@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Où en es-tu vraiment ? · Le bilan · L'Effet Papillon</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+  :root{
+    --rose:#c9a0c2;
+    --bleu:#a0b8d8;
+    --violet:#3d2e45;
+    --texte:#5d4868;
+    --fond:#fdf6f0;
+  }
+
+  body{
+    font-family:'Lora',serif;
+    background:linear-gradient(160deg,#fdf6f0 0%,#f5e8f5 50%,#e8f0f8 100%);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:0 20px 80px;
+    font-size:18px;
+    line-height:1.75;
+    color:var(--texte);
+  }
+
+  header{
+    width:100%;
+    max-width:580px;
+    padding-top:40px;
+    text-align:center;
+    margin-bottom:10px;
+  }
+
+  .surtitre{
+    font-family:'Jost',sans-serif;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:#b09aac;
+    margin-bottom:10px;
+  }
+
+  h1{
+    font-size:clamp(23px,5.4vw,32px);
+    font-weight:400;
+    color:var(--violet);
+    line-height:1.25;
+  }
+
+  .sep{
+    width:40px;
+    height:2px;
+    background:linear-gradient(90deg,var(--rose),var(--bleu));
+    margin:14px auto 0;
+    border-radius:2px;
+  }
+
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+
+  .card{
+    background:white;
+    border-radius:24px;
+    padding:34px 26px;
+    box-shadow:0 8px 40px rgba(180,150,200,0.12);
+    border:1px solid rgba(200,180,220,0.25);
+    max-width:580px;
+    width:100%;
+    margin-top:24px;
+  }
+
+  .fleur{font-size:44px;display:block;text-align:center;margin-bottom:14px;line-height:1}
+
+  .label{
+    font-family:'Jost',sans-serif;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--rose);
+    text-align:center;
+    margin-bottom:10px;
+  }
+
+  h2{
+    font-size:25px;
+    font-weight:400;
+    color:var(--violet);
+    text-align:center;
+    margin-bottom:18px;
+    line-height:1.35;
+  }
+
+  /* Texte courant : aligné à gauche pour éviter les coupures moches */
+  p{
+    font-size:17.5px;
+    color:var(--texte);
+    line-height:1.75;
+    margin-bottom:14px;
+    text-align:left;
+  }
+
+  p.note{
+    font-size:15px;
+    color:#9a84a8;
+    line-height:1.65;
+    font-family:'Jost',sans-serif;
+    margin-bottom:14px;
+  }
+
+  .question-text{
+    font-size:19px;
+    color:var(--violet);
+    line-height:1.55;
+    margin-bottom:8px;
+    text-align:left;
+  }
+
+  .consigne{
+    font-family:'Jost',sans-serif;
+    font-size:13.5px;
+    color:#9a84a8;
+    line-height:1.6;
+    margin-bottom:20px;
+    padding-bottom:16px;
+    border-bottom:1px solid rgba(200,180,220,0.3);
+    text-align:left;
+  }
+
+  .encart-prog{
+    background:linear-gradient(135deg,#fdf0f8,#f0f4fd);
+    border:1px solid rgba(200,180,220,0.3);
+    border-radius:16px;
+    padding:18px 20px;
+    margin:20px 0 6px;
+  }
+  .encart-prog p{font-size:16.5px;line-height:1.7;margin-bottom:0;}
+  .encart-prog strong{color:var(--violet);font-weight:600;}
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    margin:18px 0 22px;
+  }
+
+  .tag{
+    background:rgba(201,160,194,0.12);
+    border:1px solid rgba(201,160,194,0.3);
+    border-radius:20px;
+    padding:6px 14px;
+    font-size:13.5px;
+    color:#7a6082;
+    font-family:'Jost',sans-serif;
+    letter-spacing:0.02em;
+  }
+
+  .btn{
+    background:linear-gradient(135deg,var(--rose),var(--bleu));
+    color:white;
+    border:none;
+    border-radius:50px;
+    padding:15px 38px;
+    font-size:17px;
+    cursor:pointer;
+    font-family:'Lora',serif;
+    letter-spacing:0.03em;
+    box-shadow:0 4px 20px rgba(180,150,200,0.3);
+    display:block;
+    margin:22px auto 0;
+    transition:transform 0.2s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,180,220,0.3);color:#b0a0c0;box-shadow:none;cursor:not-allowed;transform:none}
+  .btn:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+
+  .hint{
+    font-size:13px;
+    color:#b09aac;
+    text-align:center;
+    margin-top:12px;
+    font-family:'Jost',sans-serif;
+    line-height:1.6;
+  }
+
+  /* Progression */
+  .progress-wrap{max-width:580px;width:100%;margin-top:20px}
+  .progress-meta{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    color:#9a84a8;
+    margin-bottom:8px;
+    font-family:'Jost',sans-serif;
+  }
+  .progress-track{height:4px;background:rgba(200,180,220,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--rose),var(--bleu));border-radius:4px;transition:width 0.4s ease}
+
+  .option-btn{
+    width:100%;
+    text-align:left;
+    padding:14px 18px;
+    border-radius:14px;
+    border:2px solid rgba(200,180,220,0.25);
+    background:white;
+    cursor:pointer;
+    font-family:'Lora',serif;
+    font-size:16.5px;
+    color:#5d4868;
+    margin-bottom:10px;
+    transition:all 0.2s;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    line-height:1.55;
+  }
+  .option-btn:hover{border-color:var(--rose);background:rgba(201,160,194,0.06)}
+  .option-btn.selected{border-color:var(--rose);background:linear-gradient(135deg,rgba(201,160,194,0.12),rgba(160,184,216,0.08))}
+  .option-btn:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+
+  .radio{
+    width:18px;height:18px;
+    border-radius:50%;
+    border:2px solid rgba(200,180,220,0.5);
+    flex-shrink:0;
+    transition:all 0.2s;
+  }
+  .option-btn.selected .radio{background:var(--rose);border-color:var(--rose)}
+
+  /* Formulaire */
+  .email-section{
+    background:linear-gradient(135deg,#fdf0f8,#f0f4fd);
+    border-radius:20px;
+    padding:28px 24px;
+    border:1px solid rgba(200,180,220,0.25);
+    margin-top:18px;
+  }
+
+  input[type="text"],input[type="email"]{
+    width:100%;
+    border:2px solid rgba(200,180,220,0.35);
+    border-radius:12px;
+    padding:13px 16px;
+    font-size:16px;
+    font-family:'Lora',serif;
+    color:var(--violet);
+    outline:none;
+    background:white;
+    margin-bottom:12px;
+  }
+  input:focus{border-color:var(--rose)}
+
+  .consent{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-family:'Jost',sans-serif;
+    font-size:14px;
+    color:#7a6082;
+    line-height:1.6;
+    margin-bottom:6px;
+  }
+  .consent input{width:20px;height:20px;flex-shrink:0;margin-top:2px;accent-color:var(--rose)}
+
+  .erreur{
+    display:none;
+    background:rgba(201,120,120,0.08);
+    border:1px solid rgba(201,120,120,0.3);
+    border-radius:12px;
+    padding:12px 16px;
+    font-family:'Jost',sans-serif;
+    font-size:14px;
+    color:#8a5060;
+    margin-top:14px;
+    line-height:1.6;
+  }
+
+  /* Résultats */
+  .profil-titre{font-size:22px;font-weight:400;color:var(--violet);margin-bottom:6px;text-align:center}
+
+  .toile-intro{
+    font-family:'Jost',sans-serif;
+    font-size:14.5px;
+    color:#6d5a78;
+    line-height:1.7;
+    background:rgba(201,160,194,0.08);
+    border-radius:14px;
+    padding:16px 18px;
+    margin:22px 0 6px;
+  }
+  .toile-intro strong{color:var(--violet);font-weight:500}
+
+  .echelle{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:6px 0 4px;
+    font-family:'Jost',sans-serif;
+    font-size:12.5px;
+    color:#8d7a97;
+  }
+  .echelle-barre{
+    flex:1;
+    height:7px;
+    border-radius:6px;
+    background:linear-gradient(90deg,#e8d4e4,#b585ad);
+  }
+
+  .sous-titre{
+    font-family:'Jost',sans-serif;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:#b09aac;
+    margin-bottom:6px;
+  }
+
+  .bloc-territoire{
+    background:rgba(201,160,194,0.09);
+    border-left:3px solid #c9a0c2;
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:14px;
+  }
+  .bloc-territoire .titre{font-size:17px;color:var(--violet);margin-bottom:12px;line-height:1.4}
+  .mini-label{
+    display:block;
+    font-family:'Jost',sans-serif;
+    font-size:10.5px;
+    letter-spacing:0.13em;
+    text-transform:uppercase;
+    color:#b585ad;
+    margin-bottom:5px;
+  }
+  .ta-reponse{
+    background:white;
+    border:1px solid rgba(201,160,194,0.28);
+    border-radius:10px;
+    padding:11px 14px;
+    font-size:15px;
+    color:#6d5a78;
+    line-height:1.6;
+    font-style:italic;
+  }
+  .fleche{
+    text-align:center;
+    color:#c9a0c2;
+    font-size:20px;
+    line-height:1;
+    margin:11px 0;
+  }
+  .bloc-territoire .apres{
+    background:rgba(255,255,255,0.65);
+    border-radius:10px;
+    padding:11px 14px;
+    font-size:15.5px;
+    color:var(--violet);
+    line-height:1.65;
+  }
+  .bloc-territoire .dans{
+    font-family:'Jost',sans-serif;
+    font-size:13.5px;
+    color:#7d6888;
+    line-height:1.65;
+    margin-top:13px;
+    padding-top:11px;
+    border-top:1px solid rgba(201,160,194,0.3);
+  }
+
+  .bloc-force{
+    background:rgba(160,184,216,0.12);
+    border-left:3px solid #a0b8d8;
+    border-radius:12px;
+    padding:13px 18px;
+    margin-bottom:10px;
+    font-size:16px;
+    color:var(--violet);
+    line-height:1.5;
+  }
+
+  .suite-box{
+    background:linear-gradient(135deg,#fdf0f8,#f0f4fd);
+    border-radius:20px;
+    padding:28px 24px;
+    border:1px solid rgba(200,180,220,0.25);
+    margin-top:16px;
+    max-width:580px;
+    width:100%;
+  }
+  .suite-box p{font-size:16.5px;line-height:1.75}
+
+  .etapes{list-style:none;margin:6px 0 16px;padding:0}
+  .etapes li{
+    font-family:'Jost',sans-serif;
+    font-size:15px;
+    color:#5d4868;
+    line-height:1.6;
+    padding:9px 0 9px 26px;
+    position:relative;
+    border-bottom:1px solid rgba(200,180,220,0.3);
+  }
+  .etapes li:last-child{border-bottom:none}
+  .etapes li::before{
+    content:"";
+    position:absolute;
+    left:6px;top:17px;
+    width:7px;height:7px;
+    border-radius:50%;
+    background:var(--rose);
+  }
+
+  .soin-box{
+    background:#fffaf4;
+    border:1px solid rgba(200,150,120,0.35);
+    border-left:4px solid #c89a72;
+    border-radius:14px;
+    padding:20px 22px;
+    margin-top:20px;
+  }
+  .soin-box p{font-size:15.5px;line-height:1.75;color:#5d4868;margin-bottom:10px;font-family:'Jost',sans-serif}
+  .soin-box p:last-child{margin-bottom:0}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="surtitre">L'Effet Papillon</div>
+  <h1>Où en es-tu vraiment ?</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card">
+    <span class="fleur">🌸</span>
+    <div class="label">Le bilan · 10 questions</div>
+    <h2>Fais le point, pour de vrai</h2>
+    <p>Pas la réponse que tu donnerais si on te demandait « ça va ? » dans un couloir. La vraie.</p>
+    <p>Dix questions, dix territoires de ta vie intérieure. À la fin, tu n'auras pas une note, mais ton portrait : ce que tu portes en ce moment, ce sur quoi tu peux déjà t'appuyer, et ce qui change si tu décides de t'en occuper.</p>
+    <div class="encart-prog">
+      <p><strong>Ce bilan est gratuit, et il est à toi.</strong> Il te montre où tu en es. Il ne te dira pas comment en sortir — ça, c'est le travail de <strong>L'Effet Papillon</strong>, mon programme de 30 jours. Le bilan en est la première marche.</p>
+    </div>
+    <p class="note">Il n'y a pas de bonnes ou de mauvaises réponses. Juste les tiennes. Réponds à ce qui se passe <strong>le plus souvent</strong> pour toi, ces dernières semaines. Si tu hésites entre deux réponses, prends celle qui te ressemble le plus souvent.</p>
+    <div class="tags">
+      <span class="tag">Émotions</span>
+      <span class="tag">Charge mentale</span>
+      <span class="tag">Colère</span>
+      <span class="tag">Limites</span>
+      <span class="tag">Sens de soi</span>
+    </div>
+    <button class="btn" onclick="showPhase('quiz');renderQuestion()">Je commence</button>
+    <p class="hint">7 minutes · gratuit · pour toi seule</p>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="phase" id="phase-quiz">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="q-counter">1 / 10</span>
+      <span id="q-category"></span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+  <div class="card">
+    <p class="question-text" id="question-text"></p>
+    <p class="consigne">Réponds à ce qui se passe le plus souvent pour toi, ces dernières semaines.</p>
+    <div id="options-container"></div>
+    <button class="btn" id="btn-next" disabled onclick="nextQuestion()">Question suivante</button>
+  </div>
+</div>
+
+<!-- FORMULAIRE -->
+<div class="phase" id="phase-email">
+  <div class="card">
+    <div class="label">Dernière étape</div>
+    <h2>Ton portrait est prêt</h2>
+    <p>Laisse ton prénom et ton adresse mail, et tes résultats s'affichent juste après. Tu pourras les télécharger pour les garder.</p>
+    <div class="email-section">
+      <input type="text" id="input-prenom" placeholder="Ton prénom" oninput="checkEmailForm()">
+      <input type="email" id="input-email" placeholder="Ton adresse email" oninput="checkEmailForm()">
+      <label class="consent">
+        <input type="checkbox" id="input-consent" onchange="checkEmailForm()">
+        <span>J'accepte que Debora conserve mes réponses de façon confidentielle et me tienne informée de L'Effet Papillon.</span>
+      </label>
+      <button class="btn" id="btn-email-submit" disabled onclick="submitAndShowResults()">Voir mon portrait</button>
+      <div class="erreur" id="erreur-envoi"></div>
+      <p class="hint" style="margin-top:14px;">Je te préviendrai à l'ouverture de la prochaine cohorte. Pas de spam, tu te désabonnes quand tu veux.</p>
+    </div>
+  </div>
+</div>
+
+<!-- RÉSULTATS -->
+<div class="phase" id="phase-resultats">
+  <div class="card">
+    <div class="label">Ton portrait</div>
+    <div id="profil-container"></div>
+  </div>
+
+  <div class="card">
+    <div id="dimensions-container"></div>
+    <button class="btn" onclick="telechargerReponses()" style="background:linear-gradient(135deg,#c8a060,#a080c8);">
+      Garder mon portrait
+    </button>
+    <p class="hint" style="margin-top:10px;">Le fichier se télécharge. Ouvre-le → Partager → Imprimer → enregistre en PDF si tu veux le conserver.</p>
+  </div>
+
+  <div class="suite-box">
+    <div style="font-size:30px;text-align:center;margin-bottom:12px;line-height:1;">🦋</div>
+    <div class="label">Et maintenant ?</div>
+    <p style="color:#3d2e45;"><strong>Ce bilan te dit où tu en es. Il ne te dit pas comment en sortir.</strong></p>
+    <p>C'est exactement ce que fait <strong>L'Effet Papillon</strong> : 30 jours pour arrêter de subir tes émotions et reprendre les commandes de ta vie, au lieu de la traverser en pilote automatique.</p>
+    <ul class="etapes">
+      <li><strong>Un pas par jour.</strong> Une page à ouvrir, quelques minutes. Rien à caser en plus dans ta journée.</li>
+      <li><strong>Comprendre d'abord.</strong> Pourquoi tu fonctionnes comme ça, sans culpabilité et sans jargon.</li>
+      <li><strong>Des outils concrets.</strong> À utiliser le soir même, dans ta vraie vie, avec tes vrais gens.</li>
+      <li><strong>Et surtout, que ça tienne.</strong> La dernière semaine sert à ancrer, pour que ça ne s'arrête pas au jour 30.</li>
+    </ul>
+    <p>Chaque territoire de ton portrait renvoie à des étapes précises du programme, celles qui travaillent exactement ce que tu viens de nommer.</p>
+    <p style="margin-bottom:0;">J'ouvre la prochaine cohorte prochainement, et tu es sur la liste. Une question d'ici là ? Écris-moi en message privé sur <strong style="white-space:nowrap;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#3d2e45" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px;margin-right:3px;"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="#3d2e45" stroke="none"/></svg>@alarenverse.coaching</strong>.</p>
+  </div>
+</div>
+
+<script>
+/* ===== Clé Web3Forms — déjà configurée, ne pas modifier ===== */
+const ACCESS_KEY = "f78b1819-4743-4b7f-9c70-309561959f36";
+/* =========================================================== */
+
+const questions=[
+  {category:"Tes émotions",
+   theme:"emotions",
+   text:"Quand une émotion forte te traverse (colère, tristesse, angoisse), qu'est-ce qui se passe le plus souvent ?",
+   options:[
+     "Elle me submerge complètement. Je perds pied et je ne me reconnais plus.",
+     "Je la ravale. Je fais bonne figure et ça ressort ailleurs, plus tard.",
+     "Je la sens monter mais je ne sais pas trop quoi en faire.",
+     "Je commence à la reconnaître et à lui laisser un peu de place.",
+     "Je la traverse. Elle passe, et je reste moi."
+   ]},
+  {category:"Ta charge mentale",
+   theme:"charge",
+   text:"Ton cerveau, il s'arrête quand ?",
+   options:[
+     "Jamais. Même la nuit, même en vacances, il tourne en continu.",
+     "Presque jamais. Je pense toujours à ce qu'il ne faut pas oublier, pour tout le monde.",
+     "Rarement. Il faut vraiment que je m'isole pour qu'il se taise.",
+     "De temps en temps, quand j'arrive à déposer les choses quelque part.",
+     "Il s'arrête. Je sais faire des pauses vraies, sans culpabiliser."
+   ]},
+  {category:"Ta voix intérieure",
+   theme:"voix",
+   text:"Quand tu rates quelque chose, tu te parles comment ?",
+   options:[
+     "Durement. Je m'en veux longtemps, je me traite de tous les noms.",
+     "Sévèrement. Je me dis des choses que je ne dirais à personne d'autre.",
+     "Ça dépend des jours. Parfois dure, parfois plus douce.",
+     "Plutôt correctement. J'essaie de me rappeler que c'est humain.",
+     "Avec douceur. Comme je parlerais à quelqu'un que j'aime."
+   ]},
+  {category:"Tes limites",
+   theme:"limites",
+   text:"Combien de fois par jour tu penses à ce dont les autres ont besoin, avant de penser à toi ?",
+   options:[
+     "Tout le temps. Je passe systématiquement après tout le monde.",
+     "Très souvent. Dire non me fait culpabiliser pendant des heures.",
+     "Souvent. Je dis oui, puis je regrette.",
+     "Ça s'équilibre doucement. J'arrive parfois à me prioriser.",
+     "Je sais poser mes limites. Je me respecte dans mes relations."
+   ]},
+  {category:"Ta colère",
+   theme:"colere",
+   text:"Ta colère, elle va où ?",
+   options:[
+     "Elle explose sur les mauvaises personnes, souvent mes proches, et je culpabilise après.",
+     "Je la ravale entièrement. Elle se transforme en tristesse ou en tensions.",
+     "Je la sens, mais je ne sais pas quoi en faire. Alors elle stagne.",
+     "J'arrive parfois à la dire, sans que ça déborde.",
+     "Je l'écoute. Elle me montre ce qui doit changer, et j'agis dessus."
+   ]},
+  {category:"Ton corps",
+   theme:"corps",
+   text:"Ton corps et toi, vous en êtes où ?",
+   options:[
+     "En conflit. Je le critique, je l'ignore, ou il me fait mal et ça m'épuise.",
+     "Distants. Je ne l'écoute pas vraiment, je le subis.",
+     "Neutres. Il est là, je fais avec.",
+     "On se réapprivoise doucement. J'écoute un peu ce qu'il me dit.",
+     "En lien. Je l'habite, je l'écoute, je prends soin de lui."
+   ]},
+  {category:"Ton repos",
+   theme:"repos",
+   text:"T'accorder du repos, sans rien faire d'« utile », c'est possible pour toi ?",
+   options:[
+     "Impossible. Je m'effondre d'épuisement, mais je ne me repose jamais vraiment.",
+     "Très difficile. Je culpabilise dès que je m'arrête.",
+     "Rarement. Il faut que tout soit fini avant, et ça ne l'est jamais.",
+     "Parfois. J'arrive à m'accorder des moments sans les justifier.",
+     "Oui. Je sais me recharger, et je me donne le droit de le faire."
+   ]},
+  {category:"Tes relations",
+   theme:"relations",
+   text:"Après avoir vu les gens de ton entourage, tu te sens comment ?",
+   options:[
+     "Vidée. Je donne beaucoup, je reçois peu, et je n'ose rien dire.",
+     "Souvent fatiguée. Je marche un peu sur des œufs.",
+     "Ça dépend beaucoup des personnes.",
+     "Plutôt bien, avec quelques relations qui pèsent.",
+     "Nourrie. Je peux être moi-même et ça me fait du bien."
+   ]},
+  {category:"Ton cycle",
+   theme:"cycle",
+   text:"Ton énergie et ton humeur changent selon ton cycle. Tu fais comment avec ça ?",
+   options:[
+     "Certaines semaines sont très dures et je m'en veux de ne pas tenir le rythme.",
+     "Je subis les variations sans les comprendre, et ça me déstabilise.",
+     "Je remarque des différences mais je m'organise comme si de rien n'était.",
+     "Je commence à adapter mon rythme à mes phases.",
+     "Je vis avec mon cycle plutôt qu'en lutte contre lui. Ou je ne suis plus concernée."
+   ]},
+  {category:"Toi, au-delà des rôles",
+   theme:"sens",
+   text:"Si on enlève tous tes rôles (mère, compagne, professionnelle, fille, amie), tu sais encore qui tu es ?",
+   options:[
+     "Non. Je me suis complètement perdue en route et ça me fait peur.",
+     "Plus vraiment. Je ne sais plus ce que j'aime, ce que je veux.",
+     "Un peu flou. J'ai des intuitions, mais rien de clair.",
+     "Ça revient. Je retrouve doucement des choses qui sont à moi.",
+     "Oui. Je sais ce qui compte pour moi et ce vers quoi je vais."
+   ]},
+];
+
+/* Chaque territoire dit maintenant CE QUI CHANGE, puis ce qu'on y fait */
+const territoires={
+  emotions:{
+    nom:"Tes émotions qui débordent",
+    force:"Ta capacité à traverser tes émotions",
+    apres:"Tu sens l'émotion arriver avant qu'elle te déborde, et tu sais quoi en faire sur le moment.",
+    dans:"Trois étapes du programme : reconnaître ce qui monte, apaiser ton corps quand ça monte, et rester toi pendant que ça traverse."
+  },
+  charge:{
+    nom:"Ta charge mentale",
+    force:"Ta capacité à déposer les choses",
+    apres:"Ta tête s'arrête. Tu poses les choses quelque part, et elles y restent.",
+    dans:"Deux étapes du programme : mettre à plat tout ce que tu portes, repérer ce qui n'est pas à toi, et le redistribuer pour de vrai."
+  },
+  voix:{
+    nom:"La dureté de ta voix intérieure",
+    force:"La douceur avec laquelle tu te parles",
+    apres:"Tu te parles comme tu parlerais à ton amie. Rater quelque chose ne te coûte plus trois jours.",
+    dans:"Deux étapes du programme : repérer ta critique intérieure, comprendre d'où elle vient, et lui répondre autrement."
+  },
+  limites:{
+    nom:"Tes limites qui s'effacent",
+    force:"Ta capacité à poser tes limites",
+    apres:"Tu dis non sans passer la soirée à te justifier dans ta tête.",
+    dans:"Deux étapes du programme : comprendre pourquoi dire non te coûte autant, et t'entraîner à le faire en vrai."
+  },
+  colere:{
+    nom:"Ta colère qui n'a pas de place",
+    force:"Ta façon d'écouter ta colère",
+    apres:"Ta colère ne sort plus sur les mauvaises personnes. Elle devient un signal, pas une honte.",
+    dans:"Une étape entière du programme : lui donner sa place, et en faire un moteur de changement."
+  },
+  corps:{
+    nom:"Ton lien abîmé avec ton corps",
+    force:"Le lien que tu as avec ton corps",
+    apres:"Tu réhabites ton corps au lieu de le traîner ou de te battre contre lui.",
+    dans:"Trois étapes du programme : renouer le lien, bouger sans performance, prendre soin sans que ce soit une tâche de plus."
+  },
+  repos:{
+    nom:"Ton épuisement, et ce repos que tu ne t'autorises pas",
+    force:"Ta capacité à te recharger",
+    apres:"Tu t'arrêtes sans culpabiliser, et ça recharge vraiment.",
+    dans:"Deux étapes du programme : lever ce qui t'empêche de t'arrêter, et organiser ton repos comme tu organises le reste."
+  },
+  relations:{
+    nom:"Tes relations qui te vident",
+    force:"La qualité de tes relations",
+    apres:"Tu sais qui te nourrit, qui te vide, et tu ajustes sans te sentir coupable.",
+    dans:"Deux étapes du programme : cartographier ton entourage, et te protéger de ce qui t'épuise."
+  },
+  cycle:{
+    nom:"Ton cycle que tu subis",
+    force:"Ton accord avec ton cycle",
+    apres:"Tu avances avec ton cycle au lieu de lutter contre lui, et tu arrêtes de t'en vouloir.",
+    dans:"Une étape du programme : adapter ton rythme à tes phases, plutôt que l'inverse."
+  },
+  sens:{
+    nom:"Cette impression de t'être perdue en route",
+    force:"La clarté que tu as sur qui tu es",
+    apres:"Tu sais de nouveau ce que tu veux, en dehors de ce qu'on attend de toi.",
+    dans:"Quatre étapes du programme : questionner tes croyances, retrouver tes valeurs, et dessiner où tu vas."
+  },
+};
+
+const labelsCourts=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"];
+
+let current=0,answers=[],selected=null,prenomSaisi="",emailSaisi="";
+
+function genererToile(vals){
+  const cx=200, cy=200, R=100, n=vals.length;
+  const angle=i=>(-90 + i*(360/n)) * Math.PI/180;
+  const pt=(i,r)=>[cx+r*Math.cos(angle(i)), cy+r*Math.sin(angle(i))];
+  let svg='<svg viewBox="0 0 400 400" role="img" aria-label="Ton portrait en dix territoires" style="width:100%;max-width:380px;height:auto;display:block;margin:0 auto;">';
+  for(let niveau=1;niveau<=5;niveau++){
+    const r=R*niveau/5;
+    let d='';
+    for(let i=0;i<n;i++){const [x,y]=pt(i,r); d+=(i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);}
+    d+='Z';
+    svg+='<path d="'+d+'" fill="'+(niveau===5?'rgba(253,246,240,0.7)':'none')+'" stroke="rgba(201,160,194,0.28)" stroke-width="1"/>';
+  }
+  for(let i=0;i<n;i++){
+    const [x,y]=pt(i,R);
+    svg+='<line x1="'+cx+'" y1="'+cy+'" x2="'+x.toFixed(1)+'" y2="'+y.toFixed(1)+'" stroke="rgba(201,160,194,0.25)" stroke-width="1"/>';
+  }
+  // Repères chiffrés sur l'axe du haut
+  for(let niveau=1;niveau<=5;niveau++){
+    const r=R*niveau/5;
+    svg+='<text x="'+(cx+5)+'" y="'+(cy-r+4)+'" font-family="Jost,sans-serif" font-size="9.5" fill="#c0aec9">'+niveau+'</text>';
+  }
+  let d='';
+  vals.forEach((v,i)=>{const [x,y]=pt(i,R*v/5); d+=(i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);});
+  d+='Z';
+  svg+='<path d="'+d+'" fill="rgba(201,160,194,0.35)" stroke="#b585ad" stroke-width="2" stroke-linejoin="round"/>';
+  vals.forEach((v,i)=>{const [x,y]=pt(i,R*v/5); svg+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="3.5" fill="#b585ad"/>';});
+  labelsCourts.forEach((lab,i)=>{
+    const [x,y]=pt(i,R+27);
+    let anchor='middle';
+    if(x>cx+8) anchor='start';
+    else if(x<cx-8) anchor='end';
+    const mots=lab.split(' ');
+    const dy = mots.length>1 ? -5 : 0;
+    let t='<text x="'+x.toFixed(1)+'" y="'+(y+dy).toFixed(1)+'" text-anchor="'+anchor+'" font-family="Jost,sans-serif" font-size="12.5" fill="#7d6888">';
+    mots.forEach((m,j)=>{ t+='<tspan x="'+x.toFixed(1)+'" dy="'+(j===0?0:13)+'">'+m+'</tspan>'; });
+    t+='</text>';
+    svg+=t;
+  });
+  svg+='</svg>';
+  return svg;
+}
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  document.getElementById('q-counter').textContent=(current+1)+' / '+questions.length;
+  document.getElementById('q-category').textContent=q.category;
+  document.getElementById('progress-fill').style.width=(current/questions.length*100)+'%';
+  document.getElementById('question-text').textContent=q.text;
+  selected=null;
+  document.getElementById('btn-next').disabled=true;
+  document.getElementById('btn-next').textContent=current<questions.length-1?'Question suivante':'Voir mon portrait';
+  const container=document.getElementById('options-container');
+  container.innerHTML='';
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='option-btn';
+    btn.innerHTML='<span class="radio"></span>'+opt;
+    btn.onclick=()=>{
+      document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selected=i+1;
+      document.getElementById('btn-next').disabled=false;
+    };
+    container.appendChild(btn);
+  });
+}
+
+function nextQuestion(){
+  if(selected===null)return;
+  answers.push(selected);
+  selected=null;
+  if(current<questions.length-1){current++;renderQuestion();window.scrollTo(0,0);}
+  else{showPhase('email');}
+}
+
+function checkEmailForm(){
+  const p=document.getElementById('input-prenom').value.trim();
+  const e=document.getElementById('input-email').value.trim();
+  const c=document.getElementById('input-consent').checked;
+  document.getElementById('btn-email-submit').disabled=!(p&&e.includes('@')&&c);
+}
+
+function construireRecapTexte(){
+  let t='';
+  answers.forEach((val,i)=>{
+    t+=(i+1)+'. '+questions[i].category+' : '+val+'/5\n   -> '+questions[i].options[val-1]+'\n\n';
+  });
+  return t;
+}
+
+async function submitAndShowResults(){
+  const btn=document.getElementById('btn-email-submit');
+  const boiteErreur=document.getElementById('erreur-envoi');
+  prenomSaisi=document.getElementById('input-prenom').value.trim();
+  emailSaisi=document.getElementById('input-email').value.trim();
+
+  btn.disabled=true;
+  btn.textContent='Un instant...';
+  boiteErreur.style.display='none';
+
+  const total=answers.reduce((a,b)=>a+b,0);
+  const moyenne=(total/answers.length).toFixed(2);
+
+  const donnees={
+    access_key:ACCESS_KEY,
+    subject:"Bilan — "+prenomSaisi,
+    from_name:"L'Effet Papillon · Bilan",
+    Prenom:prenomSaisi,
+    email:emailSaisi,
+    Score:total+" / 50 (moyenne "+moyenne+")",
+    Date:new Date().toLocaleString('fr-CH'),
+    Consentement:"Oui",
+    message:"BILAN — "+prenomSaisi+"\nScore : "+total+"/50 — moyenne "+moyenne+"/5\n\n"+construireRecapTexte()
+  };
+
+  try{
+    const rep=await fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify(donnees)
+    });
+    const res=await rep.json();
+    if(!res.success)throw new Error(res.message||'Envoi refusé');
+    showPhase('resultats');
+    renderResultats();
+  }catch(err){
+    btn.disabled=false;
+    btn.textContent='Voir mon portrait quand même';
+    btn.onclick=function(){showPhase('resultats');renderResultats();};
+    boiteErreur.innerHTML="Petit souci technique de mon côté — tes réponses restent affichées sur cet écran. Appuie sur le bouton pour voir ton portrait."
+      +"<br><br><span style='font-size:12px;opacity:0.75;'>Détail : "+(err && err.message ? err.message : 'erreur inconnue')+"</span>";
+    boiteErreur.style.display='block';
+  }
+}
+
+function renderResultats(){
+  const scores = answers.map((val,i)=>({val, idx:i, theme:questions[i].theme, cat:questions[i].category}));
+  const tries = [...scores].sort((a,b)=>a.val-b.val);
+  const lourds = tries.filter(t=>t.val<=3).slice(0,3);
+  const forces = [...scores].sort((a,b)=>b.val-a.val).filter(t=>t.val>=4).slice(0,2);
+  const moyenne = answers.reduce((a,b)=>a+b,0)/answers.length;
+  const nbTresBas = answers.filter(v=>v===1).length;
+
+  let portrait='';
+  if(moyenne<2.2){
+    portrait="Tu portes énormément en ce moment. Et si tu as répondu honnêtement à ces questions, c'est déjà un acte de courage, parce que regarder ce qu'on porte vraiment, c'est souvent ce qu'on évite le plus.";
+  } else if(moyenne<3){
+    portrait="Tu tiens debout. Mais quelque chose se fissure en dessous, et tu le sens. C'est exactement le moment où il est encore possible d'agir en douceur, avant que le corps ne t'y oblige.";
+  } else if(moyenne<3.8){
+    portrait="Tu as déjà des ressources solides, et des zones qui fatiguent. C'est une position honnête et vivante, celle depuis laquelle on peut vraiment construire quelque chose.";
+  } else {
+    portrait="Tu prends déjà soin de toi, et ça se voit dans tes réponses. Ces 30 jours ne vont pas te réparer, ils vont approfondir ce que tu sais déjà faire, et éclairer les quelques zones encore dans l'ombre.";
+  }
+
+  let html = '<div class="profil-titre">Voilà où tu en es'+(prenomSaisi?', '+prenomSaisi:'')+'</div>'
+    + '<p style="margin-top:10px;">'+portrait+'</p>'
+    + '<div class="toile-intro">'
+    + '<strong>Comment lire ce dessin.</strong> Chaque branche est un territoire. '
+    + 'Le point se place entre 1 et 5 selon ta réponse : plus il est <strong>près du bord</strong>, plus tu t\'y sens à l\'aise en ce moment. '
+    + 'Plus il est <strong>près du centre</strong>, plus tu as besoin de soutien là. '
+    + 'Les creux ne sont pas des défauts : ce sont les endroits qui demandent de l\'attention aujourd\'hui.'
+    + '</div>'
+    + '<div style="margin-top:14px;">'+genererToile(answers)+'</div>'
+    + '<div class="echelle"><span>Centre · j\'ai besoin de soutien</span><span class="echelle-barre"></span><span>Bord · je me sens à l\'aise</span></div>';
+
+  if(lourds.length>0){
+    html += '<div style="margin-top:26px;padding-top:22px;border-top:1px solid rgba(200,160,200,0.25);">'
+      + '<div class="sous-titre">Ce que tu portes en ce moment</div>'
+      + '<p class="note" style="margin-bottom:14px;">Voici ce que tu as répondu, et ce que ça devient quand on s\'en occupe.</p>';
+    lourds.forEach(t=>{
+      const ter=territoires[t.theme];
+      const saReponse=questions[t.idx].options[t.val-1];
+      html += '<div class="bloc-territoire">'
+        + '<div class="titre">'+ter.nom+'</div>'
+        + '<span class="mini-label">Ce que tu as répondu</span>'
+        + '<div class="ta-reponse">« '+saReponse+' »</div>'
+        + '<div class="fleche">↓</div>'
+        + '<span class="mini-label">Ce que ça devient</span>'
+        + '<div class="apres">'+ter.apres+'</div>'
+        + '<div class="dans"><span class="mini-label">Comment on y arrive</span>'+ter.dans+'</div>'
+        + '</div>';
+    });
+    html += '</div>';
+  }
+
+  if(forces.length>0){
+    html += '<div style="margin-top:24px;">'
+      + '<div class="sous-titre">Ce sur quoi tu peux t\'appuyer</div>';
+    forces.forEach(t=>{
+      html += '<div class="bloc-force">'+territoires[t.theme].force+'</div>';
+    });
+    html += '<p class="note" style="margin-top:6px;">Ce n\'est pas rien. On construit toujours à partir de ce qui tient déjà.</p></div>';
+  }
+
+  if(moyenne<2.2 || nbTresBas>=4){
+    html += '<div class="soin-box">'
+      + '<p><strong>Une chose que je te dois, en tant qu\'infirmière en santé mentale.</strong></p>'
+      + '<p>Ce que tu viens de décrire dépasse ce qu\'un programme peut porter tout seul. L\'Effet Papillon peut t\'accompagner, mais il ne remplace pas un professionnel qui te connaît.</p>'
+      + '<p>Si ça dure depuis plusieurs semaines, parles-en à ton médecin. Ce n\'est pas un aveu de faiblesse : c\'est exactement ce qu\'on fait pour une douleur qui ne passe pas.</p>'
+      + '<p>Et si tu te sens en danger, ne reste pas seule. Appelle le 143 (La Main Tendue, 24h/24) ou le 144.</p>'
+      + '</div>';
+  }
+
+  document.getElementById('profil-container').innerHTML = html;
+
+  document.getElementById('dimensions-container').innerHTML =
+    '<div class="sous-titre" style="margin-bottom:14px;">Ce que tu emportes avec toi</div>'
+    + '<p>Avant que tu partes, il y a une chose que j\'aimerais que tu emportes.</p>'
+    + '<p>Ce que tu viens de nommer — la fatigue, la charge, cette voix dure dans ta tête — ce ne sont pas des défauts de fabrication. Ce sont des réponses logiques à une vie qui demande beaucoup, et à une éducation qui t\'a appris très tôt à passer après.</p>'
+    + '<p>Tu n\'as rien à réparer en toi. Tu as des choses à comprendre, à déposer, et à réorganiser autrement.</p>'
+    + '<p style="color:#3d2e45;margin-bottom:0;">Et surtout : ressentir ne suffit pas. On peut passer des années à ressentir sans que rien ne change. Ce qui transforme, c\'est ce que tu fais de ce que tu ressens.</p>';
+}
+
+function telechargerReponses(){
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  const total=answers.reduce((a,b)=>a+b,0);
+
+  let contenu='';
+  answers.forEach((val,i)=>{
+    contenu+='<div class="recap-box">'
+      +'<div class="recap-q">'+questions[i].category+' — '+val+' sur 5</div>'
+      +'<div class="recap-r">'+questions[i].options[val-1]+'</div>'
+      +'</div>';
+  });
+
+  const css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.75;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:8px;}'
+    +'.score{font-size:15px;color:#3d2d50;margin-bottom:26px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.6;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+
+  const body='<div class="programme">L\'Effet Papillon</div>'
+    +'<h1>Mon bilan — Ou en suis-je vraiment ?</h1>'
+    +'<div class="date">'+(prenomSaisi?prenomSaisi+' — ':'')+date+'</div>'
+    +'<div class="score">Score global : '+total+' sur 50</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+
+  const fullhtml='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Mon bilan</title><style>'+css+'</style></head><body>'+body+'</body></html>';
+  const blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='effet-papillon-mon-bilan.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
