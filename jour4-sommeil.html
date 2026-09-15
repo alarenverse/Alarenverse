@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 4 · Le sommeil · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#eef2fb 0%,#f0ecf8 50%,#f5f0f5 100%);min-height:100vh;font-size:18px;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px;color:#3a3252;line-height:1.8}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#9a90b8;margin-bottom:8px}
+  h1{font-size:clamp(22px,5vw,30px);font-weight:500;color:#2d2848;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#8e88c2,#a0b0d8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:block;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:34px 28px;box-shadow:0 8px 40px rgba(120,110,180,0.12);border:1px solid rgba(150,140,200,0.18);max-width:560px;width:100%;margin-top:24px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8e84c0;text-align:center;margin-bottom:10px}
+  h2{font-size:24px;font-weight:500;color:#2d2848;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:20px;font-weight:600;color:#2d2848;margin-bottom:12px;line-height:1.4}
+  p{color:#4a4266;font-size:18px;line-height:1.8;margin-bottom:12px}
+  p.small{font-size:15px;color:#8a82a0}
+  .savoir-box{background:#f2f0fb;border-radius:14px;padding:16px 20px;border:1px solid rgba(150,140,200,0.18);margin-bottom:24px}
+  .savoir-box p{font-size:16px;color:#4a4266;line-height:1.7;margin:0}
+  .btn{background:linear-gradient(135deg,#8e88c2,#a0b0d8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:17px;cursor:pointer;font-family:'Lora',serif;font-weight:500;letter-spacing:0.03em;box-shadow:0 4px 20px rgba(130,120,190,0.3);display:block;margin:0 auto;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(180,170,210,0.4);color:#a098b8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:13px;color:#a89ec0;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+
+  /* Théorie navigation */
+  .theorie-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .theorie-progress{font-family:'Jost',sans-serif;font-size:12px;color:#9a90b8;letter-spacing:0.1em}
+  .theorie-dots{display:flex;gap:6px}
+  .tdot{width:7px;height:7px;border-radius:50%;background:rgba(150,140,200,0.3)}
+  .tdot.active{background:#8e88c2}
+  .theorie-emoji{font-size:42px;text-align:center;display:block;margin-bottom:10px}
+  .source-tag{font-family:'Jost',sans-serif;font-size:12px;color:#9a90b8;text-align:center;font-style:normal;margin-top:6px;margin-bottom:18px}
+  .highlight{background:linear-gradient(135deg,#f0ecfb,#eef2fc);border-radius:14px;padding:15px 18px;border-left:3px solid #8e88c2;font-size:17px;color:#3a3258;line-height:1.8;margin-bottom:12px}
+  .conseil-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(150,140,200,0.12)}
+  .conseil-item:last-child{border-bottom:none}
+  .conseil-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#8e88c2,#a0b0d8);color:white;font-size:14px;font-family:'Jost',sans-serif;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .conseil-texte{font-size:16px;color:#4a4266;line-height:1.65}
+  .conseil-texte strong{color:#2d2848}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(150,140,200,0.12)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#8e88c2,#a0b0d8);flex-shrink:0;margin-top:8px}
+  .stat-text{font-size:16px;color:#3a3258;line-height:1.65}
+  .stat-source{font-size:12px;color:#9a90b8;margin-top:2px;font-family:'Jost',sans-serif}
+
+  textarea{width:100%;border:2px solid rgba(150,140,200,0.3);border-radius:14px;padding:14px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#2d2848;line-height:1.7;outline:none;resize:vertical;background:#f8f6fd}
+  textarea:focus{border-color:#8e88c2}
+  .check-item{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:12px;border:2px solid rgba(150,140,200,0.25);margin-bottom:8px;cursor:pointer;transition:all 0.2s;background:white}
+  .check-item:hover{border-color:rgba(142,136,194,0.5)}
+  .check-item.checked{background:linear-gradient(135deg,#f0ecfb,#eef2fc);border-color:#8e88c2}
+  .check-box{width:24px;height:24px;border-radius:7px;border:2px solid rgba(150,140,200,0.4);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;transition:all 0.2s}
+  .check-item.checked .check-box{background:#8e88c2;border-color:#8e88c2}
+  .check-texte{font-size:16px;color:#3a3258;line-height:1.5}
+  .recap-box{background:#f2f0fb;border-radius:12px;padding:14px 18px;border-left:3px solid #8e88c2;margin-bottom:10px}
+  .recap-q{font-size:11px;color:#9a90b8;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:16px;color:#3a3258;line-height:1.6}
+  .suite-box{background:linear-gradient(135deg,#f0ecfb,#eef2fc);border-radius:20px;padding:22px;border:1px solid rgba(150,140,200,0.2);text-align:center;margin-top:16px}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;">
+    <span class="emoji-hero">🌙</span>
+    <div class="label">Jour 4 · Le sommeil & le repos</div>
+    <h2>Et si bien dormir n'était pas le seul objectif ?</h2>
+    <p>Tu connais sûrement déjà toutes les astuces pour mieux dormir, couper les écrans, la chambre fraîche, se coucher à heure fixe. Si tu as des soucis de sommeil, on te les a répétées cent fois. Alors aujourd'hui, on va ailleurs.</p>
+    <p>On va parler de ce que personne ne te dit : comment t'autoriser à te recharger, même les nuits où le sommeil ne vient pas. Parce que parfois on ne peut pas tout contrôler, et ça, ça change tout.</p>
+    <div class="savoir-box">
+      <p>🧠 <strong>Le savoir du jour :</strong> ton corps peut récupérer en profondeur même sans dormir, à condition de le mettre au repos consciemment. La recherche l'a prouvé. Une nuit d'insomnie n'est pas forcément une nuit perdue.</p>
+    </div>
+    <button class="btn" onclick="showPhase('theorie')">Comprendre mes nuits ✨</button>
+    <p class="hint">Théorie + mon mantra des nuits difficiles · ~15 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="card">
+    <div class="theorie-nav">
+      <span class="theorie-progress" id="t-progress">1 / 5</span>
+      <div class="theorie-dots" id="t-dots"></div>
+    </div>
+    <div id="theorie-content"></div>
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <button class="btn" id="t-prev" onclick="theoriePrev()" style="flex:1;background:rgba(150,140,200,0.15);color:#8e84c0;box-shadow:none;display:none;">← Retour</button>
+      <button class="btn" id="t-next" onclick="theorieNext()" style="flex:2;">Continuer →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRATIQUE 3R -->
+<div class="phase" id="phase-rituel">
+  <div class="card">
+    <div style="text-align:center;margin-bottom:8px;">
+      <span class="emoji-hero" style="font-size:40px;">🤍</span>
+      <h2>Ta pratique des 3R</h2>
+    </div>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Pour les nuits où le sommeil ne vient pas. À faire allongée, dans le noir, sans chercher à dormir, juste à te reposer.</p>
+
+    <div style="background:#f2f0fb;border-radius:16px;padding:20px;margin-bottom:16px;">
+      <div style="display:flex;gap:12px;margin-bottom:16px;"><div class="conseil-num">1</div><div class="conseil-texte"><strong>Balaie ton corps.</strong> Parcours-le doucement de la tête aux pieds. Cherche les endroits tendus, mâchoire, épaules, ventre. Repère, sans rien forcer.</div></div>
+      <div style="display:flex;gap:12px;margin-bottom:16px;"><div class="conseil-num">2</div><div class="conseil-texte"><strong>Respire dessus.</strong> Envoie ton souffle vers chaque tension. Imagine que tu crées de l'espace autour d'elle, qu'elle fond un peu à chaque expiration.</div></div>
+      <div style="display:flex;gap:12px;"><div class="conseil-num">3</div><div class="conseil-texte"><strong>Répète tes 3R</strong>, doucement, au rythme de ton souffle :<br><br>« J'ai le droit de me <strong>relâcher</strong>. »<br>« J'ai le droit de me <strong>reposer</strong>. »<br>« J'ai le droit de me <strong>recharger</strong>. »</div></div>
+    </div>
+
+    <div class="highlight">🌙 Ces phrases ne sont pas là pour te forcer à dormir. Elles t'autorisent à te reposer. Et c'est cette autorisation qui fait baisser ton cortisol, et qui permet à ton corps de récupérer, que le sommeil vienne ou non.</div>
+
+    <details style="margin-top:18px;border:1px solid rgba(150,140,200,0.25);border-radius:14px;padding:14px 18px;">
+      <summary style="cursor:pointer;font-size:16px;color:#8e84c0;font-weight:600;font-family:'Jost',sans-serif;">+ Voir aussi les bases d'un bon sommeil</summary>
+      <p class="small" style="margin-top:12px;margin-bottom:12px;">Tu les connais sûrement déjà, coche celles que tu veux garder en tête :</p>
+      <div id="checklist-container"></div>
+    </details>
+
+    <button class="btn" onclick="showPhase('reflexion')" style="margin-top:18px;">Passer à ma réflexion →</button>
+  </div>
+</div>
+
+<!-- RÉFLEXION -->
+<div class="phase" id="phase-reflexion">
+  <div class="card">
+    <div style="text-align:center;margin-bottom:8px;">
+      <span class="emoji-hero" style="font-size:40px;">✍️</span>
+      <h2>Ma réflexion du jour</h2>
+    </div>
+    <p class="small" style="text-align:center;margin-bottom:22px;">Réponds à ce qui te parle. Tu peux laisser des questions vides.</p>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-size:17px;color:#2d2848;font-weight:600;margin-bottom:4px;">Comment se passent tes nuits en ce moment ?</div>
+      <div style="font-size:14px;color:#9a90b8;margin-bottom:10px;font-family:'Jost',sans-serif;">Sans te juger. Juste un état des lieux honnête.</div>
+      <textarea id="e0" rows="3" placeholder="En ce moment, mes nuits..." oninput="checkE()"></textarea>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-size:17px;color:#2d2848;font-weight:600;margin-bottom:4px;">Quel est ton rapport au repos, pas juste au sommeil, mais au fait de t'autoriser à ralentir ?</div>
+      <div style="font-size:14px;color:#9a90b8;margin-bottom:10px;font-family:'Jost',sans-serif;">Est-ce que tu te le permets facilement, ou est-ce que tu culpabilises ?</div>
+      <textarea id="e1" rows="3" placeholder="Mon rapport au repos..." oninput="checkE()"></textarea>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-size:17px;color:#2d2848;font-weight:600;margin-bottom:4px;">Quel mantra aimerais-tu te répéter les nuits difficiles ?</div>
+      <div style="font-size:14px;color:#9a90b8;margin-bottom:10px;font-family:'Jost',sans-serif;">Les 3R, ou les tiens à toi. Écris-les, c'est comme ça qu'on les ancre.</div>
+      <textarea id="e2" rows="3" placeholder="Mon mantra : j'ai le droit de..." oninput="checkE()"></textarea>
+    </div>
+
+    <button class="btn" id="btn-fin" disabled onclick="showFin()">Terminer ma pratique ✨</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-bottom:16px;">
+    <span class="emoji-hero">🌿</span>
+    <h2>Tu t'autorises à te recharger</h2>
+    <p>C'est peut-être le plus beau cadeau que tu puisses te faire, arrêter de courir après le sommeil, et t'autoriser à te reposer. Que tes nuits soient pleines ou difficiles, tu sais maintenant que tu peux récupérer. Sois douce avec toi.</p>
+    <div style="background:#f2f0fb;border-radius:16px;padding:20px;border:1px solid rgba(150,140,200,0.18);text-align:left;margin-top:16px;">
+      <div class="label" style="text-align:left;margin-bottom:12px;">✍️ Tes réponses du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <button class="btn" onclick="telechargerReponses()" style="margin-top:16px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:16px;color:#5a5278;"><strong>Demain, Jour 5 :</strong> apprendre à poser tes limites</p>
+    <p class="hint" style="margin-top:6px;">26 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"⚖️",titre:"Mélatonine et cortisol : la balance de tes nuits",source:"INSERM · Recherche sur le rythme circadien",contenu:[
+    {type:"texte",texte:"Ton sommeil est piloté par deux hormones qui fonctionnent comme une balançoire. D'un côté la mélatonine, celle qui te donne sommeil, elle monte le soir, quand la lumière baisse. De l'autre le cortisol, l'hormone de l'éveil et du stress, qui monte le matin pour te réveiller."},
+    {type:"highlight",texte:"💡 Et voilà le point central : ces deux hormones sont opposées. Quand l'une grimpe, l'autre baisse. Elles ne peuvent pas être hautes en même temps. C'est l'un ou l'autre."},
+    {type:"texte",texte:"Donc quand ton cortisol est élevé, parce que tu es stressée, que tu rumines, que ton cerveau tourne sur les factures, le travail, les enfants, il fait automatiquement chuter ta mélatonine. Ton corps est épuisé, mais ton cerveau, lui, reste en alerte. Et tu te retrouves là, fatiguée mais incapable de dormir."},
+    {type:"texte",texte:"Ce n'est pas dans ta tête. Ce n'est pas un manque de volonté. C'est de la chimie, et elle obéit à des règles. Le comprendre, c'est déjà arrêter de te blâmer."},
+  ]},
+  {emoji:"🌙",titre:"Pourquoi on se réveille la nuit",source:"Recherche sur les cycles du sommeil",contenu:[
+    {type:"texte",texte:"D'abord, il faut que tu saches une chose : se réveiller la nuit, c'est normal. Ton sommeil n'est pas un long bloc continu, il est fait de cycles d'environ 90 minutes. Entre chaque cycle, tu remontes à la surface, presque réveillée. Tout le monde fait ça. La plupart du temps, on se rendort sans même s'en souvenir."},
+    {type:"highlight",texte:"🌀 Le problème, ce n'est pas le réveil. C'est ce qui se passe après. Si à ce moment-là ton cortisol est déjà haut, stress, préoccupations, charge mentale, au lieu de te rendormir, ton cerveau s'allume. Et là, les pensées démarrent."},
+    {type:"texte",texte:"Souvent ça s'accompagne d'un réflexe : regarder l'heure. \"Il est 3h, si je me rendors maintenant il me reste 4h...\", et ce simple calcul fait grimper le cortisol encore plus. Plus tu surveilles, plus tu t'éloignes du sommeil. Alors le premier geste, c'est : ne regarde pas l'heure. Vraiment."},
+  ]},
+  {emoji:"🕊️",titre:"L'insomnie a parfois le droit d'être là",source:"Approche d'acceptation · TCC de l'insomnie",contenu:[
+    {type:"texte",texte:"Je veux te dire quelque chose qu'on n'entend pas souvent. Parfois, tu sais très bien pourquoi tu ne dors pas. Et parfois, tu ne peux rien y faire."},
+    {type:"texte",texte:"Les factures qui s'accumulent, les nuits courtes parce que ton enfant est malade, le stress d'une vie qui ne ralentit pas, tout ça fait monter ton cortisol, et tu ne peux pas toujours changer l'extérieur. En tant que maman, je le sais : le sommeil m'a manqué bien souvent, pas par choix, mais par obligation."},
+    {type:"highlight",texte:"🤍 Alors au lieu de lutter contre l'insomnie, ce qui ne fait que monter encore le stress, on va faire autre chose. On va arrêter de courir après le sommeil, et s'autoriser à se reposer autrement. Parce que oui, c'est possible. Et c'est prouvé."},
+  ]},
+  {emoji:"🔋",titre:"Tu peux recharger ton corps sans dormir",source:"Dr Andrew Huberman · Non-Sleep Deep Rest (NSDR)",contenu:[
+    {type:"texte",texte:"Voilà ce que la recherche a découvert, et qui change tout pour les nuits difficiles : ton corps peut récupérer en profondeur même sans sommeil. À condition de le mettre dans un état de repos conscient."},
+    {type:"highlight",texte:"🧬 Quand tu relâches ton corps et que tu ralentis ton mental volontairement, ton système nerveux bascule en mode parasympathique, celui de la récupération. Ton cortisol baisse, tes ondes cérébrales ralentissent, et tu entres dans un état proche du sommeil profond. Le corps se recharge, presque comme s'il dormait."},
+    {type:"texte",texte:"Ça veut dire que ta nuit d'insomnie n'est pas forcément une nuit perdue. Si tu t'autorises à te relâcher au lieu de te battre contre le sommeil qui ne vient pas, tu récupères quand même. Pas autant qu'une vraie nuit, mais infiniment plus qu'une nuit passée à ruminer et à t'angoisser."},
+  ]},
+  {emoji:"🤍",titre:"Mon mantra des nuits difficiles · les 3R",source:null,contenu:[
+    {type:"texte",texte:"Je vais te partager ce que je fais, moi, les nuits où le sommeil ne vient pas. C'est tout simple, et je l'ai ancré à force de le répéter. Maintenant mon corps le reconnaît."},
+    {type:"texte",texte:"Je commence par un balayage de mon corps, je le parcours doucement, de la tête aux pieds, à la recherche des endroits tendus. Une mâchoire serrée, des épaules remontées, un ventre noué. Je repère."},
+    {type:"texte",texte:"Puis je respire dessus. J'envoie mon souffle vers cette tension, j'imagine que je crée de l'espace autour d'elle, que je la laisse fondre un peu à chaque expiration."},
+    {type:"highlight",texte:"🌙 Et pendant que je relâche, je me répète mes trois phrases : mes 3R :<br><br>« J'ai le droit de me relâcher. »<br>« J'ai le droit de me reposer. »<br>« J'ai le droit de me recharger. »<br><br>Encore, et encore, doucement, au rythme de mon souffle."},
+    {type:"texte",texte:"Ces trois phrases ne sont pas là pour te forcer à dormir. Elles sont là pour t'autoriser à te reposer. Et c'est cette autorisation, ce lâcher-prise, qui fait baisser ton cortisol, et qui permet à ton corps de récupérer, que le sommeil vienne ou non."},
+    {type:"texte",texte:"Crée ton propre mantra si le mien ne te parle pas. L'important, c'est qu'il soit à toi, simple, et que tu le répètes assez souvent pour que ton corps finisse par le reconnaître. Comme la respiration d'hier, c'est la régularité qui l'ancre."},
+  ]},
+];
+
+let theorieIdx=0;
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  let html='<span class="theorie-emoji">'+t.emoji+'</span>';
+  html+='<h3 style="text-align:center;">'+t.titre+'</h3>';
+  if(t.source) html+='<div class="source-tag">'+t.source+'</div>';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') html+='<p style="font-size:17px;color:#4a4266;line-height:1.85;margin-bottom:12px;">'+item.texte+'</p>';
+    else if(item.type==='highlight') html+='<div class="highlight">'+item.texte+'</div>';
+  });
+  document.getElementById('theorie-content').innerHTML=html;
+  document.getElementById('t-progress').textContent=(theorieIdx+1)+' / '+theorie.length;
+  let dots='';
+  theorie.forEach((x,i)=>{dots+='<div class="tdot'+(i===theorieIdx?' active':'')+'"></div>';});
+  document.getElementById('t-dots').innerHTML=dots;
+  document.getElementById('t-prev').style.display=theorieIdx===0?'none':'block';
+  document.getElementById('t-next').textContent=theorieIdx===theorie.length-1?'Mon rituel du soir →':'Continuer →';
+}
+
+function theorieNext(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('rituel');
+}
+function theoriePrev(){
+  if(theorieIdx>0){theorieIdx--;renderTheorie();window.scrollTo(0,0);}
+}
+
+const rituels=[
+  "Poser mon téléphone 30 minutes avant de dormir",
+  "Baisser les lumières le soir (lampe douce plutôt que plafonnier)",
+  "M'exposer à la lumière du matin dès le réveil",
+  "Faire quelques respirations lentes une fois couchée",
+  "Garder ma chambre fraîche et dans le noir",
+  "Me coucher à peu près à la même heure",
+  "Éviter le café après 14h",
+  "Noter mes pensées sur un carnet si mon cerveau tourne",
+];
+
+const cc=document.getElementById('checklist-container');
+rituels.forEach((r,i)=>{
+  const div=document.createElement('div');
+  div.className='check-item';
+  div.onclick=()=>div.classList.toggle('checked');
+  div.innerHTML='<div class="check-box">✓</div><div class="check-texte">'+r+'</div>';
+  cc.appendChild(div);
+});
+
+function checkE(){
+  const ok=['e0','e1','e2'].some(id=>document.getElementById(id).value.trim());
+  document.getElementById('btn-fin').disabled=!ok;
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const qs=[
+    {id:'e0',label:'Comment se passent mes nuits'},
+    {id:'e1',label:'Mon rapport au repos'},
+    {id:'e2',label:'Mon mantra des nuits difficiles'},
+  ];
+  qs.forEach(q=>{
+    const val=document.getElementById(q.id).value.trim();
+    if(val) rc.innerHTML+='<div class="recap-box"><div class="recap-q">'+q.label+'</div><div class="recap-r">"'+val+'"</div></div>';
+  });
+  // Ajouter les rituels cochés
+  const coches=[];
+  document.querySelectorAll('.check-item.checked .check-texte').forEach(e=>coches.push(e.textContent));
+  if(coches.length){
+    rc.innerHTML+='<div class="recap-box"><div class="recap-q">Les bases que je garde en tête</div><div class="recap-r">'+coches.join(' · ')+'</div></div>';
+  }
+  showFin2();
+}
+function showFin2(){showPhase('fin');}
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 4 · Le sommeil</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='Jour4-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+renderTheorie();
+</script>
+</body>
+</html>

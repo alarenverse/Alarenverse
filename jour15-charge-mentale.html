@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 15 · La charge mentale · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f8f5f0 0%,#f5f0f8 45%,#f0f5f8 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#a09090;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d2830;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c87880,#a080c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(180,100,110,0.1);border:1px solid rgba(200,120,130,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c87880;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d2830;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d2830;margin-bottom:14px;line-height:1.4}
+  p{color:#6d4050;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a6070}
+  .btn{background:linear-gradient(135deg,#c87880,#a080c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(180,100,110,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,120,130,0.25);color:#c0a0a8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#c0a0a8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a08090;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(200,120,130,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#c87880,#a080c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#fdf0f2,#f8f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #c87880;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.important{border-left-width:4px;padding:18px;background:linear-gradient(135deg,#fde8ec,#f8f0fa)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(200,120,130,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#c87880,#a080c8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#b09090;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(200,120,130,0.12);font-size:11px;color:#b09090;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(200,120,130,0.05);border:1px solid rgba(200,120,130,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#806070;font-family:'Jost',sans-serif}
+
+  /* Inventaire */
+  .categorie-card{border-radius:18px;margin-bottom:12px;overflow:hidden;border:1px solid}
+  .categorie-header{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+  .categorie-titre{font-size:15px;font-weight:400}
+  .categorie-count{font-family:'Jost',sans-serif;font-size:12px;font-weight:600}
+  .categorie-items{padding:0 18px 14px;display:none}
+  .categorie-items.open{display:block}
+  .item-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(200,120,130,0.08)}
+  .item-row:last-child{border-bottom:none}
+  .item-check{width:20px;height:20px;border-radius:4px;border:2px solid rgba(200,120,130,0.3);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.2s;background:white}
+  .item-check.done{background:linear-gradient(135deg,#c87880,#a080c8);border-color:transparent;color:white}
+  .item-texte{font-size:13px;color:#5d4050;line-height:1.5;font-style:normal}
+  .item-custom{flex:1;border:none;border-bottom:1px dashed rgba(200,120,130,0.3);padding:4px 0;font-size:13px;font-family:'Lora',serif;color:#5d4050;outline:none;background:transparent;font-style:italic}
+
+  /* Compteur total */
+  .compteur-wrap{background:linear-gradient(135deg,#fdf0f2,#f8f0fa);border-radius:16px;padding:16px 20px;border:1px solid rgba(200,120,130,0.2);margin-top:16px;text-align:center}
+  .compteur-num{font-size:36px;font-weight:300;color:#c87880;font-family:'Lora',serif}
+  .compteur-label{font-size:13px;color:#a08090;font-family:'Jost',sans-serif;margin-top:4px}
+  .compteur-message{font-size:14px;color:#5d2030;margin-top:8px;line-height:1.6}
+
+  /* Écriture */
+  textarea{width:100%;border:2px solid rgba(200,120,130,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d2830;line-height:1.7;outline:none;resize:vertical;background:#fdf8f9}
+  textarea:focus{border-color:#c87880}
+  .e-q{font-size:17px;color:#3d2830;line-height:1.65;text-align:center;margin-bottom:6px}
+  .e-sous{font-size:13px;color:#a08090;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+
+  .recap-box{background:linear-gradient(135deg,#fdf0f2,#f8f0fa);border-radius:14px;padding:14px 18px;border:1px solid rgba(200,120,130,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b09090;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#fdf0f2,#f8f0fa);border-radius:20px;padding:22px;border:1px solid rgba(200,120,130,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🧠</span>
+    <div class="label">Jour 15 · La charge mentale</div>
+    <h2>Ce que tu portes dans ta tête et que personne ne voit</h2>
+    <p>La charge mentale, ce n'est pas du stress. C'est ce travail invisible et permanent de penser, anticiper, organiser, se souvenir, pour toi et pour les autres. Que tu sois mère ou non, en couple ou non, tu portes sûrement bien plus que tu ne le réalises. Et ça a un vrai coût.</p>
+    <p class="small" style="margin-bottom:20px;">Aujourd'hui on met des mots sur ce qui est là, avec la science derrière, et un inventaire pour voir concrètement tout ce que tu portes.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🧠</button>
+    <p class="hint">Théorie · Impact psy · Inventaire · Écriture guidée · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- INVENTAIRE -->
+<div class="phase" id="phase-inventaire">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">📋</span>
+    <h2>L'inventaire de ta charge mentale</h2>
+    <p style="text-align:center;margin-bottom:6px;">Coche tout ce que tu gères, seule ou en majorité. Ouvre chaque catégorie pour explorer.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Le but n'est pas de culpabiliser ni d'accuser, c'est de voir. Nommer, c'est déjà commencer à reprendre du pouvoir.</p>
+    <div id="inventaire-container"></div>
+    <div class="compteur-wrap">
+      <div class="compteur-num" id="compteur-num">0</div>
+      <div class="compteur-label">tâches cognitives identifiées</div>
+      <div class="compteur-message" id="compteur-message">Coche ce que tu gères pour voir apparaître ton total.</div>
+    </div>
+    <button class="btn" style="margin-top:16px;" onclick="showPhase('ecriture')">Passer à l'écriture guidée ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/4</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Nommer l'invisible</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌸</span>
+    <h2>Tu viens de nommer ce qui était invisible</h2>
+    <p>Ce travail que tu viens de faire, inventorier, nommer, écrire, est déjà un acte politique et thérapeutique. On ne peut pas changer ce qu'on ne voit pas. Tu viens de le voir.</p>
+    <div style="background:linear-gradient(135deg,#fdf0f2,#f8f0fa);border-radius:16px;padding:20px;border:1px solid rgba(200,120,130,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c87880;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> La charge mentale n'est pas une fatalité, mais elle ne disparaîtra pas seule, et elle ne disparaîtra pas par ta seule volonté de "mieux t'organiser". Elle demande une conversation, une redistribution, et parfois une décision courageuse sur ce que tu lâches. Demain, on travaille exactement sur ça.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#806070;"><strong style="color:#3d2830;">Demain, Jour 16 :</strong> gérer la charge mentale & lâcher prise</p>
+    <p class="hint" style="margin-top:6px;">15 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"📖",titre:"La charge mentale, et pourquoi elle pèse sur les femmes",source:"Monique Haicault / Emma, Fallait demander",contenu:[
+    {type:"texte",texte:"Le terme \"charge mentale\" vient de la sociologue Monique Haicault, dans les années 80, et a été rendu célèbre par la dessinatrice Emma en 2017. Mais le truc qu'il décrit, lui, est bien plus ancien, et tu le connais sûrement par cœur."},
+    {type:"hl",texte:"🧠 La charge mentale, c'est tout ce travail invisible de gestion : penser à ce qui manque dans le frigo, retenir le rendez-vous chez le pédiatre, anticiper les cadeaux d'anniversaire, planifier les vacances, suivre les devoirs, garder un œil sur l'humeur de chacun. C'est gérer le foyer dans sa tête, en permanence, en arrière-plan de tout le reste."},
+    {type:"stat",texte:"Les femmes consacrent nettement plus de temps que les hommes aux tâches domestiques, mais surtout, elles portent la grande majorité du travail de coordination et d'anticipation. C'est ça, le vrai poids",source:"INSEE, Enquête Emploi du temps"},
+    {type:"texte",texte:"Et même dans les couples qui se vivent comme égalitaires, c'est encore le plus souvent la femme qui porte cette charge de coordination, souvent sans même s'en rendre compte elle-même."},
+    {type:"hl",texte:"💡 Retiens bien ça : ce n'est pas naturel, ce n'est pas inné, ce n'est pas \"dans ta nature de femme\". C'est le résultat de générations d'éducation où les filles apprennent à gérer et anticiper, et les garçons à être pris en charge. C'est structurel, pas un défaut à toi.",classe:"violet"},
+  ]},
+  {emoji:"🏠",titre:"Le travail invisible, cheffe de projet du foyer",source:"Arlie Hochschild, The Second Shift",contenu:[
+    {type:"texte",texte:"La charge mentale, c'est bien plus que \"faire des tâches\". C'est manager tout le foyer, comme une cheffe de projet qui coordonne, délègue, anticipe, vérifie, rappelle, réajuste. Sauf que cette cheffe de projet-là travaille sans arrêt, sans fiche de poste, sans salaire, et sans personne pour reconnaître le boulot."},
+    {type:"hl",texte:"📊 C'est ce qu'on appelle la \"double journée\" : beaucoup de femmes qui travaillent à l'extérieur rentrent chez elles pour une deuxième journée de travail, non rémunérée celle-là. Hochschild l'a décrit il y a plus de trente ans, et ça n'a pas vraiment changé."},
+    {type:"texte",texte:"Ce management du foyer, c'est : le suivi médical de toute la famille, l'administratif, la logistique du quotidien, les repas, le suivi scolaire, les émotions des enfants, le lien social, les cadeaux, les anniversaires. Et surtout, le fait de devoir se souvenir de tout ça, tout le temps."},
+    {type:"stat",texte:"Les mères de jeunes enfants ont infiniment moins de temps libre que les pères dans la même situation familiale. L'écart est saisissant, et il est rarement nommé",source:"Observatoire des inégalités"},
+    {type:"hl",texte:"🔑 Et non, ce n'est pas \"de l'aide\" quand un partenaire fait la vaisselle. Aider, ça suppose qu'il y a une responsable qui délègue. Le vrai sujet, c'est la répartition de la responsabilité, pas seulement qui exécute la tâche.",classe:"or"},
+  ]},
+  {emoji:"🧬",titre:"Ce que ça fait vraiment à ton cerveau et ton moral",source:"Recherches en psychologie clinique et neurosciences",contenu:[
+    {type:"texte",texte:"La charge mentale chronique, ce n'est pas juste fatigant. Ça laisse des traces réelles, mesurables, sur le cerveau, les hormones, le moral. Ce n'est pas \"dans ta tête\" au sens où tu l'imaginerais, c'est dans ta tête au sens neurologique, bien concret."},
+    {type:"stat",texte:"Quand le cerveau ne s'éteint jamais, le cortisol reste élevé en continu. Résultat : la mémoire flanche, les décisions deviennent plus dures à prendre, et le risque d'épuisement grimpe nettement",source:"Recherche en psychologie de la santé au travail"},
+    {type:"stat",texte:"Les femmes vivent des dépressions bien plus souvent que les hommes. Une part importante de cet écart s'explique par la charge mentale et domestique, l'épuisement du rôle de \"celle qui prend soin\", et ce sentiment de ne plus avoir prise sur sa vie",source:"OMS, Genre et santé mentale"},
+    {type:"hl",texte:"⚠️ Il y a un phénomène précis qui s'appelle la \"fatigue décisionnelle\" : après des centaines de micro-décisions dans la journée (les repas, l'organisation, le planning, les émotions de chacun), ton cerveau n'a plus de carburant pour les décisions qui te concernent, toi. Tu t'oublies. Pas par manque d'amour de toi-même, par épuisement cognitif bien réel.",classe:"important"},
+    {type:"texte",texte:"Et ce sentiment de ne jamais pouvoir \"éteindre\" son cerveau, si caractéristique de la charge mentale, est directement lié à l'insomnie, à l'anxiété qui s'installe, et à cette impression de perdre peu à peu qui on est."},
+    {type:"hl",texte:"🌸 Cette perte d'identité, c'est l'un des effets les plus douloureux, et les moins nommés, de la charge mentale. À force de n'être que \"maman\", \"celle qui gère\", \"celle qui est toujours dispo\", on finit par ne plus savoir qui on est en dehors de ces rôles. C'est exactement là que ces 30 jours prennent tout leur sens.",classe:"vert"},
+  ]},
+];
+
+const inventaire=[
+  {titre:"Foyer & Logistique",couleur:"#c87880",bg:"#fdf0f2",border:"rgba(200,120,130,0.2)",items:[
+    "Anticiper ce qui manque dans les placards avant de faire les courses",
+    "Planifier les menus de la semaine",
+    "Gérer les réparations et l'entretien du logement",
+    "Suivre les factures, abonnements et contrats",
+    "Gérer les démarches administratives du foyer",
+    "Se souvenir de sortir les poubelles aux bons jours",
+    "Gérer le linge, tri, lavage, repassage, rangement",
+    "Surveiller les stocks de produits d'hygiène et ménagers",
+  ]},
+  {titre:"Enfants & Famille",couleur:"#e8a0b4",bg:"#fdf0f5",border:"rgba(232,160,180,0.2)",items:[
+    "Suivre le carnet de santé et planifier les rendez-vous médicaux",
+    "Gérer les activités extrascolaires, inscriptions, transport, matériel",
+    "Suivre le travail scolaire et les communications avec les enseignants",
+    "Anticiper les besoins vestimentaires selon les saisons et la croissance",
+    "Préparer les cartables, les sacs de sport, les affaires de sortie",
+    "Gérer l'état émotionnel des enfants, crises, angoisses, conflits",
+    "Organiser les anniversaires, les invitations, les cadeaux",
+    "Maintenir le lien avec les grands-parents et la famille élargie",
+  ]},
+  {titre:"Relations & Social",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.2)",items:[
+    "Se souvenir des anniversaires et occasions importantes",
+    "Acheter et envoyer les cadeaux et cartes",
+    "Maintenir le contact avec les amis, prendre des nouvelles, organiser des retrouvailles",
+    "Gérer l'état émotionnel du partenaire et anticiper ses besoins",
+    "Être \"disponible émotionnellement\" pour les proches en difficulté",
+    "Gérer les conflits relationnels dans la famille ou l'entourage",
+    "Organiser les repas de famille et les réunions sociales",
+  ]},
+  {titre:"Travail & Professionnel",couleur:"#6090c0",bg:"#eef4fb",border:"rgba(96,144,192,0.2)",items:[
+    "Anticiper les réunions, les délais, les préparations nécessaires",
+    "Gérer les relations avec les collègues et managers",
+    "Gérer la charge émotionnelle du travail (patients, usagers, clients)",
+    "Penser au travail en dehors des heures de travail",
+    "Gérer la culpabilité de ne pas être \"assez\" présente au travail ou à la maison",
+    "Anticiper les impacts professionnels de la vie personnelle (enfant malade, etc.)",
+  ]},
+  {titre:"Soin de soi · souvent oublié",couleur:"#80c8a8",bg:"#eaf5f0",border:"rgba(128,200,168,0.2)",items:[
+    "Trouver du temps pour soi, et culpabiliser de le prendre",
+    "Gérer ses propres rendez-vous médicaux (souvent reportés)",
+    "Penser à se nourrir correctement malgré la charge",
+    "Maintenir ses propres amitiés et besoins sociaux",
+    "Garder une activité personnelle, un loisir, un espace de joie",
+  ]},
+];
+
+const ecritureQs=[
+  {q:"Qu'est-ce que tu as ressenti en faisant cet inventaire ?",sous:"Surprise, reconnaissance, tristesse, colère, soulagement de voir... Nomme ce qui est là.",placeholder:"En faisant cet inventaire j'ai ressenti..."},
+  {q:"Y a-t-il une partie de ta charge mentale qui t'épuise particulièrement, et que personne ne voit ?",sous:"La partie la plus invisible, la plus lourde, la moins reconnue.",placeholder:"Ce qui m'épuise le plus et qu'on ne voit pas c'est..."},
+  {q:"Qu'est-ce que tu as dû abandonner ou mettre de côté à cause de la charge mentale ?",sous:"Un projet, un rêve, une partie de toi-même, une relation, un loisir...",placeholder:"Ce que j'ai mis de côté c'est..."},
+  {q:"Si tu pouvais changer une chose dans la répartition de ta charge mentale, laquelle serait-ce ?",sous:"Pas une liste idéale, une seule chose, réaliste ou non, qui te soulagerait vraiment.",placeholder:"Si je pouvais changer une chose ce serait..."},
+];
+
+let theorieIdx=0, checkedItems=new Set(), eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='ecriture') renderE();
+}
+
+// Preview
+const pc=document.getElementById('preview-container');
+[{e:'📖',t:'Qu\'est-ce que la charge mentale, et pourquoi les femmes'},{e:'🏠',t:'Le travail invisible, la double journée'},{e:'🧬',t:'L\'impact sur la santé mentale, science et données'},{e:'📋',t:'Inventaire interactif de ta charge mentale'},{e:'✍️',t:'Écriture guidée, nommer l\'invisible'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#6d4050;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Faire mon inventaire 📋':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else{renderInventaire();showPhase('inventaire');}
+}
+
+function renderInventaire(){
+  const el=document.getElementById('inventaire-container');
+  el.innerHTML='';
+  inventaire.forEach((cat,ci)=>{
+    const card=document.createElement('div');
+    card.className='categorie-card';
+    card.style.cssText=`background:${cat.bg};border-color:${cat.border};`;
+    const header=document.createElement('div');
+    header.className='categorie-header';
+    header.innerHTML=`
+      <div class="categorie-titre" style="color:${cat.couleur};">${cat.titre}</div>
+      <div class="categorie-count" id="count-${ci}" style="color:${cat.couleur};">0 / ${cat.items.length}</div>`;
+    header.onclick=()=>{
+      const items=card.querySelector('.categorie-items');
+      items.classList.toggle('open');
+    };
+    const items=document.createElement('div');
+    items.className='categorie-items';
+    cat.items.forEach((item,ii)=>{
+      const key=`${ci}-${ii}`;
+      const row=document.createElement('div');
+      row.className='item-row';
+      row.innerHTML=`
+        <div class="item-check" id="ic-${key}" onclick="toggleItem('${key}',${ci})">${checkedItems.has(key)?'✓':''}</div>
+        <div class="item-texte">${item}</div>`;
+      if(checkedItems.has(key)) row.querySelector('.item-check').classList.add('done');
+      items.appendChild(row);
+    });
+    // Champ personnalisé
+    const customRow=document.createElement('div');
+    customRow.className='item-row';
+    customRow.innerHTML=`
+      <div class="item-check" style="opacity:0.3;">+</div>
+      <input class="item-custom" placeholder="Ajouter quelque chose..." id="custom-${ci}">`;
+    items.appendChild(customRow);
+    card.appendChild(header);
+    card.appendChild(items);
+    el.appendChild(card);
+  });
+}
+
+function toggleItem(key,ci){
+  const check=document.getElementById('ic-'+key);
+  if(checkedItems.has(key)){
+    checkedItems.delete(key);
+    check.classList.remove('done');
+    check.textContent='';
+  } else {
+    checkedItems.add(key);
+    check.classList.add('done');
+    check.textContent='✓';
+  }
+  // Mettre à jour le compteur de catégorie
+  const catCount=inventaire[ci].items.filter((_,ii)=>checkedItems.has(`${ci}-${ii}`)).length;
+  document.getElementById('count-'+ci).textContent=`${catCount} / ${inventaire[ci].items.length}`;
+  updateCompteur();
+}
+
+function updateCompteur(){
+  const n=checkedItems.size;
+  document.getElementById('compteur-num').textContent=n;
+  const msg=document.getElementById('compteur-message');
+  if(n===0) msg.textContent='Coche ce que tu gères pour voir apparaître ton total.';
+  else if(n<=10) msg.textContent='Ce n\'est que le début de ce que tu portes. Continue à cocher.';
+  else if(n<=20) msg.textContent=`${n} tâches cognitives, et ce n'est pas exhaustif. Commence-tu à voir le poids de ce que tu portes ?`;
+  else if(n<=30) msg.textContent=`${n} tâches cognitives. C'est considérable. Et probablement pas la liste complète.`;
+  else msg.textContent=`${n} tâches cognitives identifiées. C'est une charge réelle, lourde, et en grande partie invisible aux yeux des autres. Tu n'es pas folle d'être épuisée.`;
+}
+
+// Écriture
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 15 🌸';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 15 · La charge mentale</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour15-charge-mentale-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

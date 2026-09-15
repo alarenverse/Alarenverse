@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 10 · La gratitude · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf8ee 0%,#fdf5f0 45%,#fdf0f8 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b0a070;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d3020;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c8a870,#e8a0b4);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(200,160,80,0.12);border:1px solid rgba(220,180,100,0.2);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c8a870;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d3020;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d3020;margin-bottom:14px;line-height:1.4}
+  p{color:#6d5830;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a7850}
+  .btn{background:linear-gradient(135deg,#c8a870,#e8a0b4);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(200,160,80,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,160,80,0.25);color:#b8a880;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#b8a880;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a09060;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(200,160,80,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#c8a870,#e8a0b4);border-radius:4px;transition:width 0.4s ease}
+  .highlight{background:linear-gradient(135deg,#fdf8ee,#fdf5f0);border-radius:14px;padding:14px 18px;border-left:3px solid #c8a870;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .highlight.rose{border-left-color:#e8a0b4;background:linear-gradient(135deg,#fdf0f8,#fdf5f5)}
+  .highlight.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(200,160,80,0.12)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#c8a870,#e8a0b4);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#b0a070;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(200,160,80,0.15);font-size:11px;color:#b0a070;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(200,160,80,0.06);border:1px solid rgba(200,160,80,0.15);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#907050;font-family:'Jost',sans-serif}
+
+  /* Journal */
+  textarea{width:100%;border:2px solid rgba(200,160,80,0.3);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d3020;line-height:1.7;outline:none;resize:vertical;background:#fdfaf4}
+  textarea:focus{border-color:#c8a870}
+  .journal-q{font-size:17px;color:#3d3020;line-height:1.65;text-align:center;margin-bottom:6px}
+  .journal-sous{font-size:13px;color:#a09060;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .journal-exemple{background:rgba(200,160,80,0.08);border-radius:10px;padding:10px 14px;font-size:13px;color:#8a7040;line-height:1.6;margin-bottom:14px;border-left:2px solid rgba(200,160,80,0.3)}
+
+  /* Gratitude envers soi */
+  .soi-item{background:white;border-radius:16px;padding:18px 20px;border:1px solid rgba(232,160,180,0.2);margin-bottom:12px;box-shadow:0 2px 12px rgba(200,140,160,0.08)}
+  .soi-categorie{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:#e8a0b4;margin-bottom:6px}
+  .soi-question{font-size:17px;color:#3d3020;line-height:1.6;margin-bottom:10px}
+  .soi-textarea{width:100%;border:1px solid rgba(232,160,180,0.3);border-radius:10px;padding:10px 14px;font-size:13px;font-family:'Lora',serif;color:#3d3020;line-height:1.6;outline:none;resize:none;background:#fdf8fc}
+  .soi-textarea:focus{border-color:#e8a0b4}
+
+  /* Difficile */
+  .difficile-btn{background:transparent;border:2px solid rgba(200,160,80,0.25);border-radius:14px;padding:14px 18px;width:100%;cursor:pointer;font-family:'Lora',serif;text-align:left;margin-bottom:10px;transition:all 0.2s;display:flex;align-items:flex-start;gap:12px}
+  .difficile-btn:hover{border-color:#c8a870;background:rgba(200,160,80,0.04)}
+  .difficile-btn.open{border-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .difficile-titre{font-size:17px;color:#253050;line-height:1.5;font-style:italic}
+  .difficile-reponse{font-size:13px;color:#8a7050;line-height:1.65;margin-top:8px;padding-top:8px;border-top:1px solid rgba(200,160,80,0.2);display:none;font-style:normal}
+  .difficile-btn.open .difficile-reponse{display:block}
+
+  .recap-box{background:linear-gradient(135deg,#fdf8ee,#fdf0f8);border-radius:14px;padding:14px 18px;border:1px solid rgba(200,160,80,0.2);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b0a070;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#fdf8ee,#fdf0f8);border-radius:20px;padding:22px;border:1px solid rgba(200,160,80,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">💛</span>
+    <div class="label">Jour 10 · La gratitude</div>
+    <h2>La gratitude, ce n'est pas de la pensée positive</h2>
+    <p>On t'a sûrement déjà dit de "compter tes bénédictions" ou de "voir le bon côté des choses". Oublie ça. Ce n'est pas du tout de ça qu'on parle. La vraie gratitude, la profonde, c'est un outil qui change le cerveau, et elle marche, même quand tu vas mal.</p>
+    <p class="small" style="margin-bottom:20px;">Mais à une condition : la pratiquer pour de vrai, pas en surface. Aujourd'hui on voit ce que la science en dit, pourquoi c'est si dur quand on souffre, et comment la pratiquer sans jamais te mentir à toi-même.</p>
+    <div id="preview-container" style="text-align:left;margin-bottom:22px;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 💛</button>
+    <p class="hint">Théorie · Journal guidé · Gratitude envers soi · ~20 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- QUAND C'EST DIFFICILE -->
+<div class="phase" id="phase-difficile">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌧️</span>
+    <h2>Quand la gratitude semble impossible</h2>
+    <p style="text-align:center;margin-bottom:8px;">Clique sur ce qui te ressemble. Ces résistances sont normales, et elles ont des réponses.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">La gratitude forcée fait plus de mal que de bien. Voici comment l'approcher autrement.</p>
+    <div id="difficile-container"></div>
+    <button class="btn" onclick="showPhase('journal')">Passer au journal de gratitude 📖</button>
+  </div>
+</div>
+
+<!-- JOURNAL GUIDÉ -->
+<div class="phase" id="phase-journal">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="j-label">Journal · 1/4</span>
+      <span style="font-family:'Jost',sans-serif;">📖 Gratitude profonde</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="j-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <p class="journal-q" id="j-question"></p>
+    <p class="journal-sous" id="j-sous"></p>
+    <div class="journal-exemple" id="j-exemple" style="display:none;"></div>
+    <textarea id="j-textarea" rows="5" placeholder="" oninput="checkJournal()"></textarea>
+    <button class="btn" id="btn-j-next" style="width:100%;margin-top:12px;" onclick="nextJournal()">Continuer →</button>
+  </div>
+</div>
+
+<!-- GRATITUDE ENVERS SOI -->
+<div class="phase" id="phase-soi">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🪞</span>
+    <h2>La gratitude envers toi-même</h2>
+    <p style="text-align:center;margin-bottom:8px;">La gratitude qu'on s'accorde à soi-même est souvent la plus difficile, et la plus puissante.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Réponds à ces questions avec la même douceur que tu aurais pour quelqu'un que tu aimes.</p>
+
+    <div class="highlight rose" style="margin-bottom:20px;">
+      <strong>Pourquoi la gratitude envers soi est si difficile</strong><br><br>
+      On apprend facilement à être reconnaissante pour les autres, pour la nature, pour les petits moments de vie. Mais se remercier soi-même, pour sa résilience, ses efforts, sa douceur, ça heurte souvent quelque chose. La voix critique dit : "Tu n'as rien fait d'exceptionnel." Mais tenir debout, prendre soin de soi, avancer malgré tout, c'est déjà beaucoup.
+    </div>
+
+    <div id="soi-container"></div>
+    <button class="btn" id="btn-soi" onclick="showFin()">Terminer le Jour 10 💛</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌟</span>
+    <h2>Tu viens de nourrir ton cerveau</h2>
+    <p>La gratitude que tu viens de pratiquer n'est pas de l'optimisme naïf. C'est un acte neurologique, tu viens de stimuler la dopamine, la sérotonine et l'ocytocine de ton cerveau. Et la gratitude envers toi-même, c'est peut-être ce qu'il y a de plus rare et de plus précieux.</p>
+
+    <div style="background:linear-gradient(135deg,#fdf8ee,#fdf0f8);border-radius:16px;padding:20px;border:1px solid rgba(200,160,80,0.2);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">💛 Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+
+    <div class="highlight" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À pratiquer chaque soir :</strong> Pas une liste de 3 choses. Une seule chose, ressentie vraiment, avec détail. Pourquoi est-ce que ça compte ? Qu'est-ce que ça t'a apporté ? C'est la profondeur qui change le cerveau, pas la quantité.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#907050;"><strong style="color:#3d3020;">Demain, Jour 11 :</strong> les relations nourrissantes</p>
+    <p class="hint" style="margin-top:6px;">20 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie = [
+  {
+    emoji:"🧠", titre:"Ce que la gratitude fait vraiment à ton cerveau",
+    source:"Dr Robert Emmons, UC Davis / Dr Martin Seligman",
+    contenu:[
+      {type:"texte", texte:"La gratitude, ce n'est pas une posture spirituelle ni un exercice de pensée positive un peu naïf. C'est une vraie pratique qui change le cerveau, avec des effets qu'on peut mesurer. Rien à voir avec le \"vois le bon côté des choses\"."},
+      {type:"stat", texte:"Pratiquée régulièrement, la gratitude réveille la zone du cerveau liée aux décisions, à la régulation des émotions et à l'empathie",source:"Dr Glenn Fox, USC Brain and Creativity Institute"},
+      {type:"stat", texte:"À l'imagerie cérébrale, la gratitude active les mêmes circuits que la générosité et la récompense, elle libère de la dopamine et de l'ocytocine en même temps",source:"Recherche en neurosciences"},
+      {type:"highlight", texte:"💡 Voilà pourquoi c'est si puissant : notre cerveau est naturellement programmé pour retenir bien plus longtemps le négatif que le positif : un vieux réflexe de survie. La gratitude vient rééquilibrer ça, doucement. Ce n'est pas de la naïveté. C'est entraîner ton cerveau à voir aussi le bon, pas seulement le menaçant."},
+    ]
+  },
+  {
+    emoji:"🔬", titre:"Gratitude de surface vs gratitude profonde",
+    source:"Sonja Lyubomirsky, The How of Happiness",
+    contenu:[
+      {type:"texte", texte:"\"Liste 3 choses positives par jour\", c'est la version la plus connue de la gratitude. C'est aussi la moins efficace quand on la fait machinalement, en cochant une case. Parce que le cerveau s'y habitue et finit par ne plus rien ressentir."},
+      {type:"highlight", texte:"❌ Gratitude de surface : \"Aujourd'hui j'ai bien mangé. Il faisait beau. Ma journée s'est bien passée.\" → Le cerveau s'habitue vite, et la pratique perd tout son effet en quelques semaines."},
+      {type:"highlight", texte:"✅ Gratitude profonde : \"Aujourd'hui ma collègue a pris le temps de m'écouter. Ça m'a fait sentir moins seule dans ce moment difficile. Et ça me rappelle que je mérite d'être vue et entendue.\" → Là, ça touche vraiment quelque chose, et ça laisse une trace.", classe:"vert"},
+      {type:"texte", texte:"Tu sens la différence ? La gratitude profonde nomme précisément la personne ou le moment, et surtout elle explore pourquoi ça compte, ce que ça te dit de toi et de tes besoins. C'est cette profondeur-là qui change réellement quelque chose en toi."},
+    ]
+  },
+  {
+    emoji:"🌧️", titre:"Quand on va mal, la gratitude qui ne nie pas la douleur",
+    source:"Dr Brené Brown, The Gifts of Imperfection",
+    contenu:[
+      {type:"texte", texte:"Quand on est en dépression, épuisée ou en grande souffrance, la gratitude peut sembler une insulte. \"Sois reconnaissante\" peut sonner comme \"arrête de te plaindre\". Ce n'est absolument pas ce qu'on te demande ici. On ne va pas te demander de faire semblant."},
+      {type:"highlight", texte:"💡 La règle d'or : la gratitude ne nie jamais la douleur. Elle vit à côté d'elle. Ce n'est pas \"tout va bien\". C'est \"malgré ce qui est dur, il y a aussi ça\". Les deux peuvent être vraies en même temps : ta souffrance ET un petit quelque chose de bon. L'un n'efface pas l'autre."},
+      {type:"texte", texte:"Et quand la gratitude classique te semble impossible, il y a une porte plus douce : être reconnaissante pour les choses toutes simples. Pas les grandes joies, juste l'ordinaire qui aurait pu être autrement. L'eau chaude de la douche. Le fait de pouvoir respirer. Un moment de silence. Un café encore chaud."},
+      {type:"highlight", texte:"🌱 Brené Brown parle de \"pratiquer\" la gratitude plutôt que de la \"ressentir\", parce que dans les moments durs, elle ne vient pas toute seule. On la choisit, volontairement, comme un geste de soin envers soi. Pas comme une obligation d'être heureuse. Juste comme une main qu'on se tend à soi-même.", classe:"vert"},
+    ]
+  },
+];
+
+const difficiles = [
+  {
+    titre:"\"Je n'arrive pas à ressentir de la gratitude quand je suis au fond.\"",
+    reponse:"C'est normal et valide. Dans ces moments-là, commence par la plus petite chose possible, pas une joie, juste quelque chose de neutre qui aurait pu être absent. L'eau chaude. Un toit. Un moment sans douleur. La gratitude ne demande pas d'être heureuse. Elle demande juste de remarquer ce qui est là."
+  },
+  {
+    titre:"\"Ça me semble faux, comme si je me forçais à voir le bon côté.\"",
+    reponse:"La gratitude forcée ne fonctionne pas, tu as raison de le sentir. La vraie pratique n'est pas de nier ce qui est difficile, mais de tenir les deux simultanément : 'C'est dur ET il y a aussi ça.' Commence par des choses authentiquement vraies pour toi, même minuscules."
+  },
+  {
+    titre:"\"Ma vie est difficile en ce moment, il n'y a pas grand chose à remarquer.\"",
+    reponse:"Le cerveau en souffrance a du mal à percevoir ce qui va, c'est neurologique, pas une défaillance de caractère. Essaie de te demander non pas 'qu'est-ce qui est bien ?' mais 'qu'est-ce qui aurait pu être pire et ne l'est pas ?' C'est souvent une porte d'entrée plus honnête."
+  },
+  {
+    titre:"\"J'ai du mal à être reconnaissante envers les personnes qui me font du mal.\"",
+    reponse:"La gratitude ne demande pas de pardonner ou d'ignorer la douleur infligée par les autres. Tu n'as pas à être reconnaissante envers eux. Dirige ta pratique vers d'autres personnes, vers la nature, vers des situations, ou vers toi-même."
+  },
+  {
+    titre:"\"Je fais ça depuis des semaines et je ne sens rien de différent.\"",
+    reponse:"La gratitude mécanique, lister 3 choses rapidement sans y plonger vraiment, perd son effet en quelques semaines. L'effet neurologique vient de la profondeur : une seule chose, décrite avec détail, avec l'émotion qu'elle génère, et pourquoi elle compte pour toi."
+  },
+];
+
+const journalQuestions = [
+  {
+    q:"Une personne qui t'a aidée, soutenue ou vue récemment, qui est-ce ?",
+    sous:"Pas forcément un grand geste. Un mot, une présence, un regard peut suffire.",
+    exemple:"Exemple : Ma collègue qui a pris 5 minutes pour m'écouter hier sans chercher à résoudre.",
+    placeholder:"Cette personne c'est... / Ce qu'elle a fait c'est..."
+  },
+  {
+    q:"Pourquoi ce geste compte-t-il pour toi ? Qu'est-ce qu'il dit de ce dont tu as besoin ?",
+    sous:"C'est ici que la gratitude devient profonde. Prends le temps d'aller vraiment dans le détail.",
+    exemple:"Exemple : Ça compte parce que je me sens souvent invisible. Être vue, même 5 minutes, m'a rappelé que j'existe et que je mérite de l'espace.",
+    placeholder:"Ça compte parce que... / Ça me rappelle que..."
+  },
+  {
+    q:"Une chose ordinaire de ta journée, neutre, simple, que tu aurais pu ne pas avoir.",
+    sous:"Pas besoin que ce soit beau ou émouvant. Juste vrai.",
+    exemple:"Exemple : Le café chaud ce matin. Le silence de 7h avant que tout commence. Le fait que mon corps m'a portée aujourd'hui.",
+    placeholder:"Cette chose simple c'est..."
+  },
+  {
+    q:"Comment vas-tu garder cette pratique vivante cette semaine : de façon réaliste ?",
+    sous:"Pas un objectif parfait. Juste quelque chose de faisable et honnête.",
+    exemple:"Exemple : Un moment le soir avant de dormir. Une note dans mon téléphone. Une phrase dans mon agenda.",
+    placeholder:"Ce que je vais faire c'est..."
+  },
+];
+
+const soiQuestions = [
+  {
+    categorie:"Résilience",
+    question:"Pour quelle difficulté que tu as traversée ces dernières semaines est-ce que tu mérites de te féliciter, même si personne d'autre ne l'a remarqué ?"
+  },
+  {
+    categorie:"Effort invisible",
+    question:"Qu'est-ce que tu fais chaque jour qui demande de l'énergie et que tu ne te reconnais jamais ?"
+  },
+  {
+    categorie:"Douceur envers soi",
+    question:"Dans quel moment récent as-tu été plus douce envers toi-même qu'avant ? Même légèrement ?"
+  },
+];
+
+let theorieIdx = 0;
+let journalIdx = 0;
+let journalReponses = [];
+let soiReponses = {};
+let soiCount = 0;
+
+function showPhase(id) {
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='difficile') renderDifficile();
+  if(id==='soi') renderSoi();
+  if(id==='journal') renderJournal();
+}
+
+// Preview
+const pc = document.getElementById('preview-container');
+[
+  {e:'🧠', t:'Ce que la gratitude fait vraiment au cerveau'},
+  {e:'🔬', t:'Gratitude de surface vs gratitude profonde'},
+  {e:'🌧️', t:'Quand c\'est difficile, et comment quand même l\'approcher'},
+  {e:'🌧️', t:'Les résistances les plus courantes'},
+  {e:'📖', t:'Journal de gratitude profonde guidé'},
+  {e:'🪞', t:'Gratitude envers toi-même'},
+].forEach(item=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${item.e}</span><span>${item.t}</span></div>`;
+});
+
+function renderTheorie() {
+  const t = theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#6d5830;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='highlight') el.innerHTML+=`<div class="highlight ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  const isLast=theorieIdx===theorie.length-1;
+  document.querySelector('#phase-theorie .btn').textContent=isLast?'Quand c\'est difficile 🌧️':'Continuer →';
+}
+
+function nextTheorie() {
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else{showPhase('difficile');}
+}
+
+function renderDifficile() {
+  const el=document.getElementById('difficile-container');
+  el.innerHTML='';
+  difficiles.forEach((d,i)=>{
+    el.innerHTML+=`
+      <button class="difficile-btn" id="diff-${i}" onclick="toggleDiff(${i})">
+        <div style="flex:1;">
+          <div class="difficile-titre">${d.titre}</div>
+          <div class="difficile-reponse">${d.reponse}</div>
+        </div>
+      </button>`;
+  });
+}
+
+function toggleDiff(i) {
+  const btn=document.getElementById('diff-'+i);
+  btn.classList.toggle('open');
+}
+
+function renderJournal() {
+  const q=journalQuestions[journalIdx];
+  document.getElementById('j-label').textContent=`Journal · ${journalIdx+1}/${journalQuestions.length}`;
+  document.getElementById('j-progress').style.width=((journalIdx+1)/journalQuestions.length*100)+'%';
+  document.getElementById('j-question').textContent=q.q;
+  document.getElementById('j-sous').textContent=q.sous;
+  const exempleEl=document.getElementById('j-exemple');
+  if(q.exemple){exempleEl.textContent=q.exemple;exempleEl.style.display='block';}
+  else{exempleEl.style.display='none';}
+  document.getElementById('j-textarea').value='';
+  document.getElementById('j-textarea').placeholder=q.placeholder;
+  const isLast=journalIdx===journalQuestions.length-1;
+  document.getElementById('btn-j-next').textContent=isLast?'Passer à la gratitude envers moi 🪞':'Continuer →';
+}
+
+function checkJournal(){
+  // Journal libre, bouton toujours accessible
+}
+
+function nextJournal(){
+  const val=document.getElementById('j-textarea').value.trim();
+  if(val) journalReponses.push({q:journalQuestions[journalIdx].q,r:val});
+  if(journalIdx<journalQuestions.length-1){journalIdx++;renderJournal();window.scrollTo(0,0);}
+  else{showPhase('soi');}
+}
+
+function renderSoi() {
+  const el=document.getElementById('soi-container');
+  el.innerHTML='';
+  soiQuestions.forEach((q,i)=>{
+    el.innerHTML+=`
+      <div class="soi-item">
+        <div class="soi-categorie">${q.categorie}</div>
+        <div class="soi-question">${q.question}</div>
+        <textarea class="soi-textarea" id="soi-${i}" rows="3" placeholder="Écris librement..." oninput="checkSoi()"></textarea>
+      </div>`;
+  });
+}
+
+function checkSoi() {
+  // Gratitude envers soi libre, bouton toujours accessible
+}
+
+function showFin() {
+  // Collecter les réponses soi
+  soiQuestions.forEach((q,i)=>{
+    const val=document.getElementById('soi-'+i)?.value.trim();
+    if(val) soiReponses[q.categorie]=val;
+  });
+
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+
+  journalReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+
+  Object.entries(soiReponses).forEach(([cat,val])=>{
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Gratitude envers moi, ${cat}</div><div class="recap-r">"${val}"</div></div>`;
+  });
+
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 10 · La gratitude</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour10-gratitude-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

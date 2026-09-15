@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 26 · Ma vision et ma lettre · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f0f4fa 0%,#fdf8f0 45%,#f5f0fa 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#8090a8;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#1d2840;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#6080c8,#c8a060);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(80,100,180,0.1);border:1px solid rgba(80,120,200,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#6080c8;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#1d2840;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#1d2840;margin-bottom:14px;line-height:1.4}
+  p{color:#405068;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#607088}
+  .btn{background:linear-gradient(135deg,#6080c8,#c8a060);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(80,100,180,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(80,120,200,0.25);color:#a0a8c8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#a0a8c8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#7090b0;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(80,120,200,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#6080c8,#c8a060);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#eef2fb,#fdf8f0);border-radius:14px;padding:14px 18px;border-left:3px solid #6080c8;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.or{border-left-color:#c8a060;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(80,120,200,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#6080c8,#c8a060);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#8090b8;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(80,120,200,0.12);font-size:11px;color:#8090b8;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(80,120,200,0.05);border:1px solid rgba(80,120,200,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#507088;font-family:'Jost',sans-serif}
+
+  /* Vision domaines */
+  .domaine-card{border-radius:14px;padding:14px 18px;margin-bottom:10px;border:1px solid}
+  .domaine-titre{font-size:14px;font-weight:700;margin-bottom:8px;font-style:normal}
+  .domaine-input{width:100%;border:none;border-bottom:1px dashed rgba(80,120,200,0.3);padding:6px 0;font-size:14px;font-family:'Lora',serif;color:#1d2840;outline:none;background:transparent;font-style:italic}
+
+  /* Visualisation */
+  .visu-etape{border-radius:16px;padding:16px 18px;margin-bottom:10px;border:1px solid rgba(80,120,200,0.2);background:linear-gradient(135deg,#eef2fb,#fdf8f0)}
+  .visu-num{font-family:'Jost',sans-serif;font-size:10px;color:#6080c8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
+  .visu-titre{font-size:15px;font-weight:700;color:#1d2840;margin-bottom:6px;font-style:normal}
+  .visu-desc{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .visu-duree{display:inline-block;background:rgba(80,120,200,0.12);border-radius:10px;padding:3px 10px;font-size:11px;font-family:'Jost',sans-serif;color:#6080c8;margin-top:8px}
+
+  /* Lettre */
+  .lettre-zone{background:linear-gradient(135deg,#f5f8ff,#fdf8f0);border-radius:18px;padding:22px;border:1px solid rgba(80,120,200,0.2)}
+  .lettre-entete{font-size:12px;color:#8090b8;font-family:'Jost',sans-serif;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.1em}
+  .lettre-debut{font-size:16px;color:#1d2840;margin-bottom:10px}
+  .lettre-textarea{width:100%;border:none;background:transparent;font-size:15px;font-family:'Lora',serif;color:#1d2840;line-height:1.9;outline:none;resize:vertical;min-height:200px;font-style:italic}
+  .lettre-fin{font-size:17px;color:#1d2840;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(80,120,200,0.2)}
+
+  textarea{width:100%;border:2px solid rgba(80,120,200,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#1d2840;line-height:1.7;outline:none;resize:vertical;background:#f4f7fd}
+  textarea:focus{border-color:#6080c8}
+  .recap-box{background:linear-gradient(135deg,#eef2fb,#fdf8f0);border-radius:14px;padding:14px 18px;border:1px solid rgba(80,120,200,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#8090b8;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#eef2fb,#fdf8f0);border-radius:20px;padding:22px;border:1px solid rgba(80,120,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌅</span>
+    <div class="label">Jour 26 · Ma vision & ma lettre</div>
+    <h2>Ressentir qui tu as envie d'être</h2>
+    <p>Aujourd'hui est un jour en deux temps : d'abord ressentir la femme que tu as envie d'être. Pas une liste d'objectifs à atteindre, mais une façon d'être que tu peux déjà commencer à habiter. Puis lui écrire une lettre, depuis elle, à toi aujourd'hui.</p>
+    <p class="small" style="margin-bottom:20px;">C'est un des exercices les plus puissants du programme. Prends le temps qu'il faut.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🌅</button>
+    <p class="hint">Science · Vision · Visualisation guidée · Lettre à toi-même · ~30 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/2</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:50%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- CONSTRUIRE SA VISION -->
+<div class="phase" id="phase-vision">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🏗️</span>
+    <h2>Ma vision, domaine par domaine</h2>
+    <p style="text-align:center;margin-bottom:8px;">La question n'est pas <em>"qu'est-ce que je veux avoir ?"</em> mais <em>"comment est-ce que je veux être et me sentir ?"</em></p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Écris au présent, comme si tu y étais. Pas d'objectifs chiffrés, juste ce que tu ressens.</p>
+
+    <div class="domaine-card" style="background:#eef2fb;border-color:rgba(80,120,200,0.2);">
+      <div class="domaine-titre" style="color:#6080c8;">🌸 Moi : comment je veux me sentir dans mon corps et dans ma tête</div>
+      <input class="domaine-input" placeholder="Je me sens... / Je suis quelqu'un qui..." id="d1">
+    </div>
+    <div class="domaine-card" style="background:#fdf8ee;border-color:rgba(200,160,80,0.2);">
+      <div class="domaine-titre" style="color:#c8a060;">💛 Relations : comment je veux vivre mes liens</div>
+      <input class="domaine-input" placeholder="Dans mes relations je veux..." id="d2">
+    </div>
+    <div class="domaine-card" style="background:#eaf5f0;border-color:rgba(80,160,120,0.2);">
+      <div class="domaine-titre" style="color:#60a880;">🌿 Travail et contribution : ce que je veux apporter</div>
+      <input class="domaine-input" placeholder="Dans mon travail / ma contribution je veux..." id="d3">
+    </div>
+    <div class="domaine-card" style="background:#f5f0fa;border-color:rgba(160,128,200,0.2);">
+      <div class="domaine-titre" style="color:#a080c8;">✨ Croissance : qui je veux continuer à devenir</div>
+      <input class="domaine-input" placeholder="Je veux continuer à grandir en..." id="d4">
+    </div>
+    <div class="domaine-card" style="background:#fde8e6;border-color:rgba(232,133,122,0.2);">
+      <div class="domaine-titre" style="color:#c04030;">🔥 Ce que je veux laisser derrière moi</div>
+      <input class="domaine-input" placeholder="Je veux laisser derrière moi..." id="d5">
+    </div>
+
+    <button class="btn" onclick="showPhase('visualisation')">Visualisation guidée 🧘</button>
+  </div>
+</div>
+
+<!-- VISUALISATION -->
+<div class="phase" id="phase-visualisation">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🧘</span>
+    <h2>Ressentir cette version de toi</h2>
+    <p style="text-align:center;margin-bottom:8px;">Installe-toi confortablement. Ferme les yeux entre chaque étape. Ce n'est pas un exercice de performance, il n'y a pas de bonne vision à avoir.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Prends 10 minutes. Laisse venir ce qui vient.</p>
+
+    <div class="visu-etape">
+      <div class="visu-num">Étape 1</div>
+      <div class="visu-titre">Ancre-toi dans le présent</div>
+      <div class="visu-desc">Ferme les yeux. 3 respirations profondes. Sens ton corps. Tu es là, maintenant, en sécurité. Dis intérieurement : "Je suis là, en sécurité. Je peux ressentir librement."</div>
+      <div class="visu-duree">1 minute</div>
+    </div>
+
+    <div class="visu-etape">
+      <div class="visu-num">Étape 2</div>
+      <div class="visu-titre">Laisse venir l'image</div>
+      <div class="visu-desc">Imagine-toi dans une journée ordinaire d'une vie qui te ressemble vraiment. Pas parfaite, mais juste. Une vie où tu te reconnais. Où es-tu ? Comment est la lumière ? Qu'est-ce que tu entends ? Laisse l'image venir sans forcer.</div>
+      <div class="visu-duree">2 minutes</div>
+    </div>
+
+    <div class="visu-etape">
+      <div class="visu-num">Étape 3</div>
+      <div class="visu-titre">Sens dans ton corps</div>
+      <div class="visu-desc">Dans cette vie, comment te sens-tu dans ton corps ? Légère ? Ancrée ? Libre ? Où est la sensation ? Poitrine, ventre, épaules ? La vision juste génère une sensation corporelle, pas une liste. Cherche la sensation.</div>
+      <div class="visu-duree">2 minutes</div>
+    </div>
+
+    <div class="visu-etape">
+      <div class="visu-num">Étape 4</div>
+      <div class="visu-titre">Observe ta vie et tes relations</div>
+      <div class="visu-desc">Qui est autour de toi ? Comment se passent tes journées ? Pas en termes de tâches, mais d'énergie et de présence. Qu'est-ce qui a changé par rapport à maintenant ?</div>
+      <div class="visu-duree">2 minutes</div>
+    </div>
+
+    <div class="visu-etape">
+      <div class="visu-num">Étape 5</div>
+      <div class="visu-titre">Reviens, et note immédiatement</div>
+      <div class="visu-desc">Doucement, reviens. 3 respirations. Ouvre les yeux. Note ce que tu as vu, ressenti, entendu, avant que l'image s'estompe. Même des fragments. Même des sensations sans mots.</div>
+      <div class="visu-duree">3 minutes</div>
+    </div>
+
+    <textarea id="visu-note" rows="4" placeholder="Ce que j'ai vu / ressenti / entendu... / La sensation dans mon corps c'était... / Ce qui m'a surprise c'est..."></textarea>
+    <button class="btn" onclick="showPhase('lettre')" style="margin-top:12px;">Écrire ma lettre ✉️</button>
+  </div>
+</div>
+
+<!-- LETTRE À MOI-MÊME -->
+<div class="phase" id="phase-lettre">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">✉️</span>
+    <h2>Une lettre de cette femme, à toi</h2>
+    <p style="text-align:center;margin-bottom:8px;">Mets-toi à la place de cette femme que tu viens de ressentir. Elle a traversé ce que tu traverses. Elle te regarde aujourd'hui, avec toute la tendresse et le recul qu'elle a acquis.</p>
+    <p class="small" style="text-align:center;margin-bottom:8px;">Qu'est-ce que tu voudrais dire à celle que tu es maintenant ?</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Écris librement, sans censure. Laisse venir ce qui vient.</p>
+
+    <div class="lettre-zone">
+      <div class="lettre-entete">De : celle que je deviens &nbsp;·&nbsp; À : moi aujourd'hui</div>
+      <div class="lettre-debut">Chère moi,</div>
+      <textarea class="lettre-textarea" id="lettre-corps"
+        placeholder="Je t'écris depuis l'endroit où tu voulais arriver...&#10;&#10;Ce que je voudrais que tu saches...&#10;&#10;Ce que tu peux lâcher dès maintenant...&#10;&#10;Ce dont tu es capable et que tu ne vois pas encore...&#10;&#10;Ce qui va changer, et ce qui restera...&#10;&#10;Ce qui compte vraiment, et ce qui ne compte pas..."></textarea>
+      <div class="lettre-fin">Avec tout ce que tu vas devenir,<br><em>Toi.</em></div>
+    </div>
+
+    <button class="btn" onclick="showFin()" style="margin-top:16px;">Terminer le Jour 26 🌅</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌅</span>
+    <h2>Tu as une boussole, et maintenant une lettre pour les jours difficiles</h2>
+    <p>Ta vision n'a pas besoin d'être parfaite. Ta lettre n'a pas besoin d'être belle. Elles ont besoin d'être vraies. Et quand tu te sentiras perdue, tu pourras revenir à ce que tu viens d'écrire.</p>
+
+    <div style="background:linear-gradient(135deg,#eef2fb,#fdf8f0);border-radius:16px;padding:20px;border:1px solid rgba(80,120,200,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#6080c8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🌅 Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> Une vision juste ne génère pas de pression, elle génère de l'élan. Et une lettre à soi-même est un des actes de compassion les plus puissants qu'on puisse se faire.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#507090;"><strong style="color:#1d2840;">Demain, Jour 27 :</strong> le rapport au corps & l'image de soi</p>
+    <p class="hint" style="margin-top:6px;">4 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🌱",titre:"Une vision se ressent, elle ne s'anticipe pas",source:"Dr Álvaro Pascual-Leone, Harvard",contenu:[
+    {type:"texte",texte:"Avant de commencer, je veux qu'on soit bien d'accord sur ce qu'on va faire aujourd'hui. Parce qu'il y a deux façons très différentes de regarder devant soi, et une seule fait du bien."},
+    {type:"hl",texte:"⚠️ Anticiper, c'est se demander ce qui va se passer, si on y arrivera, ce qui pourrait mal tourner. Ça mobilise la peur et ça nourrit l'anxiété. Ce n'est pas du tout ce qu'on cherche ici.",classe:"or"},
+    {type:"hl",texte:"🌱 Une vision, c'est autre chose. C'est ressentir qui tu as envie d'être. Comment tu veux te sentir dans ton corps, dans tes liens, dans tes journées. Ce n'est pas un plan à exécuter, c'est une sensation à retrouver.",classe:"vert"},
+    {type:"texte",texte:"Et cette sensation, tu peux commencer à l'habiter dès maintenant. Pas dans cinq ans. Aujourd'hui, dans un choix, dans une façon de te parler, dans un geste. C'est ça qui rend une vision vivante plutôt qu'angoissante."},
+    {type:"stat",texte:"Quand tu ressens intensément une scène, ton cerveau active les mêmes zones que si tu la vivais vraiment. À force, la façon d'être que tu ressens devient plus familière, plus accessible, plus naturelle",source:"Dr Álvaro Pascual-Leone, Harvard Medical School"},
+    {type:"hl",texte:"✅ D'où la différence entre une vision et un objectif.<br><br>L'objectif dit : je serai bien quand j'aurai obtenu ceci. La vision dit : voilà la femme que j'ai envie d'être, et je peux déjà l'incarner un peu aujourd'hui.<br><br>L'un met ton bien-être en attente. L'autre te le rend disponible tout de suite.",classe:"vert"},
+  ]},
+  {emoji:"✉️",titre:"La lettre à soi-même",source:"Dr James Pennebaker et Dr Kristin Neff",contenu:[
+    {type:"texte",texte:"Écrire sur soi avec intention a des effets réels sur le moral, le stress et la clarté d'esprit. La lettre à soi-même est l'une des formes les plus puissantes de cette écriture."},
+    {type:"stat",texte:"Écrire sur ses émotions et ses expériences, quelques fois de suite, apaise l'anxiété et améliore le bien-être de façon durable. Ce n'est pas juste se soulager sur le moment : ça réorganise la façon dont on comprend ce qu'on vit",source:"Dr James Pennebaker, University of Texas"},
+    {type:"hl",texte:"💡 Écrire depuis ton futur, en te projetant dans une version de toi qui a traversé ce que tu vis maintenant, t'aide à prendre du recul avec les émotions du présent. C'est une technique utilisée en thérapie cognitive."},
+    {type:"hl",texte:"🌸 Et c'est aussi un geste de douceur envers toi. Te parler comme tu parlerais à quelqu'un que tu aimes. Kristin Neff a montré que cette bienveillance envers soi soutient mieux le moral sur le long terme que l'estime de soi, parce qu'elle ne dépend pas de tes performances.",classe:"vert"},
+  ]},
+];
+
+let theorieIdx=0;
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🌱',t:'Une vision se ressent'},{e:'✉️',t:'La lettre à soi-même'},{e:'🏗️',t:'Construire ma vision, domaine par domaine'},{e:'🧘',t:'Visualisation guidée'},{e:'✉️',t:'Lettre depuis mon futur'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#405068;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Construire ma vision 🏗️':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('vision');
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+
+  const domaines=[
+    {id:'d1',label:'Comment je veux me sentir'},
+    {id:'d2',label:'Mes relations'},
+    {id:'d3',label:'Travail & contribution'},
+    {id:'d4',label:'Ma croissance'},
+    {id:'d5',label:'Ce que je laisse derrière'},
+  ];
+  domaines.forEach(d=>{
+    const val=document.getElementById(d.id)?.value.trim();
+    if(val) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">${d.label}</div><div class="recap-r">"${val}"</div></div>`;
+  });
+
+  const visuNote=document.getElementById('visu-note').value.trim();
+  if(visuNote) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ma visualisation</div><div class="recap-r">"${visuNote}"</div></div>`;
+
+  const lettre=document.getElementById('lettre-corps').value.trim();
+  if(lettre) rc.innerHTML+=`<div class="recap-box"><div class="recap-q">Ma lettre de celle que je deviens</div><div class="recap-r" style="font-style:normal;font-size:15px;">${lettre.replace(/\n/g,'<br>')}</div></div>`;
+
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 26 · Ma vision et ma lettre</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour26-vision-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

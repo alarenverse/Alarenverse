@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 13 · La co-régulation · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf5f0 0%,#f5f0fa 45%,#f0f8f5 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#a08080;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d2020;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c87060,#a080c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(200,100,80,0.1);border:1px solid rgba(200,120,100,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c87060;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d2020;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d2020;margin-bottom:14px;line-height:1.4}
+  p{color:#604040;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#806060}
+  .btn{background:linear-gradient(135deg,#c87060,#a080c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(200,100,80,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,120,100,0.25);color:#c0a090;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#c0a090;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a08070;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(200,120,100,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#c87060,#a080c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#fdf0ee,#f8f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #c87060;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.important{border-left-color:#c87060;background:linear-gradient(135deg,#fde8e4,#fdf0ee);border-width:3px;padding:16px 18px}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(200,120,100,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#c87060,#a080c8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#b09090;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(200,120,100,0.12);font-size:11px;color:#b09090;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(200,120,100,0.05);border:1px solid rgba(200,120,100,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#806060;font-family:'Jost',sans-serif}
+
+  /* Scénarios */
+  .scenario-btn{border-radius:18px;padding:16px 20px;width:100%;cursor:pointer;font-family:'Lora',serif;text-align:left;margin-bottom:10px;border:2px solid transparent;display:flex;align-items:flex-start;gap:14px;transition:all 0.2s}
+  .scenario-btn.selected{transform:translateX(4px)}
+  .scenario-pastille{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:10px;font-weight:700;color:white;letter-spacing:0.03em;text-align:center;line-height:1.2}
+  .scenario-titre{font-size:17px;color:#3d2020;margin-bottom:3px}
+  .scenario-sous{font-size:12px;line-height:1.5;font-style:normal}
+
+  /* Outils scénario */
+  .outil-scenario{border-radius:16px;padding:16px 18px;margin-bottom:10px;border:1px solid}
+  .outil-num{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
+  .outil-titre{font-size:17px;color:#3d2020;margin-bottom:6px}
+  .outil-texte{font-size:13px;line-height:1.7;color:#604040;font-style:normal}
+  .outil-astuce{font-size:12px;margin-top:8px;padding:8px 12px;border-radius:8px;line-height:1.6}
+
+  /* Signal dysrégulation */
+  .signal-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(200,120,100,0.1)}
+  .signal-item:last-child{border-bottom:none}
+  .signal-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px}
+
+  textarea{width:100%;border:2px solid rgba(200,120,100,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d2020;line-height:1.7;outline:none;resize:vertical;background:#fdf8f6}
+  textarea:focus{border-color:#c87060}
+  .e-q{font-size:17px;color:#3d2020;line-height:1.65;text-align:center;margin-bottom:6px}
+  .e-sous{font-size:13px;color:#a08070;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#fdf0ee,#f8f0fa);border-radius:14px;padding:14px 18px;border:1px solid rgba(200,120,100,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b09090;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#fdf0ee,#f5f0fa);border-radius:20px;padding:22px;border:1px solid rgba(200,120,100,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🫂</span>
+    <div class="label">Jour 13 · La co-régulation</div>
+    <h2>Tu régules les autres en permanence, souvent sans le savoir, souvent sans avoir le choix</h2>
+    <p>Mère, soignante, amie, partenaire, mais aussi simplement vivante au milieu des autres. Ton système nerveux capte et régule celui des gens autour de toi, en permanence. C'est beau. Et c'est aussi épuisant, surtout quand personne ne le voit ni ne le nomme.</p>
+    <p class="small" style="margin-bottom:20px;">Aujourd'hui on comprend ce qu'est vraiment la co-régulation, dans les grandes relations comme dans la vie de tous les jours, pourquoi c'est si intensément humain, et comment tenir quand on doit réguler l'autre même quand on est soi-même à bout.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🫂</button>
+    <p class="hint">Théorie · La réalité des mères & soignantes · Signaux · Scénarios · Écriture · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- LA RÉALITÉ -->
+<div class="phase" id="phase-realite">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💥</span>
+    <h2>La vérité que personne ne dit</h2>
+    <p style="text-align:center;margin-bottom:20px;">"Mets ton masque à oxygène avant d'aider les autres." C'est juste. Et c'est aussi parfois totalement déconnecté de la réalité.</p>
+
+    <div class="hl important">
+      <strong>La réalité des mères, des soignantes, des proches aidantes :</strong><br><br>
+      Il est 23h. Ton enfant de 2 ans fait une crise. Tu es épuisée, tu as peut-être pleuré toi-même dans la journée, ton système nerveux est à bout. Et pourtant, tu n'as pas le choix. Tu dois co-réguler. Maintenant. Même dysrégulée.<br><br>
+      Ce n'est pas un échec. Ce n'est pas une mauvaise mère ou une mauvaise soignante. C'est la réalité concrète du soin, et il faut des outils pour ça. Pas juste des injonctions à "prendre soin de soi d'abord".
+    </div>
+
+    <div class="hl or" style="margin-bottom:12px;">
+      <strong>Ce que la science dit vraiment sur le masque à oxygène :</strong><br><br>
+      Le principe est vrai sur le long terme, on ne peut pas donner indéfiniment ce qu'on n'a pas. L'épuisement chronique du co-régulateur finit par dégrader la qualité de la co-régulation elle-même.<br><br>
+      Mais sur le court terme, dans l'urgence du moment, des recherches en neurosciences montrent que même un système nerveux partiellement dysrégulé peut co-réguler un autre, si certaines conditions sont réunies.
+    </div>
+
+    <div class="hl vert">
+      <strong>Les 3 conditions pour co-réguler même à bout :</strong><br><br>
+      <strong>1. La présence physique</strong>, être là, même silencieuse. La simple présence d'un corps connu et safe active le système nerveux de l'enfant ou de l'autre.<br><br>
+      <strong>2. La voix</strong>, grave, lente, douce. Pas les mots : le ton. Un enfant en crise ne traite pas le sens des mots. Il traite la prosodie, le rythme, la chaleur de la voix.<br><br>
+      <strong>3. La régulation minimale de soi</strong>, pas parfaite, juste suffisante. 3 respirations profondes avant d'entrer dans la pièce. Pas pour être calme, pour descendre d'un cran.
+    </div>
+
+    <button class="btn" onclick="showPhase('signaux')">Reconnaître quand tu ne peux plus →</button>
+  </div>
+</div>
+
+<!-- SIGNAUX DE DYSRÉGULATION -->
+<div class="phase" id="phase-signaux">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🚨</span>
+    <h2>Reconnaître quand tu es toi-même trop dysrégulée</h2>
+    <p style="text-align:center;margin-bottom:8px;">Il y a un seuil au-delà duquel co-réguler devient contre-productif, et potentiellement blessant pour les deux.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Ces signaux indiquent que tu as besoin d'une pause avant de continuer, même courte, même imparfaite.</p>
+
+    <div id="signaux-container"></div>
+
+    <div class="hl violet" style="margin-top:8px;">
+      <strong>Quand tu repères ces signaux :</strong><br><br>
+      Si tu peux, passe le relais. Une autre personne, même moins "experte", peut co-réguler si toi tu es trop à bout.<br><br>
+      Si tu ne peux pas passer le relais, 3 respirations 4-6, les yeux fermés, avant de répondre. Ce n'est pas abandonner l'autre. C'est te donner 30 secondes pour descendre d'un niveau et éviter une réponse qui aggraverait la situation.
+    </div>
+
+    <div class="hl important" style="margin-top:8px;">
+      <strong>La règle des 30 secondes :</strong><br><br>
+      Tu ne peux pas toujours avoir le masque à oxygène. Mais tu peux presque toujours avoir 30 secondes. Retourne-toi. Ferme les yeux. 3 respirations 4-6. C'est suffisant pour descendre d'un cran, pas pour être zen, mais pour éviter d'amplifier la dysrégulation de l'autre avec la tienne.
+    </div>
+
+    <button class="btn" onclick="showPhase('scenarios')">Les scénarios concrets →</button>
+  </div>
+</div>
+
+<!-- SCÉNARIOS -->
+<div class="phase" id="phase-scenarios">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🎭</span>
+    <h2>Choisis ta situation</h2>
+    <p style="text-align:center;margin-bottom:6px;">Chaque contexte de co-régulation est différent. Choisis celui qui te ressemble le plus en ce moment.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Tu verras les outils les plus adaptés à cette situation spécifique.</p>
+    <div id="scenarios-container"></div>
+    <button class="btn" id="btn-scenario" disabled onclick="showOutilsScenario()">Voir mes outils →</button>
+  </div>
+</div>
+
+<!-- OUTILS SCÉNARIO -->
+<div class="phase" id="phase-outils">
+  <div class="card" style="margin-top:24px;">
+    <div id="outils-header" style="text-align:center;margin-bottom:20px;"></div>
+    <div id="outils-container"></div>
+    <button class="btn" onclick="showPhase('ecriture')">Passer à l'écriture ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/3</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Mon expérience de co-régulatrice</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌸</span>
+    <h2>Tu fais un travail invisible et essentiel</h2>
+    <p>Co-réguler les autres, en permanence, souvent sans ressources, souvent sans reconnaissance, est l'un des travaux les plus exigeants qui soit. Ce n'est pas de la faiblesse d'être épuisée par ça. C'est de la lucidité.</p>
+    <div style="background:linear-gradient(135deg,#fdf0ee,#f5f0fa);border-radius:16px;padding:20px;border:1px solid rgba(200,120,100,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c87060;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> Tu n'as pas toujours le choix de te réguler d'abord. Mais tu as presque toujours 30 secondes. Et sur le long terme, te nourrir toi, trouver tes propres espaces de régulation, n'est pas un luxe. C'est ce qui te permet de continuer à tenir pour les autres.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#806060;"><strong style="color:#3d2020;">Demain, Jour 14 :</strong> bilan, organisation & construction de ta routine</p>
+    <p class="hint" style="margin-top:6px;">17 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🧬",titre:"Ce qui se passe entre deux systèmes nerveux",source:"Dr Stephen Porges / Dr Allan Schore",contenu:[
+    {type:"texte",texte:"La co-régulation, c'est ce processus par lequel le système nerveux d'une personne influence et apaise, ou agite, celui d'une autre. Souvent sans qu'on s'en rende compte. Deux systèmes nerveux en présence se parlent, en permanence, sous le radar de la conscience."},
+    {type:"hl",texte:"🧬 C'est pour ça qu'entrer dans une pièce où quelqu'un panique peut faire grimper ton anxiété, avant même que tu saches pourquoi cette personne panique. Vos systèmes nerveux communiquent avant que vos cerveaux conscients aient compris quoi que ce soit."},
+    {type:"stat",texte:"Un bébé règle son rythme cardiaque, sa respiration et son stress en se calant sur ceux de la personne qui s'occupe de lui. Sans cette co-régulation, son système nerveux ne peut tout simplement pas se construire normalement",source:"Dr Allan Schore, UCLA"},
+    {type:"texte",texte:"Et ça ne s'arrête pas à l'enfance. Adultes, on co-régule sans cesse, avec notre partenaire, nos amies, nos collègues. On influence et on est influencée par les systèmes nerveux autour de nous, tout le temps."},
+    {type:"hl",texte:"💡 C'est pour ça qu'une personne posée change le climat de toute une famille ou d'une équipe. Et c'est aussi pour ça que si tu es celle qui régule tout le monde, tout le temps, tu finis vidée. Garde ça en tête, on y revient.",classe:"or"},
+  ]},
+  {emoji:"🌍",titre:"La co-régulation est partout, tout le temps",source:"Théorie polyvagale appliquée au quotidien",contenu:[
+    {type:"texte",texte:"On pense souvent la co-régulation dans les grandes relations : la famille, le couple, le travail. Mais en vérité, elle est partout. Dans chaque interaction, même la plus banale, ton système nerveux capte celui des autres et s'ajuste."},
+    {type:"hl",texte:"🛒 Tu entres dans un magasin bondé, bruyant, où tout le monde est pressé et tendu → sans rien faire, ton système nerveux capte cette agitation et monte d'un cran. Tu ressors fatiguée sans savoir pourquoi. Ce n'est pas dans ta tête, c'est de la co-régulation, en négatif."},
+    {type:"hl",texte:"🚇 Les transports en commun, une file d'attente qui s'énerve, une réunion sous tension, un inconnu agressif dans la rue, une amie qui débarque en panique → chacune de ces situations agit sur ton état intérieur, en permanence, que tu le veuilles ou non.",classe:"or"},
+    {type:"texte",texte:"Et ça marche dans les deux sens, heureusement. Un sourire échangé avec une caissière, une personne calme et chaleureuse dans une file, un éclat de rire dans un bus → ça apaise aussi ton système nerveux. On se régule mutuellement, pour le meilleur comme pour le pire."},
+    {type:"hl",texte:"🌿 Savoir ça te donne un vrai pouvoir : tu peux choisir, autant que possible, les environnements et les personnes qui t'apaisent, et te protéger, ou te re-réguler après, quand tu dois traverser ceux qui t'agitent. Tu n'es pas obligée de tout absorber sans rien faire.",classe:"vert"},
+  ]},
+  {emoji:"👶",titre:"Parent-enfant · pourquoi c'est si épuisant",source:"Dr Daniel Siegel & Dr Mary Hartzell",contenu:[
+    {type:"texte",texte:"Le cerveau d'un enfant, surtout avant 6 ans, n'est pas équipé pour se réguler tout seul. La zone qui gère le calme, le contrôle, n'est pas encore construite. Il a littéralement besoin d'un système nerveux adulte posé pour se co-réguler avec lui."},
+    {type:"hl",texte:"👶 Concrètement : quand ton enfant fait une crise, son cerveau émotionnel est en feu et son cerveau réfléchi est hors ligne. Il ne PEUT pas se calmer seul, même s'il le voulait. Il a besoin de toi, de ta voix, de ta présence, de ton système nerveux, pour retrouver le chemin du calme."},
+    {type:"texte",texte:"C'est magnifique. Et c'est aussi épuisant pour de vraies raisons biologiques. Chaque co-régulation puise dans l'énergie de ton propre système nerveux. Alors non, ce n'est pas dans ta tête si tu te sens lessivée après une heure de crise. Ton corps a vraiment travaillé."},
+    {type:"stat",texte:"Les parents de jeunes enfants vivent avec un niveau de stress nettement plus élevé que la moyenne, particulièrement les mères, qui portent le plus souvent l'essentiel de la co-régulation émotionnelle",source:"Recherche en psychologie familiale"},
+    {type:"hl",texte:"🌸 Être épuisée de co-réguler ton enfant, ce n'est pas un manque d'amour. C'est de la neurologie. Et le reconnaître, c'est le premier pas pour trouver des stratégies qui tiennent vraiment, même les jours où tu es à bout.",classe:"vert"},
+  ]},
+  {emoji:"🏥",titre:"Co-réguler dans le soin · la charge invisible",source:"Recherches en psychologie du travail émotionnel",contenu:[
+    {type:"texte",texte:"Dans les métiers du soin, infirmières, éducatrices, thérapeutes, aides-soignantes, la co-régulation, c'est le cœur même du travail. On appelle ça le \"travail émotionnel\" : gérer ses propres émotions, en continu, pour réguler celles des autres. C'est invisible, et c'est immense."},
+    {type:"stat",texte:"Une grande partie des soignantes en psychiatrie montrent des signes nets d'épuisement émotionnel, directement liés à cette charge de co-régulation des patients en détresse, jour après jour",source:"Recherche en psychiatrie"},
+    {type:"hl",texte:"⚠️ Le burn-out des soignantes est en grande partie un burn-out de co-régulation : à force de réguler tout le monde, on ne sait plus comment se réguler soi-même. Les émotions des patients s'accumulent dans le corps de la soignante, sans jamais d'espace pour les déposer."},
+    {type:"hl",texte:"🌿 Les temps de supervision, de régulation entre collègues, les espaces de parole : ce ne sont pas des luxes. Pour qui co-régule en permanence, ce sont des nécessités vitales. Ton corps a besoin de déposer, lui aussi.",classe:"vert"},
+  ]},
+];
+
+const signauxDysreg=[
+  {texte:"Tu commences à parler plus fort ou plus vite que d'habitude",couleur:"#e8857a",bg:"#fde8e6"},
+  {texte:"Tu ressens une montée de chaleur dans la poitrine ou le visage",couleur:"#e8a85c",bg:"#fdf3e6"},
+  {texte:"Tes mâchoires se serrent ou tes épaules remontent",couleur:"#a080c8",bg:"#f5f0fa"},
+  {texte:"Tu as envie de fuir la pièce ou de te figer sur place",couleur:"#90b8d0",bg:"#eef4fb"},
+  {texte:"Les pleurs ou la colère de l'autre commencent à déclencher les tiens",couleur:"#e8857a",bg:"#fde8e6"},
+  {texte:"Tu te surprends à minimiser la détresse de l'autre pour ne plus avoir à y répondre",couleur:"#c8a870",bg:"#fdf8ee"},
+  {texte:"Tu ne peux plus penser clairement, tu es en réaction, plus en réflexion",couleur:"#a080c8",bg:"#f5f0fa"},
+];
+
+const scenarios=[
+  {id:"enfant",titre:"Mon enfant en bas âge fait une crise",sous:"Pleurs intenses, colère, agitation, il est en hyperactivation complète.",couleur:"#c87060",bg:"#fdf0ee",border:"rgba(200,112,96,0.3)",pastille:"BE",
+    outils:[
+      {num:"Outil 1 · Pendant que tu interviens",titre:"Respire en même temps que tu es là",texte:"Tu n'as pas à attendre que ça se calme pour respirer, ni à quitter la pièce. Tu te régules pendant que tu es avec lui. Pose une main sur ton propre ventre, et expire long, lentement, tout en restant présente pour lui. Tu conscientises ce qui monte en toi, \"je sens l'agacement arriver\", et tu respires dessus, là, dans le feu de l'action. Un système nerveux qui se régule en direct vaut mille fois mieux qu'un système qui s'emballe en miroir.",astuce:"Tu peux le faire les yeux ouverts, en continuant à lui parler. Personne ne voit que tu te régules, mais ton corps, lui, le sent.",bg:"#fdf0ee",border:"#c87060"},
+      {num:"Outil 2, La voix avant les mots",titre:"Grave, lente, douce, le ton prime",texte:"Un enfant en crise ne traite pas le sens de tes mots. Il traite ta prosodie : le rythme, la hauteur, la chaleur de ta voix. Parle lentement. Voix grave et douce. \"Je suis là. Je t'entends. C'est okay.\" même s'il ne comprend pas encore.",astuce:"Fredonner doucement est souvent plus efficace que parler. Les vibrations vocales graves activent le nerf vague.",bg:"#fdf0ee",border:"#c87060"},
+      {num:"Outil 3 · La présence physique régulée",titre:"Ton corps comme ancre",texte:"Mets-toi à sa hauteur. Présence physique stable, mouvements lents, contact doux si accepté. Ton corps régulé, même partiellement, est son ancre. Tu n'as pas besoin d'être parfaite. Juste présente et suffisamment stable.",astuce:"Évite les mouvements brusques ou rapides, ils activent le système d'alerte de l'enfant.",bg:"#fdf0ee",border:"#c87060"},
+      {num:"Outil 4 · Après la crise",titre:"Ne pas oublier de se recharger",texte:"Une fois la crise passée, prends 5 minutes pour toi. Ce n'est pas du luxe. C'est de la maintenance. Une courte respiration, un verre d'eau, un moment de silence. Ton système nerveux a travaillé. Il a besoin de récupérer.",astuce:"Si possible, annonce à voix haute (même seule) : \"La crise est passée. Je suis en sécurité. Je reprends.\"",bg:"#fdf0ee",border:"#c87060"},
+    ]
+  },
+  {id:"adulte",titre:"Un proche adulte est en détresse émotionnelle",sous:"Ton partenaire, ton ami, ta sœur, en pleurs, en colère ou effondré.",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)",pastille:"PR",
+    outils:[
+      {num:"Outil 1 · Valider avant de résoudre",titre:"\"Je t'entends\" prime sur \"voilà ce que tu devrais faire\"",texte:"Le système nerveux en détresse a besoin de se sentir vu et entendu avant de pouvoir recevoir des solutions. \"C'est vraiment difficile ce que tu traverses\" active la co-régulation. \"Tu devrais...\" l'interrompt.",astuce:"Résiste à l'envie de résoudre immédiatement. La présence empathique régule plus vite que les conseils.",bg:"#f5f0fa",border:"#a080c8"},
+      {num:"Outil 2 · Le reflet calme",titre:"Ta régulation devient la sienne",texte:"Reste physiquement calme, respiration visible et lente, posture ouverte, voix douce. Ton système nerveux régulé crée un espace dans lequel le sien peut progressivement se synchroniser. C'est la co-régulation par le miroir.",astuce:"Ne correspond pas émotionnellement à leur intensité, reste légèrement en dessous pour les attirer vers le calme.",bg:"#f5f0fa",border:"#a080c8"},
+      {num:"Outil 3 · Nommer ce que tu observes",titre:"\"Je vois que tu es très bouleversé\"",texte:"Nommer l'émotion de l'autre, sans minimiser ni dramatiser, l'aide à en prendre conscience et à commencer à la traiter. C'est le name it to tame it appliqué à la co-régulation.",astuce:"Demande : \"Est-ce que tu veux qu'on reste en silence ou tu veux parler ?\" Respecte la réponse.",bg:"#f5f0fa",border:"#a080c8"},
+      {num:"Outil 4 · Poser tes propres limites",titre:"Co-réguler n'est pas tout absorber",texte:"Tu peux être présente et régulatrice sans absorber toutes les émotions de l'autre dans ton propre système nerveux. Visualise une membrane perméable, tu peux te connecter sans fusionner. Et si tu te sens saturée, tu peux dire : \"J'ai besoin d'une courte pause avant de continuer.\"",astuce:"Ce n'est pas de l'abandon. C'est prendre soin de la relation sur le long terme.",bg:"#f5f0fa",border:"#a080c8"},
+    ]
+  },
+  {id:"patient",titre:"Un patient ou un usager est en crise",sous:"Dans ton contexte professionnel, urgence psychiatrique, consultation difficile, crise aiguë.",couleur:"#6090c0",bg:"#eef4fb",border:"rgba(96,144,192,0.3)",pastille:"PA",
+    outils:[
+      {num:"Outil 1 · Ta propre régulation en 3 temps",titre:"Avant d'entrer dans la crise",texte:"1. Inspire profondément en entrant dans la pièce. 2. Voix grave et posée dès le premier mot. 3. Mouvements lents et non-menaçants. Ces 3 secondes changent la dynamique de la rencontre : ton système nerveux régulé signale la sécurité à l'autre.",astuce:"Même si tu es stressée : ton cortex préfrontal peut encore gouverner si tu l'actives intentionnellement.",bg:"#eef4fb",border:"#6090c0"},
+      {num:"Outil 2 · La désescalade somatique",titre:"Corps avant paroles",texte:"Mets-toi au même niveau que le patient, assis si il est assis, debout à distance respectueuse. Ralentis tous tes mouvements. Le corps dit la sécurité avant les mots. \"Je suis là. On va prendre le temps.\"",astuce:"Ne croise pas les bras, posture ouverte signale l'absence de menace.",bg:"#eef4fb",border:"#6090c0"},
+      {num:"Outil 3 · La décharge après la crise",titre:"Ne pas garder dans le corps",texte:"Après une crise intense, surtout en psychiatrie, ton corps a absorbé du stress. Il faut décharger : marcher 5 minutes, secouer légèrement les mains et les bras, respirer fort par la bouche. Ces gestes permettent au système nerveux sympathique de se décharger.",astuce:"La supervision et les espaces de parole entre collègues ne sont pas optionnels, ils sont de la décharge collective nécessaire.",bg:"#eef4fb",border:"#6090c0"},
+      {num:"Outil 4 · Reconnaître la contagion émotionnelle",titre:"Nommer ce que tu as absorbé",texte:"Après une co-régulation intense, demande-toi : \"Qu'est-ce que je ressens là ? Est-ce que c'est moi, ou est-ce que j'ai absorbé quelque chose du patient ?\" Cette différenciation protège de l'épuisement par accumulation.",astuce:"C'est l'équivalent psychique de se laver les mains, hygiène de base en psychiatrie.",bg:"#eef4fb",border:"#6090c0"},
+    ]
+  },
+  {id:"quotidien",titre:"Un environnement agité m'envahit",sous:"Magasin bondé, transports, file d'attente énervée, foule, bruit, tu sens l'agitation ambiante monter en toi.",couleur:"#60a890",bg:"#eaf6f0",border:"rgba(96,168,144,0.3)",pastille:"VQ",
+    outils:[
+      {num:"Outil 1 · Repérer que ce n'est pas toi",titre:"\"C'est l'ambiance, pas moi\"",texte:"Le premier réflexe, c'est de nommer ce qui se passe : \"Cette tension que je ressens, elle vient de l'environnement, pas de moi.\" Rien que de le reconnaître, ça t'aide à ne pas te laisser complètement happer par l'agitation ambiante. Tu reprends un peu de distance intérieure.",astuce:"Tu peux te le dire mentalement, comme une petite phrase qui te recentre : \"Je capte l'agitation autour, mais je peux rester posée.\"",bg:"#eaf6f0",border:"#60a890"},
+      {num:"Outil 2 · Ton ancre portable",titre:"Reviens à ton souffle et à ton corps",texte:"Au milieu de la foule ou du bruit, ramène ton attention à quelque chose de stable en toi : ton souffle, tes pieds sur le sol, la sensation de tes mains. Quelques expirations longues, discrètes, suffisent à dire à ton système nerveux que tu es en sécurité, même si ça s'agite autour.",astuce:"Pose une main sur ton sac ou dans ta poche, sens un objet familier : un petit point de contact qui t'ancre.",bg:"#eaf6f0",border:"#60a890"},
+      {num:"Outil 3 · Te protéger sans culpabiliser",titre:"Limiter l'exposition quand tu peux",texte:"Tu n'es pas obligée de tout encaisser. Si un environnement t'épuise et que tu as le choix, autorise-toi à l'éviter ou à écourter : faire ses courses à une heure creuse, mettre des écouteurs dans les transports, sortir prendre l'air deux minutes. Ce n'est pas de la fragilité, c'est de l'écologie personnelle.",astuce:"Des écouteurs, même sans musique, réduisent la charge sensorielle et t'aident à garder ta bulle.",bg:"#eaf6f0",border:"#60a890"},
+      {num:"Outil 4 · Te re-réguler après",titre:"Décharger en sortant",texte:"En sortant d'un lieu très chargé, prends un instant pour te re-réguler : quelques respirations à l'air libre, marcher un peu, secouer les mains. Tu déposes l'agitation que tu as captée, au lieu de la ramener à la maison avec toi.",astuce:"Un grand soupir sonore en sortant, laisse ton corps relâcher d'un coup ce qu'il a retenu.",bg:"#eaf6f0",border:"#60a890"},
+    ]
+  },
+];
+
+const ecritureQs=[
+  {q:"Dans quelles situations tu co-régules le plus souvent, et est-ce que c'est reconnu par les autres ?",sous:"Enfant, partenaire, collègues, patients... et est-ce que quelqu'un co-régule aussi pour toi ?",placeholder:"Je co-régule surtout... / Ce qui est rarement vu c'est... / Ce qui me manque c'est..."},
+  {q:"Comment tu te sens dans ton corps après une longue période de co-régulation intense ?",sous:"Pas ce que tu penses devoir ressentir : ce que tu ressens vraiment.",placeholder:"Dans mon corps je ressens... / Les signaux que je remarque c'est..."},
+  {q:"Qu'est-ce qui t'aiderait à co-réguler sans te vider autant, de façon réaliste et concrète ?",sous:"Pas une liste de vœux, quelque chose de faisable dans ta vie telle qu'elle est.",placeholder:"Ce qui m'aiderait vraiment c'est..."},
+];
+
+let theorieIdx=0, selectedScenario=null, eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='ecriture') renderE();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🧬',t:'La co-régulation, deux systèmes nerveux en contact'},{e:'👶',t:'Parent-enfant, pourquoi c\'est épuisant'},{e:'🏥',t:'Co-réguler dans le soin : la charge invisible'},{e:'💥',t:'La réalité : quand on n\'a pas le choix'},{e:'🚨',t:'Signaux, quand tu es toi-même trop dysrégulée'},{e:'🎭',t:'Scénarios concrets et outils adaptés'},{e:'✍️',t:'Écriture : ton expérience de co-régulatrice'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#604040;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'La réalité qu\'on ne dit pas 💥':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('realite');
+}
+
+// Signaux
+const sc=document.getElementById('signaux-container');
+signauxDysreg.forEach(s=>{
+  sc.innerHTML+=`<div class="signal-item"><div class="signal-dot" style="background:${s.couleur};"></div><div style="font-size:17px;color:#253050;line-height:1.65;">${s.texte}</div></div>`;
+});
+
+// Scénarios
+const scc=document.getElementById('scenarios-container');
+scenarios.forEach((s,i)=>{
+  const btn=document.createElement('button');
+  btn.className='scenario-btn';
+  btn.id='sc-'+i;
+  btn.style.cssText=`background:${s.bg};border-color:${s.border};`;
+  btn.innerHTML=`<div class="scenario-pastille" style="background:${s.couleur};">${s.pastille}</div><div><div class="scenario-titre">${s.titre}</div><div class="scenario-sous" style="color:${s.couleur};">${s.sous}</div></div>`;
+  btn.onclick=()=>{
+    document.querySelectorAll('.scenario-btn').forEach(b=>{b.classList.remove('selected');b.style.borderColor=scenarios[parseInt(b.id.replace('sc-',''))].border;});
+    btn.classList.add('selected');btn.style.borderColor=s.couleur;
+    selectedScenario=i;document.getElementById('btn-scenario').disabled=false;
+  };
+  scc.appendChild(btn);
+});
+
+function showOutilsScenario(i){
+  if(typeof i==='number') selectedScenario=i;
+  if(selectedScenario===null)return;
+  const s=scenarios[selectedScenario];
+  document.getElementById('outils-header').innerHTML=`
+    <div style="display:inline-block;background:${s.couleur};color:white;border-radius:20px;padding:6px 16px;font-size:12px;font-family:'Jost',sans-serif;margin-bottom:12px;">${s.titre}</div>
+    <h2 style="font-size:18px;color:#3d2020;margin-bottom:8px;">Tes outils pour cette situation</h2>`;
+  const oc=document.getElementById('outils-container');
+  oc.innerHTML='';
+  s.outils.forEach(o=>{
+    oc.innerHTML+=`
+      <div class="outil-scenario" style="background:${o.bg};border-color:${o.border};">
+        <div class="outil-num" style="color:${o.border};">${o.num}</div>
+        <div class="outil-titre">${o.titre}</div>
+        <div class="outil-texte">${o.texte}</div>
+        <div class="outil-astuce" style="background:rgba(255,255,255,0.6);color:#604040;">💡 ${o.astuce}</div>
+      </div>`;
+  });
+  // Navigation vers les autres scénarios
+  let autresHtml='<div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(160,140,140,0.2);"><p style="font-size:14px;color:#9a8080;text-align:center;margin-bottom:12px;font-family:\'Jost\',sans-serif;">Explore aussi les outils des autres situations, tu en vis sûrement plusieurs :</p>';
+  scenarios.forEach((autre,idx)=>{
+    if(idx!==selectedScenario){
+      autresHtml+=`<button onclick="showOutilsScenario(${idx})" style="width:100%;text-align:left;padding:13px 16px;border-radius:12px;border:2px solid ${autre.border};background:${autre.bg};cursor:pointer;font-family:'Lora',serif;font-size:15px;font-weight:500;color:${autre.couleur};margin-bottom:8px;">→ ${autre.titre}</button>`;
+    }
+  });
+  autresHtml+='</div>';
+  oc.innerHTML+=autresHtml;
+  showPhase('outils');
+}
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 13 🫂';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 13 · La co-regulation</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour13-coregulation-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

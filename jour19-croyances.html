@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 19 · Les croyances limitantes · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f0f5fa 0%,#f8f5ff 45%,#f5f0fa 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#9080b0;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#2d1d50;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#8060c0,#c090d0);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(120,80,200,0.1);border:1px solid rgba(140,100,210,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8060c0;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#2d1d50;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#2d1d50;margin-bottom:14px;line-height:1.4}
+  p{color:#4d3870;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#6d5890}
+  .btn{background:linear-gradient(135deg,#8060c0,#c090d0);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(120,80,200,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(140,100,210,0.25);color:#b0a0d0;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#b0a0d0;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#9080b0;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(140,100,210,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#8060c0,#c090d0);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#f0eefa,#f8f0ff);border-radius:14px;padding:14px 18px;border-left:3px solid #8060c0;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.rose{border-left-color:#c090d0;background:linear-gradient(135deg,#f8f0ff,#fdf0f8)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(140,100,210,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#8060c0,#c090d0);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#a090c0;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(140,100,210,0.12);font-size:11px;color:#a090c0;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(140,100,210,0.05);border:1px solid rgba(140,100,210,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#7060a0;font-family:'Jost',sans-serif}
+
+  /* Croyances communes */
+  .croyance-btn{border-radius:14px;padding:14px 18px;width:100%;cursor:pointer;font-family:'Lora',serif;text-align:left;margin-bottom:10px;border:2px solid rgba(140,100,210,0.2);background:rgba(140,100,210,0.04);transition:all 0.2s;display:flex;gap:12px;align-items:flex-start}
+  .croyance-btn:hover{border-color:#8060c0;background:rgba(140,100,210,0.08)}
+  .croyance-btn.selected{border-color:#8060c0;background:linear-gradient(135deg,#f0eefa,#f8f0ff)}
+  .croyance-texte{font-size:17px;color:#253050;line-height:1.5;flex:1}
+  .croyance-origine{font-size:12px;color:#9080b0;margin-top:4px;font-style:normal;line-height:1.4;display:none}
+  .croyance-btn.selected .croyance-origine{display:block}
+  .croyance-check{width:20px;height:20px;border-radius:50%;border:2px solid rgba(140,100,210,0.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.2s;background:white;margin-top:2px}
+  .croyance-btn.selected .croyance-check{background:linear-gradient(135deg,#8060c0,#c090d0);border-color:transparent;color:white}
+
+  /* Questionnement Byron Katie */
+  .katie-question{background:linear-gradient(135deg,#f0eefa,#f8f0ff);border-radius:16px;padding:18px 20px;margin-bottom:14px;border:1px solid rgba(140,100,210,0.18)}
+  .katie-num{font-family:'Jost',sans-serif;font-size:10px;color:#8060c0;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
+  .katie-q{font-size:16px;color:#2d1d50;margin-bottom:8px;line-height:1.5}
+  .katie-aide{font-size:13px;color:#7060a0;line-height:1.6;font-style:normal}
+  .katie-input{width:100%;border:2px solid rgba(140,100,210,0.22);border-radius:12px;padding:10px 14px;font-size:14px;font-family:'Lora',serif;color:#2d1d50;outline:none;background:white;margin-top:8px;resize:vertical;min-height:60px}
+  .katie-input:focus{border-color:#8060c0}
+
+  /* Identité */
+  .identite-card{border-radius:16px;padding:16px 18px;margin-bottom:10px;border:2px solid;display:flex;gap:14px;align-items:flex-start}
+  .id-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px}
+  .id-titre{font-size:15px;font-style:normal;margin-bottom:4px;font-weight:600;line-height:1.4}
+  .id-desc{font-size:13px;line-height:1.65;color:#3d2060;font-style:normal}
+
+  textarea{width:100%;border:2px solid rgba(140,100,210,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#2d1d50;line-height:1.7;outline:none;resize:vertical;background:#f8f5ff}
+  textarea:focus{border-color:#8060c0}
+  .e-q{font-size:17px;color:#2d1d50;line-height:1.65;text-align:center;margin-bottom:6px}
+  .e-sous{font-size:13px;color:#9080b0;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#f0eefa,#f8f0ff);border-radius:14px;padding:14px 18px;border:1px solid rgba(140,100,210,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#a090c0;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#f0eefa,#f8f0ff);border-radius:20px;padding:22px;border:1px solid rgba(140,100,210,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🔮</span>
+    <div class="label">Jour 19 · Croyances & Identité</div>
+    <h2>Ce que tu crois de toi-même n'est pas qui tu es</h2>
+    <p>Tes croyances les plus limitantes ne sont pas des vérités. Ce sont des histoires que tu t'es racontées, souvent toute petite, pour survivre à ce qui était dur. Aujourd'hui on les repère, on les questionne, et on part à la rencontre de qui tu es, vraiment, en dessous.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🔮</button>
+    <p class="hint">Théorie · Identifier · Questionner · Qui suis-je ? · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- IDENTIFIER SES CROYANCES -->
+<div class="phase" id="phase-identifier">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🔍</span>
+    <h2>Reconnais-tu ces croyances ?</h2>
+    <p style="text-align:center;margin-bottom:6px;">Clique sur celles qui résonnent, même légèrement. En les voyant écrites, l'origine souvent devient claire.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Il n'y a pas de bonne ou mauvaise réponse. Juste ce qui est vrai pour toi.</p>
+    <div id="croyances-container"></div>
+    <div class="hl" style="margin-top:8px;" id="croyances-message">Clique sur les croyances qui te ressemblent pour voir d'où elles viennent.</div>
+    <button class="btn" onclick="showPhase('questionner')">Questionner une croyance →</button>
+  </div>
+</div>
+
+<!-- QUESTIONNER, BYRON KATIE -->
+<div class="phase" id="phase-questionner">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">❓</span>
+    <h2>Questionner une croyance : la méthode Byron Katie</h2>
+    <p style="text-align:center;margin-bottom:8px;">Choisis la croyance limitante qui te pèse le plus en ce moment : une que tu as cochée ou une autre. Écris-la ici.</p>
+
+    <div style="margin-bottom:16px;">
+      <input type="text" id="ma-croyance" placeholder="Ma croyance limitante : ex. Je suis trop sensible..." style="width:100%;border:2px solid rgba(140,100,210,0.25);border-radius:12px;padding:12px 16px;font-size:15px;font-family:'Lora',serif;color:#2d1d50;outline:none;background:white;">
+    </div>
+
+    <div class="hl" style="margin-bottom:16px;">
+      Byron Katie propose 4 questions pour défaire une croyance. Pas pour la nier, pour voir si elle est vraiment vraie. Réponds honnêtement, sans te censurer.
+    </div>
+
+    <div class="katie-question">
+      <div class="katie-num">Question 1</div>
+      <div class="katie-q">Est-ce que c'est absolument vrai ?</div>
+      <div class="katie-aide">Pas "probablement vrai" ou "ça me semble vrai". Peux-tu en être certaine à 100% ? Y a-t-il une exception, un contre-exemple ?</div>
+      <textarea class="katie-input" id="k1" placeholder="Quand je cherche vraiment..."></textarea>
+    </div>
+
+    <div class="katie-question">
+      <div class="katie-num">Question 2</div>
+      <div class="katie-q">Comment réagis-tu quand tu crois cette pensée ?</div>
+      <div class="katie-aide">Qu'est-ce que tu fais, tu évites, tu ressens dans ton corps ? Comment cette croyance change-t-elle tes comportements ?</div>
+      <textarea class="katie-input" id="k2" placeholder="Quand je crois ça, je..."></textarea>
+    </div>
+
+    <div class="katie-question">
+      <div class="katie-num">Question 3</div>
+      <div class="katie-q">Qui serais-tu sans cette pensée ?</div>
+      <div class="katie-aide">Ferme les yeux. Imagine-toi dans la même situation, mais sans cette croyance dans ta tête. Qu'est-ce qui serait différent ?</div>
+      <textarea class="katie-input" id="k3" placeholder="Sans cette croyance, je serais..."></textarea>
+    </div>
+
+    <div class="katie-question">
+      <div class="katie-num">Question 4, La retournée</div>
+      <div class="katie-q">Quel est l'opposé de ta croyance, et est-ce qu'il pourrait être aussi vrai ?</div>
+      <div class="katie-aide">Ex : "Je suis trop sensible" → "Je suis suffisamment sensible" ou "Ma sensibilité est une force". Est-ce que cet opposé peut être vrai ?</div>
+      <textarea class="katie-input" id="k4" placeholder="L'opposé pourrait être vrai parce que..."></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('beck')">La fiche à 5 colonnes 📋</button>
+  </div>
+</div>
+
+<!-- QUI SUIS-JE -->
+<div class="phase" id="phase-identite">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🪞</span>
+    <h2>Qui suis-je vraiment, au-delà de mes rôles et croyances ?</h2>
+    <p style="text-align:center;margin-bottom:8px;">Tu es mère, fille, professionnelle, partenaire, amie. Tu es "trop sensible", "pas assez patiente", "toujours fatiguée". Mais ce ne sont pas toi : ce sont des rôles et des histoires.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Explore les dimensions de qui tu es vraiment : ce qui reste quand on enlève les rôles et les croyances.</p>
+
+    <div class="hl" style="margin-bottom:16px;">
+      <strong>L'identité n'est pas un état fixe.</strong> C'est un mouvement, une exploration. Tu n'as pas à "trouver qui tu es" une fois pour toutes. Tu as à rester en contact avec ce qui est vivant en toi : tes valeurs, tes élans, ce qui te fait te sentir toi-même.
+    </div>
+
+    <div id="identite-container"></div>
+
+    <button class="btn" onclick="showPhase('ecriture')">L'écriture de soi ✍️</button>
+  </div>
+</div>
+
+<!-- 5 COLONNES DE BECK -->
+<div class="phase" id="phase-beck">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">📋</span>
+    <h2>La fiche à 5 colonnes de Beck</h2>
+    <p>C'est l'outil TCC le plus utilisé pour travailler les pensées automatiques. Pas parce qu'il faut "penser positif", parce qu'il t'aide à voir que ta pensée automatique n'est pas forcément la réalité.</p>
+
+    <div class="hl" style="margin-bottom:14px;">
+      <strong>Les 5 colonnes :</strong><br><br>
+      <strong>1. Situation</strong>, Ce qui s'est passé concrètement. Les faits, pas l'interprétation.<br><br>
+      <strong>2. Émotions</strong>, Ce que tu as ressenti. Nomme l'émotion et son intensité de 0 à 8.<br><br>
+      <strong>3. Pensée automatique</strong>, La première pensée qui est venue, celle que tu crois à 100%. Évalue ta conviction de 0 à 100%.<br><br>
+      <strong>4. Pensée alternative</strong>, Une autre façon de voir la situation. Elle doit avoir du sens pour toi, tu dois y croire au moins à 50%, sinon ce n'est pas une vraie alternative, c'est juste une belle phrase.<br><br>
+      <strong>5. Résultat</strong>, Réévalue l'intensité de ton émotion après avoir trouvé la pensée alternative.
+    </div>
+
+    <div class="hl violet" style="margin-bottom:20px;">
+      La pensée alternative ne doit pas être l'opposé parfait de la pensée automatique. Elle doit juste ouvrir un peu d'espace, introduire un doute raisonnable. "Peut-être que..." ou "Il est aussi possible que..." sont souvent de bons points de départ.<br><br>
+      <strong>Un petit secret qui change tout :</strong> formule ta pensée alternative en positif, sans "ne pas" ni "sans". Ton cerveau entend le mot fort, pas la négation. "Je ne suis pas nulle" laisse traîner "nulle" dans ta tête. Préfère "je fais de mon mieux et j'apprends". Dis ce que tu veux, pas ce que tu fuis.
+    </div>
+
+    <div style="background:linear-gradient(135deg,#f0eefa,#f5f0fa);border-radius:16px;padding:20px;border:1px solid rgba(140,100,210,0.2);margin-bottom:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#8060c0;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:16px;">📋 Ma fiche à 5 colonnes</div>
+
+      <div style="margin-bottom:12px;">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#8060c0;margin-bottom:6px;">1 · Situation</div>
+        <textarea id="beck1" rows="2" style="width:100%;border:2px solid rgba(140,100,210,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="Ce qui s'est passé concrètement..."></textarea>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#8060c0;margin-bottom:6px;">2 · Émotions (intensité 0 à 8)</div>
+        <textarea id="beck2" rows="2" style="width:100%;border:2px solid rgba(140,100,210,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="Je me sens... / intensité : ..."></textarea>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#8060c0;margin-bottom:6px;">3 · Pensée automatique (conviction 0 à 100%)</div>
+        <textarea id="beck3" rows="2" style="width:100%;border:2px solid rgba(140,100,210,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="La pensée qui est venue : ... / Je la crois à ... %"></textarea>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#8060c0;margin-bottom:6px;">4 · Pensée alternative (conviction 0 à 100%)</div>
+        <textarea id="beck4" rows="2" style="width:100%;border:2px solid rgba(140,100,210,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="Une autre façon de voir... / Je la crois à ... %"></textarea>
+      </div>
+      <div>
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#8060c0;margin-bottom:6px;">5 · Résultat, réévalue ton émotion (0 à 8)</div>
+        <textarea id="beck5" rows="2" style="width:100%;border:2px solid rgba(140,100,210,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="Maintenant mon émotion est à ... / Ce qui a changé c'est..."></textarea>
+      </div>
+    </div>
+
+    <button class="btn" onclick="showPhase('ecriture')">Réflexion finale ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/4</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Qui je suis vraiment</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌟</span>
+    <h2>Tu es bien plus que ce qu'on t'a dit d'être</h2>
+    <p>Les croyances limitantes ne sont pas des vérités : ce sont des cicatrices de vieilles expériences. Et comme toutes les cicatrices, elles témoignent de ce qu'on a traversé, mais elles ne définissent pas ce qu'on peut devenir.</p>
+    <div style="background:linear-gradient(135deg,#f0eefa,#f8f0ff);border-radius:16px;padding:20px;border:1px solid rgba(140,100,210,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#8060c0;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> Quand la voix critique dit "tu es trop..." ou "tu n'es pas assez...", demande-toi : est-ce absolument vrai ? D'où vient cette voix ? Qui serais-je sans cette pensée ? Les 4 questions de Byron Katie sont un outil pour toute la vie.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#7060a0;"><strong style="color:#2d1d50;">Demain, Jour 20 :</strong> le deuil et les transitions</p>
+    <p class="hint" style="margin-top:6px;">11 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🌱",titre:"D'où viennent les croyances qui te limitent",source:"Dr Aaron Beck / Dr Jeffrey Young, Thérapie des schémas",contenu:[
+    {type:"texte",texte:"Une croyance limitante, c'est une conviction profonde sur toi ou sur le monde qui vient rétrécir ce que tu crois pouvoir faire, ressentir ou mériter. Elle n'est pas tombée du ciel, elle a une histoire, souvent ancienne."},
+    {type:"hl",texte:"🌱 Ces croyances se forment surtout dans l'enfance, à un âge où on absorbe tout comme une éponge, sans filtre, sans recul. Une phrase répétée d'un parent, une humiliation à l'école, un message qui revient sans cesse dans l'entourage, tout ça s'enregistre comme une vérité sur soi. Aaron Beck, le père des thérapies cognitives, appelle ça les \"croyances centrales\"."},
+    {type:"texte",texte:"Et les plus tenaces sont souvent celles qu'on ne t'a jamais dites directement. Ne pas être consolée quand tu pleurais t'a peut-être appris \"mes émotions ne comptent pas\". Être toujours comparée à ta sœur : \"je ne suis jamais assez\". Voir ta mère s'effacer : \"les femmes ne prennent pas de place\"."},
+    {type:"texte",texte:"Jeffrey Young, qui a développé la thérapie des schémas, a montré comment ces croyances précoces deviennent des \"schémas\" : des lunettes à travers lesquelles on interprète toute sa vie, sans même s'en rendre compte. On ne voit plus la croyance : on croit voir la réalité."},
+    {type:"hl",texte:"💡 La bonne nouvelle, et elle est immense : ton cerveau reste modelable toute ta vie. Ces croyances ne s'effacent pas d'un coup, mais elles peuvent être questionnées, fragilisées, et remplacées petit à petit par de nouvelles expériences et une nouvelle façon de te voir.",classe:"vert"},
+  ]},
+  {emoji:"🔍",titre:"Comment les identifier, les signaux d'une croyance limitante",source:"ACT, Acceptance and Commitment Therapy / Dr Steven Hayes",contenu:[
+    {type:"texte",texte:"Les croyances limitantes ne s'annoncent pas comme telles. Elles se déguisent en vérités évidentes, en jugements de réalité, en \"c'est comme ça que je suis\". Voici comment les repérer."},
+    {type:"hl",texte:"🚩 Signal 1, Les mots absolus : \"Je suis toujours...\", \"Je ne suis jamais...\", \"Je suis trop...\", \"Je ne suis pas assez...\". Ces absolus sont presque toujours des croyances, pas des faits."},
+    {type:"hl",texte:"🚩 Signal 2, La comparaison systématique : se comparer défavorablement aux autres de façon automatique et récurrente. \"Elle, elle y arrive.\" \"Tout le monde semble s'en sortir mieux que moi.\"",classe:"rose"},
+    {type:"hl",texte:"🚩 Signal 3, L'évitement : on évite certaines situations parce qu'on croit d'avance qu'on va échouer, décevoir ou être rejetée. L'évitement protège la croyance en empêchant de la tester.",classe:"or"},
+    {type:"hl",texte:"🚩 Signal 4, La réaction émotionnelle disproportionnée : une remarque anodine provoque une honte intense, une critique légère effondre. La croyance est activée, et réagit comme si c'était une question de survie.",classe:"rouge"},
+    {type:"texte",texte:"En ACT, thérapie d'acceptation et d'engagement, on apprend à \"défuser\" des croyances : les observer comme des pensées, pas comme des vérités. \"J'ai la pensée que je suis trop sensible\" est différent de \"je suis trop sensible\"."},
+  ]},
+  {emoji:"🪞",titre:"Qui suis-je vraiment, au-delà des rôles et des étiquettes",source:"Dr Dan Siegel, Mindsight / Viktor Frankl / Philosophie bouddhiste",contenu:[
+    {type:"texte",texte:"Si tu n'es ni tes rôles (mère, professionnelle, fille, partenaire) ni tes croyances (trop sensible, pas assez patiente, toujours fatiguée), qui es-tu ?"},
+    {type:"hl",texte:"🪞 Le Dr Dan Siegel propose le concept de \"mindsight\" : la capacité à observer ses propres pensées et émotions sans s'identifier à elles. Quand tu observes ta colère sans être la colère, tu touches quelque chose de plus stable, de plus vaste que l'émotion."},
+    {type:"texte",texte:"L'identité profonde n'est pas une chose fixe qu'on trouve une fois pour toutes. C'est un mouvement vers ce qui est vivant en toi : tes valeurs, tes élans naturels, ce qui t'anime quand tu n'es pas épuisée ou en train de performer pour quelqu'un."},
+    {type:"hl",texte:"💡 Une façon d'approcher la question \"qui suis-je ?\" : observe ce qui reste quand tu enlèves les rôles. Quand tu n'es pas en train d'être mère, professionnelle, fille, qu'est-ce qui est encore là ? Qu'est-ce qui t'attire, te touche, te met en mouvement depuis toujours ?",classe:"vert"},
+    {type:"hl",texte:"🌸 Viktor Frankl : \"Entre le stimulus et la réponse, il y a un espace. Dans cet espace se trouve notre pouvoir de choisir notre réponse. Dans notre réponse se trouvent notre croissance et notre liberté.\" Cet espace, c'est là que tu existes, au-delà de tes réflexes et de tes croyances.",classe:"rose"},
+  ]},
+];
+
+const croyances=[
+  {texte:"\"Je suis trop sensible\"",origine:"Souvent appris quand les émotions ont été minimisées ou ridiculisées dans l'enfance. \"Tu pleures pour rien\" enregistré comme \"mes émotions sont excessives\"."},
+  {texte:"\"Je ne suis jamais assez, assez bonne, assez patiente, assez présente\"",origine:"Souvent né de comparaisons répétées ou d'attentes impossibles à l'enfance. Le perfectionnisme comme réponse à une peur d'être rejetée si on n'est pas parfaite."},
+  {texte:"\"Je ne mérite pas de prendre de la place\"",origine:"Souvent transmis culturellement aux femmes, ne pas déranger, ne pas trop demander, s'effacer pour les autres. Renforcé si les besoins exprimés ont été ignorés ou punis."},
+  {texte:"\"Je dois tout gérer seule, demander de l'aide c'est faible\"",origine:"Souvent appris dans des familles où l'indépendance était valorisée à l'excès, ou où les demandes d'aide n'étaient pas entendues."},
+  {texte:"\"Mes besoins sont moins importants que ceux des autres\"",origine:"Souvent construit à partir d'un rôle de caretaker précoce, enfant qui s'est occupée d'un parent, d'une fratrie, ou d'une relation où s'oublier était la condition d'être aimée."},
+  {texte:"\"Si je montre ma vulnérabilité, on va me juger ou m'abandonner\"",origine:"Souvent né d'expériences où la vulnérabilité a réellement été utilisée contre soi, ou où montrer ses fragilités n'était pas safe."},
+  {texte:"\"Je suis trop compliquée : mes émotions sont un fardeau pour les autres\"",origine:"Souvent appris dans des relations où les émotions ont été reçues comme excessives, ou dans un environnement qui valorisait la gestion émotionnelle froide."},
+  {texte:"\"Je ne peux pas changer, c'est comme ça que je suis\"",origine:"La croyance sur les croyances, l'idée que l'identité est fixe. Souvent renforcée par des étiquettes répétées : \"tu es colérique\", \"tu es anxieuse\", \"tu es comme ta mère\"."},
+];
+
+const identiteDimensions=[
+  {titre:"Mes valeurs · ce qui compte vraiment pour moi",desc:"Pas ce qui devrait compter, pas ce qu'on m'a dit de valoriser. Ce qui, quand je le vis, me fait me sentir alignée.",couleur:"#6040a0",bg:"#f0eefa",border:"rgba(128,96,192,0.3)"},
+  {titre:"Mes élans naturels · ce qui m'attire sans effort",desc:"Ce vers quoi je vais spontanément quand je ne suis pas épuisée ou en train de performer. Ce qui m'a toujours attirée, depuis l'enfance.",couleur:"#8040a8",bg:"#f5f0ff",border:"rgba(160,80,180,0.3)"},
+  {titre:"Mes forces · ce que je fais naturellement bien",desc:"Pas ce pour quoi on me félicite nécessairement : ce qui vient facilement, ce que je fais avec plaisir, ce qui coule.",couleur:"#206050",bg:"#eaf5f0",border:"rgba(80,160,128,0.3)"},
+  {titre:"Ce qui me touche · ce qui émeut quelque chose en moi",desc:"La beauté, l'injustice, la vulnérabilité de quelqu'un, un coucher de soleil, une histoire vraie... Ce qui me touche dit quelque chose de profond sur qui je suis.",couleur:"#7a5010",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)"},
+  {titre:"Mes frontières naturelles, ce que je refuse instinctivement",desc:"Pas les règles apprises, ce qui dans mes tripes me dit non. Ce que je ne peux pas faire sans me trahir.",couleur:"#8a2020",bg:"#fde8e6",border:"rgba(220,100,90,0.3)"},
+];
+
+const ecritureQs=[
+  {q:"Quelle croyance limitante te pèse le plus en ce moment, et d'où penses-tu qu'elle vient ?",sous:"Cherche l'origine, une personne, une expérience, un message répété.",placeholder:"La croyance qui me pèse le plus c'est... / Je pense qu'elle vient de..."},
+  {q:"Après le questionnement Byron Katie, qu'est-ce qui a légèrement bougé dans ta façon de voir cette croyance ?",sous:"Même un tout petit décalage compte. Même juste un doute là où il y avait certitude.",placeholder:"Ce qui a légèrement bougé c'est... / Je commence à voir que..."},
+  {q:"En dehors de tes rôles, mère, professionnelle, fille, partenaire, qui es-tu ?",sous:"Pas une liste de qualités. Ce qui reste quand on enlève tout ce que tu fais pour les autres.",placeholder:"Au-delà de mes rôles, je suis quelqu'un qui..."},
+  {q:"Quelle nouvelle croyance sur toi-même voudrais-tu commencer à cultiver ?",sous:"Pas nécessairement l'opposé exact de la limitante, quelque chose qui te semble plus juste et plus vaste.",placeholder:"La croyance que je veux cultiver c'est..."},
+];
+
+let theorieIdx=0, selectedCroyances=new Set(), eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='ecriture') renderE();
+  if(id==='beck') window.scrollTo(0,0);
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🌱',t:'D\'où viennent les croyances limitantes'},{e:'🔍',t:'Comment les identifier : les 4 signaux'},{e:'🪞',t:'Qui suis-je au-delà des rôles et étiquettes'},{e:'🔍',t:'Identifier mes croyances, exercice interactif'},{e:'❓',t:'Questionner avec Byron Katie, 4 questions'},{e:'🪞',t:'Explorer mon identité profonde'},{e:'✍️',t:'Écriture guidée'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#4d3870;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Identifier mes croyances 🔍':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else{renderCroyances();showPhase('identifier');}
+}
+
+function renderCroyances(){
+  const el=document.getElementById('croyances-container');
+  croyances.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='croyance-btn';
+    btn.id='cr-'+i;
+    btn.innerHTML=`
+      <div class="croyance-check" id="ccheck-${i}"></div>
+      <div style="flex:1;">
+        <div class="croyance-texte">${c.texte}</div>
+        <div class="croyance-origine">${c.origine}</div>
+      </div>`;
+    btn.onclick=()=>{
+      btn.classList.toggle('selected');
+      const check=document.getElementById('ccheck-'+i);
+      if(selectedCroyances.has(i)){
+        selectedCroyances.delete(i);
+        check.textContent='';
+      } else {
+        selectedCroyances.add(i);
+        check.textContent='✓';
+      }
+      updateCroyancesMessage();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function updateCroyancesMessage(){
+  const n=selectedCroyances.size;
+  const msg=document.getElementById('croyances-message');
+  if(n===0) msg.textContent='Clique sur les croyances qui te ressemblent pour voir d\'où elles viennent.';
+  else if(n===1) msg.innerHTML='Tu en as identifié une. Les origines que tu vois, est-ce qu\'elles résonnent avec ton histoire ?';
+  else msg.innerHTML=`${n} croyances identifiées. Remarques-tu un fil commun dans leurs origines ? Souvent, plusieurs croyances naissent du même sol.`;
+}
+
+// Identité dimensions
+const idEl=document.getElementById('identite-container');
+identiteDimensions.forEach((dim,i)=>{
+  const div=document.createElement('div');
+  div.className='identite-card';
+  div.style.cssText=`background:${dim.bg};border-color:${dim.border};`;
+  div.innerHTML=`
+    <div class="id-dot" style="background:${dim.couleur};"></div>
+    <div>
+      <div class="id-titre" style="color:${dim.couleur};font-weight:600;">${dim.titre}</div>
+      <div class="id-desc" style="color:#3d2060;font-style:normal;margin-top:4px;">${dim.desc}</div>
+    </div>`;
+  idEl.appendChild(div);
+});
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 19 🔮';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+
+  // 1. Croyances reconnues
+  if(selectedCroyances.size>0){
+    const liste=[...selectedCroyances].map(i=>croyances[i].texte).join('<br>');
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Les croyances que j'ai reconnues en moi</div><div class="recap-r" style="font-style:normal;font-size:15px;">${liste}</div></div>`;
+  }
+
+  // 2. Croyance travaillée
+  const maCroyance=document.getElementById('ma-croyance').value.trim();
+  if(maCroyance) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">La croyance que j'ai questionnée</div><div class="recap-r">"${maCroyance}"</div></div>`;
+
+  // 3. Les 4 questions de Byron Katie
+  const katieQs=[
+    "Est-ce que c'est absolument vrai ?",
+    "Comment je réagis quand je crois cette pensée ?",
+    "Qui je serais sans cette pensée ?",
+    "La retournée, l'opposé pourrait-il être vrai ?"
+  ];
+  const katieVals=[1,2,3,4].map(n=>document.getElementById('k'+n)?.value.trim());
+  if(katieVals.some(v=>v)){
+    let kh='';
+    katieVals.forEach((v,i)=>{ if(v) kh+=`<strong style="color:#8060c0;">${katieQs[i]}</strong><br>"${v}"<br><br>`; });
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon questionnement en 4 questions</div><div class="recap-r" style="font-style:normal;font-size:15px;">${kh}</div></div>`;
+  }
+
+  // 4. Fiche à 5 colonnes de Beck
+  const beckLabels=['1 · Situation','2 · Émotions','3 · Pensée automatique','4 · Pensée alternative','5 · Résultat'];
+  const beckVals=[1,2,3,4,5].map(n=>document.getElementById('beck'+n)?.value.trim());
+  if(beckVals.some(v=>v)){
+    let bh='';
+    beckVals.forEach((v,i)=>{ if(v) bh+=`<strong style="color:#8060c0;">${beckLabels[i]}</strong><br>${v}<br><br>`; });
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ma fiche à 5 colonnes de Beck</div><div class="recap-r" style="font-style:normal;font-size:15px;">${bh}</div></div>`;
+  }
+
+  // 5. Écriture finale
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 19 · Mes croyances limitantes</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour19-croyances-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

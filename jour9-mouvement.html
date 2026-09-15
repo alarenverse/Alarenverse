@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 9 · Le mouvement · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f0f8f0 0%,#f5f8f0 45%,#f0f5f8 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#809880;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#2d4030;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#80c8a8,#90b8d0);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(100,160,120,0.12);border:1px solid rgba(120,180,140,0.2);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#80c8a8;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#2d4030;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#2d4030;margin-bottom:14px;line-height:1.4}
+  p{color:#4d6050;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#708070}
+  .btn{background:linear-gradient(135deg,#80c8a8,#90b8d0);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(100,180,140,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(120,180,140,0.3);color:#a0b8a8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#a0b8a8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#80a888;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(120,180,140,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#80c8a8,#90b8d0);border-radius:4px;transition:width 0.4s ease}
+  .highlight{background:linear-gradient(135deg,#eaf5f0,#eef4fb);border-radius:14px;padding:14px 18px;border-left:3px solid #80c8a8;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .highlight.bleu{border-left-color:#90b8d0;background:linear-gradient(135deg,#eef4fb,#f0f4fd)}
+  .highlight.terre{border-left-color:#c2836a;background:linear-gradient(135deg,#fdf5ee,#fdf8f0)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(120,180,140,0.12)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#80c8a8,#90b8d0);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#90a890;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(120,180,140,0.15);font-size:11px;color:#90a890;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(120,180,140,0.06);border:1px solid rgba(120,180,140,0.15);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#507060;font-family:'Jost',sans-serif}
+
+  /* Sélecteur d'état */
+  .etat-btn{border-radius:18px;padding:16px 20px;width:100%;cursor:pointer;font-family:'Lora',serif;text-align:left;margin-bottom:10px;transition:all 0.25s;border:2px solid transparent;display:flex;align-items:flex-start;gap:14px}
+  .etat-btn:hover{transform:translateX(4px)}
+  .etat-btn.selected{transform:translateX(4px)}
+  .etat-icone{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:11px;font-weight:600;color:white;letter-spacing:0.05em}
+  .etat-titre{font-size:16px;color:#2d4030;margin-bottom:4px}
+  .etat-desc{font-size:13px;line-height:1.55;font-style:normal}
+
+  /* Suggestions de mouvement */
+  .mouvement-section{margin-bottom:20px}
+  .mouvement-titre{font-family:'Jost',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid}
+  .mouvement-card{border-radius:16px;padding:16px 18px;margin-bottom:10px;border:1px solid}
+  .mouvement-nom{font-size:17px;color:#2d4030;margin-bottom:4px;font-weight:400}
+  .mouvement-detail{font-size:13px;line-height:1.65;font-style:normal}
+  .mouvement-duree{display:inline-block;border-radius:10px;padding:3px 10px;font-size:11px;font-family:'Jost',sans-serif;margin-top:6px}
+
+  /* Pilates / Yoga highlight spécial */
+  .pilates-box{background:linear-gradient(135deg,#eaf5f2,#e8f4fb);border-radius:18px;padding:20px;border:2px solid #80c8a8;margin-bottom:16px}
+  .pilates-badge{display:inline-block;background:linear-gradient(135deg,#80c8a8,#90b8d0);color:white;border-radius:20px;padding:4px 14px;font-size:11px;font-family:'Jost',sans-serif;margin-bottom:10px;letter-spacing:0.05em}
+  .pilates-titre{font-size:17px;color:#2d4030;margin-bottom:8px}
+  .pilates-texte{font-size:17px;color:#253050;line-height:1.75;font-style:normal}
+
+  /* Cycle */
+  .cycle-phase{border-radius:14px;padding:14px 18px;margin-bottom:10px;border:1px solid}
+  .cycle-label{font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.1em;margin-bottom:6px}
+  .cycle-sports{font-size:13px;line-height:1.65;color:#4d6050;font-style:normal}
+
+  /* Journal */
+  textarea{width:100%;border:2px solid rgba(120,180,140,0.3);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#2d4030;line-height:1.7;outline:none;resize:vertical;background:#f4fdf8}
+  textarea:focus{border-color:#80c8a8}
+  .journal-q{font-size:16px;color:#2d4030;line-height:1.6;margin-bottom:6px;text-align:center}
+  .journal-sous{font-size:13px;color:#80a888;text-align:center;margin-bottom:14px;font-family:'Jost',sans-serif}
+
+  .recap-box{background:linear-gradient(135deg,#eaf5f0,#eef4fb);border-radius:14px;padding:14px 18px;border:1px solid rgba(120,180,140,0.2);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#80a888;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#eaf5f0,#eef4fb);border-radius:20px;padding:22px;border:1px solid rgba(120,180,140,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <div class="label">Jour 9 · Le mouvement comme soin</div>
+    <h2>Ton corps est fait pour bouger, mais pas n'importe comment, ni n'importe quand</h2>
+    <p>Bouger, ce n'est pas qu'une histoire de forme ou de silhouette. C'est l'un des outils les plus puissants que tu aies pour réguler tes émotions, calmer ton système nerveux, prendre soin de ta tête.</p>
+    <p class="small" style="margin-bottom:20px;">Mais tout est là : choisir le bon mouvement au bon moment. Selon ton état du jour, selon ton cycle, selon ce dont ton corps a vraiment besoin, pas selon ce qu'on est censées faire.</p>
+    <div id="preview-container" style="text-align:left;margin-bottom:22px;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🌿</button>
+    <p class="hint">Théorie · Mouvement guidé selon ton état · Journal · ~20 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <p id="t-intro-el" style="font-size:14px;color:#708070;margin-bottom:14px;display:none;"></p>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- PILATES / YOGA -->
+<div class="phase" id="phase-pilates">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🧘</span>
+    <h2>Quand le système nerveux est saturé</h2>
+    <p style="text-align:center;margin-bottom:20px;">Il y a des moments où le corps a besoin de bouger, mais pas n'importe comment. Quand tu es épuisée, anxieuse, en mode freeze ou après une période de stress intense, certains sports régulent. D'autres aggravent.</p>
+
+    <div class="pilates-box">
+      <div class="pilates-badge">Recommandation clinique</div>
+      <div class="pilates-titre">Le Pilates et le Yoga : les alliés du système nerveux</div>
+      <div class="pilates-texte">
+        Quand le système nerveux est en mode combat/fuite ou figement, les sports intenses, HIIT, course rapide, sports de compétition, peuvent <strong>aggraver</strong> l'état : ils ajoutent du cortisol à un corps déjà saturé.<br><br>
+        Le Pilates et le Yoga travaillent différemment. Ils activent le <strong>nerf vague</strong> via la respiration consciente, les mouvements lents et contrôlés, et la connexion corps-esprit. Ils passent le système nerveux du mode alerte au mode sécurité, exactement comme la respiration 4-6 que tu pratiques depuis le Jour 3.<br><br>
+        Ce n'est pas de la faiblesse. C'est de la précision.
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-bottom:12px;">
+      <strong>Le Pilates spécifiquement</strong> renforce le plancher pelvien et les muscles profonds souvent fragilisés par les fluctuations hormonales, les grossesses, ou simplement le stress chronique. Il améliore la proprioception, le sens que tu as de ton propre corps dans l'espace, ce qui est souvent perturbé chez les personnes anxieuses.
+    </div>
+
+    <div class="highlight bleu">
+      <strong>Le Yoga</strong> réunit mouvement, respiration et présence, trois des outils les mieux validés pour réguler ses émotions. Pratiqué régulièrement, plusieurs fois par semaine, il apaise vraiment l'anxiété. Le corps et le mental se calment ensemble.<br><br>
+      <span style="font-size:11px;color:#7090a0;">Recherche en psychologie clinique · Harvard Medical School</span>
+    </div>
+
+    <div class="highlight terre" style="margin-top:4px;">
+      <strong>Important :</strong> cela ne signifie pas qu'il faut éviter les sports intenses. Ça signifie qu'il faut les choisir au bon moment, quand le système nerveux est en mode sécurité, pas quand il est déjà à bout.
+    </div>
+
+    <button class="btn" onclick="showPhase('etat')">Choisir mon mouvement du jour →</button>
+  </div>
+</div>
+
+<!-- CHOIX D'ÉTAT -->
+<div class="phase" id="phase-etat">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌡️</span>
+    <h2>Comment te sens-tu en ce moment ?</h2>
+    <p style="text-align:center;margin-bottom:22px;">Choisis l'état qui te ressemble le plus aujourd'hui. Tu recevras des suggestions de mouvement adaptées à ce que ton corps et ton système nerveux ont vraiment besoin.</p>
+    <div id="etats-container"></div>
+    <button class="btn" id="btn-etat" disabled onclick="showSuggestions()">Voir mes suggestions →</button>
+  </div>
+</div>
+
+<!-- SUGGESTIONS -->
+<div class="phase" id="phase-suggestions">
+  <div class="card" style="margin-top:24px;">
+    <div id="suggestions-header" style="text-align:center;margin-bottom:20px;"></div>
+    <div id="suggestions-container"></div>
+    <button class="btn" onclick="showPhase('journal')">Passer au journal de mouvement ✍️</button>
+  </div>
+</div>
+
+<!-- JOURNAL -->
+<div class="phase" id="phase-journal">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="j-label">Journal · 1/3</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Mon journal de mouvement</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="j-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <p class="journal-q" id="j-question"></p>
+    <p class="journal-sous" id="j-sous"></p>
+    <textarea id="j-textarea" rows="5" placeholder="" oninput="checkJournal()"></textarea>
+    <button class="btn" id="btn-j-next" style="width:100%;margin-top:12px;" onclick="nextJournal()">Continuer →</button>
+  </div>
+</div>
+
+<!-- CYCLE -->
+<div class="phase" id="phase-cycle">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌙</span>
+    <h2>Le mouvement selon ton cycle</h2>
+    <p style="text-align:center;margin-bottom:20px;">Ton énergie physique n'est pas la même tout au long du mois. Apprendre à adapter ton mouvement à ton cycle, c'est travailler avec ton corps, pas contre lui.</p>
+    <div id="cycle-container"></div>
+    <button class="btn" onclick="showPhase('fin')">Terminer le Jour 9 🌿</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌱</span>
+    <h2>Le mouvement comme langage</h2>
+    <p>Tu viens d'apprendre quelque chose d'important : bouger n'est pas une obligation ni une punition. C'est une conversation avec ton corps, et elle peut être douce, intense, lente ou joyeuse, selon ce dont tu as besoin.</p>
+    <div style="background:linear-gradient(135deg,#eaf5f0,#eef4fb);border-radius:16px;padding:20px;border:1px solid rgba(120,180,140,0.2);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#80c8a8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Ton journal du Jour 9</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="highlight" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> Quand ton système nerveux est saturé, commence par le Pilates ou le Yoga. Quand tu te sens ancrée et en sécurité, tu peux aller vers des sports plus intenses. Écoute d'abord, bouge ensuite.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#507060;"><strong style="color:#2d4030;">Demain, Jour 10 :</strong> la gratitude</p>
+    <p class="hint" style="margin-top:6px;">21 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie = [
+  { emoji:"⚗️", titre:"Ce que bouger fait vraiment à ton cerveau", source:"Dr John Ratey, Spark", contenu:[
+    {type:"texte",texte:"Quand tu bouges, ton cerveau libère tout un cocktail de molécules qui agissent directement sur ton moral. Et ça n'a rien à voir avec ta condition physique, ton poids ou tes performances. Ça marche pour tout le monde, quel que soit le niveau."},
+    {type:"stat",texte:"La dopamine, la molécule de la motivation et du plaisir, grimpe après une vingtaine de minutes de mouvement. C'est pour ça que bouger peut casser un état d'apathie ou de tristesse, même quand on n'en a aucune envie au départ",source:"Dr John Ratey, Harvard Medical School"},
+    {type:"stat",texte:"La sérotonine, celle qui stabilise l'humeur, se fabrique pendant et après l'effort. C'est le même neurotransmetteur que ciblent les antidépresseurs. Pour les déprimes légères à modérées, bouger régulièrement a des effets comparables",source:"British Journal of Sports Medicine"},
+    {type:"highlight",texte:"💡 Le Dr Ratey appelle le mouvement l'\"engrais miracle du cerveau\". En bougeant, tu stimules la fabrication de nouveaux neurones, notamment dans la zone du cerveau qui gère la mémoire et les émotions. Tu ne muscles pas que ton corps, tu muscles ta tête."},
+  ]},
+  { emoji:"🔋", titre:"Quand tu crois être épuisée · la fluctuation", source:"Méta-analyse · O'Connor, University of Georgia", contenu:[
+    {type:"texte",texte:"Voilà quelque chose de contre-intuitif mais essentiel : tout est fluctuant. Ton énergie n'est pas un réservoir fixe qui se vide. Et parfois, ce que tu prends pour de l'épuisement, c'est en réalité un corps qui a besoin de bouger pour relancer la machine."},
+    {type:"highlight",texte:"⚡ Quand tu bouges, tu fais circuler le sang, les hormones, l'oxygène, et tes pensées avec. Un corps immobile depuis trop longtemps stagne, et cette stagnation, on la ressent comme de la fatigue. Le mouvement, même léger, remet tout en circulation."},
+    {type:"texte",texte:"La recherche est claire là-dessus : énergie et fatigue ne sont pas la même chose. On peut faire monter son énergie même quand la fatigue est là. Un mouvement doux d'une vingtaine de minutes, quand on part justement d'un état fatigué, peut relancer l'énergie de façon nette. Ce n'est pas magique, c'est physiologique."},
+    {type:"highlight",texte:"🌱 Alors la prochaine fois que tu te dis \"je suis trop crevée pour bouger\", pose-toi la question : est-ce que mon corps a besoin de repos... ou est-ce qu'il a besoin de bouger pour se réveiller ? Les deux existent. Apprendre à les distinguer, c'est un vrai pouvoir.",classe:"terre"},
+  ]},
+  { emoji:"🎯", titre:"Pourquoi c'est plus dur pour certaines · et le truc des 5 minutes", source:"Johns Hopkins Medicine · Recherche sur la dopamine", contenu:[
+    {type:"texte",texte:"Tu t'es peut-être déjà demandé pourquoi certaines personnes bougent si facilement, alors que pour toi c'est une montagne à chaque fois. Ce n'est pas une question de volonté ni de discipline. C'est une histoire de chimie du cerveau."},
+    {type:"highlight",texte:"🧠 La dopamine, encore elle, détermine en grande partie si l'effort physique te semble facile ou épuisant. Chez certaines personnes, le signal dopaminergique est plus efficace : bouger leur paraît naturel, presque agréable d'avance. Chez d'autres, le même mouvement demande un effort intérieur bien plus grand juste pour démarrer."},
+    {type:"texte",texte:"Et c'est important de le savoir, parce que ça déculpabilise énormément. Si bouger te coûte plus qu'à ta copine qui adore le sport, ce n'est pas que tu es paresseuse ou pas assez motivée. Vos cerveaux ne partent pas avec le même élan de départ. Point."},
+    {type:"highlight",texte:"💡 La dopamine, c'est ce qui déclenche l'initiation du mouvement : le tout premier pas. Souvent, ce qui te manque ce n'est pas l'énergie pour faire la séance entière, c'est juste l'impulsion pour commencer. Une fois lancée, le corps suit. C'est le démarrage qui coince, pas la suite."},
+    {type:"texte",texte:"C'est là qu'un petit objectif tout simple change tout : se dire \"je commence par 5 minutes, et si vraiment je n'ai pas envie de continuer, j'arrête\". Le plus souvent, tu réalises qu'il te manquait juste l'amorce. Tu donnes à ta dopamine le petit coup de pouce du départ, et le reste se met en route presque tout seul."},
+  ]},
+  { emoji:"🔑", titre:"\"J'arrive pas à m'y mettre\" : la vraie raison, et comment la changer", source:"Dr Wendy Wood, Good Habits, Bad Habits", contenu:[
+    {type:"texte",texte:"Si tu te dis souvent \"je n'arrive pas à me mettre au sport, ça me semble tellement difficile\", écoute bien : ce n'est pas un défaut de volonté. Et ce n'est pas qu'une croyance dans ta tête non plus. Il y a une vraie mécanique derrière, et la bonne nouvelle, c'est qu'elle se change."},
+    {type:"highlight",texte:"🧠 Voilà le cœur du problème : ton cerveau a besoin d'une récompense rapide pour ancrer un comportement. Or quand tu commences le sport, la récompense, se sentir mieux, plus en forme, met des semaines à arriver. Pendant ce temps, c'est juste difficile et inconfortable. Ton cerveau ne reçoit pas son \"shoot\" de dopamine assez vite, alors il décroche. Ce n'est pas toi qui es faible. C'est ta chimie qui n'a pas encore trouvé sa récompense."},
+    {type:"texte",texte:"Les chercheurs sur les habitudes, Wendy Wood en tête, sont formels : ce qui fait tenir une habitude, ce n'est pas la motivation ni la discipline. Ce sont deux choses : la récompense immédiate, et la réduction de la friction. Autrement dit, rendre le truc facile à démarrer et agréable tout de suite."},
+    {type:"highlight",texte:"💡 Comment faire concrètement :<br><br>• <strong>Choisis un mouvement que tu aimes</strong>, pas celui que tu \"devrais\" faire. Danser dans ton salon compte autant qu'une salle de sport.<br>• <strong>Associe-le à un plaisir immédiat</strong> : ta playlist préférée, un podcast que tu gardes juste pour ça, un beau lieu de marche.<br>• <strong>Réduis la friction</strong> : prépare tes affaires la veille, choisis quelque chose de proche et simple.<br>• <strong>Célèbre tout de suite</strong>, même un petit \"je l'ai fait !\" intérieur. Ça nourrit la dopamine au bon moment.",classe:"terre"},
+    {type:"highlight",texte:"🎁 Une stratégie qui marche très bien : les récompenses par paliers. \"Si j'arrive à inclure 3 séances cette semaine, je m'offre cette jolie brassière que je voulais.\" Tu donnes à ton cerveau un objectif concret et une récompense réelle au bout, exactement ce dont il a besoin pour s'accrocher au début, quand le plaisir du sport n'est pas encore là."},
+    {type:"texte",texte:"Une seule chose à garder en tête : ces récompenses externes sont un échafaudage. Elles sont géniales pour démarrer et passer le cap difficile. Mais petit à petit, laisse la vraie récompense prendre le relais, celle de te sentir bien, plus claire, plus fière, plus vivante après avoir bougé. C'est elle qui fera tenir l'habitude sur le long terme, quand il n'y aura plus de brassière à la clé."},
+    {type:"texte",texte:"Et voilà le plus encourageant : plus tu bouges, plus ton cerveau fabrique de récepteurs à dopamine. Concrètement, ça veut dire que bouger devient de plus en plus facile avec le temps. Le démarrage est dur parce que ton cerveau n'est pas encore équipé, mais il s'équipe, séance après séance. Ce qui te coûte un effort énorme aujourd'hui deviendra presque naturel dans quelques semaines. Ce n'est pas une promesse en l'air, c'est de la plasticité cérébrale."},
+    {type:"highlight",texte:"🌱 Alors sois patiente et douce avec toi au début. Tu n'es pas en train d'échouer, tu es en train de recâbler ton cerveau. Et ça, ça prend un peu de temps. Chaque petite séance, même ridiculement courte, construit le terrain pour la suivante."},
+  ]},
+  { emoji:"⚡", titre:"Quel mouvement selon ton état du moment ?", source:"Dr Peter Levine, Somatic Experiencing", contenu:[
+    {type:"texte",texte:"Tous les sports ne se valent pas selon l'état dans lequel tu es. Un corps déjà en mode alerte, saturé de cortisol, n'a pas besoin qu'on lui en rajoute avec un entraînement intense. Il a besoin d'être régulé, apaisé. C'est très différent."},
+    {type:"highlight",texte:"🟢 Quand tu te sens posée, en sécurité → tu peux y aller franchement : course, renforcement, natation, sport collectif. Ton corps a les ressources pour encaisser l'effort et en tirer du bon."},
+    {type:"highlight",texte:"🟠 Quand tu te sens agitée, anxieuse, sur le qui-vive → va vers des mouvements réguliers et prévisibles : marche rapide, vélo tranquille, danse libre. C'est le rythme régulier, répétitif, qui vient calmer ton système nerveux.",classe:"bleu"},
+    {type:"highlight",texte:"🔴 Quand tu es épuisée, à plat, vidée → Pilates, yoga doux, étirements, marche lente dans la nature. Ces pratiques réveillent ton nerf vague et te ramènent doucement du mode survie vers le mode sécurité, sans rajouter de stress à un corps déjà à bout.",classe:"terre"},
+    {type:"texte",texte:"La règle d'or, c'est celle-là : écoute d'abord où en est ton corps, ensuite choisis ton mouvement. Choisir le Pilates un jour d'épuisement, ce n'est pas se ménager par faiblesse, c'est de l'intelligence corporelle. C'est connaître son corps et le respecter."},
+  ]},
+  { emoji:"🌙", titre:"Bouger avec ton cycle, pas contre lui", source:"Dr Stacy Sims, Roar", contenu:[
+    {type:"texte",texte:"Ton énergie, ta force, ta récupération changent au fil de ton cycle. Si tu l'ignores, tu rames à contre-courant de ta propre biologie. Si tu t'y adaptes, tu avances avec elle, et tout devient plus facile."},
+    {type:"stat",texte:"Dans la première moitié du cycle (après les règles), l'œstrogène monte : ta force, ton endurance et ta récupération sont à leur top. C'est le moment idéal pour les entraînements plus intenses, si tu en as envie",source:"Dr Stacy Sims"},
+    {type:"stat",texte:"Dans la seconde moitié (avant les règles), ton corps tourne différemment : la température monte, la récupération ralentit, la fatigue arrive plus vite. Les mouvements doux sont souvent plus justes à ce moment-là",source:"Recherche en physiologie féminine"},
+    {type:"highlight",texte:"💡 Attention, adapter à ton cycle ce n'est pas une excuse pour ne rien faire. C'est une façon de bouger plus intelligemment, plus longtemps, avec plus de plaisir, et moins de risque de te blesser ou de t'épuiser."},
+  ]},
+];
+
+const etats = [
+  {
+    id:"securite",
+    titre:"Je me sens ancrée et en énergie",
+    desc:"Mon système nerveux est en mode sécurité. J'ai de l'élan, de la motivation, je me sens stable.",
+    couleur:"#80c8a8", bg:"#eaf5f0", border:"rgba(128,200,168,0.3)",
+    icone:"OK",
+    suggestions: {
+      titre:"Tu es prête pour un mouvement intense",
+      desc:"Ton système nerveux est en mode sécurité, c'est le moment idéal pour des sports plus exigeants.",
+      mouvements:[
+        {nom:"Course ou marche rapide", detail:"30 à 45 minutes, à un rythme qui te fait sentir vivante. En nature si possible, l'exposition aux arbres réduit le cortisol indépendamment de l'effort.", duree:"30-45 min", bg:"#eaf5f0", border:"#80c8a8", couleur:"#305040"},
+        {nom:"HIIT ou circuit training", detail:"Des intervalles courts et intenses alternés avec des récupérations. Libère un maximum d'endorphines et de BDNF. Idéal en phase folliculaire.", duree:"20-30 min", bg:"#eaf5f0", border:"#80c8a8", couleur:"#305040"},
+        {nom:"Natation", detail:"Combine l'effort cardiovasculaire avec la régulation du système nerveux par la respiration rythmique. Un des sports les plus complets pour la santé mentale.", duree:"30-40 min", bg:"#eaf5f0", border:"#80c8a8", couleur:"#305040"},
+        {nom:"Musculation / Renforcement charges lourdes", detail:"Le travail de force en phase de sécurité libère de la dopamine et de la testostérone. Tu peux aller vers des charges plus importantes, des séries plus longues. Améliore aussi l'estime de soi et le sentiment d'efficacité personnelle.", duree:"40-50 min", bg:"#eaf5f0", border:"#80c8a8", couleur:"#305040"},
+      ]
+    }
+  },
+  {
+    id:"agitee",
+    titre:"Je suis agitée, anxieuse, hyperactive",
+    desc:"Mon esprit s'emballe, mon corps est tendu. Je me sens dans le mode combat/fuite.",
+    couleur:"#e8a85c", bg:"#fdf3e6", border:"rgba(232,168,92,0.3)",
+    icone:"!",
+    suggestions: {
+      titre:"Ton corps a besoin de rythme régulier",
+      desc:"Quand tu es en mode combat/fuite, les mouvements rhythmiques et prévisibles régulent ton système nerveux mieux que les sports intenses.",
+      mouvements:[
+        {nom:"Marche consciente en nature", detail:"20 à 30 minutes, à allure modérée. Concentre-toi sur les sensations : le sol sous tes pieds, l'air sur ta peau. La nature amplifie l'effet régulateur.", duree:"20-30 min", bg:"#fdf3e6", border:"#e8a85c", couleur:"#604020"},
+        {nom:"Vélo ou vélo elliptique", detail:"L'alternance régulière des jambes crée un rythme bilatéral qui apaise le système nerveux, comme la marche, mais plus intense si tu en as besoin.", duree:"25-35 min", bg:"#fdf3e6", border:"#e8a85c", couleur:"#604020"},
+        {nom:"Danse libre", detail:"Mettre de la musique que tu aimes et laisser ton corps bouger librement est l'une des façons les plus naturelles de réguler les émotions et de sortir de l'anxiété.", duree:"15-20 min", bg:"#fdf3e6", border:"#e8a85c", couleur:"#604020"},
+        {nom:"Renforcement musculaire à charges modérées", detail:"Quand tu es anxieuse, la musculation peut être excellente, à condition d'adapter les charges. Des séries plus longues, charges moyennes, mouvements contrôlés. Le focus sur la technique détourne le mental des pensées anxieuses.", duree:"30-40 min", bg:"#fdf3e6", border:"#e8a85c", couleur:"#604020"},
+      ]
+    }
+  },
+  {
+    id:"epuisee",
+    titre:"Je suis épuisée, à plat, en mode freeze",
+    desc:"Je me sens vidée, déconnectée, sans énergie. Mon corps et mon mental sont saturés.",
+    couleur:"#90b8d0", bg:"#eef4fb", border:"rgba(144,184,208,0.3)",
+    icone:"...",
+    suggestions: {
+      titre:"Ton système nerveux a besoin de douceur",
+      desc:"Quand tu es en épuisement ou en mode freeze, les sports intenses ajoutent du cortisol à un corps déjà saturé. La douceur est ici la vraie force.",
+      special: true,
+      mouvements:[
+        {nom:"Pilates doux, recommandation prioritaire", detail:"Travail en profondeur des muscles stabilisateurs, respiration consciente, connexion corps-esprit. Active le nerf vague, renforce le plancher pelvien fragilisé par le stress, améliore la proprioception. C'est le sport de la régulation par excellence.", duree:"20-40 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050", star:true},
+        {nom:"Yoga Yin ou Nidra", detail:"Des postures tenues longtemps (3 à 5 minutes), en respiration profonde. Le Yoga Nidra, ou \"sommeil yogique\", est une pratique de relaxation profonde qui agit sur le système nerveux autonome aussi efficacement qu'une sieste.", duree:"20-45 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050"},
+        {nom:"Étirements doux au sol", detail:"15 minutes d'étirements lents, à l'écoute des sensations. Pas de performance, pas d'objectif, juste reprendre contact avec ton corps avec bienveillance.", duree:"10-20 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050"},
+        {nom:"Renforcement musculaire très doux, charges légères", detail:"Même en épuisement, une musculation très douce reste bénéfique. Charges légères, mouvements lents et contrôlés, peu de séries. L'objectif n'est pas la performance, c'est de maintenir le lien avec son corps et de stimuler doucement le système nerveux sans le saturer.", duree:"15-25 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050"},
+      ]
+    }
+  },
+  {
+    id:"variable",
+    titre:"C'est variable · ça dépend des jours",
+    desc:"Mon énergie est instable. Certains jours je me sens bien, d'autres je suis à plat.",
+    couleur:"#c9a0c2", bg:"#f5edf5", border:"rgba(201,160,194,0.3)",
+    icone:"~",
+    suggestions: {
+      titre:"Commence par écouter avant de choisir",
+      desc:"Quand l'énergie est variable, la clé est de vérifier l'état de ton système nerveux avant de choisir ton mouvement, pas de suivre une routine fixe.",
+      mouvements:[
+        {nom:"Pilates, ton ancre quotidienne", detail:"Peu importe l'état de ton système nerveux, le Pilates s'adapte. Quand tu vas bien, tu peux intensifier. Quand tu es épuisée, tu ralentis. C'est la pratique la plus versatile pour les femmes dont l'énergie varie.", duree:"20-40 min", bg:"#f5edf5", border:"#c9a0c2", couleur:"#503050"},
+        {nom:"Marche : le mouvement universel", detail:"Simple, accessible, régulateur. Adapte le rythme à ton état du jour. La marche est le seul mouvement recommandé à tous les états du système nerveux.", duree:"20-40 min", bg:"#f5edf5", border:"#c9a0c2", couleur:"#503050"},
+        {nom:"Musculation, adapte les charges à ton état", detail:"La musculation est l'une des rares pratiques qui s'adapte à tous les états du système nerveux. Charges lourdes quand tu es en sécurité et en énergie. Charges légères, mouvements lents quand tu es fatiguée ou saturée. Évalue ton état avant de choisir ton programme du jour.", duree:"20-45 min", bg:"#f5edf5", border:"#c9a0c2", couleur:"#503050"},
+      ]
+    }
+  },
+];
+
+const cyclePhases = [
+  {
+    label:"Phase menstruelle · Jours 1 à 5",
+    couleur:"#e8857a", bg:"#fde8e6", border:"rgba(232,133,122,0.3)",
+    texte:"Énergie basse, corps en travail. C'est le moment du Yoga Yin, des étirements doux, de la marche lente. Pas de sport intense : le corps a besoin de ses ressources pour autre chose.",
+  },
+  {
+    label:"Phase folliculaire · Jours 6 à 13",
+    couleur:"#80c8a8", bg:"#eaf5f0", border:"rgba(128,200,168,0.3)",
+    texte:"Énergie montante, force maximale. C'est le meilleur moment pour les sports intenses : HIIT, musculation, course, natation rapide. Profite de cette fenêtre d'énergie.",
+  },
+  {
+    label:"Ovulation · Jours 14 à 16",
+    couleur:"#f5c842", bg:"#fdfbea", border:"rgba(245,200,66,0.3)",
+    texte:"Pic d'énergie et de coordination. Sports collectifs, danse, activités sociales et sportives. Attention aux ligaments plus souples, risque de blessure légèrement augmenté.",
+  },
+  {
+    label:"Phase lutéale · Jours 17 à 28",
+    couleur:"#a08ec2", bg:"#f4f0fa", border:"rgba(160,142,194,0.3)",
+    texte:"Énergie qui décroît progressivement. Privilégie le Pilates, le Yoga, la marche. En fin de phase (J25-J28), écoute ton corps et repose-toi si nécessaire, c'est hormonal, pas psychologique.",
+  },
+];
+
+const journalQuestions = [
+  {q:"Quel mouvement as-tu choisi aujourd'hui, ou lequel voudrais-tu essayer cette semaine ?", sous:"Pas d'obligation de résultat, juste une intention.", placeholder:"J'aimerais essayer / J'ai fait..."},
+  {q:"Comment te sens-tu dans ton corps en ce moment, avant de bouger ou après ?", sous:"Sensations physiques, énergie, tensions... Décris ce que tu ressens.", placeholder:"Dans mon corps je ressens..."},
+  {q:"Est-ce que tu as tendance à te forcer à faire du sport même quand ton corps dit non, ou au contraire à éviter le mouvement même quand il te ferait du bien ?", sous:"Honnêteté bienveillante, sans jugement.", placeholder:"Ma relation au mouvement c'est plutôt..."},
+];
+
+let theorieIdx = 0;
+let selectedEtat = null;
+let journalIdx = 0;
+let journalReponses = [];
+
+function showPhase(id) {
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='cycle') renderCycle();
+  if(id==='journal') renderJournal();
+}
+
+// Preview
+const pc = document.getElementById('preview-container');
+[
+  {e:'⚗️', t:'Le sport et le cerveau, dopamine, sérotonine, endorphines'},
+  {e:'⚡', t:'Quel mouvement selon ton système nerveux'},
+  {e:'🧘', t:'Pilates et Yoga : les alliés du système nerveux saturé'},
+  {e:'🌙', t:'Le cycle féminin et le sport'},
+  {e:'🌡️', t:'Programme guidé selon ton état du jour'},
+  {e:'✍️', t:'Journal de mouvement'},
+].forEach(item=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${item.e}</span><span>${item.t}</span></div>`;
+});
+
+function renderTheorie() {
+  const t = theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  const introEl=document.getElementById('t-intro-el');
+  if(t.intro){introEl.textContent=t.intro;introEl.style.display='block';}else{introEl.style.display='none';}
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#4d6050;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='highlight') el.innerHTML+=`<div class="highlight ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  const isLast = theorieIdx===theorie.length-1;
+  document.querySelector('#phase-theorie .btn').textContent = isLast ? 'Piates, Yoga et système nerveux 🧘' : 'Continuer →';
+}
+
+function nextTheorie() {
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else{showPhase('pilates');}
+}
+
+// Etats
+const ec = document.getElementById('etats-container');
+etats.forEach((e,i)=>{
+  const div = document.createElement('button');
+  div.className='etat-btn';
+  div.id='etat-'+i;
+  div.style.cssText=`background:${e.bg};border-color:${e.border};`;
+  div.innerHTML=`
+    <div class="etat-icone" style="background:${e.couleur};">${e.icone}</div>
+    <div>
+      <div class="etat-titre">${e.titre}</div>
+      <div class="etat-desc" style="color:${e.couleur.replace(')', ',0.8)').replace('rgb','rgba')};">${e.desc}</div>
+    </div>`;
+  div.onclick=()=>{
+    document.querySelectorAll('.etat-btn').forEach(b=>{b.classList.remove('selected');b.style.borderColor=etats[parseInt(b.id.replace('etat-',''))].border;});
+    div.classList.add('selected');
+    div.style.borderColor=e.couleur;
+    selectedEtat=i;
+    document.getElementById('btn-etat').disabled=false;
+  };
+  ec.appendChild(div);
+});
+
+function showSuggestions() {
+  if(selectedEtat===null)return;
+  const e = etats[selectedEtat];
+  const s = e.suggestions;
+  const header = document.getElementById('suggestions-header');
+  header.innerHTML=`
+    <div style="display:inline-block;background:${e.couleur};color:white;border-radius:20px;padding:6px 16px;font-size:12px;font-family:'Jost',sans-serif;margin-bottom:12px;">${e.titre}</div>
+    <h2 style="font-size:18px;color:#2d4030;margin-bottom:8px;">${s.titre}</h2>
+    <p style="font-size:14px;color:#507060;margin:0;">${s.desc}</p>`;
+
+  const sc = document.getElementById('suggestions-container');
+  sc.innerHTML='';
+  s.mouvements.forEach(m=>{
+    sc.innerHTML+=`
+      <div class="mouvement-card" style="background:${m.bg};border-color:${m.border};${m.star?'border-width:2px;':''}">
+        ${m.star?`<div style="display:inline-block;background:linear-gradient(135deg,#80c8a8,#90b8d0);color:white;border-radius:12px;padding:3px 12px;font-size:10px;font-family:'Jost',sans-serif;margin-bottom:8px;letter-spacing:0.05em;">RECOMMANDATION PRIORITAIRE</div>`:''}
+        <div class="mouvement-nom" style="color:${m.couleur};">${m.nom}</div>
+        <div class="mouvement-detail" style="color:${m.couleur}88;">${m.detail}</div>
+        <div class="mouvement-duree" style="background:${m.border};color:white;">${m.duree}</div>
+      </div>`;
+  });
+  showPhase('suggestions');
+}
+
+function renderCycle() {
+  const el=document.getElementById('cycle-container');
+  el.innerHTML='';
+  cyclePhases.forEach(ph=>{
+    el.innerHTML+=`
+      <div class="cycle-phase" style="background:${ph.bg};border-color:${ph.border};">
+        <div class="cycle-label" style="color:${ph.couleur};">${ph.label}</div>
+        <div class="cycle-sports">${ph.texte}</div>
+      </div>`;
+  });
+}
+
+function renderJournal() {
+  const q=journalQuestions[journalIdx];
+  document.getElementById('j-label').textContent=`Journal · ${journalIdx+1}/${journalQuestions.length}`;
+  document.getElementById('j-progress').style.width=((journalIdx+1)/journalQuestions.length*100)+'%';
+  document.getElementById('j-question').textContent=q.q;
+  document.getElementById('j-sous').textContent=q.sous;
+  document.getElementById('j-textarea').value='';
+  document.getElementById('j-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-j-next').textContent=journalIdx<journalQuestions.length-1?'Continuer →':'Voir le bilan du cycle 🌙';
+}
+
+function checkJournal(){
+  // Journal libre : le bouton reste accessible
+}
+
+function nextJournal(){
+  const val=document.getElementById('j-textarea').value.trim();
+  if(!val)return;
+  journalReponses.push({q:journalQuestions[journalIdx].q,r:val});
+  if(journalIdx<journalQuestions.length-1){journalIdx++;renderJournal();window.scrollTo(0,0);}
+  else{showPhase('cycle');}
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  journalReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<journalReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 9 · Le mouvement</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour9-mouvement-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

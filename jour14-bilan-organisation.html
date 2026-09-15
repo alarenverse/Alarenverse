@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 14 · Bilan & Organisation · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf8f0 0%,#f8f0fa 45%,#f0f8f5 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#a09080;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d3020;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c8a870,#a080c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(180,150,80,0.11);border:1px solid rgba(200,170,100,0.18);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c8a870;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d3020;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d3020;margin-bottom:14px;line-height:1.4}
+  p{color:#6d5830;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a7850}
+  .btn{background:linear-gradient(135deg,#c8a870,#a080c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(180,150,80,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,170,100,0.25);color:#c0b090;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#c0b090;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .hl{background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #c8a870;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.important{background:linear-gradient(135deg,#fdf0e8,#fdf5f0);border-left-color:#c87060;border-width:3px;padding:18px}
+
+  /* Récapitulatif 14 jours */
+  .recap-jour{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all 0.2s;border:1px solid transparent}
+  .recap-jour:hover{transform:translateX(3px)}
+  .recap-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:11px;font-weight:700;color:white;flex-shrink:0}
+  .recap-titre{font-size:14px;color:#3d3020;flex:1}
+  .recap-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(200,170,100,0.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;transition:all 0.2s;background:white}
+  .recap-check.done{background:linear-gradient(135deg,#c8a870,#a080c8);border-color:transparent;color:white}
+
+  /* Sélection des pratiques */
+  .pratique-card{border-radius:18px;padding:16px 18px;margin-bottom:10px;border:2px solid transparent;cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:14px}
+  .pratique-card.selected{transform:scale(1.01)}
+  .pratique-check{width:24px;height:24px;border-radius:50%;border:2px solid rgba(200,170,100,0.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all 0.2s;background:white;margin-top:2px}
+  .pratique-check.done{background:linear-gradient(135deg,#c8a870,#a080c8);border-color:transparent;color:white}
+  .pratique-nom{font-size:17px;color:#3d3020;margin-bottom:4px}
+  .pratique-temps{font-family:'Jost',sans-serif;font-size:11px;color:#a09070;margin-bottom:4px}
+  .pratique-desc{font-size:13px;color:#8a7050;line-height:1.55;font-style:normal}
+
+  /* Planning */
+  .planning-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+  .planning-moment{font-family:'Jost',sans-serif;font-size:11px;color:#a09070;text-transform:uppercase;letter-spacing:0.1em;width:70px;flex-shrink:0}
+  .planning-field{flex:1;border:2px solid rgba(200,170,100,0.25);border-radius:12px;padding:10px 14px;font-size:13px;font-family:'Lora',serif;color:#3d3020;outline:none;background:white;transition:border-color 0.2s;font-style:italic}
+  .planning-field:focus{border-color:#c8a870}
+
+  /* Bilan questions */
+  textarea{width:100%;border:2px solid rgba(200,170,100,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d3020;line-height:1.7;outline:none;resize:vertical;background:#fdfaf4}
+  textarea:focus{border-color:#c8a870}
+  .bilan-q{font-size:16px;color:#3d3020;line-height:1.6;margin-bottom:6px}
+  .bilan-sous{font-size:13px;color:#a09070;margin-bottom:12px;font-family:'Jost',sans-serif}
+
+  .recap-box{background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:14px;padding:14px 18px;border:1px solid rgba(200,170,100,0.18);margin-bottom:10px}
+  .recap-q-label{font-size:11px;color:#b0a070;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#fdf8ee,#f5f0fa);border-radius:20px;padding:24px;border:1px solid rgba(200,170,100,0.22);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🗓️</span>
+    <div class="label">Jour 14 · Bilan & Organisation</div>
+    <h2>Tu as fait quelque chose de courageux, et de beaucoup</h2>
+    <p>14 jours. 14 thèmes. Des émotions, le souffle, le sommeil, les limites, le corps, la voix critique, le mouvement, la gratitude, les relations, la régulation, la co-régulation.</p>
+    <div class="hl important" style="text-align:left;margin:16px 0;">
+      C'est beaucoup. Vraiment beaucoup. Et si tu n'as pas tout pratiqué, tout intégré, tout mis en place, c'est normal. C'était même prévisible. Tu absorbais des informations nouvelles, souvent intenses, sur toi-même et sur ta vie.<br><br>
+      C'est exactement pour ça qu'aujourd'hui on s'arrête. Pas pour faire plus, pour choisir ce qui reste, ce qui te parle vraiment, et construire quelque chose de réaliste avec ça. La régularité de trois choses simples vaut infiniment plus que la perfection de quatorze choses impossibles.
+    </div>
+    <button class="btn" onclick="showPhase('recap14')">Mon bilan des 14 premiers jours →</button>
+    <p class="hint">Bilan · Sélection · Planning · Organisation · ~20 min</p>
+  </div>
+</div>
+
+<!-- RÉCAP 14 JOURS -->
+<div class="phase" id="phase-recap14">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">📋</span>
+    <h2>Les 14 jours : ce que tu as traversé</h2>
+    <p style="text-align:center;margin-bottom:6px;">Coche les jours que tu as faits. Pas pour te noter, pour voir ton chemin.</p>
+    <p class="small" style="text-align:center;margin-bottom:18px;">Et souviens-toi : lire, réfléchir, reconnaître quelque chose en toi, c'est déjà pratiquer.</p>
+    <div id="recap14-container"></div>
+    <div class="hl vert" style="margin-top:12px;" id="recap-message"></div>
+    <button class="btn" onclick="showPhase('bilan')">Mon bilan réflexif →</button>
+  </div>
+</div>
+
+<!-- BILAN RÉFLEXIF -->
+<div class="phase" id="phase-bilan">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💭</span>
+    <h2>Mon bilan de mi-parcours</h2>
+    <p style="text-align:center;margin-bottom:20px;">Quatre questions honnêtes. Pas de bonnes réponses, juste les tiennes.</p>
+
+    <div style="margin-bottom:18px;">
+      <div class="bilan-q">Parmi tout ce que tu as découvert ces 14 jours, qu'est-ce qui t'a le plus touchée ou bousculée ?</div>
+      <div class="bilan-sous">Un thème, une phrase, une prise de conscience, même petite.</div>
+      <textarea id="b1" rows="4" placeholder="Ce qui m'a le plus touchée c'est..." oninput="checkBilan()"></textarea>
+    </div>
+
+    <div style="margin-bottom:18px;">
+      <div class="bilan-q">Qu'est-ce qui a été difficile à entendre ou à regarder en face ?</div>
+      <div class="bilan-sous">La résistance est une information précieuse, qu'est-ce qu'elle dit de toi ?</div>
+      <textarea id="b2" rows="4" placeholder="Ce qui a été difficile c'est... / Je pense que ça résiste parce que..." oninput="checkBilan()"></textarea>
+    </div>
+
+    <div style="margin-bottom:18px;">
+      <div class="bilan-q">Qu'est-ce qui a changé, même légèrement, dans ta façon de te voir ou de prendre soin de toi ?</div>
+      <div class="bilan-sous">Même infime. Même juste une pensée différente.</div>
+      <textarea id="b3" rows="4" placeholder="Ce qui a changé c'est... / Je commence à..." oninput="checkBilan()"></textarea>
+    </div>
+
+    <div style="margin-bottom:18px;">
+      <div class="bilan-q">Qu'est-ce que tu veux garder absolument pour la deuxième moitié du programme ?</div>
+      <div class="bilan-sous">Une intention, une pratique, une façon d'être avec toi-même.</div>
+      <textarea id="b4" rows="3" placeholder="Je veux garder..." oninput="checkBilan()"></textarea>
+    </div>
+
+    <button class="btn" id="btn-bilan" onclick="showPhase('selection')">Choisir mes pratiques essentielles →</button>
+  </div>
+</div>
+
+<!-- SÉLECTION DES PRATIQUES -->
+<div class="phase" id="phase-selection">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <h2>Tes 3 pratiques non-négociables</h2>
+    <p style="text-align:center;margin-bottom:8px;">Pas une liste exhaustive. Pas la perfection. Juste 3 choses que tu t'engages à faire régulièrement, parce qu'elles te font du bien.</p>
+    <p class="small" style="text-align:center;margin-bottom:6px;">Choisis en fonction de ce qui t'a le plus parlé, pas de ce qui te semble le plus "sérieux".</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;" id="selection-compteur">Choisis les pratiques qui te parlent, idéalement autour de 3</p>
+    <div id="pratiques-container"></div>
+    <button class="btn" onclick="showPhase('planning')" style="margin-top:20px;">Construire mon planning →</button>
+  </div>
+</div>
+
+<!-- PLANNING -->
+<div class="phase" id="phase-planning">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">📅</span>
+    <h2>Mon planning de soin, réaliste et durable</h2>
+    <p style="text-align:center;margin-bottom:8px;">Place tes 3 pratiques dans ta journée, pas comme des obligations, mais comme des rendez-vous avec toi-même.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">La régularité prime sur la durée. 5 minutes tous les jours > 1 heure une fois par semaine.</p>
+
+    <div class="hl" style="margin-bottom:20px;">
+      <strong>La dose minimale qui fait du bien :</strong><br><br>
+      Respiration 4-6 → quelques cycles, moins d'une minute<br>
+      Journal de gratitude → une seule chose, mais en profondeur<br>
+      Scan corporel → quelques minutes suffisent<br>
+      Mouvement → un petit quart d'heure fait déjà son effet<br>
+      Écriture libre → cinq minutes, et ça compte déjà<br><br>
+      Tu n'as pas besoin de beaucoup de temps. Tu as besoin de régularité.
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-family:'Jost',sans-serif;font-size:12px;color:#a09070;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;">Ma journée type de soin</div>
+
+      <div class="planning-row">
+        <span class="planning-moment">Matin</span>
+        <input class="planning-field" placeholder="Ex : 3 respirations 4-6 avant de regarder mon téléphone..." id="p-matin">
+      </div>
+      <div class="planning-row">
+        <span class="planning-moment">Midi</span>
+        <input class="planning-field" placeholder="Ex : 5 minutes de marche consciente..." id="p-midi">
+      </div>
+      <div class="planning-row">
+        <span class="planning-moment">Soir</span>
+        <input class="planning-field" placeholder="Ex : Journal de gratitude + rituel du soir..." id="p-soir">
+      </div>
+      <div class="planning-row">
+        <span class="planning-moment">Si crise</span>
+        <input class="planning-field" placeholder="Ex : Respiration 4-6 + grounding 5-4-3-2-1..." id="p-crise">
+      </div>
+    </div>
+
+    <div class="hl violet" style="margin-bottom:16px;">
+      <strong>Le Habit Stacking : la façon la plus simple d'ancrer une nouvelle habitude</strong><br><br>
+      James Clear, dans <em>Atomic Habits</em>, a rendu célèbre cette idée toute bête mais redoutablement efficace : le moyen le plus facile d'installer une nouvelle habitude, c'est de la coller à une habitude que tu as déjà, bien ancrée.<br><br>
+      La formule tient en une phrase : <strong>"Après [une chose que je fais déjà], je fais [la nouvelle habitude]."</strong><br><br>
+      Pourquoi ça marche si bien ? Parce que l'habitude que tu as déjà déclenche automatiquement un circuit dans ton cerveau. En accrochant la nouvelle juste derrière, tu profites de cet élan tout fait, tu n'as presque plus besoin de volonté. C'est l'ancienne habitude qui tire la nouvelle.
+    </div>
+
+    <div class="hl or" style="margin-bottom:16px;">
+      <strong>Exemples concrets, pour tous les domaines de ta vie :</strong><br><br>
+
+      <strong>🌬️ Respiration & régulation :</strong><br>
+      "Après m'être brossé les dents le matin → 3 respirations 4-6"<br>
+      "Avant de démarrer ma voiture → 1 minute de respiration consciente"<br><br>
+
+      <strong>💛 Gratitude & joie :</strong><br>
+      "Après avoir éteint ma lampe de chevet → noter une chose qui m'a touché aujourd'hui"<br>
+      "En prenant mon café du matin → nommer un micro-moment de joie de la veille"<br><br>
+
+      <strong>🏃 Sport & mouvement :</strong><br>
+      "Après avoir préparé le sac du lendemain → poser mes affaires de sport à côté"<br>
+      "Après le réveil → mettre mes vêtements de sport avant de faire quoi que ce soit d'autre"<br><br>
+
+      <strong>🥗 Alimentation :</strong><br>
+      "En faisant les courses → ajouter systématiquement un légume vert que j'aime"<br>
+      "Avant chaque repas → boire un grand verre d'eau"<br><br>
+
+      <strong>🧘 Pleine conscience & scan corporel :</strong><br>
+      "Sous la douche → scanner les 5 zones du corps et nommer ce que je ressens"<br>
+      "En attendant que l'eau bouille → poser mes mains sur mon ventre et respirer"<br><br>
+
+      <strong>📖 Écriture & réflexion :</strong><br>
+      "Après avoir couché les enfants → 5 minutes d'écriture libre dans mon carnet"<br>
+      "En mangeant seule le midi → noter une pensée ou une émotion du jour"<br><br>
+
+      <strong>💬 Affirmation de soi :</strong><br>
+      "En me regardant dans le miroir le matin → me dire une phrase bienveillante"<br>
+      "Avant chaque réunion difficile → me rappeler une de mes valeurs"
+    </div>
+
+    <button class="btn" onclick="showPhase('semaine3')">Aperçu de la Semaine 3 →</button>
+  </div>
+</div>
+
+<!-- APERÇU SEMAINE 3 -->
+<div class="phase" id="phase-semaine3">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌸</span>
+    <h2>La Semaine 3 · Se délester</h2>
+    <p style="text-align:center;margin-bottom:20px;">Tu as passé deux semaines à te connaître et à te reconnecter. La semaine prochaine, on va plus loin, vers ce qui t'empêche d'être pleinement toi-même.</p>
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+      <div style="background:linear-gradient(135deg,#fdf8f0,#f8f0fa);border-radius:12px;padding:12px 16px;border:1px solid rgba(200,170,100,0.18);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Jour 15</div>
+        <div style="font-size:14px;color:#3d3020;">La charge mentale, nommer le travail invisible</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#fdf8f0,#f8f0fa);border-radius:12px;padding:12px 16px;border:1px solid rgba(200,170,100,0.18);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Jour 16</div>
+        <div style="font-size:14px;color:#3d3020;">Gérer la charge mentale & lâcher prise</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#fdf8f0,#f8f0fa);border-radius:12px;padding:12px 16px;border:1px solid rgba(200,170,100,0.18);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Jour 17</div>
+        <div style="font-size:14px;color:#3d3020;">Le cycle féminin et les émotions</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#fdf8f0,#f8f0fa);border-radius:12px;padding:12px 16px;border:1px solid rgba(200,170,100,0.18);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Jour 18</div>
+        <div style="font-size:14px;color:#3d3020;">Retrouver la joie</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#fdf8f0,#f8f0fa);border-radius:12px;padding:12px 16px;border:1px solid rgba(200,170,100,0.18);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Jour 19</div>
+        <div style="font-size:14px;color:#3d3020;">Les croyances limitantes & Qui suis-je vraiment ?</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#fdf8f0,#f8f0fa);border-radius:12px;padding:12px 16px;border:1px solid rgba(200,170,100,0.18);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Jour 20</div>
+        <div style="font-size:14px;color:#3d3020;">Le deuil et les transitions</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#eaf5f0,#f0f8f4);border-radius:12px;padding:12px 16px;border:1px solid rgba(128,200,168,0.2);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#80c8a8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Jour 21</div>
+        <div style="font-size:14px;color:#3d3020;">Bilan semaine 3</div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="showFin()">Terminer le Jour 14 🌸</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌟</span>
+    <h2>Mi-parcours, et déjà tellement de chemin</h2>
+    <p>Tu as traversé 14 jours de conscience de toi-même. Tu as regardé tes émotions, ton corps, tes relations, ta voix intérieure, ta façon de réguler et de prendre soin. Ce n'est pas rien, c'est même beaucoup.</p>
+    <p>La deuxième moitié commence maintenant, avec plus de profondeur, et avec les outils que tu as déjà construits.</p>
+
+    <div style="background:linear-gradient(135deg,#fdf8ee,#f5f0fa);border-radius:16px;padding:20px;border:1px solid rgba(200,170,100,0.18);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🌿 Ton plan de soin pour la semaine 3</div>
+      <div id="plan-recap"></div>
+    </div>
+
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> Tu n'as pas à tout faire parfaitement. Tu as juste à revenir, encore et encore, avec douceur, à tes 3 pratiques choisies. C'est la constance, pas la perfection, qui transforme.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+
+    <div style="margin-top:22px;padding-top:20px;border-top:1px solid rgba(200,160,120,0.25);">
+      <p style="font-size:15px;color:#7d6040;text-align:center;margin-bottom:4px;"><strong>🌿 Ton plan de soin à remplir et afficher</strong></p>
+      <p style="font-size:14px;color:#907050;text-align:center;margin-bottom:14px;font-family:'Jost',sans-serif;">Un document à toi : tes 3 pratiques, ton planning, tes formules d'ancrage et un tracker de la semaine à cocher. Remplis-le sur ton ordi, imprime-le, et garde-le sous les yeux.</p>
+      <a href="jour14-mon-plan-de-soin.pdf" download style="display:block;text-decoration:none;">
+        <button class="btn" style="width:100%;background:linear-gradient(135deg,#c2836a,#c8a060);">
+          📋 Télécharger mon plan de soin (PDF à remplir)
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:30px;margin-bottom:10px;">🌸</div>
+    <p style="font-size:17px;color:#7d6040;margin-bottom:6px;"><strong>Semaine 3 · Se délester</strong></p>
+    <p style="font-size:14px;color:#907050;">Charge mentale · Cycle · Joie · Croyances · Deuil</p>
+    <p class="hint" style="margin-top:10px;">16 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const jours14=[
+  {num:"1",titre:"État des lieux · questionnaire",couleur:"#c9a0c2"},
+  {num:"2",titre:"Identifier ses émotions",couleur:"#c9a0c2"},
+  {num:"3",titre:"La respiration et le système nerveux",couleur:"#90b8d0"},
+  {num:"4",titre:"Le sommeil et les rituels du soir",couleur:"#a080c8"},
+  {num:"5",titre:"Poser ses limites",couleur:"#c2836a"},
+  {num:"6",titre:"Prendre soin de son corps",couleur:"#e8a0b4"},
+  {num:"7",titre:"Bilan semaine 1",couleur:"#c8a870"},
+  {num:"8",titre:"La voix intérieure critique",couleur:"#a080c8"},
+  {num:"9",titre:"Le mouvement et le sport",couleur:"#80c8a8"},
+  {num:"10",titre:"La gratitude",couleur:"#c8a870"},
+  {num:"11",titre:"Les relations nourrissantes & toxiques",couleur:"#9090c8"},
+  {num:"12",titre:"La régulation émotionnelle",couleur:"#6090c0"},
+  {num:"13",titre:"La co-régulation",couleur:"#c87060"},
+  {num:"14",titre:"Bilan & Organisation",couleur:"#c8a870"},
+];
+
+const pratiques=[
+  {id:"respiration",nom:"Respiration 4-6",temps:"50 secondes à 5 minutes",desc:"Inspire 4s par le nez, expire 6s par la bouche. 3 à 5 cycles. L'outil le plus rapide pour réguler le système nerveux.",bg:"#eef4fb",border:"#6090c0"},
+  {id:"gratitude",nom:"Journal de gratitude profonde",temps:"3 à 5 minutes",desc:"Une seule chose, décrite en détail, avec l'émotion qu'elle génère. Pas une liste.",bg:"#fdf8ee",border:"#c8a870"},
+  {id:"corps",nom:"Scan corporel",temps:"5 minutes",desc:"Parcourir les 5 zones du corps, observer sans chercher à changer. Reconnecter corps et esprit.",bg:"#fdf0f5",border:"#e8a0b4"},
+  {id:"mouvement",nom:"Mouvement conscient",temps:"15 à 30 minutes",desc:"Pilates, yoga, marche, musculation adaptée, selon l'état de ton système nerveux du jour.",bg:"#eaf5f0",border:"#80c8a8"},
+  {id:"rituel_soir",nom:"Rituel du soir",temps:"20 à 30 minutes",desc:"Écrans posés, lumière baissée, corps choyé, respiration, gratitude, intention. Le signal que la journée est terminée.",bg:"#f0eefa",border:"#a080c8"},
+  {id:"ecriture",nom:"Écriture libre",temps:"5 à 10 minutes",desc:"Écrire sans censure ce qui est là, émotions, pensées, réflexions. Vidange mentale et traitement émotionnel.",bg:"#faf0eb",border:"#c2836a"},
+  {id:"limites",nom:"Pratique des limites",temps:"Quotidien",desc:"Un non par jour. Une limite posée, même petite. Nommer clairement un besoin à une personne de confiance.",bg:"#fde8e6",border:"#e8857a"},
+  {id:"voix",nom:"Dialogue avec la voix intérieure",temps:"2 à 5 minutes",desc:"Quand la voix critique parle, l'observer, la nommer, lui répondre avec une phrase de compassion.",bg:"#f5f0fa",border:"#a080c8"},
+];
+
+let checkedJours=new Set();
+let selectedPratiques=new Set();
+let bilanReponses={};
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// Récap 14 jours
+const rc=document.getElementById('recap14-container');
+jours14.forEach((j,i)=>{
+  const div=document.createElement('div');
+  div.className='recap-jour';
+  div.style.background=i===13?'linear-gradient(135deg,#fdf8ee,#f5f0fa)':'rgba(200,170,100,0.04)';
+  div.style.borderColor='rgba(200,170,100,0.15)';
+  div.innerHTML=`
+    <div class="recap-num" style="background:${j.couleur};">${j.num}</div>
+    <div class="recap-titre">${j.titre}</div>
+    <div class="recap-check" id="check-${i}" onclick="toggleJour(${i})"></div>`;
+  rc.appendChild(div);
+});
+
+function toggleJour(i){
+  const check=document.getElementById('check-'+i);
+  if(checkedJours.has(i)){
+    checkedJours.delete(i);
+    check.classList.remove('done');
+    check.textContent='';
+  } else {
+    checkedJours.add(i);
+    check.classList.add('done');
+    check.textContent='✓';
+  }
+  updateRecapMessage();
+}
+
+function updateRecapMessage(){
+  const n=checkedJours.size;
+  const msg=document.getElementById('recap-message');
+  if(n===0) msg.textContent='Coche les jours que tu as faits, même partiellement.';
+  else if(n<=4) msg.textContent=`${n} jour${n>1?'s':''} coché${n>1?'s':''}. Chaque jour compte, même lu en diagonale, même sans tout pratiquer.`;
+  else if(n<=9) msg.textContent=`${n} jours, tu t'es vraiment investie. C'est un beau chemin déjà parcouru.`;
+  else msg.textContent=`${n} jours, c'est remarquable. Tu as montré une vraie constance envers toi-même. 🌸`;
+}
+updateRecapMessage();
+
+function checkBilan(){
+  // Bilan libre, bouton toujours accessible
+}
+
+// Pratiques
+const pc=document.getElementById('pratiques-container');
+pratiques.forEach((p,i)=>{
+  const div=document.createElement('div');
+  div.className='pratique-card';
+  div.style.cssText=`background:${p.bg};border-color:${p.border}40;`;
+  div.id='pratique-'+i;
+  div.innerHTML=`
+    <div class="pratique-check" id="pcheck-${i}"></div>
+    <div style="flex:1;">
+      <div class="pratique-nom">${p.nom}</div>
+      <div class="pratique-temps">${p.temps}</div>
+      <div class="pratique-desc">${p.desc}</div>
+    </div>`;
+  div.onclick=()=>togglePratique(i,p);
+  pc.appendChild(div);
+});
+
+function togglePratique(i,p){
+  const check=document.getElementById('pcheck-'+i);
+  const card=document.getElementById('pratique-'+i);
+  if(selectedPratiques.has(i)){
+    selectedPratiques.delete(i);
+    check.classList.remove('done');
+    check.textContent='';
+    card.style.borderColor=p.border+'40';
+    card.classList.remove('selected');
+  } else {
+    if(selectedPratiques.size>=3){
+      // Retirer la première sélectionnée
+      const first=[...selectedPratiques][0];
+      selectedPratiques.delete(first);
+      document.getElementById('pcheck-'+first).classList.remove('done');
+      document.getElementById('pcheck-'+first).textContent='';
+      document.getElementById('pratique-'+first).style.borderColor=pratiques[first].border+'40';
+      document.getElementById('pratique-'+first).classList.remove('selected');
+    }
+    selectedPratiques.add(i);
+    check.classList.add('done');
+    check.textContent='✓';
+    card.style.borderColor=p.border;
+    card.classList.add('selected');
+  }
+  const n=selectedPratiques.size;
+  document.getElementById('selection-compteur').textContent=
+    n===0?'Choisis les pratiques qui te parlent, idéalement autour de 3':
+    n===1?'1 pratique choisie':
+    n===2?'2 pratiques choisies':
+    n===3?'3 pratiques choisies ✓, parfait !':
+    n+' pratiques choisies';
+}
+
+function showFin(){
+  // Plan récap
+  const pr=document.getElementById('plan-recap');
+  pr.innerHTML='';
+  const matin=document.getElementById('p-matin').value.trim();
+  const midi=document.getElementById('p-midi').value.trim();
+  const soir=document.getElementById('p-soir').value.trim();
+  const crise=document.getElementById('p-crise').value.trim();
+
+  if(matin) pr.innerHTML+=`<div style="margin-bottom:8px;"><span style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.1em;">Matin</span><p style="font-size:14px;color:#5d4820;margin:2px 0 0;">${matin}</p></div>`;
+  if(midi) pr.innerHTML+=`<div style="margin-bottom:8px;"><span style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.1em;">Midi</span><p style="font-size:14px;color:#5d4820;margin:2px 0 0;">${midi}</p></div>`;
+  if(soir) pr.innerHTML+=`<div style="margin-bottom:8px;"><span style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.1em;">Soir</span><p style="font-size:14px;color:#5d4820;margin:2px 0 0;">${soir}</p></div>`;
+  if(crise) pr.innerHTML+=`<div><span style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.1em;">Si crise</span><p style="font-size:14px;color:#5d4820;margin:2px 0 0;">${crise}</p></div>`;
+
+  if(!pr.innerHTML) pr.innerHTML=`<p style="font-size:14px;color:#a09070;">Continue à intégrer les pratiques qui te parlent, à ton rythme.</p>`;
+
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 14 · Bilan et organisation</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour14-bilan-organisation-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 25 · Mes valeurs profondes · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f0f8f4 0%,#f5f0fa 45%,#fdf8f0 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#708090;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#1d3028;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#60a880,#a080c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(80,160,120,0.1);border:1px solid rgba(80,160,120,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#60a880;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#1d3028;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#1d3028;margin-bottom:14px;line-height:1.4}
+  p{color:#3d6050;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#5d8070}
+  .btn{background:linear-gradient(135deg,#60a880,#a080c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(80,160,120,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(80,160,120,0.25);color:#90c0a8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#90c0a8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#70a090;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(80,160,120,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#60a880,#a080c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#eaf5f0,#f5f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #60a880;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .hl.bleu{border-left-color:#7090c0;background:linear-gradient(135deg,#eef4fb,#f0f4fd)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(80,160,120,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#60a880,#a080c8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#80a890;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(80,160,120,0.12);font-size:11px;color:#80a890;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(80,160,120,0.05);border:1px solid rgba(80,160,120,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#507060;font-family:'Jost',sans-serif}
+
+  /* Valeurs reçues vs choisies */
+  .versus{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .versus-card{border-radius:14px;padding:16px;border:2px solid}
+  .versus-label{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;font-weight:700}
+  .versus-item{font-size:13px;line-height:1.7;margin-bottom:4px;font-style:normal;font-weight:500;display:flex;gap:6px}
+
+  /* Exercice exploration */
+  .question-bloc{background:linear-gradient(135deg,#eaf5f0,#f5f0fa);border-radius:16px;padding:18px 20px;margin-bottom:14px;border:1px solid rgba(80,160,120,0.2)}
+  .q-num{font-family:'Jost',sans-serif;font-size:10px;color:#60a880;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
+  .q-texte{font-size:15px;font-weight:600;color:#1d3028;margin-bottom:6px;font-style:normal;line-height:1.5}
+  .q-sous{font-size:13px;color:#5d8070;margin-bottom:10px;font-style:normal;line-height:1.5}
+  .q-exemples{font-size:13px;color:#709080;margin-bottom:10px;line-height:1.6;padding:8px 12px;background:rgba(80,160,120,0.06);border-radius:8px}
+  .q-input{width:100%;border:2px solid rgba(80,160,120,0.22);border-radius:12px;padding:10px 14px;font-size:14px;font-family:'Lora',serif;color:#1d3028;outline:none;background:white;resize:vertical;min-height:60px}
+  .q-input:focus{border-color:#60a880}
+
+  /* Vivre en accord */
+  .accord-item{border-radius:14px;padding:16px 18px;margin-bottom:10px;border:2px solid;display:flex;gap:14px;align-items:flex-start}
+  .accord-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px}
+  .accord-titre{font-size:15px;font-weight:700;color:#1d3028;margin-bottom:4px;font-style:normal}
+  .accord-desc{font-size:13px;line-height:1.65;font-style:normal}
+
+  textarea{width:100%;border:2px solid rgba(80,160,120,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#1d3028;line-height:1.7;outline:none;resize:vertical;background:#f4fbf7}
+  textarea:focus{border-color:#60a880}
+  .e-q{font-size:17px;font-weight:600;color:#1d3028;line-height:1.65;text-align:center;margin-bottom:6px;font-style:normal}
+  .e-sous{white-space:pre-line;font-size:13px;color:#70a080;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#eaf5f0,#f5f0fa);border-radius:14px;padding:14px 18px;border:1px solid rgba(80,160,120,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#80a890;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#eaf5f0,#f5f0fa);border-radius:20px;padding:22px;border:1px solid rgba(80,160,120,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🧭</span>
+    <div class="label">Jour 25 · Mes valeurs profondes</div>
+    <h2>Tes valeurs sont ta boussole, pas celles qu'on t'a données</h2>
+    <p>On porte souvent des valeurs héritées de notre famille, de notre culture, de notre éducation, sans jamais s'être demandé si elles nous appartiennent vraiment. Aujourd'hui on fait la distinction. Et on trouve les tiennes.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🧭</button>
+    <p class="hint">Théorie · Valeurs reçues vs choisies · Exploration · Vivre en accord · Écriture · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- VALEURS REÇUES VS CHOISIES -->
+<div class="phase" id="phase-versus">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🧭</span>
+    <h2>Tes 10 valeurs fondamentales</h2>
+    <p style="text-align:center;margin-bottom:8px;">Shalom Schwartz a identifié dix grandes directions qu'on retrouve dans toutes les cultures du monde. Voici les dix, une par une.</p>
+    <p class="small" style="text-align:center;margin-bottom:6px;">Pour chaque phrase, une seule question : est-ce que c'est vrai pour toi ?</p>
+    <p class="small" style="text-align:center;margin-bottom:22px;">Réponds vite, avec ton instinct. Il n'y a pas de bonne réponse, et aucune valeur n'est plus noble qu'une autre.</p>
+    <div id="quiz-container"></div>
+    <p class="hint" id="quiz-compteur" style="margin-top:6px;">Tu peux répondre à toutes, ou seulement à celles qui te parlent</p>
+    <button class="btn" onclick="voirMesValeurs()">Voir mes valeurs dominantes</button>
+  </div>
+</div>
+
+<div class="phase" id="phase-resultat-quiz">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">✨</span>
+    <h2>Tes valeurs dominantes</h2>
+    <p style="text-align:center;margin-bottom:20px;">Voilà ce qui ressort. Ce ne sont pas des étiquettes, ce sont des directions. Garde-les en tête pour la suite.</p>
+    <div id="resultat-quiz-container"></div>
+
+    <div class="hl vert" style="margin-top:18px;">
+      <strong>Et maintenant, mets-les en mots à toi</strong><br><br>
+      Une valeur prend vie quand tu la formules avec ta propre voix, avec le pourquoi qui va avec.<br><br>
+      Si "la bienveillance" ressort, ça peut devenir : "j'ai à cœur d'être là pour les gens que j'aime, parce que je me sens à ma place quand je peux les soutenir."<br><br>
+      Si "l'autodétermination" ressort : "j'ai à cœur de décider moi-même de ma vie, parce que je m'éteins quand on choisit à ma place."
+    </div>
+
+    <button class="btn" onclick="showPhase('exploration')">Approfondir mes valeurs →</button>
+  </div>
+</div>
+
+<div class="phase" id="phase-exploration">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <h2>Explorer mes valeurs profondes</h2>
+    <p style="text-align:center;margin-bottom:8px;">Le quiz t'a donné les grandes directions. Ces quatre questions servent à les retrouver dans ta vie à toi, dans des situations concrètes.</p>
+    <p class="small" style="text-align:center;margin-bottom:16px;">Pour chaque question, raconte une situation réelle. Puis regarde laquelle des dix valeurs elle touche. Les exemples te montrent comment faire.</p>
+
+    <div style="background:#f6f3f9;border-radius:14px;padding:14px 18px;margin-bottom:22px;border:1px solid rgba(180,170,200,0.25);">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#a898b8;margin-bottom:8px;">Les dix valeurs, pour t'y référer</div>
+      <div id="rappel-valeurs" style="font-size:13.5px;color:#6d5d7a;line-height:1.9;"></div>
+    </div>
+
+    <div class="question-bloc">
+      <div class="q-num">Question 1</div>
+      <div class="q-texte">Pense à un moment où tu t'es sentie pleinement toi-même : vivante, alignée, juste. Qu'est-ce qui était présent dans ce moment ?</div>
+      <div class="q-sous">Un moment où tu t'es dit : voilà, là, j'étais vraiment moi. Pas forcément un grand moment. Une conversation, un choix, un geste tout simple. Prends celui qui te vient en premier, même s'il te semble minuscule. Ensuite demande-toi ce qui rendait ce moment si juste.</div>
+      <div class="q-exemples">Ex : "J'ai osé refuser un projet qui ne me convenait pas" → l'autodétermination<br>"J'ai passé l'après-midi à écouter une amie qui allait mal" → la bienveillance<br>"J'ai défendu une collègue traitée injustement" → l'universalisme<br>"J'ai réussi quelque chose de difficile au travail" → la réussite</div>
+      <textarea class="q-input" id="q1" placeholder="La situation : ...&#10;&#10;Ce qui rendait ce moment si juste : ...&#10;&#10;La valeur que ça touche : ..."></textarea>
+    </div>
+
+    <div class="question-bloc">
+      <div class="q-num">Question 2</div>
+      <div class="q-texte">Pense à un moment où tu t'es sentie profondément trahie, par toi-même ou par quelqu'un d'autre. Qu'est-ce qui a été blessé ?</div>
+      <div class="q-sous">Ce qui nous blesse profondément révèle ce qui compte vraiment. La blessure pointe vers la valeur.</div>
+      <div class="q-exemples">Ex : "On a décidé pour moi sans me demander mon avis" → l'autodétermination<br>"Quelqu'un que j'aime a été blessé et je n'ai rien pu faire" → la bienveillance<br>"On m'a fait une promesse et on ne l'a pas tenue" → la conformité<br>"J'ai perdu ma stabilité du jour au lendemain" → la sécurité</div>
+      <textarea class="q-input" id="q2" placeholder="La situation : ...&#10;&#10;Ce qui a été blessé en moi : ...&#10;&#10;La valeur que ça touche : ..."></textarea>
+    </div>
+
+    <div class="question-bloc">
+      <div class="q-num">Question 3</div>
+      <div class="q-texte">Qu'est-ce que tu aurais envie de transmettre à quelqu'un qui compte pour toi ? Une amie proche, ton enfant, ta sœur, une jeune femme qui te demanderait conseil.</div>
+      <div class="q-sous">Pas des conseils pratiques, mais ce que tu as compris de la vie et que tu voudrais lui épargner d'apprendre à la dure. Ce qu'on veut transmettre révèle ce qu'on a de plus précieux.</div>
+      <div class="q-exemples">Ex : "Décide par toi-même, même quand ça déplaît" → l'autodétermination<br>"Prends soin des gens qui comptent vraiment pour toi" → la bienveillance<br>"Ne laisse jamais passer une injustice" → l'universalisme<br>"Garde de la place pour ce qui te fait du bien" → le plaisir</div>
+      <textarea class="q-input" id="q3" placeholder="Ce que j'aurais envie de lui transmettre : ...&#10;&#10;Parce que : ...&#10;&#10;La valeur que ça touche : ..."></textarea>
+    </div>
+
+    <div class="question-bloc">
+      <div class="q-num">Question 4</div>
+      <div class="q-texte">Qu'est-ce que tu ne pourrais jamais faire sans te trahir profondément, même si cela t'avantageait ?</div>
+      <div class="q-sous">Nos limites absolues, ce qu'on refuserait même sous pression, révèlent nos valeurs les plus ancrées.</div>
+      <div class="q-exemples">Ex : "Je ne pourrais pas obéir à quelque chose qui va contre mes convictions" → l'autodétermination<br>"Je ne pourrais pas abandonner quelqu'un qui a besoin de moi" → la bienveillance<br>"Je ne pourrais pas trahir une confidence" → la conformité<br>"Je ne pourrais pas participer à quelque chose d'injuste" → l'universalisme</div>
+      <textarea class="q-input" id="q4" placeholder="Ce que je ne pourrais jamais faire : ...&#10;&#10;Parce que ça trahirait : ...&#10;&#10;La valeur que ça touche : ..."></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('accord')">Comment vivre en accord avec mes valeurs →</button>
+  </div>
+</div>
+
+<!-- VIVRE EN ACCORD -->
+<div class="phase" id="phase-accord">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">⚖️</span>
+    <h2>Vivre en accord avec ses valeurs, au quotidien</h2>
+    <p style="text-align:center;margin-bottom:8px;">Connaître ses valeurs est un premier pas. Les vivre au quotidien, même imparfaitement, même dans les petits choix, c'est là que l'estime de soi se construit vraiment.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Chaque fois que tu agis en accord avec une valeur profonde, quelque chose en toi se renforce. Chaque fois que tu t'en éloignes, quelque chose se contracte.</p>
+
+    <div class="accord-item" style="background:#eaf5f0;border-color:rgba(80,160,120,0.3);">
+      <div class="accord-dot" style="background:#60a880;"></div>
+      <div>
+        <div class="accord-titre" style="color:#1d4030;">Les micro-alignements quotidiens</div>
+        <div class="accord-desc" style="color:#3d6050;">Pas besoin de grands gestes. Chaque petit choix qui honore une valeur compte : dire non à quelque chose qui ne t'appartient pas (intégrité), appeler quelqu'un juste pour prendre des nouvelles (connexion), créer quelque chose même 10 minutes (créativité). Ces micro-alignements s'accumulent, et reconstruisent l'estime de soi de l'intérieur.</div>
+      </div>
+    </div>
+
+    <div class="accord-item" style="background:#f5f0fa;border-color:rgba(160,128,200,0.3);">
+      <div class="accord-dot" style="background:#a080c8;"></div>
+      <div>
+        <div class="accord-titre" style="color:#3d1d50;">Les conflits de valeurs, quand deux valeurs s'opposent</div>
+        <div class="accord-desc" style="color:#5d3070;">Parfois deux valeurs importantes entrent en tension. Ex : loyauté (envers quelqu'un) vs intégrité (dire la vérité). Famille (être présente) vs liberté (avoir du temps pour soi). Ces conflits ne se résolvent pas par une règle. Ils demandent une décision consciente, au cas par cas, en sachant quel coût tu acceptes de payer.</div>
+      </div>
+    </div>
+
+    <div class="accord-item" style="background:#fdf8ee;border-color:rgba(200,168,112,0.3);">
+      <div class="accord-dot" style="background:#c8a870;"></div>
+      <div>
+        <div class="accord-titre" style="color:#5d3d10;">Les valeurs comme boussole de décision</div>
+        <div class="accord-desc" style="color:#7d5030;">Face à une décision difficile, demande-toi : "Quelle option m'éloigne le moins de mes valeurs profondes ?" Pas "quelle option est parfaite", mais "quelle option me permet de rester le plus possible moi-même". C'est une boussole, pas une règle.</div>
+      </div>
+    </div>
+
+    <div class="accord-item" style="background:#fde8e6;border-color:rgba(232,133,122,0.3);">
+      <div class="accord-dot" style="background:#e8857a;"></div>
+      <div>
+        <div class="accord-titre" style="color:#802030;">Quand on trahit ses valeurs, sans se flageller</div>
+        <div class="accord-desc" style="color:#904040;">Tout le monde trahit ses valeurs parfois, par peur, par fatigue, par pression. Ce n'est pas une raison de se condamner. C'est une information : "Je me suis éloignée de moi-même. Comment est-ce que je reviens ?" La question n'est pas "pourquoi j'ai failli", mais "comment je me réaligne".</div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="showPhase('ecriture')">Mon écriture de soi ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/4</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Mes valeurs profondes</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🧭</span>
+    <h2>Tu as maintenant ta boussole</h2>
+    <p>Tes valeurs ne disparaissent pas. Elles sont toujours là, même quand la vie les enterre sous la fatigue, les obligations et les attentes des autres. Aujourd'hui tu les as vues. Tu peux maintenant t'y référer.</p>
+    <div style="background:linear-gradient(135deg,#eaf5f0,#f5f0fa);border-radius:16px;padding:20px;border:1px solid rgba(80,160,120,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#60a880;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🧭 Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À pratiquer :</strong> Chaque soir, pose-toi une question : "Ai-je agi en accord avec une de mes valeurs aujourd'hui, même dans un petit geste ?" Si oui, note-le. C'est comme ça que l'estime de soi se reconstruit, une preuve d'alignement à la fois.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#507060;"><strong style="color:#1d3028;">Demain, Jour 26 :</strong> ma vision de l'avenir</p>
+    <p class="hint" style="margin-top:6px;">5 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🧭",titre:"Ce qu'est vraiment une valeur",source:"Shalom Schwartz, théorie des valeurs fondamentales",contenu:[
+    {type:"texte",texte:"Une valeur, c'est une direction profonde qui te guide dans tes choix. Elle te touche au niveau moral : quand tu la respectes, tu te sens juste. Quand tu la trahis, quelque chose se contracte en toi."},
+    {type:"hl",texte:"🧭 Et une valeur est étonnamment stable. Les recherches de Schwartz, menées dans plus de 80 pays, montrent que l'ordre de nos valeurs bouge peu à l'âge adulte. Ce ne sont pas des humeurs. Ce sont des repères de fond."},
+    {type:"texte",texte:"Une qualité, c'est autre chose. C'est une part de toi que tu peux développer avec le temps : la patience, la générosité, le courage. Ça se travaille, ça se muscle. Une valeur, elle, ne se muscle pas. Elle est là, ou elle n'est pas là."},
+    {type:"hl",texte:"💡 Pour formuler une valeur, cette phrase marche très bien : \"J'ai à cœur de ... parce que ...\"<br><br>Par exemple : j'ai à cœur de dire avec bienveillance ce que je pense aux gens, parce que je me sens alignée avec moi quand je le fais.<br><br>L'action, et le pourquoi qui va avec. C'est ce \"parce que\" qui fait qu'une valeur t'appartient vraiment.",classe:"vert"},
+  ]},
+  {emoji:"🔍",titre:"Ce qu'on confond souvent",source:"Approche ACT et théorie de Schwartz",contenu:[
+    {type:"texte",texte:"Prenons l'honnêteté, et regardons les trois façons dont elle peut apparaître dans ta vie."},
+    {type:"hl",texte:"✨ \"L'honnêteté\" est une qualité. Une part de toi, que tu peux développer avec le temps.",classe:"or"},
+    {type:"hl",texte:"🧭 \"J'ai à cœur de dire avec bienveillance ce que je pense, parce que je me sens alignée avec moi\" est une valeur. Une direction de fond, qui te touche moralement.",classe:"vert"},
+    {type:"hl",texte:"⚠️ \"Je dois toujours tout dire, sinon je mens\" est une règle imposée. Rigide, sans place pour le contexte, et tu ne l'as jamais vraiment choisie.",classe:"rouge"},
+    {type:"texte",texte:"Et pour être claire : les règles ne sont pas l'ennemi. Beaucoup sont utiles et protectrices, comme se coucher à heure régulière ou ne plus répondre aux messages après une certaine heure. La question n'est pas règle ou pas règle. C'est : est-ce que je l'ai choisie, et est-ce qu'elle s'adapte au contexte ?"},
+  ]},
+  {emoji:"⚠️",titre:"Une valeur a besoin de limites",source:"Approche IRA",contenu:[
+    {type:"texte",texte:"Aider les autres est une belle direction de vie. Créer du lien aussi, prendre soin, s'engager. Mais il y a une chose qu'on t'a rarement dite."},
+    {type:"hl",texte:"⚠️ Une valeur reste saine seulement si elle a des limites. Sans limites, aider devient s'oublier. Créer du lien devient dépendre. S'engager devient se soumettre. Et le plus difficile, c'est que ça continue de ressembler à une belle qualité.",classe:"rouge"},
+    {type:"texte",texte:"C'est le glissement de \"j'ai à cœur d'aider les gens que j'aime\" vers \"je me sens obligée d'aider tout le monde\". La valeur de départ était juste. C'est son application sans limite qui devient un piège."},
+    {type:"hl",texte:"🔑 Alors pose-toi cette question à chaque fois : est-ce que je peux honorer cette valeur en me respectant moi aussi ? Si la réponse est non, tu n'es plus dans une valeur choisie.",classe:"or"},
+  ]},
+  {emoji:"⚡",titre:"Pourquoi c'est difficile à vivre au quotidien",source:"Dr Russ Harris",contenu:[
+    {type:"texte",texte:"Même quand tu sais ce qui compte pour toi, deux obstacles reviennent tout le temps."},
+    {type:"hl",texte:"L'épuisement, d'abord. Quand tu es à bout, tu agis par réflexe, souvent à l'opposé de tes valeurs. C'est pour ça que prendre soin de toi n'est pas un luxe : c'est la condition pour agir depuis ce qui compte, plutôt que depuis la survie.",classe:"rouge"},
+    {type:"hl",texte:"La pression sociale ensuite. Ton entourage a des attentes fondées sur ses propres valeurs, pas sur les tiennes. Vivre selon ce qui compte pour toi demande parfois de décevoir."},
+    {type:"hl",texte:"✅ Ce qui aide vraiment : garder tes trois valeurs principales sous la main, et te poser une seule question chaque soir. Est-ce que j'ai agi en accord avec l'une d'elles aujourd'hui ? Pas parfaitement. Juste un peu.",classe:"vert"},
+  ]},
+];
+
+const dixValeurs=[
+  {nom:"L'autodétermination",phrase:"J'ai besoin de décider par moi-même de ma vie et de mes choix.",indice:"Quand on décide à ta place, quelque chose se cabre en toi.",couleur:"#6fa8c8"},
+  {nom:"La stimulation",phrase:"J'ai besoin de nouveauté et de mouvement pour me sentir vivante.",indice:"La routine t'éteint plus qu'elle ne te rassure.",couleur:"#c88fa8"},
+  {nom:"Le plaisir",phrase:"J'ai besoin de moments qui me font du bien, sans avoir à les justifier.",indice:"Te priver en permanence finit par t'assécher.",couleur:"#e0a878"},
+  {nom:"La réussite",phrase:"J'ai besoin de me sentir compétente dans ce que je fais.",indice:"Bien faire les choses te tient vraiment à cœur.",couleur:"#c8a870"},
+  {nom:"L'influence",phrase:"J'ai besoin que ma voix compte dans ce qui me concerne.",indice:"Subir les décisions des autres t'est difficile.",couleur:"#a888c8"},
+  {nom:"La sécurité",phrase:"J'ai besoin de stabilité pour me sentir bien.",indice:"L'imprévu te coûte plus qu'il ne t'excite.",couleur:"#8fb8a0"},
+  {nom:"La conformité",phrase:"J'ai besoin de tenir mes engagements et de respecter les règles communes.",indice:"Décevoir ou ne pas tenir parole te pèse.",couleur:"#a0b0c8"},
+  {nom:"La tradition",phrase:"J'ai besoin de rester reliée à mes racines et de transmettre.",indice:"Ce qui a traversé le temps a de la valeur à tes yeux.",couleur:"#c8a090"},
+  {nom:"La bienveillance",phrase:"J'ai besoin de prendre soin des gens qui comptent pour moi.",indice:"Tu ne peux pas être en paix si un proche va mal.",couleur:"#88b890"},
+  {nom:"L'universalisme",phrase:"J'ai besoin que le monde soit juste, même quand ça ne me touche pas directement.",indice:"Une injustice te révolte, même à distance.",couleur:"#8098c0"},
+];
+
+const ecritureQs=[
+  {q:"Quelles sont tes 3 valeurs les plus profondes ? Celles qui sont ressorties du quiz ou de tes réponses.",
+   sous:"Formule-les avec ta propre voix : j'ai à cœur de ... parce que ...\n\nPar exemple : j'ai à cœur de décider moi-même de ma vie, parce que je m'éteins quand on choisit à ma place. Ou : j'ai à cœur d'être là pour les gens que j'aime, parce que je me sens à ma place quand je peux les soutenir.",
+   placeholder:"1. J'ai à cœur de ... parce que ...\n\n2. J'ai à cœur de ... parce que ...\n\n3. J'ai à cœur de ... parce que ..."},
+  {q:"Dans quelle partie de ta vie es-tu le plus en désaccord avec tes valeurs ?",
+   sous:"Pas pour te culpabiliser, mais pour voir où l'énergie se perd.\n\nPar exemple : \"Au travail, je me tais alors que je ne suis pas d'accord, et ça me ronge.\" Ou : \"Je dis oui à ma mère à chaque fois, alors que j'ai besoin de souffler.\" Ou : \"Je remets toujours mes projets à plus tard pour ceux des autres.\"",
+   placeholder:"C'est dans... que je suis le plus en désaccord. Concrètement, ce qui se passe c'est..."},
+  {q:"Quel petit geste concret peux-tu faire cette semaine pour honorer une de tes valeurs ?",
+   sous:"Pas un grand changement. Quelque chose de faisable dès demain.\n\nPar exemple : \"Dire à ma collègue que je ne suis pas d'accord avec sa décision.\" Ou : \"Bloquer une heure mercredi soir rien que pour moi.\" Ou : \"Appeler mon amie que je repousse depuis trois semaines.\"",
+   placeholder:"Pour honorer ma valeur de... je vais... (quoi, quand, avec qui)"},
+  {q:"Qu'est-ce que tu voudrais que les gens qui t'aiment disent de toi ?",
+   sous:"Pas ce que tu as accompli, mais qui tu étais avec eux. Cette réponse pointe souvent vers ce qui compte le plus.\n\nPar exemple : \"Qu'avec elle, on pouvait être soi-même.\" Ou : \"Qu'elle a osé vivre sa vie à elle.\" Ou : \"Qu'elle disait les choses avec franchise, mais jamais pour blesser.\"",
+   placeholder:"Je voudrais qu'on dise de moi que..."},
+];
+
+let theorieIdx=0, eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='ecriture') renderE();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🧭',t:'Ce qu\'est vraiment une valeur'},{e:'🔍',t:'Ce qu\'on confond souvent'},{e:'⚠️',t:'Une valeur a besoin de limites'},{e:'⚡',t:'Pourquoi c\'est difficile au quotidien'},{e:'🌿',t:'Explorer mes vraies valeurs'},{e:'⚖️',t:'Les vivre concrètement'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#3d6050;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Valeurs reçues vs choisies 🔍':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('versus');
+}
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 25 🧭';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const notees=Object.keys(notesValeurs).map(k=>({i:+k,note:notesValeurs[k]})).filter(x=>x.note>=2).sort((a,b)=>b.note-a.note);
+  if(notees.length){
+    const liste=notees.map(x=>dixValeurs[x.i].nom+(x.note===3?' (profondément moi)':'')).join('<br>');
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mes valeurs dominantes</div><div class="recap-r" style="font-style:normal;">${liste}</div></div>`;
+  }
+  // Ajouter les réponses d'exploration
+  const exploQs=['Moment d\'alignement : valeurs révélées','Blessure profonde : valeurs révélées','Ce que je veux transmettre','Ce que je ne pourrais jamais faire'];
+  ['q1','q2','q3','q4'].forEach((id,i)=>{
+    const val=document.getElementById(id)?.value.trim();
+    if(val) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">${exploQs[i]}</div><div class="recap-r">"${val}"</div></div>`;
+  });
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+let notesValeurs = {};
+const niveaux = [
+  {label:"Pas moi", val:0, bg:"#f2f0f4", txt:"#8878a0"},
+  {label:"Un peu", val:1, bg:"#eef2f8", txt:"#5a7a9a"},
+  {label:"Beaucoup", val:2, bg:"#eaf5f0", txt:"#3a8060"},
+  {label:"C'est profondément moi", val:3, bg:"#e4f2ea", txt:"#206040"},
+];
+
+function renderQuiz(){
+  const el = document.getElementById('quiz-container');
+  if(!el) return;
+  el.innerHTML = '';
+  dixValeurs.forEach((v,i)=>{
+    let btns = niveaux.map(n=>`<button id="nv-${i}-${n.val}" onclick="noterValeur(${i},${n.val})" style="flex:1;min-width:0;padding:9px 4px;border-radius:9px;border:1.5px solid rgba(160,150,180,0.25);background:#fff;color:#8878a0;font-family:'Jost',sans-serif;font-size:11.5px;cursor:pointer;line-height:1.3;">${n.label}</button>`).join('');
+    el.innerHTML += `
+      <div style="background:#fff;border-radius:16px;padding:18px 20px;border:1px solid rgba(180,170,200,0.22);margin-bottom:14px;">
+        <div style="font-size:17px;color:#3d2e45;line-height:1.6;margin-bottom:8px;padding-left:12px;border-left:3px solid ${v.couleur};">${v.phrase}</div>
+        <div style="font-size:13px;color:#9a8aa8;line-height:1.6;margin-bottom:13px;font-family:'Jost',sans-serif;">${v.indice}</div>
+        <div style="display:flex;gap:5px;">${btns}</div>
+      </div>`;
+  });
+}
+
+function noterValeur(i, val){
+  notesValeurs[i] = val;
+  niveaux.forEach(n=>{
+    const b = document.getElementById(`nv-${i}-${n.val}`);
+    if(!b) return;
+    if(n.val === val){
+      b.style.background = n.bg;
+      b.style.color = n.txt;
+      b.style.borderColor = n.txt + '66';
+      b.style.fontWeight = '600';
+    } else {
+      b.style.background = '#fff';
+      b.style.color = '#8878a0';
+      b.style.borderColor = 'rgba(160,150,180,0.25)';
+      b.style.fontWeight = 'normal';
+    }
+  });
+  const n = Object.keys(notesValeurs).length;
+  const c = document.getElementById('quiz-compteur');
+  if(c) c.textContent = n < 10 ? `${n} valeur${n>1?'s':''} sur 10 explorée${n>1?'s':''}` : 'Les 10 valeurs explorées';
+}
+
+function voirMesValeurs(){
+  const el = document.getElementById('resultat-quiz-container');
+  const notees = Object.keys(notesValeurs).map(k=>({i:+k, note:notesValeurs[k]})).filter(x=>x.note>0);
+  notees.sort((a,b)=>b.note-a.note);
+  el.innerHTML = '';
+  if(notees.length === 0){
+    el.innerHTML = `<p style="text-align:center;color:#7d6888;">Tu n'as coché aucune valeur pour l'instant. Tu peux revenir en arrière, ou continuer et explorer tes valeurs autrement avec les questions qui suivent.</p>`;
+  } else {
+    const fortes = notees.filter(x=>x.note===3);
+    const presentes = notees.filter(x=>x.note===2);
+    if(fortes.length){
+      el.innerHTML += `<div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#b09aac;margin-bottom:10px;">Profondément toi</div>`;
+      fortes.forEach(x=>{
+        const v = dixValeurs[x.i];
+        el.innerHTML += `<div style="background:${v.couleur}18;border-left:3px solid ${v.couleur};border-radius:11px;padding:13px 16px;margin-bottom:9px;">
+          <div style="font-size:16px;color:#3d2e45;margin-bottom:2px;">${v.nom}</div>
+          <div style="font-size:13.5px;color:#6d5d7a;line-height:1.6;">${v.phrase}</div></div>`;
+      });
+    }
+    if(presentes.length){
+      el.innerHTML += `<div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#b09aac;margin:18px 0 10px;">Présentes aussi</div>`;
+      presentes.forEach(x=>{
+        const v = dixValeurs[x.i];
+        el.innerHTML += `<div style="background:${v.couleur}12;border-left:3px solid ${v.couleur}88;border-radius:11px;padding:11px 16px;margin-bottom:8px;">
+          <div style="font-size:15px;color:#3d2e45;">${v.nom}</div></div>`;
+      });
+    }
+    if(fortes.length > 4){
+      el.innerHTML += `<p style="font-size:13.5px;color:#7d6888;font-family:'Jost',sans-serif;margin-top:14px;line-height:1.7;">Beaucoup de valeurs te parlent fort, et c'est très fréquent. Pour la suite, essaie d'en choisir trois : celles qui comptent le plus, celles que tu ne pourrais pas laisser de côté.</p>`;
+    }
+  }
+  showPhase('resultat-quiz');
+}
+
+renderQuiz();
+
+const rv=document.getElementById('rappel-valeurs');
+if(rv) rv.innerHTML = dixValeurs.map(v=>`<span style="display:inline-block;background:${v.couleur}1e;border-radius:8px;padding:2px 9px;margin:0 4px 5px 0;color:#5d4868;">${v.nom}</span>`).join('');
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 25 · Mes valeurs profondes</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour25-valeurs-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

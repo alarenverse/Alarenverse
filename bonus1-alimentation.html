@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonus 1 · Alimentation & santé mentale · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f0f8f0 0%,#f5f8f0 50%,#f0f5f8 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 20px 80px;color:#1d3020;line-height:1.8}
+  header{width:100%;max-width:580px;padding-top:40px;text-align:center;margin-bottom:10px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#70a080;margin-bottom:10px}
+  h1{font-size:clamp(22px,5vw,30px);font-weight:500;color:#1d3020;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#60a870,#a0c860);margin:14px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:36px 28px;box-shadow:0 8px 40px rgba(80,160,80,0.1);border:1px solid rgba(80,160,80,0.15);max-width:580px;width:100%;margin-top:24px}
+  .emoji-hero{font-size:52px;display:block;text-align:center;margin-bottom:16px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#60a870;text-align:center;margin-bottom:10px}
+  h2{font-size:24px;font-weight:600;color:#1d3020;text-align:center;margin-bottom:16px;line-height:1.4}
+  h3{font-size:20px;font-weight:600;color:#1d3020;margin-bottom:14px;line-height:1.4}
+  p{font-size:18px;color:#3d5040;line-height:1.8;margin-bottom:14px}
+  p.note{font-size:15px;color:#80a888;font-family:'Jost',sans-serif;margin-bottom:14px}
+  .btn{background:linear-gradient(135deg,#60a870,#a0c860);color:white;border:none;border-radius:50px;padding:15px 44px;font-size:17px;cursor:pointer;font-family:'Lora',serif;font-weight:500;box-shadow:0 4px 20px rgba(80,160,80,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(80,160,80,0.25);color:#90c098;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:13px;color:#90c098;text-align:center;margin-top:12px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:580px;width:100%;margin-top:20px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:13px;color:#70a080;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:4px;background:rgba(80,160,80,0.15);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#60a870,#a0c860);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#eaf5ec,#f0f8ee);border-radius:14px;padding:16px 20px;border-left:3px solid #60a870;font-size:17px;color:#1d3020;line-height:1.8;margin-bottom:14px}
+  .hl.orange{border-left-color:#e8a85c;background:linear-gradient(135deg,#fef5e0,#fdf0d8)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.bleu{border-left-color:#6090c0;background:linear-gradient(135deg,#eef4fb,#f0f4fd)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(80,160,80,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#60a870,#a0c860);flex-shrink:0;margin-top:8px}
+  .stat-text{font-size:17px;color:#1d3020;line-height:1.7}
+  .stat-source{font-size:12px;color:#80a888;margin-top:3px;font-family:'Jost',sans-serif}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(80,160,80,0.12);font-size:12px;color:#80a888;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(80,160,80,0.05);border:1px solid rgba(80,160,80,0.15);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:15px;color:#3d5040}
+
+  /* Neurotransmetteurs */
+  .neuro-card{border-radius:16px;padding:18px 20px;margin-bottom:12px;border:2px solid;cursor:pointer;transition:all 0.2s}
+  .neuro-card:hover{transform:translateX(3px)}
+  .neuro-card.open{transform:translateX(4px)}
+  .neuro-titre{font-size:17px;font-weight:600;margin-bottom:4px}
+  .neuro-role{font-size:15px;font-family:'Jost',sans-serif;margin-bottom:4px}
+  .neuro-detail{font-size:16px;color:#3d5040;line-height:1.75;margin-top:10px;padding-top:10px;border-top:1px solid rgba(80,160,80,0.15);display:none}
+  .neuro-card.open .neuro-detail{display:block}
+
+  /* Nutriments */
+  .nutriment-bloc{border-radius:16px;padding:20px;margin-bottom:14px;border:2px solid}
+  .nutriment-header{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}
+  .nutriment-emoji{font-size:28px;flex-shrink:0}
+  .nutriment-titre{font-size:18px;font-weight:600;color:#1d3020;margin-bottom:3px}
+  .nutriment-sous{font-size:13px;font-family:'Jost',sans-serif;color:#70a080}
+  .nutriment-desc{font-size:16px;color:#3d5040;line-height:1.75;margin-bottom:10px}
+  .nutriment-sources{border-radius:10px;padding:10px 14px;font-size:15px;color:#1d3020;line-height:1.7}
+  .nutriment-dose{font-size:13px;font-family:'Jost',sans-serif;margin-top:8px;padding:6px 12px;border-radius:8px;display:inline-block}
+
+  /* Bilan alimentaire */
+  .bilan-section{border-radius:14px;padding:16px 18px;margin-bottom:12px;border:1px solid}
+  .bilan-label{font-family:'Jost',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;font-weight:600}
+  .bilan-items{display:flex;flex-wrap:wrap;gap:8px}
+  .bilan-tag{border-radius:20px;padding:6px 14px;font-size:15px;cursor:pointer;border:2px solid;transition:all 0.2s;font-family:'Lora',serif;font-weight:500}
+  .bilan-tag.selected{color:white}
+
+  textarea{width:100%;border:2px solid rgba(80,160,80,0.25);border-radius:14px;padding:14px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#1d3020;line-height:1.7;outline:none;resize:vertical;background:#f4fbf6}
+  textarea:focus{border-color:#60a870}
+  .e-bloc{margin-bottom:20px}
+  .e-q{font-size:17px;font-weight:600;color:#1d3020;line-height:1.5;margin-bottom:4px}
+  .e-sous{font-size:14px;color:#80a888;margin-bottom:10px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#eaf5ec,#f0f8ee);border-radius:14px;padding:16px 18px;border:1px solid rgba(80,160,80,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#80a888;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:16px;color:#1d3020;line-height:1.7}
+  .suite-box{background:linear-gradient(135deg,#eaf5ec,#f0f8ee);border-radius:20px;padding:24px;border:1px solid rgba(80,160,80,0.2);text-align:center;margin-top:16px;max-width:580px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · Bonus</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;">
+    <span class="emoji-hero">🥗</span>
+    <div class="label">Bonus 1 · Alimentation & santé mentale</div>
+    <h2>Ce que tu manges influence directement ce que tu ressens</h2>
+    <p>Pas de façon magique. De façon neurochimique. Tes neurotransmetteurs, sérotonine, dopamine, GABA, sont fabriqués à partir de ce que tu manges. Et quand certains nutriments manquent, la chimie du cerveau en souffre directement.</p>
+    <p>Ce module ne parle pas de régime ni de manger "parfaitement". Il parle de comprendre le lien entre assiette et humeur, et d'identifier ce qui pourrait manquer.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🥗</button>
+    <p class="hint">Neurotransmetteurs · Nutriments clés · Bilan · Écriture · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/2</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:50%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- NEUROTRANSMETTEURS -->
+<div class="phase" id="phase-neuro">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🧪</span>
+    <h2>Les neurotransmetteurs, et ce qu'il faut pour les fabriquer</h2>
+    <p>Chaque neurotransmetteur a un rôle précis sur l'humeur. Et chacun est fabriqué à partir d'ingrédients que tu consommes, ou pas. Clique sur chacun pour comprendre son rôle et ce qui l'alimente.</p>
+    <div id="neuro-container"></div>
+    <button class="btn" onclick="showPhase('nutriments')">Les nutriments clés →</button>
+  </div>
+</div>
+
+<!-- NUTRIMENTS CLÉS -->
+<div class="phase" id="phase-nutriments">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💊</span>
+    <h2>Les nutriments clés pour la santé mentale</h2>
+    <p>Pas des compléments miracles. Des nutriments essentiels dont beaucoup de femmes manquent, souvent sans le savoir, et dont la carence a des effets directs et mesurables sur l'humeur, le sommeil et l'anxiété.</p>
+    <div id="nutriments-container"></div>
+    <div class="hl orange" style="margin-top:8px;">
+      Avant toute supplémentation : un bilan sanguin chez ton médecin. La vitamine D, le magnésium et les oméga-3 peuvent être dosés. Et un professionnel de santé pourra t'orienter vers les bonnes doses selon ta situation personnelle.
+    </div>
+    <button class="btn" onclick="showPhase('bilan')">Mon bilan alimentaire →</button>
+  </div>
+</div>
+
+<!-- BILAN ALIMENTAIRE -->
+<div class="phase" id="phase-bilan">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">📋</span>
+    <h2>Mon bilan alimentaire, honnêtement</h2>
+    <p>Pas pour te juger. Pour voir où tu en es vraiment. Coche ce qui correspond à ta réalité habituelle, pas à ce que tu aimerais manger.</p>
+    <div class="hl" style="margin-bottom:16px;">
+      Une chose importante avant de commencer. Il ne s'agit pas ici de contrôler, de compter, ni de bien manger. Il s'agit d'ajouter ce qui soutient ton mental, pas de retirer ce qui te fait plaisir.<br><br>
+      Et si ta relation à la nourriture est douloureuse en ce moment, si tu te restreins, si tu manges en cachette ou si manger te fait peur, ce module n'est pas le bon endroit pour toi. Passe-le sans culpabiliser, et parles-en plutôt à un professionnel qui pourra t'accompagner vraiment.
+    </div>
+    <div id="bilan-container"></div>
+    <div class="hl" style="margin-top:12px;" id="bilan-message">Coche les aliments qui font partie de ton quotidien.</div>
+    <button class="btn" onclick="showPhase('ecriture')">Écriture & réflexion ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">✍️</span>
+    <h2>Ma relation à la nourriture et à la santé mentale</h2>
+    <p class="note" style="text-align:center;margin-bottom:20px;">Ces questions explorent ta relation à la nourriture, au-delà des nutriments. Réponds honnêtement, sans te juger.</p>
+
+    <div class="e-bloc">
+      <div class="e-q">Est-ce que tu remarques un lien entre ce que tu manges et ton humeur ou ton énergie ?</div>
+      <div class="e-sous">Certains aliments qui t'apaisent, d'autres qui t'agitent, des moments où la nourriture devient une régulation émotionnelle...</div>
+      <textarea id="e1" rows="3" placeholder="Quand je mange... / Je remarque que..." oninput="checkE()"></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Y a-t-il un nutriment ou une habitude alimentaire dont tu penses manquer, et qui pourrait expliquer certains de tes symptômes ?</div>
+      <div class="e-sous">Fatigue chronique, anxiété, mauvais sommeil, irritabilité, brouillard mental : ces symptômes ont parfois une composante nutritionnelle.</div>
+      <textarea id="e2" rows="3" placeholder="Je pense que je manque peut-être de... / Depuis que j'ai changé..." oninput="checkE()"></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Quelle est ta relation à la nourriture, est-ce que c'est un plaisir, une obligation, une source d'anxiété ?</div>
+      <div class="e-sous">Pas de bonne réponse. Juste regarder honnêtement comment tu vis le fait de manger.</div>
+      <textarea id="e3" rows="3" placeholder="Pour moi manger c'est..." oninput="checkE()"></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Une petite chose concrète que tu pourrais changer cette semaine pour soutenir ta santé mentale par l'alimentation</div>
+      <div class="e-sous">Pas un régime. Pas une révolution. Un ajout, un remplacement, une attention différente.</div>
+      <textarea id="e4" rows="3" placeholder="Cette semaine je vais essayer de..." oninput="checkE()"></textarea>
+    </div>
+
+    <button class="btn" id="btn-e" onclick="showFin()">Terminer le Bonus 1 🥗</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌱</span>
+    <h2>L'alimentation est un soin, pas une contrainte</h2>
+    <p>Pas de perfection. Pas de régime. Juste une conscience un peu plus fine de ce que ton corps a besoin pour fabriquer les molécules du bien-être. Un nutriment à la fois. Une habitude à la fois.</p>
+    <div style="background:linear-gradient(135deg,#eaf5ec,#f0f8ee);border-radius:16px;padding:22px;border:1px solid rgba(80,160,80,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#60a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;">🥗 Tes réflexions</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 Si tu retiens une seule chose : 95% de la sérotonine est fabriquée dans l'intestin. Ce que tu manges n'affecte pas que ton corps, il parle directement à ton cerveau.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:28px;margin-bottom:10px;">🧠</div>
+    <p style="font-size:18px;color:#1d3020;margin-bottom:6px;"><strong>Bonus 2 :</strong> Anxiété · Burn-out · Solitude · Post-partum</p>
+    <p class="note" style="margin-top:4px;">Pour aller encore plus loin 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🧠",titre:"L'axe intestin-cerveau, ton deuxième cerveau",source:"Dr Michael Gershon, The Second Brain / Psychonutrition, La Revue du Praticien 2024",contenu:[
+    {type:"p",texte:"L'intestin contient plus de 500 millions de neurones, plus que la moelle épinière. Il communique en permanence avec le cerveau via le nerf vague, et produit lui-même une grande partie des molécules qui régulent ton humeur."},
+    {type:"stat",texte:"95% de la sérotonine du corps, le neurotransmetteur de l'humeur stable et du bien-être, est produite dans l'intestin, pas dans le cerveau. Ce que tu manges influence directement cette production",source:"Dr Michael Gershon, The Second Brain"},
+    {type:"hl",texte:"Ce qu'on appelle aujourd'hui la psychonutrition, la science de l'influence de l'alimentation sur la santé mentale, s'est accumulée massivement ces 15 dernières années. Les études contrôlées montrent des liens clairs entre alimentation et dépression, anxiété, troubles du sommeil et déclin cognitif."},
+    {type:"stat",texte:"Une méta-analyse de 2019 portant sur plus de 45 000 personnes montre qu'une alimentation de type méditerranéen, riche en légumes, poissons gras, légumineuses et huile d'olive, est associée à une réduction significative du risque de dépression",source:"Psychiatry Research, 2019"},
+    {type:"hl",texte:"La chrononutrition ajoute une dimension supplémentaire : consommer des protéines le matin, avant 10h, fournit au cerveau les acides aminés nécessaires pour fabriquer les neurotransmetteurs stimulants (dopamine, noradrénaline) au bon moment de la journée. Le soir, les protéines légers et les glucides complexes favorisent la production de sérotonine et de mélatonine pour le sommeil.",classe:"bleu"},
+  ]},
+  {emoji:"⚠️",titre:"Ce qui bouscule ta chimie intérieure",source:"Dr Uma Naidoo, This Is Your Brain on Food",contenu:[
+    {type:"p",texte:"Avant de parler de ce qui aide, un mot sur ce qui perturbe. Pas pour te culpabiliser, ni pour dresser une liste d'interdits. Juste pour que tu comprennes pourquoi certains jours tu te sens plus anxieuse ou plus à plat sans savoir pourquoi."},
+    {type:"hl",texte:"🍬 <strong>Le sucre raffiné</strong> fait monter puis chuter brutalement ta glycémie. Et ces chutes déclenchent une réaction de stress dans ton corps. Résultat : cette irritabilité, ce coup de barre ou cette angoisse diffuse en milieu d'après-midi ne viennent pas forcément de ta journée. Parfois, c'est juste ce que tu as mangé deux heures plus tôt.",classe:"rouge"},
+    {type:"hl",texte:"🏭 <strong>Les aliments ultra-transformés</strong> appauvrissent la flore de ton intestin, celle-là même qui participe à fabriquer tes neurotransmetteurs. Plus ils prennent de place dans ton alimentation, plus le lien avec la déprime se renforce dans les études.",classe:"orange"},
+    {type:"hl",texte:"🍷 <strong>L'alcool</strong> calme sur le moment, c'est vrai. Mais il épuise ensuite les mêmes ressources qui te permettent de rester apaisée, et il abîme la phase du sommeil qui digère tes émotions. Cette angoisse du lendemain que tu connais peut-être, elle n'est pas dans ta tête. Elle est chimique.",classe:"rouge"},
+    {type:"stat",texte:"Le café maintient ton système nerveux en état d'alerte. Et si tu es anxieuse, ou en périménopause, ta sensibilité augmente sans que tu t'en rendes compte. Son effet sur ton anxiété et ton sommeil est souvent bien plus grand qu'on ne le pense",source:"Journal of Psychopharmacology, 2021"},
+  ]},
+];
+
+const neuros=[
+  {titre:"Sérotonine",role:"Humeur stable · Bien-être · Sommeil · Appétit",couleur:"#60a870",bg:"#eaf5ec",border:"rgba(80,160,80,0.3)",
+   detail:"La sérotonine est fabriquée à partir du tryptophane : un acide aminé présent dans les protéines. Elle régule l'humeur, le sommeil (elle se transforme en mélatonine la nuit), l'appétit et la digestion. Un manque de sérotonine est associé à la dépression, l'anxiété, les fringales sucrées et les troubles du sommeil.<br><br><strong>Ce qui soutient sa production :</strong> tryptophane (dinde, œufs, banane, fromage, graines de courge), magnésium, vitamines B6 et B9, exposition au soleil (vitamine D). La sérotonine a besoin de glucides pour traverser la barrière hémato-encéphalique, d'où les fringales de sucre lors d'un manque."},
+  {titre:"Dopamine",role:"Motivation · Concentration · Plaisir · Élan",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)",
+   detail:"La dopamine est fabriquée à partir de la tyrosine : un acide aminé. Elle gouverne la motivation, le plaisir, la concentration, la mémoire et l'élan. Un manque de dopamine se traduit par une démotivation profonde, une difficulté à ressentir du plaisir, un brouillard mental et une fatigue même après le repos.<br><br><strong>Ce qui soutient sa production :</strong> tyrosine (viande, poisson, œufs, produits laitiers, avocats, amandes), fer, vitamines B6 et B9, cuivre. L'exercice physique stimule également la production de dopamine de façon significative."},
+  {titre:"GABA",role:"Calme · Anti-anxiété · Relaxation musculaire",couleur:"#7090c0",bg:"#eef4fb",border:"rgba(100,144,192,0.3)",
+   detail:"Le GABA est le principal neurotransmetteur inhibiteur du cerveau, il calme l'activité neuronale et réduit l'anxiété. Quand le GABA est insuffisant, le cerveau reste en état d'alerte permanent. C'est la cible principale des médicaments anxiolytiques comme les benzodiazépines.<br><br><strong>Ce qui soutient sa production :</strong> glutamate (présent dans de nombreux aliments), magnésium, vitamine B6, zinc. La pratique régulière de la respiration lente et de la méditation augmente l'activité GABA de façon mesurable."},
+  {titre:"Noradrénaline",role:"Énergie · Vigilance · Réponse au stress",couleur:"#e8857a",bg:"#fde8e6",border:"rgba(232,133,122,0.3)",
+   detail:"La noradrénaline est un neurotransmetteur stimulant, elle donne l'énergie du matin, la vigilance et la capacité de réponse au stress. Un manque est associé à une fatigue matinale persistante, une difficulté à démarrer la journée et un état dépressif.<br><br><strong>Ce qui soutient sa production :</strong> tyrosine, vitamine C (cofacteur essentiel), cuivre, fer. Elle est fabriquée à partir de la dopamine, donc tout ce qui soutient la dopamine soutient également la noradrénaline."},
+];
+
+const nutriments=[
+  {emoji:"🐟",titre:"Oméga-3 (EPA et DHA)",sous:"Le nutriment anti-inflammatoire du cerveau",couleur:"#6090c0",bg:"#eef4fb",border:"rgba(100,144,192,0.25)",
+   desc:"Les acides gras oméga-3, EPA et DHA, constituent les membranes des neurones et facilitent la transmission des neurotransmetteurs, notamment la sérotonine et la dopamine. Des études montrent que les personnes déprimées ont des réserves d'oméga-3 significativement plus faibles que la population générale.",
+   sources:"Poissons gras (saumon, maquereau, sardines, hareng) 2-3x/semaine · Noix · Graines de lin et de chia · Huile de lin",
+   dose:"EPA+DHA : 1 à 2g/jour en supplémentation si alimentation insuffisante en poissons gras",
+   doseStyle:"background:rgba(100,144,192,0.12);color:#4070a0;"},
+  {emoji:"🌿",titre:"Magnésium",sous:"Le minéral anti-stress et anti-anxiété",couleur:"#60a870",bg:"#eaf5ec",border:"rgba(80,160,80,0.25)",
+   desc:"Le magnésium régule le système nerveux, réduit la réponse au stress, participe à la production de sérotonine et améliore la qualité du sommeil. Une carence, très fréquente, surtout en cas de stress chronique, est directement associée à l'anxiété, l'irritabilité et l'insomnie. Le stress épuise les réserves de magnésium, créant un cercle vicieux.",
+   sources:"Légumes verts feuillus (épinards, blettes) · Oléagineux (amandes, noix de cajou) · Légumineuses · Chocolat noir · Céréales complètes · Eau minérale riche en magnésium",
+   dose:"300 à 400mg/jour, apport souvent insuffisant uniquement par l'alimentation",
+   doseStyle:"background:rgba(80,160,80,0.12);color:#3d7050;"},
+  {emoji:"☀️",titre:"Vitamine D",sous:"La vitamine du soleil et de l'humeur",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.25)",
+   desc:"La vitamine D est en réalité une hormone qui influence directement la production de sérotonine et de dopamine. Une carence, extrêmement fréquente sous nos latitudes, notamment en automne et hiver, est associée à la dépression saisonnière, la fatigue chronique et les troubles de l'humeur. Les femmes enceintes, allaitantes et ménopausées sont particulièrement à risque.",
+   sources:"Exposition solaire quotidienne (15 à 30 min, avant 11h ou après 16h) · Poissons gras · Jaune d'œuf · Champignons exposés au soleil",
+   dose:"1000 à 2000 UI/jour en supplémentation, à vérifier par dosage sanguin (25-OH vitamine D)",
+   doseStyle:"background:rgba(200,160,80,0.12);color:#7d5020;"},
+  {emoji:"🥩",titre:"Vitamines B (B6, B9, B12)",sous:"Les cofacteurs de tous les neurotransmetteurs",couleur:"#c870a0",bg:"#fdf0f5",border:"rgba(200,112,160,0.25)",
+   desc:"Les vitamines du groupe B sont indispensables à la fabrication de presque tous les neurotransmetteurs, sérotonine, dopamine, GABA, noradrénaline. La B12 est particulièrement importante pour le système nerveux et souvent déficiente chez les végétariens et végétaliens. La B9 (folates) joue un rôle clé dans la prévention de la dépression.",
+   sources:"B12 : viande, poissons, œufs, produits laitiers (supplémentation indispensable si végétalienne) · B9 : légumes verts feuillus, légumineuses, foie · B6 : poulet, poisson, banane, pomme de terre",
+   dose:"Supplémentation en complexe B recommandée si alimentation restrictive ou végétalienne",
+   doseStyle:"background:rgba(200,112,160,0.12);color:#803060;"},
+  {emoji:"🌰",titre:"Zinc et Fer",sous:"Les oligo-éléments oubliés",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.25)",
+   desc:"Le zinc régule les neurotransmetteurs et l'axe hypothalamo-hypophyso-surrénalien : le système du stress. De faibles niveaux de zinc sont associés à la dépression et à l'anxiété. Le fer est essentiel à la production de dopamine et de sérotonine : une anémie ferriprive provoque fatigue, brouillard mental et irritabilité. Chez les femmes réglées, les pertes de fer sont importantes.",
+   sources:"Zinc : huîtres, viande rouge, graines de courge, légumineuses · Fer : viande rouge, foie, légumineuses, épinards (avec vitamine C pour l'absorption)",
+   dose:"Bilan sanguin recommandé pour évaluer les niveaux, supplémentation selon résultats",
+   doseStyle:"background:rgba(160,128,200,0.12);color:#5040a0;"},
+];
+
+const bilanSections=[
+  {label:"🐟 Sources d'oméga-3",couleur:"#6090c0",bg:"#eef4fb",border:"rgba(100,144,192,0.3)",
+   items:["Saumon / maquereau / sardines","Noix","Graines de lin / chia","Compléments oméga-3"]},
+  {label:"🌿 Sources de magnésium",couleur:"#60a870",bg:"#eaf5ec",border:"rgba(80,160,80,0.3)",
+   items:["Légumes verts feuillus","Amandes / noix de cajou","Chocolat noir","Légumineuses","Eau minérale riche en Mg"]},
+  {label:"☀️ Vitamine D",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)",
+   items:["Exposition solaire quotidienne","Poissons gras réguliers","Supplémentation vitamine D"]},
+  {label:"🥩 Vitamines B",couleur:"#c870a0",bg:"#fdf0f5",border:"rgba(200,112,160,0.3)",
+   items:["Œufs quotidiens","Viande / poisson régulier","Légumineuses","Supplémentation complexe B"]},
+  {label:"⚠️ Ce que je consomme souvent",couleur:"#e8857a",bg:"#fde8e6",border:"rgba(232,133,122,0.3)",
+   items:["Sucre raffiné / sucreries","Aliments ultra-transformés","Alcool régulier","Beaucoup de caféine"]},
+];
+
+let theorieIdx=0, selectedBilan=new Set();
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='neuro') renderNeuro();
+  if(id==='nutriments') renderNutriments();
+  if(id==='bilan') renderBilan();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🧠',t:'L\'axe intestin-cerveau : ton deuxième cerveau'},{e:'⚠️',t:'Ce qui sabote la neurochimie'},{e:'🧪',t:'Les neurotransmetteurs et leur carburant'},{e:'💊',t:'Les nutriments clés, magnésium, oméga-3, vitamine D...'},{e:'📋',t:'Mon bilan alimentaire'},{e:'✍️',t:'Ma relation à la nourriture'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:18px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='p') el.innerHTML+=`<p>${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Les neurotransmetteurs 🧪':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('neuro');
+}
+
+function renderNeuro(){
+  const el=document.getElementById('neuro-container');
+  el.innerHTML='';
+  neuros.forEach((n,i)=>{
+    const div=document.createElement('div');
+    div.className='neuro-card';
+    div.style.cssText=`background:${n.bg};border-color:${n.border};`;
+    div.innerHTML=`
+      <div class="neuro-titre" style="color:${n.couleur};">${n.titre}</div>
+      <div class="neuro-role" style="color:${n.couleur}aa;">${n.role}</div>
+      <div class="neuro-detail">${n.detail}</div>`;
+    div.onclick=()=>div.classList.toggle('open');
+    el.appendChild(div);
+  });
+}
+
+function renderNutriments(){
+  const el=document.getElementById('nutriments-container');
+  el.innerHTML='';
+  nutriments.forEach(n=>{
+    el.innerHTML+=`
+      <div class="nutriment-bloc" style="background:${n.bg};border-color:${n.border};">
+        <div class="nutriment-header">
+          <div class="nutriment-emoji">${n.emoji}</div>
+          <div>
+            <div class="nutriment-titre">${n.titre}</div>
+            <div class="nutriment-sous" style="color:${n.couleur};">${n.sous}</div>
+          </div>
+        </div>
+        <div class="nutriment-desc">${n.desc}</div>
+        <div class="nutriment-sources" style="background:rgba(0,0,0,0.03);"><strong>Sources :</strong> ${n.sources}</div>
+        <div class="nutriment-dose" style="${n.doseStyle}">💊 ${n.dose}</div>
+      </div>`;
+  });
+}
+
+function renderBilan(){
+  const el=document.getElementById('bilan-container');
+  el.innerHTML='';
+  bilanSections.forEach((s,si)=>{
+    const div=document.createElement('div');
+    div.className='bilan-section';
+    div.style.cssText=`background:${s.bg};border-color:${s.border};`;
+    div.innerHTML=`<div class="bilan-label" style="color:${s.couleur};">${s.label}</div><div class="bilan-items" id="bitems-${si}"></div>`;
+    el.appendChild(div);
+    s.items.forEach((item,ii)=>{
+      const key=`${si}-${ii}`;
+      const tag=document.createElement('button');
+      tag.className='bilan-tag';
+      tag.id='btag-'+key;
+      tag.style.cssText=`border-color:${s.border};color:${s.couleur};background:white;`;
+      tag.textContent=item;
+      tag.onclick=()=>{
+        if(selectedBilan.has(key)){
+          selectedBilan.delete(key);
+          tag.style.background='white';
+          tag.style.color=s.couleur;
+        } else {
+          selectedBilan.add(key);
+          tag.style.background=s.couleur;
+          tag.style.color='white';
+          tag.style.borderColor=s.couleur;
+        }
+        updateBilanMessage();
+      };
+      document.getElementById('bitems-'+si).appendChild(tag);
+    });
+  });
+}
+
+function updateBilanMessage(){
+  const msg=document.getElementById('bilan-message');
+  const nutri=['0-','1-','2-','3-','4-'].slice(0,4);
+  const bonCount=[...selectedBilan].filter(k=>!k.startsWith('4-')).length;
+  const mauvaiseCount=[...selectedBilan].filter(k=>k.startsWith('4-')).length;
+  if(bonCount===0&&mauvaiseCount===0) msg.textContent='Coche les aliments qui font partie de ton quotidien.';
+  else if(bonCount>=6) msg.textContent=`Ton alimentation semble déjà bien orientée pour soutenir ta santé mentale. ${mauvaiseCount>0?'Quelques ajustements possibles côté disrupteurs.':''}`;
+  else if(bonCount<=2) msg.innerHTML='Peu de sources de nutriments clés dans ton quotidien. C\'est une piste concrète à explorer, doucement, sans culpabilité.';
+  else msg.textContent=`${bonCount} aliments bénéfiques identifiés. ${mauvaiseCount>0?`Et ${mauvaiseCount} facteur${mauvaiseCount>1?'s':''} perturbateur${mauvaiseCount>1?'s':''} à avoir en tête.`:''}`;
+}
+
+function checkE(){
+  // écriture libre
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const qs=['Lien alimentation & humeur','Ce qui pourrait manquer','Ma relation à la nourriture','Mon intention pour cette semaine'];
+  ['e1','e2','e3','e4'].forEach((id,i)=>{
+    const val=document.getElementById(id).value.trim();
+    if(val) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">${qs[i]}</div><div class="recap-r">"${val}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Bonus 1 · Alimentation et sante mentale</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='bonus1-alimentation-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

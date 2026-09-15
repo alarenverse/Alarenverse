@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 27 · Le rapport au corps · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf0f5 0%,#f5f0fa 45%,#f0f8f5 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#a08090;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d1d30;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c870a0,#a080c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(180,80,130,0.1);border:1px solid rgba(200,100,150,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c870a0;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d1d30;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d1d30;margin-bottom:14px;line-height:1.4}
+  p{color:#6d3d50;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a5568}
+  .btn{background:linear-gradient(135deg,#c870a0,#a080c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(180,80,130,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,100,150,0.25);color:#c0a0b0;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#c0a0b0;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a07080;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(200,100,150,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#c870a0,#a080c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#fdf0f5,#f5f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #c870a0;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(200,100,150,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#c870a0,#a080c8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#b090a0;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(200,100,150,0.12);font-size:11px;color:#b090a0;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(200,100,150,0.05);border:1px solid rgba(200,100,150,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#906070;font-family:'Jost',sans-serif}
+
+  /* Réconciliation zones */
+  .zone-card{border-radius:16px;padding:16px 18px;margin-bottom:12px;border:2px solid;cursor:pointer;transition:all 0.2s}
+  .zone-card:hover{transform:translateX(3px)}
+  .zone-card.open{transform:translateX(4px)}
+  .zone-titre{font-size:15px;font-weight:700;color:#3d1d30;margin-bottom:4px;font-style:normal}
+  .zone-msg{font-size:13px;color:#7d5060;font-style:normal;line-height:1.5}
+  .zone-detail{font-size:13px;color:#5d2040;line-height:1.7;margin-top:10px;padding-top:10px;border-top:1px solid rgba(200,100,150,0.15);display:none;font-style:normal}
+  .zone-card.open .zone-detail{display:block}
+
+  /* Écriture */
+  .e-bloc{margin-bottom:20px}
+  .e-q{font-size:16px;font-weight:600;color:#3d1d30;line-height:1.5;margin-bottom:4px;font-style:normal}
+  .e-sous{font-size:13px;color:#a07080;margin-bottom:10px;font-family:'Jost',sans-serif}
+  textarea{width:100%;border:2px solid rgba(200,100,150,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d1d30;line-height:1.7;outline:none;resize:vertical;background:#fdf5f8}
+  textarea:focus{border-color:#c870a0}
+  .recap-box{background:linear-gradient(135deg,#fdf0f5,#f5f0fa);border-radius:14px;padding:14px 18px;border:1px solid rgba(200,100,150,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b090a0;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#fdf0f5,#f5f0fa);border-radius:20px;padding:22px;border:1px solid rgba(200,100,150,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌸</span>
+    <div class="label">Jour 27 · Le rapport au corps</div>
+    <h2>Ton corps n'est pas un problème à résoudre, c'est ta maison</h2>
+    <p>On apprend aux femmes très tôt à regarder leur corps de l'extérieur : l'évaluer, le comparer, le corriger. Rarement à l'habiter. Aujourd'hui on explore cette relation, et on commence à la transformer.</p>
+    <p class="small" style="margin-bottom:20px;">Ce jour peut toucher à des endroits sensibles. Vas-y à ton propre rythme, avec bienveillance.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🌸</button>
+    <p class="hint">Théorie · Image corporelle · Réconciliation · Écriture guidée · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- RÉCONCILIATION -->
+<div class="phase" id="phase-reconciliation">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🤝</span>
+    <h2>Passer du corps jugé au corps habité</h2>
+    <p style="text-align:center;margin-bottom:8px;">Au lieu de regarder ton corps et de l'évaluer, essaie de le remercier. Zone par zone. Pas pour ce qu'il ressemble, mais pour ce qu'il fait.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Clique sur chaque zone pour lire un message de réconciliation.</p>
+
+    <div id="zones-container"></div>
+
+    <div class="hl vert" style="margin-top:8px;">
+      <strong>Le changement de perspective :</strong><br><br>
+      On passe toute notre vie à regarder notre corps. Est-il assez mince, assez ferme, assez jeune ? Et si on essayait de l'habiter à la place ? Sentir ses pieds sur le sol. Sentir son ventre se soulever. Sentir sa chaleur. Pas évaluer. Être.
+    </div>
+
+    <button class="btn" onclick="showPhase('ecriture')">L'écriture de soi ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">✍️</span>
+    <h2>Explorer ma relation à mon corps</h2>
+    <p style="text-align:center;margin-bottom:6px;">Ces questions peuvent toucher à des endroits profonds et parfois douloureux. Tu peux t'arrêter à n'importe quel moment.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Réponds avec honnêteté, sans censure et sans jugement.</p>
+
+    <div class="e-bloc">
+      <div class="e-q">Quel est ton premier souvenir d'une pensée négative sur ton corps ? Et d'où venait-elle ?</div>
+      <div class="e-sous">Un commentaire, un regard, un message médiatique... La blessure a souvent une origine précise.</div>
+      <textarea id="e1" rows="4" placeholder="Mon premier souvenir c'est... / Cette pensée venait de..." oninput="checkEcriture()"></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Quelle partie de ton corps as-tu le plus de mal à accepter ? Et qu'est-ce que tu lui reproches vraiment ?</div>
+      <div class="e-sous">Derrière le reproche physique, il y a souvent quelque chose de plus profond : une peur, une honte, un message reçu.</div>
+      <textarea id="e2" rows="4" placeholder="La partie de mon corps que j'ai le plus de mal à accepter c'est... / Ce que je lui reproche vraiment c'est..." oninput="checkEcriture()"></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Qu'est-ce que ton corps a traversé ? Et pour quoi mérite-t-il d'être remercié ?</div>
+      <div class="e-sous">Maternité, maladie, fatigue chronique, douleur, vieillissement, stress... Ton corps a tenu debout.</div>
+      <textarea id="e3" rows="4" placeholder="Mon corps a traversé... / Pour ça, il mérite d'être remercié parce que..." oninput="checkEcriture()"></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Comment voudrais-tu parler de ton corps ? À toi-même, et devant tes enfants ou les personnes que tu aimes ?</div>
+      <div class="e-sous">On transmet notre rapport au corps. Qu'est-ce que tu veux transmettre ?</div>
+      <textarea id="e4" rows="4" placeholder="Je voudrais parler de mon corps en disant... / Je veux transmettre..." oninput="checkEcriture()"></textarea>
+    </div>
+
+    <button class="btn" id="btn-ecriture" onclick="showFin()">Terminer le Jour 27 🌸</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌸</span>
+    <h2>Ton corps mérite d'être habité, pas jugé</h2>
+    <p>La réconciliation avec son corps n'est pas un événement, c'est un processus. Chaque fois que tu choisis de le remercier plutôt que de le critiquer, tu poses une brique. Ça prend du temps. Et ça vaut la peine.</p>
+    <div style="background:linear-gradient(135deg,#fdf0f5,#f5f0fa);border-radius:16px;padding:20px;border:1px solid rgba(200,100,150,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c870a0;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🌸 Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À pratiquer :</strong> Chaque matin devant le miroir, au lieu de chercher ce qui ne va pas, pose ta main sur une partie de ton corps et dis-lui merci pour quelque chose qu'elle fait. Un geste. Cinq secondes. Ça change le dialogue intérieur, lentement mais sûrement.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#906070;"><strong style="color:#3d1d30;">Demain, Jour 28 :</strong> la créativité comme soin</p>
+    <p class="hint" style="margin-top:6px;">3 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🌍",titre:"Pourquoi les femmes ont un rapport au corps si complexe",source:"Dr Susie Orbach et Jean Kilbourne",contenu:[
+    {type:"texte",texte:"Le rapport difficile des femmes à leur corps n'est pas naturel, il est construit. Dès l'enfance, les filles apprennent à regarder leur corps de l'extérieur, à l'évaluer selon des standards extérieurs, à le voir comme un objet à améliorer plutôt qu'une maison à habiter."},
+    {type:"stat",texte:"L'insatisfaction du corps commence très tôt chez les filles, parfois dès l'école primaire. À l'adolescence, une grande majorité d'entre elles se disent mal dans leur corps. Et les réseaux sociaux n'arrangent rien",source:"Recherches sur l'image corporelle"},
+    {type:"hl",texte:"📱 Les réseaux sociaux ont amplifié ce phénomène de façon dramatique. Des documents internes de Facebook, révélés par la presse, ont montré que l'entreprise savait qu'Instagram abîme le rapport au corps d'une part importante des adolescentes. Les filtres, les retouches et les corps \"parfaits\" créent des standards impossibles qui génèrent une honte chronique.",classe:"rouge"},
+    {type:"texte",texte:"Le Dr Susie Orbach décrit ce phénomène comme l'\"objectification\" : le fait d'apprendre à se voir soi-même comme un objet plutôt qu'un sujet. Cette auto-objectification a des effets mesurables sur la santé mentale : anxiété, dépression, troubles alimentaires, et une relation dissociée au corps."},
+    {type:"hl",texte:"💡 Ce n'est pas une fragilité. C'est le résultat d'une pression culturelle systématique, répétée depuis l'enfance. Reconnaître l'origine extérieure de ce regard critique est la première étape pour commencer à le transformer.",classe:"vert"},
+  ]},
+  {emoji:"🧠",titre:"L'image corporelle et le corps réel",source:"Dr Thomas Cash",contenu:[
+    {type:"texte",texte:"L'image corporelle n'est pas une photo fidèle de ton corps. C'est une construction mentale, teintée d'émotions, de souvenirs, de messages reçus et de biais cognitifs. Ce que tu vois dans le miroir n'est pas ton corps réel. C'est ton corps filtré par tout ce que tu crois de toi-même."},
+    {type:"hl",texte:"🧠 Le cerveau construit l'image du corps à partir de plusieurs sources simultanées : les sensations physiques (proprioception), les perceptions visuelles, les souvenirs émotionnels liés au corps, et les jugements appris. Ces sources ne sont pas toujours cohérentes, et les jugements appris peuvent déformer radicalement la perception."},
+    {type:"stat",texte:"Quand l'image de son corps est très abîmée, se regarder dans un miroir déclenche dans le cerveau la même alerte qu'une menace réelle. Le corps devient alors quelque chose dont on se protège, au lieu d'un endroit où habiter",source:"Recherche en psychiatrie"},
+    {type:"hl",texte:"💡 Ce que ça signifie : la honte corporelle n'est pas une réponse rationnelle à une réalité objective. C'est une réponse émotionnelle à une image construite. Et comme toute construction mentale, elle peut être déconstruite et reconstruite différemment.",classe:"or"},
+  ]},
+  {emoji:"🏠",titre:"Renouer avec son corps, le passer de jugé à habité",source:"Dr Bessel van der Kolk et Dr Peter Levine",contenu:[
+    {type:"texte",texte:"La plupart des femmes ont une relation au corps qui passe essentiellement par le regard : comment il paraît. Rarement par la sensation : comment il se sent. Cette dissociation entre être dans son corps et regarder son corps est au cœur de beaucoup de souffrances."},
+    {type:"hl",texte:"🏠 Habiter son corps plutôt que le juger, c'est passer de la question \"comment est-ce que j'ai l'air ?\" à \"comment est-ce que je me sens ?\". Ce changement de perspective est le cœur du travail somatique, et c'est ce qu'on pratique depuis le Jour 3 avec la respiration, le Jour 6 avec le scan corporel, et le Jour 9 avec le mouvement."},
+    {type:"texte",texte:"Le Dr van der Kolk a documenté comment les blessures, y compris celles de l'humiliation corporelle répétée, se loge dans le corps et crée une dissociation. Renouer avec les sensations du corps, apprendre à l'écouter plutôt qu'à le juger, est l'un des chemins de guérison les plus directs."},
+    {type:"hl",texte:"🌸 La neutralité corporelle est un objectif bien plus accessible que l'amour inconditionnel de son corps, qui peut sembler hors de portée. Ne pas aimer chaque centimètre de soi. Juste cesser de le haïr. Juste lui permettre d'exister sans verdict permanent.",classe:"vert"},
+    {type:"hl",texte:"💡 Et si la question n'était pas \"est-ce que j'aime mon corps ?\" mais \"est-ce que je peux lui faire confiance ? Est-ce que je peux l'écouter ? Est-ce que je peux le remercier pour ce qu'il fait ?\" Ces questions ouvrent un espace différent.",classe:"violet"},
+  ]},
+];
+
+const zones=[
+  {titre:"Mes jambes",msg:"Elles me portent. Chaque jour, sans réclamer de remerciement.",detail:"Elles t'ont portée quand tu étais épuisée, elles t'ont amenée là où tu devais aller, elles ont couru, marché, dansé, tenu debout. Quelle que soit leur forme, leur taille, leurs cicatrices, elles font leur travail.",bg:"#fdf0f5",border:"rgba(200,100,150,0.3)"},
+  {titre:"Mon ventre",msg:"Il a digéré, respiré, peut-être porté une vie.",detail:"Le ventre est souvent la zone la plus jugée et la plus maltraitée. Et c'est aussi la zone la plus vivante : elle respire, elle digère, elle ressent avant même que le mental comprenne. Et pour certaines, elle a porté, nourri, donné la vie.",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)"},
+  {titre:"Mes bras et mes mains",msg:"Ils ont créé, consolé, construit, tenu.",detail:"Tes mains ont préparé des repas, écrit des messages d'amour, consolé un enfant qui pleurait, créé quelque chose. Tes bras ont enlacé. Peu importe leur forme, ce qu'ils ont donné est réel.",bg:"#eaf5f0",border:"rgba(128,200,168,0.3)"},
+  {titre:"Ma poitrine et mon cœur",msg:"Ils ont aimé, ressenti, battu à travers tout.",detail:"Ton cœur bat environ 100 000 fois par jour sans que tu aies à y penser. Ta poitrine a porté des émotions, des deuils, des joies, des peurs. Elle a tenu debout sous des poids que personne ne voyait.",bg:"#fdf8ee",border:"rgba(200,168,112,0.3)"},
+  {titre:"Mon visage",msg:"Il a exprimé ce que les mots ne pouvaient pas dire.",detail:"Ton visage a souri à tes enfants, pleuré avec des amis, exprimé de la compassion, de la colère, de la tendresse. Il porte les traces du temps, et chaque trace est une histoire vécue. Ce n'est pas une imperfection. C'est une vie.",bg:"#fde8e6",border:"rgba(232,133,122,0.3)"},
+  {titre:"Mon corps entier",msg:"Il a survécu à tout ce qu'il a traversé.",detail:"Tout ce que ton corps a traversé, les maladies, les grossesses, les nuits sans sommeil, le stress chronique, les douleurs, les changements hormonaux, les transitions de vie, et il est encore là. Il continue. C'est une forme de courage dont on ne parle jamais.",bg:"#f0f5fa",border:"rgba(100,144,192,0.3)"},
+];
+
+let theorieIdx=0, ecritureOk=false;
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='reconciliation') renderZones();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🌍',t:'Pourquoi ce rapport est si complexe'},{e:'🧠',t:'Image corporelle et corps réel'},{e:'🏠',t:'Du corps jugé au corps habité'},{e:'🤝',t:'Réconciliation, zone par zone'},{e:'✍️',t:'Écriture guidée sur mon corps'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#6d3d50;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Réconciliation 🤝':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('reconciliation');
+}
+
+function renderZones(){
+  const el=document.getElementById('zones-container');
+  el.innerHTML='';
+  zones.forEach((z,i)=>{
+    const div=document.createElement('div');
+    div.className='zone-card';
+    div.id='zone-'+i;
+    div.style.cssText=`background:${z.bg};border-color:${z.border};`;
+    div.innerHTML=`
+      <div class="zone-titre">${z.titre}</div>
+      <div class="zone-msg" style="color:#c870a0;">"${z.msg}"</div>
+      <div class="zone-detail">${z.detail}</div>`;
+    div.onclick=()=>div.classList.toggle('open');
+    el.appendChild(div);
+  });
+}
+
+function checkEcriture(){
+  // écriture libre
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const qs=['Premier souvenir de jugement corporel','La partie la plus difficile à accepter','Ce que mon corps a traversé, et merci','Comment je veux parler de mon corps'];
+  ['e1','e2','e3','e4'].forEach((id,i)=>{
+    const val=document.getElementById(id).value.trim();
+    if(val) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">${qs[i]}</div><div class="recap-r">"${val}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 27 · Le rapport au corps</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour27-corps-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

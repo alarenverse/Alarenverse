@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 3 · La respiration · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf6f0 0%,#f0f5fd 50%,#eaf5f0 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b09aac;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d2e45;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#90b8d0,#80c8a8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}.phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:34px 28px;box-shadow:0 8px 40px rgba(160,180,200,0.13);border:1px solid rgba(160,200,220,0.2);max-width:560px;width:100%;margin-top:20px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#90b8c8;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d2e45;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d2e45;margin-bottom:16px;line-height:1.4}
+  p{color:#5a6878;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#7a8898}
+  .btn{background:linear-gradient(135deg,#90b8d0,#80c8a8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(100,160,200,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(160,200,220,0.25);color:#b0b8b8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#b0b8b8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:20px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#90a8b8;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(160,200,220,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#90b8d0,#80c8a8);border-radius:4px;transition:width 0.4s ease}
+  .highlight{background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:14px;padding:14px 18px;border-left:3px solid #90b8d0;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .etat-box{border-radius:14px;padding:14px 18px;margin-bottom:12px}
+  .etat-label{font-size:13px;font-weight:600;letter-spacing:0.05em;margin-bottom:6px;font-family:'Jost',sans-serif}
+  .etat-texte{font-size:17px;color:#253050;line-height:1.75;font-style:normal}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(160,200,220,0.15)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#90b8d0,#80c8a8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#a0b8c0;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:18px;padding-top:14px;border-top:1px solid rgba(160,200,220,0.18);font-size:11px;color:#a0b8c0;font-family:'Jost',sans-serif}
+  .prep-item{display:flex;align-items:flex-start;gap:12px;background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:12px;padding:12px 16px;border:1px solid rgba(160,200,220,0.18);margin-bottom:10px}
+  .prep-num{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#90b8d0,#80c8a8);color:white;font-size:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif}
+  .prep-texte{font-size:17px;color:#253050;line-height:1.6;font-style:normal}
+
+  /* Respiration */
+  #breath-wrapper{position:relative;width:210px;height:210px;margin:20px auto 30px;display:flex;align-items:center;justify-content:center}
+  #breath-halo{position:absolute;width:210px;height:210px;border-radius:50%;background:linear-gradient(135deg,rgba(144,184,208,0.1),rgba(128,200,168,0.1));transition:transform 1s ease-in-out}
+  #breath-circle{width:170px;height:170px;border-radius:50%;background:linear-gradient(135deg,#90b8d0,#80c8a8);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(100,160,200,0.28);transition:transform 1s ease-in-out,background 1.5s ease}
+  #breath-label{font-size:13px;color:rgba(255,255,255,0.85);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;font-family:'Jost',sans-serif}
+  #breath-count{font-size:34px;color:white;font-weight:300}
+  #breath-instruction{font-size:14px;color:#8a9898;text-align:center;margin-bottom:6px}
+  #breath-cycle{font-size:12px;color:#b0b8c0;text-align:center;font-family:'Jost',sans-serif}
+  .dots{display:flex;justify-content:center;gap:10px;margin-bottom:30px}
+  .dot{width:10px;height:10px;border-radius:50%;background:rgba(160,200,220,0.25);transition:all 0.4s ease}
+  .dot.done{background:linear-gradient(135deg,#90b8d0,#80c8a8)}
+  .dot.current{background:#90b8d0}
+
+  textarea{width:100%;border:2px solid rgba(160,200,220,0.35);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d4e58;line-height:1.7;outline:none;resize:vertical;background:#f4fafd}
+  textarea:focus{border-color:#90b8d0}
+  .retenir-box{background:white;border-radius:20px;padding:24px 26px;box-shadow:0 4px 24px rgba(160,180,200,0.1);border:1px solid rgba(160,200,220,0.18);margin-top:14px}
+  .suite-box{background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:20px;padding:22px;border:1px solid rgba(160,200,220,0.25);text-align:center;margin-top:14px}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌬️</span>
+    <div class="label">Jour 3 · La respiration & le système nerveux</div>
+    <h2>Ton souffle est ton ancre</h2>
+    <p>Avant de te dire de respirer, parce que tout le monde te dit de respirer, j'aimerais que tu comprennes pourquoi ça marche vraiment. Parce que quand on comprend ce qui se passe dans le corps, on arrête de le faire machinalement. Et là, ça change tout.</p>
+    <div id="theorie-preview"></div>
+    <button class="btn" onclick="showPhase('theorie')">Je veux comprendre ✨</button>
+    <p class="hint">Théorie scientifique + pratique guidée · ~15 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label" style="text-transform:uppercase;letter-spacing:0.1em;">Théorie · 1/5</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:20%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+      <span id="t-emoji" style="font-size:34px;"></span>
+      <h3 id="t-titre"></h3>
+    </div>
+    <p id="t-intro" style="font-size:14px;color:#7a8898;margin-bottom:14px;display:none;"></p>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- PRÉPARATION -->
+<div class="phase" id="phase-prepare">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🧘</span>
+    <h2>Prépare-toi</h2>
+    <p class="small" style="margin-bottom:20px;">5 cycles · Inspire <strong>4 secondes</strong> par le nez · Expire <strong>6 secondes</strong> par la bouche</p>
+    <div style="text-align:left;">
+      <div class="prep-item"><span class="prep-num">1</span><span class="prep-texte">Assieds-toi confortablement, dos droit mais sans rigidité</span></div>
+      <div class="prep-item"><span class="prep-num">2</span><span class="prep-texte">Pose une main sur ton ventre, sens-le se gonfler à l'inspire</span></div>
+      <div class="prep-item"><span class="prep-num">3</span><span class="prep-texte">👃 Inspire par le nez · 👄 Expire par la bouche : le flux d'air est plus facile à doser et à contrôler</span></div>
+      <div class="prep-item"><span class="prep-num">4</span><span class="prep-texte">Ferme les yeux ou fixe un point devant toi</span></div>
+      <div class="prep-item"><span class="prep-num">5</span><span class="prep-texte">Tu n'as rien à faire, juste suivre le souffle</span></div>
+    </div>
+    <button class="btn" onclick="startBreathing()">Je commence 🌬️</button>
+  </div>
+</div>
+
+<!-- RESPIRATION -->
+<div class="phase" id="phase-breathing">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <div class="dots" id="dots-container"></div>
+    <div id="breath-wrapper">
+      <div id="breath-halo"></div>
+      <div id="breath-circle">
+        <div id="breath-label">Inspire...</div>
+        <div id="breath-count">4</div>
+      </div>
+    </div>
+    <div id="breath-instruction">👃 Par le nez, gonfle doucement le ventre...</div>
+    <div id="breath-cycle" style="margin-top:6px;">Cycle 1 sur 5</div>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <h2>Prends un instant...</h2>
+    <p>Voilà. Tu viens d'envoyer un signal de sécurité à ton corps. Ce que tu ressens là, maintenant, même si c'est tout petit, même si c'est juste un soupçon de détente, c'est ton système nerveux qui glisse du mode alerte vers le mode repos. Reste un moment avec ça.</p>
+    <p style="font-size:17px;color:#3d4e58;margin-bottom:6px;">Dans quel état était ton système nerveux avant de commencer ?</p>
+    <p class="small" style="text-align:center;margin-bottom:14px;">Combat/fuite, figement, ou déjà en sécurité ? Et qu'est-ce que tu remarques maintenant ?</p>
+    <textarea id="reflexion-text" rows="4" placeholder="Avant j'étais... / Maintenant je ressens dans mon corps..." oninput="checkReflexionFin()"></textarea>
+    <button class="btn" id="btn-save" style="width:100%;margin-top:14px;" disabled onclick="saveReflexion()">Enregistrer ✨</button>
+    <div id="reflexion-saved" style="display:none;background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:14px;padding:18px 20px;border:1px solid rgba(160,200,220,0.2);text-align:left;margin-top:14px;">
+      <div style="font-size:11px;color:#90a8b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-family:'Jost',sans-serif;">✍️ Ma réflexion du Jour 3</div>
+      <p id="reflexion-display" style="font-size:14px;color:#4a6068;margin:0;"></p>
+    </div>
+  </div>
+  <div class="retenir-box">
+    <div style="font-size:13px;color:#90a8b8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;font-family:'Jost',sans-serif;">🔑 À retenir absolument</div>
+    <p style="margin-bottom:10px;">Une fois par jour, minimum. Tous les jours. Dans un moment calme, au lever ou au coucher. Pas quand tu craques. Quand tout va bien.</p>
+    <p style="font-size:14px;margin-bottom:10px;">C'est seulement comme ça que ton corps assimile la respiration comme une ressource. Et c'est seulement après, une fois l'habitude bien ancrée et les bienfaits installés, que tu pourras t'appuyer dessus dans le stress, parce que ton corps, lui, connaîtra déjà le chemin.</p>
+    <p style="font-size:14px;">5 minutes chaque matin avant d'attraper ton téléphone. Tu n'as rien à forcer. Juste à revenir, encore et encore. C'est la régularité, et elle seule, qui transforme.</p>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#5a7080;"><strong>Demain, Jour 4 :</strong> le sommeil et les rituels du soir</p>
+    <p class="hint" style="margin-top:6px;">27 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie = [
+  { emoji:"🧠", titre:"Pourquoi le corps doit passer en premier", intro:null, source:"Dr Bessel van der Kolk, Le Corps n'oublie rien", contenu:[
+    {type:"texte",texte:"Quand tu ne te sens pas en sécurité, stressée, anxieuse, débordée, ton cerveau qui réfléchit se déconnecte. Littéralement. La partie qui relativise, qui prend du recul, qui décide, elle se met en veille. C'est pas toi qui choisis, c'est ton système nerveux qui prend le dessus."},
+    {type:"highlight",texte:"💡 C'est exactement pour ça que se dire \"calme-toi\" ne marche jamais dans ces moments-là. Tu ne peux pas réfléchir pour sortir du stress quand la partie qui réfléchit est justement celle qui s'est éteinte."},
+    {type:"texte",texte:"Alors on fait l'inverse. On passe par le corps d'abord. C'est ce que les neurosciences appellent l'approche bottom-up : de bas en haut. Et la respiration, c'est la porte d'entrée la plus directe qu'on ait. La plus simple aussi. Tu l'as toujours avec toi."},
+  ]},
+  { emoji:"⚡", titre:"Les 3 états de ton système nerveux", intro:"Le Dr Stephen Porges a décrit 3 modes dans lesquels ton système nerveux peut basculer. Les reconnaître, c'est déjà commencer à les apprivoiser :", source:"Dr Stephen Porges, La théorie polyvagale (1994)", contenu:[
+    {type:"etat",couleur:"#80c8a8",bg:"#eaf5f0",label:"🟢 SÉCURITÉ",texte:"Tu te sens ancrée, posée, capable de réfléchir. C'est le mode où tu peux apprendre, créer, te relier vraiment aux autres. C'est là qu'on veut revenir."},
+    {type:"etat",couleur:"#e8a85c",bg:"#fdf3e6",label:"🟠 COMBAT / FUITE",texte:"Le cœur qui s'emballe, les muscles tendus, le souffle court. Tu es irritable, agitée, sur le qui-vive. Ton corps est prêt à se battre ou à fuir, même quand le danger n'est qu'une boîte mail."},
+    {type:"etat",couleur:"#e8857a",bg:"#fde8e6",label:"🔴 FIGEMENT",texte:"Quand la menace semble trop grande, le corps se coupe. Tu te sens vidée, paralysée, incapable de bouger. Et je veux que ce soit clair : c'est un mécanisme de survie, pas une faiblesse. Ton corps fait ce qu'il peut pour te protéger."},
+  ]},
+  { emoji:"🫀", titre:"Ce qui se passe dans ton corps quand tu respires", intro:null, source:"Dr Arielle Schwartz, Applied Polyvagal Theory", contenu:[
+    {type:"texte",texte:"Le nerf vague, c'est l'autoroute qui relie ton cerveau à tous tes organes : ton cœur, tes poumons, ton ventre. C'est lui qui régule ton état intérieur en permanence, sans que tu t'en rendes compte."},
+    {type:"highlight",texte:"🌬️ Et voilà le truc : quand tu expires plus longtemps que tu n'inspires, tu stimules ce nerf vague. Ton cœur ralentit, ta tension baisse, tes muscles lâchent. Ton corps reçoit un message clair : le danger est passé, tu peux te poser."},
+    {type:"highlight",texte:"👃 Inspire par le nez, expire par la bouche. Le nez active mieux le nerf vague, et l'expiration par la bouche te permet de mieux doser, de vraiment vider tes poumons. C'est tout bête, mais ça fait la différence."},
+  ]},
+  { emoji:"⚠️", titre:"Ce que beaucoup ne savent pas, et qui change tout", intro:null, source:"Dr Andrew Huberman, Huberman Lab", contenu:[
+    {type:"highlight",texte:"🔑 La respiration, ce n'est pas d'abord un truc pour gérer une crise sur le moment. Et c'est important que tu le saches, sinon tu vas essayer en pleine panique, sentir que ça t'aide à peine, et croire que ça ne marche pas sur toi."},
+    {type:"texte",texte:"Son vrai pouvoir, il est dans la répétition. Une fois par jour, minimum. Tous les jours. Dans un moment calme, au lever ou au coucher, c'est l'idéal. Pas quand tu craques. Quand tout est tranquille."},
+    {type:"texte",texte:"Pourquoi dans le calme ? Parce que c'est là que ton corps apprend. À force de répéter ce geste jour après jour, ton système nerveux finit par l'enregistrer comme un raccourci vers la sécurité. Il l'assimile, doucement, comme une ressource."},
+    {type:"highlight",texte:"🌱 Et c'est seulement là, une fois que l'habitude est installée et que les bienfaits se font vraiment sentir, que tu peux te dire : OK, dans le stress, j'utilise cette ressource. Parce que ton corps, lui, l'a déjà reconnue. Il sait où elle mène. Tu ne lui demandes plus quelque chose d'inconnu en pleine tempête, tu actives un chemin qu'il connaît déjà par cœur."},
+    {type:"texte",texte:"Imagine ton système nerveux comme un thermostat. Réglé en permanence sur \"alerte\", le moindre truc devient une menace : un mail, un regard, un silence. La respiration quotidienne baisse doucement ce niveau de base. Petit à petit, ton seuil remonte."},
+    {type:"highlight",texte:"💡 5 minutes par jour quand tu vas bien valent infiniment plus qu'une heure en pleine crise. C'est pas l'intensité qui transforme. C'est la régularité, et elle seule. Sois tranquille avec ça, tu n'as pas besoin d'en faire des tonnes. Juste d'y revenir chaque jour."},
+  ]},
+  { emoji:"📊", titre:"Ce que la recherche a observé sur le long terme", intro:"Chez les personnes qui pratiquent régulièrement quelques minutes par jour pendant plusieurs semaines, les études observent :", source:null, contenu:[
+    {type:"stat",texte:"Une baisse notable du cortisol, l'hormone du stress",source:"Frontiers in Psychology, 2017"},
+    {type:"stat",texte:"Une meilleure variabilité de la fréquence cardiaque : un marqueur clé de la résilience émotionnelle",source:"Journal of Clinical Psychology, 2021"},
+    {type:"stat",texte:"Une diminution des symptômes d'anxiété et de dépression",source:"Méta-analyse, JAMA Internal Medicine, 2022"},
+    {type:"stat",texte:"Un sommeil de meilleure qualité",source:"Sleep Medicine Reviews, 2020"},
+    {type:"stat",texte:"Un système immunitaire renforcé",source:"Psychosomatic Medicine, 2018"},
+  ]},
+];
+
+// Preview
+const preview = document.getElementById('theorie-preview');
+theorie.forEach(t => {
+  preview.innerHTML += `<div style="display:flex;align-items:center;gap:12px;background:rgba(160,200,220,0.08);border:1px solid rgba(160,200,220,0.18);border-radius:12px;padding:10px 14px;margin-bottom:8px;text-align:left;"><span style="font-size:18px;">${t.emoji}</span><span style="font-size:13px;color:#5a7080;font-family:'Jost',sans-serif;">${t.titre}</span></div>`;
+});
+
+let theorieIdx = 0;
+
+function showPhase(id) {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  document.getElementById('phase-' + id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function renderTheorie() {
+  const t = theorie[theorieIdx];
+  document.getElementById('t-label').textContent = `Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent = t.emoji + ' ' + t.titre;
+  document.getElementById('t-progress').style.width = ((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent = t.emoji;
+  document.getElementById('t-titre').textContent = t.titre;
+  const introEl = document.getElementById('t-intro');
+  if (t.intro) { introEl.textContent = t.intro; introEl.style.display='block'; } else { introEl.style.display='none'; }
+  const sourceEl = document.getElementById('t-source');
+  sourceEl.textContent = t.source ? '📚 ' + t.source : '';
+
+  const contenu = document.getElementById('t-contenu');
+  contenu.innerHTML = '';
+  t.contenu.forEach(item => {
+    if (item.type === 'texte') {
+      contenu.innerHTML += `<p style="font-size:17px;color:#5a6878;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    } else if (item.type === 'highlight') {
+      contenu.innerHTML += `<div class="highlight">${item.texte}</div>`;
+    } else if (item.type === 'etat') {
+      contenu.innerHTML += `<div class="etat-box" style="background:${item.bg};border:1px solid ${item.couleur}40;"><div class="etat-label" style="color:${item.couleur};">${item.label}</div><div class="etat-texte">${item.texte}</div></div>`;
+    } else if (item.type === 'stat') {
+      contenu.innerHTML += `<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+    }
+  });
+
+  const btn = document.querySelector('#phase-theorie .btn');
+  btn.textContent = theorieIdx < theorie.length-1 ? 'Continuer →' : 'Passons à la pratique 🌬️';
+}
+
+function nextTheorie() {
+  if (theorieIdx < theorie.length-1) {
+    theorieIdx++;
+    renderTheorie();
+    window.scrollTo(0,0);
+  } else {
+    showPhase('prepare');
+  }
+}
+
+// Init théorie
+showPhase('intro');
+renderTheorie();
+
+// Respiration
+const INHALE = 4, EXHALE = 6, TOTAL = 5;
+let cycle = 0, sec = 0, interval = null;
+
+function startBreathing() {
+  showPhase('breathing');
+  // Dots
+  const dots = document.getElementById('dots-container');
+  dots.innerHTML = '';
+  for(let i=0;i<TOTAL;i++){
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.id = 'dot-'+i;
+    dots.appendChild(d);
+  }
+  cycle = 0; sec = 0;
+  updateDots();
+  interval = setInterval(tick, 1000);
+}
+
+function updateDots() {
+  for(let i=0;i<TOTAL;i++){
+    const d = document.getElementById('dot-'+i);
+    if(!d) return;
+    d.className = 'dot' + (i < cycle ? ' done' : i === cycle ? ' current' : '');
+  }
+}
+
+function tick() {
+  const isInhale = sec < INHALE;
+  const circle = document.getElementById('breath-circle');
+  const halo = document.getElementById('breath-halo');
+  let scale, count;
+  if (isInhale) {
+    scale = 0.6 + (sec/INHALE)*0.4;
+    count = INHALE - sec;
+    document.getElementById('breath-label').textContent = 'Inspire...';
+    document.getElementById('breath-count').textContent = count;
+    document.getElementById('breath-instruction').textContent = '👃 Par le nez, gonfle doucement le ventre...';
+    circle.style.background = 'linear-gradient(135deg,#90b8d0,#80c8a8)';
+  } else {
+    scale = 1 - ((sec-INHALE)/EXHALE)*0.4;
+    count = EXHALE - (sec-INHALE);
+    document.getElementById('breath-label').textContent = 'Expire...';
+    document.getElementById('breath-count').textContent = count;
+    document.getElementById('breath-instruction').textContent = '👄 Par la bouche, laisse l\'air sortir lentement...';
+    circle.style.background = 'linear-gradient(135deg,#a8cce0,#98d8b8)';
+  }
+  circle.style.transform = `scale(${scale})`;
+  halo.style.transform = `scale(${scale*1.2})`;
+  document.getElementById('breath-cycle').textContent = `Cycle ${Math.min(cycle+1,TOTAL)} sur ${TOTAL}`;
+  sec++;
+  if(sec >= INHALE+EXHALE) {
+    sec = 0; cycle++;
+    if(cycle >= TOTAL) {
+      clearInterval(interval);
+      setTimeout(()=>showPhase('fin'), 600);
+    } else {
+      updateDots();
+    }
+  }
+}
+
+function checkReflexionFin() {
+  document.getElementById('btn-save').disabled = !document.getElementById('reflexion-text').value.trim();
+}
+
+function saveReflexion() {
+  const val = document.getElementById('reflexion-text').value.trim();
+  document.getElementById('reflexion-text').style.display='none';
+  document.getElementById('btn-save').style.display='none';
+  document.getElementById('reflexion-display').textContent = '"' + val + '"';
+  document.getElementById('reflexion-saved').style.display='block';
+}
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 3 · La respiration</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour3-respiration-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

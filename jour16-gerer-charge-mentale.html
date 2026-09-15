@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 16 · Gérer la charge mentale · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f8f5f0 0%,#f0f5f8 45%,#f5f0f8 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#9090a0;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#2d3040;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#6080c8,#a080c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(80,100,180,0.1);border:1px solid rgba(100,120,200,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#6080c8;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#2d3040;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#2d3040;margin-bottom:14px;line-height:1.4}
+  p{color:#485068;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#687088}
+  .btn{background:linear-gradient(135deg,#6080c8,#a080c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(80,100,180,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(100,120,200,0.25);color:#a0a8c8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#a0a8c8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#8090b8;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(100,120,200,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#6080c8,#a080c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#eef0fa,#f0eefa);border-radius:14px;padding:14px 18px;border-left:3px solid #6080c8;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f0eefa,#f5f0fd)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(100,120,200,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#6080c8,#a080c8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#9098b8;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(100,120,200,0.12);font-size:11px;color:#9098b8;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(100,120,200,0.05);border:1px solid rgba(100,120,200,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#607090;font-family:'Jost',sans-serif}
+
+  /* Plan redistribution */
+  .tache-row{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+  .tache-field{flex:1;border:2px solid rgba(100,120,200,0.22);border-radius:12px;padding:10px 14px;font-size:14px;font-family:'Lora',serif;color:#2d3040;outline:none;background:white;transition:border-color 0.2s;font-style:italic}
+  .tache-field:focus{border-color:#6080c8}
+  .tache-a-qui{width:130px;border:2px solid rgba(100,120,200,0.22);border-radius:12px;padding:10px 12px;font-size:13px;font-family:'Jost',sans-serif;color:#2d3040;outline:none;background:white;cursor:pointer}
+  .tache-a-qui:focus{border-color:#6080c8}
+  .add-btn{background:transparent;border:2px dashed rgba(100,120,200,0.28);border-radius:12px;padding:8px 16px;font-size:13px;cursor:pointer;font-family:'Jost',sans-serif;color:#8090b8;width:100%;margin-top:4px;transition:all 0.2s}
+  .add-btn:hover{border-color:#6080c8;background:rgba(100,120,200,0.05)}
+
+  /* Phrases types */
+  .phrase-card{background:white;border-radius:16px;padding:18px 20px;border:1px solid rgba(100,120,200,0.18);margin-bottom:12px;box-shadow:0 2px 12px rgba(80,100,180,0.07)}
+  .phrase-situation{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#6080c8;margin-bottom:8px}
+  .phrase-texte{font-size:17px;color:#2d3040;line-height:1.6;margin-bottom:6px}
+  .phrase-pourquoi{font-size:13px;color:#7080a0;line-height:1.6;font-style:normal}
+  .phrase-copy{background:transparent;border:1px solid rgba(100,120,200,0.25);border-radius:10px;padding:5px 12px;font-size:11px;cursor:pointer;font-family:'Jost',sans-serif;color:#8090b8;margin-top:8px;transition:all 0.2s}
+  .phrase-copy:hover{background:rgba(100,120,200,0.08);border-color:#6080c8;color:#6080c8}
+  .phrase-copy.copied{background:rgba(128,200,168,0.15);border-color:#80c8a8;color:#80c8a8}
+
+  /* Lâcher prise */
+  .lacher-item{border-radius:16px;padding:16px 18px;margin-bottom:12px;border:2px solid transparent;cursor:pointer;transition:all 0.25s}
+  .lacher-item:hover{transform:translateX(3px)}
+  .lacher-item.selected{transform:translateX(4px)}
+  .lacher-titre{font-size:17px;color:#2d3040;margin-bottom:4px}
+  .lacher-desc{font-size:13px;line-height:1.6;font-style:normal}
+  .lacher-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(100,120,200,0.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all 0.2s;background:white}
+  .lacher-check.done{background:linear-gradient(135deg,#6080c8,#a080c8);border-color:transparent;color:white}
+
+  textarea{width:100%;border:2px solid rgba(100,120,200,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#2d3040;line-height:1.7;outline:none;resize:vertical;background:#f8f9fd}
+  textarea:focus{border-color:#6080c8}
+  .e-q{font-size:17px;color:#2d3040;line-height:1.65;text-align:center;margin-bottom:6px}
+  .e-sous{font-size:13px;color:#9098b8;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#eef0fa,#f0eefa);border-radius:14px;padding:14px 18px;border:1px solid rgba(100,120,200,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#9098b8;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#eef0fa,#f0eefa);border-radius:20px;padding:22px;border:1px solid rgba(100,120,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <div class="label">Jour 16 · Gérer & Délester</div>
+    <h2>Hier tu as nommé. Aujourd'hui tu agis, et tu poses.</h2>
+    <p>Voir sa charge mentale c'est déjà un pas énorme. Mais voir sans agir peut aussi devenir une nouvelle source de frustration. Aujourd'hui on passe à la suite : redistribuer, délester ce qui peut l'être, et trouver les mots pour le dire.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🌿</button>
+    <p class="hint">Théorie · Plan de redistribution · Phrases types · Exercice de délestage · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- PLAN DE REDISTRIBUTION -->
+<div class="phase" id="phase-plan">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">📋</span>
+    <h2>Mon plan de redistribution</h2>
+    <p style="text-align:center;margin-bottom:8px;">Liste les tâches que tu veux redistribuer, et à qui tu pourrais les confier.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Pas une liste parfaite. Un premier pas réaliste.</p>
+
+    <div class="hl" style="margin-bottom:16px;">
+      <strong>Rappel important :</strong> redistribuer ne signifie pas "demander de l'aide". Ça signifie transférer la responsabilité, pas juste l'exécution. "Peux-tu t'occuper du suivi des rendez-vous médicaux des enfants ?" est une redistribution. "Peux-tu m'aider à prendre les rendez-vous ?" maintient la charge mentale chez toi.
+    </div>
+
+    <p style="font-family:'Jost',sans-serif;font-size:11px;color:#9098b8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Des idées pour commencer, touche pour ajouter :</p>
+    <div id="suggestions-container" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;"></div>
+
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <div style="flex:1;font-family:'Jost',sans-serif;font-size:10px;color:#9098b8;text-transform:uppercase;letter-spacing:0.1em;">Tâche à redistribuer</div>
+      <div style="width:130px;font-family:'Jost',sans-serif;font-size:10px;color:#9098b8;text-transform:uppercase;letter-spacing:0.1em;">À qui</div>
+    </div>
+    <div id="plan-container"></div>
+    <button class="add-btn" onclick="addTache()">+ Ajouter une tâche</button>
+
+    <div class="hl vert" style="margin-top:16px;">
+      <strong>Et ce que tu peux tout simplement arrêter de faire :</strong><br><br>
+      Certaines tâches n'ont pas besoin d'être redistribuées, elles peuvent être supprimées. Le repas parfait tous les soirs. Les réponses instantanées aux messages. Les maisons rangées avant les visites. Demande-toi : "Si je ne le faisais pas, qu'est-ce qui se passerait vraiment ?"
+    </div>
+
+    <button class="btn" onclick="showPhase('phrases')">Les phrases pour avoir la conversation →</button>
+  </div>
+</div>
+
+<!-- PHRASES TYPES -->
+<div class="phase" id="phase-phrases">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💬</span>
+    <h2>Des mots pour avoir la conversation</h2>
+    <p style="text-align:center;margin-bottom:6px;">Parler de charge mentale à son partenaire, sa famille ou ses collègues est difficile. Ces phrases t'aident à le faire sans accuser, sans minimiser, et sans que ce soit une guerre.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Clique sur "Copier" pour garder celles qui te parlent.</p>
+    <div id="phrases-container"></div>
+    <button class="btn" onclick="showPhase('lacher')">Exercice de délestage →</button>
+  </div>
+</div>
+
+<!-- LÂCHER PRISE -->
+<div class="phase" id="phase-lacher">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🎈</span>
+    <h2>Ce que tu peux délester</h2>
+    <p style="text-align:center;margin-bottom:8px;">Délester, ce n'est pas ne plus te soucier de rien. C'est déposer une partie du poids pour t'offrir de l'espace, choisir ce qui mérite ton énergie, et ce qui peut attendre, être fait autrement, ou disparaître.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Coche ce que tu choisis de délester cette semaine, même un seul suffit.</p>
+
+    <div class="hl rouge" style="margin-bottom:16px;">
+      <strong>Pourquoi c'est si difficile de déposer, pour nous :</strong><br><br>
+      Le perfectionnisme féminin est en grande partie une réponse à la peur du jugement, "si je ne le fais pas bien, on dira que je suis une mauvaise mère / mauvaise femme / mauvaise professionnelle." Délester, c'est aussi accepter que le regard des autres ne définit pas ta valeur.
+    </div>
+
+    <div id="lacher-container"></div>
+
+    <div class="hl vert" style="margin-top:8px;">
+      <strong>La notion de "suffisamment bon", Winnicott</strong><br><br>
+      Le pédiatre Winnicott a introduit le concept de "good enough mother" : la mère suffisamment bonne. Pas parfaite. Juste suffisamment présente, suffisamment aimante, suffisamment là. Ce concept s'applique à tout : le repas suffisamment bon, la maison suffisamment propre, le travail suffisamment bien fait. La perfection épuise. Le suffisamment bon libère.
+    </div>
+
+    <button class="btn" onclick="showPhase('ecriture')">Mon engagement ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">✍️</span>
+    <h2>Mon engagement de la semaine</h2>
+    <p style="text-align:center;margin-bottom:20px;">Deux questions courtes : une action, une permission.</p>
+
+    <div style="margin-bottom:20px;">
+      <p class="e-q">Quelle est la première tâche concrète que tu vas redistribuer ou arrêter cette semaine ?</p>
+      <p class="e-sous">Pas une liste. Une seule chose, précise, réaliste, avec un délai.</p>
+      <textarea id="e1" rows="3" placeholder="Cette semaine je vais redistribuer / arrêter de faire... / Je vais demander à... de prendre en charge..." oninput="checkEngagement()"></textarea>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <p class="e-q">Quelle permission tu te donnes à toi-même à partir d'aujourd'hui ?</p>
+      <p class="e-sous">Une permission de délester, d'être imparfaite, de te faire de la place.</p>
+      <textarea id="e2" rows="3" placeholder="Je me permets de... / Je m'autorise à ne plus... / Je décide que c'est suffisant de..." oninput="checkEngagement()"></textarea>
+    </div>
+
+    <button class="btn" id="btn-engagement" onclick="showFin()">Terminer le Jour 16 🌿</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <h2>Tu viens de prendre une décision courageuse</h2>
+    <p>Redistribuer et délester ne sont pas des abandons. C'est de la sagesse, déposer une partie du poids pour que ton énergie serve vraiment ce qui compte pour toi. Et gagner de la place pour respirer.</p>
+
+    <div style="background:linear-gradient(135deg,#eef0fa,#f0eefa);border-radius:16px;padding:20px;border:1px solid rgba(100,120,200,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#6080c8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🌿 Tes engagements du Jour 16</div>
+      <div id="recap-container"></div>
+    </div>
+
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> "Suffisamment bon" n'est pas de la résignation. C'est de la sagesse. Le perfectionnisme protège de la critique extérieure, mais il épuise de l'intérieur. Tu mérites de te ménager.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#607090;"><strong style="color:#2d3040;">Demain, Jour 17 :</strong> le cycle féminin et les émotions</p>
+    <p class="hint" style="margin-top:6px;">14 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🔄",titre:"La redistribution, bien plus qu'une question d'organisation",source:"Eve Rodsky, Fair Play / Hochschild",contenu:[
+    {type:"texte",texte:"La charge mentale ne se règle pas avec un meilleur agenda ou une appli de plus. Elle se règle par une vraie redistribution de la responsabilité, pas juste de l'exécution."},
+    {type:"hl",texte:"🔑 Toute la différence est là : quand tu demandes \"tu peux faire les courses ?\", c'est encore toi qui penses aux courses, qui fais la liste, qui surveilles le frigo. Quand tu confies la responsabilité des courses, c'est l'autre qui pense, qui liste, qui surveille. Ça, c'est une redistribution."},
+    {type:"texte",texte:"Eve Rodsky, dans Fair Play, découpe chaque tâche en trois temps : concevoir (y penser), planifier (l'organiser), exécuter (la faire). La vraie redistribution transfère les trois, pas seulement le dernier."},
+    {type:"stat",texte:"Les couples qui ont une vraie conversation sur la répartition des tâches, y compris mentales, en ressortent avec une relation plus satisfaisante et nettement moins de stress, surtout chez les femmes",source:"Recherche sur le couple et la famille"},
+    {type:"hl",texte:"💡 Oui, cette conversation fait peur. Mais ne pas l'avoir coûte plus cher : le ressentiment qui s'accumule en silence est l'un des poisons les plus sûrs d'une relation à long terme.",classe:"or"},
+  ]},
+  {emoji:"📤",titre:"Sortir de ta tête, l'externalisation",source:"Recherche en psychologie cognitive, cognitive offloading",contenu:[
+    {type:"texte",texte:"Ton cerveau n'est pas fait pour stocker cinquante choses à ne pas oublier. Chaque \"il faut que je pense à...\" qui tourne dans ta tête consomme de la mémoire de travail : cette ressource limitée dont tu as besoin pour réfléchir, décider, être présente."},
+    {type:"hl",texte:"🧠 La science est claire là-dessus : noter quelque chose libère ta mémoire de travail et te permet de passer à autre chose, sans la peur d'oublier. C'est ce qu'on appelle l'externalisation cognitive, sortir les choses de ta tête vers un support extérieur. Et ça marche remarquablement bien."},
+    {type:"texte",texte:"Concrètement : une liste unique où tout atterrit (papier ou téléphone, peu importe), un agenda partagé visible par toute la famille, un tableau dans la cuisine. Le support importe peu. Ce qui compte, c'est que ta tête ne soit plus le seul endroit où l'information existe."},
+    {type:"hl",texte:"✨ Le vrai gain, c'est le silence mental. Quand ton cerveau sait que c'est noté quelque part de fiable, il arrête de te le rappeler en boucle à 23h. Tu peux enfin penser à autre chose, ou à rien du tout.",classe:"vert"},
+  ]},
+  {emoji:"🎯",titre:"Mettre ton énergie là où tu as une prise",source:"Approche cognitivo-comportementale, résolution de problème",contenu:[
+    {type:"texte",texte:"Face à la surcharge, on gaspille souvent une énergie folle sur ce qui ne dépend pas de nous : ruminer, se plaindre, vouloir changer l'autre, refaire mentalement la journée. Et c'est humain, c'est même le premier mouvement de tout le monde face à ce qui déborde."},
+    {type:"hl",texte:"🎯 Mais il y a une question qui change tout : \"À quel endroit mon énergie sera-t-elle le plus utile ?\" Prends une source de charge qui t'épuise, et trie en deux colonnes : ce qui est sous ta prise (ce que tu peux changer, déléguer, abandonner, dire), et ce qui ne l'est pas (les réactions des autres, le passé, les imprévus)."},
+    {type:"texte",texte:"Ensuite, transforme ce qui est sous ta prise en une action toute petite et très concrète : pas \"mieux répartir les tâches\" mais \"proposer à mon partenaire mercredi soir qu'il reprenne entièrement les lessives\". Avec un quand, un où, un comment. Plus c'est précis et modeste, plus ça se fait réellement."},
+    {type:"hl",texte:"🌿 Et pour le reste, ce qui n'est pas sous ta prise, l'énergie que tu y mettais peut être doucement rapatriée vers toi. Ce n'est pas de la résignation. C'est de la stratégie.",classe:"vert"},
+  ]},
+  {emoji:"🎈",titre:"Délester · enlever du poids sans tout lâcher",source:"Dr Kristin Neff / Dr Susan David",contenu:[
+    {type:"texte",texte:"On te dira souvent qu'il faut \"lâcher prise\". Je n'aime pas cette expression. Lâcher prise, ça sonne comme un saut dans le vide sans élastique, on tient tout, ou on lâche tout. C'est extrême, ça fait peur, et franchement, ça veut tout et rien dire."},
+    {type:"hl",texte:"🎈 Ce que je te propose, c'est autre chose : délester. Comme une montgolfière qui enlève quelques sacs de sable pour prendre de la hauteur. Tu ne lâches pas la charge, tu en déposes une partie. Tu gardes la main, tu gardes le contrôle, mais tu t'offres de la distance et de l'espace."},
+    {type:"texte",texte:"Et cette nuance change tout, psychologiquement. Parce que déposer un sac, c'est faisable, progressif, réversible. Ça n'exige pas de renoncer à tout du jour au lendemain. Ça demande juste de choisir : qu'est-ce que je continue à porter, qu'est-ce que je redistribue, qu'est-ce que je pose ?"},
+    {type:"hl",texte:"⚠️ Et si c'est si dur pour nous, il y a une raison : le perfectionnisme féminin est souvent une réponse logique à un monde qui juge plus sévèrement les femmes sur leur maison, leurs enfants, leur organisation. Délester, c'est aussi affronter ce regard, qu'il soit réel ou qu'on l'ait intériorisé."},
+    {type:"stat",texte:"Les femmes qui s'accordent le droit à l'imperfection, avec de la douceur envers elles-mêmes, vivent avec moins d'anxiété et s'épuisent bien moins que celles qui tiennent des standards de perfection",source:"Dr Kristin Neff, recherche sur l'auto-compassion"},
+    {type:"hl",texte:"🌿 Chaque charge que tu délestes libère de l'espace, pour respirer, pour toi, pour ce qui compte vraiment. C'est ça le but : pas le vide, mais la légèreté. Être plus disponible pour ta propre vie.",classe:"vert"},
+  ]},
+  {emoji:"✨",titre:"Le \"suffisamment bon\", te libérer du perfectionnisme",source:"Donald Winnicott / Brené Brown",contenu:[
+    {type:"texte",texte:"Winnicott a offert au monde un concept magnifique : la \"mère suffisamment bonne\". Son observation, après des années à observer des familles : les enfants n'ont pas besoin de mères parfaites. Ils ont besoin de mères suffisamment présentes, suffisamment aimantes, suffisamment là."},
+    {type:"hl",texte:"💡 Et ça s'applique à tout : le repas suffisamment nourrissant (pas gastronomique), la maison suffisamment propre (pas immaculée), le travail suffisamment bien fait (pas irréprochable). La perfection est un horizon qui recule à mesure qu'on avance, et qui épuise en chemin."},
+    {type:"texte",texte:"Brené Brown l'a montré : le perfectionnisme n'est pas de l'excellence, c'est de la protection. On devient parfaite pour devancer le jugement des autres. Sauf que cette armure coûte très cher : l'épuisement, la peur en continu, et le plaisir de faire qui disparaît."},
+    {type:"hl",texte:"🌸 Te donner la permission d'être suffisamment bonne, ce n'est pas baisser tes standards. C'est choisir des standards humains plutôt qu'impossibles, et te traiter avec la même bienveillance que tu offres si naturellement aux autres.",classe:"violet"},
+  ]},
+];
+
+const phrases=[
+  {situation:"Ouvrir la conversation sur la charge mentale",texte:"\"J'ai besoin qu'on parle de quelque chose d'important pour moi. Je ne veux pas que ça soit une dispute, je veux qu'on trouve ensemble comment mieux répartir ce que je porte seule en ce moment.\"",pourquoi:"Pose le cadre collaboratif avant de commencer. Enlève la dimension accusatrice."},
+  {situation:"Expliquer ce qu'est la charge mentale",texte:"\"Ce n'est pas juste de faire des tâches. C'est de penser à tout, anticiper, planifier, se souvenir, gérer. Et ce travail-là, je le fais presque entièrement seule, même quand tu fais des choses.\"",pourquoi:"Nomme la différence entre exécution et responsabilité mentale, sans agressivité."},
+  {situation:"Demander une redistribution concrète",texte:"\"J'aimerais que tu prennes en charge [tâche précise], complètement. Pas m'aider à le faire, mais en être responsable : y penser, le planifier, le faire. Est-ce que tu peux faire ça ?\"",pourquoi:"Précis, concret, et transfert complet de responsabilité, pas juste d'exécution."},
+  {situation:"Quand l'autre dit 'dis-moi juste ce que tu veux que je fasse'",texte:"\"Le problème, c'est que me demander de te dire ce que tu as à faire, c'est encore moi qui gère. J'ai besoin que tu vois toi-même ce qu'il y a à faire et que tu le prennes en charge sans que j'aie à le penser.\"",pourquoi:"Nomme le mécanisme sans l'attaque personnelle. C'est souvent un angle mort, pas de la mauvaise volonté."},
+  {situation:"Parler à un proche qui sollicite trop",texte:"\"Je t'aime et je veux être là pour toi. Et en ce moment j'ai besoin de te dire que je n'ai plus les ressources pour être aussi présente. J'ai besoin de me recharger.\"",pourquoi:"Pose une limite sans rejeter l'autre, en nommant ton état et ton besoin, pas ses comportements."},
+  {situation:"Se parler à soi-même, la permission intérieure",texte:"\"Ce n'est pas parfait, et c'est suffisant. Je fais de mon mieux avec ce que j'ai. Je me donne la permission d'en faire moins aujourd'hui.\"",pourquoi:"La conversation la plus importante est souvent celle qu'on a avec soi-même."},
+];
+
+const lacherItems=[
+  {titre:"La maison parfaitement rangée en permanence",desc:"Une maison habitée est une maison vivante. Le rangement peut attendre, peut être fait différemment, peut être fait par d'autres.",bg:"#eef0fa",border:"#6080c8"},
+  {titre:"Répondre à tous les messages dans la journée",desc:"Ta disponibilité n'est pas une obligation. Les gens peuvent attendre, et ceux qui t'aiment vraiment comprennent.",bg:"#f0eefa",border:"#a080c8"},
+  {titre:"Le repas fait maison et équilibré chaque soir",desc:"Un repas simple et rapide nourrit autant. La culpabilité du repas \"insuffisant\" est souvent plus épuisante que le repas lui-même.",bg:"#eaf5f0",border:"#80c8a8"},
+  {titre:"Être la mémoire de tout le monde",desc:"Si tu n'as pas rappelé l'anniversaire, ce n'est pas ta faute que l'autre l'oublie. Ce n'est pas à toi seule de porter la mémoire collective.",bg:"#fdf8ee",border:"#c8a870"},
+  {titre:"Gérer l'état émotionnel de tout le monde",desc:"Tu peux être présente sans être responsable du bonheur de chacun. Les émotions des autres leur appartiennent.",bg:"#fde8e6",border:"#e8857a"},
+  {titre:"Anticiper les besoins avant qu'ils soient exprimés",desc:"Les adultes peuvent exprimer leurs besoins. Tu n'as pas à deviner. Tu peux attendre qu'on te demande.",bg:"#eef0fa",border:"#6080c8"},
+  {titre:"Être disponible à 100% pour tout le monde en même temps",desc:"Tu es une personne, pas un service. Tes ressources sont limitées, et c'est normal et sain.",bg:"#f0eefa",border:"#a080c8"},
+];
+
+let theorieIdx=0, lacherSelected=new Set();
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// Preview
+const pc=document.getElementById('preview-container');
+[{e:'🔄',t:'La redistribution, responsabilité vs exécution'},{e:'📤',t:'Sortir de ta tête, l\'externalisation'},{e:'🎯',t:'Mettre ton énergie là où tu as une prise'},{e:'🎈',t:'Délester, enlever du poids sans tout lâcher'},{e:'✨',t:'Le suffisamment bon, Winnicott & Brown'},{e:'📋',t:'Mon plan de redistribution concret'},{e:'💬',t:'Phrases types pour avoir la conversation'},{e:'🎈',t:'Exercice : ce que je choisis de délester'},{e:'✍️',t:'Mon engagement de la semaine'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#485068;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Mon plan de redistribution 📋':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('plan');
+}
+
+// Plan redistribution
+const suggestionsTaches=[
+  "Les rendez-vous médicaux (prise + suivi)",
+  "Les lessives de A à Z",
+  "Les courses + la liste + le suivi du frigo",
+  "Les repas d'un ou plusieurs soirs par semaine",
+  "Les cadeaux d'anniversaire de sa famille",
+  "Le suivi des devoirs",
+  "Le lien avec l'école / la crèche",
+  "L'administratif et les factures",
+  "Le tri et le rangement d'une pièce",
+  "L'organisation des vacances",
+  "Le linge des enfants (tri des tailles, saisons)",
+  "Les poubelles et le recyclage",
+];
+
+function renderSuggestions(){
+  const sc=document.getElementById('suggestions-container');
+  if(!sc)return;
+  sc.innerHTML='';
+  suggestionsTaches.forEach((t,i)=>{
+    const chip=document.createElement('button');
+    chip.id='sugg-'+i;
+    chip.textContent='+ '+t;
+    chip.style.cssText='font-family:\'Jost\',sans-serif;font-size:12.5px;padding:7px 12px;border-radius:16px;border:1.5px solid rgba(100,120,200,0.3);background:#f4f6fd;color:#4a5a90;cursor:pointer;';
+    chip.onclick=()=>{
+      addTache(t);
+      chip.style.opacity='0.35';
+      chip.style.pointerEvents='none';
+      chip.textContent='✓ '+t;
+    };
+    sc.appendChild(chip);
+  });
+}
+
+function addTache(texte){
+  const container=document.getElementById('plan-container');
+  const row=document.createElement('div');
+  row.className='tache-row';
+  row.innerHTML=`
+    <input class="tache-field" placeholder="Ex : Gérer les rendez-vous médicaux des enfants...">
+    <select class="tache-a-qui">
+      <option value="">À qui ?</option>
+      <option value="partenaire">Partenaire</option>
+      <option value="enfant">Enfant(s)</option>
+      <option value="famille">Famille</option>
+      <option value="collegue">Collègue</option>
+      <option value="pro">Professionnel</option>
+      <option value="supprimer">Supprimer</option>
+    </select>`;
+  container.appendChild(row);
+  if(typeof texte==='string'&&texte){
+    row.querySelector('.tache-field').value=texte;
+  }
+}
+// Initialiser avec 3 lignes
+for(let i=0;i<3;i++) addTache();
+
+// Phrases
+const phrasesEl=document.getElementById('phrases-container');
+let phrasesGardees=new Set();
+phrases.forEach((p,i)=>{
+  const div=document.createElement('div');
+  div.className='phrase-card';
+  div.innerHTML=`
+    <div class="phrase-situation">${p.situation}</div>
+    <div class="phrase-texte">${p.texte}</div>
+    <div class="phrase-pourquoi">${p.pourquoi}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="phrase-copy" id="copy-${i}" onclick="copyPhrase(${i},'${p.texte.replace(/'/g,"\\'")}')">Copier cette phrase</button>
+      <button class="phrase-copy" id="garder-${i}" onclick="garderPhrase(${i})" style="background:#f4f0fa;border-color:rgba(160,128,200,0.35);color:#7a5aa8;">☆ Garder dans mon récap</button>
+    </div>`;
+  phrasesEl.appendChild(div);
+});
+
+function garderPhrase(i){
+  const btn=document.getElementById('garder-'+i);
+  if(phrasesGardees.has(i)){
+    phrasesGardees.delete(i);
+    btn.textContent='☆ Garder dans mon récap';
+    btn.style.background='#f4f0fa';
+  }else{
+    phrasesGardees.add(i);
+    btn.textContent='★ Gardée ✓';
+    btn.style.background='#e8ddf5';
+  }
+}
+
+function copyPhrase(i, texte){
+  navigator.clipboard.writeText(texte).catch(()=>{});
+  const btn=document.getElementById('copy-'+i);
+  btn.textContent='Copiée ✓';
+  btn.classList.add('copied');
+  setTimeout(()=>{btn.textContent='Copier cette phrase';btn.classList.remove('copied');},2000);
+}
+
+// Lâcher prise
+const lacherEl=document.getElementById('lacher-container');
+lacherItems.forEach((item,i)=>{
+  const div=document.createElement('div');
+  div.className='lacher-item';
+  div.style.cssText=`background:${item.bg};border-color:${item.border}40;`;
+  div.id='lacher-'+i;
+  div.innerHTML=`
+    <div style="display:flex;align-items:flex-start;gap:12px;">
+      <div class="lacher-check" id="lcheck-${i}"></div>
+      <div>
+        <div class="lacher-titre">${item.titre}</div>
+        <div class="lacher-desc" style="color:#607080;">${item.desc}</div>
+      </div>
+    </div>`;
+  div.onclick=()=>{
+    const check=document.getElementById('lcheck-'+i);
+    if(lacherSelected.has(i)){
+      lacherSelected.delete(i);
+      check.classList.remove('done');check.textContent='';
+      div.classList.remove('selected');div.style.borderColor=item.border+'40';
+    } else {
+      lacherSelected.add(i);
+      check.classList.add('done');check.textContent='✓';
+      div.classList.add('selected');div.style.borderColor=item.border;
+    }
+  };
+  lacherEl.appendChild(div);
+});
+
+function checkEngagement(){
+  // Engagement libre, bouton toujours accessible
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  // Plan de redistribution : tâches + à qui
+  const labels={partenaire:"Partenaire",enfant:"Enfant(s)",famille:"Famille",collegue:"Collègue",pro:"Professionnel",supprimer:"À supprimer"};
+  const lignes=[];
+  document.querySelectorAll('#plan-container .tache-row').forEach(row=>{
+    const tache=row.querySelector('.tache-field')?.value.trim();
+    const aqui=row.querySelector('.tache-a-qui')?.value;
+    if(tache){
+      lignes.push(`${tache}${aqui?' → <strong>'+labels[aqui]+'</strong>':''}`);
+    }
+  });
+  if(lignes.length>0){
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon plan de redistribution</div><div class="recap-r">${lignes.join('<br>')}</div></div>`;
+  }
+  const e1=document.getElementById('e1').value.trim();
+  const e2=document.getElementById('e2').value.trim();
+  if(e1) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ce que je vais redistribuer / arrêter</div><div class="recap-r">"${e1}"</div></div>`;
+  if(e2) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">La permission que je me donne</div><div class="recap-r">"${e2}"</div></div>`;
+  if(lacherSelected.size>0){
+    const lacher=[...lacherSelected].map(i=>lacherItems[i].titre).join(' / ');
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ce que je choisis de délester</div><div class="recap-r">${lacher}</div></div>`;
+  }
+  if(phrasesGardees.size>0){
+    const ph=[...phrasesGardees].map(i=>`<em>${phrases[i].texte}</em>`).join('<br><br>');
+    rc.innerHTML+=`<div class="recap-box"><div class="recap-q">Mes phrases pour la conversation</div><div class="recap-r">${ph}</div></div>`;
+  }
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+renderSuggestions();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 16 · Gerer la charge mentale</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour16-gerer-charge-mentale-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

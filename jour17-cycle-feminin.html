@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 17 · Le cycle féminin · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f5eef8 0%,#eef2fb 45%,#f0f5f0 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  .stars{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0}
+  .star{position:absolute;border-radius:50%;background:rgba(201,160,194,0.25);animation:twinkle 3s ease-in-out infinite}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px;position:relative;z-index:1}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#a878a0;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:500;color:#4a3358;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c9a0c2,#7090c0);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease;position:relative;z-index:1}
+  .card{background:rgba(255,255,255,0.75);backdrop-filter:blur(20px);border-radius:24px;padding:32px 26px;border:1px solid rgba(200,160,220,0.25);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#b070a8;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:500;color:#4a3358;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:17px;font-weight:500;color:#4a3358;margin-bottom:14px;line-height:1.4}
+  p{color:#5d4d6a;font-size:15px;line-height:1.85;margin-bottom:12px;font-style:normal}
+  p.small{font-size:14px;color:#8878a0}
+  .btn{background:linear-gradient(135deg,#c9a0c2,#7090c0);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(180,140,200,0.35);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,160,220,0.3);color:#a898b8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#9888b0;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px;position:relative;z-index:1}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a878a0;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(200,160,220,0.25);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#c9a0c2,#7090c0);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:rgba(200,160,220,0.14);border-radius:14px;padding:14px 18px;border-left:3px solid #c9a0c2;font-size:15px;color:#4a3358;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.bleu{border-left-color:#7090c0;background:rgba(112,144,192,0.12)}
+  .hl.vert{border-left-color:#5fa583;background:rgba(128,200,168,0.14)}
+  .hl.rouge{border-left-color:#e0857a;background:rgba(232,133,122,0.12)}
+  .hl.or{border-left-color:#c8a870;background:rgba(200,168,112,0.14)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(200,160,220,0.18)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#c9a0c2,#7090c0);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:15px;color:#4a3358;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#9888b0;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(200,160,220,0.2);font-size:11px;color:#9888b0;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.5);border:1px solid rgba(200,160,220,0.2);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#6d5d7a;font-family:'Jost',sans-serif}
+
+  /* Phases du cycle */
+  .phase-cycle{border-radius:18px;padding:18px 20px;margin-bottom:12px;border:1px solid}
+  .phase-cycle-header{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+  .phase-cycle-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+  .phase-cycle-nom{font-size:16px;color:#4a3358}
+  .phase-cycle-jours{font-family:'Jost',sans-serif;font-size:11px;color:#8878a0;margin-left:auto}
+  .phase-cycle-hormones{font-family:'Jost',sans-serif;font-size:11px;margin-bottom:8px;padding:4px 10px;border-radius:10px;display:inline-block}
+  .phase-cycle-desc{font-size:13px;line-height:1.7;font-style:normal;color:#5d4d6a}
+  .phase-cycle-emotions{font-size:13px;margin-top:8px;padding:8px 12px;border-radius:10px;line-height:1.6}
+  .phase-cycle-conseils{font-size:12px;margin-top:8px;color:#9088b0;line-height:1.6;font-style:normal}
+
+  /* Suivi de cycle */
+  .suivi-btn{border-radius:16px;padding:14px 18px;width:100%;cursor:pointer;font-family:'Lora',serif;text-align:left;margin-bottom:10px;border:2px solid rgba(200,160,220,0.25);display:flex;align-items:center;gap:14px;transition:all 0.2s;background:rgba(255,255,255,0.6)}
+  .suivi-btn:hover{transform:translateX(3px)}
+  .suivi-btn.selected{transform:translateX(4px)}
+  .suivi-pastille{width:16px;height:16px;border-radius:50%;flex-shrink:0}
+  .suivi-titre{font-size:15px;color:#4a3358}
+  .suivi-sous{font-size:12px;font-style:normal;margin-top:2px}
+
+  /* Conseils adaptés */
+  .conseil-section{border-radius:16px;padding:18px 20px;margin-bottom:12px;border:1px solid}
+  .conseil-titre{font-size:14px;font-family:'Jost',sans-serif;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+  .conseil-item{font-size:13px;line-height:1.7;color:#5d4d6a;margin-bottom:6px;padding-left:12px;border-left:2px solid rgba(200,160,220,0.4);font-style:normal}
+
+  /* SPM / PMDD */
+  .spm-diff{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+  .spm-card{border-radius:14px;padding:14px 16px;border:1px solid}
+  .spm-label{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px}
+  .spm-symptome{font-size:13px;line-height:1.65;font-style:normal;margin-bottom:4px;display:flex;gap:8px;align-items:flex-start}
+
+  textarea{width:100%;border:2px solid rgba(200,160,220,0.35);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#4a3358;line-height:1.7;outline:none;resize:vertical;background:rgba(255,255,255,0.85)}
+  textarea::placeholder{color:#b0a0c0}
+  textarea:focus{border-color:#c9a0c2}
+  .e-q{font-size:17px;color:#4a3358;line-height:1.65;text-align:center;margin-bottom:6px}
+  .e-sous{font-size:13px;color:#8878a0;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:rgba(255,255,255,0.6);border-radius:14px;padding:14px 18px;border:1px solid rgba(200,160,220,0.25);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#8878a8;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:rgba(200,160,220,0.08);border-radius:20px;padding:22px;border:1px solid rgba(200,160,220,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%;position:relative;z-index:1}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes twinkle{0%,100%{opacity:0.3}50%{opacity:0.8}}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌙</span>
+    <div class="label">Jour 17 · Le cycle féminin & les émotions</div>
+    <h2>Ton cycle n'est pas ton ennemi, c'est une carte</h2>
+    <p>Ces vagues émotionnelles qui reviennent avec ton cycle, ce ne sont pas des signes de fragilité ni d'instabilité. Ce sont de vraies réponses de ton corps à des changements hormonaux bien réels. Les comprendre, ça change absolument tout.</p>
+    <p class="small" style="margin-bottom:20px;">Des règles à la périménopause, aujourd'hui on dessine ensemble la carte de ton monde hormonal intérieur, pour que tu puisses mieux te comprendre et prendre soin de toi au bon moment.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🌙</button>
+    <p class="hint">Science · 4 phases · SPM & PMDD · Périménopause · Suivi · Écriture · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/4</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- 4 PHASES -->
+<div class="phase" id="phase-4phases">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌑🌒🌕🌘</span>
+    <h2>Les 4 saisons de ton cycle intérieur</h2>
+    <p style="text-align:center;margin-bottom:20px;">Chaque phase du cycle correspond à un paysage hormonal différent, avec ses forces, ses vulnérabilités, ses besoins spécifiques.</p>
+    <div id="phases-container"></div>
+    <button class="btn" onclick="showPhase('spm')">SPM et PMDD, comprendre la différence →</button>
+  </div>
+</div>
+
+<!-- SPM / PMDD -->
+<div class="phase" id="phase-spm">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">⚠️</span>
+    <h2>SPM et PMDD, deux réalités très différentes</h2>
+    <p style="text-align:center;margin-bottom:8px;">Le syndrome prémenstruel (SPM) et le trouble dysphorique prémenstruel (TDPM / PMDD) sont souvent confondus. Comprendre la différence peut changer ta vie.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Le TDPM est une condition médicale sérieuse, pas "juste des hormones" ni de la sensibilité excessive.</p>
+
+    <div class="spm-diff">
+      <div class="spm-card" style="background:rgba(200,168,112,0.1);border-color:rgba(200,168,112,0.3);">
+        <div class="spm-label" style="color:#c8a870;">SPM, Syndrome prémenstruel</div>
+        <div class="spm-symptome"><span></span><span>Irritabilité modérée avant les règles</span></div>
+        <div class="spm-symptome"><span></span><span>Gonflements, seins sensibles</span></div>
+        <div class="spm-symptome"><span></span><span>Légère baisse d'humeur</span></div>
+        <div class="spm-symptome"><span></span><span>Fatigue augmentée</span></div>
+        <div class="spm-symptome"><span></span><span>Disparaît avec les règles</span></div>
+        <div style="font-size:11px;color:#c8a870;font-family:'Jost',sans-serif;margin-top:8px;">Touche 75-80% des femmes</div>
+      </div>
+      <div class="spm-card" style="background:rgba(232,133,122,0.1);border-color:rgba(232,133,122,0.3);">
+        <div class="spm-label" style="color:#e8857a;">PMDD, Trouble dysphorique</div>
+        <div class="spm-symptome"><span></span><span>Dépression sévère, pleurs intenses</span></div>
+        <div class="spm-symptome"><span></span><span>Anxiété ou attaques de panique</span></div>
+        <div class="spm-symptome"><span></span><span>Rage, conflits relationnels majeurs</span></div>
+        <div class="spm-symptome"><span></span><span>Pensées sombres, désespoir</span></div>
+        <div class="spm-symptome"><span></span><span>Impact sévère sur la vie quotidienne</span></div>
+        <div style="font-size:11px;color:#e8857a;font-family:'Jost',sans-serif;margin-top:8px;">Touche 3-8% des femmes</div>
+      </div>
+    </div>
+
+    <div class="hl rouge">
+      <strong>PMDD, quand consulter :</strong><br><br>
+      Si tu reconnais les symptômes du PMDD, une détresse émotionnelle sévère, répétitive, liée au cycle, qui disparaît avec les règles, tu mérites une prise en charge médicale adaptée. Ce n'est pas "dans ta tête". C'est une condition reconnue par le DSM-5 (depuis 2013) avec des traitements efficaces disponibles : thérapie, régulation hormonale, antidépresseurs si nécessaire.<br><br>
+      Un suivi de cycle pendant 2 mois suffit souvent à établir le diagnostic. Parles-en à ton médecin ou gynécologue.
+    </div>
+
+    <div class="hl or">
+      <strong>Le PMDD est encore largement sous-diagnostiqué</strong>, parce que les femmes ont appris à minimiser leurs symptômes, parce que les médecins ont longtemps attribué ces symptômes à "la nervosité", et parce que la recherche sur la santé féminine reste insuffisamment financée.
+    </div>
+
+    <button class="btn" onclick="showPhase('perimenopause')">Périménopause & ménopause →</button>
+  </div>
+</div>
+
+<!-- PÉRIMÉNOPAUSE -->
+<div class="phase" id="phase-perimenopause">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <h2>Périménopause & Ménopause : les bouleversements incompris</h2>
+    <p style="text-align:center;margin-bottom:20px;">La périménopause peut commencer dès 35-40 ans et durer 10 ans. Ses effets sur la santé mentale sont réels, documentés, et encore trop souvent ignorés ou mal diagnostiqués.</p>
+
+    <div class="hl">
+      <strong>Ce qu'est la périménopause :</strong><br><br>
+      La transition vers la ménopause pendant laquelle les niveaux d'œstrogènes et de progestérone fluctuent de façon irrégulière et imprévisible. Ce n'est pas une ligne droite, c'est des montagnes russes hormonales qui peuvent durer des années.
+    </div>
+
+    <div class="hl rouge">
+      <strong>Les symptômes psychiatriques souvent mal attribués :</strong><br><br>
+      Anxiété inexpliquée, dépression soudaine (souvent le premier épisode dépressif de la vie), troubles du sommeil sévères, irritabilité intense, brouillard mental ("brain fog"), perte de mémoire, perte de confiance en soi, crises de larmes.<br><br>
+      Ces symptômes sont souvent diagnostiqués comme "dépression" ou "anxiété généralisée", et traités avec des antidépresseurs sans investigation hormonale. Le traitement hormonal substitutif (THS), quand il est approprié, peut changer radicalement la situation.
+    </div>
+
+    <div class="hl vert">
+      <strong>Ce que la science dit maintenant :</strong><br><br>
+      Le cerveau féminin est profondément sensible aux œstrogènes, ils régulent la sérotonine, la dopamine et le GABA. Quand les œstrogènes fluctuent ou chutent, tout le système de régulation émotionnelle est déstabilisé. Ce n'est pas psychologique d'abord, c'est neurobiologique.<br><br>
+      <span style="font-size:11px;color:#60a080;">Dr Lisa Mosconi, The Menopause Brain / Dr Mary Claire Haver, The New Menopause, 2024</span>
+    </div>
+
+    <div class="hl or">
+      <strong>Quand consulter :</strong> Si tu as plus de 35 ans et ressens une anxiété ou dépression nouvelle, des troubles du sommeil inhabituels, une irritabilité intense ou un brouillard mental qui ne s'explique pas autrement, demande une évaluation hormonale à ton médecin. Pas juste un antidépresseur d'emblée.
+    </div>
+
+    <button class="btn" onclick="showPhase('suivi')">Identifier ma phase aujourd'hui →</button>
+  </div>
+</div>
+
+<!-- SUIVI INTERACTIF -->
+<div class="phase" id="phase-suivi">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌡️</span>
+    <h2>Où en es-tu dans ton cycle aujourd'hui ?</h2>
+    <p style="text-align:center;margin-bottom:6px;">Choisis la phase qui correspond à où tu en es, ou la situation qui te ressemble le plus.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Tu recevras des conseils adaptés à ce que ton corps et tes émotions ont besoin en ce moment.</p>
+    <div id="suivi-container"></div>
+    <button class="btn" id="btn-suivi" disabled onclick="showConseilsSuivi()">Voir mes conseils →</button>
+  </div>
+</div>
+
+<!-- CONSEILS ADAPTÉS -->
+<div class="phase" id="phase-conseils">
+  <div class="card" style="margin-top:24px;">
+    <div id="conseils-header" style="text-align:center;margin-bottom:20px;"></div>
+    <div id="conseils-container"></div>
+    <button class="btn" onclick="showPhase('ecriture')">Passer à l'écriture ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/3</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Ma relation à mon cycle</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌙</span>
+    <h2>Ton cycle est une intelligence, pas un obstacle</h2>
+    <p>Comprendre ton cycle ne signifie pas être limitée par lui. Ça signifie travailler avec lui, choisir le bon moment pour les efforts intenses, te reposer quand ton corps le demande, et ne plus te battre contre des fluctuations qui ont une raison d'être.</p>
+    <div style="background:rgba(200,160,220,0.1);border-radius:16px;padding:20px;border:1px solid rgba(200,160,220,0.18);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c9a0c2;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À faire :</strong> Commence à noter dans ton agenda, même juste un mot, où tu en es dans ton cycle chaque semaine. En quelques mois, tu verras des patterns qui t'aideront à comprendre tes émotions avec beaucoup plus de clarté.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#7d6d8a;"><strong style="color:#4a3358;">Demain, Jour 18 :</strong> retrouver la joie</p>
+    <p class="hint" style="margin-top:6px;">13 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+// Étoiles
+const starsEl=document.getElementById('stars');
+for(let i=0;i<18;i++){
+  const s=document.createElement('div');s.className='star';
+  const size=Math.random()>0.7?3:2;
+  s.style.cssText=`width:${size}px;height:${size}px;top:${Math.random()*70}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*3}s`;
+  starsEl.appendChild(s);
+}
+
+const theorie=[
+  {emoji:"🧬",titre:"Comment tes hormones agissent sur ton cerveau et tes émotions",source:"Dr Lisa Mosconi, The XX Brain / Dr Sara Gottfried",contenu:[
+    {type:"texte",texte:"Tes hormones, œstrogènes, progestérone et les autres, ne s'occupent pas seulement de ton système reproducteur. Elles agissent directement sur ton cerveau, sur la sérotonine, la dopamine, le GABA, le cortisol. C'est exactement ça qui explique pourquoi tes émotions changent autant selon le moment du cycle."},
+    {type:"stat",texte:"Les œstrogènes rendent la sérotonine et la dopamine plus disponibles dans le cerveau. C'est pour ça qu'en première partie de cycle, quand ils montent, l'humeur est souvent plus lumineuse, l'énergie plus haute, l'esprit plus vif",source:"Dr Lisa Mosconi, Weill Cornell Medicine"},
+    {type:"stat",texte:"La progestérone, elle, a un effet apaisant, presque sédatif, elle agit sur les mêmes zones du cerveau que certains calmants. Sa chute juste avant les règles explique en grande partie l'anxiété, l'insomnie et l'irritabilité d'avant-règles",source:"Recherche en neuroendocrinologie"},
+    {type:"hl",texte:"💡 Alors non, les femmes ne sont pas \"instables émotionnellement\". Tes émotions bougent parce que ta chimie intérieure bouge : de façon réelle, mesurable, cyclique. Ce n'est pas \"dans ta tête\" au sens où on l'entend d'habitude. C'est dans ton cerveau, pour de vrai."},
+    {type:"hl",texte:"🔬 Et il y a quelque chose de fascinant : le cerveau féminin traverse plusieurs grands remaniements dans une vie : la puberté, la grossesse, le post-partum, la ménopause. Chacune de ces étapes est à la fois une période de fragilité et de transformation profonde. Une vraie force, cachée dans le mouvement.",classe:"vert"},
+  ]},
+  {emoji:"🌈",titre:"Les 4 phases, 4 versions de toi",source:"Alexandra Pope & Sjanie Hugo Wurlitzer, Wild Power",contenu:[
+    {type:"texte",texte:"Ton cycle, ce n'est pas juste \"les règles\". C'est un cycle complet en quatre phases, chacune avec sa propre chimie, ses forces, ses besoins. Apprendre à les connaître, c'est apprendre à avancer avec toi-même, au lieu de te forcer contre ton propre courant. Il faut environ un mois pour le traverser en entier."},
+    {type:"hl",texte:"🌑 HIVER · quand tu as tes règles : repli, intuition, besoin de calme et de silence. L'énergie est basse, et c'est voulu. Ton cerveau traite, digère, intègre. C'est une phase de sagesse intérieure, pas de faiblesse."},
+    {type:"hl",texte:"🌱 PRINTEMPS · après tes règles : l'énergie remonte, l'esprit s'éclaircit, la créativité et l'envie des autres reviennent. C'est ta phase du \"oui\", parfaite pour les projets, les conversations importantes, les nouveaux départs.",classe:"vert"},
+    {type:"hl",texte:"☀️ ÉTÉ · autour de l'ovulation : pic d'énergie, de confiance, les mots viennent facilement. Tu rayonnes. Le moment idéal pour ce qui demande de la présence : présentations, négociations, retrouvailles.",classe:"or"},
+    {type:"hl",texte:"🍂 AUTOMNE · avant tes règles : besoin de ralentir, de terminer les choses, de te tourner vers l'intérieur. Si tu te forces à vivre l'automne comme le printemps, tu épuises tes réserves. Ralentir n'est pas paresser, c'est respecter ta saison.",classe:"rouge"},
+  ]},
+];
+
+const phases4=[
+  {nom:"Phase menstruelle",emoji:"🌑",jours:"Jours 1 à 5",couleur:"#c9a0c2",bg:"rgba(201,160,194,0.1)",border:"rgba(201,160,194,0.3)",
+    hormones:"Oestrogènes & Progestérone au plus bas",hormonesStyle:"background:rgba(201,160,194,0.2);color:#c9a0c2;",
+    desc:"Le corps travaille intensément. L'énergie est intentionnellement basse : ton système nerveux est en mode récupération.",
+    emotions:"Besoin de calme, d'intériorité, de douceur. Intuition souvent accrue. Vulnérabilité émotionnelle réelle.",
+    conseils:"Réduire les engagements si possible. Repos, chaleur, soupe. Pas le moment des grandes décisions. Yoga Yin, étirements doux. Honorer ce besoin de retrait sans culpabilité."},
+  {nom:"Phase folliculaire",emoji:"🌒",jours:"Jours 6 à 13",couleur:"#80c8a8",bg:"rgba(128,200,168,0.1)",border:"rgba(128,200,168,0.3)",
+    hormones:"Oestrogènes en hausse",hormonesStyle:"background:rgba(128,200,168,0.2);color:#80c8a8;",
+    desc:"L'énergie remonte. La clarté mentale revient. C'est ta phase de renaissance, idéale pour commencer, créer, planifier.",
+    emotions:"Optimisme naturel, curiosité, sociabilité, créativité. La sérotonine monte avec les œstrogènes.",
+    conseils:"Planifier les projets importants ici. Sports plus intenses possibles et bénéfiques. Conversations difficiles plus accessibles. Bonne période pour les nouvelles habitudes."},
+  {nom:"Ovulation",emoji:"🌕",jours:"Jours 14 à 16",couleur:"#c8a870",bg:"rgba(200,168,112,0.1)",border:"rgba(200,168,112,0.3)",
+    hormones:"Pic d'oestrogènes + LH",hormonesStyle:"background:rgba(200,168,112,0.2);color:#c8a870;",
+    desc:"Ton pic d'énergie, de confiance et de présence. Tu communiques avec facilité, tu rayonnes naturellement.",
+    emotions:"Confiance en soi élevée, générosité, magnétisme social, désir de connexion.",
+    conseils:"Moment idéal pour les présentations, les négociations, les conversations importantes. Attention aux ligaments plus souples, risque de blessure légèrement augmenté. Sports intenses possibles."},
+  {nom:"Phase lutéale",emoji:"🌘",jours:"Jours 17 à 28",couleur:"#e8a85c",bg:"rgba(232,168,92,0.1)",border:"rgba(232,168,92,0.3)",
+    hormones:"Progestérone monte puis chute",hormonesStyle:"background:rgba(232,168,92,0.2);color:#e8a85c;",
+    desc:"L'énergie décroît progressivement. La progestérone, sédatif naturel, monte puis s'effondre avant les règles.",
+    emotions:"Irritabilité croissante, sensibilité accrue, besoin de repli, critique intérieure plus forte. C'est hormonal, pas un défaut de caractère.",
+    conseils:"Réduire progressivement l'intensité des engagements. Pilates, yoga, marche. Prioriser le sommeil. En fin de phase : douceur maximale. Éviter les grandes décisions les 3 derniers jours."},
+];
+
+const suiviOptions=[
+  {id:"menstruelle",titre:"Phase menstruelle · j'ai mes règles",sous:"Je suis en début de cycle, fatiguée, repliée sur moi-même.",couleur:"#c9a0c2",
+    conseils:{
+      energie:"Ton énergie est intentionnellement basse, c'est biologique, pas psychologique. Honore ce besoin de repos sans culpabilité.",
+      mouvement:"Yoga Yin, étirements très doux, marche lente. Pas de sport intense : ton corps a d'autres priorités.",
+      emotions:"Si tu pleures sans raison apparente ou que tu te sens très sensible, c'est normal. Tes hormones sont au plus bas. Sois ta meilleure amie.",
+      nutrition:"Fer, magnésium, oméga-3. Chocolat noir si tu en as envie : le magnésium qu'il contient aide vraiment.",
+      eviter:"Les grandes décisions, les confrontations, la sur-stimulation sociale. Ce n'est pas le bon moment.",
+    }
+  },
+  {id:"folliculaire",titre:"Phase folliculaire · énergie qui monte",sous:"Mes règles sont terminées, je me sens de mieux en mieux.",couleur:"#80c8a8",
+    conseils:{
+      energie:"C'est ta fenêtre d'or. Utilise cette énergie montante pour les projets, les nouveaux départs, les conversations importantes.",
+      mouvement:"Sports plus intenses possibles et bénéfiques, HIIT, course, musculation avec charges plus lourdes.",
+      emotions:"L'optimisme revient naturellement. Profite de cette clarté pour avancer sur ce qui te tient à cœur.",
+      nutrition:"Légumes verts, protéines, graines germées. Ton corps reconstruit.",
+      eviter:"Gaspiller cette énergie sur des tâches sans importance. Planifie ton mois depuis ici.",
+    }
+  },
+  {id:"ovulation",titre:"Ovulation · pic d'énergie et de présence",sous:"Je me sens rayonnante, confiante, connectée.",couleur:"#c8a870",
+    conseils:{
+      energie:"Tu es à ton maximum. Momentum pour les projets les plus ambitieux, les rencontres importantes, les prises de décision.",
+      mouvement:"Sports intenses, danser, tout ce qui célèbre le corps en mouvement. Attention aux articulations légèrement plus souples.",
+      emotions:"Profite de la facilité de communication. C'est le moment des conversations difficiles, tu y arrives mieux.",
+      nutrition:"Hydratation ++. Aliments anti-inflammatoires. Léger et énergisant.",
+      eviter:"L'hyperconnexion sociale qui drainerait l'énergie. Garde de l'espace pour toi aussi.",
+    }
+  },
+  {id:"luteale_debut",titre:"Phase lutéale début · ralentissement",sous:"Je commence à me sentir moins en élan, plus intérieure.",couleur:"#e8a85c",
+    conseils:{
+      energie:"L'énergie décroît, c'est normal et prévisible. Commence à réduire l'intensité de tes engagements.",
+      mouvement:"Pilates, yoga doux, marche. Musculation avec charges légères à modérées.",
+      emotions:"La progestérone monte, tu peux te sentir plus émotive, plus critique. C'est hormonal.",
+      nutrition:"Magnésium, vitamine B6, calcium. Réduire le sucre et la caféine qui amplifient les symptômes.",
+      eviter:"Te forcer à maintenir le rythme de la phase folliculaire. Tu épuiseras tes ressources.",
+    }
+  },
+  {id:"luteale_fin",titre:"Phase lutéale fin, pré-menstruelle",sous:"SPM, irritabilité, larmes, fatigue intense, les règles arrivent bientôt.",couleur:"#e8857a",
+    conseils:{
+      energie:"Douceur maximale. Ce n'est pas le moment de performer, c'est le moment de survivre avec grâce.",
+      mouvement:"Étirements doux, yoga très calme, promenade. Pas de sport intense.",
+      emotions:"Si tes symptômes sont très intenses et récurrents, note-les : le PMDD mérite une consultation médicale.",
+      nutrition:"Repas chauds, réconfortants. Éviter l'alcool, le sucre, la caféine, ils aggravent les symptômes prémenstruels.",
+      eviter:"Les grandes décisions, les conflits importants, la comparaison aux autres. Toutes les pensées négatives sont amplifiées par la chute hormonale.",
+    }
+  },
+  {id:"perimenopause",titre:"Périménopause / Ménopause",sous:"Mon cycle est irrégulier ou absent, je traverse une transition hormonale.",couleur:"#a080c8",
+    conseils:{
+      energie:"Les fluctuations peuvent être imprévisibles. Apprends à lire les signaux de ton corps plutôt que le calendrier.",
+      mouvement:"Musculation douce, essentielle pour la santé osseuse. Pilates, yoga. Marche quotidienne.",
+      emotions:"Les symptômes psychiatriques sont réels et traçables à la neurobiologie hormonale. Consulte si l'anxiété ou la dépression sont nouvelles ou intenses.",
+      nutrition:"Calcium, vitamine D, phytoœstrogènes (soja, lin). Réduire l'alcool et la caféine.",
+      eviter:"Minimiser tes symptômes ou les attribuer à \"l'âge\". Tu mérites une prise en charge adaptée.",
+    }
+  },
+];
+
+const ecritureQs=[
+  {q:"Est-ce que tu reconnais des patterns émotionnels liés à ton cycle, que tu n'avais pas nommés comme tels avant ?",sous:"Des moments récurrents de tristesse, d'irritabilité, d'énergie ou de clarté...",placeholder:"Je remarque que chaque mois je ressens... / Je comprends maintenant que..."},
+  {q:"Est-ce qu'il y a des symptômes cycliques qui mériteraient que tu consultes, et que tu as peut-être minimisés jusqu'ici ?",sous:"SPM sévère, PMDD possible, périménopause non investiguée...",placeholder:"Ce que j'ai minimisé jusqu'ici c'est... / Ce que j'aimerais aborder avec mon médecin c'est..."},
+  {q:"Comment aimerais-tu adapter ta vie à ton cycle : de façon réaliste ?",sous:"Dans ton travail, tes engagements, tes pratiques de soin, tes relations...",placeholder:"Ce que j'aimerais adapter c'est..."},
+];
+
+let theorieIdx=0, selectedSuivi=null, eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='4phases') renderPhases();
+  if(id==='suivi') renderSuivi();
+  if(id==='ecriture') renderE();
+}
+
+// Preview
+const pc=document.getElementById('preview-container');
+[{e:'🧬',t:'Hormones et cerveau, la science'},{e:'🌈',t:'Les 4 phases, 4 saisons intérieures'},{e:'⚠️',t:'SPM et PMDD, différence et quand consulter'},{e:'🌿',t:'Périménopause & Ménopause, les bouleversements'},{e:'🌡️',t:'Suivi interactif, conseils adaptés à ta phase'},{e:'✍️',t:'Écriture guidée, ta relation à ton cycle'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:15px;color:#5d4d6a;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Les 4 saisons 🌑🌒🌕🌘':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('4phases');
+}
+
+function renderPhases(){
+  const el=document.getElementById('phases-container');
+  el.innerHTML='';
+  phases4.forEach(ph=>{
+    el.innerHTML+=`
+      <div class="phase-cycle" style="background:${ph.bg};border-color:${ph.border};">
+        <div class="phase-cycle-header">
+          <div class="phase-cycle-dot" style="background:${ph.couleur};"></div>
+          <div class="phase-cycle-nom">${ph.emoji} ${ph.nom}</div>
+          <div class="phase-cycle-jours">${ph.jours}</div>
+        </div>
+        <div class="phase-cycle-hormones" style="${ph.hormonesStyle}">${ph.hormones}</div>
+        <div class="phase-cycle-desc" style="color:#5d4d6a;">${ph.desc}</div>
+        <div class="phase-cycle-emotions" style="background:rgba(200,160,220,0.14);color:#6d5d7a;">${ph.emotions}</div>
+        <div class="phase-cycle-conseils">${ph.conseils}</div>
+      </div>`;
+  });
+}
+
+function renderSuivi(){
+  const el=document.getElementById('suivi-container');
+  el.innerHTML='';
+  suiviOptions.forEach((s,i)=>{
+    const btn=document.createElement('button');
+    btn.className='suivi-btn';
+    btn.id='suivi-'+i;
+    btn.style.borderColor=s.couleur+'30';
+    btn.innerHTML=`
+      <div class="suivi-pastille" style="background:${s.couleur};"></div>
+      <div>
+        <div class="suivi-titre">${s.titre}</div>
+        <div class="suivi-sous" style="color:${s.couleur};">${s.sous}</div>
+      </div>`;
+    btn.onclick=()=>{
+      document.querySelectorAll('.suivi-btn').forEach(b=>{b.classList.remove('selected');b.style.borderColor=suiviOptions[parseInt(b.id.replace('suivi-',''))].couleur+'30';});
+      btn.classList.add('selected');btn.style.borderColor=s.couleur;
+      selectedSuivi=i;document.getElementById('btn-suivi').disabled=false;
+    };
+    el.appendChild(btn);
+  });
+}
+
+function showConseilsSuivi(i){
+  if(typeof i==='number') selectedSuivi=i;
+  if(selectedSuivi===null)return;
+  const s=suiviOptions[selectedSuivi];
+  document.getElementById('conseils-header').innerHTML=`
+    <div style="display:inline-block;background:${s.couleur};color:white;border-radius:20px;padding:6px 16px;font-size:12px;font-family:'Jost',sans-serif;margin-bottom:12px;">${s.titre}</div>
+    <h2 style="font-size:18px;color:#4a3358;">Tes conseils pour cette phase</h2>`;
+  const cc=document.getElementById('conseils-container');
+  cc.innerHTML='';
+  const sections={
+    energie:{label:'Énergie & Rythme',couleur:'#c8a870'},
+    mouvement:{label:'Mouvement',couleur:'#80c8a8'},
+    emotions:{label:'Émotions',couleur:'#c9a0c2'},
+    nutrition:{label:'Nutrition',couleur:'#e8a85c'},
+    eviter:{label:'À éviter',couleur:'#e8857a'},
+  };
+  Object.entries(s.conseils).forEach(([key,val])=>{
+    const sec=sections[key];
+    cc.innerHTML+=`
+      <div class="conseil-section" style="background:rgba(255,255,255,0.6);border-color:${sec.couleur}40;">
+        <div class="conseil-titre" style="color:${sec.couleur};">${sec.label}</div>
+        <div class="conseil-item" style="border-left-color:${sec.couleur};">${val}</div>
+      </div>`;
+  });
+  // Navigation vers les autres phases
+  let autresHtml='<div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(200,180,220,0.2);"><p style="font-size:14px;color:#6d5d7a;text-align:center;margin-bottom:12px;font-family:\'Jost\',sans-serif;">Explore aussi les conseils des autres phases : ce sont toutes des versions de toi :</p>';
+  suiviOptions.forEach((autre,idx)=>{
+    if(idx!==selectedSuivi){
+      autresHtml+=`<button onclick="showConseilsSuivi(${idx})" style="width:100%;text-align:left;padding:12px 15px;border-radius:12px;border:1.5px solid ${autre.couleur}55;background:rgba(255,255,255,0.6);cursor:pointer;font-family:'Lora',serif;font-size:14.5px;font-weight:500;color:${autre.couleur};margin-bottom:8px;">→ ${autre.titre}</button>`;
+    }
+  });
+  autresHtml+='</div>';
+  cc.innerHTML+=autresHtml;
+  showPhase('conseils');
+}
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 17 🌙';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val){
+    eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  }
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 17 · Mon cycle feminin</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour17-cycle-feminin-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

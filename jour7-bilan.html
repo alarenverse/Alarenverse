@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 7 · Bilan de la semaine 1 · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf8f0 0%,#f5f0e8 50%,#f0f5f0 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b0a890;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d3828;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c8a870,#80b890);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(180,160,100,0.12);border:1px solid rgba(200,180,120,0.2);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c8a870;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d3828;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d3828;margin-bottom:14px;line-height:1.4}
+  p{color:#6d6040;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a7850}
+  .btn{background:linear-gradient(135deg,#c8a870,#80b890);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(180,150,80,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,180,120,0.3);color:#b0a880;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#b8b090;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .highlight{background:linear-gradient(135deg,#fdf8ee,#f0f8f0);border-radius:14px;padding:14px 18px;border-left:3px solid #c8a870;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(200,180,120,0.15);font-size:11px;color:#b0a880;font-family:'Jost',sans-serif}
+
+  /* Bilan réflexif */
+  .bilan-item{margin-bottom:22px}
+  .bilan-q{font-size:16px;color:#3d3828;line-height:1.6;margin-bottom:6px}
+  .bilan-sous{font-size:13px;color:#a09070;margin-bottom:12px;font-family:'Jost',sans-serif}
+  textarea{width:100%;border:2px solid rgba(200,180,120,0.3);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d3828;line-height:1.7;outline:none;resize:vertical;background:#fdfaf4}
+  textarea:focus{border-color:#c8a870}
+
+  /* Roue de la vie */
+  .roue-item{margin-bottom:20px}
+  .roue-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .roue-nom{font-size:17px;color:#3d3828;font-style:italic}
+  .roue-val{font-family:'Jost',sans-serif;font-size:13px;color:#c8a870;font-weight:400}
+  .roue-track{height:10px;background:rgba(200,180,120,0.15);border-radius:8px;overflow:hidden;margin-bottom:6px;cursor:pointer;position:relative}
+  .roue-fill{height:100%;border-radius:8px;transition:width 0.3s ease}
+  .roue-dots{display:flex;justify-content:space-between;padding:0 2px}
+  .roue-dot-label{font-size:10px;color:#b0a880;font-family:'Jost',sans-serif}
+  .roue-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .roue-btn{border:1px solid rgba(200,180,120,0.3);border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;font-family:'Jost',sans-serif;background:transparent;color:#8a7850;transition:all 0.2s}
+  .roue-btn:hover{background:rgba(200,180,120,0.15);border-color:#c8a870}
+  .roue-btn.active{background:linear-gradient(135deg,#c8a870,#80b890);color:white;border-color:transparent}
+
+  /* Radar visuel */
+  .radar-wrap{text-align:center;margin:20px 0}
+  canvas{max-width:280px;width:100%}
+
+  .recap-box{background:linear-gradient(135deg,#fdf8ee,#f0f8f0);border-radius:14px;padding:14px 18px;border:1px solid rgba(200,180,120,0.2);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b0a880;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#fdf8ee,#f0f8f0);border-radius:20px;padding:22px;border:1px solid rgba(200,180,120,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🗓️</span>
+    <div class="label">Jour 7 · Bilan de la semaine 1</div>
+    <h2>Tu as fait quelque chose de courageux cette semaine</h2>
+    <p>Tu t'es arrêtée. Tu t'es regardée. Tu as commencé à t'écouter. Ce n'est pas rien, c'est même beaucoup.</p>
+    <p class="small" style="margin-bottom:22px;">Aujourd'hui on ne va pas plus loin. On regarde derrière, on prend la mesure du chemin parcouru, et on se prépare doucement pour la semaine 2.</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:22px;text-align:left;">
+      <div style="display:flex;align-items:center;gap:12px;background:rgba(200,180,120,0.07);border:1px solid rgba(200,180,120,0.15);border-radius:12px;padding:10px 14px;"><span style="font-size:16px;">🧠</span><span style="font-size:13px;color:#907850;font-family:'Jost',sans-serif;">Pourquoi les bilans sont essentiels en psychologie</span></div>
+      <div style="display:flex;align-items:center;gap:12px;background:rgba(200,180,120,0.07);border:1px solid rgba(200,180,120,0.15);border-radius:12px;padding:10px 14px;"><span style="font-size:16px;">💭</span><span style="font-size:13px;color:#907850;font-family:'Jost',sans-serif;">Bilan réflexif : ce qui a résonné, ce qui a été difficile</span></div>
+      <div style="display:flex;align-items:center;gap:12px;background:rgba(200,180,120,0.07);border:1px solid rgba(200,180,120,0.15);border-radius:12px;padding:10px 14px;"><span style="font-size:16px;">🌿</span><span style="font-size:13px;color:#907850;font-family:'Jost',sans-serif;">Roue de la vie, où en es-tu après 7 jours ?</span></div>
+    </div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer mon bilan 🗓️</button>
+    <p class="hint">~15 minutes de douceur et de recul</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="card" style="margin-top:24px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span style="font-size:32px;">🧠</span>
+      <h3 style="margin-bottom:0;">Pourquoi s'arrêter pour faire le point change tout</h3>
+    </div>
+    <p>On vit souvent en pilote automatique, d'une tâche à l'autre, sans jamais prendre le temps de regarder ce qu'on traverse. Or s'arrêter pour faire le point, c'est une des choses les plus protectrices qui soient pour ton mental.</p>
+    <div class="highlight">
+      💡 Il y a une expression en psychologie que j'aime beaucoup : "name it to tame it", nomme-le pour l'apprivoiser. Le simple fait de mettre des mots sur ce que tu as vécu change la façon dont ton cerveau le range et le digère. Ce que tu nommes a moins d'emprise sur toi.
+    </div>
+    <p>Faire un bilan, ce n'est pas un exercice scolaire avec des bonnes et des mauvaises réponses. C'est un moment où tu prends un peu de recul sur ta propre vie, et ce recul, justement, te permet d'observer ce que tu vis au lieu de seulement le subir.</p>
+    <div class="highlight" style="border-left-color:#80b890;background:linear-gradient(135deg,#f0f8f0,#f8fdf4);">
+      🌿 Et ça se travaille comme un muscle. Les personnes qui prennent l'habitude de revenir sur leur vécu, ne serait-ce que quelques minutes par semaine, deviennent peu à peu plus solides face aux tempêtes. Plus capables de rebondir.<br><br>
+      <span style="font-size:11px;color:#90a890;font-style:normal;">Inspiré des travaux de Daniel Siegel, Martin Seligman et James Pennebaker</span>
+    </div>
+    <p>Tu viens de traverser 7 jours. Tu as regardé tes émotions, ton système nerveux, ton repos, tes limites, ton corps. Une semaine entière à apprendre à te connaître. Ça mérite vraiment qu'on s'arrête un instant.</p>
+    <button class="btn" onclick="showPhase('bilan')">Passer au bilan 💭</button>
+  </div>
+</div>
+
+<!-- BILAN RÉFLEXIF -->
+<div class="phase" id="phase-bilan">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💭</span>
+    <h2>Bilan de ta semaine 1</h2>
+    <p style="text-align:center;margin-bottom:22px;">Prends le temps de répondre à ce qui te parle, sans te juger, sans chercher la bonne réponse. Tu peux laisser des questions de côté.</p>
+
+    <div class="bilan-item">
+      <div class="bilan-q">Parmi les 6 journées, laquelle a le plus résonné en toi ? Pourquoi ?</div>
+      <div class="bilan-sous">Émotions · Respiration · Sommeil · Limites · Corps · ou autre chose ?</div>
+      <textarea id="b1" rows="4" placeholder="Le jour qui m'a le plus touchée c'est..." oninput="checkBilan()"></textarea>
+    </div>
+
+    <div class="bilan-item">
+      <div class="bilan-q">Qu'est-ce qui a été difficile ou résistant cette semaine ?</div>
+      <div class="bilan-sous">Une pratique que tu n'as pas réussi à faire, quelque chose qui t'a heurtée, une résistance intérieure...</div>
+      <textarea id="b2" rows="4" placeholder="Ce qui a été difficile c'est..." oninput="checkBilan()"></textarea>
+    </div>
+
+    <div class="bilan-item">
+      <div class="bilan-q">Quelle est la chose la plus importante que tu as apprise ou réalisée sur toi-même cette semaine ?</div>
+      <div class="bilan-sous">Même petite, même subtile : une prise de conscience compte.</div>
+      <textarea id="b3" rows="4" placeholder="J'ai réalisé que..." oninput="checkBilan()"></textarea>
+    </div>
+
+    <div class="bilan-item">
+      <div class="bilan-q">Comment tu vas prendre soin de toi différemment la semaine prochaine ?</div>
+      <div class="bilan-sous">Une seule chose concrète, pas une liste. Une intention.</div>
+      <textarea id="b4" rows="3" placeholder="La semaine prochaine je vais..." oninput="checkBilan()"></textarea>
+    </div>
+
+    <button class="btn" id="btn-bilan" onclick="showPhase('roue')">Passer à la roue de la vie 🌿</button>
+  </div>
+</div>
+
+<!-- ROUE DE LA VIE -->
+<div class="phase" id="phase-roue">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <h2>Roue de la vie, après 7 jours</h2>
+    <p style="text-align:center;margin-bottom:6px;">Note chaque dimension de 1 à 5, pas comme tu voudrais qu'elle soit, mais comme tu la ressens <em>aujourd'hui</em>.</p>
+    <p class="small" style="text-align:center;margin-bottom:22px;">1 = très difficile · 3 = ça va · 5 = épanouie</p>
+
+    <div id="roue-container"></div>
+
+    <div class="radar-wrap">
+      <canvas id="radar-canvas" width="280" height="280"></canvas>
+    </div>
+
+    <button class="btn" id="btn-roue" onclick="showFin()">Terminer mon bilan ✨</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌟</span>
+    <h2>Une semaine de chemin parcouru</h2>
+    <p>Tu as fait quelque chose que beaucoup n'osent pas : tu t'es arrêtée pour te regarder avec honnêteté. C'est le fondement de tout changement durable.</p>
+
+    <div style="background:linear-gradient(135deg,#fdf8ee,#f0f8f0);border-radius:16px;padding:20px;border:1px solid rgba(200,180,120,0.2);text-align:left;margin:16px 0;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">💭 Tes réflexions de la semaine 1</div>
+      <div id="recap-container"></div>
+    </div>
+
+    <div class="highlight" style="text-align:left;">
+      🔑 <strong>À retenir :</strong> Le changement ne se fait pas en ligne droite. Il y a des jours de grâce et des jours de résistance. Les deux font partie du chemin. Tu es exactement là où tu dois être.
+    </div>
+  </div>
+
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:10px;">🌱</div>
+    <p style="font-size:17px;color:#7d6840;margin-bottom:6px;"><strong>Semaine 2 · Se réguler</strong></p>
+    <p style="font-size:14px;color:#907850;">Voix intérieure · Gratitude · Relations · Joie · Cycle féminin</p>
+    <p class="hint" style="margin-top:10px;">23 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const dimensions = [
+  { nom:"💛 Émotions", couleur:"#f5c842" },
+  { nom:"🌙 Sommeil", couleur:"#a08ec2" },
+  { nom:"🌸 Corps", couleur:"#e8a0b4" },
+  { nom:"⚡ Énergie", couleur:"#90b8d0" },
+  { nom:"🛡️ Limites", couleur:"#c2836a" },
+  { nom:"🤝 Relations", couleur:"#80c8a8" },
+];
+
+let roueValues = { 0:0, 1:0, 2:0, 3:0, 4:0, 5:0 };
+
+function showPhase(id) {
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='roue') renderRoue();
+}
+
+function checkBilan() {
+  // Le bouton reste toujours accessible, chacune avance à son rythme
+}
+
+function renderRoue() {
+  const el = document.getElementById('roue-container');
+  el.innerHTML = '';
+  dimensions.forEach((dim, i) => {
+    const val = roueValues[i] || 0;
+    const pct = (val/5)*100;
+    el.innerHTML += `
+      <div class="roue-item">
+        <div class="roue-label">
+          <span class="roue-nom">${dim.nom}</span>
+          <span class="roue-val">${val > 0 ? val+'/5' : ''}</span>
+        </div>
+        <div class="roue-track">
+          <div class="roue-fill" id="fill-${i}" style="width:${pct}%;background:linear-gradient(90deg,${dim.couleur},${dim.couleur}99);"></div>
+        </div>
+        <div class="roue-btns">
+          ${[1,2,3,4,5].map(n=>`<button class="roue-btn ${val===n?'active':''}" onclick="setRoue(${i},${n})">${n}</button>`).join('')}
+        </div>
+      </div>`;
+  });
+  drawRadar();
+}
+
+function setRoue(dimIdx, val) {
+  roueValues[dimIdx] = val;
+  renderRoue();
+}
+
+function drawRadar() {
+  const canvas = document.getElementById('radar-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+  const maxR = 100;
+  const n = dimensions.length;
+  ctx.clearRect(0,0,W,H);
+
+  // Grille
+  for(let r=1;r<=5;r++){
+    ctx.beginPath();
+    for(let i=0;i<n;i++){
+      const angle = (i/n)*Math.PI*2 - Math.PI/2;
+      const x = cx + (maxR*r/5)*Math.cos(angle);
+      const y = cy + (maxR*r/5)*Math.sin(angle);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(200,180,120,0.2)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Axes
+  for(let i=0;i<n;i++){
+    const angle = (i/n)*Math.PI*2 - Math.PI/2;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+maxR*Math.cos(angle), cy+maxR*Math.sin(angle));
+    ctx.strokeStyle='rgba(200,180,120,0.3)';
+    ctx.lineWidth=1;
+    ctx.stroke();
+
+    // Labels
+    const lx = cx+(maxR+22)*Math.cos(angle);
+    const ly = cy+(maxR+22)*Math.sin(angle);
+    ctx.font='11px Jost, sans-serif';
+    ctx.fillStyle='#907850';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(dimensions[i].nom.split(' ')[0], lx, ly);
+  }
+
+  // Données
+  const vals = dimensions.map((_,i)=>roueValues[i]||0);
+  if(vals.some(v=>v>0)){
+    ctx.beginPath();
+    for(let i=0;i<n;i++){
+      const angle = (i/n)*Math.PI*2 - Math.PI/2;
+      const r = maxR*(vals[i]/5);
+      const x = cx+r*Math.cos(angle);
+      const y = cy+r*Math.sin(angle);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.fillStyle='rgba(200,168,112,0.25)';
+    ctx.fill();
+    ctx.strokeStyle='#c8a870';
+    ctx.lineWidth=2;
+    ctx.stroke();
+
+    // Points
+    for(let i=0;i<n;i++){
+      const angle = (i/n)*Math.PI*2 - Math.PI/2;
+      const r = maxR*(vals[i]/5);
+      ctx.beginPath();
+      ctx.arc(cx+r*Math.cos(angle), cy+r*Math.sin(angle), 4, 0, Math.PI*2);
+      ctx.fillStyle='#c8a870';
+      ctx.fill();
+    }
+  }
+}
+
+function showFin() {
+  const rc = document.getElementById('recap-container');
+  rc.innerHTML = '';
+  const bilans = [
+    { q:"Ce qui a le plus résonné", r:document.getElementById('b1').value.trim() },
+    { q:"Ce qui a été difficile", r:document.getElementById('b2').value.trim() },
+    { q:"Ma prise de conscience principale", r:document.getElementById('b3').value.trim() },
+    { q:"Mon intention pour la semaine 2", r:document.getElementById('b4').value.trim() },
+  ];
+  bilans.forEach((b,i)=>{
+    if(!b.r) return;
+    rc.innerHTML+=`<div class="recap-box" ${i<bilans.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${b.q}</div><div class="recap-r">"${b.r}"</div></div>`;
+  });
+  showPhase('fin');
+}
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 7 · Bilan semaine 1</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour7-bilan-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

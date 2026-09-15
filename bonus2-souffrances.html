@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonus 2 · Les grandes souffrances féminines · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f8f0fa 0%,#f0f5f8 50%,#fdf8f0 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 20px 80px;color:#2d2040;line-height:1.8}
+  header{width:100%;max-width:580px;padding-top:40px;text-align:center;margin-bottom:10px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#9080a8;margin-bottom:10px}
+  h1{font-size:clamp(22px,5vw,30px);font-weight:500;color:#2d2040;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#a070c0,#7090c0);margin:14px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:36px 28px;box-shadow:0 8px 40px rgba(140,100,180,0.1);border:1px solid rgba(160,120,200,0.15);max-width:580px;width:100%;margin-top:24px}
+  .emoji-hero{font-size:52px;display:block;text-align:center;margin-bottom:16px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#a070c0;text-align:center;margin-bottom:10px}
+  h2{font-size:24px;font-weight:600;color:#2d2040;text-align:center;margin-bottom:16px;line-height:1.4}
+  h3{font-size:20px;font-weight:600;color:#2d2040;margin-bottom:14px;line-height:1.4}
+  p{font-size:18px;color:#4d3860;line-height:1.8;margin-bottom:14px}
+  p.note{font-size:15px;color:#9080a8;font-family:'Jost',sans-serif;margin-bottom:14px}
+  .btn{background:linear-gradient(135deg,#a070c0,#7090c0);color:white;border:none;border-radius:50px;padding:15px 44px;font-size:17px;cursor:pointer;font-family:'Lora',serif;font-weight:500;box-shadow:0 4px 20px rgba(140,100,180,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-outline{background:transparent;border:2px solid rgba(160,120,200,0.4);color:#a070c0;border-radius:50px;padding:12px 28px;font-size:16px;cursor:pointer;font-family:'Lora',serif;font-weight:500;transition:all 0.2s;margin:6px auto;display:block;max-width:400px;width:100%}
+  .btn-outline:hover{background:rgba(160,120,200,0.08)}
+  .btn-outline.active-theme{background:linear-gradient(135deg,#a070c0,#7090c0);color:white;border-color:transparent}
+  .hint{font-size:13px;color:#b0a0c8;text-align:center;margin-top:12px;font-family:'Jost',sans-serif}
+  .hl{background:linear-gradient(135deg,#f5f0fa,#f0f5fb);border-radius:14px;padding:16px 20px;border-left:3px solid #a070c0;font-size:17px;color:#2d2040;line-height:1.8;margin-bottom:14px}
+  .hl.vert{border-left-color:#60a880;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.or{border-left-color:#c8a060;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .hl.bleu{border-left-color:#6090c0;background:linear-gradient(135deg,#eef4fb,#f0f4fd)}
+  .hl.rose{border-left-color:#c870a0;background:linear-gradient(135deg,#fdf0f5,#f8f0fa)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(160,120,200,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#a070c0,#7090c0);flex-shrink:0;margin-top:8px}
+  .stat-text{font-size:17px;color:#2d2040;line-height:1.7}
+  .stat-source{font-size:12px;color:#9080a8;margin-top:3px;font-family:'Jost',sans-serif}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(160,120,200,0.12);font-size:12px;color:#9080a8;font-family:'Jost',sans-serif}
+
+  /* Navigation thèmes */
+  .themes-nav{max-width:580px;width:100%;margin-top:20px;display:flex;flex-direction:column;gap:8px}
+  .theme-btn{border-radius:16px;padding:16px 20px;border:2px solid;background:white;cursor:pointer;font-family:'Lora',serif;font-size:17px;font-weight:500;text-align:left;transition:all 0.2s;display:flex;align-items:center;gap:14px}
+  .theme-btn:hover{transform:translateX(4px)}
+  .theme-emoji{font-size:24px;flex-shrink:0}
+  .theme-nom{font-size:17px;font-weight:600}
+  .theme-sous{font-size:14px;font-family:'Jost',sans-serif;margin-top:2px}
+
+  /* Signes */
+  .signe-item{border-radius:12px;padding:12px 16px;margin-bottom:8px;border:1px solid;font-size:16px;color:#2d2040;line-height:1.65;display:flex;gap:12px;align-items:flex-start}
+  .signe-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px}
+
+  /* Quand consulter */
+  .consulter-box{border-radius:16px;padding:20px;border:2px solid #e8857a;background:linear-gradient(135deg,#fde8e6,#fdf5f0);margin-top:16px}
+  .consulter-titre{font-size:17px;font-weight:600;color:#c04030;margin-bottom:10px}
+  .consulter-item{font-size:16px;color:#4d2020;line-height:1.7;margin-bottom:6px;display:flex;gap:10px}
+
+  /* Ressources */
+  .ressource-item{border-radius:12px;padding:12px 16px;margin-bottom:8px;background:linear-gradient(135deg,#f0f5fb,#f5f0fa);border:1px solid rgba(100,144,192,0.2);font-size:15px;color:#2d2040;font-family:'Jost',sans-serif}
+  .ressource-nom{font-weight:600;margin-bottom:2px}
+  .ressource-info{color:#7090a8;font-size:13px}
+
+  textarea{width:100%;border:2px solid rgba(160,120,200,0.25);border-radius:14px;padding:14px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#2d2040;line-height:1.7;outline:none;resize:vertical;background:#f8f5ff}
+  textarea:focus{border-color:#a070c0}
+  .recap-box{background:linear-gradient(135deg,#f5f0fa,#f0f5fb);border-radius:14px;padding:16px 18px;border:1px solid rgba(160,120,200,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#9080a8;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:16px;color:#2d2040;line-height:1.7}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · Bonus</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;">
+    <span class="emoji-hero">🧠</span>
+    <div class="label">Bonus 2 · Les grandes souffrances féminines</div>
+    <h2>Tu n'es pas seule. Et ce n'est pas dans ta tête.</h2>
+    <p>L'anxiété, le burn-out, la solitude, la dépression post-partum, la fausse couche, l'infertilité : ce sont des souffrances réelles, souvent invisibles, souvent minimisées. Par les autres. Parfois par toi-même.</p>
+    <p>Ce module ne remplace pas un accompagnement professionnel. Il te donne simplement des mots pour nommer ce que tu vis.</p>
+    <p class="note">Lis ce qui te concerne. Passe ce qui ne te parle pas. Reviens quand c'est le bon moment.</p>
+    <button class="btn" onclick="showPhase('intro-globale')">Commencer 🧠</button>
+    <p class="hint">Introduction · 6 thèmes · Outils · Ressources Suisse & France</p>
+  </div>
+</div>
+
+<!-- INTRO GLOBALE -->
+<div class="phase" id="phase-intro-globale">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🔗</span>
+    <h2>Ce qui relie tout : le fil commun</h2>
+    <p>Ces six souffrances semblent différentes. Mais elles partagent quelque chose d'essentiel : elles touchent toutes à l'identité féminine, à la maternité, réelle ou fantasmée, et à des transitions de vie qui bouleversent profondément qui on est.</p>
+
+    <div class="hl" style="margin-bottom:14px;">
+      <strong>Ce qu'elles ont en commun :</strong><br><br>
+      Elles sont toutes sous-diagnostiquées. Souvent minimisées par l'entourage, et par les femmes elles-mêmes. Souvent confondues entre elles. Et toutes aggravées par l'isolement et la honte.
+    </div>
+
+    <div class="hl bleu" style="margin-bottom:14px;">
+      <strong>Les femmes sont deux fois plus touchées par l'anxiété et la dépression que les hommes.</strong> Ce n'est pas une fragilité biologique, c'est le résultat de facteurs cumulés : pression sociale, charge mentale, fluctuations hormonales, violences subies, manque de reconnaissance. La biologie joue un rôle, mais le contexte aussi.
+    </div>
+
+    <div class="hl vert" style="margin-bottom:14px;">
+      <strong>Ce que la psychoéducation change :</strong><br><br>
+      Comprendre ce qu'on vit, lui donner un nom, connaître son mécanisme, savoir que d'autres en souffrent aussi, réduit la honte, réduit l'isolement, et ouvre la porte à demander de l'aide. C'est l'objectif de ce module.
+    </div>
+
+    <div class="hl or">
+      <strong>Une précision importante :</strong><br><br>
+      Ce module donne des repères, pas des diagnostics. Si tu te reconnais dans ce que tu lis et que ça perturbe ton fonctionnement quotidien, consulte un professionnel de santé. Un médecin généraliste, une sage-femme, un psychiatre, un psychologue, tous peuvent être des premiers interlocuteurs.
+    </div>
+
+    <button class="btn" onclick="showPhase('themes')">Choisir mon thème →</button>
+  </div>
+</div>
+
+<!-- NAVIGATION THÈMES -->
+<div class="phase" id="phase-themes">
+  <div class="card" style="margin-top:24px;text-align:center;">
+    <h2>Quel thème veux-tu explorer ?</h2>
+    <p>Clique sur celui qui te concerne. Tu pourras revenir à cette page pour en explorer d'autres.</p>
+  </div>
+  <div class="themes-nav">
+    <button class="theme-btn" style="border-color:rgba(232,133,122,0.35);background:#fde8e6;" onclick="showTheme('anxiete')">
+
+      <span class="theme-emoji">😰</span>
+      <div><div class="theme-nom" style="color:#c04030;">L'anxiété</div><div class="theme-sous" style="color:#e8857a;">Quand le cerveau ne s'arrête plus</div></div>
+    </button>
+    <button class="theme-btn" style="border-color:rgba(200,160,80,0.35);background:#fdf8ee;" onclick="showTheme('burnout')">
+      <span class="theme-emoji">🔥</span>
+      <div><div class="theme-nom" style="color:#7d5010;">Le burn-out féminin</div><div class="theme-sous" style="color:#c8a060;">L'épuisement qui va plus loin que la fatigue</div></div>
+    </button>
+    <button class="theme-btn" style="border-color:rgba(100,144,192,0.35);background:#eef4fb;" onclick="showTheme('solitude')">
+      <span class="theme-emoji">🌫️</span>
+      <div><div class="theme-nom" style="color:#3060a0;">La solitude</div><div class="theme-sous" style="color:#6090c0;">Se sentir seule même entourée</div></div>
+    </button>
+    <button class="theme-btn" style="border-color:rgba(160,128,200,0.35);background:#f5f0fa;" onclick="showTheme('postpartum')">
+      <span class="theme-emoji">👶</span>
+      <div><div class="theme-nom" style="color:#5030a0;">La dépression post-partum</div><div class="theme-sous" style="color:#a080c8;">Le tabou maternel</div></div>
+    </button>
+    <button class="theme-btn" style="border-color:rgba(200,112,160,0.35);background:#fdf0f5;" onclick="showTheme('faussecouche')">
+      <span class="theme-emoji">🌸</span>
+      <div><div class="theme-nom" style="color:#803060;">La fausse couche</div><div class="theme-sous" style="color:#c870a0;">Le deuil qu'on minimise</div></div>
+    </button>
+    <button class="theme-btn" style="border-color:rgba(80,160,120,0.35);background:#eaf5f0;" onclick="showTheme('infertilite')">
+      <span class="theme-emoji">🌱</span>
+      <div><div class="theme-nom" style="color:#1d5040;">L'infertilité</div><div class="theme-sous" style="color:#60a880;">Quand le corps ne suit pas le désir</div></div>
+    </button>
+    <button class="theme-btn" style="border-color:rgba(160,120,200,0.25);background:linear-gradient(135deg,#f5f0fa,#f0f5fb);" onclick="showPhase('fin')">
+      <span class="theme-emoji">🆘</span>
+      <div><div class="theme-nom" style="color:#a070c0;">Ressources & contacts d'aide</div><div class="theme-sous" style="color:#9080a8;">Suisse et France, numéros et adresses utiles</div></div>
+    </button>
+  </div>
+</div>
+
+<!-- THÈME DYNAMIQUE -->
+<div class="phase" id="phase-theme-detail">
+  <div class="card" style="margin-top:24px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
+      <span id="th-emoji" style="font-size:36px;"></span>
+      <div>
+        <div class="label" id="th-label" style="text-align:left;margin-bottom:4px;"></div>
+        <h2 id="th-titre" style="text-align:left;margin-bottom:0;font-size:22px;"></h2>
+      </div>
+    </div>
+    <p id="th-accroche" style="margin-top:12px;"></p>
+    <div id="th-contenu"></div>
+    <button class="btn" onclick="showPhase('themes')" style="margin-top:20px;">← Revenir aux thèmes</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌸</span>
+    <h2>Tu mérites d'être accompagnée</h2>
+    <p>Si quelque chose dans ce module t'a touchée, si tu t'es reconnue dans un ou plusieurs thèmes, c'est peut-être le moment de faire un pas vers un accompagnement professionnel.</p>
+    <p>Pas parce que tu ne peux pas t'en sortir seule. Parce que certaines souffrances sont trop lourdes à porter sans aide. Et demander de l'aide, c'est un acte de force, pas de faiblesse.</p>
+    <div class="hl vert" style="text-align:left;margin-top:16px;">
+      <strong>Ressources en Suisse :</strong><br><br>
+      Pro Mente Sana : 0800 858 858 (ligne gratuite, lun-ven 9h-12h)<br>
+      La Main Tendue : 143 (24h/24, gratuit, anonyme)<br>
+      Santépsy.ch : annuaire des psychologues en Suisse<br>
+      Maternité, Pro Familia Suisse : profamilia.ch
+    </div>
+    <div class="hl bleu" style="text-align:left;">
+      <strong>Ressources en France :</strong><br><br>
+      Numéro National Prévention Suicide : 3114 (24h/24)<br>
+      Mon Soutien Psy : consultations psychologue remboursées sur prescription<br>
+      Maman Blues : maman-blues.fr, réseau d'entraide post-partum<br>
+      Jumeaux & Plus / SOS Fausse Couche : sosfaussecouche.com
+    </div>
+    <button class="btn" onclick="telechargerReponses()" style="background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Garder ces ressources avec moi
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+
+    <button class="btn" onclick="showPhase('themes')" style="margin-top:14px;background:transparent;color:#a070c0;border:1.5px solid rgba(160,120,200,0.35);box-shadow:none;">Revenir aux thèmes</button>
+
+    <div style="margin-top:26px;padding-top:20px;border-top:1px solid rgba(160,120,200,0.2);">
+      <p style="font-size:15px;color:#6d5d7a;line-height:1.85;">Tu peux fermer cette page quand tu veux, et y revenir autant de fois que nécessaire.</p>
+      <p style="font-size:15px;color:#6d5d7a;line-height:1.85;">Ce module reste là pour toi. Le jour où tu en auras besoin, ou le jour où quelqu'un autour de toi en aura besoin.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const themes={
+  anxiete:{
+    emoji:"😰",
+    label:"Anxiété",
+    titre:"L'anxiété · quand le cerveau ne s'arrête plus",
+    accroche:"L'anxiété n'est pas de la sensibilité excessive. C'est un système d'alarme qui s'emballe, qui détecte des dangers là où il n'y en a pas, ou qui réagit de façon disproportionnée à des situations réelles. Et chez les femmes, elle est deux fois plus fréquente que chez les hommes.",
+    contenu:[
+      {type:"stat",texte:"1 femme sur 3 souffre d'un trouble anxieux au cours de sa vie. La prévalence est 2 fois plus élevée que chez les hommes, liée aux fluctuations hormonales, à la charge mentale chronique, et à des facteurs sociaux comme l'exposition aux violences",source:"OMS, World Mental Health Report 2022"},
+      {type:"titre",texte:"Ce que c'est, et ce que ce n'est pas"},
+      {type:"hl",texte:"L'anxiété est une réponse normale du cerveau face à une menace perçue, réelle ou imaginaire. Le problème commence quand le système d'alarme reste enclenché en permanence, même sans danger réel. Le cortisol reste élevé, le système nerveux reste en hypervigilance, le cerveau cherche en permanence ce qui pourrait mal tourner."},
+      {type:"titre",texte:"Les signes à reconnaître"},
+      {type:"signes",couleur:"#e8857a",bg:"#fde8e6",items:["Pensées qui s'enchaînent et qu'on n'arrive pas à arrêter","Sentiment de catastrophe imminente sans raison précise","Difficultés à s'endormir ou réveils nocturnes avec ruminations","Tension musculaire chronique, nuque, mâchoires, épaules","Palpitations, oppression thoracique, difficultés à respirer","Irritabilité disproportionnée","Évitement de certaines situations par peur anticipatoire","Besoin de tout contrôler pour se sentir en sécurité"]},
+      {type:"titre",texte:"Ce qui aide"},
+      {type:"hl",texte:"La respiration lente, en expirant plus longtemps que tu n'inspires, active ton nerf vague et fait redescendre la réponse de stress. Ce n'est pas une impression, c'est physiologique. Et pour l'anxiété installée, les thérapies cognitivo-comportementales restent le traitement de référence.",classe:"vert"},
+      {type:"hl",texte:"Une vague d'anxiété fonctionne comme une vague : elle monte, atteint un pic, puis redescend d'elle-même si tu ne l'alimentes pas. Ce qui la fait durer, c'est le scénario qu'on déroule dans sa tête. L'observer sans la fuir et sans la nourrir, c'est le principe de base de la thérapie d'exposition.",classe:"bleu"},
+      {type:"consulter",items:["L'anxiété perturbe ton sommeil, ton travail ou tes relations depuis plus de 2 semaines","Tu évites des situations importantes à cause de l'anxiété","Tu as des attaques de panique, montée intense de peur avec symptômes physiques","Tu utilises l'alcool ou d'autres substances pour calmer l'anxiété"]},
+    ]
+  },
+  burnout:{
+    emoji:"🔥",
+    label:"Burn-out féminin",
+    titre:"Le burn-out · l'épuisement qui va plus loin que la fatigue",
+    accroche:"Le burn-out n'est pas un manque de courage. C'est l'aboutissement d'une surcharge chronique, professionnelle, familiale, émotionnelle, dans un contexte où on a longtemps ignoré ses propres besoins pour répondre à ceux des autres.",
+    contenu:[
+      {type:"stat",texte:"Les femmes sont significativement plus touchées par le burn-out que les hommes, en partie parce qu'elles cumulent souvent une surcharge professionnelle ET une charge mentale domestique et émotionnelle non reconnue",source:"OMS, Burn-out as an occupational phenomenon, 2019"},
+      {type:"titre",texte:"Burn-out vs fatigue : la différence"},
+      {type:"hl",texte:"La fatigue se récupère avec du repos. Le burn-out, non. C'est ce qui le distingue, après des vacances, après une nuit de sommeil, l'épuisement revient immédiatement. Le burn-out est un épuisement des ressources psychiques, pas seulement physiques."},
+      {type:"hl",texte:"L'OMS définit le burn-out autour de 3 dimensions : l'épuisement émotionnel (sentiment d'être à sec), le cynisme ou la distance émotionnelle (ne plus se sentir concernée), et la réduction du sentiment d'efficacité personnelle (ne plus croire en sa propre compétence).",classe:"or"},
+      {type:"titre",texte:"Les signes à reconnaître"},
+      {type:"signes",couleur:"#c8a060",bg:"#fdf8ee",items:["Épuisement persistant qui ne disparaît pas avec le repos","Perte de plaisir ou d'intérêt pour des choses qu'on aimait","Sentiment de vide ou d'indifférence, émotionnelle ou professionnelle","Erreurs ou oublis inhabituels, brouillard mental","Irritabilité, pleurs fréquents ou au contraire anesthésie émotionnelle","Symptômes physiques sans cause organique, douleurs, maux de tête, infections répétées","Sentiment d'inefficacité malgré les efforts","Difficulté à se déconnecter ou à ne rien faire"]},
+      {type:"titre",texte:"Ce qui aide"},
+      {type:"hl",texte:"La première étape est toujours l'arrêt, accepter de ralentir avant que le corps impose l'arrêt. L'agenda Maîtrise/Plaisir (vu au Jour 18) est un outil TCC spécifiquement utile en burn-out pour réintroduire des activités qui nourrissent vraiment.",classe:"vert"},
+      {type:"hl",texte:"Redistribuer la charge n'est pas optionnel, c'est médical. Les femmes en burn-out qui reprennent exactement la même vie rechutent. Identifier ce qui peut être délégué, refusé ou supprimé est une partie du traitement.",classe:"bleu"},
+      {type:"consulter",items:["Tu ne récupères plus après le repos","Tu as des pensées de fuir, de disparaître ou que tout le monde irait mieux sans toi","Tu ne ressens plus rien, ni joie, ni tristesse, depuis plusieurs semaines","Tu as des symptômes physiques inexpliqués qui s'accumulent"]},
+    ]
+  },
+  solitude:{
+    emoji:"🌫️",
+    label:"Solitude",
+    titre:"La solitude · se sentir seule même entourée",
+    accroche:"La solitude n'est pas forcément l'absence des autres. C'est le sentiment de ne pas être vraiment vue, vraiment entendue, vraiment connectée, même en présence de sa famille, de ses amis, de son partenaire.",
+    contenu:[
+      {type:"stat",texte:"La solitude chronique est aujourd'hui reconnue comme un facteur de risque pour la santé aussi important que fumer 15 cigarettes par jour. Elle active les mêmes circuits cérébraux que la douleur physique",source:"Dr Julianne Holt-Lunstad, Brigham Young University"},
+      {type:"titre",texte:"Les deux formes de solitude"},
+      {type:"hl",texte:"<strong>La solitude sociale</strong> : l'absence objective de liens, peu de relations, isolement géographique, après une rupture ou un déménagement.<br><br><strong>La solitude émotionnelle</strong> : le sentiment d'être seule malgré les liens, ne pas trouver quelqu'un à qui parler vraiment, se sentir incomprise, porter ses fardeaux seule. C'est souvent la plus douloureuse, et la plus difficile à nommer."},
+      {type:"titre",texte:"Pourquoi les femmes sont particulièrement touchées"},
+      {type:"hl",texte:"La maternité isole souvent, en particulier les premières années. La charge mentale épuise, laissant peu d'énergie pour entretenir des liens. La pression de paraître bien empêche la vulnérabilité. Et les amitiés féminines, contrairement à ce qu'on croit, demandent une disponibilité émotionnelle que la surcharge ne laisse pas toujours.",classe:"or"},
+      {type:"titre",texte:"Les signes à reconnaître"},
+      {type:"signes",couleur:"#6090c0",bg:"#eef4fb",items:["Sentiment d'être incomprise même par ses proches","Difficulté à parler vraiment, tout reste en surface","Sentiment que personne ne verrait si tu allais mal","Peu ou pas de relations où tu peux être vulnérable","Envie de connexion mais peur d'importuner","Jalousie des liens que tu vois chez les autres","Sentiment de vide après des interactions pourtant agréables"]},
+      {type:"titre",texte:"Ce qui aide"},
+      {type:"hl",texte:"La solitude se résout rarement par plus d'activités sociales, elle se résout par plus de profondeur dans les liens existants. Une vraie conversation vaut plus que dix interactions superficielles. Oser la vulnérabilité avec une personne de confiance est plus efficace que remplir son agenda.",classe:"vert"},
+      {type:"consulter",items:["La solitude s'accompagne d'une dépression ou d'une anxiété marquée","Tu as des pensées de ne pas vouloir continuer","Tu t'isoles de plus en plus malgré toi","Ça dure depuis plus de 3 mois et s'aggrave"]},
+    ]
+  },
+  postpartum:{
+    emoji:"👶",
+    label:"Dépression post-partum",
+    titre:"La dépression post-partum · le tabou maternel",
+    accroche:"On attend des jeunes mères qu'elles soient comblées. Rayonnantes. Submergées d'amour. Quand ce n'est pas le cas, quand vient la tristesse, l'épuisement, le sentiment d'être une mauvaise mère, la honte s'ajoute à la souffrance. Il faut le nommer clairement : la dépression post-partum n'est pas un choix. C'est une condition médicale.",
+    contenu:[
+      {type:"stat",texte:"La dépression post-partum touche une part importante des femmes après l'accouchement, bien plus qu'on ne l'imagine. Et elle reste largement sous-diagnostiquée, parce que beaucoup n'en parlent pas, par honte ou par peur d'être jugées mauvaises mères",source:"INSERM / Santé Publique France, 2023"},
+      {type:"titre",texte:"Baby blues vs dépression post-partum : la différence"},
+      {type:"hl",texte:"<strong>Le baby blues</strong> : survient dans les 3 à 5 premiers jours après l'accouchement. Pleurs, émotivité, fatigue intense. Dure quelques jours, se résout spontanément avec du soutien et du repos. C'est hormonal et très fréquent, environ 80% des femmes le vivent.<br><br><strong>La dépression post-partum</strong> : commence souvent dans les premières semaines mais peut apparaître jusqu'à un an après. Elle dure, s'aggrave, et perturbe le fonctionnement. Elle demande une aide professionnelle."},
+      {type:"titre",texte:"Les signes à reconnaître"},
+      {type:"signes",couleur:"#a080c8",bg:"#f5f0fa",items:["Tristesse profonde et persistante, ou anesthésie émotionnelle","Sentiment de ne pas aimer son bébé ou de ne pas être capable de créer un lien","Pensées envahissantes de faire du mal au bébé ou à soi-même, à signaler immédiatement","Irritabilité ou colère disproportionnée","Sentiment d'être une mauvaise mère, de ne pas être à la hauteur","Peur intense pour la santé ou la sécurité du bébé","Épuisement qui dépasse la fatigue normale du manque de sommeil","Retrait de l'entourage, honte, isolement"]},
+      {type:"hl",texte:"Les pensées intrusives, images ou pensées de faire du mal au bébé, sont fréquentes dans la dépression post-partum et ne signifient pas qu'on est dangereuse. Elles sont le signe d'un cerveau épuisé et anxieux. Les nommer à un professionnel aide à les dépathologiser.",classe:"bleu"},
+      {type:"titre",texte:"Ce qui aide"},
+      {type:"hl",texte:"Le soutien social est le premier facteur protecteur. Ne pas être seule avec le bébé. Ne pas avoir à tout gérer. Accepter de l'aide, même quand c'est difficile. La DPP se traite très bien avec un accompagnement précoce, psychothérapie, médication si nécessaire, soutien pratique.",classe:"vert"},
+      {type:"consulter",items:["Les symptômes durent plus de 2 semaines","Tu as des pensées de te faire du mal ou de faire du mal à ton bébé","Tu n'arrives plus à t'occuper de toi ou de ton bébé","Tu te sens complètement déconnectée de ton bébé sans amélioration"]},
+    ]
+  },
+  faussecouche:{
+    emoji:"🌸",
+    label:"Fausse couche",
+    titre:"La fausse couche · le deuil qu'on minimise",
+    accroche:"\"C'est fréquent.\" \"Tu pourras en avoir un autre.\" \"C'était tôt de toute façon.\" Ces phrases, dites avec bienveillance, minimisent quelque chose d'immense : la perte d'un possible, d'une vie imaginée, d'un lien déjà formé. Une fausse couche est un deuil réel. Et il mérite d'être reconnu comme tel.",
+    contenu:[
+      {type:"stat",texte:"La fausse couche concerne énormément de femmes au cours de leur vie. Et son impact est bien réel : dans les semaines qui suivent, beaucoup vivent un véritable état de stress post-traumatique, avec de l'anxiété qui persiste longtemps après. Bien plus longtemps que ce que l'entourage imagine",source:"Farren et al., BMJ, 2020 / CNGOF"},
+      {type:"titre",texte:"Ce qui rend ce deuil particulièrement difficile"},
+      {type:"hl",texte:"La fausse couche est souvent vécue dans le silence, beaucoup de grossesses n'ont pas encore été annoncées. Le deuil se fait seule, sans rituel, sans reconnaissance sociale. Le corps a vécu quelque chose d'intense : la perte n'est pas abstraite. Et pourtant l'entourage attend souvent qu'on \"passe à autre chose\" rapidement."},
+      {type:"hl",texte:"Il y a aussi le deuil de l'innocence de la grossesse, après une fausse couche, les grossesses suivantes sont souvent vécues dans l'anxiété. La joie attendue est souvent remplacée par une vigilance douloureuse.",classe:"or"},
+      {type:"titre",texte:"Les signes à reconnaître"},
+      {type:"signes",couleur:"#c870a0",bg:"#fdf0f5",items:["Tristesse profonde, pleurs, vide inexpliqué","Pensées intrusives sur la perte, images, souvenirs","Irritabilité ou retrait émotionnel","Anxiété pour une prochaine grossesse ou difficulté à envisager d'en avoir une","Sentiment de culpabilité, \"qu'est-ce que j'ai fait de travers ?\"","Incompréhension de l'entourage qui minimise","Difficultés à assister à des événements impliquant des bébés ou des grossesses","Sentiment de solitude dans le deuil, personne avec qui vraiment en parler"]},
+      {type:"titre",texte:"Ce qui aide"},
+      {type:"hl",texte:"Nommer la perte. Lui donner un espace. Ne pas se forcer à \"aller bien\" pour les autres. Certaines femmes trouvent utile un rituel, planter quelque chose, écrire une lettre, marquer la date. Ça aide le cerveau à créer un ancrage pour le deuil.",classe:"vert"},
+      {type:"hl",texte:"Les groupes de parole, en présentiel ou en ligne, réduisent significativement l'isolement. Parler avec d'autres femmes qui ont vécu la même chose normalise et déculpabilise.",classe:"bleu"},
+      {type:"consulter",items:["Les symptômes de deuil persistent de façon intense au-delà de 6 mois","Tu as des pensées suicidaires ou de ne plus vouloir être là","L'anxiété bloque une nouvelle tentative de grossesse souhaitée","Tu te sens incapable de fonctionner au quotidien"]},
+    ]
+  },
+  infertilite:{
+    emoji:"🌱",
+    label:"Infertilité",
+    titre:"L'infertilité · quand le corps ne suit pas le désir",
+    accroche:"L'infertilité est l'une des souffrances les plus invisibles et les moins comprises. Chaque mois apporte son cycle de hope and grief, espoir et deuil. Et au-delà de la médecine, c'est une crise identitaire profonde pour beaucoup de femmes.",
+    contenu:[
+      {type:"stat",texte:"1 couple sur 6 est concerné par des difficultés à concevoir. Les niveaux d'anxiété et de dépression chez les femmes en parcours d'infertilité sont comparables à ceux observés dans les maladies chroniques graves comme le cancer",source:"Dr Alice Domar, Harvard Medical School / ESHRE 2023"},
+      {type:"titre",texte:"Le cycle émotionnel de l'infertilité"},
+      {type:"hl",texte:"Chaque cycle menstruel devient un mini-cycle émotionnel, espoir pendant la période d'attente, test, annonce de la règles ou d'un résultat négatif, deuil, puis recommencer. Ce cycle répété épuise les ressources émotionnelles d'une façon que l'entourage ne voit pas toujours."},
+      {type:"hl",texte:"Les traitements de PMA (procréation médicalement assistée) ajoutent une couche supplémentaire : les injections hormonales perturbent l'humeur, la vie sexuelle devient médicalisée, et l'échec de chaque tentative est une perte en soi.",classe:"or"},
+      {type:"titre",texte:"Les signes à reconnaître"},
+      {type:"signes",couleur:"#60a880",bg:"#eaf5f0",items:["Anxiété permanente autour du cycle et des chances de grossesse","Tristesse ou dépression cyclique liée aux règles","Sentiment d'échec ou de trahison par son propre corps","Difficulté à se réjouir des grossesses dans l'entourage","Isolement, éviter les événements familiaux, les bébés, les annonces","Tensions dans le couple : la PMA est un facteur de stress majeur","Perte d'identité, \"si je ne peux pas avoir d'enfant, qui suis-je ?\"","Épuisement du parcours médical, examens, attentes, protocoles"]},
+      {type:"titre",texte:"Ce qui aide"},
+      {type:"hl",texte:"L'accompagnement psychologique pendant un parcours de PMA n'est pas un luxe : des études montrent qu'il améliore les taux de réussite des traitements en réduisant le stress chronique qui affecte la fertilité. Le cerveau et le corps ne sont pas séparés.",classe:"vert"},
+      {type:"hl",texte:"Définir des limites au parcours, jusqu'où on est prête à aller, combien de tentatives, quand on s'autorisera à envisager d'autres chemins, protège psychologiquement. Pas comme une capitulation, mais comme un acte de soin envers soi-même.",classe:"bleu"},
+      {type:"consulter",items:["L'anxiété ou la dépression perturbe ton quotidien depuis plus d'un mois","Tu as des pensées suicidaires ou de ne plus vouloir être là","Le couple souffre intensément et la communication est rompue","Tu traverses cela seule sans aucun soutien"]},
+    ]
+  }
+};
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showTheme(key){
+  const t=themes[key];
+  document.getElementById('th-emoji').textContent=t.emoji;
+  document.getElementById('th-label').textContent=t.label;
+  document.getElementById('th-label').style.color=getThemeCouleur(key);
+  document.getElementById('th-titre').textContent=t.titre;
+  document.getElementById('th-accroche').textContent=t.accroche;
+
+  const el=document.getElementById('th-contenu');
+  el.innerHTML='';
+
+  t.contenu.forEach(item=>{
+    if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}" style="margin-top:12px;">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item" style="margin-top:12px;"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+    else if(item.type==='titre') el.innerHTML+=`<h3 style="margin-top:20px;font-size:18px;color:#2d2040;">${item.texte}</h3>`;
+    else if(item.type==='signes'){
+      let html=`<div style="margin-top:8px;">`;
+      item.items.forEach(s=>{
+        html+=`<div class="signe-item" style="background:${item.bg};border-color:${item.couleur}33;">
+          <div class="signe-dot" style="background:${item.couleur};"></div>
+          <span>${s}</span>
+        </div>`;
+      });
+      html+=`</div>`;
+      el.innerHTML+=html;
+    }
+    else if(item.type==='consulter'){
+      let html=`<div class="consulter-box"><div class="consulter-titre">⚠️ Quand consulter</div>`;
+      item.items.forEach(c=>{
+        html+=`<div class="consulter-item"><span>→</span><span>${c}</span></div>`;
+      });
+      html+=`</div>`;
+      el.innerHTML+=html;
+    }
+  });
+
+  // Bouton ressources
+  el.innerHTML+=`<button class="btn-outline" onclick="showPhase('fin')" style="margin-top:20px;">Voir les ressources d'aide →</button>`;
+
+  showPhase('theme-detail');
+}
+
+function getThemeCouleur(key){
+  const couleurs={anxiete:'#c04030',burnout:'#7d5010',solitude:'#3060a0',postpartum:'#5030a0',faussecouche:'#803060',infertilite:'#1d5040'};
+  return couleurs[key]||'#a070c0';
+}
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Bonus 2 · Les grandes souffrances feminines</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='bonus2-souffrances-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

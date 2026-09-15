@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 22 · Apprivoiser la colère · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf0ee 0%,#fdf5f0 45%,#f5f0fa 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#a07060;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d1d10;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#e8705a,#c87060);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(220,100,80,0.1);border:1px solid rgba(230,110,90,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c87060;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d1d10;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d1d10;margin-bottom:14px;line-height:1.4}
+  p{color:#6d3d28;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a5040}
+  .btn{background:linear-gradient(135deg,#e8705a,#c87060);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(220,100,80,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(220,100,80,0.25);color:#c0a090;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#c0a090;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a07060;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(220,100,80,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#e8705a,#c87060);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#fdf0ee,#fdf5f0);border-radius:14px;padding:14px 18px;border-left:3px solid #e8705a;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.bleu{border-left-color:#7090c0;background:linear-gradient(135deg,#eef4fb,#f0f4fd)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.tristesse{border-left-color:#7090c0;background:linear-gradient(135deg,#eef4fb,#f0f5ff);border-left-width:4px;padding:18px}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(220,100,80,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#e8705a,#c87060);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#b09080;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(220,100,80,0.12);font-size:11px;color:#b09080;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(220,100,80,0.05);border:1px solid rgba(220,100,80,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#906050;font-family:'Jost',sans-serif}
+
+  /* Pratique corporelle */
+  .etape{border-radius:16px;padding:18px 20px;margin-bottom:12px;border:1px solid rgba(230,110,90,0.2);background:linear-gradient(135deg,#fdf0ee,#fdf5f0)}
+  .etape-num{font-family:'Jost',sans-serif;font-size:10px;color:#c87060;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
+  .etape-titre{font-size:15px;font-weight:700;color:#3d1d10;margin-bottom:6px;font-style:normal}
+  .etape-desc{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .etape-duree{display:inline-block;background:rgba(230,110,90,0.15);border-radius:10px;padding:3px 10px;font-size:11px;font-family:'Jost',sans-serif;color:#c87060;margin-top:8px}
+
+  /* Écriture */
+  textarea{width:100%;border:2px solid rgba(220,100,80,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d1d10;line-height:1.7;outline:none;resize:vertical;background:#fdf8f6}
+  textarea:focus{border-color:#e8705a}
+  .e-q{font-size:17px;font-weight:600;color:#3d1d10;line-height:1.65;text-align:center;margin-bottom:6px;font-style:normal}
+  .e-sous{font-size:13px;color:#a07060;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#fdf0ee,#fdf5f0);border-radius:14px;padding:14px 18px;border:1px solid rgba(220,100,80,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b09080;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#fdf0ee,#f5f0fa);border-radius:20px;padding:22px;border:1px solid rgba(220,100,80,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🔥</span>
+    <div class="label">Jour 22 · Apprivoiser la colère</div>
+    <h2>Ta colère est une énergie, apprends à la faire travailler pour toi</h2>
+    <p>On apprend aux femmes à ne pas être en colère. À sourire, à s'adapter, à "calmer le jeu". Résultat : la colère rentrée devient tristesse, douleurs, ressentiment silencieux, ou explose là où il ne faut pas. Mais il existe un troisième chemin.</p>
+    <p class="small" style="margin-bottom:20px;">Aujourd'hui on apprend à laisser la colère prendre sa place, à écouter son message, et surtout à en faire quelque chose. Parce qu'une colère qui revient toujours pour la même raison te dit une chose : il est temps de changer quelque chose.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🔥</button>
+    <p class="hint">Théorie · Les 3 chemins · Colère féminine · Pousser au changement · Pratique · Écriture · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- COLÈRE ET TRISTESSE -->
+<div class="phase" id="phase-tristesse">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💧</span>
+    <h2>Sous la colère, souvent, il y a la tristesse</h2>
+    <p style="text-align:center;margin-bottom:20px;">C'est l'une des vérités les plus importantes sur la colère, et l'une des moins connues.</p>
+
+    <div class="hl tristesse">
+      <strong>La colère comme protection de la tristesse</strong><br><br>
+      La colère est une émotion active, elle mobilise, elle pousse à agir, elle donne l'illusion du contrôle. La tristesse, elle, est une émotion passive, elle demande de s'effondrer, d'accepter sa vulnérabilité, de traverser quelque chose de douloureux.<br><br>
+      Quand la tristesse est trop menaçante, parce qu'on n'a pas appris à l'accueillir, parce que le contexte ne le permet pas, parce qu'elle touche à quelque chose de trop profond : le cerveau la "couvre" avec de la colère. La colère est plus acceptable, plus controllable, moins vulnérable.
+    </div>
+
+    <div class="hl or" style="margin-bottom:12px;">
+      <strong>Des exemples concrets :</strong><br><br>
+      Tu es furieuse contre ton partenaire qui n'a pas fait la vaisselle, mais en dessous, tu es triste de ne pas te sentir vue ni soutenue.<br><br>
+      Tu es en colère contre tes enfants qui ne t'écoutent pas, mais en dessous, tu es épuisée et triste de ne jamais avoir de répit.<br><br>
+      Tu es en colère contre toi-même d'avoir "encore" failli, mais en dessous, tu es triste de te sentir toujours insuffisante.
+    </div>
+
+    <div class="hl vert">
+      <strong>Ce que ça change :</strong><br><br>
+      Quand on traverse la colère jusqu'à la tristesse qui est dessous, quelque chose se dépose. La colère perd de son intensité, parce qu'elle n'a plus à protéger quelque chose. Et la tristesse, accueillie, peut être traversée.<br><br>
+      La question à se poser quand la colère est très intense : <em>"Qu'est-ce que je perds, qu'est-ce que je pleure, derrière cette colère ?"</em>
+    </div>
+
+    <div class="hl violet">
+      <strong>Et après la colère, souvent, les larmes</strong><br><br>
+      C'est un signe que la colère a fait son travail. Quand les larmes viennent après une expression sincère de colère, c'est que le système nerveux commence à se réguler, et que la couche de protection a laissé passer ce qu'elle recouvrait. Ce n'est pas une faiblesse. C'est de l'intégration.
+    </div>
+
+    <button class="btn" onclick="showPhase('pratique')">Pratique corporelle 🔥</button>
+  </div>
+</div>
+
+<!-- PRATIQUE CORPORELLE -->
+<div class="phase" id="phase-pratique">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💪</span>
+    <h2>Ressentir et libérer la colère dans le corps</h2>
+    <p style="text-align:center;margin-bottom:8px;">La colère est une émotion physique avant d'être mentale. Elle a besoin de passer par le corps pour être libérée, pas juste de la tête.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Cette pratique peut être faite seule, dans un endroit où tu te sens libre. Prends 10 minutes.</p>
+
+    <div class="etape">
+      <div class="etape-num">Étape 1</div>
+      <div class="etape-titre">Localise la colère dans ton corps</div>
+      <div class="etape-desc">Ferme les yeux. Pense à quelque chose qui te met en colère, pas forcément la grande colère, juste quelque chose d'irritant. Scan ton corps : où la sens-tu ? Poitrine ? Gorge ? Mâchoires ? Épaules ? Mains ? Nomme l'endroit à voix haute ou mentalement.</div>
+      <div class="etape-duree">2 minutes</div>
+    </div>
+
+    <div class="etape">
+      <div class="etape-num">Étape 2</div>
+      <div class="etape-titre">Laisse-la monter, sans l'exploser</div>
+      <div class="etape-desc">Inspire profondément. En expirant, laisse la sensation s'intensifier légèrement, comme si tu lui donnais de l'espace plutôt que de la réprimer. Serre les poings si tu en as besoin. Laisse les mâchoires se contracter. Tu n'as pas à l'exprimer encore, juste la laisser être là.</div>
+      <div class="etape-duree">2 minutes</div>
+    </div>
+
+    <div class="etape">
+      <div class="etape-num">Étape 3</div>
+      <div class="etape-titre">Libère-la par le mouvement ou le son</div>
+      <div class="etape-desc">Choisis ce qui te vient naturellement : frapper un coussin, secouer les bras vigoureusement, piétiner sur place, souffler fort par la bouche à plusieurs reprises, ou émettre un son grave et prolongé, un "hhhmmm" ou un "haaa" expulsé. Ce n'est pas ridicule, c'est neurologique. Le mouvement et le son libèrent le cortisol et l'adrénaline accumulés.</div>
+      <div class="etape-duree">3 minutes</div>
+    </div>
+
+    <div class="etape">
+      <div class="etape-num">Étape 4</div>
+      <div class="etape-titre">Observe ce qui vient après</div>
+      <div class="etape-desc">Après la libération, reste un moment dans le silence. Qu'est-ce qui vient ? Un soupir ? Des larmes ? Un relâchement ? De la fatigue ? Parfois la tristesse arrive ici, accueille-la si elle vient. C'est elle qui était dessous. Pose une main sur ton cœur si tu en as besoin.</div>
+      <div class="etape-duree">3 minutes</div>
+    </div>
+
+    <textarea id="pratique-note" rows="3" placeholder="Après cette pratique, j'ai ressenti... / Ce qui est venu après la colère c'est..." style="margin-top:8px;"></textarea>
+    <button class="btn" onclick="showPhase('ecriture')">Passer à l'écriture ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/4</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Ma relation à la colère</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌱</span>
+    <h2>Ta colère méritait d'être entendue</h2>
+    <p>La colère n'est pas un défaut de caractère, c'est ton système nerveux qui te dit qu'une limite a été franchie, qu'un besoin n'est pas satisfait, qu'une injustice s'est produite. L'apprivoiser, c'est apprendre à l'écouter sans en être emportée.</p>
+    <div style="background:linear-gradient(135deg,#fdf0ee,#fdf5f0);border-radius:16px;padding:20px;border:1px solid rgba(220,100,80,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c87060;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🔥 Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> La prochaine fois que tu sens la colère monter, avant de réagir, demande-toi : "Qu'est-ce que je perds ou ce que je pleure derrière cette colère ?" Cette question change tout.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#806050;"><strong style="color:#3d1d10;">Demain, Jour 23 :</strong> le pardon</p>
+    <p class="hint" style="margin-top:6px;">8 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"💡",titre:"La colère comme information, ce qu'elle dit sur tes besoins",source:"Dr Harriet Lerner, The Dance of Anger",contenu:[
+    {type:"texte",texte:"La colère est une émotion directe, elle surgit en réponse à quelque chose de précis. Et elle transporte toujours un message sur ce dont tu as besoin. Toujours."},
+    {type:"hl",texte:"💡 La colère dit toujours une de ces choses : une limite a été franchie, un besoin fondamental n'est pas satisfait, une injustice s'est produite, ou quelque chose d'important pour toi est menacé. Elle n'est jamais \"sans raison\", même quand la raison n'est pas immédiatement visible."},
+    {type:"texte",texte:"Harriet Lerner le dit joliment : la colère est un signal que quelque chose ne va pas, pas un problème en soi. Le problème, ce n'est jamais la colère. C'est le chemin qu'elle prend. Et il y en a trois."},
+  ]},
+  {emoji:"🛤️",titre:"Les 3 chemins de la colère · concrètement",source:"Approche cognitivo-comportementale",contenu:[
+    {type:"hl",texte:"🔴 Chemin 1, L'explosion. Tu hurles sur ton enfant pour un verre renversé alors que c'est ta journée qui déborde. Tu envoies le message assassin dans la minute. Tu claques la porte, tu balances une phrase qui blesse. Sur le moment, ça soulage. Mais après : la culpabilité, la relation abîmée, et ton vrai message, perdu. Personne n'a entendu ton besoin, on n'a retenu que le débordement.",classe:"rouge"},
+    {type:"hl",texte:"⚫ Chemin 2, La répression. Tu souris alors que tu bouillonnes. Tu dis \"c'est pas grave\" alors que si, c'est grave. Tu t'excuses presque d'être en colère. Tu te réprimandes toi-même : \"calme-toi, tu exagères\". Et cette colère ravalée ne disparaît pas, elle se stocke. En tensions, en ressentiment qui suinte, en explosions différées sur les mauvaises personnes, en tristesse de fond qui s'installe."},
+    {type:"stat",texte:"La colère ravalée en permanence finit par coûter cher : elle est liée à davantage de dépression, de tensions cardiovasculaires et de douleurs chroniques. Le corps stocke ce que la tête refuse d'exprimer",source:"Recherche en psychosomatique"},
+    {type:"hl",texte:"🟢 Chemin 3, La colère saine. D'abord, tu la laisses prendre toute la place, dans ton corps, dans un espace sûr. Tu la ressens pleinement, sans la juger : elle monte, elle traverse, tu respires avec, tu bouges avec si besoin. Ensuite, tu écoutes son message. Et puis, et c'est là que tout se joue, tu en fais quelque chose. La colère saine ne s'arrête jamais au ressenti. Elle débouche sur une parole, une limite, une décision, un changement.",classe:"vert"},
+    {type:"texte",texte:"Une vague de colère, si tu ne l'alimentes pas, monte puis redescend d'elle-même, c'est une vague, pas un état permanent. Ce qui la fait durer des heures, c'est le récit qu'on rejoue en boucle. Alors laisse passer le pic avant d'agir. Mais après le pic, agis."},
+  ]},
+  {emoji:"🌍",titre:"La colère féminine, mal acceptée, et souvent mal orientée",source:"Dr Soraya Chemaly, Rage Becomes Her",contenu:[
+    {type:"texte",texte:"Dans presque toutes les cultures, la colère est acceptée chez les hommes, et sanctionnée chez les femmes. Une femme en colère est \"hystérique\", \"dramatique\", \"difficile\". Un homme en colère est \"fort\", \"assertif\", \"passionné\"."},
+    {type:"stat",texte:"Au travail, une femme en colère est perçue comme moins compétente et moins fiable. Un homme en colère, lui, est perçu comme plus compétent. Même émotion, jugement inverse, uniquement selon qui la ressent",source:"Dr Victoria Brescoll, Yale University"},
+    {type:"hl",texte:"⚠️ Résultat : on apprend très tôt à ne pas montrer notre colère. On la ravale, on la minimise, on la transforme en larmes (plus acceptables), ou on la retourne contre nous-mêmes, en honte, en auto-critique, en tristesse de fond. Il y a d'ailleurs une formule qui résume bien ça : la dépression, c'est souvent de la colère tournée vers l'intérieur."},
+    {type:"texte",texte:"Et quand cette colère légitime n'a nulle part où aller, elle peut aussi mal s'orienter, devenir une rage diffuse, contre tout et tout le monde, qui épuise sans rien changer. Une colère sans direction tourne en rond. Une colère bien orientée, elle, nomme des situations précises : cette inégalité-là, ce comportement-là, cette injustice-là. Et elle en fait quelque chose : elle s'informe, elle lit, elle en parle, elle agit là où elle a une prise."},
+    {type:"hl",texte:"🌸 Ta colère est légitime. Elle l'a toujours été. La question n'est pas de la faire taire, c'est de lui donner une direction.",classe:"vert"},
+  ]},
+  {emoji:"🔥",titre:"Ta colère doit pousser au changement",source:"Approche IRA, Identifier, Ressentir, Agir",contenu:[
+    {type:"texte",texte:"Voilà le cœur de tout : on ne peut pas ressentir de la colère face à une situation et ne rien faire. Ressentir, c'est une étape. L'exprimer sainement, c'en est une autre. Mais si tu t'arrêtes là, la même situation va se reproduire, et la même colère avec elle."},
+    {type:"hl",texte:"🔁 Fais le test : y a-t-il une colère qui revient régulièrement dans ta vie ? La même, encore et encore ? Face à la même personne, la même situation, le même comportement ? Cette répétition est un signal limpide : la situation n'a pas changé. Et elle ne changera pas tant que tu ne feras rien de différent.",classe:"or"},
+    {type:"texte",texte:"Concrètement, faire quelque chose de sa colère, ça peut être : avoir enfin la conversation que tu repousses. Poser la limite noir sur blanc. Redistribuer ce qui doit l'être. Nommer le comportement qui te blesse, calmement mais clairement. Changer une organisation qui t'épuise. T'informer, lire, comprendre, pour transformer une rage diffuse en position claire. Ou parfois, quitter ce qui ne changera pas."},
+    {type:"hl",texte:"💬 Pour la conversation elle-même, parle depuis toi : \"Je me suis sentie ignorée\" plutôt que \"tu ne m'écoutes jamais\". \"J'ai besoin de plus de soutien\" plutôt que \"tu ne fais rien\". C'est le principe de la Communication NonViolente, et ça change tout à la façon dont ton message est reçu.",classe:"bleu"},
+    {type:"hl",texte:"🌱 Retiens ça : ta colère est une énergie. Ravalée, elle te ronge. Explosée, elle détruit. Canalisée vers un changement concret, elle devient une force qui transforme ta vie. C'est exactement ça, agir au lieu de subir.",classe:"vert"},
+  ]},
+];
+
+const ecritureQs=[
+  {q:"Quelle est ta relation habituelle à ta propre colère, tu l'exprimes, tu la ravales, tu la retournes contre toi ?",sous:"Honnêteté sans jugement, juste observer comment tu gères habituellement cette émotion.",placeholder:"Ma relation à ma colère c'est plutôt..."},
+  {q:"Y a-t-il une colère ancienne ou actuelle que tu n'as jamais vraiment exprimée ? À qui, et pour quoi ?",sous:"Pas besoin de la résoudre aujourd'hui, juste la nommer.",placeholder:"La colère que je n'ai jamais exprimée c'est..."},
+  {q:"Qu'est-ce que ta colère dit sur ce qui compte pour toi : tes besoins, tes limites, tes valeurs ?",sous:"Cherche le message sous la colère.",placeholder:"Sous ma colère il y a un besoin de... / Elle me dit que pour moi est important..."},
+  {q:"Et en dessous de cette colère, quelle est la tristesse qui l'accompagne ?",sous:"Prends le temps. Parfois elle est là, parfois elle n'est pas encore accessible. Les deux sont valides.",placeholder:"Sous ma colère, ce que je pleure c'est peut-être..."},
+  {q:"Qu'est-ce que cette colère te demande de changer, concrètement ?",sous:"Une conversation à avoir, une limite à poser, une organisation à revoir, une décision à prendre : la première action, même petite.",placeholder:"Ce que ma colère me pousse à changer c'est... / La première action que je peux faire c'est..."},
+];
+
+let theorieIdx=0, eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='ecriture') renderE();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'💡',t:'La colère comme signal, ce qu\'elle dit sur tes besoins'},{e:'🌍',t:'La colère féminine, pourquoi si mal acceptée'},{e:'🎯',t:'Exprimer sainement, ni exploser ni ravaler'},{e:'💧',t:'Sous la colère, souvent, la tristesse'},{e:'💪',t:'Pratique corporelle, ressentir et libérer'},{e:'✍️',t:'Écriture, ma relation à la colère'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#6d3d28;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'La colère et la tristesse 💧':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('tristesse');
+}
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 22 🔥';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const pratNote=document.getElementById('pratique-note').value.trim();
+  if(pratNote) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ce que j'ai ressenti après la pratique</div><div class="recap-r">"${pratNote}"</div></div>`;
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 22 · Apprivoiser la colere</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour22-colere-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

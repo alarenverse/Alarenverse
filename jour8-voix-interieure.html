@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 8 · La voix intérieure · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf5f8 0%,#f5f0fa 50%,#f0f5fa 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b090b0;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d2845;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#b08ec8,#90a8d8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(160,120,200,0.12);border:1px solid rgba(180,140,210,0.2);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#b08ec8;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d2845;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d2845;margin-bottom:14px;line-height:1.4}
+  p{color:#6d5070;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a7090}
+  .btn{background:linear-gradient(135deg,#b08ec8,#90a8d8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(160,120,200,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(180,140,210,0.3);color:#b0a0c0;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#b8a8c8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a090b8;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(180,140,210,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#b08ec8,#90a8d8);border-radius:4px;transition:width 0.4s ease}
+  .highlight{background:linear-gradient(135deg,#f8f0fd,#f0f4fd);border-radius:14px;padding:14px 18px;border-left:3px solid #b08ec8;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .highlight.bleu{border-left-color:#90a8d8;background:linear-gradient(135deg,#f0f4fd,#f4f8fd)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(180,140,210,0.12)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#b08ec8,#90a8d8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#b0a0c0;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(180,140,210,0.15);font-size:11px;color:#b0a0c0;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(180,140,210,0.06);border:1px solid rgba(180,140,210,0.15);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#907090;font-family:'Jost',sans-serif}
+
+  /* Voix critique vs bienveillante */
+  .voix-comparaison{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .voix-card{border-radius:16px;padding:16px}
+  .voix-titre{font-family:'Jost',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px}
+  .voix-exemple{font-size:13px;line-height:1.7;font-style:italic}
+
+  /* Identification */
+  .id-item{background:linear-gradient(135deg,#f8f0fd,#f4f0fa);border-radius:14px;padding:16px 18px;border:1px solid rgba(180,140,210,0.18);margin-bottom:12px;cursor:pointer;transition:all 0.2s}
+  .id-item:hover{border-color:#b08ec8;transform:translateX(3px)}
+  .id-item.active{border-color:#b08ec8;background:linear-gradient(135deg,#f0e8fd,#e8f0fd)}
+  .id-texte{font-size:17px;color:#253050;line-height:1.6;font-style:italic}
+  .id-reponse{font-size:13px;color:#8870a0;line-height:1.65;margin-top:8px;padding-top:8px;border-top:1px solid rgba(180,140,210,0.2);display:none;font-style:normal}
+  .id-item.active .id-reponse{display:block}
+
+  /* Écriture */
+  textarea{width:100%;border:2px solid rgba(180,140,210,0.3);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d2845;line-height:1.7;outline:none;resize:vertical;background:#fdf8ff}
+  textarea:focus{border-color:#b08ec8}
+  .ecriture-q{font-size:17px;color:#3d2845;line-height:1.6;text-align:center;margin-bottom:6px}
+  .ecriture-sous{font-size:13px;color:#a090b8;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+
+  /* Phrases de compassion */
+  .phrase-compassion{background:white;border-radius:16px;padding:18px 20px;border:1px solid rgba(180,140,210,0.18);margin-bottom:12px;box-shadow:0 2px 12px rgba(160,120,200,0.07);transition:all 0.2s}
+  .phrase-compassion:hover{border-color:#b08ec8;transform:translateY(-2px)}
+  .phrase-situation{font-family:'Jost',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:#b08ec8;margin-bottom:8px}
+  .phrase-texte{font-size:16px;color:#3d2845;line-height:1.6;margin-bottom:6px}
+  .phrase-explication{font-size:13px;color:#8a7090;line-height:1.6;font-style:normal}
+  .phrase-cocher{display:flex;align-items:center;gap:10px;margin-top:10px;cursor:pointer}
+  .phrase-check{width:20px;height:20px;border-radius:50%;border:2px solid rgba(180,140,210,0.4);flex-shrink:0;transition:all 0.2s;display:flex;align-items:center;justify-content:center;font-size:12px}
+  .phrase-check.done{background:linear-gradient(135deg,#b08ec8,#90a8d8);border-color:transparent;color:white}
+  .phrase-label{font-size:13px;color:#a090b8;font-family:'Jost',sans-serif}
+
+  .recap-box{background:linear-gradient(135deg,#f8f0fd,#f0f4fd);border-radius:14px;padding:14px 18px;border:1px solid rgba(180,140,210,0.2);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b0a0c0;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#f8f0fd,#f0f4fd);border-radius:20px;padding:22px;border:1px solid rgba(180,140,210,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🪞</span>
+    <div class="label">Jour 8 · La voix intérieure</div>
+    <h2>Cette voix dans ta tête, d'où vient-elle vraiment ?</h2>
+    <p>Tu l'entends sûrement. Celle qui dit que tu n'es pas assez. Que tu aurais dû faire mieux. Que les autres y arrivent mais pas toi. Aujourd'hui on va la regarder en face, avec curiosité plutôt qu'avec peur.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🪞</button>
+    <p class="hint">Théorie · Identification · Écriture · Phrases de compassion · ~20 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- IDENTIFICATION -->
+<div class="phase" id="phase-identification">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🔍</span>
+    <h2>Reconnais ta voix critique</h2>
+    <p style="text-align:center;margin-bottom:6px;">Clique sur les pensées que tu reconnais en toi. Tu n'es pas seule : ces voix sont universelles.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">En cliquant, tu verras d'où cette pensée vient et comment la transformer.</p>
+    <div id="identification-container"></div>
+    <button class="btn" onclick="showPhase('comparaison')">Voir critique vs bienveillante →</button>
+  </div>
+</div>
+
+<!-- COMPARAISON VOIX -->
+<div class="phase" id="phase-comparaison">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">⚖️</span>
+    <h2>Deux voix, deux façons d'habiter ta vie</h2>
+    <p style="text-align:center;margin-bottom:20px;">La voix critique et la voix bienveillante parlent des mêmes situations, mais pas du tout de la même façon.</p>
+
+    <div class="voix-comparaison">
+      <div class="voix-card" style="background:linear-gradient(135deg,#fde8e8,#fdf0f0);border:1px solid rgba(232,130,120,0.2);">
+        <div class="voix-titre" style="color:#c85040;">🔴 Voix critique</div>
+        <div class="voix-exemple" style="color:#8d4040;">"Tu as encore échoué. Tu n'y arrives jamais vraiment."</div>
+        <hr style="border:none;border-top:1px solid rgba(232,130,120,0.2);margin:10px 0;">
+        <div class="voix-exemple" style="color:#8d4040;">"Regarde les autres, elles gèrent bien mieux que toi."</div>
+        <hr style="border:none;border-top:1px solid rgba(232,130,120,0.2);margin:10px 0;">
+        <div class="voix-exemple" style="color:#8d4040;">"Tu es trop sensible. Tu exagères."</div>
+      </div>
+      <div class="voix-card" style="background:linear-gradient(135deg,#eaf5f0,#f0f8f4);border:1px solid rgba(120,190,150,0.2);">
+        <div class="voix-titre" style="color:#408060;">🟢 Voix bienveillante</div>
+        <div class="voix-exemple" style="color:#406850;">"C'était difficile. Tu as fait de ton mieux avec ce que tu avais."</div>
+        <hr style="border:none;border-top:1px solid rgba(120,190,150,0.2);margin:10px 0;">
+        <div class="voix-exemple" style="color:#406850;">"Tu as ton propre rythme. Ta progression t'appartient."</div>
+        <hr style="border:none;border-top:1px solid rgba(120,190,150,0.2);margin:10px 0;">
+        <div class="voix-exemple" style="color:#406850;">"Ta sensibilité est une force. Ce que tu ressens est valide."</div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      💡 La voix bienveillante ne nie pas la réalité. Elle ne dit pas "tout va bien" quand ce n'est pas le cas. Elle offre la même honnêteté que la voix critique, mais sans cruauté. C'est ça, la compassion envers soi.
+    </div>
+    <div class="highlight bleu">
+      🧠 Des recherches du Dr Kristin Neff montrent que la voix critique active les mêmes zones cérébrales que la menace physique : le corps entre en mode survie. La voix bienveillante, elle, active les zones liées à la sécurité et à l'attachement. Même résultat que si quelqu'un qu'on aime nous consolait.
+    </div>
+    <button class="btn" onclick="showPhase('ecriture')">Passer à l'écriture ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/3</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Dialoguer avec ta voix</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <p class="ecriture-q" id="e-question"></p>
+    <p class="ecriture-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkEcriture()"></textarea>
+    <button class="btn" id="btn-e-next" style="width:100%;margin-top:12px;" onclick="nextEcriture()">Continuer →</button>
+  </div>
+</div>
+
+<!-- PHRASES DE COMPASSION -->
+<div class="phase" id="phase-phrases">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💜</span>
+    <h2>Des mots pour te parler avec douceur</h2>
+    <p style="text-align:center;margin-bottom:6px;">Ce sont des phrases à t'offrir, à voix haute si tu peux, ou dans ta tête. Coche celles qui résonnent en toi.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Tu peux les noter quelque part, les relire quand la voix critique se fait trop forte.</p>
+    <div id="phrases-container"></div>
+    <button class="btn" onclick="showPhase('fin')">Terminer le Jour 8 ✨</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌸</span>
+    <h2>Tu viens de faire quelque chose de rare</h2>
+    <p>Regarder sa voix critique sans la fuir ni la laisser gagner, c'est un acte de courage et de maturité émotionnelle. Tu commences à devenir ta propre alliée.</p>
+
+    <div style="background:linear-gradient(135deg,#f8f0fd,#f0f4fd);border-radius:16px;padding:20px;border:1px solid rgba(180,140,210,0.2);text-align:left;margin:16px 0;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#b08ec8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+
+    <div class="highlight" style="text-align:left;">
+      🔑 <strong>À pratiquer chaque jour :</strong> Quand tu entends ta voix critique, demande-toi, "Est-ce que je dirais ça à une amie que j'aime ?" Si la réponse est non, tu mérites exactement la même douceur qu'elle.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#907090;"><strong style="color:#5d3860;">Demain, Jour 9 :</strong> le mouvement et le sport comme soin mental</p>
+    <p class="hint" style="margin-top:6px;">22 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie = [
+  { emoji:"🧬", titre:"D'où vient ta voix critique ?", source:"Dr Paul Gilbert, Compassion Focused Therapy", contenu:[
+    {type:"texte",texte:"D'abord, une chose essentielle : ta voix critique, ce n'est pas toi. C'est une construction. Elle s'est fabriquée petit à petit, avec tes expériences, les phrases qu'on t'a dites enfant, les attentes de ta famille, de la société. Elle s'est installée, mais elle n'est pas ta vraie nature."},
+    {type:"highlight",texte:"🧠 Ton cerveau est naturellement programmé pour repérer ce qui ne va pas : les erreurs, les dangers, les ratés. C'est un vieux réflexe de survie. Du coup ta voix critique n'est pas ton ennemie : c'est une part de toi qui essaie de te protéger. Maladroitement, oui. Mais avec de bonnes intentions au départ."},
+    {type:"texte",texte:"Et chez les femmes, cette voix est souvent nourrie par des injonctions qu'on a toutes entendues : sois parfaite, sois disponible, ne prends pas trop de place, ne te plains pas, mérite l'amour au lieu de simplement le recevoir. À force, ça s'imprime."},
+    {type:"stat",texte:"Les femmes ont tendance à se critiquer bien plus souvent que les hommes, pas par fragilité, mais parce que ce conditionnement social est plus fort et commence plus tôt",source:"Dr Susan Nolen-Hoeksema, Women Who Think Too Much"},
+  ]},
+  { emoji:"🔍", titre:"Les 3 visages de ta voix critique", source:"Dr Russ Harris, The Happiness Trap / ACT", contenu:[
+    {type:"texte",texte:"Ta voix critique ne prend pas toujours la même forme. Apprendre à la reconnaître sous ses différents masques, c'est déjà arrêter de la confondre avec la vérité."},
+    {type:"highlight",texte:"🔴 La juge : \"Tu n'es pas assez bien. Tu aurais dû faire mieux. Regarde ce que tu as encore raté.\" → Elle compare, elle condamne, elle punit."},
+    {type:"highlight",texte:"😰 La catastrophiste : \"Ça ne marchera jamais. Tout va mal tourner. Les gens vont te laisser tomber.\" → Elle imagine le pire, soi-disant pour t'éviter la déception.",classe:"bleu"},
+    {type:"highlight",texte:"👻 La minimiseuse : \"C'est pas si grave ce que tu ressens. D'autres ont de vrais problèmes. Tu exagères.\" → Elle balaie tes émotions pour t'éviter d'être vulnérable.",classe:"bleu"},
+    {type:"texte",texte:"Ces trois voix ont un point commun : elles parlent toujours comme si elles étaient LA vérité. Or ce ne sont que des pensées. Pas des faits. Et ça, ça change absolument tout, parce qu'une pensée, on peut la regarder passer sans la croire."},
+  ]},
+  { emoji:"💜", titre:"Te parler comme à ta meilleure amie", source:"Dr Kristin Neff, Self-Compassion Research", contenu:[
+    {type:"texte",texte:"La compassion envers soi, ce n'est pas de la faiblesse, ni de la complaisance, ni du nombrilisme. C'est simplement se traiter avec la même douceur qu'on offre, sans réfléchir, à quelqu'un qu'on aime."},
+    {type:"highlight",texte:"💡 Fais le test : repense à ce que tu te dis quand tu rates quelque chose. Maintenant imagine ta meilleure amie qui vit exactement la même chose. Est-ce que tu lui parlerais comme tu te parles à toi ? Presque jamais. Cet écart, là, c'est tout l'espace que la compassion peut venir remplir."},
+    {type:"stat",texte:"Les personnes qui apprennent à être douces avec elles-mêmes traversent mieux les échecs, rebondissent plus facilement, et gardent une motivation plus durable. Et non, contrairement à ce qu'on croit, se traiter avec bienveillance ne rend pas paresseuse",source:"Dr Kristin Neff & Dr Christopher Germer"},
+    {type:"highlight",texte:"🌸 Cette douceur tient sur trois appuis : te parler avec gentillesse plutôt que de te juger, voir les choses telles qu'elles sont sans les dramatiser ni les minimiser, et te rappeler que te tromper et souffrir fait partie d'être humaine. Tu n'es pas seule là-dedans, vraiment jamais.",classe:"bleu"},
+  ]},
+];
+
+const penseesCritiques = [
+  { texte:"\"Je ne suis jamais assez, assez bonne, assez productive, assez organisée...\"", origine:"Cette pensée vient souvent d'une injonction à la perfection reçue dans l'enfance. Elle te pousse à toujours en faire plus, au détriment de toi-même.", transformation:"\"J'en fais déjà beaucoup. Je suis suffisante telle que je suis, dans mes efforts du moment.\"" },
+  { texte:"\"Les autres gèrent mieux que moi, je dois avoir un problème.\"", origine:"Le biais de comparaison : on compare notre intérieur chaotique à l'extérieur lisse des autres. Tout le monde a un intérieur chaotique.", transformation:"\"Je vois seulement la surface des autres. Ma vie intérieure m'appartient et elle est pleinement valide.\"" },
+  { texte:"\"Je suis trop sensible. Je devrais être plus forte.\"", origine:"Message culturel profondément ancré chez les femmes : les émotions seraient un signe de faiblesse. C'est faux, elles sont un signe d'humanité.", transformation:"\"Ma sensibilité me permet de ressentir profondément. C'est une vraie richesse, une force.\"" },
+  { texte:"\"J'aurais dû réagir autrement. Je n'aurais pas dû dire ça.\"", origine:"Le juge intérieur qui rejoue les situations en boucle, aussi appelé rumination. Il croit te protéger en te faisant apprendre. Mais il t'épuise.", transformation:"\"J'ai fait de mon mieux avec ce que j'avais à ce moment-là. J'apprends de cette expérience et je m'accueille avec douceur.\"" },
+  { texte:"\"Je suis un fardeau pour les personnes que j'aime.\"", origine:"Cette pensée est souvent liée à un attachement anxieux ou à des expériences où tes besoins ont été dévalorisés. Avoir des besoins est humain.", transformation:"\"Avoir besoin des autres fait partie de mon humanité. Les gens qui m'aiment ont envie d'être là pour moi.\"" },
+];
+
+const phrasesCompassion = [
+  { situation:"Quand tu fais une erreur", texte:"\"J'ai fait de mon mieux avec ce que j'avais. J'apprends et je grandis.\"", explication:"Cette phrase active la zone d'apprentissage plutôt que la zone de menace. Elle permet d'avancer sans se punir." },
+  { situation:"Quand tu te compares aux autres", texte:"\"Mon chemin est le mien. Je n'ai pas à correspondre au chemin de quelqu'un d'autre.\"", explication:"La comparaison est un piège, elle ignore tout de ce que l'autre traverse vraiment." },
+  { situation:"Quand tu te sens submergée", texte:"\"Ce que je ressens est valide. Je traverses quelque chose de difficile, et c'est normal de trouver ça dur.\"", explication:"Valider ses propres émotions, avant de chercher à les changer, est la base de la régulation émotionnelle." },
+  { situation:"Quand tu n'en fais jamais assez", texte:"\"Je prends soin de moi aujourd'hui, et c'est suffisant. Je ne peux pas donner ce que je n'ai pas.\"", explication:"Se rappeler que le soin de soi n'est pas de l'égoïsme, c'est la condition pour pouvoir donner aux autres." },
+  { situation:"Quand la voix critique est très forte", texte:"\"Je t'entends. Tu essaies de me protéger. Mais je n'ai pas besoin de cette armure aujourd'hui.\"", explication:"Parler à la voix critique plutôt que de la combattre, l'ACT montre que c'est plus efficace que d'essayer de la faire taire." },
+  { situation:"Quand tu doutes de ta valeur", texte:"\"Je mérite d'être aimée simplement parce que j'existe, pas parce que je performe, produis ou plais.\"", explication:"La valeur n'est pas conditionnelle. C'est peut-être la phrase la plus difficile à croire, et la plus importante." },
+];
+
+const ecritureQuestions = [
+  { q:"Quelle est la phrase que ta voix critique répète le plus souvent ?", sous:"Écris-la telle qu'elle, sans la filtrer.", placeholder:"Ma voix critique me dit souvent : ..." },
+  { q:"À quelle période de ta vie penses-tu que cette voix s'est formée ?", sous:"Pas besoin de certitude, juste une intuition, une image, un souvenir.", placeholder:"Je pense que cette voix vient de..." },
+  { q:"Si ta meilleure amie vivait ce que tu vis, qu'est-ce que tu lui dirais ?", sous:"Écris-lui une vraie réponse bienveillante, puis relis-la en te l'adressant à toi-même.", placeholder:"Si c'était mon amie, je lui dirais : ..." },
+];
+
+let theorieIdx = 0;
+let ecritureIdx = 0;
+let ecritureReponses = [];
+let phrasesChoisies = [];
+
+function showPhase(id) {
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='identification') renderIdentification();
+  if(id==='phrases') renderPhrases();
+  if(id==='ecriture') renderEcriture();
+}
+
+// Preview
+const pc = document.getElementById('preview-container');
+[{e:'🧬',t:"D'où vient ta voix critique ?"},{e:'🔍',t:'Les 3 formes qu\'elle prend'},{e:'💜',t:'La compassion envers soi'},{e:'🔍',t:'Reconnais tes pensées critiques'},{e:'⚖️',t:'Critique vs bienveillante'},{e:'✍️',t:'Écriture, dialoguer avec ta voix'},{e:'💜',t:'Phrases de compassion à se dire'}].forEach(item=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${item.e}</span><span>${item.t}</span></div>`;
+});
+
+function renderTheorie() {
+  const t = theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#6d5070;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='highlight') el.innerHTML+=`<div class="highlight ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  const isLast=theorieIdx===theorie.length-1;
+  document.querySelector('#phase-theorie .btn').textContent=isLast?'Identifier ma voix critique 🔍':'Continuer →';
+}
+
+function nextTheorie() {
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else{showPhase('identification');}
+}
+
+function renderIdentification() {
+  const el=document.getElementById('identification-container');
+  el.innerHTML='';
+  penseesCritiques.forEach((p,i)=>{
+    el.innerHTML+=`
+      <div class="id-item" id="id-${i}" onclick="toggleId(${i})">
+        <div class="id-texte">${p.texte}</div>
+        <div class="id-reponse">
+          <strong style="color:#8870a0;font-style:normal;">D'où ça vient :</strong> ${p.origine}<br><br>
+          <strong style="color:#80b890;font-style:normal;">Comment le transformer :</strong> <em>${p.transformation}</em>
+        </div>
+      </div>`;
+  });
+}
+
+function toggleId(i) {
+  const el=document.getElementById('id-'+i);
+  el.classList.toggle('active');
+}
+
+function renderEcriture() {
+  const e=ecritureQuestions[ecritureIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${ecritureIdx+1}/${ecritureQuestions.length}`;
+  document.getElementById('e-progress').style.width=((ecritureIdx+1)/ecritureQuestions.length*100)+'%';
+  document.getElementById('e-question').textContent=e.q;
+  document.getElementById('e-sous').textContent=e.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=e.placeholder;
+  document.getElementById('btn-e-next').textContent=ecritureIdx<ecritureQuestions.length-1?'Continuer →':'Voir les phrases de compassion 💜';
+}
+
+function checkEcriture(){
+  // Le bouton reste accessible, écriture libre, à ton rythme
+}
+
+function nextEcriture(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(!val)return;
+  ecritureReponses.push({q:ecritureQuestions[ecritureIdx].q,r:val});
+  if(ecritureIdx<ecritureQuestions.length-1){ecritureIdx++;renderEcriture();window.scrollTo(0,0);}
+  else{showPhase('phrases');}
+}
+
+function renderPhrases(){
+  const el=document.getElementById('phrases-container');
+  el.innerHTML='';
+  phrasesCompassion.forEach((p,i)=>{
+    const checked=phrasesChoisies.includes(i);
+    const div=document.createElement('div');
+    div.className='phrase-compassion';
+    div.innerHTML=`
+      <div class="phrase-situation">${p.situation}</div>
+      <div class="phrase-texte">${p.texte}</div>
+      <div class="phrase-explication">${p.explication}</div>
+      <div class="phrase-cocher" onclick="togglePhrase(${i})">
+        <div class="phrase-check ${checked?'done':''}" id="check-${i}">${checked?'✓':''}</div>
+        <span class="phrase-label">${checked?'Cette phrase me parle ✓':'Cette phrase me parle'}</span>
+      </div>`;
+    el.appendChild(div);
+  });
+}
+
+function togglePhrase(i){
+  if(phrasesChoisies.includes(i)){
+    phrasesChoisies=phrasesChoisies.filter(x=>x!==i);
+  } else {
+    phrasesChoisies.push(i);
+  }
+  renderPhrases();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  ecritureReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<ecritureReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  if(phrasesChoisies.length>0){
+    rc.innerHTML+=`<div class="recap-box" style="margin-top:10px;"><div class="recap-q">Tes phrases de compassion choisies</div>`;
+    phrasesChoisies.forEach(i=>{
+      rc.querySelector('.recap-box:last-child').innerHTML+=`<div class="recap-r" style="margin-bottom:6px;">${phrasesCompassion[i].texte}</div>`;
+    });
+    rc.querySelector('.recap-box:last-child').innerHTML+='</div>';
+  }
+  _sp('fin');
+}
+
+// Override showPhase pour fin
+const _sp=showPhase;
+window.showPhase=function(id){
+  if(id==='fin'){showFin();return;}
+  _sp(id);
+};
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 8 · Ma voix interieure</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour8-voix-interieure-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

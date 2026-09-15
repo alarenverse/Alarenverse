@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 24 · L'estime de soi · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf5e8 0%,#f8f0fa 45%,#eef5f8 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#a08060;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d2d10;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c8a060,#a080c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(180,140,60,0.1);border:1px solid rgba(200,160,80,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c8a060;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d2d10;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d2d10;margin-bottom:14px;line-height:1.4}
+  p{color:#6d4d20;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a6a40}
+  .btn{background:linear-gradient(135deg,#c8a060,#a080c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(180,140,60,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,160,80,0.25);color:#c0a870;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#c0a870;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a08060;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(200,160,80,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#c8a060,#a080c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#fdf5e8,#f8f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #c8a060;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .hl.bleu{border-left-color:#7090c0;background:linear-gradient(135deg,#eef4fb,#f0f4fd)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(200,160,80,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#c8a060,#a080c8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#b09060;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(200,160,80,0.12);font-size:11px;color:#b09060;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(200,160,80,0.05);border:1px solid rgba(200,160,80,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#806040;font-family:'Jost',sans-serif}
+
+  /* 3 piliers */
+  .pilier{border-radius:18px;padding:20px;margin-bottom:14px;border:2px solid}
+  .pilier-num{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:6px}
+  .pilier-titre{font-size:18px;font-weight:700;margin-bottom:8px;font-style:normal}
+  .pilier-def{font-size:14px;line-height:1.7;font-style:normal;margin-bottom:8px}
+  .pilier-ex{font-size:13px;line-height:1.6;padding:8px 12px;border-radius:8px;margin-top:6px}
+
+  /* Thermomètre estime */
+  .thermo-wrap{position:relative;margin:16px 0}
+  .thermo-track{height:12px;border-radius:8px;background:linear-gradient(90deg,#e8857a,#c8a870,#80c8a8);margin-bottom:8px;position:relative}
+  .thermo-labels{display:flex;justify-content:space-between;font-family:'Jost',sans-serif;font-size:10px}
+  .thermo-cursor{position:absolute;top:-4px;width:20px;height:20px;border-radius:50%;background:white;border:3px solid #c8a060;cursor:grab;transform:translateX(-10px);box-shadow:0 2px 8px rgba(0,0,0,0.2);transition:left 0.1s}
+  .thermo-message{font-size:13px;color:#4d3010;text-align:center;margin-top:8px;min-height:40px;line-height:1.5}
+
+  /* Exercices */
+  .exercice-card{border-radius:16px;padding:20px;margin-bottom:14px;border:2px solid}
+  .ex-badge{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;padding:3px 12px;border-radius:10px;display:inline-block;color:white;margin-bottom:10px}
+  .ex-titre{font-size:16px;font-weight:700;color:#2d1d10;margin-bottom:8px;font-style:normal}
+  .ex-desc{font-size:17px;color:#253050;line-height:1.7;font-style:normal;margin-bottom:12px}
+  .ex-input{width:100%;border:2px solid rgba(200,160,80,0.25);border-radius:12px;padding:12px 14px;font-size:14px;font-family:'Lora',serif;color:#3d2d10;outline:none;background:white;resize:vertical;min-height:70px;margin-bottom:8px}
+  .ex-input:focus{border-color:#c8a060}
+
+  textarea{width:100%;border:2px solid rgba(200,160,80,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d2d10;line-height:1.7;outline:none;resize:vertical;background:#fdfaf4}
+  textarea:focus{border-color:#c8a060}
+  .e-q{font-size:17px;font-weight:600;color:#3d2d10;line-height:1.65;text-align:center;margin-bottom:6px;font-style:normal}
+  .e-sous{font-size:13px;color:#a08060;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#fdf5e8,#f8f0fa);border-radius:14px;padding:14px 18px;border:1px solid rgba(200,160,80,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b09060;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#fdf5e8,#f8f0fa);border-radius:20px;padding:22px;border:1px solid rgba(200,160,80,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">💎</span>
+    <div class="label">Jour 24 · L'estime de soi</div>
+    <h2>L'estime de soi n'est pas fixe, et elle est bien plus grande que la confiance en soi</h2>
+    <p>On confond souvent estime de soi et confiance en soi. Ce sont deux choses distinctes, et on peut avoir l'une sans l'autre. L'estime de soi est la plus profonde des deux, elle touche à ta valeur en tant que personne, pas à tes capacités dans une situation donnée.</p>
+    <p class="small" style="margin-bottom:20px;">Aujourd'hui on explore sa structure, ses origines, son caractère fluctuant, et des exercices concrets pour la nourrir sur ses 3 piliers.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 💎</button>
+    <p class="hint">Théorie · 3 piliers · Fluctuation · Exercices · Écriture · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- 3 PILIERS -->
+<div class="phase" id="phase-piliers">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🏛️</span>
+    <h2>Les 3 piliers de l'estime de soi</h2>
+    <p style="text-align:center;margin-bottom:6px;">Ces trois dimensions sont interdépendantes, chacune nourrit les autres. Une estime de soi solide s'appuie sur les trois ensemble.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Christophe André, psychiatre spécialiste de l'estime de soi, les décrit comme un "tissage vivant", pas un état fixe.</p>
+
+    <div class="pilier" style="background:linear-gradient(135deg,#fdf5e8,#fdf8ee);border-color:rgba(200,160,80,0.35);">
+      <div class="pilier-num" style="color:#c8a060;">Pilier 1, Le plus profond</div>
+      <div class="pilier-titre" style="color:#4d3010;">L'amour de soi</div>
+      <div class="pilier-def" style="color:#5d4020;">C'est le sentiment d'avoir de la valeur en tant que personne, indépendamment de ce qu'on fait, de ce qu'on réussit, de ce que les autres pensent. C'est se sentir digne d'être aimée, d'exister, de prendre de la place. C'est la couche la plus profonde et la plus difficile à reconstruire.</div>
+      <div class="pilier-ex" style="background:rgba(200,160,80,0.1);color:#6d4020;">💡 Quand l'amour de soi est faible : on conditionne sa valeur à la performance, à la validation des autres, à être "assez" quelque chose. Chaque erreur devient une preuve de sa nullité, pas juste d'une maladresse passagère.</div>
+    </div>
+
+    <div class="pilier" style="background:linear-gradient(135deg,#f5f0fa,#f0eefa);border-color:rgba(160,128,200,0.35);">
+      <div class="pilier-num" style="color:#a080c8;">Pilier 2</div>
+      <div class="pilier-titre" style="color:#3d1d50;">L'affirmation de soi</div>
+      <div class="pilier-def" style="color:#5d3070;">C'est la capacité à s'exprimer, défendre ses droits et ses besoins, sans agressivité ni soumission, tout en respectant ceux des autres. Elle est directement liée aux valeurs : on s'affirme depuis ce qui compte vraiment pour nous. Elle inclut savoir dire non, exprimer un désaccord, demander ce dont on a besoin.</div>
+      <div class="pilier-ex" style="background:rgba(160,128,200,0.1);color:#4d2060;">💡 Quand l'affirmation de soi est faible : on dit oui quand on pense non, on s'efface pour éviter le conflit, on laisse ses besoins passer après ceux des autres, systématiquement. La frustration et le ressentiment s'accumulent.</div>
+    </div>
+
+    <div class="pilier" style="background:linear-gradient(135deg,#eef4fb,#f0f5fa);border-color:rgba(100,144,192,0.35);">
+      <div class="pilier-num" style="color:#6090c0;">Pilier 3</div>
+      <div class="pilier-titre" style="color:#1d3050;">La confiance en soi</div>
+      <div class="pilier-def" style="color:#3d5070;">C'est l'estime de soi dans l'action : la conviction d'avoir les ressources pour faire face à une situation donnée. Contrairement à l'amour de soi, la confiance est toujours contextuelle : on peut être très confiante dans son travail et pas du tout dans ses relations. Elle se construit par l'action et l'accumulation de petits succès.</div>
+      <div class="pilier-ex" style="background:rgba(100,144,192,0.1);color:#2d4060;">💡 Différence clé : l'estime de soi (amour de soi + valeurs) est en rapport avec qui on est. La confiance en soi est en rapport avec ce qu'on sait faire. On peut avoir une grande confiance professionnelle et une faible estime de soi, et inversement.</div>
+    </div>
+
+    <button class="btn" onclick="showPhase('fluctuation')">L'estime de soi est fluctuante →</button>
+  </div>
+</div>
+
+<!-- FLUCTUATION -->
+<div class="phase" id="phase-fluctuation">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌊</span>
+    <h2>L'estime de soi fluctue, et c'est normal</h2>
+    <p style="text-align:center;margin-bottom:20px;">L'estime de soi n'est pas un état fixe qu'on atteint une fois pour toutes. Elle varie selon les jours, les situations, les phases de vie. Ce n'est pas un échec, c'est de la neurologie.</p>
+
+    <div class="hl" style="margin-bottom:16px;">
+      <strong>Ce qui fait monter l'estime de soi :</strong><br><br>
+      Agir en accord avec ses valeurs · Poser une limite et la tenir · Recevoir de la reconnaissance sincère · Accomplir quelque chose de difficile · Prendre soin de son corps · Être dans des relations nourrissantes · Se pardonner une erreur · Faire quelque chose qu'on avait peur de faire
+    </div>
+
+    <div class="hl rouge" style="margin-bottom:16px;">
+      <strong>Ce qui fait baisser l'estime de soi :</strong><br><br>
+      Agir contre ses valeurs · Subir une critique ou un rejet · Comparer sa vie à celle des autres sur les réseaux · S'isoler · Accumuler des promesses non tenues à soi-même · Surcharge chronique sans ressourcement · Periménopause ou bouleversements hormonaux · Rumination et voix critique non questionnée
+    </div>
+
+    <div class="hl" style="margin-bottom:16px;">
+      <strong>Le perfectionnisme, l'ennemi silencieux de l'estime de soi</strong><br><br>
+      Le perfectionnisme est souvent présenté comme une qualité, "je suis perfectionniste" dit-on fièrement. Mais cliniquement, le perfectionnisme toxique est l'un des facteurs les plus destructeurs pour l'estime de soi féminine.<br><br>
+      Pourquoi ? Parce qu'il repose sur une logique conditionnelle : <em>"Je vaux quelque chose SI je fais les choses parfaitement."</em> L'estime de soi devient alors entièrement dépendante de la performance, et s'effondre dès la première erreur.<br><br>
+      <strong>La différence entre soin de la qualité et perfectionnisme toxique :</strong><br>
+     , Le soin de la qualité dit : "Je veux bien faire parce que ça m'importe." Il vient d'une valeur.<br>
+     , Le perfectionnisme toxique dit : "Je dois être parfaite pour avoir de la valeur." Il vient de la peur.<br><br>
+      <strong>Chez les femmes spécifiquement :</strong> le perfectionnisme est souvent une réponse à la peur d'être jugée comme incompétente, insuffisante, ou illégitime. On compense par la performance ce qu'on ne croit pas mériter naturellement. C'est épuisant, et ce n'est jamais assez, parce que la barre se déplace toujours.
+    </div>
+
+    <div class="hl vert" style="margin-bottom:16px;">
+      <strong>La bonne nouvelle, l'estime de soi n'est pas immuable :</strong><br><br>
+      Pendant longtemps, on a cru que l'estime de soi était largement fixée dans l'enfance. Les neurosciences montrent aujourd'hui que le cerveau reste plastique, et que l'estime de soi peut être reconstruite à tout âge, progressivement, par des pratiques régulières et des expériences correctives dans des relations sécurisantes.
+    </div>
+
+    <div class="hl violet">
+      <strong>Déculpabiliser :</strong><br><br>
+      Une estime de soi fluctuante n'est pas le signe d'une fragilité de caractère. C'est une réponse normale à des circonstances réelles. Les jours où tu te sens "nulle", ce n'est pas la vérité sur toi. C'est une vague. Elle passe.
+    </div>
+
+    <button class="btn" onclick="showPhase('exercices')">Les exercices pour nourrir mes 3 piliers →</button>
+  </div>
+</div>
+
+<!-- EXERCICES -->
+<div class="phase" id="phase-exercices">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💪</span>
+    <h2>Nourrir mes 3 piliers, exercices concrets</h2>
+    <p style="text-align:center;margin-bottom:20px;">Un exercice par pilier. Prends le temps de vraiment répondre, pas de survoler.</p>
+
+    <!-- Amour de soi -->
+    <div class="exercice-card" style="background:linear-gradient(135deg,#fdf5e8,#fdf8ee);border-color:rgba(200,160,80,0.3);">
+      <div class="ex-badge" style="background:#c8a060;">Pilier 1, Amour de soi</div>
+      <div class="ex-titre">Le regard de quelqu'un qui t'aime vraiment</div>
+      <div class="ex-desc">
+        Pense à quelqu'un qui t'aime sincèrement : une amie proche, ta mère, ton enfant, quelqu'un qui te voit vraiment. Pas quelqu'un qui t'admire pour tes performances, quelqu'un qui t'aime pour qui tu es.<br><br>
+        <strong>Exemples pour t'aider à démarrer :</strong><br>
+       , "Elle dirait que je suis une mère présente malgré la fatigue"<br>
+       , "Elle verrait mon courage de tenir debout dans des moments difficiles"<br>
+       , "Elle dirait que j'ai un cœur immense même quand je me sens vide"<br>
+       , "Elle remarquerait ma capacité à voir la beauté dans les petites choses"<br><br>
+        Maintenant toi, qu'est-ce que cette personne voit en toi ?
+      </div>
+      <textarea class="ex-input" id="ex1" placeholder="Si cette personne devait me décrire, elle dirait que je suis... / Elle voit en moi... / Ce qu'elle admire en moi sans que je le réalise c'est..."></textarea>
+      <div style="font-size:12px;color:#a08060;font-family:'Jost',sans-serif;margin-top:6px;">📌 Relis ce que tu viens d'écrire. Trois fois si nécessaire. C'est aussi vrai que ce que ta voix critique dit de toi, et souvent bien plus juste.</div>
+    </div>
+
+    <!-- Affirmation de soi -->
+    <div class="exercice-card" style="background:linear-gradient(135deg,#f5f0fa,#f0eefa);border-color:rgba(160,128,200,0.3);">
+      <div class="ex-badge" style="background:#a080c8;">Pilier 2, Affirmation de soi</div>
+      <div class="ex-titre">Mon non de la semaine, avec les mots concrets</div>
+      <div class="ex-desc">
+        L'affirmation de soi se construit par l'action, pas par la réflexion seule. Identifie une situation cette semaine où tu aurais voulu dire non, poser une limite, ou exprimer un besoin, et où tu ne l'as pas fait.<br><br>
+        <strong>Exemples de situations fréquentes :</strong><br>
+       , On m'a demandé de prendre en charge quelque chose que je n'avais pas la capacité de faire<br>
+       , Quelqu'un a dit quelque chose de blessant et je n'ai rien dit<br>
+       , J'ai dit oui à une invitation alors que j'avais besoin de me reposer<br>
+       , J'ai gardé une opinion pour moi par peur du conflit<br><br>
+        <strong>Pour formuler ton non :</strong> commence par "je" et nomme ton besoin, pas le comportement de l'autre.<br>
+        Ex : "J'ai besoin de ne pas prendre ça en charge cette semaine" plutôt que "tu me demandes trop"
+      </div>
+      <textarea class="ex-input" id="ex2" placeholder="La situation c'était... / Ce que j'aurais voulu dire c'est... / La prochaine fois je pourrais dire : 'Je...'"></textarea>
+    </div>
+
+    <!-- Confiance en soi -->
+    <div class="exercice-card" style="background:linear-gradient(135deg,#eef4fb,#f0f5fa);border-color:rgba(100,144,192,0.3);">
+      <div class="ex-badge" style="background:#6090c0;">Pilier 3, Confiance en soi</div>
+      <div class="ex-titre">Mes 5 preuves de résilience</div>
+      <div class="ex-desc">
+        La confiance en soi se construit sur des preuves réelles, pas sur des affirmations positives vides. Ton cerveau a besoin de faits concrets pour y croire.<br><br>
+        <strong>Ces preuves peuvent être :</strong><br>
+       , Avoir traversé une période difficile sans s'effondrer<br>
+       , Avoir pris une décision courageuse même avec la peur<br>
+       , Avoir appris quelque chose de nouveau et l'avoir maîtrisé<br>
+       , Avoir demandé de l'aide quand c'était nécessaire<br>
+       , Avoir tenu une promesse à soi-même<br>
+       , Avoir su dire non quand c'était important<br>
+       , Avoir surmonté quelque chose qu'on pensait ne pas pouvoir<br><br>
+        <strong>Ce ne sont pas forcément de grandes choses.</strong> Tenir debout chaque jour avec une vie chargée, c'est déjà une preuve.
+      </div>
+      <textarea class="ex-input" id="ex3" placeholder="1. J'ai surmonté / accompli / tenu debout face à...&#10;2.&#10;3.&#10;4.&#10;5."></textarea>
+      <div style="font-size:12px;color:#6090c0;font-family:'Jost',sans-serif;margin-top:6px;">📌 Ces preuves sont réelles. Ta confiance peut s'appuyer dessus, maintenant et les jours où tu doutes.</div>
+    </div>
+
+    <button class="btn" onclick="showPhase('valeurs')">Mes valeurs : le socle de tout →</button>
+  </div>
+</div>
+
+<!-- VALEURS -->
+<div class="phase" id="phase-valeurs">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🧭</span>
+    <h2>Mes valeurs : le socle de l'estime de soi</h2>
+    <p style="text-align:center;margin-bottom:8px;">L'estime de soi est directement liée à l'alignement avec ses valeurs. Quand on agit en accord avec ce qui compte vraiment pour soi, l'estime monte. Quand on s'en éloigne, elle chute.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Identifie tes 3 valeurs les plus profondes en cochant celles qui résonnent le plus.</p>
+
+    <div id="valeurs-container" style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;"></div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a060;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Mes 3 valeurs les plus importantes</div>
+      <div id="valeurs-choisies" style="font-size:16px;color:#4d3010;min-height:30px;line-height:1.8;"></div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a060;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Dans quelle mesure vis-tu en accord avec ces valeurs en ce moment ?</div>
+      <textarea id="valeurs-note" rows="3" placeholder="Je vis en accord avec... / Ce qui m'éloigne de mes valeurs c'est... / Ce que je pourrais changer c'est..."></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('ecriture')">Écriture finale ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/3</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Mon estime de soi</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">💎</span>
+    <h2>Tu vaux bien plus que ce que tu crois les jours difficiles</h2>
+    <p>L'estime de soi ne se construit pas en un jour. Elle se tisse, par chaque limite posée, chaque valeur honorée, chaque erreur pardonnée, chaque preuve de ta propre résilience que tu acceptes de voir.</p>
+    <div style="background:linear-gradient(135deg,#fdf5e8,#f8f0fa);border-radius:16px;padding:20px;border:1px solid rgba(200,160,80,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a060;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">💎 Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À pratiquer :</strong> Chaque soir, note une chose que tu as faite qui était alignée avec tes valeurs. Même petite. C'est comme ça que l'estime de soi se reconstruit, pas par des affirmations vides, mais par des preuves concrètes d'alignement avec qui tu es vraiment.
+    </div>
+    <button class="btn" onclick="telechargerReponses()" style="margin-top:16px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p class="note" style="margin-top:8px;text-align:center;">Un PDF de tes réponses du jour, à garder pour toi.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#806040;"><strong style="color:#3d2d10;">Demain, Jour 25 :</strong> mes valeurs profondes</p>
+    <p class="hint" style="margin-top:6px;">6 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🔬",titre:"Estime de soi, confiance en soi, affirmation de soi, trois choses distinctes",source:"Christophe André, Imparfaits, libres et heureux / Université de Sherbrooke",contenu:[
+    {type:"texte",texte:"On confond souvent estime de soi et confiance en soi. Ce sont deux réalités neurologiquement et psychologiquement différentes, et on peut avoir l'une sans l'autre."},
+    {type:"hl",texte:"💡 <strong>L'estime de soi</strong> est en rapport avec les valeurs et la valeur de la personne, \"je suis quelqu'un qui vaut la peine d'exister et d'être aimé.\" C'est une évaluation profonde, stable, qui ne dépend pas d'une situation particulière.<br><br><strong>La confiance en soi</strong> est en rapport avec les capacités dans un contexte donné, \"je pense que je suis capable de faire ça.\" Elle est toujours contextuelle : on peut être très confiante au travail et pas du tout dans ses relations amoureuses.<br><br><strong>L'affirmation de soi</strong> est la capacité à défendre ses droits et exprimer ses besoins, sans agressivité ni soumission. Elle est le pont entre l'estime intérieure et le monde extérieur."},
+    {type:"stat",texte:"Une estime de soi fragile pèse lourd sur le moral, davantage d'anxiété, de tristesse de fond, de difficultés dans les relations. Et ça, même quand on est par ailleurs très compétente dans son travail ou sa vie",source:"Université de Sherbrooke"},
+    {type:"hl",texte:"🌸 On peut être excellente professionnellement (confiance en soi élevée) et se sentir profondément indigne d'être aimée (estime de soi faible). Ces deux réalités coexistent souvent, et c'est pour ça que les succès extérieurs ne \"guérissent\" pas toujours le sentiment intérieur d'insuffisance.",classe:"violet"},
+  ]},
+  {emoji:"🌱",titre:"D'où vient une faible estime de soi",source:"Christophe André / Dr Nathaniel Branden, The Six Pillars of Self-Esteem",contenu:[
+    {type:"texte",texte:"L'estime de soi se construit principalement dans l'enfance, dans les regards et les messages qu'on a reçus des personnes qui comptaient. Mais elle continue d'évoluer tout au long de la vie."},
+    {type:"hl",texte:"🌱 Les origines les plus fréquentes d'une faible estime de soi :<br>· Des messages répétés de dévalorisation ou de critique dans l'enfance<br>· Une validation conditionnelle : \"je t'aime si tu es sage, si tu réussis, si tu obéis\"<br>· Des comparaisons systématiques défavorables<br>· Des blessures relationnelles non réparées<br>· Un environnement qui n'a pas permis l'affirmation de soi<br>· Des traumatismes ou des pertes importantes"},
+    {type:"texte",texte:"Ces messages s'enregistrent comme des vérités, \"je ne suis pas assez\", \"je dois mériter ma place\", \"mes besoins ne comptent pas\", et gouvernent ensuite les comportements de façon souvent inconsciente."},
+    {type:"hl",texte:"💡 Le Dr Nathaniel Branden identifie 6 pratiques qui reconstruisent l'estime de soi : vivre consciemment, s'accepter, être responsable de soi, s'affirmer, vivre avec un but, intégrer l'intégrité personnelle. Toutes sont des pratiques, pas des états qu'on atteint.",classe:"vert"},
+  ]},
+  {emoji:"🏛️",titre:"Les 4 composantes de l'estime de soi, le modèle de Duclos",source:"Germain Duclos, L'estime de soi, un passeport pour la vie / CPAS Charleroi",contenu:[
+    {type:"texte",texte:"Le psychologue québécois Germain Duclos a identifié 4 composantes interdépendantes de l'estime de soi. Elles se nourrissent mutuellement, quand l'une est fragilisée, les autres en pâtissent aussi."},
+    {type:"hl",texte:"🛡️ <strong>1. Le sentiment de sécurité et de confiance</strong><br>Se sentir en sécurité dans ses relations et son environnement. Pouvoir s'adapter au stress, maintenir son calme, anticiper les plaisirs plutôt que de tout redouter. Quand cette composante est fragilisée, tout semble menaçant, imprévisible, incontrôlable."},
+    {type:"hl",texte:"🔍 <strong>2. La connaissance de soi</strong><br>Savoir ce qu'on aime, ce qu'on ne sait pas bien faire, ce qu'on voudrait changer, ce qui nous différencie des autres. S'affirmer, prendre la parole, exprimer ses besoins. Quand cette composante manque, on vit selon les attentes des autres, jamais selon les siennes.",classe:"violet"},
+    {type:"hl",texte:"🤝 <strong>3. Le sentiment d'appartenance</strong><br>Se sentir faire partie d'un groupe, d'une communauté. Être à l'aise avec les autres, pouvoir donner et recevoir du soutien. Quand ce sentiment manque : la solitude s'installe, même entourée.",classe:"vert"},
+    {type:"hl",texte:"⭐ <strong>4. Le sentiment de compétence et de réussite</strong><br>Se souvenir de ses réussites passées, anticiper le plaisir face à une nouvelle activité plutôt que le stress, persévérer malgré les difficultés. Quand cette composante est fragile, on se perçoit comme incapable avant même d'essayer.",classe:"or"},
+    {type:"texte",texte:"La bonne nouvelle : aucune de ces composantes n'est fixe. Chacune peut être travaillée, renforcée, reconstruite, à travers des expériences correctives, des pratiques répétées et des relations qui nous voient vraiment."},
+  ]},
+  {emoji:"⚡",titre:"L'estime de soi est fluctuante, variable · et reconstructible",source:"Christophe André / Neurosciences de la plasticité cérébrale",contenu:[
+    {type:"texte",texte:"Pendant longtemps, on a cru que l'estime de soi était largement fixée dans l'enfance et difficile à modifier. Les neurosciences modernes montrent quelque chose de différent, et de plus encourageant."},
+    {type:"hl",texte:"🌊 L'estime de soi fluctue naturellement, selon les journées, les situations, les phases hormonales, les relations, les succès et les échecs. Les jours où tu te sens \"nulle\" ne disent pas la vérité sur ta valeur, ils disent que ton estime est temporairement basse. C'est une vague, pas un état permanent."},
+    {type:"stat",texte:"L'estime de soi peut se reconstruire à tout âge, par un travail sur ses pensées, une douceur régulière envers soi-même, et des relations qui réparent. Ce n'est jamais figé, jamais trop tard",source:"Recherche en psychologie de la personnalité"},
+    {type:"hl",texte:"⚠️ Ce qui maintient une faible estime de soi : la rumination, la comparaison aux autres, éviter les situations où on pourrait échouer (et donc ne jamais accumuler de preuves de compétence), et la voix critique non questionnée.",classe:"rouge"},
+    {type:"hl",texte:"🌸 Ce qui la reconstruit progressivement : agir en accord avec ses valeurs, poser des limites, accueillir les compliments sans les défleter, se pardonner ses erreurs, et s'entourer de personnes qui nous voient vraiment.",classe:"vert"},
+  ]},
+];
+
+const valeursListe=[
+  "Loyauté, tenir ses engagements envers ceux qu'on aime, rester fidèle à sa parole",
+  "Authenticité, être vraie, sans masque ni performance",
+  "Liberté, choisir ma vie, mes choix, sans me trahir",
+  "Courage, agir malgré la peur, dire la vérité",
+  "Intégrité, agir en accord avec ce que je crois juste",
+  "Bienveillance, envers les autres et envers moi-même",
+  "Justice, ce qui est équitable, honnête, droit",
+  "Créativité, créer, inventer, exprimer quelque chose d'unique",
+  "Connexion, les liens vrais, la présence, l'intimité",
+  "Croissance, apprendre, évoluer, ne jamais stagner",
+  "Famille, le lien, la transmission, prendre soin des siens",
+  "Indépendance, ne pas dépendre des autres pour exister",
+  "Empathie, ressentir ce que l'autre vit, être touchée",
+  "Aventure, sortir du connu, explorer, prendre des risques",
+  "Spiritualité, une connexion à quelque chose de plus grand",
+  "Équité, que chacun ait sa juste place",
+  "Service, contribuer, être utile, laisser quelque chose",
+  "Beauté, créer ou percevoir ce qui est beau, harmonieux",
+  "Paix intérieure, calme, sérénité, absence de guerre intérieure",
+  "Respect, de soi et des autres, des limites et des différences",
+  "Amour, donner et recevoir de l'amour sans condition",
+  "Discipline, tenir ses engagements envers soi-même",
+  "Humour, légèreté, rire, ne pas se prendre trop au sérieux",
+  "Vérité, dire et entendre ce qui est réel, sans fard",
+  "Engagement, aller au bout, ne pas abandonner ce qui compte",
+  "Présence, être vraiment là, dans l'instant, avec les autres",
+];
+
+const ecritureQs=[
+  {q:"Sur quel pilier ton estime de soi est-elle la plus fragilisée en ce moment, et pourquoi ?",sous:"Amour de soi, affirmation de soi ou confiance en soi ?",placeholder:"Le pilier qui me semble le plus fragile c'est... / Je pense que c'est parce que..."},
+  {q:"Quelle preuve de ta valeur tu refuses de voir, ou que tu minimises systématiquement ?",sous:"Ce que les autres voient en toi que tu n'arrives pas à t'accorder.",placeholder:"Ce que je refuse de voir ou minimise c'est..."},
+  {q:"Une petite action concrète par pilier, que tu vas faire cette semaine pour nourrir ton estime de soi.",sous:"Une par pilier. Réaliste, précise, faisable.",placeholder:"Amour de soi : je vais... / Affirmation : je vais... / Confiance : je vais..."},
+];
+
+let theorieIdx=0, selectedValeurs=new Set(), eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='valeurs') renderValeurs();
+  if(id==='ecriture') renderE();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🔬',t:'Estime, confiance, affirmation, 3 choses distinctes'},{e:'🌱',t:'D\'où vient une faible estime de soi'},{e:'⚡',t:'Fluctuante, variable et reconstructible'},{e:'🏛️',t:'Les 3 piliers, amour, affirmation, confiance'},{e:'🌊',t:'Comprendre la fluctuation et déculpabiliser'},{e:'💪',t:'Exercices concrets sur les 3 piliers'},{e:'🧭',t:'Mes valeurs : le socle de tout'},{e:'✍️',t:'Écriture guidée'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function telechargerReponses(){
+  const recap = document.getElementById('recap-container');
+  const date = new Date().toLocaleDateString('fr-FR', {day:'numeric',month:'long',year:'numeric'});
+  const contenu = recap ? recap.innerHTML : '';
+
+  const win = window.open('', '_blank');
+  win.document.write(`
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+      <meta charset="UTF-8">
+      <title>Jour 24 · Mes réponses</title>
+      <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+      <style>
+        body{font-family:'Lora',serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}
+        h1{font-size:24px;font-weight:600;color:#3d2d50;margin-bottom:6px;}
+        .date{font-family:'Jost',sans-serif;font-size:13px;color:#9a84a8;margin-bottom:30px;}
+        .programme{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}
+        .bloc{background:#fdf8ee;border-radius:12px;padding:16px 20px;border-left:3px solid #c8a060;margin-bottom:16px;}
+        .recap-q{font-family:'Jost',sans-serif;font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+        .recap-r{font-size:16px;color:#3d2d50;line-height:1.7;}
+        .footer{margin-top:40px;padding-top:20px;border-top:1px solid #e8d8c0;font-family:'Jost',sans-serif;font-size:12px;color:#b0a080;text-align:center;}
+        @media print{body{padding:20px;} button{display:none;}}
+      </style>
+    </head>
+    <body>
+      <div class="programme">30 jours pour prendre soin de ma santé mentale</div>
+      <h1>Jour 24 · L'estime de soi</h1>
+      <div class="date">Mes réponses du ${date}</div>
+      ${contenu.replace(/class="recap-box" style="margin-bottom:10px;"/g, 'class="bloc"').replace(/class="recap-box"/g,'class="bloc"')}
+      <div class="footer">@alarenverse.coaching · Programme 30 jours santé mentale</div>
+      <br>
+      <button onclick="window.print()" style="background:linear-gradient(135deg,#c8a060,#a080c8);color:white;border:none;border-radius:30px;padding:12px 30px;font-size:16px;cursor:pointer;font-family:'Lora',serif;display:block;margin:0 auto;">🖨️ Imprimer ou enregistrer en PDF</button>
+    </body>
+    </html>
+  `);
+  win.document.close();
+}
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/4`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#6d4d20;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Les 3 piliers 🏛️':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('piliers');
+}
+
+function renderValeurs(){
+  const el=document.getElementById('valeurs-container');
+  el.innerHTML='';
+  valeursListe.forEach((v,i)=>{
+    const sepIdx = v.indexOf(', ');
+    const nom = sepIdx>-1 ? v.substring(0,sepIdx) : v;
+    const def = sepIdx>-1 ? v.substring(sepIdx+3) : '';
+    const btn=document.createElement('button');
+    btn.style.cssText=`border-radius:12px;padding:8px 14px;border:2px solid rgba(200,160,80,0.3);background:white;font-size:14px;font-family:'Lora',serif;color:#4d3010;cursor:pointer;transition:all 0.2s;text-align:left;width:100%;`;
+    btn.innerHTML=`<div style="font-weight:700;font-style:normal;font-size:15px;">${nom}</div>${def?`<div style="font-size:12px;color:#a08060;font-style:normal;margin-top:3px;font-family:'Jost',sans-serif;">${def}</div>`:''}`;
+    btn.id='val-'+i;
+    btn.onclick=()=>toggleValeur(i,nom,btn);
+    el.appendChild(btn);
+  });
+}
+
+function toggleValeur(i,v,btn){
+  if(selectedValeurs.has(v)){
+    selectedValeurs.delete(v);
+    btn.style.background='white';
+    btn.style.borderColor='rgba(200,160,80,0.3)';
+    btn.style.color='#4d3010';
+  } else {
+    if(selectedValeurs.size>=3){
+      const first=[...selectedValeurs][0];
+      selectedValeurs.delete(first);
+      document.querySelectorAll('[id^="val-"]').forEach(b=>{
+        if(b.textContent===first){
+          b.style.background='white';
+          b.style.borderColor='rgba(200,160,80,0.3)';
+          b.style.color='#4d3010';
+        }
+      });
+    }
+    selectedValeurs.add(v);
+    btn.style.background='linear-gradient(135deg,#c8a060,#a080c8)';
+    btn.style.borderColor='transparent';
+    btn.style.color='white';
+  }
+  document.getElementById('valeurs-choisies').textContent=[...selectedValeurs].join(' · ')||'';
+}
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 24 💎';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const ex1=document.getElementById('ex1').value.trim();
+  if(ex1) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ce que quelqu'un qui m'aime voit en moi</div><div class="recap-r">"${ex1}"</div></div>`;
+  const ex2=document.getElementById('ex2').value.trim();
+  if(ex2) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">M'affirmer : ce que je pourrais dire</div><div class="recap-r">"${ex2}"</div></div>`;
+  const ex3=document.getElementById('ex3').value.trim();
+  if(ex3) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mes preuves : ce que j'ai surmonté et accompli</div><div class="recap-r" style="white-space:pre-line;">"${ex3}"</div></div>`;
+  if(selectedValeurs.size>0) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mes valeurs profondes</div><div class="recap-r">${[...selectedValeurs].join(' · ')}</div></div>`;
+  const vNote=document.getElementById('valeurs-note').value.trim();
+  if(vNote) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Comment je vis (ou pas) mes valeurs au quotidien</div><div class="recap-r">"${vNote}"</div></div>`;
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function telechargerReponses(){
+  const recap=document.getElementById('recap-container');
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  const contenu=recap?recap.innerHTML:'';
+  const css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  const body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 24 · Estime de soi</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching · Programme 30 jours sante mentale</div>';
+  const html='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='Jour24-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+renderTheorie();
+</script>
+</body>
+</html>

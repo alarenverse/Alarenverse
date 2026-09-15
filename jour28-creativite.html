@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 28 · La créativité comme soin · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f8f0fa 0%,#f0f8f5 45%,#fdf8f0 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#9080a0;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#2d1d40;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#a060c8,#60a880);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(140,80,180,0.1);border:1px solid rgba(160,100,200,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#a060c8;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#2d1d40;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#2d1d40;margin-bottom:14px;line-height:1.4}
+  p{color:#503d68;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#706088}
+  .btn{background:linear-gradient(135deg,#a060c8,#60a880);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(140,80,180,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(160,100,200,0.25);color:#b0a0c8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#b0a0c8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#9080b0;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(160,100,200,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#a060c8,#60a880);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#f5f0fa,#f0f8f5);border-radius:14px;padding:14px 18px;border-left:3px solid #a060c8;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.vert{border-left-color:#60a880;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .hl.bleu{border-left-color:#7090c0;background:linear-gradient(135deg,#eef4fb,#f0f4fd)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(160,100,200,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#a060c8,#60a880);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#9080b0;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(160,100,200,0.12);font-size:11px;color:#9080b0;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(160,100,200,0.05);border:1px solid rgba(160,100,200,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#706088;font-family:'Jost',sans-serif}
+
+  /* Formes de créativité */
+  .forme-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .forme-btn{border-radius:12px;padding:10px 14px;border:2px solid;background:white;cursor:pointer;font-family:'Lora',serif;font-size:14px;transition:all 0.2s;text-align:left}
+  .forme-btn:hover{transform:translateY(-2px)}
+  .forme-btn.selected{color:white}
+
+  /* Exercice créatif */
+  .exercice-bloc{border-radius:18px;padding:22px;background:linear-gradient(135deg,#f5f0fa,#f0f8f5);border:1px solid rgba(160,100,200,0.2);margin-bottom:16px}
+  .ex-badge{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;padding:3px 12px;border-radius:10px;display:inline-block;color:white;margin-bottom:10px}
+  .ex-titre{font-size:16px;font-weight:700;color:#2d1d40;margin-bottom:8px;font-style:normal}
+  .ex-desc{font-size:17px;color:#253050;line-height:1.7;font-style:normal;margin-bottom:12px}
+  .ex-etape{font-size:13px;color:#706088;line-height:1.65;padding:8px 14px;background:rgba(255,255,255,0.6);border-radius:10px;margin-bottom:6px;font-style:normal}
+
+  /* Écriture libre */
+  .ecriture-libre{width:100%;border:2px solid rgba(160,100,200,0.25);border-radius:18px;padding:20px;font-size:16px;font-family:'Lora',serif;color:#2d1d40;line-height:1.9;outline:none;resize:vertical;background:linear-gradient(135deg,#faf5ff,#f5fff8);min-height:200px;font-style:italic}
+  .ecriture-libre:focus{border-color:#a060c8}
+
+  .recap-box{background:linear-gradient(135deg,#f5f0fa,#f0f8f5);border-radius:14px;padding:14px 18px;border:1px solid rgba(160,100,200,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#9080b0;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#f5f0fa,#f0f8f5);border-radius:20px;padding:22px;border:1px solid rgba(160,100,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🎨</span>
+    <div class="label">Jour 28 · La créativité comme soin</div>
+    <h2>Créer n'est pas un luxe, c'est un besoin</h2>
+    <p>On croit souvent que la créativité est réservée aux artistes, aux gens qui "ont du talent". Ce n'est pas vrai. Créer, sous n'importe quelle forme, est l'un des besoins les plus fondamentaux du cerveau humain. Et l'un des soins les plus puissants pour la santé mentale.</p>
+    <p class="small" style="margin-bottom:20px;">Aujourd'hui on explore pourquoi, et on crée quelque chose. N'importe quoi. Sans objectif de résultat.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🎨</button>
+    <p class="hint">Science · Pourquoi on arrête · Exercice créatif · Écriture libre · ~20 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/2</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:50%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FORMES DE CRÉATIVITÉ -->
+<div class="phase" id="phase-formes">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌈</span>
+    <h2>Toutes les formes de créativité comptent</h2>
+    <p style="text-align:center;margin-bottom:8px;">La créativité ne se limite pas à la peinture ou à l'écriture. Elle vit dans tous les actes de création, grands et petits.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Clique sur celles qui te parlent, celles que tu pratiques ou que tu aimerais explorer.</p>
+
+    <div class="forme-grid" id="formes-container"></div>
+
+    <div class="hl vert" style="margin-top:8px;">
+      <strong>Ce qui compte, ce n'est pas le résultat, c'est le processus.</strong><br><br>
+      Le bénéfice neurologique de la créativité vient de l'acte de créer, pas de la qualité de ce qu'on produit. Un gribouillage fait avec attention vaut autant qu'une aquarelle soignée. Une recette improvisée vaut autant qu'un plat gastronomique. Ce qui compte c'est d'être en état de création : présente, concentrée, dans le flux.
+    </div>
+
+    <button class="btn" onclick="showPhase('exercice')">L'exercice créatif du jour →</button>
+  </div>
+</div>
+
+<!-- EXERCICE CRÉATIF -->
+<div class="phase" id="phase-exercice">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">✨</span>
+    <h2>Crée quelque chose, maintenant</h2>
+    <p style="text-align:center;margin-bottom:8px;">Pas de bonne ou mauvaise réponse. Pas d'objectif de résultat. Juste créer quelque chose, ici, maintenant, avec ce que tu as.</p>
+    <p class="small" style="text-align:center;margin-bottom:6px;">Choisis celui qui t'attire le plus. Un seul suffit largement pour aujourd'hui.</p>
+    <p class="small" style="text-align:center;margin-bottom:18px;">Les trois ne sont pas à faire aujourd'hui. Tu les retrouveras dans ton récap en fin de journée, et dans le livret bonus qui rassemble tous les exercices du programme. Ils resteront disponibles pour toi, longtemps après ces 30 jours.</p>
+
+    <div class="exercice-bloc">
+      <div class="ex-badge" style="background:linear-gradient(135deg,#a060c8,#c870a0);">Exercice 1 · Dessin libre</div>
+      <div class="ex-titre">5 minutes de dessin sans intention</div>
+      <div class="ex-desc">Prends une feuille et un stylo, ou utilise l'espace ci-dessous pour décrire ce que tu dessines. Laisse ta main bouger sans réfléchir. Formes, lignes, gribouillis, motifs, peu importe. L'objectif est de ne pas avoir d'objectif.</div>
+      <div class="ex-etape">1. Prends une feuille et un stylo ou crayon</div>
+      <div class="ex-etape">2. Ferme les yeux une seconde et respire</div>
+      <div class="ex-etape">3. Laisse ta main bouger pendant 5 minutes sans soulever le stylo</div>
+      <div class="ex-etape">4. Ne juge pas, ne regarde pas avant d'avoir fini</div>
+    </div>
+
+    <div class="exercice-bloc">
+      <div class="ex-badge" style="background:linear-gradient(135deg,#60a880,#c8a870);">Exercice 2 · Cuisine créative</div>
+      <div class="ex-titre">Inventer quelque chose avec ce que tu as</div>
+      <div class="ex-desc">Ouvre ton frigo ou tes placards. Prends 3 ingrédients au hasard. Invente quelque chose, même simple, même bizarre. La contrainte est la mère de la créativité.</div>
+      <div class="ex-etape">1. 3 ingrédients au hasard dans ton frigo</div>
+      <div class="ex-etape">2. 10 minutes pour créer quelque chose avec</div>
+      <div class="ex-etape">3. Pas de recette, juste l'instinct</div>
+    </div>
+
+    <div class="exercice-bloc">
+      <div class="ex-badge" style="background:linear-gradient(135deg,#7090c0,#a060c8);">Exercice 3 · Arrangement</div>
+      <div class="ex-titre">Créer quelque chose de beau dans ton environnement</div>
+      <div class="ex-desc">Arrange des fleurs, des objets, des livres. Réorganise un coin de ta maison pour qu'il soit beau plutôt qu'utile. Crée un petit autel de ce qui compte pour toi.</div>
+      <div class="ex-etape">1. Choisis un coin de ta maison ou une surface</div>
+      <div class="ex-etape">2. Pose dessus 3 à 5 objets qui te plaisent ou ont du sens</div>
+      <div class="ex-etape">3. Arrange, déplace, jusqu'à ce que ça te fasse sourire</div>
+    </div>
+
+    <div style="font-family:'Jost',sans-serif;font-size:11px;color:#9080b0;text-transform:uppercase;letter-spacing:0.1em;margin:16px 0 8px;">Note ce que tu as créé ou ressenti :</div>
+    <textarea id="exercice-note" rows="3" placeholder="J'ai choisi l'exercice... / J'ai créé... / Ce que j'ai ressenti pendant c'est..."></textarea>
+
+    <button class="btn" onclick="showPhase('ecriture-libre')" style="margin-top:12px;">Écriture libre →</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE LIBRE -->
+<div class="phase" id="phase-ecriture-libre">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">📝</span>
+    <h2>Écriture libre, sans censure ni objectif</h2>
+    <p style="text-align:center;margin-bottom:8px;">L'écriture libre est l'une des formes de créativité les plus accessibles et les plus thérapeutiques. La règle : écrire sans s'arrêter, sans corriger, sans juger.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Mets un minuteur sur 10 minutes. Commence par la phrase d'amorce ci-dessous, et laisse venir ce qui vient. Ne soulève pas le stylo (ou les doigts) avant que le minuteur sonne.</p>
+
+    <div class="hl" style="margin-bottom:16px;">
+      <strong>La règle de l'écriture libre :</strong><br><br>
+      On écrit sans s'arrêter. Si on ne sait pas quoi écrire, on écrit "je ne sais pas quoi écrire" jusqu'à ce que quelque chose vienne. On ne corrige pas les fautes. On ne relit pas pendant qu'on écrit. On ne juge pas. L'objectif est le flux, pas le contenu.
+    </div>
+
+    <div style="font-family:'Jost',sans-serif;font-size:11px;color:#a060c8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Phrase d'amorce, commence par ici :</div>
+    <div style="font-size:18px;color:#2d1d40;margin-bottom:16px;padding:12px 16px;background:rgba(160,100,200,0.08);border-radius:12px;border-left:3px solid #a060c8;">"Ce que je n'ai jamais dit à voix haute, c'est..."</div>
+
+    <textarea class="ecriture-libre" id="ecriture-libre-text" placeholder="Ce que je n'ai jamais dit à voix haute, c'est... (continue sans t'arrêter pendant 10 minutes)"></textarea>
+
+    <div style="font-size:12px;color:#9080b0;font-family:'Jost',sans-serif;margin-top:8px;">Tu n'as pas à partager ce texte. Il est pour toi seule. Tu peux même le brûler ou le supprimer après. Le bienfait vient de l'acte d'écrire, pas de la conservation.</div>
+
+    <button class="btn" onclick="showFin()" style="margin-top:16px;">Terminer le Jour 28 🎨</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">✨</span>
+    <h2>Tu viens de prendre soin de toi d'une façon différente</h2>
+    <p>La créativité n'est pas un bonus qu'on s'accorde quand tout le reste est fait. C'est un soin, comme la respiration, comme le sommeil, comme le mouvement. Elle mérite sa place dans ta routine.</p>
+    <div style="background:linear-gradient(135deg,#f5f0fa,#f0f8f5);border-radius:16px;padding:20px;border:1px solid rgba(160,100,200,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#a060c8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🎨 Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À pratiquer :</strong> 10 minutes de création par jour : dessin, cuisine, jardinage, écriture, chant, arrangement. Peu importe. Pas pour un résultat. Pour le processus. Le cerveau a besoin de créer comme il a besoin de dormir.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#706088;"><strong style="color:#2d1d40;">Demain, Jour 29 :</strong> célébrer mon chemin</p>
+    <p class="hint" style="margin-top:6px;">2 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🧠",titre:"Ce que créer fait à ton cerveau",source:"Dr Girija Kaimal, Drexel University",contenu:[
+    {type:"texte",texte:"Quand tu crées, ton cerveau bascule dans un réseau bien particulier, celui de l'imagination, de la rêverie et de la construction du sens. Créer n'a rien de superficiel. C'est l'un des états les plus profonds et les plus réparateurs que ton cerveau puisse traverser."},
+    {type:"stat",texte:"Une séance d'activité créative fait baisser le cortisol, l'hormone du stress. Et voilà le plus rassurant : ça marche quel que soit ton niveau. Les débutantes en profitent autant que les artistes confirmées",source:"Dr Girija Kaimal, Drexel University"},
+    {type:"hl",texte:"🎨 Créer libère aussi de la dopamine, la molécule de la motivation et du plaisir. Pendant que tu crées, et encore après en regardant ce que tu as fait. C'est pour ça que créer donne de l'élan, même quand tu étais épuisée avant de commencer."},
+    {type:"hl",texte:"💡 Et il y a cet état d'absorption totale, où tu perds la notion du temps, où plus rien n'existe que ce que tu es en train de faire. Csikszentmihalyi l'a appelé le flow. C'est l'un des états de bien-être les plus intenses qu'on puisse vivre. Et il ne demande aucune expertise, juste d'être absorbée.",classe:"vert"},
+  ]},
+  {emoji:"🚧",titre:"Pourquoi on arrête de créer, et comment y revenir",source:"Julia Cameron et Brené Brown",contenu:[
+    {type:"texte",texte:"La plupart des adultes ont arrêté de créer librement à un moment de leur vie. Souvent à cause d'un commentaire, d'une note, d'un regard. Ou simplement parce que la vie a pris toute la place."},
+    {type:"hl",texte:"🚧 Les raisons les plus fréquentes :<br><br>\"Je ne suis pas douée\", après une critique reçue trop tôt.<br><br>\"Je n'ai pas le temps\", la créativité reléguée tout en bas de la liste.<br><br>\"Ça ne sert à rien\", cette culture du productif qui dévalorise tout ce qui n'est pas utile.<br><br>\"Je ne suis pas créative\", la croyance la plus répandue, et la plus fausse.",classe:"rouge"},
+    {type:"texte",texte:"Julia Cameron, dans The Artist's Way, part d'une idée simple : tout le monde est créatif. Mais beaucoup ont été blessés dans leur créativité par des jugements reçus trop jeunes. On répare ça en recréant sans objectif de résultat, juste pour le plaisir de créer."},
+    {type:"texte",texte:"Brené Brown a montré que la honte est le principal frein à la créativité adulte. Cette petite voix qui dit \"je ne suis pas assez bonne pour ça\". Créer demande du courage, parce que mettre quelque chose de soi dans le monde, même un gribouillage, c'est se rendre vulnérable."},
+    {type:"hl",texte:"🌸 Alors pour y revenir : commence petit, commence seule, commence sans rien montrer à personne. Le but n'est pas de produire quelque chose de beau. C'est de retrouver le plaisir de créer pour créer. Le reste vient après, ou ne vient pas, et ce n'est pas grave.",classe:"vert"},
+  ]},
+];
+
+const formes=[
+  {nom:"Écriture",emoji:"✍️",couleur:"#a060c8",bg:"#f5f0fa"},
+  {nom:"Dessin",emoji:"🎨",couleur:"#c870a0",bg:"#fdf0f5"},
+  {nom:"Cuisine",emoji:"🍳",couleur:"#c8a870",bg:"#fdf8ee"},
+  {nom:"Jardinage",emoji:"🌱",couleur:"#60a880",bg:"#eaf5f0"},
+  {nom:"Musique",emoji:"🎵",couleur:"#7090c0",bg:"#eef4fb"},
+  {nom:"Danse",emoji:"💃",couleur:"#e8857a",bg:"#fde8e6"},
+  {nom:"Photographie",emoji:"📷",couleur:"#808080",bg:"#f5f5f5"},
+  {nom:"Couture",emoji:"🧵",couleur:"#c870a0",bg:"#fdf0f5"},
+  {nom:"Décoration",emoji:"🕯️",couleur:"#c8a870",bg:"#fdf8ee"},
+  {nom:"Chant",emoji:"🎤",couleur:"#a060c8",bg:"#f5f0fa"},
+  {nom:"Artisanat",emoji:"🧶",couleur:"#60a880",bg:"#eaf5f0"},
+  {nom:"Autre",emoji:"✨",couleur:"#9080b0",bg:"#f5f0fa"},
+];
+
+let theorieIdx=0, selectedFormes=new Set();
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='formes') renderFormes();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🧠',t:'Ce que la créativité fait au cerveau'},{e:'🚧',t:'Pourquoi on arrête, et comment y revenir'},{e:'🌈',t:'Toutes les formes de créativité comptent'},{e:'✨',t:'Exercice créatif du jour'},{e:'📝',t:'Écriture libre sans censure'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#503d68;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Les formes de créativité 🌈':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('formes');
+}
+
+function renderFormes(){
+  const el=document.getElementById('formes-container');
+  el.innerHTML='';
+  formes.forEach((f,i)=>{
+    const btn=document.createElement('button');
+    btn.className='forme-btn';
+    btn.style.cssText=`border-color:${f.couleur}44;background:${f.bg};color:#3d1d50;`;
+    btn.innerHTML=`${f.emoji} ${f.nom}`;
+    btn.id='forme-'+i;
+    btn.onclick=()=>{
+      if(selectedFormes.has(i)){
+        selectedFormes.delete(i);
+        btn.style.background=f.bg;
+        btn.style.color='#3d1d50';
+        btn.style.borderColor=f.couleur+'44';
+      } else {
+        selectedFormes.add(i);
+        btn.style.background=f.couleur;
+        btn.style.color='white';
+        btn.style.borderColor='transparent';
+      }
+    };
+    el.appendChild(btn);
+  });
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const exNote=document.getElementById('exercice-note').value.trim();
+  if(exNote) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon exercice créatif</div><div class="recap-r">"${exNote}"</div></div>`;
+  const ecritureNote=document.getElementById('ecriture-libre-text').value.trim();
+  if(ecritureNote) rc.innerHTML+=`<div class="recap-box"><div class="recap-q">Mon écriture libre</div><div class="recap-r" style="font-style:normal;font-size:15px;">${ecritureNote.replace(/\n/g,'<br>')}</div></div>`;
+  if(selectedFormes.size>0){
+    const selected=[...selectedFormes].map(i=>formes[i].nom).join(' · ');
+    rc.innerHTML=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mes formes de créativité</div><div class="recap-r">${selected}</div></div>`+rc.innerHTML;
+  }
+  rc.innerHTML+=`<div class="recap-box" style="margin-top:10px;">
+    <div class="recap-q">Mes 3 exercices créatifs, à refaire quand je veux</div>
+    <div class="recap-r" style="font-style:normal;font-size:15px;line-height:1.9;">
+      <strong>1. Dessin libre</strong><br>Une feuille, un stylo, cinq minutes. Ferme les yeux, respire, puis laisse ta main bouger sans réfléchir. Formes, lignes, gribouillis. Ne regarde pas avant d'avoir fini, et ne juge pas.<br><br>
+      <strong>2. Cuisine créative</strong><br>Ouvre ton frigo ou tes placards. Prends trois ingrédients au hasard. Invente quelque chose, même simple, même bizarre. Pas de recette, juste l'instinct. La contrainte nourrit la créativité.<br><br>
+      <strong>3. Arrangement</strong><br>Choisis un coin de ton espace. Prends des objets que tu as déjà. Arrange, déplace, recommence, jusqu'à ce que ça te fasse sourire. Rien à acheter, rien à réussir.
+    </div></div>`;
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 28 · La creativite comme soin</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour28-creativite-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

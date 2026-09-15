@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 18 · Retrouver la joie · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf8ee 0%,#fef5e0 45%,#fff8f0 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b09040;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d2d10;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#f5c842,#e8a85c);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(220,180,60,0.12);border:1px solid rgba(240,200,80,0.2);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c8a030;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d2d10;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d2d10;margin-bottom:14px;line-height:1.4}
+  p{color:#6d5020;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a7040}
+  .btn{background:linear-gradient(135deg,#f5c842,#e8a85c);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(220,180,60,0.35);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(220,180,60,0.25);color:#c0a060;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#c0a060;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a08040;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(220,180,60,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#f5c842,#e8a85c);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#fdf8ee,#fef5e0);border-radius:14px;padding:14px 18px;border-left:3px solid #f5c842;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.orange{border-left-color:#e8a85c;background:linear-gradient(135deg,#fef5e0,#fdf0d8)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(220,180,60,0.12)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#f5c842,#e8a85c);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#b0a060;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(220,180,60,0.15);font-size:11px;color:#b0a060;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(220,180,60,0.06);border:1px solid rgba(220,180,60,0.15);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#907040;font-family:'Jost',sans-serif}
+
+  /* Comparaison joie/bonheur */
+  .comparaison{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .comp-card{border-radius:16px;padding:16px 18px;border:1px solid}
+  .comp-label{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;font-weight:600}
+  .comp-item{font-size:13px;line-height:1.7;font-style:normal;margin-bottom:5px;display:flex;gap:8px}
+
+  /* Pratique corporelle */
+  .pratique-etape{border-radius:16px;padding:16px 18px;margin-bottom:12px;border:1px solid rgba(220,180,60,0.2);background:linear-gradient(135deg,#fdf8ee,#fef5e0)}
+  .etape-num{font-family:'Jost',sans-serif;font-size:10px;color:#c8a030;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
+  .etape-titre{font-size:17px;color:#3d2d10;margin-bottom:6px}
+  .etape-desc{font-size:13px;color:#6d5020;line-height:1.7;font-style:normal}
+  .etape-duree{display:inline-block;background:rgba(245,200,66,0.2);border-radius:10px;padding:3px 10px;font-size:11px;font-family:'Jost',sans-serif;color:#a08030;margin-top:6px}
+
+  /* Inventaire joie */
+  .joie-categorie{margin-bottom:20px}
+  .joie-cat-titre{font-family:'Jost',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;color:#c8a030;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid rgba(220,180,60,0.2)}
+  .joie-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(220,180,60,0.08)}
+  .joie-item:last-child{border-bottom:none}
+  .joie-check{width:20px;height:20px;border-radius:50%;border:2px solid rgba(220,180,60,0.3);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.2s;background:white}
+  .joie-check.done{background:linear-gradient(135deg,#f5c842,#e8a85c);border-color:transparent;color:white}
+  .joie-texte{font-size:17px;color:#253050;line-height:1.5;font-style:normal}
+  .joie-custom{flex:1;border:none;border-bottom:1px dashed rgba(220,180,60,0.3);padding:4px 0;font-size:14px;font-family:'Lora',serif;color:#5d3d10;outline:none;background:transparent;font-style:italic}
+
+  /* Sources personnelles */
+  .sources-perso{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+  .source-field{border:2px solid rgba(220,180,60,0.25);border-radius:12px;padding:12px 16px;font-size:14px;font-family:'Lora',serif;color:#3d2d10;outline:none;background:white;transition:border-color 0.2s;width:100%}
+  .source-field:focus{border-color:#f5c842}
+
+  textarea{width:100%;border:2px solid rgba(220,180,60,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d2d10;line-height:1.7;outline:none;resize:vertical;background:#fdfaf0}
+  textarea:focus{border-color:#f5c842}
+  .e-q{font-size:17px;color:#3d2d10;line-height:1.65;text-align:center;margin-bottom:6px}
+  .e-sous{font-size:13px;color:#a08040;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#fdf8ee,#fef5e0);border-radius:14px;padding:14px 18px;border:1px solid rgba(220,180,60,0.18);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b0a060;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#fdf8ee,#fef5e0);border-radius:20px;padding:22px;border:1px solid rgba(220,180,60,0.22);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">✨</span>
+    <div class="label">Jour 18 · Retrouver la joie</div>
+    <h2>La joie n'est pas le bonheur, et ça change tout</h2>
+    <p>On nous a appris à courir après le bonheur, cet état stable, durable, qu'on aurait enfin \"atteint\". Et c'est justement cette course qui nous épuise et nous rend tristes. La joie, elle, c'est tout autre chose. Bien plus accessible, bien plus proche.</p>
+    <p class="small" style="margin-bottom:20px;">Aujourd'hui on voit ce qui différencie les deux, on réapprend à sentir la joie dans le corps, pas dans la tête, et tu retrouves tes propres sources de joie.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer ✨</button>
+    <p class="hint">Théorie · Science · Pratique corporelle · Inventaire · ~20 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/4</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- PRATIQUE CORPORELLE -->
+<div class="phase" id="phase-pratique">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🫀</span>
+    <h2>Ressentir la joie dans le corps, maintenant</h2>
+    <p style="text-align:center;margin-bottom:8px;">La joie ne s'invite pas par la pensée. Elle s'accueille par le corps. Voici une pratique guidée pour la retrouver, même si tu te sens loin d'elle en ce moment.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Prends 10 minutes. Installe-toi confortablement. Suis chaque étape.</p>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 1</div>
+      <div class="etape-titre">Ancre-toi dans ton corps</div>
+      <div class="etape-desc">Ferme les yeux. Pose les deux pieds à plat sur le sol. Sens le contact. Inspire profondément par le nez, expire par la bouche, 3 fois. Dis intérieurement : "Je suis là. Je suis en sécurité."</div>
+      <div class="etape-duree">1 minute</div>
+    </div>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 2</div>
+      <div class="etape-titre">Convoque un souvenir de joie</div>
+      <div class="etape-desc">Pense à un moment, même petit, où tu as ressenti quelque chose de vivant, de léger, de joyeux. Pas forcément une grande joie. Peut-être juste rire avec quelqu'un. Sentir le soleil. Voir ton enfant. Écouter une chanson. Laisse l'image venir.</div>
+      <div class="etape-duree">2 minutes</div>
+    </div>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 3</div>
+      <div class="etape-titre">Cherche la joie dans le corps</div>
+      <div class="etape-desc">En tenant ce souvenir, scan ton corps. Où est-ce que tu sens quelque chose ? Un léger réchauffement dans la poitrine ? Un sourire qui monte ? Une légèreté dans les épaules ? Un picotement dans les mains ? La joie se loge dans le corps avant de monter au cerveau. Nomme où tu la sens.</div>
+      <div class="etape-duree">2 minutes</div>
+    </div>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 4</div>
+      <div class="etape-titre">Amplifie la sensation</div>
+      <div class="etape-desc">Concentre toute ton attention sur cette zone du corps. Laisse la sensation s'élargir, pas en la forçant, en lui donnant de l'espace. Si tu souris, laisse le sourire. Si tu veux soupirer de soulagement, laisse-le. Le corps sait trouver la joie quand on lui en donne la permission.</div>
+      <div class="etape-duree">3 minutes</div>
+    </div>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 5</div>
+      <div class="etape-titre">Note ce que tu as ressenti</div>
+      <div class="etape-desc">Ouvre les yeux. Prends un moment pour noter, dans le champ ci-dessous, où tu as senti la joie dans ton corps, et à quel souvenir elle était attachée.</div>
+      <div class="etape-duree">2 minutes</div>
+    </div>
+
+    <textarea id="pratique-note" rows="3" placeholder="J'ai senti la joie dans... / Le souvenir qui l'a fait apparaître c'est..." style="margin-top:8px;"></textarea>
+    <button class="btn" onclick="showPhase('inventaire')">Passer à mon inventaire de joie →</button>
+  </div>
+</div>
+
+<!-- INVENTAIRE -->
+<div class="phase" id="phase-inventaire">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌻</span>
+    <h2>Mes sources de joie : ce qui me rend vivante</h2>
+    <p style="text-align:center;margin-bottom:6px;">Pas ce qui devrait te rendre heureuse. Pas ce qui est "bien". Ce qui te fait te sentir vivante, présente, légère, même brièvement.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Coche tout ce qui résonne. Ajoute les tiennes. Il n'y a pas de bonnes ou mauvaises réponses.</p>
+    <div id="inventaire-container"></div>
+
+    <div style="margin-top:20px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a030;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Mes 3 sources de joie les plus puissantes</div>
+      <div class="sources-perso">
+        <input class="source-field" placeholder="Ma première source de joie c'est..." id="s1">
+        <input class="source-field" placeholder="Ma deuxième source de joie c'est..." id="s2">
+        <input class="source-field" placeholder="Ma troisième source de joie c'est..." id="s3">
+      </div>
+    </div>
+
+    <button class="btn" onclick="showPhase('agenda')">L'agenda Maîtrise / Plaisir 📊</button>
+  </div>
+</div>
+
+<!-- AGENDA MAÎTRISE/PLAISIR -->
+<div class="phase" id="phase-agenda">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">📊</span>
+    <h2>L'agenda Maîtrise / Plaisir</h2>
+    <p>C'est un outil issu des thérapies cognitives et comportementales, simple, très concret, et redoutablement efficace pour identifier ce qui te nourrit vraiment vs ce qui te vide.</p>
+    <p>Le principe : pendant une journée ou une semaine, tu notes tes activités par tranche horaire et tu leur attribues deux notes de 0 à 5 : une pour le plaisir que tu en as tiré, une pour le sentiment de maîtrise (le fait de bien faire quelque chose).</p>
+
+    <div class="hl" style="margin-bottom:14px;">
+      <strong>Pourquoi ça change quelque chose :</strong><br><br>
+      Quand on est déprimée ou épuisée, on a tendance à penser qu'on ne fait "rien de bien" et que "rien ne nous fait plaisir". L'agenda objective ça, et souvent il révèle qu'il y a plus de plaisir et de maîtrise dans la journée qu'on ne le croyait. Il révèle aussi clairement ce qui vide sans rien apporter.
+    </div>
+
+    <div class="hl vert" style="margin-bottom:14px;">
+      <strong>Comment l'utiliser :</strong><br><br>
+      Chaque tranche horaire, note l'activité que tu as faite.<br>
+      Maîtrise (M) : à quel point tu t'es sentie compétente, efficace, capable. 0 = rien / 5 = vraiment bien fait.<br>
+      Plaisir (P) : à quel point tu as apprécié ce moment. 0 = rien / 5 = vraiment agréable.<br><br>
+      Pas besoin de noter 5 partout, l'honnêteté est plus utile que l'idéal.
+    </div>
+
+    <div style="background:linear-gradient(135deg,#fdf8ee,#fef5e0);border-radius:16px;padding:20px;border:1px solid rgba(220,180,60,0.2);margin-bottom:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a030;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;">📋 Mon agenda du jour</div>
+      <div id="agenda-container"></div>
+    </div>
+
+    <div class="hl orange">
+      Après avoir rempli une journée, regarde les patterns. Les activités avec un bon score de plaisir ET de maîtrise sont tes ressources. Celles avec un score de 0 partout : ce sont peut-être des choses à questionner ou à redistribuer.
+    </div>
+
+    <button class="btn" onclick="showPhase('ecriture')">Réflexion finale ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Réflexion · 1/3</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Ma relation à la joie</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">☀️</span>
+    <h2>La joie est déjà en toi, elle attend d'être accueillie</h2>
+    <p>Tu n'as pas à être heureuse pour ressentir de la joie. Tu n'as pas à avoir une vie parfaite. La joie existe dans les marges, dans les moments ordinaires auxquels tu prêtes une attention extraordinaire.</p>
+
+    <div style="background:linear-gradient(135deg,#fdf8ee,#fef5e0);border-radius:16px;padding:20px;border:1px solid rgba(220,180,60,0.2);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a030;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✨ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À pratiquer :</strong> Chaque jour cette semaine, trouve un micro-moment de joie et dis-le à voix haute ou note-le. Pas "j'essaie d'être heureuse". Juste : "Là, maintenant, j'ai ressenti quelque chose de vivant." C'est suffisant.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#907040;"><strong style="color:#3d2d10;">Demain, Jour 19 :</strong> les croyances limitantes & qui suis-je vraiment ?</p>
+    <p class="hint" style="margin-top:6px;">12 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🔬",titre:"La joie et le bonheur, ce n'est pas pareil",source:"Dr Barbara Fredrickson / Spinoza",contenu:[
+    {type:"texte",texte:"On mélange souvent les deux mots, joie et bonheur, comme s'ils voulaient dire la même chose. Mais ils sont très différents, et les confondre, c'est une des grandes sources de souffrance discrète, celle qu'on ne voit pas venir."},
+    {type:"comparaison"},
+    {type:"hl",texte:"💡 La joie est un état passager, incarné, spontané : une réponse à quelque chose de vivant dans le moment présent. Le bonheur est une construction cognitive, un jugement sur sa vie, souvent projeté dans le futur ou le passé. On peut ressentir de la joie au milieu de la tristesse. On peut être \"heureux\" sur le papier et ne jamais ressentir de joie."},
+    {type:"stat",texte:"À l'imagerie cérébrale, la joie et le bonheur n'allument même pas les mêmes zones : la joie touche les régions profondes du corps et des sensations, alors que le bonheur, lui, active surtout la zone du jugement et de l'évaluation. Deux choses vraiment distinctes",source:"Dr Antonio Damasio"},
+    {type:"hl",texte:"🌸 Spinoza, au 17ème siècle, définissait la joie comme \"le passage d'une moindre à une plus grande perfection\", non pas un état stable, mais un mouvement, une expansion. On ne possède pas la joie. On la traverse.",classe:"vert"},
+  ]},
+  {emoji:"🫀",titre:"La joie vit dans le corps, pas dans la tête",source:"Dr Bessel van der Kolk / Dr Peter Levine",contenu:[
+    {type:"texte",texte:"La joie, ce n'est pas d'abord une pensée. C'est une sensation, dans le corps : une chaleur dans la poitrine, un sourire qui monte tout seul avant même que tu y penses, une légèreté dans les jambes, un picotement dans les mains."},
+    {type:"hl",texte:"🫀 Van der Kolk le dit simplement : la joie est dans le corps, pas dans les pensées. Quand on est épuisée ou qu'on a beaucoup encaissé, on perd souvent le contact avec elle, pas parce qu'elle a disparu, mais parce que le lien entre le corps et le cerveau s'est un peu refermé, pour se protéger."},
+    {type:"texte",texte:"Cela explique pourquoi on peut \"savoir\" intellectuellement qu'on devrait être content, avoir une belle vie, des gens qui nous aiment, et ne rien ressentir. La joie ne se commande pas par la tête. Elle se retrouve par le corps."},
+    {type:"hl",texte:"💡 Les pratiques qui rouvrent l'accès à la joie sont donc somatiques : le mouvement, la respiration, le toucher, la musique, la nature, le jeu, la créativité. Pas la pensée positive.",classe:"orange"},
+  ]},
+  {emoji:"⚠️",titre:"Pourquoi chercher le bonheur à tout prix rend malheureuse",source:"Dr Russ Harris / Viktor Frankl",contenu:[
+    {type:"texte",texte:"Tu la connais, cette petite musique : \"sois positive\", \"vis ta meilleure vie\", \"le bonheur est un choix\". Ça part d'une bonne intention, mais c'est un vrai poison pour le moral. Parce que vouloir être heureuse tout le temps, ça t'amène à te battre contre toutes les émotions qui ne sont pas joyeuses."},
+    {type:"hl",texte:"⚠️ Le paradoxe hédoniste : plus on cherche activement le bonheur comme état permanent, plus on souffre des émotions qui ne correspondent pas à cet idéal. La tristesse, la colère, l'anxiété deviennent des \"échecs\" du bonheur, et on y ajoute de la honte et de la résistance."},
+    {type:"stat",texte:"C'est presque paradoxal : les personnes qui font du bonheur leur grand objectif de vie se sentent souvent moins bien, plus seules, plus déconnectées que celles qui cherchent plutôt le sens et la présence dans l'instant",source:"Dr Iris Mauss, UC Berkeley"},
+    {type:"hl",texte:"🌿 Viktor Frankl, survivant des camps de concentration : \"Le bonheur ne peut pas être poursuivi, il doit s'ensuivre.\" Il arrive comme conséquence d'une vie vécue avec présence et sens, pas comme objectif en soi.",classe:"vert"},
+    {type:"hl",texte:"💡 La joie fonctionne différemment du bonheur : on ne la cherche pas, on lui fait de la place. On crée les conditions dans lesquelles elle peut apparaître, et on l'accueille quand elle vient, sans chercher à la retenir.",classe:"orange"},
+  ]},
+  {emoji:"⚡",titre:"Les micro-moments · ces petits éclairs de joie",source:"Dr Barbara Fredrickson / Dr Rick Hanson",contenu:[
+    {type:"texte",texte:"La joie ne vient pas surtout des grands moments : les mariages, les vacances, les réussites. Elle vient bien plus souvent des tout petits instants. Des éclairs courts, ordinaires, presque invisibles, qui parsèment une journée."},
+    {type:"stat",texte:"Quand on mesure le bien-être en temps réel, on voit que les pics de joie viennent de riens : une lumière qui tombe joliment sur un objet, un rire spontané, une bouchée de quelque chose de bon, le regard d'un animal ou d'un bébé qui croise le tien",source:"Dr Barbara Fredrickson, UNC"},
+    {type:"hl",texte:"💡 Rick Hanson a une image que j'aime beaucoup : câbler le bonheur dans le cerveau. Quand tu t'attardes quelques secondes sur un petit moment de joie, au lieu de le laisser filer, tu crées une trace dans ton cerveau. Et à force de répéter, ces traces finissent par changer ta façon de voir. Doucement, ton regard apprend à capter le bon."},
+    {type:"stat",texte:"Notre cerveau retient bien plus fort le négatif que le positif, c'est un vieux réflexe de survie. S'attarder exprès sur les petits moments positifs, c'est justement une façon de rééquilibrer la balance",source:"Dr Rick Hanson"},
+    {type:"hl",texte:"🌸 La pratique : quand tu ressens un micro-moment de joie, arrête-toi. 20 secondes. Ferme les yeux si tu peux. Sens-le dans ton corps. Dis-toi : \"J'enregistre ça.\" Ce n'est pas de la pensée positive, c'est de la neuroplasticité intentionnelle.",classe:"vert"},
+  ]},
+];
+
+const inventaireItems=[
+  {cat:"Sensations & Corps",items:["Le contact du soleil sur la peau","L'eau chaude d'une douche ou d'un bain","Le silence du matin avant que tout commence","Le bruit de la pluie","Sentir une odeur que j'aime","Étirer mon corps après une longue position","La sensation de marcher pieds nus dans l'herbe ou le sable"]},
+  {cat:"Connexion & Relations",items:["Rire vraiment avec quelqu'un","Un câlin long et sincère","Une conversation où je me sens vraiment comprise","Regarder mon enfant ou un proche dormir paisiblement","Un regard échangé qui dit tout sans mots","Retrouver une vieille amie comme si le temps n'avait pas passé"]},
+  {cat:"Créativité & Expression",items:["Créer quelque chose, cuisine, dessin, jardinage, écriture","Chanter seule, même faux","Danser dans ma cuisine","Décorer, arranger, embellir un espace","Prendre des photos de ce que je trouve beau","Lire un livre qui m'emporte complètement"]},
+  {cat:"Nature & Beauté",items:["Voir un coucher de soleil ou un lever","Observer des animaux","Sentir l'odeur de la terre après la pluie","Le vent dans les arbres","Une fleur qui s'est ouverte","La lumière à travers les feuilles"]},
+  {cat:"Mouvement & Jeu",items:["Bouger sans objectif, juste pour le plaisir","Jouer, avec des enfants, des animaux, ou comme une enfant","Apprendre quelque chose de nouveau juste parce que ça m'intéresse","Rire jusqu'aux larmes","Faire quelque chose d'inutile et délicieux, flâner, regarder les gens"]},
+];
+
+const ecritureQs=[
+  {q:"Quand as-tu ressenti de la joie pour la dernière fois, même brièvement, même en marge ?",sous:"Pas le bonheur. Un éclair de vivant. Un micro-moment.",placeholder:"La dernière fois que j'ai ressenti quelque chose de joyeux c'était..."},
+  {q:"Qu'est-ce qui t'empêche de te laisser aller à la joie : la culpabilité, la fatigue, l'impression de ne pas la mériter ?",sous:"Honnêteté bienveillante, sans jugement.",placeholder:"Ce qui m'empêche de laisser entrer la joie c'est..."},
+  {q:"Comment tu vas faire de la place pour la joie cette semaine, concrètement ?",sous:"Pas un objectif de bonheur. Juste un geste vers quelque chose qui te fait te sentir vivante.",placeholder:"Cette semaine je vais faire de la place pour la joie en..."},
+];
+
+let theorieIdx=0, checkedJoie=new Set(), eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='inventaire') renderInventaire();
+  if(id==='agenda'){renderAgenda();}
+  if(id==='ecriture') renderE();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🔬',t:'Joie vs Bonheur, différence neurologique'},{e:'🫀',t:'La joie est somatique, elle vit dans le corps'},{e:'⚠️',t:'Le paradoxe hédoniste, pourquoi chercher rend malheureux'},{e:'⚡',t:'Les micro-moments, câbler la joie dans le cerveau'},{e:'🫀',t:'Pratique guidée, ressentir la joie dans le corps'},{e:'🌻',t:'Inventaire, mes sources personnelles de joie'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#6d5020;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+    else if(item.type==='comparaison') el.innerHTML+=`
+      <div style="margin-bottom:14px;">
+        <div class="hl" style="margin-bottom:10px;">
+          <strong>Un exemple concret :</strong><br><br>
+          Tu traverses une période difficile, fatiguée, surchargée, des tensions à la maison. Objectivement, tu n'es pas "heureuse".<br><br>
+          Et pourtant : ce matin, en préparant ton café, la lumière frappe ta tasse d'une façon particulière. Ou ton enfant éclate de rire pour rien. Ou tu entends une chanson que tu aimes. Et pendant 10 secondes, tu ressens quelque chose de chaud dans la poitrine.<br><br>
+          <strong>Ça, c'est la joie.</strong> Pas le bonheur. Le bonheur, tu ne l'as pas ce matin. Mais la joie, si. Les deux peuvent coexister.
+        </div>
+        <div style="background:#fdf8ee;border-radius:14px;padding:14px 18px;border:1px solid rgba(245,200,66,0.3);margin-bottom:10px;">
+          <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a030;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">La Joie : ce que c'est vraiment</div>
+          <div style="font-size:13px;color:#5d3d10;line-height:1.75;font-style:normal;">
+            C'est un <strong>éclair dans le corps</strong> : un sourire qui monte tout seul, un réchauffement dans la poitrine, une légèreté soudaine. Elle arrive sans prévenir, souvent dans des moments ordinaires. Elle dure quelques secondes à quelques minutes. Elle ne demande pas que ta vie soit parfaite. Elle peut surgir au milieu d'une journée difficile, au milieu d'une période sombre. Elle est <strong>dans le présent</strong>, pas dans le futur ni dans le passé.
+          </div>
+        </div>
+        <div style="background:#f0f5fa;border-radius:14px;padding:14px 18px;border:1px solid rgba(100,140,200,0.3);">
+          <div style="font-family:'Jost',sans-serif;font-size:10px;color:#6080b0;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Le Bonheur : ce que c'est vraiment</div>
+          <div style="font-size:13px;color:#3d4060;line-height:1.75;font-style:normal;">
+            C'est un <strong>jugement sur sa vie</strong>, "est-ce que ma vie est bonne ?", "est-ce que je suis satisfaite de là où j'en suis ?". C'est une évaluation mentale, souvent conditionnelle : "je serai heureuse quand...", "j'étais heureuse avant...". Il demande des conditions : une situation stable, des objectifs atteints, une vie qui ressemble à ce qu'on voulait. Il est <strong>dans le mental</strong>, pas dans le corps.
+          </div>
+        </div>
+        <div class="hl orange" style="margin-top:10px;">
+          <strong>Le problème :</strong> on nous apprend à chercher le bonheur, cet état stable et durable. Mais le bonheur, ça ne s'attrape pas. Ça s'évalue rétrospectivement. La joie, elle, est accessible maintenant, même dans les jours difficiles. C'est elle qu'on va apprendre à retrouver aujourd'hui.
+        </div>
+      </div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Pratique corporelle 🫀':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('pratique');
+}
+
+function renderInventaire(){
+  const el=document.getElementById('inventaire-container');
+  el.innerHTML='';
+  inventaireItems.forEach((cat,ci)=>{
+    const div=document.createElement('div');
+    div.className='joie-categorie';
+    div.innerHTML=`<div class="joie-cat-titre">${cat.cat}</div>`;
+    cat.items.forEach((item,ii)=>{
+      const key=`${ci}-${ii}`;
+      const row=document.createElement('div');
+      row.className='joie-item';
+      row.innerHTML=`
+        <div class="joie-check" id="jc-${key}" onclick="toggleJoie('${key}')">${checkedJoie.has(key)?'✓':''}</div>
+        <div class="joie-texte">${item}</div>`;
+      if(checkedJoie.has(key)) row.querySelector('.joie-check').classList.add('done');
+      div.appendChild(row);
+    });
+    // Champ custom
+    const customRow=document.createElement('div');
+    customRow.className='joie-item';
+    customRow.innerHTML=`<div class="joie-check" style="opacity:0.3;cursor:default;">+</div><input class="joie-custom" placeholder="Ajouter la mienne...">`;
+    div.appendChild(customRow);
+    el.appendChild(div);
+  });
+}
+
+function toggleJoie(key){
+  const check=document.getElementById('jc-'+key);
+  if(checkedJoie.has(key)){
+    checkedJoie.delete(key);check.classList.remove('done');check.textContent='';
+  } else {
+    checkedJoie.add(key);check.classList.add('done');check.textContent='✓';
+  }
+}
+
+function renderAgenda(){
+  const horaires=['07h00','07h30','08h00','08h30','09h00','09h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','15h30','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00'];
+  const el=document.getElementById('agenda-container');
+  el.innerHTML=`
+    <div style="display:grid;grid-template-columns:60px 1fr 50px 50px;gap:6px;margin-bottom:8px;font-family:'Jost',sans-serif;font-size:11px;color:#a08040;text-transform:uppercase;letter-spacing:0.08em;">
+      <span>Heure</span><span>Activité</span><span style="text-align:center;">M 0-5</span><span style="text-align:center;">P 0-5</span>
+    </div>`;
+  horaires.forEach(h=>{
+    const row=document.createElement('div');
+    row.className='agenda-row';
+    row.dataset.heure=h;
+    row.style.cssText='display:grid;grid-template-columns:60px 1fr 50px 50px;gap:6px;margin-bottom:6px;align-items:center;';
+    row.innerHTML=`
+      <span style="font-family:'Jost',sans-serif;font-size:13px;color:#a08040;">${h}</span>
+      <input class="ag-act" style="border:1px solid rgba(220,180,60,0.3);border-radius:8px;padding:6px 10px;font-size:14px;font-family:'Lora',serif;width:100%;outline:none;" placeholder="activité...">
+      <input class="ag-m" type="number" min="0" max="5" style="border:1px solid rgba(220,180,60,0.3);border-radius:8px;padding:6px;font-size:14px;text-align:center;width:100%;outline:none;" placeholder="0">
+      <input class="ag-p" type="number" min="0" max="5" style="border:1px solid rgba(220,180,60,0.3);border-radius:8px;padding:6px;font-size:14px;text-align:center;width:100%;outline:none;" placeholder="0">`;
+    el.appendChild(row);
+  });
+}
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Réflexion · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 18 ✨';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+
+  // Note de pratique corporelle
+  const pratNote=document.getElementById('pratique-note').value.trim();
+  if(pratNote) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Où j'ai ressenti la joie dans mon corps</div><div class="recap-r">"${pratNote}"</div></div>`;
+
+  // Sources perso
+  const sources=[document.getElementById('s1').value.trim(),document.getElementById('s2').value.trim(),document.getElementById('s3').value.trim()].filter(s=>s);
+  if(sources.length>0) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mes sources de joie</div><div class="recap-r">${sources.join(' · ')}</div></div>`;
+
+  // Agenda Maîtrise / Plaisir, lignes remplies
+  const agLignes=[];
+  document.querySelectorAll('.agenda-row').forEach(row=>{
+    const act=row.querySelector('.ag-act')?.value.trim();
+    const m=row.querySelector('.ag-m')?.value.trim();
+    const p=row.querySelector('.ag-p')?.value.trim();
+    if(act){
+      const notes=[];
+      if(m!=='') notes.push('M'+m);
+      if(p!=='') notes.push('P'+p);
+      agLignes.push(`${row.dataset.heure}, ${act}${notes.length?' <span style="color:#c8a030;font-family:\'Jost\',sans-serif;font-size:12px;">('+notes.join(' · ')+')</span>':''}`);
+    }
+  });
+  if(agLignes.length>0){
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon agenda Maîtrise / Plaisir</div><div class="recap-r" style="font-style:normal;font-size:15px;">${agLignes.join('<br>')}</div></div>`;
+  }
+
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 18 · Retrouver la joie</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour18-joie-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

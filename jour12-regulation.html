@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 12 · La régulation émotionnelle · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f0f5fa 0%,#f5f0f8 45%,#f0f8f5 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#8898b0;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#1d2d40;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#6090c0,#a080c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(80,120,180,0.11);border:1px solid rgba(80,140,200,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#6090c0;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#1d2d40;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#1d2d40;margin-bottom:14px;line-height:1.4}
+  p{color:#405068;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#607088}
+  .btn{background:linear-gradient(135deg,#6090c0,#a080c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(80,120,180,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(80,140,200,0.25);color:#90a8c0;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#90a8c0;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#7090b0;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(80,140,200,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#6090c0,#a080c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#eef4fb,#f0eefa);border-radius:14px;padding:14px 18px;border-left:3px solid #6090c0;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f0eefa,#f5f0fd)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(80,140,200,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#6090c0,#a080c8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#8098b8;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(80,140,200,0.12);font-size:11px;color:#8098b8;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(80,140,200,0.05);border:1px solid rgba(80,140,200,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#506880;font-family:'Jost',sans-serif}
+
+  /* Fenêtre de tolérance */
+  .fenetre-wrap{border-radius:18px;overflow:hidden;border:1px solid rgba(80,140,200,0.2);margin-bottom:16px}
+  .fenetre-zone{padding:16px 18px;text-align:center}
+  .fenetre-label{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:6px;font-weight:600}
+  .fenetre-desc{font-size:13px;line-height:1.65;font-style:normal}
+  .fenetre-exemples{font-size:12px;margin-top:6px;opacity:0.8}
+
+  /* Émotions primaires/secondaires */
+  .emotion-tab{display:flex;gap:8px;margin-bottom:16px}
+  .tab-btn{flex:1;padding:10px;border:2px solid rgba(80,140,200,0.2);border-radius:12px;background:transparent;cursor:pointer;font-family:'Lora',serif;font-size:14px;color:#405068;transition:all 0.2s;font-style:italic}
+  .tab-btn.active{background:linear-gradient(135deg,#6090c0,#a080c8);color:white;border-color:transparent}
+  .emotion-content{display:none}
+  .emotion-content.active{display:block;animation:fadeUp 0.3s ease}
+  .emotion-card{border-radius:14px;padding:14px 18px;margin-bottom:10px;border:1px solid}
+  .emotion-nom{font-size:17px;color:#1d2d40;margin-bottom:4px}
+  .emotion-def{font-size:13px;line-height:1.65;font-style:normal}
+
+  /* Sens */
+  .sens-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+  .sens-card{border-radius:14px;padding:14px 16px;border:1px solid;cursor:pointer;transition:all 0.2s}
+  .sens-card:hover{transform:translateY(-2px)}
+  .sens-titre{font-size:14px;color:#1d2d40;margin-bottom:4px}
+  .sens-desc{font-size:12px;line-height:1.6;font-style:normal}
+
+  /* État selector */
+  .etat-btn{border-radius:16px;padding:14px 18px;width:100%;cursor:pointer;font-family:'Lora',serif;text-align:left;margin-bottom:10px;border:2px solid transparent;display:flex;align-items:center;gap:14px;transition:all 0.2s}
+  .etat-btn.selected{transform:translateX(4px)}
+  .etat-pastille{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:10px;font-weight:700;color:white;letter-spacing:0.05em}
+  .etat-titre-txt{font-size:17px;color:#1d2d40;margin-bottom:3px}
+  .etat-sous{font-size:12px;line-height:1.5;font-style:normal}
+
+  /* Outils */
+  .outil-card{border-radius:16px;padding:18px 20px;margin-bottom:12px;border:1px solid;transition:all 0.2s}
+  .outil-badge{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;padding:3px 10px;border-radius:10px;display:inline-block;color:white;margin-bottom:8px}
+  .outil-nom{font-size:17px;color:#1d2d40;margin-bottom:6px}
+  .outil-desc{font-size:13px;line-height:1.7;font-style:normal;color:#405068}
+  .outil-comment{font-size:12px;margin-top:8px;padding:8px 12px;border-radius:8px;line-height:1.6}
+
+  .recap-box{background:linear-gradient(135deg,#eef4fb,#f0eefa);border-radius:14px;padding:14px 18px;border:1px solid rgba(80,140,200,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#8098b8;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#eef4fb,#f0eefa);border-radius:20px;padding:22px;border:1px solid rgba(80,140,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  textarea{width:100%;border:2px solid rgba(80,140,200,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#1d2d40;line-height:1.7;outline:none;resize:vertical;background:#f4f8fd}
+  textarea:focus{border-color:#6090c0}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌊</span>
+    <div class="label">Jour 12 · La régulation émotionnelle</div>
+    <h2>Les émotions ne sont pas le problème, c'est de ne pas savoir quoi en faire</h2>
+    <p>Réguler ses émotions ne signifie pas les supprimer, les contrôler ou faire comme si elles n'étaient pas là. Ça signifie apprendre à les traverser sans en être submergée, et sans blesser ce qui compte pour toi.</p>
+    <p class="small" style="margin-bottom:20px;">Aujourd'hui on regarde ce qui se passe vraiment dans le cerveau quand une émotion monte, comment une émotion peut en cacher une autre, comment la reconnaître dans le corps, et surtout les outils qui marchent pour de vrai.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🌊</button>
+    <p class="hint">Théorie · Émotions primaires & secondaires · Sens · État · Boîte à outils · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- ÉMOTIONS PRIMAIRES / SECONDAIRES -->
+<div class="phase" id="phase-emotions">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🔬</span>
+    <h2>Émotions primaires et émotions secondaires</h2>
+    <p style="text-align:center;margin-bottom:6px;">C'est une distinction fondamentale, et souvent la clé pour comprendre pourquoi on réagit de façon disproportionnée dans certaines situations.</p>
+    <p class="small" style="text-align:center;margin-bottom:18px;">Explore les deux catégories en cliquant sur les onglets.</p>
+
+    <div class="emotion-tab">
+      <button class="tab-btn active" onclick="switchTab('primaires')">Émotions primaires</button>
+      <button class="tab-btn" onclick="switchTab('secondaires')">Émotions secondaires</button>
+    </div>
+
+    <div class="emotion-content active" id="tab-primaires">
+      <div class="hl" style="margin-bottom:14px;">
+        Les émotions primaires sont <strong>immédiates, instinctives, universelles</strong>. Elles surgissent directement en réponse à un événement, avant même que le cerveau conscient ait le temps d'analyser. Elles sont biologiques, communes à toutes les cultures humaines.
+      </div>
+      <div class="emotion-card" style="background:#fde8e6;border-color:rgba(232,133,122,0.3);">
+        <div class="emotion-nom" style="color:#c04030;">Peur</div>
+        <div class="emotion-def" style="color:#804040;">Réponse immédiate à une menace perçue, réelle ou anticipée. Active le système nerveux sympathique. Message : "Quelque chose me menace, je dois me protéger."</div>
+      </div>
+      <div class="emotion-card" style="background:#fdf3e6;border-color:rgba(232,168,92,0.3);">
+        <div class="emotion-nom" style="color:#c07020;">Colère</div>
+        <div class="emotion-def" style="color:#805020;">Réponse à une injustice, une limite franchie, une frustration. Message : "Quelque chose n'est pas juste. J'ai besoin de me défendre ou de changer quelque chose."</div>
+      </div>
+      <div class="emotion-card" style="background:#eef4fb;border-color:rgba(100,150,200,0.3);">
+        <div class="emotion-nom" style="color:#304070;">Tristesse</div>
+        <div class="emotion-def" style="color:#506080;">Réponse à une perte, d'une personne, d'un espoir, d'une version de soi. Message : "J'ai perdu quelque chose d'important. J'ai besoin de temps pour intégrer."</div>
+      </div>
+      <div class="emotion-card" style="background:#fdf8ee;border-color:rgba(200,168,112,0.3);">
+        <div class="emotion-nom" style="color:#806020;">Joie</div>
+        <div class="emotion-def" style="color:#706040;">Réponse à quelque chose de bon, de beau, de satisfaisant. Message : "Ceci est précieux. Savoure-le."</div>
+      </div>
+      <div class="emotion-card" style="background:#f0eefa;border-color:rgba(160,128,200,0.3);">
+        <div class="emotion-nom" style="color:#604090;">Dégoût</div>
+        <div class="emotion-def" style="color:#806090;">Réponse à quelque chose qui transgresse nos valeurs ou nous semble nocif. Message : "Ceci n'est pas bon pour moi. Je dois m'en éloigner."</div>
+      </div>
+      <div class="emotion-card" style="background:#eaf5f0;border-color:rgba(128,200,168,0.3);">
+        <div class="emotion-nom" style="color:#306050;">Surprise</div>
+        <div class="emotion-def" style="color:#508070;">Réponse à l'inattendu, peut être positive ou négative. Message : "Quelque chose d'imprévu se passe. Je dois réévaluer."</div>
+      </div>
+    </div>
+
+    <div class="emotion-content" id="tab-secondaires">
+      <div class="hl violet" style="margin-bottom:14px;">
+        Les émotions secondaires sont des <strong>émotions sur les émotions</strong>. Elles apparaissent en réponse à une émotion primaire, souvent parce qu'on a appris que cette première émotion était "inacceptable", dangereuse ou honteuse. C'est là que la régulation devient complexe.
+      </div>
+      <div class="hl rouge" style="margin-bottom:14px;">
+        <strong>Exemple concret :</strong> Tu ressens de la tristesse (primaire). Puis tu ressens de la honte d'être triste (secondaire). Puis de la colère contre toi-même d'avoir honte (tertiaire). Tu ne sais plus ce que tu ressens vraiment, et tu es épuisée.<br><br>
+        C'est pourquoi nommer l'émotion primaire en premier est si important : c'est là que se trouve le vrai message.
+      </div>
+      <div class="emotion-card" style="background:#fde8e6;border-color:rgba(232,133,122,0.3);">
+        <div class="emotion-nom" style="color:#c04030;">Honte d'être en colère</div>
+        <div class="emotion-def" style="color:#804040;">Très fréquent chez les femmes, on a appris que la colère féminine est "laide" ou "inappropriée". On refoule la colère et on ressent de la honte à la place.</div>
+      </div>
+      <div class="emotion-card" style="background:#f0eefa;border-color:rgba(160,128,200,0.3);">
+        <div class="emotion-nom" style="color:#604090;">Culpabilité d'être triste</div>
+        <div class="emotion-def" style="color:#806090;">"Je n'ai pas le droit d'être triste, d'autres ont des vrais problèmes." La tristesse primaire est niée et remplacée par de la culpabilité : une émotion secondaire qui bloque le traitement de la vraie douleur.</div>
+      </div>
+      <div class="emotion-card" style="background:#fdf3e6;border-color:rgba(232,168,92,0.3);">
+        <div class="emotion-nom" style="color:#c07020;">Anxiété sur la joie</div>
+        <div class="emotion-def" style="color:#805020;">"Quand les choses vont bien, c'est que quelque chose de mauvais va arriver." La joie primaire déclenche de l'anxiété secondaire, souvent chez des personnes ayant vécu des traumatismes ou des pertes répétées.</div>
+      </div>
+      <div class="emotion-card" style="background:#eef4fb;border-color:rgba(100,150,200,0.3);">
+        <div class="emotion-nom" style="color:#304070;">Colère contre soi d'avoir peur</div>
+        <div class="emotion-def" style="color:#506080;">"Je suis ridicule d'avoir peur de ça." La peur primaire est jugée et remplacée par de l'auto-critique : ce qui empêche de prendre soin de la vraie vulnérabilité.</div>
+      </div>
+      <div class="hl vert" style="margin-top:8px;">
+        <strong>La clé :</strong> quand tu remarques une émotion intense ou confuse, demande-toi, "Quelle est l'émotion primaire en dessous ? Qu'est-ce que je ressentais avant de commencer à me juger pour ce que je ressentais ?"
+      </div>
+    </div>
+
+    <button class="btn" onclick="showPhase('sens')">Reconnaître ses émotions par le corps →</button>
+  </div>
+</div>
+
+<!-- PAR LES SENS -->
+<div class="phase" id="phase-sens">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🫀</span>
+    <h2>Reconnaître ses émotions par les sens</h2>
+    <p style="text-align:center;margin-bottom:6px;">Avant de pouvoir réguler une émotion, il faut la reconnaître. Et le corps parle souvent avant le mental.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Explore chaque sens, comment l'émotion s'y manifeste et comment l'utiliser pour réguler.</p>
+
+    <div class="sens-grid">
+      <div class="sens-card" style="background:#fdf8f0;border-color:rgba(200,168,112,0.3);" onclick="toggleSens(this)">
+        <div class="sens-titre" style="color:#806030;">Vue</div>
+        <div class="sens-desc" style="color:#907050;">Clique pour explorer</div>
+        <div class="sens-detail" style="display:none;margin-top:8px;font-size:12px;color:#907050;line-height:1.65;">
+          <strong>Signal :</strong> Regard qui se fige, vision tunnel, larmes qui montent, regard fuyant.<br><br>
+          <strong>Outil :</strong> La technique du "5-4-3-2-1", nommer 5 choses que tu vois autour de toi. Ancre le cerveau dans le présent et interrompt la spirale de pensées.
+        </div>
+      </div>
+      <div class="sens-card" style="background:#f0f8f4;border-color:rgba(128,200,168,0.3);" onclick="toggleSens(this)">
+        <div class="sens-titre" style="color:#306050;">Ouïe</div>
+        <div class="sens-desc" style="color:#508070;">Clique pour explorer</div>
+        <div class="sens-detail" style="display:none;margin-top:8px;font-size:12px;color:#508070;line-height:1.65;">
+          <strong>Signal :</strong> Hypersensibilité aux sons, oreilles qui bourdonnent, voix qui tremble, silence intérieur ou au contraire pensées bruyantes.<br><br>
+          <strong>Outil :</strong> Musique consciente, choisir une chanson et écouter uniquement les instruments, pas les paroles. Ou hum-mer doucement : les vibrations stimulent le nerf vague.
+        </div>
+      </div>
+      <div class="sens-card" style="background:#f0eefa;border-color:rgba(160,128,200,0.3);" onclick="toggleSens(this)">
+        <div class="sens-titre" style="color:#504090;">Toucher</div>
+        <div class="sens-desc" style="color:#706090;">Clique pour explorer</div>
+        <div class="sens-detail" style="display:none;margin-top:8px;font-size:12px;color:#706090;line-height:1.65;">
+          <strong>Signal :</strong> Tensions dans les épaules, la mâchoire, le ventre. Besoin de se recroqueviller ou au contraire de bouger.<br><br>
+          <strong>Outil :</strong> Poser une main sur le cœur et une sur le ventre. Sentir sa propre chaleur. Le toucher auto-compassionnel libère de l'ocytocine et active le nerf vague.
+        </div>
+      </div>
+      <div class="sens-card" style="background:#fde8e6;border-color:rgba(232,133,122,0.3);" onclick="toggleSens(this)">
+        <div class="sens-titre" style="color:#803030;">Odorat</div>
+        <div class="sens-desc" style="color:#904040;">Clique pour explorer</div>
+        <div class="sens-detail" style="display:none;margin-top:8px;font-size:12px;color:#904040;line-height:1.65;">
+          <strong>Signal :</strong> L'odorat est directement relié au système limbique, centre des émotions. Certaines odeurs déclenchent des émotions intenses presque instantanément.<br><br>
+          <strong>Outil :</strong> Sentir quelque chose que tu associes à la sécurité ou à la douceur : une crème, un parfum, une tisane. Active immédiatement le système parasympathique.
+        </div>
+      </div>
+      <div class="sens-card" style="background:#eef4fb;border-color:rgba(100,150,200,0.3);" onclick="toggleSens(this)" style="grid-column:span 2;">
+        <div class="sens-titre" style="color:#304070;">Goût & Bouche</div>
+        <div class="sens-desc" style="color:#506080;">Clique pour explorer</div>
+        <div class="sens-detail" style="display:none;margin-top:8px;font-size:12px;color:#506080;line-height:1.65;">
+          <strong>Signal :</strong> Gorge sèche, goût amer, envies alimentaires compulsives lors des états émotionnels intenses : le corps cherche à se réguler par la bouche.<br><br>
+          <strong>Outil :</strong> Boire de l'eau froide lentement (active le nerf vague), sucer un glaçon, ou mâcher lentement quelque chose : le mouvement de mastication a un effet régulateur documenté.
+        </div>
+      </div>
+      <div class="sens-card" style="background:#fdf3e6;border-color:rgba(232,168,92,0.3);" onclick="toggleSens(this)" style="grid-column:span 2;">
+        <div class="sens-titre" style="color:#805020;">Proprioception : le sens du corps dans l'espace</div>
+        <div class="sens-desc" style="color:#906030;">Clique pour explorer</div>
+        <div class="sens-detail" style="display:none;margin-top:8px;font-size:12px;color:#906030;line-height:1.65;">
+          <strong>Signal :</strong> Se sentir déconnectée de son corps, "hors de soi", ou au contraire trop dans sa tête. Mauvaise coordination, gaucherie inhabituelle lors des états de stress.<br><br>
+          <strong>Outil :</strong> Appuyer fermement les pieds au sol. Se frotter les mains. Presser les paumes l'une contre l'autre. Ces gestes de "grounding" ramènent la conscience dans le corps, essentiel en cas de dissociation légère ou de freeze.
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="showPhase('etat')">Identifier mon état et mes outils →</button>
+  </div>
+</div>
+
+<!-- ÉTAT + OUTILS -->
+<div class="phase" id="phase-etat">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🧰</span>
+    <h2>Ma boîte à outils de régulation</h2>
+    <p style="text-align:center;margin-bottom:6px;">Choisis l'état qui te ressemble le plus en ce moment. Tu recevras les outils les plus adaptés à ce dont ton système nerveux a besoin.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Les outils ne sont pas universels : ce qui marche dépend de ton état de départ. Tu pourras ensuite explorer librement les outils des autres états, sans rien recommencer.</p>
+    <div id="etats-container"></div>
+    <button class="btn" id="btn-etat" disabled onclick="showOutils()">Voir mes outils →</button>
+  </div>
+</div>
+
+<!-- OUTILS -->
+<div class="phase" id="phase-outils">
+  <div class="card" style="margin-top:24px;">
+    <div id="outils-header" style="text-align:center;margin-bottom:20px;"></div>
+    <div id="outils-container"></div>
+    <button class="btn" onclick="showPhase('reflexion')">Ma réflexion du jour ✍️</button>
+  </div>
+</div>
+
+<!-- RÉFLEXION -->
+<div class="phase" id="phase-reflexion">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">✍️</span>
+    <h2>Ma réflexion du jour</h2>
+    <p style="text-align:center;margin-bottom:20px;">Trois questions courtes pour ancrer ce que tu as appris aujourd'hui.</p>
+
+    <div style="margin-bottom:18px;">
+      <p style="font-size:16px;color:#1d2d40;margin-bottom:6px;">Quelle est l'émotion que tu as le plus de mal à réguler, et est-ce une émotion primaire ou secondaire ?</p>
+      <textarea id="r1" rows="3" placeholder="L'émotion qui me pose le plus de problème c'est... / Je pense que c'est une émotion..." oninput="checkReflexion()"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-size:16px;color:#1d2d40;margin-bottom:6px;">Dans quelle zone de ta fenêtre de tolérance passes-tu le plus de temps ?</p>
+      <textarea id="r2" rows="3" placeholder="Je suis souvent en hyperactivation (agitée, anxieuse) / hypoactivation (vide, gelée) / dans ma fenêtre..." oninput="checkReflexion()"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <p style="font-size:16px;color:#1d2d40;margin-bottom:6px;">Quel outil de régulation tu veux essayer cette semaine, et dans quelle situation ?</p>
+      <textarea id="r3" rows="3" placeholder="L'outil que je veux essayer c'est... / Dans la situation où..." oninput="checkReflexion()"></textarea>
+    </div>
+    <button class="btn" id="btn-reflexion" onclick="showFin()">Terminer le Jour 12 🌊</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌊</span>
+    <h2>Tu as maintenant une carte et des outils</h2>
+    <p>La régulation émotionnelle n'est pas un talent inné, c'est une compétence qui s'apprend, se pratique et se renforce. Tu viens de faire un grand pas.</p>
+    <div style="background:linear-gradient(135deg,#eef4fb,#f0eefa);border-radius:16px;padding:20px;border:1px solid rgba(80,140,200,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#6090c0;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> Avant de réguler une émotion, nomme-la d'abord, primaire ou secondaire ? Demande-toi si elle en cache une autre plus profonde. Rappelle-toi qu'une vague monte puis redescend si tu ne l'alimentes pas. Et choisis ton outil selon ta zone, corps d'abord si c'est intense.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#506880;"><strong style="color:#1d2d40;">Demain, Jour 13 :</strong> la co-régulation</p>
+    <p class="hint" style="margin-top:6px;">18 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🪟",titre:"La fenêtre de tolérance · rester dans la zone",source:"Dr Dan Siegel / Dr Peter Levine",contenu:[
+    {type:"texte",texte:"Dan Siegel a décrit quelque chose de très utile : ce qu'il appelle la \"fenêtre de tolérance\". C'est la zone dans laquelle ton système nerveux arrive à traiter les émotions sans être débordé. Tant que tu es dedans, tu peux ressentir, réfléchir, réguler. Tu restes toi."},
+    {type:"fenetre"},
+    {type:"texte",texte:"Et l'objectif, ce n'est pas de rester dans cette fenêtre tout le temps, c'est impossible. Les émotions fortes nous en font sortir, et c'est parfaitement normal. Le vrai but, c'est d'apprendre à y revenir. Encore et encore. C'est ça, réguler."},
+    {type:"hl",texte:"💡 Plus ta fenêtre est large, plus tu peux traverser des émotions intenses sans te sentir submergée. Et la bonne nouvelle, c'est qu'elle s'élargit, avec le temps, les pratiques corporelles, la régulation répétée. Elle n'est pas figée. Tu peux l'agrandir."},
+  ]},
+  {emoji:"🧬",titre:"La neurologie de la régulation, ce qui se passe dans le cerveau",source:"Dr Lisa Feldman Barrett, How Emotions Are Made / Dr Jill Bolte Taylor",contenu:[
+    {type:"texte",texte:"Contrairement à ce qu'on pensait, les émotions ne sont pas des réponses automatiques pré-programmées. Elles sont construites par le cerveau en temps réel, à partir de sensations corporelles, d'expériences passées et du contexte présent."},
+    {type:"stat",texte:"Le cortex préfrontal, zone de régulation et de prise de décision, se déconnecte partiellement quand l'amygdale est activée. C'est pour ça qu'on \"perd la tête\" sous le coup d'une émotion forte, ce n'est pas de la faiblesse, c'est de la neurologie",source:"Dr Joseph LeDoux, The Emotional Brain"},
+    {type:"hl",texte:"🌊 <strong>Une émotion fonctionne comme une vague</strong><br><br>Elle monte, elle atteint un pic, puis elle redescend. C'est sa nature même. Une émotion n'est pas un état permanent, c'est un mouvement qui traverse.<br><br>Ce qui la fait durer des heures, ce n'est plus l'émotion elle-même. C'est le récit que tu te racontes autour. Tu rejoues la scène, tu nourris la pensée, et tu redéclenches la vague encore et encore.<br><br>Concrètement : si tu arrives à observer l'émotion sans l'alimenter, en respirant avec elle, tu vas la sentir perdre de son intensité. Pas en un temps chronométré, mais elle redescend.",classe:"or"},
+    {type:"hl",texte:"🎭 <strong>Une émotion peut en cacher une autre</strong><br><br>Souvent ce qu'on ressent en surface n'est pas l'émotion première. La colère cache souvent de la tristesse ou de la peur. L'indifférence cache parfois une douleur trop intense à ressentir. L'anxiété peut couvrir de la colère qu'on n'a pas le droit d'exprimer.<br><br>Exemples concrets :<br>· Tu es furieuse contre quelqu'un → en dessous, tu es blessée ou triste de ne pas te sentir vue<br>· Tu te sens \"vide\" et sans réaction → en dessous, quelque chose est peut-être trop douloureux à ressentir<br>· Tu es anxieuse sans raison apparente → en dessous, parfois une colère qu'on a appris à réprimer<br><br>La question clé : <em>\"Est-ce que cette émotion en cache une autre, plus vulnérable, plus profonde ?\"</em>"},
+    {type:"stat",texte:"L'imagerie cérébrale le confirme : mettre un mot sur une émotion calme presque aussitôt la zone d'alarme du cerveau. C'est le \"name it to tame it\" de Dan Siegel, nomme-le pour l'apaiser",source:"Dr Matthew Lieberman, UCLA"},
+    {type:"hl",texte:"🧠 La régulation fonctionne dans les deux sens : du haut vers le bas (cerveau → corps, par la pensée) et du bas vers le haut (corps → cerveau, par la respiration, le mouvement, le toucher). Quand l'émotion est très intense : le corps d'abord. Toujours.",classe:"vert"},
+  ]},
+  {emoji:"⚡",titre:"Les stratégies qui fonctionnent vraiment, et pourquoi",source:"Dr James Gross, Process Model of Emotion Regulation / DBT Linehan",contenu:[
+    {type:"texte",texte:"Toutes les stratégies de régulation ne se valent pas. Certaines fonctionnent à court terme mais aggravent à long terme. D'autres sont plus lentes à apprendre mais transforment durablement."},
+    {type:"hl",texte:"❌ Ce qui ne fonctionne pas sur le long terme : la suppression (faire semblant de ne pas ressentir), la rumination (retourner l'émotion sans fin), la distraction permanente. Ces stratégies réduisent l'émotion à court terme mais l'amplifient sur la durée et épuisent le système nerveux."},
+    {type:"hl",texte:"✅ Ce qui fonctionne : la régulation somatique (corps d'abord, respiration, mouvement, toucher), la réévaluation cognitive (changer sa lecture d'une situation), l'acceptation (laisser l'émotion être là sans la combattre), et l'expression dans un cadre sécurisé (écriture, thérapie, conversation de confiance).",classe:"vert"},
+    {type:"hl",texte:"💡 La clé : choisir la stratégie en fonction de l'intensité de l'émotion. Quand c'est très intense, corps d'abord. Quand c'est plus modéré, le cognitif peut aider. Quand c'est chronique, l'acceptation et l'expression sont essentielles.",classe:"or"},
+  ]},
+];
+
+const etats=[
+  {id:"hyper",titre:"Hyperactivée · agitée, anxieuse, submergée",sous:"Mon système nerveux s'emballe. Pensées en boucle, corps tendu, respiration courte.",couleur:"#e8a85c",bg:"#fdf3e6",border:"rgba(232,168,92,0.3)",
+    outils:[
+      {nom:"Respiration 4-6",desc:"Inspire 4 secondes par le nez, expire 6 secondes par la bouche. Répète 5 à 10 fois. Active directement le nerf vague et freine le système nerveux sympathique.",comment:"C'est l'outil le plus immédiat pour sortir de l'hyperactivation. Tu le pratiques depuis le Jour 3.",bg:"#fdf3e6",border:"#e8a85c",couleur:"#604020"},
+      {nom:"Grounding sensoriel, 5-4-3-2-1",desc:"Nomme 5 choses que tu vois, 4 que tu touches, 3 que tu entends, 2 que tu sens, 1 que tu goûtes. Ancre le cerveau dans le présent et interrompt la spirale anxieuse.",comment:"Particulièrement efficace lors des attaques d'anxiété ou des pensées ruminantes.",bg:"#fdf3e6",border:"#e8a85c",couleur:"#604020"},
+      {nom:"Mouvement bilatéral rythmique",desc:"Marche, balance-toi d'un pied sur l'autre, ou tapote alternativement tes genoux gauche et droite. Le mouvement bilatéral régule le système nerveux en activant les deux hémisphères du cerveau.",comment:"C'est le principe de l'EMDR, utilisé en thérapie des traumatismes. À portée de main à tout moment.",bg:"#fdf3e6",border:"#e8a85c",couleur:"#604020"},
+      {nom:"Nommer l'émotion primaire à voix haute",desc:"\"Je ressens de la peur.\" \"Je suis en colère.\" Dire l'émotion à voix haute ou l'écrire réduit l'activation de l'amygdale quasi immédiatement : le name it to tame it de Dan Siegel.",comment:"Commence toujours par chercher l'émotion primaire, pas la secondaire.",bg:"#fdf3e6",border:"#e8a85c",couleur:"#604020"},
+    ]
+  },
+  {id:"hypo",titre:"Hypoactivée · vide, gelée, déconnectée",sous:"Je me sens à plat, absente, sans énergie ni réactions. Mode freeze.",couleur:"#90b8d0",bg:"#eef4fb",border:"rgba(144,184,208,0.3)",
+    outils:[
+      {nom:"Activation douce, commencer par bouger",desc:"Des mouvements légers et lents, étirements, balancement, marche très douce. Le freeze est un état de conservation d'énergie : le réveiller progressivement, sans forcer.",comment:"Ne pas commencer par un sport intense, ça peut aggraver la dissociation. Commencer très doucement.",bg:"#eef4fb",border:"#90b8d0",couleur:"#304050"},
+      {nom:"Stimulation sensorielle douce",desc:"Eau froide sur les poignets ou le visage, une crème parfumée, une boisson chaude entre les mains. Les sensations physiques contrastées ramènent dans le corps.",comment:"L'odorat est particulièrement efficace, il est directement relié au système limbique.",bg:"#eef4fb",border:"#90b8d0",couleur:"#304050"},
+      {nom:"Contact humain, co-régulation",desc:"Si possible, être en présence physique d'une personne de confiance. Un regard, une voix douce, une main sur l'épaule. Le système nerveux se régule dans la relation, c'est la co-régulation.",comment:"On en parlera en détail demain, Jour 13.",bg:"#eef4fb",border:"#90b8d0",couleur:"#304050"},
+      {nom:"Respiration activante, expiration courte",desc:"Inverse de la 4-6 : inspire profondément et expire par petits coups brefs (comme souffler des bougies). Cette technique active légèrement le système sympathique pour sortir du freeze.",comment:"Utilise avec douceur, l'objectif est de réveiller, pas de sur-stimuler.",bg:"#eef4fb",border:"#90b8d0",couleur:"#304050"},
+    ]
+  },
+  {id:"fenetre",titre:"Dans ma fenêtre · stable mais veux approfondir",sous:"Je me sens relativement bien aujourd'hui. Je veux apprendre à réguler en prévention.",couleur:"#80c8a8",bg:"#eaf5f0",border:"rgba(128,200,168,0.3)",
+    outils:[
+      {nom:"Journal émotionnel quotidien",desc:"5 minutes chaque soir : quelle émotion primaire ai-je ressentie aujourd'hui ? Dans quelle zone de ma fenêtre étais-je ? Qu'est-ce qui m'a aidée ou pas ? Cette pratique entraîne la conscience émotionnelle.",comment:"La régularité prime sur la durée. 5 minutes par jour > 30 minutes une fois par semaine.",bg:"#eaf5f0",border:"#80c8a8",couleur:"#305040"},
+      {nom:"Pratique de l'acceptation radicale",desc:"Choisir délibérément d'accueillir une émotion sans chercher à la changer, \"Cette émotion est là. Je la laisse être.\" L'acceptation réduit la souffrance secondaire (la résistance à l'émotion) même quand l'émotion elle-même reste.",comment:"Inspiré de la DBT de Marsha Linehan, validé cliniquement pour la régulation émotionnelle.",bg:"#eaf5f0",border:"#80c8a8",couleur:"#305040"},
+      {nom:"Réévaluation cognitive",desc:"Face à une situation émotionnellement chargée, demande-toi : \"Y a-t-il une autre lecture possible de cette situation ?\" Pas pour nier l'émotion, pour voir si la pensée qui l'alimente est vraiment exacte.",comment:"Efficace surtout quand l'émotion est modérée. Moins efficace en pleine crise.",bg:"#eaf5f0",border:"#80c8a8",couleur:"#305040"},
+      {nom:"Pratique régulière de la respiration 4-6",desc:"Utilisée en prévention, pas seulement en crise. 3 sessions de 5 cycles par jour (matin, midi, soir) recalibrent le système nerveux sur le long terme et élargissent ta fenêtre de tolérance.",comment:"L'effet cumulatif prime, comme pour tous les outils de régulation.",bg:"#eaf5f0",border:"#80c8a8",couleur:"#305040"},
+    ]
+  },
+];
+
+let theorieIdx=0, selectedEtat=null, reflexions={};
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// Preview
+const pc=document.getElementById('preview-container');
+[{e:'🪟',t:'La fenêtre de tolérance de Dan Siegel'},{e:'🧬',t:'La neurologie de la régulation'},{e:'⚡',t:'Les stratégies qui fonctionnent vraiment'},{e:'🔬',t:'Émotions primaires et secondaires'},{e:'🫀',t:'Reconnaître par les sens'},{e:'🧰',t:'Boîte à outils selon mon état'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#405068;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+    else if(item.type==='fenetre') el.innerHTML+=`
+      <div class="fenetre-wrap">
+        <div class="fenetre-zone" style="background:#fde8e8;">
+          <div class="fenetre-label" style="color:#c04030;">Zone d'hyperactivation</div>
+          <div class="fenetre-desc" style="color:#804040;">Anxiété, agitation, panique, colère incontrôlable, pensées en boucle. Le système nerveux s'emballe, trop d'activation pour être régulé.</div>
+          <div class="fenetre-exemples" style="color:#a06060;">Réponse : combat ou fuite</div>
+        </div>
+        <div class="fenetre-zone" style="background:#eaf5f0;border-top:2px dashed rgba(128,200,168,0.5);border-bottom:2px dashed rgba(128,200,168,0.5);">
+          <div class="fenetre-label" style="color:#306050;">Fenêtre de tolérance</div>
+          <div class="fenetre-desc" style="color:#405060;">Zone de régulation optimale. Tu peux ressentir des émotions intenses sans en être submergée. Tu penses clairement, tu te connectes, tu apprends.</div>
+          <div class="fenetre-exemples" style="color:#608070;">C'est ici que la croissance et la guérison sont possibles</div>
+        </div>
+        <div class="fenetre-zone" style="background:#eef4fb;">
+          <div class="fenetre-label" style="color:#304070;">Zone d'hypoactivation</div>
+          <div class="fenetre-desc" style="color:#506080;">Engourdissement, vide, dissociation, freeze, épuisement profond, impossibilité de ressentir. Le système se coupe pour se protéger.</div>
+          <div class="fenetre-exemples" style="color:#6080a0;">Réponse : figement ou effondrement</div>
+        </div>
+      </div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Émotions primaires & secondaires 🔬':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('emotions');
+}
+
+function switchTab(tab){
+  document.querySelectorAll('.emotion-content').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleSens(el){
+  const detail=el.querySelector('.sens-detail');
+  const desc=el.querySelector('.sens-desc');
+  const isOpen=detail.style.display==='block';
+  detail.style.display=isOpen?'none':'block';
+  desc.style.display=isOpen?'block':'none';
+}
+
+// États
+const ec=document.getElementById('etats-container');
+etats.forEach((e,i)=>{
+  const btn=document.createElement('button');
+  btn.className='etat-btn';
+  btn.id='etat-'+i;
+  btn.style.cssText=`background:${e.bg};border-color:${e.border};`;
+  btn.innerHTML=`<div class="etat-pastille" style="background:${e.couleur};">${i===0?'▲':i===1?'▼':'◆'}</div><div><div class="etat-titre-txt">${e.titre}</div><div class="etat-sous" style="color:${e.couleur};">${e.sous}</div></div>`;
+  btn.onclick=()=>{
+    document.querySelectorAll('.etat-btn').forEach(b=>{b.classList.remove('selected');b.style.borderColor=etats[parseInt(b.id.replace('etat-',''))].border;});
+    btn.classList.add('selected');btn.style.borderColor=e.couleur;
+    selectedEtat=i;document.getElementById('btn-etat').disabled=false;
+  };
+  ec.appendChild(btn);
+});
+
+function showOutils(i){
+  if(typeof i==='number') selectedEtat=i;
+  if(selectedEtat===null)return;
+  const e=etats[selectedEtat];
+  document.getElementById('outils-header').innerHTML=`
+    <div style="display:inline-block;background:${e.couleur};color:white;border-radius:20px;padding:6px 16px;font-size:12px;font-family:'Jost',sans-serif;margin-bottom:12px;">${e.titre}</div>
+    <h2 style="font-size:18px;color:#1d2d40;margin-bottom:8px;">Tes outils adaptés</h2>`;
+  const oc=document.getElementById('outils-container');
+  oc.innerHTML='';
+  e.outils.forEach(o=>{
+    oc.innerHTML+=`
+      <div class="outil-card" style="background:${o.bg};border-color:${o.border};">
+        <div class="outil-nom" style="color:${o.couleur};">${o.nom}</div>
+        <div class="outil-desc">${o.desc}</div>
+        <div class="outil-comment" style="background:rgba(255,255,255,0.6);color:${o.couleur};">💡 ${o.comment}</div>
+      </div>`;
+  });
+  // Boutons pour explorer les outils des autres états
+  let autresHtml='<div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(150,150,180,0.2);"><p style="font-size:14px;color:#7a8a9a;text-align:center;margin-bottom:12px;font-family:\'Jost\',sans-serif;">Explore aussi les outils des autres états, ils sont précieux à connaître pour toutes les situations :</p>';
+  etats.forEach((autre,idx)=>{
+    if(idx!==selectedEtat){
+      autresHtml+=`<button onclick="showOutils(${idx})" style="width:100%;text-align:left;padding:13px 16px;border-radius:12px;border:2px solid ${autre.border};background:${autre.bg};cursor:pointer;font-family:'Lora',serif;font-size:15px;font-weight:500;color:${autre.couleur};margin-bottom:8px;">→ Voir les outils : ${autre.titre}</button>`;
+    }
+  });
+  autresHtml+='</div>';
+  oc.innerHTML+=autresHtml;
+  showPhase('outils');
+}
+
+function checkReflexion(){
+  // Réflexion libre, bouton toujours accessible
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  [{id:'r1',q:"Émotion difficile à réguler"},{id:'r2',q:"Ma zone habituelle"},{id:'r3',q:"L'outil que je veux essayer"}].forEach((r,i)=>{
+    const val=document.getElementById(r.id).value.trim();
+    if(val) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:${i<2?'10px':'0'}"><div class="recap-q">${r.q}</div><div class="recap-r">"${val}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 12 · La regulation emotionnelle</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour12-regulation-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

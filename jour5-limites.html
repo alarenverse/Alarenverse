@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 5 · Poser ses limites · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf0f5 0%,#f5eaf0 40%,#f0eafa 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b09aac;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#3d2e45;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c2836a,#a08ec2);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(180,120,150,0.12);border:1px solid rgba(200,150,180,0.2);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c2836a;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#3d2e45;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#3d2e45;margin-bottom:14px;line-height:1.4}
+  p{color:#6d5060;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#8a6070}
+  .btn{background:linear-gradient(135deg,#c2836a,#a08ec2);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(180,100,120,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(200,150,180,0.3);color:#b0a0b0;box-shadow:none;cursor:not-allowed;transform:none}
+  .btn-outline{background:transparent;border:2px solid rgba(194,131,106,0.4);color:#c2836a;border-radius:50px;padding:12px 32px;font-size:14px;cursor:pointer;font-family:'Lora',serif;display:block;margin:10px auto 0;transition:all 0.2s}
+  .btn-outline:hover{background:rgba(194,131,106,0.08)}
+  .hint{font-size:12px;color:#b0a0b0;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a08080;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(200,150,180,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#c2836a,#a08ec2);border-radius:4px;transition:width 0.4s ease}
+  .highlight{background:linear-gradient(135deg,#fdf0f0,#f5f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #c2836a;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .highlight.violet{border-left-color:#a08ec2;background:linear-gradient(135deg,#f5f0fa,#ede8f8)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(200,150,180,0.12)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#c2836a,#a08ec2);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#b09090;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(200,150,180,0.15);font-size:11px;color:#b09090;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(200,150,180,0.06);border:1px solid rgba(200,150,180,0.15);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#906070;font-family:'Jost',sans-serif}
+
+  /* Quiz */
+  .quiz-option{background:transparent;border:2px solid rgba(200,150,180,0.25);border-radius:14px;padding:12px 16px;width:100%;cursor:pointer;font-family:'Lora',serif;font-size:17px;color:#253050;line-height:1.5;text-align:left;display:flex;align-items:center;gap:12px;margin-bottom:9px;transition:all 0.2s}
+  .quiz-option:hover{border-color:#c2836a;background:rgba(194,131,106,0.05)}
+  .quiz-option.selected{background:linear-gradient(135deg,#fdf0ec,#f5eefa);border-color:#c2836a;color:#4a2030}
+  .quiz-radio{width:20px;height:20px;border-radius:50%;border:2px solid #d0b0c0;flex-shrink:0;background:white;transition:all 0.2s}
+  .quiz-option.selected .quiz-radio{border:6px solid #c2836a}
+
+  /* Résultats quiz */
+  .score-section{background:linear-gradient(135deg,#fdf0ec,#f5eefa);border-radius:16px;padding:20px;border:1px solid rgba(194,131,106,0.2);margin-bottom:14px}
+  .dim-label{font-family:'Jost',sans-serif;font-size:12px;color:#906070;margin-bottom:5px}
+  .dim-bar{height:8px;background:rgba(200,150,180,0.2);border-radius:6px;overflow:hidden;margin-bottom:12px}
+  .dim-fill{height:100%;border-radius:6px}
+
+  /* Écriture */
+  textarea{width:100%;border:2px solid rgba(200,150,180,0.3);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#3d2e45;line-height:1.7;outline:none;resize:vertical;background:#fdf8fc}
+  textarea:focus{border-color:#c2836a}
+  .ecriture-question{font-size:17px;color:#3d2e45;line-height:1.6;text-align:center;margin-bottom:8px}
+  .ecriture-sous{font-size:13px;color:#a08090;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .reponse-saved{background:linear-gradient(135deg,#fdf0ec,#f5eefa);border-radius:14px;padding:14px 18px;border:1px solid rgba(194,131,106,0.2);margin-bottom:12px}
+  .reponse-q{font-size:12px;color:#a08090;font-family:'Jost',sans-serif;margin-bottom:5px}
+  .reponse-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+
+  /* Phrases types */
+  .phrase-card{background:white;border-radius:16px;padding:18px 20px;border:1px solid rgba(200,150,180,0.2);margin-bottom:12px;box-shadow:0 2px 12px rgba(180,120,150,0.07)}
+  .phrase-situation{font-family:'Jost',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:#c2836a;margin-bottom:8px}
+  .phrase-non{font-size:17px;color:#3d2e45;line-height:1.6;margin-bottom:6px}
+  .phrase-why{font-size:13px;color:#8a6070;line-height:1.6;font-style:normal}
+
+  .suite-box{background:linear-gradient(135deg,#fdf0ec,#f5eefa);border-radius:20px;padding:22px;border:1px solid rgba(200,150,180,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🛡️</span>
+    <div class="label">Jour 5 · Poser ses limites</div>
+    <h2>Dire non, c'est dire oui à toi-même</h2>
+    <p>Poser une limite, c'est sûrement l'un des plus grands gestes d'amour que tu puisses te faire. Et l'un des plus durs aussi, parce qu'on ne nous a jamais vraiment appris à le faire sans culpabiliser.</p>
+    <p class="small" style="margin-bottom:22px;">Aujourd'hui on va comprendre pourquoi c'est si compliqué, repérer où sont tes limites à toi, et trouver les mots pour les poser pour de vrai.</p>
+    <div id="preview-container" style="text-align:left;margin-bottom:22px;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🛡️</button>
+    <p class="hint">Théorie · Auto-diagnostic · Écriture · Phrases types · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/4</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <p id="t-intro-el" style="font-size:14px;color:#8a6070;margin-bottom:14px;display:none;"></p>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="phase" id="phase-quiz">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="q-label">Quiz · 1/6</span>
+      <span style="font-family:'Jost',sans-serif;">Où en sont tes limites ?</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
+  </div>
+  <div class="card">
+    <p style="font-size:11px;color:#a08090;font-family:'Jost',sans-serif;text-align:center;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:4px;">Question <span id="q-num">1</span> / 6</p>
+    <p class="ecriture-question" id="q-text" style="margin-bottom:22px;"></p>
+    <div id="q-options"></div>
+    <button class="btn" id="btn-q-next" disabled onclick="nextQuiz()">Suivant →</button>
+  </div>
+</div>
+
+<!-- RÉSULTATS QUIZ -->
+<div class="phase" id="phase-quiz-results">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🪞</span>
+    <h2>Ton portrait des limites</h2>
+    <p style="text-align:center;margin-bottom:20px;">Voici où en sont tes limites aujourd'hui, dans chaque dimension de ta vie.</p>
+    <div id="quiz-results-container"></div>
+    <div class="highlight violet" style="margin-top:16px;" id="quiz-message"></div>
+    <button class="btn" onclick="showPhase('ecriture')">Aller plus loin, écriture guidée ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE GUIDÉE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/4</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Exploration guidée</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <p class="ecriture-question" id="e-question"></p>
+    <p class="ecriture-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="Écris librement, sans te censurer..." oninput="checkEcriture()"></textarea>
+    <button class="btn" id="btn-e-next" style="width:100%;margin-top:12px;" disabled onclick="nextEcriture()">Continuer →</button>
+  </div>
+</div>
+
+<!-- PHRASES TYPES -->
+<div class="phase" id="phase-phrases">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">💬</span>
+    <h2>Des mots pour dire non</h2>
+    <p style="text-align:center;margin-bottom:6px;">Dire non ne signifie pas être froide ou égoïste. Voici des formulations douces, fermes et honnêtes, à adapter à ta voix.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Choisis celles qui te parlent, note-les, fais-en les tiennes.</p>
+    <div id="phrases-container"></div>
+    <button class="btn" onclick="showPhase('fin')">Terminer le Jour 5 ✨</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <h2>Tu viens de faire quelque chose de courageux</h2>
+    <p>Regarder en face ses propres limites, ou leur absence, demande une vraie honnêteté envers soi-même. Tu l'as fait.</p>
+    <div style="background:linear-gradient(135deg,#fdf0ec,#f5eefa);border-radius:16px;padding:20px;border:1px solid rgba(194,131,106,0.2);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c2836a;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="highlight" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> Poser une limite ne détruit pas une relation. Si quelqu'un ne peut pas respecter tes limites, c'est une information précieuse sur cette relation, pas une raison de te sacrifier.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#906070;"><strong style="color:#5d3040;">Demain, Jour 6 :</strong> prendre soin de son corps avec douceur</p>
+    <p class="hint" style="margin-top:6px;">25 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie = [
+  { emoji:"🧠", titre:"Pourquoi c'est si dur de dire non", intro:null, source:"Dr Harriet Lerner, The Dance of Anger", contenu:[
+    {type:"texte",texte:"Si tu n'arrives pas à dire non, ce n'est pas parce que tu es trop gentille ou pas assez forte. On t'a appris ça. Depuis toute petite. Et ce qui a été appris peut se désapprendre."},
+    {type:"highlight",texte:"👧 Petites, on nous répète d'être sages, de faire plaisir, de ne pas déranger. \"Sois gentille.\" \"Ne fais pas de peine.\" \"Pense aux autres.\" À force, ces phrases s'impriment si profond qu'elles deviennent une part de nous, au point qu'on ne les entend même plus."},
+    {type:"texte",texte:"Du coup, dire non se met à ressembler à un danger. Ton cerveau associe le refus au risque d'être rejetée, de décevoir, de provoquer la colère de l'autre. Et il réagit comme face à une vraie menace : le corps se contracte, la gorge se serre, les mots restent coincés."},
+    {type:"highlight",texte:"💡 Tu vois ? Ce n'est pas un manque de courage. C'est un vieux câblage, posé par l'éducation. Et un câblage, ça se refait. Petit à petit, avec de la pratique et beaucoup de douceur envers toi.",classe:"violet"},
+  ]},
+  { emoji:"🪞", titre:"Ce que ça te coûte de ne jamais dire non", intro:null, source:"Dr Brené Brown, Dare to Lead", contenu:[
+    {type:"texte",texte:"Quand tu ne poses pas de limites, tu ne te sacrifies pas joyeusement pour les autres. Tu accumules. De la fatigue, de la frustration, du ressentiment qui monte sans bruit. Et un jour, tu finis par donner avec amertume ce que tu aurais tellement voulu donner avec amour."},
+    {type:"texte",texte:"C'est ça, le vrai prix. Pas juste d'être débordée, mais de t'éloigner peu à peu des gens que tu aimes, parce qu'à force de tout porter, tu n'as plus rien à donner de joyeux."},
+    {type:"stat",texte:"Le burn-out touche davantage les femmes que les hommes, et l'une des causes majeures est justement cette difficulté à poser des limites, au travail comme dans les relations",source:"OMS / Étude Gallup"},
+    {type:"highlight",texte:"🔑 Une limite, ce n'est pas un mur pour tenir les autres à distance. C'est une frontière qui dit où tu finis et où l'autre commence. Et crois-moi : ça protège la relation autant que ça te protège, toi.",classe:"violet"},
+  ]},
+  { emoji:"🧩", titre:"Si tu ne sais même pas où sont tes limites", intro:null, source:"Dr Nedra Tawwab, Set Boundaries, Find Peace", contenu:[
+    {type:"texte",texte:"Souvent, si tu n'arrives pas à repérer tes limites, c'est tout simplement parce que personne ne t'a appris à écouter tes propres besoins. On t'a appris l'inverse, à capter ceux des autres, à t'ajuster, à anticiper. Tes besoins à toi sont passés au second plan si longtemps que tu ne les entends plus bien."},
+    {type:"highlight",texte:"💡 Voilà les signaux qu'une limite vient d'être franchie : tu ressors vidée après avoir vu quelqu'un, une colère ou un ressentiment monte sans trop savoir pourquoi, tu dis oui avec la bouche mais c'est non à l'intérieur, et tu t'oublies sans même t'en rendre compte. Apprends à les reconnaître : ce sont tes meilleurs indicateurs."},
+    {type:"texte",texte:"Et rassure-toi : tes limites ne sont pas des règles rigides gravées dans le marbre. Elles bougent avec toi, changent selon les personnes, les moments. Ce qui compte, c'est qu'elles collent à ce qui est vrai pour toi, là, maintenant."},
+    {type:"texte",texte:"Parce qu'une bonne partie de l'anxiété vient de là : du sentiment de n'avoir aucune prise sur ce qu'on laisse entrer dans sa vie. Reprendre ce pouvoir, c'est apaiser quelque chose de profond."},
+  ]},
+  { emoji:"💬", titre:"Dire non sans te justifier ni culpabiliser", intro:null, source:"Dr Anne Katherine, Where to Draw the Line", contenu:[
+    {type:"texte",texte:"Tu n'as pas à te justifier à chaque non. \"Non\" est une phrase complète à elle seule. Mais je sais qu'au début, quand on réapprend à poser ses limites, c'est vertigineux de s'arrêter là. Alors des formulations douces et honnêtes aident à passer le cap."},
+    {type:"highlight",texte:"🗣️ La différence entre poser une limite et attaquer : une limite parle de toi. \"J'ai besoin d'un peu de temps pour moi ce week-end\", ça, c'est une limite. \"Tu ne me laisses jamais souffler\", ça, c'est un reproche. Une limite n'accuse pas. Elle informe, tout simplement."},
+    {type:"texte",texte:"Et cette culpabilité que tu sens monter après avoir dit non ? Ce n'est pas la preuve que tu as mal fait. C'est juste le signe que tu déranges un vieux réflexe. C'est inconfortable, oui. Mais à chaque non que tu prononces, ça s'allège un peu. Pas du jour au lendemain, mais ça s'allège, je te le promets."},
+    {type:"highlight",texte:"✨ Garde ça avec toi : chaque fois que tu dis non à quelque chose qui ne t'appartient pas, tu dis oui à quelque chose qui te ressemble.",classe:"violet"},
+  ]},
+];
+
+const quizQuestions = [
+  { texte:"Dans mes relations proches, j'arrive à dire non quand je n'ai pas envie de faire quelque chose.", dim:"Relations", options:["Jamais, je dis toujours oui par peur de blesser","Rarement, avec beaucoup de culpabilité","Parfois, selon la personne","Souvent, même si c'est encore difficile","Naturellement, sans culpabilité"] },
+  { texte:"Au travail, je suis capable de refuser une tâche qui ne m'appartient pas ou qui dépasse mes capacités.", dim:"Travail", options:["Jamais, j'accepte tout pour ne pas décevoir","Rarement, j'ai peur des conséquences","Parfois, quand c'est vraiment trop","Souvent, je commence à m'affirmer","Naturellement, mes limites pro sont claires"] },
+  { texte:"Je protège mon temps et mon énergie, j'ai du temps pour moi sans culpabilité.", dim:"Temps & Énergie", options:["Jamais, je suis toujours disponible pour les autres","Rarement, je me sens égoïste quand je prends du temps pour moi","Parfois, mais avec de la culpabilité","Souvent, j'apprends à me prioriser","Oui, prendre soin de moi est une priorité"] },
+  { texte:"Je suis capable d'exprimer mes besoins émotionnels dans mes relations.", dim:"Émotions", options:["Jamais, je garde tout pour moi","Rarement, j'ai peur d'être un fardeau","Parfois, selon le contexte","Souvent, même si c'est difficile","Oui, j'exprime ce que je ressens et ce dont j'ai besoin"] },
+  { texte:"Quand quelqu'un me traite d'une façon qui me blesse, je suis capable de le nommer.", dim:"Respect", options:["Jamais, je préfère me taire plutôt que créer un conflit","Rarement, je minimise ce que je ressens","Parfois, seulement si c'est vraiment grave","Souvent, j'apprends à mettre des mots","Oui, je sais dire quand quelque chose ne me convient pas"] },
+  { texte:"Je suis capable de décevoir quelqu'un pour rester en accord avec moi-même.", dim:"Authenticité", options:["Jamais, la déception des autres m'est insupportable","Rarement, je préfère me trahir plutôt que décevoir","Parfois, dans certaines situations","Souvent, même si ça reste difficile","Oui, rester fidèle à moi-même est ma priorité"] },
+];
+
+const ecritureQuestions = [
+  { q:"Dans quelle situation de ta vie tu dis oui alors que tout en toi crie non ?", sous:"Prends ton temps. Sois honnête avec toi-même.", placeholder:"Écris la situation, le contexte, ce que tu ressens quand tu dis ce oui..." },
+  { q:"Qu'est-ce que tu as peur qu'il se passe si tu poses tes limites dans cette situation ?", sous:"La peur est valide. Nomme-la.", placeholder:"J'ai peur que... / Je redoute que..." },
+  { q:"De quoi as-tu vraiment besoin dans cette relation ou cette situation ?", sous:"Pas ce que tu penses devoir vouloir : ce dont tu as vraiment besoin.", placeholder:"J'ai besoin de... / Ce qui me manque vraiment c'est..." },
+  { q:"Quelle serait la phrase que tu aimerais pouvoir dire, si tu n'avais pas peur ?", sous:"Laisse-toi rêver une limite honnête et courageuse.", placeholder:"Ce que j'aurais envie de dire c'est..." },
+];
+
+const phrasesTypes = [
+  { situation:"Quand tu ne peux pas rendre service", phrase:"\"J'aurais vraiment aimé t'aider, mais là ce n'est pas possible pour moi.\"", why:"Pas d'excuse inventée. Pas de sur-explication. Juste une vérité douce et ferme." },
+  { situation:"Quand tu as besoin de temps seule", phrase:"\"J'ai besoin de temps pour moi ce week-end, je me ressource pour être vraiment présente ensuite.\"", why:"Tu expliques le bénéfice pour la relation, sans te justifier excessivement." },
+  { situation:"Quand quelqu'un franchit une limite", phrase:"\"Je veux qu'on continue à bien se parler, et pour ça j'ai besoin que tu ne fasses plus ça.\"", why:"Tu parles de toi et de ton besoin. Tu ne blâmes pas, tu informes." },
+  { situation:"Quand on te demande une réponse immédiate", phrase:"\"J'ai besoin d'un peu de temps pour réfléchir avant de te répondre.\"", why:"Tu ne dis pas oui sous pression. Tu prends l'espace de décider vraiment." },
+  { situation:"Au travail, face à une demande excessive", phrase:"\"Je ne peux pas prendre ça en charge en ce moment. On peut voir ensemble ce qui peut être réajusté ?\"", why:"Tu poses ta limite et tu proposes une solution, sans t'excuser d'exister." },
+  { situation:"Quand tu te sens coupable d'avoir dit non", phrase:"\"Me respecter n'est pas égoïste. C'est ce qui me permet de donner vraiment.\"", why:"Dis-toi ça à toi-même. Autant de fois que nécessaire." },
+];
+
+// State
+let theorieIdx = 0;
+let quizIdx = 0;
+let quizAnswers = [];
+let quizSelected = null;
+let ecritureIdx = 0;
+let ecritureReponses = [];
+
+function showPhase(id) {
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// Preview
+const pc = document.getElementById('preview-container');
+[{e:'🧠',t:'Pourquoi les femmes ont du mal à dire non'},{e:'🪞',t:"Ce que l'absence de limites coûte vraiment"},{e:'🧩',t:'Identifier où sont tes limites'},{e:'💬',t:'Dire non sans se justifier'},{e:'📋',t:'Quiz, où en sont tes limites ?'},{e:'✍️',t:'Écriture guidée, explorer tes limites'},{e:'💬',t:'Phrases types pour dire non'}].forEach(item=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${item.e}</span><span>${item.t}</span></div>`;
+});
+
+function renderTheorie() {
+  const t = theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  const introEl=document.getElementById('t-intro-el');
+  if(t.intro){introEl.textContent=t.intro;introEl.style.display='block';}else{introEl.style.display='none';}
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#6d5060;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='highlight') el.innerHTML+=`<div class="highlight ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx<theorie.length-1?'Continuer →':'Passons au quiz 📋';
+}
+
+function nextTheorie() {
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else{showPhase('quiz');renderQuiz();}
+}
+
+function renderQuiz() {
+  const q = quizQuestions[quizIdx];
+  document.getElementById('q-label').textContent=`Quiz · ${quizIdx+1}/${quizQuestions.length}`;
+  document.getElementById('q-num').textContent=quizIdx+1;
+  document.getElementById('q-progress').style.width=((quizIdx)/quizQuestions.length*100)+'%';
+  document.getElementById('q-text').textContent=q.texte;
+  quizSelected=null;
+  document.getElementById('btn-q-next').disabled=true;
+  const el=document.getElementById('q-options');
+  el.innerHTML='';
+  q.options.forEach((opt,i)=>{
+    const val=i+1;
+    const btn=document.createElement('button');
+    btn.className='quiz-option';
+    btn.innerHTML=`<span class="quiz-radio"></span>${opt}`;
+    btn.onclick=()=>{
+      document.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      quizSelected=val;
+      document.getElementById('btn-q-next').disabled=false;
+    };
+    el.appendChild(btn);
+  });
+  const isLast=quizIdx===quizQuestions.length-1;
+  document.getElementById('btn-q-next').textContent=isLast?'Voir mon portrait →':'Suivant →';
+}
+
+function nextQuiz() {
+  if(quizSelected===null)return;
+  quizAnswers.push({dim:quizQuestions[quizIdx].dim,val:quizSelected});
+  if(quizIdx<quizQuestions.length-1){quizIdx++;quizSelected=null;renderQuiz();}
+  else{showQuizResults();}
+}
+
+function showQuizResults() {
+  const total=quizAnswers.reduce((a,b)=>a+b.val,0);
+  const max=quizQuestions.length*5;
+  const pct=total/max;
+  let msg;
+  if(pct<=0.35) msg="Tes limites sont très fragilisées en ce moment. Tu te mets souvent de côté pour les autres. Ce programme va t'aider à te retrouver : une limite à la fois. Tu mérites d'exister pleinement.";
+  else if(pct<=0.55) msg="Tu as conscience de l'importance des limites, mais tu peines encore à les poser vraiment. C'est normal, c'est un apprentissage. Tu es sur le bon chemin.";
+  else if(pct<=0.75) msg="Tu poses des limites dans certains domaines, mais d'autres restent des zones floues. Continue à t'écouter, tu développes quelque chose de précieux.";
+  else msg="Tes limites sont globalement bien posées. Continue à les nourrir et à les affiner, c'est un travail de toute une vie, jamais terminé.";
+
+  const rc=document.getElementById('quiz-results-container');
+  rc.innerHTML='';
+  quizAnswers.forEach(a=>{
+    const p=(a.val/5)*100;
+    const c=p<=40?'#e8857a':p<=60?'#e6a85c':p<=80?'#a08ec2':'#80c8a8';
+    rc.innerHTML+=`<div style="margin-bottom:14px;"><div class="dim-label">${a.dim}, ${a.val}/5</div><div class="dim-bar"><div class="dim-fill" style="width:${p}%;background:${c};"></div></div></div>`;
+  });
+  document.getElementById('quiz-message').textContent=msg;
+  showPhase('quiz-results');
+}
+
+function renderEcriture() {
+  const e=ecritureQuestions[ecritureIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${ecritureIdx+1}/${ecritureQuestions.length}`;
+  document.getElementById('e-progress').style.width=((ecritureIdx+1)/ecritureQuestions.length*100)+'%';
+  document.getElementById('e-question').textContent=e.q;
+  document.getElementById('e-sous').textContent=e.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=e.placeholder;
+  document.getElementById('btn-e-next').disabled=true;
+  const isLast=ecritureIdx===ecritureQuestions.length-1;
+  document.getElementById('btn-e-next').textContent=isLast?'Voir les phrases types 💬':'Continuer →';
+}
+
+function checkEcriture() {
+  document.getElementById('btn-e-next').disabled=!document.getElementById('e-textarea').value.trim();
+}
+
+function nextEcriture() {
+  const val=document.getElementById('e-textarea').value.trim();
+  if(!val)return;
+  ecritureReponses.push({q:ecritureQuestions[ecritureIdx].q,r:val});
+  if(ecritureIdx<ecritureQuestions.length-1){ecritureIdx++;renderEcriture();window.scrollTo(0,0);}
+  else{renderPhrases();showPhase('phrases');}
+}
+
+function renderPhrases() {
+  const el=document.getElementById('phrases-container');
+  el.innerHTML='';
+  phrasesTypes.forEach(p=>{
+    el.innerHTML+=`<div class="phrase-card"><div class="phrase-situation">${p.situation}</div><div class="phrase-non">${p.phrase}</div><div class="phrase-why">${p.why}</div></div>`;
+  });
+}
+
+// Override showPhase for fin
+const _showPhase=showPhase;
+window.showPhase=function(id){
+  if(id==='fin'){
+    const rc=document.getElementById('recap-container');
+    rc.innerHTML='';
+    ecritureReponses.forEach((r,i)=>{
+      rc.innerHTML+=`<div class="reponse-saved" ${i<ecritureReponses.length-1?'style="margin-bottom:10px;"':''}><div class="reponse-q">${r.q}</div><div class="reponse-r">"${r.r}"</div></div>`;
+    });
+  }
+  _showPhase(id);
+};
+
+// Init
+renderTheorie();
+document.querySelector('[onclick="showPhase(\'ecriture\')"]').onclick=()=>{renderEcriture();showPhase('ecriture');};
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 5 · Mes limites</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour5-limites-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

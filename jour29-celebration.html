@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 29 · Célébrer mon chemin · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf8f0 0%,#f8f0fa 50%,#f0f8f5 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 20px 80px;color:#3d2d50;line-height:1.8}
+  header{width:100%;max-width:580px;padding-top:40px;text-align:center;margin-bottom:10px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#b090a8;margin-bottom:10px}
+  h1{font-size:clamp(22px,5vw,30px);font-weight:500;color:#3d2d50;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c8a060,#a080c8);margin:14px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:36px 28px;box-shadow:0 8px 40px rgba(160,128,200,0.1);border:1px solid rgba(180,150,220,0.2);max-width:580px;width:100%;margin-top:24px}
+  .emoji-hero{font-size:52px;display:block;text-align:center;margin-bottom:16px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#c8a060;text-align:center;margin-bottom:10px}
+  h2{font-size:24px;font-weight:600;color:#3d2d50;text-align:center;margin-bottom:16px;line-height:1.4}
+  h3{font-size:20px;font-weight:600;color:#3d2d50;margin-bottom:14px;line-height:1.4}
+  p{font-size:18px;color:#5d4570;line-height:1.8;margin-bottom:14px}
+  p.note{font-size:15px;color:#9a84a8;font-family:'Jost',sans-serif;margin-bottom:14px}
+  .btn{background:linear-gradient(135deg,#c8a060,#a080c8);color:white;border:none;border-radius:50px;padding:15px 44px;font-size:17px;cursor:pointer;font-family:'Lora',serif;font-weight:500;box-shadow:0 4px 20px rgba(160,128,200,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(180,150,220,0.25);color:#b0a0c8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:13px;color:#b0a0c8;text-align:center;margin-top:12px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:580px;width:100%;margin-top:20px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:13px;color:#9a84a8;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:4px;background:rgba(180,150,220,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#c8a060,#a080c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:14px;padding:16px 20px;border-left:3px solid #c8a060;font-size:17px;color:#3d2d50;line-height:1.8;margin-bottom:14px}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.vert{border-left-color:#60a880;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.rose{border-left-color:#c870a0;background:linear-gradient(135deg,#fdf0f5,#f8f0fa)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(180,150,220,0.12)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#c8a060,#a080c8);flex-shrink:0;margin-top:8px}
+  .stat-text{font-size:17px;color:#3d2d50;line-height:1.7}
+  .stat-source{font-size:12px;color:#9a84a8;margin-top:3px;font-family:'Jost',sans-serif}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(180,150,220,0.12);font-size:12px;color:#9a84a8;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(180,150,220,0.05);border:1px solid rgba(180,150,220,0.15);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:15px;color:#5d4570;font-family:'Lora',serif}
+
+  /* Chemin parcouru */
+  .semaine-card{border-radius:16px;padding:18px 20px;margin-bottom:12px;border:2px solid;cursor:pointer;transition:all 0.2s}
+  .semaine-card:hover{transform:translateX(3px)}
+  .semaine-card.open{transform:translateX(4px)}
+  .semaine-titre{font-size:17px;font-weight:600;color:#3d2d50;margin-bottom:4px}
+  .semaine-sous{font-size:14px;color:#9a84a8;font-family:'Jost',sans-serif}
+  .semaine-detail{font-size:16px;color:#5d4570;line-height:1.75;margin-top:12px;padding-top:12px;border-top:1px solid rgba(180,150,220,0.15);display:none}
+  .semaine-card.open .semaine-detail{display:block}
+
+  /* Gratitude envers soi */
+  .fierte-bloc{border-radius:16px;padding:18px 20px;margin-bottom:12px;border:2px solid rgba(200,160,80,0.25);background:linear-gradient(135deg,#fdf8ee,#f8f0fa)}
+  .fierte-label{font-family:'Jost',sans-serif;font-size:11px;color:#c8a060;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px}
+  .fierte-q{font-size:17px;font-weight:600;color:#3d2d50;margin-bottom:6px;line-height:1.5}
+  .fierte-sous{font-size:14px;color:#9a84a8;margin-bottom:10px;font-family:'Jost',sans-serif;line-height:1.5}
+  textarea{width:100%;border:2px solid rgba(180,150,220,0.25);border-radius:14px;padding:14px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#3d2d50;line-height:1.7;outline:none;resize:vertical;background:#fdf8f5}
+  textarea:focus{border-color:#c8a060}
+
+  /* Recevoir */
+  .recevoir-item{border-radius:14px;padding:16px 18px;margin-bottom:10px;border:2px solid;display:flex;gap:14px;align-items:flex-start}
+  .recevoir-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:5px}
+  .recevoir-titre{font-size:16px;font-weight:600;color:#3d2d50;margin-bottom:4px}
+  .recevoir-desc{font-size:15px;color:#5d4570;line-height:1.7}
+
+  .recap-box{background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:14px;padding:16px 18px;border:1px solid rgba(200,160,80,0.2);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#b0a080;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:16px;color:#3d2d50;line-height:1.7}
+  .suite-box{background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:20px;padding:24px;border:1px solid rgba(200,160,80,0.2);text-align:center;margin-top:16px;max-width:580px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;">
+    <span class="emoji-hero">🌟</span>
+    <div class="label">Jour 29 · Célébrer mon chemin</div>
+    <h2>29 jours. Tu es encore là.</h2>
+    <p>Aujourd'hui on s'arrête. On regarde en arrière. Et on apprend à recevoir ce qu'on mérite de se dire.</p>
+    <p class="note">Pas pour te féliciter de tout. Pour te voir vraiment.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🌟</button>
+    <p class="hint">Chemin parcouru · Pourquoi célébrer · Recevoir · Gratitude envers soi · ~20 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/2</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:50%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- CHEMIN PARCOURU -->
+<div class="phase" id="phase-chemin">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🗺️</span>
+    <h2>Ce que tu as traversé, semaine par semaine</h2>
+    <p>Pas pour tout te rappeler. Juste pour voir l'étendue de ce que tu as osé regarder en face.</p>
+    <p class="note" style="text-align:center;margin-bottom:20px;">Clique sur chaque semaine pour te souvenir.</p>
+    <div id="semaines-container"></div>
+    <div class="hl vert" style="margin-top:8px;">
+      Ce n'est pas rien. Vraiment. La plupart des gens passent des années sans jamais s'arrêter pour regarder tout ça.
+    </div>
+    <button class="btn" onclick="showPhase('recevoir')">Apprendre à recevoir →</button>
+  </div>
+</div>
+
+<!-- APPRENDRE À RECEVOIR -->
+<div class="phase" id="phase-recevoir">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🤲</span>
+    <h2>Apprendre à recevoir</h2>
+    <p>On donne facilement aux autres. On se félicite rarement. Et quand quelqu'un nous complimente, on minimise, on détourne, on dit "oh c'est rien".</p>
+    <p>Mais recevoir, vraiment recevoir, c'est aussi une compétence. Et elle se travaille.</p>
+
+    <div class="hl" style="margin-bottom:14px;">
+      Pourquoi c'est si difficile de se féliciter ? Parce qu'on confond humilité et auto-effacement. Parce qu'on a peur d'avoir l'air arrogante. Parce qu'on a appris que se mettre en avant, c'est mal. Mais reconnaître ce qu'on a fait, sans fanfare, juste pour soi, ce n'est pas de l'arrogance. C'est de l'honnêteté.
+    </div>
+
+    <div id="recevoir-container"></div>
+
+    <button class="btn" onclick="showPhase('gratitude')">La gratitude envers moi ✨</button>
+  </div>
+</div>
+
+<!-- GRATITUDE ENVERS SOI -->
+<div class="phase" id="phase-gratitude">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">✨</span>
+    <h2>Ce dont je suis fière, sans minimiser</h2>
+    <p>Pas de liste de performances. Pas de ce que tu as accompli pour les autres. Juste ce que tu as fait pour toi : ce que tu as osé, traversé, tenu, délesté, appris.</p>
+    <p class="note" style="text-align:center;margin-bottom:20px;">Réponds honnêtement. Interdit de minimiser.</p>
+
+    <div class="fierte-bloc">
+      <div class="fierte-label">Ce que j'ai osé</div>
+      <div class="fierte-q">Qu'est-ce que tu as osé faire, penser ou ressentir pendant ces 29 jours, que tu n'aurais pas osé avant ?</div>
+      <div class="fierte-sous">Même une toute petite chose. Même juste nommer une émotion que tu évitais.</div>
+      <textarea id="f1" rows="3" placeholder="J'ai osé..." oninput="checkFierte()"></textarea>
+    </div>
+
+    <div class="fierte-bloc">
+      <div class="fierte-label">Ce que j'ai traversé</div>
+      <div class="fierte-q">Qu'est-ce qui était difficile dans ce programme, et que tu as traversé quand même ?</div>
+      <div class="fierte-sous">La résistance compte aussi. Avoir lu quelque chose de difficile et être restée avec ça, c'est du courage.</div>
+      <textarea id="f2" rows="3" placeholder="Ce qui était difficile et que j'ai traversé quand même..." oninput="checkFierte()"></textarea>
+    </div>
+
+    <div class="fierte-bloc">
+      <div class="fierte-label">Ce qui a changé</div>
+      <div class="fierte-q">Qu'est-ce qui est différent en toi, même légèrement, depuis le Jour 1 ?</div>
+      <div class="fierte-sous">Pas forcément visible de l'extérieur. Quelque chose qui a bougé dans ta façon de te voir ou de te parler.</div>
+      <textarea id="f3" rows="3" placeholder="Ce qui a changé, même subtilement..." oninput="checkFierte()"></textarea>
+    </div>
+
+    <div class="fierte-bloc">
+      <div class="fierte-label">Ce dont je suis fière</div>
+      <div class="fierte-q">Complète cette phrase, sans t'arrêter, sans corriger :</div>
+      <div class="fierte-sous">"Je suis fière de moi parce que..."</div>
+      <textarea id="f4" rows="3" placeholder="Je suis fière de moi parce que..." oninput="checkFierte()"></textarea>
+    </div>
+
+    <button class="btn" id="btn-fierte" onclick="showFin()">Terminer le Jour 29 🌟</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌟</span>
+    <h2>Tu méritais de te voir comme ça</h2>
+    <p>Avec bienveillance. Avec honnêteté. Sans minimiser ce que ça t'a coûté de rester présente à toi-même pendant 29 jours.</p>
+    <p>Demain c'est le dernier jour. On ne va pas finir sur une liste de bonnes résolutions, mais sur un engagement envers toi-même. Le plus important.</p>
+
+    <div style="background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:16px;padding:22px;border:1px solid rgba(200,160,80,0.2);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a060;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;">🌟 Ce dont tu es fière</div>
+      <div id="recap-container"></div>
+    </div>
+
+    <div class="hl violet" style="margin-top:16px;text-align:left;">
+      🔑 Garde ces réponses quelque part. Les jours où la voix critique sera plus forte que les autres, reviens ici. Elle ne dit pas la vérité. Ça, si.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:28px;margin-bottom:10px;">🎯</div>
+    <p style="font-size:18px;color:#3d2d50;margin-bottom:6px;"><strong>Demain, Jour 30 :</strong> mon engagement envers moi</p>
+    <p class="note" style="margin-top:4px;">Le dernier jour, et le plus important 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🎉",titre:"Pourquoi on ne se félicite jamais",source:"Dr Rick Hanson et Dr Kristin Neff",contenu:[
+    {type:"p",texte:"Tu te souviens sûrement mieux de la remarque blessante de l'an dernier que du compliment reçu la semaine passée. Ce n'est pas un défaut de ta part. Ton cerveau est fait comme ça, il garde le négatif bien plus longtemps. Repérer les dangers a longtemps compté plus que savourer les bons moments."},
+    {type:"hl",texte:"Le problème, c'est qu'aujourd'hui ce vieux réflexe te dessert. Tu gardes les échecs, tu effaces les réussites. Et tu appelles ça de la modestie, alors que c'est juste un cerveau qui n'a pas suivi son époque."},
+    {type:"stat",texte:"Rick Hanson a montré qu'on peut rééquilibrer la balance. Il suffit de s'attarder un instant sur ce qui va bien, au lieu de le laisser filer. C'est court, mais il faut vraiment le faire",source:"Dr Rick Hanson"},
+    {type:"hl",texte:"Alors se célébrer, ce n'est pas de la vanité. C'est réapprendre à ton cerveau à voir aussi ce qui va bien. Et ça, ça se travaille comme le reste.",classe:"vert"},
+  ]},
+  {emoji:"🤲",titre:"Apprendre à recevoir",source:"Dr Brené Brown",contenu:[
+    {type:"p",texte:"Donner, tu sais faire. Ton temps, ton énergie, ton attention. Recevoir, c'est une autre histoire. Le compliment, tu le minimises. L'aide, tu l'esquives. Ta fierté, tu la caches."},
+    {type:"hl",texte:"Brené Brown a interrogé des centaines de personnes là-dessus. Celles qui vivent le plus pleinement ne sont pas celles qui ne doutent jamais. Ce sont celles qui arrivent à se regarder avec douceur, y compris dans ce qu'elles ont réussi.",classe:"violet"},
+    {type:"p",texte:"Accueillir sa propre fierté, ça demande d'accepter d'être un peu vulnérable. De dire \"j'ai bien fait\" sans ajouter aussitôt \"mais\". Celle de laisser quelque chose de bien rester bien, sans le relativiser, sans le dégonfler."},
+    {type:"hl",texte:"La prochaine fois qu'on te complimente, essaie de dire merci et de te taire après. Laisse le compliment atterrir quelque part en toi. Tu verras, c'est plus difficile qu'il n'y paraît.",classe:"vert"},
+  ]},
+];
+
+const semaines=[
+  {titre:"Semaine 1 · Se connaître",sous:"Jours 1 à 7",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)",detail:"Tu es partie d'un état des lieux honnête, sans te raconter d'histoires. Puis tu as appris à mettre des mots sur tes émotions, à respirer autrement, à regarder ton repos et tes limites en face."},
+  {titre:"Semaine 2 · Se réguler",sous:"Jours 8 à 14",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)",detail:"Là tu es allée vers ce qui apaise : ta voix intérieure, le mouvement, la gratitude. Tu as aussi regardé tes relations, ce qu'elles te donnent et ce qu'elles te prennent, et découvert comment ton système nerveux se règle sur celui des autres."},
+  {titre:"Semaine 3 · Se délester",sous:"Jours 15 à 21",couleur:"#c870a0",bg:"#fdf0f5",border:"rgba(200,112,160,0.3)",detail:"La semaine où tu as posé des choses. La charge mentale d'abord, en cherchant comment la redistribuer. Puis ton cycle, la joie, ces croyances qui te limitaient sans que tu le saches. Et les deuils que tu portais sans les avoir nommés."},
+  {titre:"Semaine 4 · Se retrouver",sous:"Jours 22 à 29",couleur:"#60a880",bg:"#eaf5f0",border:"rgba(96,168,128,0.3)",detail:"La semaine du retour à toi. Ta colère et ce qu'elle voulait te dire. Le pardon, aux autres et surtout à toi. Ton estime, tes valeurs, la femme que tu as envie d'être. Ton corps, la création. Et aujourd'hui, tout ce chemin."},
+];
+
+const recevoirItems=[
+  {titre:"Quand quelqu'un te complimente",desc:"Au lieu de minimiser, essaie juste de dire merci et de laisser le silence. Tu n'as pas à renvoyer le compliment. Tu n'as pas à expliquer que c'était rien. Juste : merci.",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)"},
+  {titre:"Quand tu réussis quelque chose",desc:"Arrête-toi un instant pour le sentir dans ton corps avant d'enchaîner. Quelques secondes suffisent. C'est ce petit temps d'arrêt qui fait que ça reste.",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)"},
+  {titre:"Quand tu te félicites toi-même",desc:"Pas besoin de le dire à voix haute. Juste une pensée claire : \"j'ai bien fait\". Sans le \"mais\" qui suit. Sans la comparaison avec ce que tu aurais pu faire mieux. Juste : j'ai bien fait.",couleur:"#60a880",bg:"#eaf5f0",border:"rgba(96,168,128,0.3)"},
+];
+
+let theorieIdx=0;
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='chemin') renderSemaines();
+  if(id==='recevoir') renderRecevoir();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🎉',t:'Pourquoi on ne se félicite jamais'},{e:'🤲',t:'Apprendre à recevoir'},{e:'🗺️',t:'Mon chemin, semaine par semaine'},{e:'✨',t:'Ce dont je suis fière, sans minimiser'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:18px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='p') el.innerHTML+=`<p>${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Mon chemin parcouru 🗺️':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('chemin');
+}
+
+function renderSemaines(){
+  const el=document.getElementById('semaines-container');
+  el.innerHTML='';
+  semaines.forEach((s,i)=>{
+    const div=document.createElement('div');
+    div.className='semaine-card';
+    div.style.cssText=`background:${s.bg};border-color:${s.border};`;
+    div.innerHTML=`
+      <div class="semaine-titre" style="color:${s.couleur};">${s.titre}</div>
+      <div class="semaine-sous">${s.sous}</div>
+      <div class="semaine-detail">${s.detail}</div>`;
+    div.onclick=()=>div.classList.toggle('open');
+    el.appendChild(div);
+  });
+}
+
+function renderRecevoir(){
+  const el=document.getElementById('recevoir-container');
+  el.innerHTML='';
+  recevoirItems.forEach(r=>{
+    el.innerHTML+=`
+      <div class="recevoir-item" style="background:${r.bg};border-color:${r.border};">
+        <div class="recevoir-dot" style="background:${r.couleur};margin-top:8px;"></div>
+        <div>
+          <div class="recevoir-titre" style="color:${r.couleur};">${r.titre}</div>
+          <div class="recevoir-desc">${r.desc}</div>
+        </div>
+      </div>`;
+  });
+}
+
+function checkFierte(){
+  // écriture libre
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const qs=['Ce que j\'ai osé','Ce que j\'ai traversé','Ce qui a changé','Ce dont je suis fière'];
+  ['f1','f2','f3','f4'].forEach((id,i)=>{
+    const val=document.getElementById(id).value.trim();
+    if(val) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">${qs[i]}</div><div class="recap-r">"${val}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 29 · Celebrer mon chemin</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour29-celebration-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

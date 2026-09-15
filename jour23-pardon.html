@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 23 · Le pardon · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f0f8f5 0%,#f5f8ff 45%,#fff5f8 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#80a090;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#1d3028;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#60b090,#a080c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(80,160,120,0.1);border:1px solid rgba(80,160,120,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#60b090;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#1d3028;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#1d3028;margin-bottom:14px;line-height:1.4}
+  p{color:#3d6050;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#5d8070}
+  .btn{background:linear-gradient(135deg,#60b090,#a080c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(80,160,120,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(80,160,120,0.25);color:#90c0a8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#90c0a8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#70a090;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(80,160,120,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#60b090,#a080c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#eaf5f0,#f0f8f5);border-radius:14px;padding:14px 18px;border-left:3px solid #60b090;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .hl.bleu{border-left-color:#7090c0;background:linear-gradient(135deg,#eef4fb,#f0f4fd)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(80,160,120,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#60b090,#a080c8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#80a890;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(80,160,120,0.12);font-size:11px;color:#80a890;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(80,160,120,0.05);border:1px solid rgba(80,160,120,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#507060;font-family:'Jost',sans-serif}
+
+  /* Ho'oponopono */
+  .hooponopono-card{border-radius:20px;padding:24px;background:linear-gradient(135deg,#eaf5f0,#f0f5ff);border:1px solid rgba(80,160,120,0.2);margin-bottom:16px}
+  .hoopo-phrase{border-radius:14px;padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;border:2px solid transparent}
+  .hoopo-phrase:hover{transform:translateX(4px)}
+  .hoopo-phrase.active{transform:translateX(4px)}
+  .hoopo-num{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
+  .hoopo-texte{font-size:20px;color:#1d3028;margin-bottom:6px;line-height:1.4}
+  .hoopo-expl{font-size:13px;line-height:1.65;color:#3d5048;font-style:normal;display:none}
+  .hoopo-phrase.active .hoopo-expl{display:block}
+
+  /* Pratique guidée */
+  .pratique-etape{border-radius:16px;padding:18px 20px;margin-bottom:12px;border:1px solid rgba(80,160,120,0.2);background:linear-gradient(135deg,#eaf5f0,#f0f8f5)}
+  .etape-num{font-family:'Jost',sans-serif;font-size:10px;color:#60b090;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
+  .etape-titre{font-size:15px;font-weight:700;color:#1d3028;margin-bottom:6px;font-style:normal}
+  .etape-desc{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .etape-duree{display:inline-block;background:rgba(80,160,120,0.15);border-radius:10px;padding:3px 10px;font-size:11px;font-family:'Jost',sans-serif;color:#60b090;margin-top:8px}
+
+  /* Pardon de soi */
+  .pardon-soi-item{border-radius:16px;padding:16px 18px;margin-bottom:12px;border:2px solid rgba(160,128,200,0.25);background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
+  .pardon-soi-cat{font-family:'Jost',sans-serif;font-size:10px;color:#a080c8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px}
+  .pardon-soi-q{font-size:15px;font-weight:600;color:#2d1d50;margin-bottom:8px;font-style:normal;line-height:1.5}
+  .pardon-soi-input{width:100%;border:2px solid rgba(160,128,200,0.22);border-radius:12px;padding:10px 14px;font-size:14px;font-family:'Lora',serif;color:#2d1d50;outline:none;background:white;resize:vertical;min-height:60px}
+  .pardon-soi-input:focus{border-color:#a080c8}
+
+  textarea{width:100%;border:2px solid rgba(80,160,120,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#1d3028;line-height:1.7;outline:none;resize:vertical;background:#f4fbf7}
+  textarea:focus{border-color:#60b090}
+  .e-q{font-size:17px;font-weight:600;color:#1d3028;line-height:1.65;text-align:center;margin-bottom:6px;font-style:normal}
+  .e-sous{font-size:13px;color:#70a080;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#eaf5f0,#f0f5ff);border-radius:14px;padding:14px 18px;border:1px solid rgba(80,160,120,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#80a890;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#eaf5f0,#f0f5ff);border-radius:20px;padding:22px;border:1px solid rgba(80,160,120,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🕊️</span>
+    <div class="label">Jour 23 · Le pardon</div>
+    <h2>Le pardon n'est pas un cadeau qu'on fait à l'autre, c'est une liberté qu'on se donne</h2>
+    <p>On nous a appris que pardonner, c'est oublier, excuser, accepter ce qui s'est passé. Ce n'est rien de tout ça. Le pardon est un acte intérieur, qui libère celui qui pardonne, indépendamment de ce que fait l'autre.</p>
+    <p class="small" style="margin-bottom:20px;">Aujourd'hui on explore ce que le pardon est vraiment, la pratique hawaïenne Ho'oponopono, et le pardon de soi, souvent le plus difficile et le plus nécessaire.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🕊️</button>
+    <p class="hint">Théorie · Ho'oponopono · Pratique vers l'autre · Pardon de soi · Écriture · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- HO'OPONOPONO -->
+<div class="phase" id="phase-hooponopono">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌺</span>
+    <h2>Ho'oponopono : la pratique hawaïenne du pardon</h2>
+    <p style="text-align:center;margin-bottom:8px;">Concrètement, c'est quoi ? Ho'oponopono est une tradition hawaïenne très ancienne. Le mot veut dire "remettre en ordre", "rétablir ce qui est juste". À l'origine, quand un conflit déchirait une famille, tout le monde se réunissait pour parler, reconnaître les torts de chacun, demander pardon et se libérer ensemble du poids, pour que la vie puisse reprendre.</p>
+    <p style="text-align:center;margin-bottom:8px;">La version moderne, celle qu'on pratique ici, est une forme simplifiée et intérieure : un rituel de 4 phrases qu'on se répète à soi-même, en pensant à une personne ou une situation. Personne d'autre n'est impliqué, tout se passe en toi.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Soyons claires : ce n'est ni de la magie, ni une religion, ni une méthode miracle. C'est un rituel intérieur : une façon structurée et douce de déposer la rancœur, quand les mots simples ne suffisent plus. Clique sur chaque phrase pour comprendre ce qu'elle signifie.</p>
+
+    <div class="hooponopono-card">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#60b090;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:16px;text-align:center;">Les 4 phrases, dans l'ordre</div>
+
+      <div class="hoopo-phrase" id="h0" onclick="toggleHoopo(0)" style="background:rgba(80,160,120,0.08);border-color:rgba(80,160,120,0.3);">
+        <div class="hoopo-num" style="color:#60b090;">Phrase 1</div>
+        <div class="hoopo-texte">"Je suis désolée."</div>
+        <div class="hoopo-expl" style="color:#3d6048;">Pas une excuse à l'autre. Une reconnaissance intérieure que quelque chose a créé de la douleur, en toi, en l'autre, dans la relation. C'est une ouverture, pas une capitulation.</div>
+      </div>
+
+      <div class="hoopo-phrase" id="h1" onclick="toggleHoopo(1)" style="background:rgba(80,160,120,0.08);border-color:rgba(80,160,120,0.3);">
+        <div class="hoopo-num" style="color:#60b090;">Phrase 2</div>
+        <div class="hoopo-texte">"Pardonne-moi."</div>
+        <div class="hoopo-expl" style="color:#3d6048;">Une demande intérieure, pas nécessairement adressée à l'autre personne, mais à quelque chose de plus grand en toi. Demander à être libérée du poids de la rancœur, de la blessure, de ce qui t'enchaîne encore à cette douleur.</div>
+      </div>
+
+      <div class="hoopo-phrase" id="h2" onclick="toggleHoopo(2)" style="background:rgba(160,128,200,0.08);border-color:rgba(160,128,200,0.3);">
+        <div class="hoopo-num" style="color:#a080c8;">Phrase 3</div>
+        <div class="hoopo-texte">"Je t'aime."</div>
+        <div class="hoopo-expl" style="color:#4d3068;">Pas nécessairement de l'amour romantique ni de l'affection. Une reconnaissance de l'humanité partagée, que cette personne, comme toi, a souffert, a eu peur, a agi depuis ses blessures. C'est la phrase la plus difficile, et la plus libératrice.</div>
+      </div>
+
+      <div class="hoopo-phrase" id="h3" onclick="toggleHoopo(3)" style="background:rgba(200,168,112,0.08);border-color:rgba(200,168,112,0.3);">
+        <div class="hoopo-num" style="color:#c8a870;">Phrase 4</div>
+        <div class="hoopo-texte">"Merci."</div>
+        <div class="hoopo-expl" style="color:#5d4018;">Gratitude pour la leçon, pour ce que cette expérience t'a appris sur toi-même, pour le fait de pouvoir traverser ça et continuer. Pas de la gratitude pour la douleur elle-même, pour ce qu'elle a rendu possible.</div>
+      </div>
+    </div>
+
+    <div class="hl">
+      <strong>Comment pratiquer :</strong> Ferme les yeux. Pense à une personne ou une situation à laquelle tu veux pardonner. Répète les 4 phrases lentement, intérieurement ou à voix basse. Pas besoin de ressentir quelque chose immédiatement : la pratique agit progressivement, comme une graine qu'on plante.
+    </div>
+
+    <div class="hl violet">
+      <strong>Important :</strong> Ho'oponopono ne dit pas que ce que l'autre a fait était acceptable. Il dit que tu mérites d'être libre du poids de cette blessure. Ces deux choses peuvent coexister.
+    </div>
+
+    <button class="btn" onclick="showPhase('pratique-autre')">Pratique guidée, pardon vers l'autre 🕊️</button>
+  </div>
+</div>
+
+<!-- PRATIQUE VERS L'AUTRE -->
+<div class="phase" id="phase-pratique-autre">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🕊️</span>
+    <h2>Pratique guidée, pardonner à quelqu'un</h2>
+    <p style="text-align:center;margin-bottom:8px;">Cette pratique ne demande pas de contact avec l'autre personne. Elle se fait entièrement en toi, pour toi.</p>
+    <p class="small" style="text-align:center;margin-bottom:6px;"><strong>Note :</strong> si la blessure est très profonde ou récente, cette pratique peut être intense. Tu peux faire une pause à tout moment. Le pardon ne se force pas, il se cultive.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Prends 10 minutes. Installe-toi confortablement.</p>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 1</div>
+      <div class="etape-titre">Choisis la personne ou la situation</div>
+      <div class="etape-desc">Pas forcément la plus grande blessure, commence par quelque chose de gérable. Une tension, une déception, un ressentiment qui occupe encore de la place en toi. Tu n'as pas à pardonner quelque chose d'énorme aujourd'hui.</div>
+      <div class="etape-duree">1 minute</div>
+    </div>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 2</div>
+      <div class="etape-titre">Reconnais la douleur, sans la minimiser</div>
+      <div class="etape-desc">Avant de pardonner, nomme ce qui t'a été fait. "Cette personne m'a blessée en..." Dis-le clairement, intérieurement. Le pardon ne commence pas par nier la blessure, il commence par la regarder en face.</div>
+      <div class="etape-duree">2 minutes</div>
+    </div>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 3</div>
+      <div class="etape-titre">Vois l'humanité de l'autre</div>
+      <div class="etape-desc">Cette personne a agi depuis ses propres blessures, ses propres peurs, ses propres limites. Ça ne justifie pas ce qu'elle a fait. Ça l'explique humainement. Essaie de voir, même brièvement, la personne blessée derrière l'acte blessant.</div>
+      <div class="etape-duree">2 minutes</div>
+    </div>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 4</div>
+      <div class="etape-titre">Les 4 phrases Ho'oponopono</div>
+      <div class="etape-desc">En pensant à cette personne, répète lentement et intérieurement :<br><br><em>"Je suis désolée. Pardonne-moi. Je t'aime. Merci."</em><br><br>Répète 3 à 5 fois. Laisse chaque phrase résonner. Ne force rien, observe juste ce qui se passe dans ton corps.</div>
+      <div class="etape-duree">3 minutes</div>
+    </div>
+
+    <div class="pratique-etape">
+      <div class="etape-num">Étape 5</div>
+      <div class="etape-titre">Observe et note</div>
+      <div class="etape-desc">Qu'est-ce qui s'est passé dans ton corps ? Un relâchement ? Une résistance ? Des larmes ? Une légèreté légère ? Il n'y a pas de bonne réponse. Note simplement ce qui était là.</div>
+      <div class="etape-duree">2 minutes</div>
+    </div>
+
+    <textarea id="pratique-autre-note" rows="3" placeholder="Pendant cette pratique j'ai ressenti... / Ce qui était difficile c'est... / Ce qui s'est légèrement déposé c'est..."></textarea>
+    <button class="btn" onclick="showPhase('pardon-soi')" style="margin-top:12px;">Le pardon de soi →</button>
+  </div>
+</div>
+
+<!-- PARDON DE SOI -->
+<div class="phase" id="phase-pardon-soi">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🪞</span>
+    <h2>Le pardon de soi, souvent le plus difficile</h2>
+    <p style="text-align:center;margin-bottom:8px;">On peut parfois pardonner à quelqu'un d'autre bien avant de se pardonner à soi-même. La culpabilité, la honte, les regrets, ils peuvent peser des années.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Réponds à ces questions avec la même douceur que tu aurais pour quelqu'un que tu aimes.</p>
+
+    <div class="hl violet" style="margin-bottom:20px;">
+      <strong>Pourquoi c'est si difficile :</strong><br><br>
+      Se pardonner demande d'accepter qu'on a eu tort, sans pour autant se condamner. C'est une voie étroite entre la minimisation ("c'était pas grave") et la flagellation ("je suis terrible"). La vraie compassion envers soi dit : "J'ai fait quelque chose que je regrette. J'ai fait de mon mieux avec ce que j'étais à ce moment-là. Je mérite de continuer à avancer."
+    </div>
+
+    <div class="pardon-soi-item">
+      <div class="pardon-soi-cat">Ce que je me reproche</div>
+      <div class="pardon-soi-q">Y a-t-il quelque chose que tu te reproches encore : une erreur, un choix, une façon d'avoir traité quelqu'un ou toi-même ?</div>
+      <textarea class="pardon-soi-input" id="ps1" placeholder="Ce que je me reproche encore c'est..."></textarea>
+    </div>
+
+    <div class="pardon-soi-item">
+      <div class="pardon-soi-cat">Le contexte</div>
+      <div class="pardon-soi-q">Qu'est-ce que tu traversais à ce moment-là ? Avec quelles ressources, quelles informations, quelles blessures ?</div>
+      <textarea class="pardon-soi-input" id="ps2" placeholder="À ce moment-là j'étais... / Je n'avais pas encore..."></textarea>
+    </div>
+
+    <div class="pardon-soi-item">
+      <div class="pardon-soi-cat">La lettre de soi à soi</div>
+      <div class="pardon-soi-q">Qu'est-ce que tu dirais à une amie proche qui se reprochait la même chose, avec la même sévérité que toi envers toi-même ?</div>
+      <textarea class="pardon-soi-input" id="ps3" placeholder="Si c'était mon amie, je lui dirais..."></textarea>
+    </div>
+
+    <div class="pardon-soi-item">
+      <div class="pardon-soi-cat">Ho'oponopono envers soi</div>
+      <div class="pardon-soi-q">Répète ces 4 phrases en te pensant à toi-même, à la version de toi qui a fait cette erreur :</div>
+      <div style="background:linear-gradient(135deg,#eaf5f0,#f5f0fa);border-radius:12px;padding:16px;margin-top:8px;text-align:center;">
+        <div style="font-size:18px;color:#1d3028;line-height:2.2;">"Je suis désolée."<br>"Pardonne-moi."<br>"Je t'aime."<br>"Merci."</div>
+      </div>
+      <textarea class="pardon-soi-input" id="ps4" placeholder="Ce que j'ai ressenti en me disant ces phrases à moi-même..." style="margin-top:10px;"></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('gateau')">Le gâteau de responsabilité 🎂</button>
+  </div>
+</div>
+
+<!-- GÂTEAU DE RESPONSABILITÉ -->
+<div class="phase" id="phase-gateau">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🎂</span>
+    <h2>Le gâteau de responsabilité</h2>
+    <p>Quand on se sent coupable d'une situation, on a souvent tendance à s'attribuer 100% de la responsabilité. Cet outil permet de distribuer la responsabilité de façon plus réaliste, avant de se pardonner.</p>
+    <p>Parce que se pardonner quelque chose dont on n'est pas entièrement responsable, c'est d'abord reconnaître que d'autres facteurs ont joué un rôle.</p>
+
+    <div class="hl" style="margin-bottom:14px;">
+      <strong>Comment ça marche :</strong><br><br>
+      Tu penses à une situation qui génère de la culpabilité. Tu listes toutes les personnes, les circonstances, les facteurs qui ont contribué à cette situation, et tu leur attribues un pourcentage de responsabilité réaliste. Le total doit faire 100%.<br><br>
+      Et seulement une fois que tu as listé TOUT LE RESTE : ta part à toi arrive en dernier. Souvent, elle est bien plus petite que les 100% que tu te donnais.
+    </div>
+
+    <div class="hl or" style="margin-bottom:16px;">
+      <strong>🎂 Un exemple concret pour t'aider :</strong><br><br>
+      <em>La situation :</em> "J'ai explosé sur mes enfants dimanche soir, j'ai crié très fort et ma fille a pleuré."<br><br>
+      <em>Ma pensée automatique :</em> "Je suis une mauvaise mère. C'est entièrement ma faute, 100%."<br><br>
+      <em>Les facteurs qui ont aussi contribué :</em><br>
+      · Une semaine de travail épuisante, sans une seule pause, 25%<br>
+      · Mon partenaire absent tout le week-end, j'ai tout géré seule, 20%<br>
+      · Les enfants malades et irritables depuis trois jours, 15%<br>
+      · Une nuit presque blanche la veille, 15%<br><br>
+      <em>Ma part réelle, en dernier :</em> "Environ 25%. J'aurais pu demander de l'aide plus tôt, ou m'accorder une pause avant d'arriver au point de rupture."<br><br>
+      <em>Ma pensée réajustée :</em> "J'ai ma part, environ 25%, et je peux agir dessus. Mais je ne suis pas une mauvaise mère : j'étais une mère à bout, dans une semaine impossible. La prochaine fois, je demande du renfort avant d'exploser."
+    </div>
+
+    <div style="background:linear-gradient(135deg,#eaf5f0,#f5f0fa);border-radius:16px;padding:20px;border:1px solid rgba(80,160,120,0.2);margin-bottom:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#60b090;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;">🎂 Ma situation</div>
+
+      <div style="margin-bottom:12px;">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#60b090;margin-bottom:6px;">La situation qui génère de la culpabilité</div>
+        <textarea id="g-situation" rows="2" style="width:100%;border:2px solid rgba(80,160,120,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="La situation c'est..."></textarea>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#60b090;margin-bottom:6px;">Ma pensée automatique</div>
+        <textarea id="g-pensee" rows="2" style="width:100%;border:2px solid rgba(80,160,120,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="Je me dis que c'est entièrement ma faute parce que..."></textarea>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#60b090;margin-bottom:6px;">Les personnes, facteurs et circonstances qui ont aussi contribué, avec leur % de responsabilité</div>
+        <div id="gateau-items"></div>
+        <button onclick="addGateauItem()" style="border:1px dashed rgba(80,160,120,0.4);background:transparent;border-radius:10px;padding:8px 14px;font-family:'Jost',sans-serif;font-size:13px;color:#60b090;cursor:pointer;margin-top:6px;">+ Ajouter un facteur</button>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#60b090;margin-bottom:6px;">Ma part réelle de responsabilité, en dernier</div>
+        <textarea id="g-mapart" rows="2" style="width:100%;border:2px solid rgba(80,160,120,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="Ma part à moi c'est... %  : ce que j'aurais pu faire différemment c'est..."></textarea>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <div style="font-family:'Jost',sans-serif;font-size:12px;color:#60b090;margin-bottom:6px;">Pensée réajustée</div>
+        <textarea id="g-reajustee" rows="2" style="width:100%;border:2px solid rgba(80,160,120,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="En réalité, ma responsabilité est de... %  : ce que je me dis maintenant c'est..."></textarea>
+      </div>
+    </div>
+
+    <button class="btn" onclick="showPhase('ecriture')">Écriture finale ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/3</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Le pardon</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌿</span>
+    <h2>Le pardon est un chemin, pas un événement</h2>
+    <p>On ne pardonne pas en une fois. On commence à pardonner, et on recommence, chaque fois que la blessure remonte. C'est une pratique, pas une destination.</p>
+    <div style="background:linear-gradient(135deg,#eaf5f0,#f0f5ff);border-radius:16px;padding:20px;border:1px solid rgba(80,160,120,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#60b090;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🕊️ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À pratiquer :</strong> Quand un ressentiment remonte, même ancien, répète les 4 phrases Ho'oponopono. Pas pour effacer. Pour te libérer un peu plus à chaque fois.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#507060;"><strong style="color:#1d3028;">Demain, Jour 24 :</strong> l'estime de soi</p>
+    <p class="hint" style="margin-top:6px;">7 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🔍",titre:"Ce qu'est vraiment le pardon, et ce qu'il n'est pas",source:"Dr Fred Luskin, Forgive for Good / Dr Robert Enright, Forgiveness is a Choice",contenu:[
+    {type:"texte",texte:"Le pardon est l'un des concepts les plus mal compris. On pense qu'il signifie oublier, excuser, accepter que ce qui s'est passé était acceptable, ou se réconcilier avec la personne. Rien de tout cela n'est vrai."},
+    {type:"hl",texte:"❌ Ce que le pardon n'est PAS :<br>· Oublier ce qui s'est passé<br>· Excuser ou minimiser la blessure<br>· Dire que c'était acceptable<br>· Se réconcilier avec la personne<br>· Être d'accord avec ce qu'elle a fait<br>· Lui donner une seconde chance"},
+    {type:"hl",texte:"✅ Ce que le pardon EST :<br>· Choisir de ne plus porter le poids de la rancœur<br>· Se délester de la prison émotionnelle que crée la blessure non pardonnée<br>· Reconnaître que l'autre a agi depuis ses propres blessures<br>· Reprendre le pouvoir sur sa propre vie intérieure<br>· Un acte qu'on fait pour soi, pas pour l'autre",classe:"vert"},
+    {type:"texte",texte:"Nelson Mandela disait : \"Le ressentiment, c'est comme boire du poison en espérant que l'autre en mourra.\" Le pardon libère celui qui pardonne, indépendamment de ce que fait, dit ou ressent la personne à qui on pardonne."},
+    {type:"stat",texte:"Pratiquer le pardon apaise vraiment, moins d'anxiété, moins de tristesse de fond, moins de tensions physiques liées au stress. Et davantage de satisfaction de vie et d'estime de soi",source:"Dr Fred Luskin, Stanford University"},
+  ]},
+  {emoji:"💔",titre:"Le pardon comme acte de libération · pour soi",source:"Dr Luskin / Dr Thich Nhat Hanh / Philosophie bouddhiste",contenu:[
+    {type:"texte",texte:"Tant qu'on ne pardonne pas, on reste lié à la personne qui nous a blessée, et à la douleur qu'elle a causée. On lui donne, sans le vouloir, un pouvoir continu sur notre humeur, nos pensées, notre capacité à avancer."},
+    {type:"hl",texte:"🔗 L'image du lien : pense à la rancœur comme à une corde attachée entre toi et la personne qui t'a blessée. Chaque fois que tu repenses à la blessure avec colère ou douleur, tu tires sur cette corde, et tu te retrouves de nouveau liée à elle. Le pardon coupe la corde. Pas pour elle, pour toi."},
+    {type:"texte",texte:"Pardonner ne signifie pas que la relation doit continuer. On peut pardonner quelqu'un et choisir de ne plus jamais le voir. On peut pardonner une personne décédée. On peut pardonner quelqu'un qui ne s'est jamais excusé. Le pardon est entièrement intérieur."},
+    {type:"hl",texte:"💡 Thich Nhat Hanh, moine bouddhiste : \"La compréhension est l'autre nom de l'amour.\" Comprendre pourquoi quelqu'un a agi comme il l'a fait, pas excuser, mais comprendre, est souvent le chemin vers le pardon.",classe:"or"},
+    {type:"stat",texte:"Le ressentiment entretenu use le corps : la tension, l'immunité, le sommeil. Le pardon, lui, allège tout ça. Ce n'est pas de la poésie, c'est de la physiologie",source:"Recherche en psychologie de la santé"},
+  ]},
+  {emoji:"🪞",titre:"Le pardon de soi, la compassion envers sa propre histoire",source:"Dr Kristin Neff, Self-Compassion / Dr Brené Brown",contenu:[
+    {type:"texte",texte:"Le pardon envers soi est souvent le plus difficile, et le plus nécessaire. On peut pardonner à d'autres bien avant de se pardonner à soi-même pour ses erreurs, ses choix, ses moments de faiblesse."},
+    {type:"hl",texte:"⚠️ L'auto-punition chronique, se reprocher indéfiniment une erreur passée, n'est pas de la responsabilité. C'est de la torture. Et contrairement à ce qu'on croit, elle n'empêche pas de refaire les mêmes erreurs, elle épuise simplement les ressources nécessaires pour changer.",classe:"rouge"},
+    {type:"texte",texte:"Le Dr Kristin Neff propose une question simple : \"Si une amie chère me racontait exactement ce que je me reproche à moi-même, que lui dirais-je ?\" La réponse révèle presque toujours un double standard : on offre aux autres une compassion qu'on refuse à soi-même."},
+    {type:"hl",texte:"🌸 Se pardonner ne signifie pas minimiser ce qu'on a fait. Ça signifie reconnaître qu'on a agi depuis ce qu'on était à ce moment-là, avec les ressources, les informations et les blessures qu'on avait alors. Et que cette version de soi mérite autant de compassion que n'importe qui d'autre.",classe:"vert"},
+  ]},
+];
+
+const ecritureQs=[
+  {q:"Y a-t-il quelqu'un à qui tu n'as pas encore pardonné, et qu'est-ce que ce non-pardon te coûte ?",sous:"Pas une obligation de pardonner maintenant, juste nommer ce que la rancœur occupe en toi.",placeholder:"La personne à qui je n'ai pas pardonné c'est... / Ce que ça me coûte c'est..."},
+  {q:"Qu'est-ce que tu as appris sur toi-même à travers cette blessure ?",sous:"Toute blessure profonde contient une information sur ce qui compte vraiment pour toi.",placeholder:"Cette blessure m'a appris que..."},
+  {q:"Qu'est-ce que tu te permets de te pardonner à toi-même aujourd'hui ?",sous:"Même une toute petite chose. Même quelque chose d'ancien.",placeholder:"Je me pardonne de..."},
+];
+
+let theorieIdx=0, eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='ecriture') renderE();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🔍',t:'Ce qu\'est le pardon, et ce qu\'il n\'est pas'},{e:'🔗',t:'Le pardon comme libération, pour soi'},{e:'🪞',t:'Le pardon de soi, la compassion envers sa propre histoire'},{e:'🌺',t:'Ho\'oponopono, la pratique hawaïenne'},{e:'🕊️',t:'Pratique guidée, pardonner à quelqu\'un'},{e:'🪞',t:'Le pardon de soi, pratique'},{e:'✍️',t:'Écriture guidée'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#3d6050;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Ho\'oponopono 🌺':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('hooponopono');
+}
+
+function toggleHoopo(i){
+  document.querySelectorAll('.hoopo-phrase').forEach((el,idx)=>{
+    if(idx===i) el.classList.toggle('active');
+    else el.classList.remove('active');
+  });
+}
+
+let gateauCount=0;
+function addGateauItem(){
+  gateauCount++;
+  const el=document.getElementById('gateau-items');
+  const div=document.createElement('div');
+  div.style.cssText='display:flex;gap:8px;align-items:center;margin-bottom:6px;';
+  div.className='gateau-item-row';
+  div.innerHTML=`
+    <input class="gi-facteur" style="flex:1;border:1px solid rgba(80,160,120,0.25);border-radius:8px;padding:8px 10px;font-family:'Lora',serif;font-size:14px;font-weight:500;outline:none;" placeholder="Facteur / personne...">
+    <input class="gi-pct" type="number" min="0" max="100" style="width:65px;border:1px solid rgba(80,160,120,0.25);border-radius:8px;padding:8px;font-size:14px;text-align:center;outline:none;" placeholder="%">`;
+  el.appendChild(div);
+}
+// Ajouter 3 lignes par défaut
+addGateauItem();addGateauItem();addGateauItem();
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 23 🕊️';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const pNote=document.getElementById('pratique-autre-note').value.trim();
+  if(pNote) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Pratique Ho'oponopono : ce que j'ai ressenti</div><div class="recap-r">"${pNote}"</div></div>`;
+
+  const psLabels=["Ce que je me reproche","Le contexte dans lequel j'étais","Ce que je dirais à une amie","Ho'oponopono envers moi : ce que j'ai ressenti"];
+  const psVals=[1,2,3,4].map(n=>document.getElementById('ps'+n)?.value.trim());
+  if(psVals.some(v=>v)){
+    let ph='';
+    psVals.forEach((v,i)=>{ if(v) ph+=`<strong style="color:#60b090;">${psLabels[i]}</strong><br>"${v}"<br><br>`; });
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon pardon de soi</div><div class="recap-r" style="font-style:normal;font-size:15px;">${ph}</div></div>`;
+  }
+
+  const gSit=document.getElementById('g-situation').value.trim();
+  const gPen=document.getElementById('g-pensee').value.trim();
+  const gPart=document.getElementById('g-mapart').value.trim();
+  const gRea=document.getElementById('g-reajustee').value.trim();
+  const facteurs=[];
+  document.querySelectorAll('.gateau-item-row').forEach(row=>{
+    const f=row.querySelector('.gi-facteur')?.value.trim();
+    const pct=row.querySelector('.gi-pct')?.value.trim();
+    if(f) facteurs.push(f+(pct?', '+pct+'%':''));
+  });
+  if(gSit||gPen||gPart||gRea||facteurs.length){
+    let gh='';
+    if(gSit) gh+=`<strong style="color:#60b090;">La situation</strong><br>${gSit}<br><br>`;
+    if(gPen) gh+=`<strong style="color:#60b090;">Ma pensée automatique</strong><br>${gPen}<br><br>`;
+    if(facteurs.length) gh+=`<strong style="color:#60b090;">Les facteurs qui ont contribué</strong><br>${facteurs.join('<br>')}<br><br>`;
+    if(gPart) gh+=`<strong style="color:#60b090;">Ma part réelle</strong><br>${gPart}<br><br>`;
+    if(gRea) gh+=`<strong style="color:#60b090;">Ma pensée réajustée</strong><br>${gRea}<br><br>`;
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon gâteau de responsabilité 🎂</div><div class="recap-r" style="font-style:normal;font-size:15px;">${gh}</div></div>`;
+  }
+
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 23 · Le pardon</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour23-pardon-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

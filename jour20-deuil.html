@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 20 · Le deuil et les transitions · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f5f0f8 0%,#f0f4f8 45%,#f8f5f0 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#9090a8;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#2d3040;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#9090c0,#b0a0c8);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(100,100,160,0.1);border:1px solid rgba(140,140,200,0.15);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#7080a8;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#2d3040;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#2d3040;margin-bottom:14px;line-height:1.4}
+  p{color:#485060;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#687080}
+  .btn{background:linear-gradient(135deg,#9090c0,#b0a0c8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(120,120,180,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(140,140,200,0.25);color:#a0a0c0;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#a0a8c0;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#8090b0;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(140,140,200,0.18);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#9090c0,#b0a0c8);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#f0f0fa,#f5f0f8);border-radius:14px;padding:14px 18px;border-left:3px solid #9090c0;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.rose{border-left-color:#c090b0;background:linear-gradient(135deg,#f8f0f5,#fdf0f8)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(140,140,200,0.1)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#9090c0,#b0a0c8);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#9090b0;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(140,140,200,0.12);font-size:11px;color:#9090b0;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(140,140,200,0.05);border:1px solid rgba(140,140,200,0.13);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#607090;font-family:'Jost',sans-serif}
+
+  /* Phases Kübler-Ross */
+  .kubler-phase{border-radius:16px;padding:16px 18px;margin-bottom:10px;border:2px solid;display:flex;gap:14px;align-items:flex-start}
+  .kubler-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:13px;font-weight:700;color:white;flex-shrink:0}
+  .kubler-nom{font-size:15px;font-weight:600;margin-bottom:4px}
+  .kubler-desc{font-size:13px;line-height:1.65;color:#404060;font-style:normal}
+
+  /* Transitions féminines */
+  .transition-btn{border-radius:16px;padding:16px 18px;width:100%;cursor:pointer;font-family:'Lora',serif;text-align:left;margin-bottom:10px;border:2px solid rgba(140,140,200,0.25);background:rgba(140,140,200,0.04);transition:all 0.2s;display:flex;gap:14px;align-items:flex-start}
+  .transition-btn:hover{transform:translateX(3px);border-color:rgba(140,140,200,0.4)}
+  .transition-btn.open{border-color:#9090c0;background:linear-gradient(135deg,#f0f0fa,#f5f0f8)}
+  .transition-pastille{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;border:2px solid rgba(140,140,200,0.2)}
+  .transition-titre{font-size:16px;font-weight:700;color:#2d3040;margin-bottom:5px;font-style:normal}
+  .transition-sous{font-size:14px;color:#404060;font-style:normal;line-height:1.5;font-weight:400}
+  .transition-detail{font-size:17px;color:#253050;line-height:1.75;margin-top:12px;padding-top:12px;border-top:2px solid rgba(140,140,200,0.2);display:none;font-style:normal;font-weight:400}
+  .transition-btn.open .transition-detail{display:block}
+
+  /* Lettre */
+  .lettre-zone{background:linear-gradient(135deg,#f5f5ff,#f8f5ff);border-radius:16px;padding:20px;border:1px solid rgba(140,140,200,0.2);font-family:'Lora',serif}
+  .lettre-debut{font-size:17px;color:#303050;margin-bottom:12px;line-height:1.6}
+  .lettre-textarea{width:100%;border:none;background:transparent;font-size:15px;font-family:'Lora',serif;color:#2d3040;line-height:1.85;outline:none;resize:vertical;min-height:160px;font-style:italic}
+  .lettre-fin{font-size:17px;color:#303050;margin-top:12px}
+
+  textarea{width:100%;border:2px solid rgba(140,140,200,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#2d3040;line-height:1.7;outline:none;resize:vertical;background:#f5f5ff}
+  textarea:focus{border-color:#9090c0}
+  .e-q{font-size:17px;color:#2d3040;line-height:1.65;text-align:center;margin-bottom:6px}
+  .e-sous{font-size:13px;color:#8090b0;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#f0f0fa,#f5f0f8);border-radius:14px;padding:14px 18px;border:1px solid rgba(140,140,200,0.15);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#9090b0;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#f0f0fa,#f5f0f8);border-radius:20px;padding:22px;border:1px solid rgba(140,140,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🍂</span>
+    <div class="label">Jour 20 · Le deuil et les transitions</div>
+    <h2>Toute perte mérite d'être pleurée, même celles qu'on ne nomme jamais</h2>
+    <p>Le deuil n'appartient pas qu'à la mort. Chaque fois que tu perds quelque chose, une relation, une version de toi, un rêve, une vie que tu imaginais, quelque chose en toi doit faire son deuil. Et quand on ne le reconnaît pas, ça laisse des traces profondes.</p>
+    <p class="small" style="margin-bottom:20px;">Aujourd'hui on ouvre grand la notion de deuil, et on lui donne enfin la place qu'il mérite.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🍂</button>
+    <p class="hint">Théorie · Phases · Transitions féminines · Deuil de soi · Lettre · Écriture · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- PHASES KÜBLER-ROSS -->
+<div class="phase" id="phase-kubler">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌊</span>
+    <h2>Les 5 phases du deuil, et pourquoi ce n'est pas une ligne droite</h2>
+    <p style="text-align:center;margin-bottom:8px;">Elisabeth Kübler-Ross a décrit 5 phases du deuil, souvent présentées comme des étapes à traverser dans l'ordre. La réalité est bien différente.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">On peut traverser plusieurs phases en une journée, revenir en arrière, rester bloquée dans l'une d'elles pendant des années. Le deuil n'est pas linéaire, c'est une spirale.</p>
+    <div id="kubler-container"></div>
+    <div class="hl" style="margin-top:8px;">
+      <strong>Ce que Kübler-Ross disait elle-même :</strong> ces phases ne sont pas des cases à cocher. Elles sont des paysages émotionnels qui peuvent se superposer, se répéter, être vécus dans n'importe quel ordre. L'objectif n'est pas de "finir" le deuil, c'est de l'intégrer.
+    </div>
+    <div class="hl vert" style="margin-top:8px;">
+      <strong>Le deuil compliqué, quand consulter :</strong> Si une perte perturbe profondément le fonctionnement quotidien depuis plus de 6 mois, sommeil, travail, relations, santé, une aide thérapeutique est recommandée. Le deuil compliqué est une condition médicale reconnue, pas une faiblesse.
+    </div>
+    <button class="btn" onclick="showPhase('transitions')">Les transitions de vie féminines →</button>
+  </div>
+</div>
+
+<!-- TRANSITIONS FÉMININES -->
+<div class="phase" id="phase-transitions">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🦋</span>
+    <h2>Les grandes transitions de vie féminine</h2>
+    <p style="text-align:center;margin-bottom:8px;">Chaque grande transition contient un deuil, même quand la transition est choisie et désirée. On ne parle pas assez de la perte qui accompagne même les bonnes choses.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Clique sur les transitions qui te touchent pour en savoir plus.</p>
+    <div id="transitions-container"></div>
+    <button class="btn" onclick="showPhase('deuil-soi')">Le deuil de soi →</button>
+  </div>
+</div>
+
+<!-- DEUIL DE SOI -->
+<div class="phase" id="phase-deuil-soi">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🪞</span>
+    <h2>Le deuil de soi, qui j'étais avant</h2>
+    <p style="text-align:center;margin-bottom:20px;">C'est peut-être le deuil le plus difficile à nommer, et le plus courant. La perte d'une version de soi-même qu'on ne retrouvera jamais exactement.</p>
+
+    <div class="hl" style="margin-bottom:12px;">
+      <strong>Ce que c'est :</strong><br><br>
+      La femme que tu étais avant d'avoir des enfants. La version de toi d'avant le burn-out. La personne que tu imaginais être à cet âge. Le rêve de qui tu aurais pu devenir si les choses avaient été différentes.<br><br>
+      Ce n'est pas de la nostalgie, c'est un deuil réel. Et comme tout deuil, il demande à être reconnu pour pouvoir être intégré.
+    </div>
+
+    <div class="hl rose" style="margin-bottom:12px;">
+      <strong>Le deuil maternel, souvent tabou :</strong><br><br>
+      Devenir mère est une transition qui implique de faire le deuil de sa vie d'avant : sa liberté, son temps, son corps, certains rêves, certaines versions de sa relation de couple. Ce deuil est réel et légitime, même quand on aime son enfant profondément. Les deux coexistent. Ne pas en parler n'empêche pas de le vivre, ça l'isole.
+    </div>
+
+    <div class="hl or" style="margin-bottom:12px;">
+      <strong>La transformation, pas la perte :</strong><br><br>
+      Le psychologue Kenneth Gergen propose une lecture différente des transitions : ce qu'on appelle "perte" est aussi souvent une transformation. Ce qu'on était n'a pas disparu, c'est devenu quelque chose d'autre. La femme d'avant est dans celle d'aujourd'hui, même si elle n'est plus visible de la même façon.
+    </div>
+
+    <div class="hl vert">
+      <strong>Ce que le deuil de soi permet :</strong><br><br>
+      Quand on reconnaît et pleure la version de soi qu'on a perdue, on libère de l'énergie. L'énergie qui était mobilisée à résister au changement, à s'accrocher à ce qui n'est plus, à comparer ce qui est à ce qui était. Cette énergie peut alors se mettre au service de qui on est en train de devenir.
+    </div>
+
+    <button class="btn" onclick="showPhase('lettre')">Écrire une lettre ✉️</button>
+  </div>
+</div>
+
+<!-- LETTRE -->
+<div class="phase" id="phase-lettre">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">✉️</span>
+    <h2>Une lettre à ce que tu as perdu</h2>
+    <p style="text-align:center;margin-bottom:8px;">Choisis ce à quoi tu veux écrire : une relation, une version de toi, un rêve, une vie imaginée, une personne. Pas d'obligation de tout résoudre. Juste dire ce qui est là.</p>
+
+    <div style="margin-bottom:14px;">
+      <input type="text" id="destinataire" placeholder="J'écris à : ma liberté d'avant / la femme que j'imaginais être / ma relation avec..." style="width:100%;border:2px solid rgba(140,140,200,0.25);border-radius:12px;padding:12px 16px;font-size:15px;font-family:'Lora',serif;color:#2d3040;outline:none;background:white;margin-bottom:4px;">
+      <div style="font-size:12px;color:#9090b0;font-family:'Jost',sans-serif;padding-left:4px;">Indique à qui ou à quoi tu écris</div>
+    </div>
+
+    <div class="lettre-zone">
+      <div class="lettre-debut" id="lettre-debut">Chère...</div>
+      <textarea class="lettre-textarea" id="lettre-corps" placeholder="Ce que je n'ai jamais eu la chance de te dire...&#10;Ce que tu m'as appris...&#10;Ce qui me manque de toi...&#10;Ce que je dois maintenant lâcher...&#10;Ce que je garde de toi en moi..." oninput="updateLettre()"></textarea>
+      <div class="lettre-fin">Avec tout ce que j'ai été,<br><em>Moi.</em></div>
+    </div>
+
+    <button class="btn" onclick="showPhase('ecriture')" style="margin-top:16px;">Passer à la réflexion ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Réflexion · 1/3</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Mes pertes et mes transitions</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌱</span>
+    <h2>Le deuil n'est pas la fin, c'est le sol de ce qui vient</h2>
+    <p>Pleurer ce qu'on a perdu n'empêche pas d'avancer. C'est souvent la condition pour avancer vraiment, avec ce qu'on a été, intégré, digéré, transformé en ressource plutôt qu'en poids.</p>
+    <div style="background:linear-gradient(135deg,#f0f0fa,#f5f0f8);border-radius:16px;padding:20px;border:1px solid rgba(140,140,200,0.15);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#7080a8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🍂 Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À retenir :</strong> Toute perte non pleurée reste dans le corps, sous forme de tension, de dépression, de colère sourde, d'une tristesse qu'on n'arrive pas à nommer. Nommer ses pertes, même les plus anciennes, est un acte de libération.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#607090;"><strong style="color:#2d3040;">Demain, Jour 21 :</strong> bilan de la semaine 3</p>
+    <p class="hint" style="margin-top:6px;">10 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🌿",titre:"Toutes les pertes méritent d'être pleurées",source:"Dr David Kessler, Finding Meaning",contenu:[
+    {type:"texte",texte:"Chez nous, on associe presque toujours le deuil à la mort de quelqu'un. Pourtant, le deuil est notre réponse à toute forme de perte. Et beaucoup de souffrances qu'on n'arrive pas à nommer sont en réalité des deuils qu'on n'a jamais reconnus comme tels."},
+    {type:"hl",texte:"🌿 Un deuil peut être causé par : la fin d'une relation amoureuse, la perte d'un emploi ou d'une identité professionnelle, un diagnostic médical, une fausse couche ou une infertilité, le départ des enfants du foyer, une amitié qui s'est éteinte, un rêve abandonné, une vie qu'on imaginait avoir et qu'on n'aura pas, ou simplement le passage du temps."},
+    {type:"texte",texte:"Ces deuils-là sont bien réels. Ton corps les vit comme les autres : le stress monte, le sommeil se dérègle, quelque chose en toi continue de chercher ce qui est parti. Ne pas les appeler des deuils ne les fait pas disparaître. Ça les rend juste plus difficiles à traverser, parce que tu les vis sans les comprendre."},
+    {type:"stat",texte:"Le cerveau traite la douleur d'une rupture, d'un rejet ou d'une perte d'identité dans les mêmes zones que la douleur physique. Il ne fait pas la différence entre une \"vraie\" perte et une perte soi-disant \"moins grave\"",source:"Dr Naomi Eisenberger, UCLA"},
+    {type:"hl",texte:"💡 Mettre un mot dessus change déjà quelque chose. Dire \"je suis en deuil de cette relation\", ou \"je suis en deuil de la vie que j'imaginais\", ça permet à ton cerveau de commencer à traiter la perte autrement. Nommer, c'est déjà commencer à traverser.",classe:"vert"},
+  ]},
+  {emoji:"🔬",titre:"Ce qui se passe vraiment dans ton cerveau",source:"Dr Mary-Frances O'Connor, The Grieving Brain",contenu:[
+    {type:"texte",texte:"Le deuil n'est pas qu'une affaire d'émotions. C'est un vrai chantier dans ton cerveau. Il doit se réorganiser en entier pour intégrer l'absence de quelqu'un ou de quelque chose qui faisait partie de sa carte du monde."},
+    {type:"stat",texte:"Un cerveau en deuil continue de chercher activement ce qui est parti, même quand on sait très bien que c'est fini. C'est exactement pour ça qu'on \"oublie\" un instant, avant de se souvenir d'un coup, comme un choc",source:"Dr Mary-Frances O'Connor"},
+    {type:"hl",texte:"🧠 Ton cerveau doit refaire toute sa carte du monde, retirer ce qui est perdu de chacune de ses attentes futures. C'est long, ça avance en zigzag, et ça coûte énormément d'énergie. Alors si tu es épuisée en période de deuil : c'est normal, et c'est physiologique."},
+    {type:"texte",texte:"O'Connor décrit le deuil comme un apprentissage : ton cerveau apprend petit à petit à vivre dans un monde où ce qui est parti n'est plus là. Et comme tout apprentissage, ça prend du temps, ça se fait par tâtonnements, et surtout, ça ne suit aucun calendrier prévisible."},
+    {type:"hl",texte:"🌱 Et voilà ce qui me touche : notre cerveau a une capacité remarquable à intégrer les pertes. Un deuil traversé, pas évité, pas mis de côté, mène souvent à une forme de croissance. Pas malgré la perte. À travers elle.",classe:"vert"},
+  ]},
+  {emoji:"🌙",titre:"Le deuil non pleuré · ce qui reste dans le corps",source:"Dr Bessel van der Kolk / Dr Gabor Maté",contenu:[
+    {type:"texte",texte:"Quand un deuil n'a jamais été reconnu, nommé, ou qu'on n'a pas eu l'espace pour le traverser, il ne s'en va pas pour autant. Il se dépose quelque part dans le corps, sous des formes qu'on n'associe pas du tout au deuil."},
+    {type:"hl",texte:"⚠️ Le deuil non pleuré peut se manifester comme : une dépression sans cause apparente, une anxiété chronique, une colère sourde et inexpliquée, une fatigue persistante, des troubles du sommeil, une sensation de vide, un engourdissement émotionnel, ou une difficulté à ressentir de la joie.",classe:"rouge"},
+    {type:"texte",texte:"Gabor Maté explore ce lien entre les pertes non pleurées et ce qui se manifeste dans le corps : les douleurs qui s'installent, la fatigue qui ne passe pas. Ses travaux font débat dans le monde médical, mais son intuition parle à beaucoup de femmes : le corps finit souvent par dire ce que la tête refuse de formuler."},
+    {type:"hl",texte:"💡 Bessel van der Kolk : \"Le corps garde le score.\" Les pertes que nous n'avons pas pu pleurer laissent une trace dans le système nerveux : une hypervigilance, une tension chronique, une fermeture progressive à l'expérience. Le travail du deuil, c'est aussi un travail de libération du corps.",classe:"or"},
+    {type:"hl",texte:"🌸 Il n'est jamais trop tard pour pleurer une perte, même ancienne. Le deuil peut être fait des années après la perte. Il attend simplement qu'on lui fasse de la place.",classe:"vert"},
+  ]},
+];
+
+const kublerPhases=[
+  {num:"1",nom:"Le déni",couleur:"#9090c0",bg:"#f0f0fa",border:"rgba(144,144,192,0.3)",desc:"\"Ce n'est pas vraiment fini.\" \"Ça va s'arranger.\" Le déni est un mécanisme de protection : le cerveau se protège du choc en n'intégrant pas encore la perte. Ce n'est pas de la lâcheté. C'est de la survie."},
+  {num:"2",nom:"La colère",couleur:"#e8857a",bg:"#fde8e6",border:"rgba(232,133,122,0.3)",desc:"\"Pourquoi moi ?\" \"C'est injuste.\" La colère est une émotion active, elle mobilise l'énergie. Dans le deuil, elle peut être dirigée vers soi, vers l'autre, vers la situation, vers la vie. Elle est normale et nécessaire."},
+  {num:"3",nom:"Le marchandage",couleur:"#c8a870",bg:"#fdf8ee",border:"rgba(200,168,112,0.3)",desc:"\"Si seulement j'avais fait autrement...\" \"Et si...?\" Le cerveau cherche un moyen de défaire la perte, en imaginant ce qu'on aurait pu faire différemment. C'est une façon de reprendre le contrôle face à quelque chose qui nous échappe."},
+  {num:"4",nom:"La dépression",couleur:"#7080b0",bg:"#f0f0fa",border:"rgba(112,128,176,0.3)",desc:"\"À quoi ça sert ?\" La tristesse profonde, l'épuisement, le retrait. C'est la phase où la perte est vraiment intégrée, et où son poids est pleinement ressenti. C'est difficile, et c'est nécessaire. Ce n'est pas \"tomber\", c'est descendre pour remonter."},
+  {num:"5",nom:"L'acceptation",couleur:"#80c8a8",bg:"#eaf5f0",border:"rgba(128,200,168,0.3)",desc:"\"Ça a eu lieu. Et je continue.\" L'acceptation n'est pas l'oubli ni l'indifférence. C'est l'intégration : la perte fait maintenant partie de l'histoire de vie, sans plus dominer le quotidien. On peut penser à ce qu'on a perdu avec moins de douleur, et avancer."},
+];
+
+const transitions=[
+  {emoji:"👶",titre:"La maternité",sous:"Devenir mère, même par choix, contient un deuil",couleur:"#e8a0b4",bg:"#fdf0f5",detail:"La maternité est présentée comme un pur bonheur. Personne ne parle du deuil qui l'accompagne : la perte de sa liberté, de son corps, de son temps, de certains rêves, d'une version de sa relation de couple, parfois d'une partie de son identité professionnelle ou sociale.<br><br>Ce deuil est réel et légitime, même quand on aime son enfant avec une intensité qu'on n'avait jamais connue. Les deux coexistent. Ne pas en parler n'empêche pas de le vivre, ça l'isole."},
+  {emoji:"💔",titre:"La séparation ou le divorce",sous:"La fin d'un lien, et de la vie imaginée avec",couleur:"#e8857a",bg:"#fde8e6",detail:"Une séparation, c'est plusieurs deuils simultanés : la relation elle-même, la personne qu'on aimait, la vie commune, les projets partagés, l'identité de couple, parfois la vision qu'on avait de soi-même dans cette relation.<br><br>Même quand la séparation est la bonne décision, même quand on l'a choisie, le deuil est réel. Il ne s'agit pas de regretter. Il s'agit de pleurer ce qui a été."},
+  {emoji:"🌿",titre:"La périménopause et la ménopause",sous:"Le deuil du corps féminin fertile",couleur:"#a080c8",bg:"#f5f0fa",detail:"La ménopause implique un deuil rarement nommé : celui de la fertilité, d'une certaine jeunesse, d'une partie de l'identité féminine telle qu'elle a été construite culturellement. Ce deuil est réel, même chez les femmes qui ne souhaitaient pas d'enfants.<br><br>Il peut s'accompagner d'une redéfinition profonde de soi, qui peut être libératrice, une fois le deuil traversé."},
+  {emoji:"🏢",titre:"La transition professionnelle",sous:"Perte d'emploi, reconversion, retraite",couleur:"#6090c0",bg:"#eef4fb",detail:"Le travail est souvent une source centrale d'identité, \"je suis infirmière\", \"je suis enseignante\". Perdre un emploi, changer de voie, prendre sa retraite implique un deuil identitaire réel, souvent sous-estimé.<br><br>La question \"qui suis-je maintenant ?\" peut être déstabilisante, et c'est une question de deuil avant d'être une question de reconversion."},
+  {emoji:"👵",titre:"Le vieillissement de ses parents",sous:"Les rôles qui s'inversent, et ce qu'on perd",couleur:"#c8a870",bg:"#fdf8ee",detail:"Voir ses parents vieillir, perdre leur autonomie, changer, c'est un deuil anticipé. On perd progressivement ceux qu'ils étaient, la relation telle qu'elle existait, parfois l'enfant qu'on était encore un peu avec eux.<br><br>C'est aussi souvent une confrontation avec sa propre mortalité, et avec la responsabilité nouvelle qu'on prend."},
+  {emoji:"🌸",titre:"Le deuil d'un rêve ou d'une vie imaginée",sous:"Ce qu'on espérait et qui ne sera pas",couleur:"#c090b0",bg:"#f8f0f5",detail:"Parfois ce qu'on perd n'a jamais existé, c'est une vie imaginée, un rêve qu'on portait depuis longtemps. La famille qu'on n'a pas pu avoir. La carrière qu'on n'a pas poursuivie. La relation qu'on espérait.<br><br>Ces deuils sont difficiles à nommer parce qu'on n'a \"rien perdu\" concrètement. Mais la perte d'un possible est une vraie perte. Elle mérite d'être pleurée."},
+];
+
+const ecritureQs=[
+  {q:"Quelle perte dans ta vie n'a jamais vraiment été nommée ni pleurée ?",sous:"Pas nécessairement la plus grande, parfois les plus petites sont les plus enfouies.",placeholder:"La perte que je n'ai jamais vraiment pleurée c'est..."},
+  {q:"Qu'est-ce que cette perte t'a appris, sur toi, sur ce qui compte, sur qui tu es ?",sous:"Toute perte contient une information précieuse sur ce à quoi on tient.",placeholder:"Ce que cette perte m'a appris c'est..."},
+  {q:"Qui es-tu en train de devenir, dans cette transition ou après cette perte ?",sous:"Pas ce que tu veux devenir. Ce que tu sens qui est en train d'émerger.",placeholder:"En train de devenir quelqu'un qui..."},
+];
+
+let theorieIdx=0, eIdx=0, eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='kubler') renderKubler();
+  if(id==='transitions') renderTransitions();
+  if(id==='ecriture') renderE();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🌿',t:'Le deuil au sens large, toutes les pertes'},{e:'🔬',t:'La neurologie du deuil, ce qui se passe dans le cerveau'},{e:'🌙',t:'Le deuil non pleuré, ce qui reste dans le corps'},{e:'🌊',t:'Les 5 phases, et pourquoi ce n\'est pas linéaire'},{e:'🦋',t:'Les transitions de vie féminine'},{e:'🪞',t:'Le deuil de soi, qui j\'étais avant'},{e:'✉️',t:'Une lettre à ce que j\'ai perdu'},{e:'✍️',t:'Écriture guidée'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#485060;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'Les 5 phases 🌊':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('kubler');
+}
+
+function renderKubler(){
+  const el=document.getElementById('kubler-container');
+  el.innerHTML='';
+  kublerPhases.forEach(ph=>{
+    el.innerHTML+=`
+      <div class="kubler-phase" style="background:${ph.bg};border-color:${ph.border};">
+        <div class="kubler-num" style="background:${ph.couleur};">${ph.num}</div>
+        <div>
+          <div class="kubler-nom" style="color:${ph.couleur};">${ph.nom}</div>
+          <div class="kubler-desc">${ph.desc}</div>
+        </div>
+      </div>`;
+  });
+}
+
+function renderTransitions(){
+  const el=document.getElementById('transitions-container');
+  el.innerHTML='';
+  transitions.forEach((t,i)=>{
+    const btn=document.createElement('button');
+    btn.className='transition-btn';
+    btn.id='tr-'+i;
+    btn.innerHTML=`
+      <div class="transition-pastille" style="background:${t.bg};">${t.emoji}</div>
+      <div style="flex:1;">
+        <div class="transition-titre">${t.titre}</div>
+        <div class="transition-sous">${t.sous}</div>
+        <div class="transition-detail">${t.detail}</div>
+      </div>`;
+    btn.onclick=()=>{
+      btn.classList.toggle('open');
+    };
+    el.appendChild(btn);
+  });
+}
+
+function updateLettre(){
+  const dest=document.getElementById('destinataire').value.trim();
+  document.getElementById('lettre-debut').textContent=dest?`Chère ${dest},`:'Chère...';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const destInput=document.getElementById('destinataire');
+  if(destInput) destInput.addEventListener('input',updateLettre);
+});
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Réflexion · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 20 🍂';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  const dest=document.getElementById('destinataire').value.trim();
+  const debut=document.getElementById('lettre-debut')?.textContent.trim();
+  const lettre=document.getElementById('lettre-corps').value.trim();
+  if(lettre){
+    const texteComplet=(debut&&debut!=='Chère...'?debut+'<br><br>':'')+lettre.replace(/\n/g,'<br>');
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ma lettre${dest?' à '+dest:''}</div><div class="recap-r" style="font-style:normal;font-size:15px;">${texteComplet}</div></div>`;
+  }
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 20 · Le deuil et les transitions</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour20-deuil-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

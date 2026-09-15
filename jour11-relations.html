@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour 11 · Les relations · 30 jours pour ma santé mentale</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#f5f0fa 0%,#f0f5f8 45%,#f5f8f0 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
+  header{width:100%;max-width:600px;padding-top:36px;text-align:center;margin-bottom:6px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#9090b0;margin-bottom:8px}
+  h1{font-size:clamp(18px,4.5vw,28px);font-weight:300;color:#2d2845;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#a090c8,#90b8d0);margin:12px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:32px 26px;box-shadow:0 8px 40px rgba(140,120,200,0.11);border:1px solid rgba(160,140,210,0.18);max-width:560px;width:100%;margin-top:18px}
+  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#a090c8;text-align:center;margin-bottom:10px}
+  h2{font-size:20px;font-weight:300;color:#2d2845;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:24px;font-weight:300;color:#2d2845;margin-bottom:14px;line-height:1.4}
+  p{color:#504868;font-size:20px;line-height:1.85;margin-bottom:12px;font-style:italic}
+  p.small{font-size:18px;color:#7868a0}
+  .btn{background:linear-gradient(135deg,#a090c8,#90b8d0);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:15px;cursor:pointer;font-family:'Lora',serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(140,120,200,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(160,140,200,0.25);color:#b0a8c8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:#b0a8c8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:560px;width:100%;margin-top:18px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#9088b8;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:3px;background:rgba(160,140,200,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#a090c8,#90b8d0);border-radius:4px;transition:width 0.4s ease}
+  .hl{background:linear-gradient(135deg,#f5f0fa,#f0f5fa);border-radius:14px;padding:14px 18px;border-left:3px solid #a090c8;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
+  .hl.bleu{border-left-color:#90b8d0;background:linear-gradient(135deg,#f0f5fa,#eef8fd)}
+  .hl.vert{border-left-color:#80c8a8;background:linear-gradient(135deg,#eaf5f0,#f0f8f4)}
+  .hl.or{border-left-color:#c8a870;background:linear-gradient(135deg,#fdf8ee,#fdf5f0)}
+  .hl.rouge{border-left-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .stat-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(160,140,200,0.12)}
+  .stat-item:last-child{border-bottom:none}
+  .stat-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#a090c8,#90b8d0);flex-shrink:0;margin-top:6px}
+  .stat-text{font-size:17px;color:#253050;line-height:1.7;font-style:normal}
+  .stat-source{font-size:11px;color:#a098c0;margin-top:3px;font-style:italic}
+  .source-cite{margin-top:16px;padding-top:14px;border-top:1px solid rgba(160,140,200,0.15);font-size:11px;color:#a098c0;font-family:'Jost',sans-serif}
+  .preview-item{display:flex;align-items:center;gap:12px;background:rgba(160,140,200,0.06);border:1px solid rgba(160,140,200,0.15);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+  .preview-item span:last-child{font-size:13px;color:#7068a0;font-family:'Jost',sans-serif}
+  .carto-section{margin-bottom:18px}
+  .carto-badge{font-family:'Jost',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;padding:5px 14px;border-radius:20px;display:inline-block;color:white;margin-bottom:6px}
+  .carto-desc{font-size:13px;color:#7868a0;margin-bottom:8px;line-height:1.5}
+  .relation-field{width:100%;border:2px solid rgba(160,140,200,0.22);border-radius:12px;padding:10px 14px;font-size:14px;font-family:'Lora',serif;color:#2d2845;outline:none;background:white;margin-bottom:8px;transition:border-color 0.2s}
+  .relation-add{background:transparent;border:2px dashed rgba(160,140,200,0.28);border-radius:12px;padding:8px;font-size:13px;cursor:pointer;font-family:'Jost',sans-serif;color:#9088b8;width:100%;margin-bottom:4px;transition:all 0.2s}
+  .relation-add:hover{border-color:#a090c8;background:rgba(160,140,200,0.05)}
+  .signal-btn{background:transparent;border:2px solid rgba(232,133,122,0.2);border-radius:14px;padding:14px 18px;width:100%;cursor:pointer;font-family:'Lora',serif;text-align:left;margin-bottom:10px;transition:all 0.2s}
+  .signal-btn:hover{border-color:#e8857a;background:rgba(232,133,122,0.04)}
+  .signal-btn.open{border-color:#e8857a;background:linear-gradient(135deg,#fde8e6,#fdf0ee)}
+  .signal-titre{font-size:17px;color:#253050;line-height:1.5;font-style:italic}
+  .signal-detail{font-size:13px;color:#8a5050;line-height:1.65;margin-top:8px;padding-top:8px;border-top:1px solid rgba(232,133,122,0.2);display:none;font-style:normal}
+  .signal-btn.open .signal-detail{display:block}
+  textarea{width:100%;border:2px solid rgba(160,140,200,0.28);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#2d2845;line-height:1.7;outline:none;resize:vertical;background:#faf8ff}
+  textarea:focus{border-color:#a090c8}
+  .e-q{font-size:17px;color:#2d2845;line-height:1.65;text-align:center;margin-bottom:6px}
+  .e-sous{font-size:13px;color:#9088b8;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
+  .recap-box{background:linear-gradient(135deg,#f5f0fa,#f0f5fa);border-radius:14px;padding:14px 18px;border:1px solid rgba(160,140,200,0.18);margin-bottom:10px}
+  .recap-q{font-size:11px;color:#a098c0;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
+  .suite-box{background:linear-gradient(135deg,#f5f0fa,#f0f5fa);border-radius:20px;padding:22px;border:1px solid rgba(160,140,200,0.22);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🤝</span>
+    <div class="label">Jour 11 · Les relations</div>
+    <h2>On ne se construit jamais seule</h2>
+    <p>On est des êtres de relation, pas joliment, pas en théorie, mais neurologiquement. Nos liens nous construisent, nous nourrissent ou nous épuisent. Aujourd'hui, on apprend à voir clairement lesquels font quoi dans ta vie.</p>
+    <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
+    <button class="btn" onclick="showPhase('theorie')">Commencer 🤝</button>
+    <p class="hint">Théorie · Interdépendance · Cartographie · Relations toxiques · Écriture · ~25 min</p>
+  </div>
+</div>
+
+<!-- THÉORIE -->
+<div class="phase" id="phase-theorie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="t-label">Théorie · 1/3</span>
+      <span id="t-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="t-progress" style="width:33%"></div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+      <span id="t-emoji" style="font-size:32px;"></span>
+      <h3 id="t-titre" style="margin-bottom:0;"></h3>
+    </div>
+    <div id="t-contenu"></div>
+    <div id="t-source" class="source-cite"></div>
+    <button class="btn" onclick="nextTheorie()">Continuer →</button>
+  </div>
+</div>
+
+<!-- INTERDÉPENDANCE -->
+<div class="phase" id="phase-interdependance">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🕸️</span>
+    <h2>On se construit dans le miroir des autres</h2>
+    <p style="text-align:center;margin-bottom:20px;">Ce n'est pas une métaphore, c'est de la neurologie et de la psychologie du développement.</p>
+    <div class="hl">
+      <strong>Le cerveau social</strong><br><br>
+      Le Dr Matthew Lieberman a montré que le cerveau consacre plus d'énergie aux informations sociales qu'à toute autre tâche. L'isolement social active les mêmes zones que la douleur physique. Nous sommes câblées pour la connexion, pas par choix, par biologie.
+    </div>
+    <div class="hl bleu">
+      <strong>Winnicott et le miroir</strong><br><br>
+      "Il n'y a pas de bébé sans mère." Le soi ne se développe pas dans le vide, il émerge dans la relation. Chaque lien important a contribué à façonner qui tu es aujourd'hui. Les relations difficiles t'ont montré tes blessures. Les nourrissantes, ta valeur. Les deux ont leur place dans ton histoire.
+    </div>
+    <div class="hl vert">
+      <strong>Les neurones miroirs, on apprend par l'imitation</strong><br><br>
+      Les neurones miroirs s'activent quand on observe quelqu'un d'autre agir ou ressentir. S'entourer de personnes résilientes et bienveillantes agit directement sur notre propre régulation émotionnelle, on capte littéralement les états intérieurs des personnes proches de nous.<br><br>
+      <span style="font-size:11px;color:#60a080;">Dr Giacomo Rizzolatti, Université de Parme</span>
+    </div>
+    <div class="hl or">
+      <strong>Aucune expérience relationnelle n'est perdue</strong><br><br>
+      Chaque relation vécue, même les plus douloureuses, t'a appris quelque chose de précieux sur toi-même, sur ce que tu veux et ne veux plus, sur ce dont tu as besoin pour être bien. C'est une ressource, pas un fardeau.
+    </div>
+    <button class="btn" onclick="showPhase('carto')">Cartographier mes relations 🗺️</button>
+  </div>
+</div>
+
+<!-- CARTOGRAPHIE -->
+<div class="phase" id="phase-carto">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🗺️</span>
+    <h2>La carte de tes relations</h2>
+    <p style="text-align:center;margin-bottom:6px;">Note les personnes importantes par prénom ou initiale. Pas de jugement, juste observer honnêtement.</p>
+    <p class="small" style="text-align:center;margin-bottom:22px;">Une même personne peut apparaître dans plusieurs cases. C'est la complexité humaine.</p>
+
+    <div class="carto-section">
+      <div class="carto-badge" style="background:linear-gradient(135deg,#80c8a8,#90b8d0);">Nourrissantes, me donnent de l'énergie</div>
+      <div class="carto-desc">Après les avoir vues, je me sens plus légère, plus moi-même.</div>
+      <div id="c-nourrissantes"></div>
+      <button class="relation-add" onclick="addChamp('c-nourrissantes','#80c8a8')">+ Ajouter une personne</button>
+    </div>
+
+    <div class="carto-section">
+      <div class="carto-badge" style="background:linear-gradient(135deg,#e8a85c,#e8857a);">Épuisantes, me prennent de l'énergie</div>
+      <div class="carto-desc">Après les avoir vues, je me sens vidée, diminuée ou tendue.</div>
+      <div id="c-epuisantes"></div>
+      <button class="relation-add" onclick="addChamp('c-epuisantes','#e8857a')">+ Ajouter une personne</button>
+    </div>
+
+    <div class="carto-section">
+      <div class="carto-badge" style="background:linear-gradient(135deg,#a090c8,#90b8d0);">Équilibrées, donnant-donnant</div>
+      <div class="carto-desc">Un échange qui me semble juste et réciproque.</div>
+      <div id="c-equilibrees"></div>
+      <button class="relation-add" onclick="addChamp('c-equilibrees','#a090c8')">+ Ajouter une personne</button>
+    </div>
+
+    <div class="carto-section">
+      <div class="carto-badge" style="background:linear-gradient(135deg,#c8a870,#e8a0b4);">À nourrir, liens que j'aimerais approfondir</div>
+      <div class="carto-desc">Des personnes importantes dont je me suis éloignée.</div>
+      <div id="c-distantes"></div>
+      <button class="relation-add" onclick="addChamp('c-distantes','#c8a870')">+ Ajouter une personne</button>
+    </div>
+
+    <div class="hl or" style="margin-top:4px;">
+      Observe les proportions. Pas pour culpabiliser, mais pour voir clairement où va ton énergie relationnelle et où tu pourrais choisir de la redistribuer.
+    </div>
+    <button class="btn" onclick="showPhase('toxiques')">Les relations toxiques, reconnaître et agir →</button>
+  </div>
+</div>
+
+<!-- RELATIONS TOXIQUES -->
+<div class="phase" id="phase-toxiques">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🛡️</span>
+    <h2>Les relations toxiques, nommer ce qui fait mal</h2>
+    <p style="text-align:center;margin-bottom:8px;">Une relation toxique n'est pas nécessairement avec une "mauvaise personne". C'est une dynamique qui te nuit, systématiquement, durablement, malgré tes efforts.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Clique sur les signaux que tu reconnais, dans une relation présente ou passée.</p>
+    <div id="signaux-container"></div>
+    <div class="hl rouge" style="margin-top:8px;">
+      <strong>Important :</strong> reconnaître une dynamique toxique ne signifie pas qu'il faut nécessairement quitter la relation immédiatement. Ça signifie la voir clairement, et décider en connaissance de cause.
+    </div>
+    <div class="hl" style="margin-top:8px;">
+      <strong>Difficile vs toxique :</strong><br><br>
+      Une relation difficile peut traverser des crises et rester fondamentalement saine si les deux personnes peuvent réparer. Une relation toxique se caractérise par la répétition des mêmes schémas blessants, l'absence de remise en question de l'autre, et le fait que tu te perdes systématiquement pour y rester.
+    </div>
+    <div class="hl vert" style="margin-top:8px;">
+      <strong>Une dynamique peut changer, si les deux personnes le veulent vraiment</strong><br><br>
+      C'est une nuance essentielle que l'on oublie souvent : une relation dont la dynamique est douloureuse n'est pas nécessairement condamnée. Si les deux personnes ont conscience du problème, si les deux ont une réelle envie de travailler sur elles-mêmes et sur le lien : la transformation est possible.<br><br>
+      Ce qui ne peut pas changer une dynamique : tes seuls efforts à toi. Si tu es la seule à te remettre en question, à t'adapter, à faire le travail : la relation restera déséquilibrée, quoi que tu fasses.<br><br>
+      La vraie question n'est donc pas seulement "est-ce que cette relation me fait du mal ?" mais aussi "est-ce que l'autre personne est capable et désireuse de faire évoluer cette dynamique avec moi ?" C'est cette réponse qui guide la décision, pas la peur de perdre le lien.
+    </div>
+    <button class="btn" onclick="showPhase('ecriture')">Passer à l'écriture guidée ✍️</button>
+  </div>
+</div>
+
+<!-- ÉCRITURE -->
+<div class="phase" id="phase-ecriture">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Écriture · 1/4</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Mes relations</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="e-question"></p>
+    <p class="e-sous" id="e-sous"></p>
+    <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
+  </div>
+</div>
+
+<!-- NOURRIR SANS SE PERDRE -->
+<div class="phase" id="phase-nourrir">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌱</span>
+    <h2>Nourrir ses relations sans se perdre soi-même</h2>
+    <p style="text-align:center;margin-bottom:20px;">Les 4 principes d'une relation nourrissante, dans les deux sens.</p>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
+      <div style="background:linear-gradient(135deg,#f5f0fa,#f0f5fa);border-radius:14px;padding:16px 18px;border:1px solid rgba(160,140,200,0.18);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#a090c8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;">Principe 1</div>
+        <div style="font-size:17px;color:#2d2845;margin-bottom:4px;">La réciprocité, donner et recevoir</div>
+        <div style="font-size:13px;color:#7068a0;line-height:1.65;">Équilibrée sur la durée, pas 50/50 à chaque instant. Apprendre à recevoir est aussi important qu'apprendre à donner.</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#f0f5fa,#eef8fd);border-radius:14px;padding:16px 18px;border:1px solid rgba(144,184,208,0.2);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#90b8d0;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;">Principe 2</div>
+        <div style="font-size:17px;color:#2d2845;margin-bottom:4px;">La présence, être là vraiment</div>
+        <div style="font-size:13px;color:#6080a0;line-height:1.65;">20 minutes d'attention sincère valent plus que 2 heures de présence physique mais d'absence mentale.</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#eaf5f0,#f0f8f4);border-radius:14px;padding:16px 18px;border:1px solid rgba(128,200,168,0.2);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#80c8a8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;">Principe 3</div>
+        <div style="font-size:17px;color:#2d2845;margin-bottom:4px;">Les limites, rester soi dans la relation</div>
+        <div style="font-size:13px;color:#508060;line-height:1.65;">La relation la plus nourrissante est celle où tu peux rester toi-même. Tes limites ne détruisent pas les liens, elles les rendent possibles sur le long terme.</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#fdf8ee,#fdf5f0);border-radius:14px;padding:16px 18px;border:1px solid rgba(200,168,112,0.2);">
+        <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;">Principe 4</div>
+        <div style="font-size:17px;color:#2d2845;margin-bottom:4px;">La vulnérabilité : le ciment de la vraie connexion</div>
+        <div style="font-size:13px;color:#806040;line-height:1.65;">La perfection crée de la distance. L'authenticité crée de la connexion. (Dr Brené Brown)</div>
+      </div>
+    </div>
+    <button class="btn" onclick="showFin()">Terminer le Jour 11 🤝</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌸</span>
+    <h2>Tu es faite de tous ceux que tu as aimés</h2>
+    <p>Chaque relation importante a laissé une trace en toi. Ce n'est pas une fragilité, c'est la richesse d'une vie humaine vécue en connexion.</p>
+    <div style="background:linear-gradient(135deg,#f5f0fa,#f0f5fa);border-radius:16px;padding:20px;border:1px solid rgba(160,140,200,0.18);text-align:left;margin-top:16px;">
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#a090c8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Tes réflexions du jour</div>
+      <div id="recap-container"></div>
+    </div>
+    <div class="hl" style="margin-top:16px;text-align:left;">
+      🔑 <strong>À faire cette semaine :</strong> Choisis une personne de ta liste "relations nourrissantes" et prends 5 minutes pour lui dire ce que sa présence dans ta vie t'apporte vraiment, par message ou en personne.
+    </div>
+  </div>
+      <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
+      📥 Télécharger mes réponses
+    </button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+  </div>
+  <div class="suite-box">
+    <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
+    <p style="font-size:14px;color:#706890;"><strong style="color:#2d2845;">Demain, Jour 12 :</strong> la régulation émotionnelle</p>
+    <p class="hint" style="margin-top:6px;">19 jours restants dans ton programme 🌸</p>
+  </div>
+</div>
+
+<script>
+const theorie=[
+  {emoji:"🧬",titre:"On a besoin des autres, c'est biologique",source:"Dr Matthew Lieberman, Social",contenu:[
+    {type:"texte",texte:"On est une espèce profondément sociale. Pas par choix, par construction. Notre cerveau s'est développé pour la connexion, et quand elle manque, il souffre, vraiment, physiquement."},
+    {type:"stat",texte:"L'isolement social abîme la santé autant que le tabac. La solitude chronique est aujourd'hui reconnue comme un véritable enjeu de santé publique",source:"Julianne Holt-Lunstad, Brigham Young University"},
+    {type:"stat",texte:"Le cerveau traite le rejet social dans la même zone que la douleur physique. Être exclue, ça fait mal, neurologiquement, pas seulement dans l'imaginaire",source:"Dr Naomi Eisenberger, UCLA"},
+    {type:"hl",texte:"💡 À l'inverse, les bonnes relations sont une vraie médecine. Quand tu vis un moment de connexion sincère, ton corps libère de l'ocytocine, elle fait baisser le cortisol, renforce ton immunité, apaise ton système nerveux. Les liens qui nourrissent te soignent, littéralement."},
+    {type:"stat",texte:"Avoir ne serait-ce qu'une seule relation proche et de confiance rend bien plus solide face aux épreuves de la vie",source:"Harvard Study of Adult Development, 80 ans de recherche"},
+  ]},
+  {emoji:"🪞",titre:"On se construit dans le regard de l'autre",source:"Donald Winnicott / Dr Dan Siegel",contenu:[
+    {type:"texte",texte:"Ton identité ne s'est pas fabriquée toute seule, dans le vide. Elle s'est construite dans la relation, d'abord avec tes parents, puis avec tes amies, tes amours, tout ce que tu as traversé avec d'autres."},
+    {type:"hl",texte:"🪞 Winnicott disait une chose magnifique : le tout premier miroir d'un bébé, c'est le visage de sa mère. Quand elle lui sourit en retour, l'enfant apprend \"j'existe, je compte, on me voit\". Et la bonne nouvelle, c'est que ce miroir peut se réparer plus tard, dans d'autres relations. Ton cerveau reste capable de changer toute ta vie."},
+    {type:"texte",texte:"Chaque relation importante t'a appris quelque chose sur toi. Les difficiles t'ont montré tes blessures et tes limites. Les douces t'ont montré ta valeur. Les deux sont précieuses, même celles qui ont fait mal portaient une information."},
+    {type:"hl",texte:"🌱 Et retiens bien ça : des relations qui te nourrissent aujourd'hui peuvent réparer des blessures très anciennes. Tu n'es pas condamnée à rejouer éternellement tes premières expériences. On peut réapprendre à être en lien, à tout âge.",classe:"vert"},
+  ]},
+  {emoji:"⚡",titre:"Ce qui te nourrit, ce qui t'épuise",source:"Dr Sue Johnson, Hold Me Tight",contenu:[
+    {type:"texte",texte:"Toutes les relations ne se valent pas. Une relation qui nourrit n'est pas une relation parfaite, c'est une relation où tu te sens fondamentalement en sécurité, vue, et libre d'être pleinement toi-même."},
+    {type:"hl",texte:"🟢 Une relation qui nourrit : après l'avoir vue, tu te sens plus légère, plus toi. Elle peut te dire des choses difficiles, mais avec douceur. Tu peux te montrer vulnérable sans avoir peur."},
+    {type:"hl",texte:"🔴 Une relation qui épuise : après l'avoir vue, tu te sens vidée, ou plus petite. Tu marches sur des œufs. Tu te perds pour lui plaire. Tu ressens une culpabilité diffuse, sans trop savoir pourquoi.",classe:"rouge"},
+    {type:"texte",texte:"Et parfois, une relation épuise non pas parce que la personne est mauvaise, mais simplement parce que la dynamique ne te convient plus. Le reconnaître, ce n'est pas être froide ou ingrate. C'est juste être lucide, avec bienveillance, envers toi-même."},
+  ]},
+];
+
+const signaux=[
+  {titre:"\"Je me sens différente avec elle/lui, moins moi-même, plus petite.\"",detail:"C'est l'un des signaux les plus fiables. Une relation saine te permet d'être pleinement toi-même. Si tu te censures ou te diminues pour être acceptée, quelque chose ne va pas dans la dynamique."},
+  {titre:"\"Je ressens souvent de la culpabilité ou de la confusion après nos échanges.\"",detail:"Le gaslighting, faire douter quelqu'un de sa propre perception, est l'une des formes les plus subtiles de toxicité. Si tu sors régulièrement d'une conversation en te demandant si tu as tort d'avoir ressenti ce que tu as ressenti, c'est un signal."},
+  {titre:"\"Je donne beaucoup, mais je ne reçois presque rien en retour.\"",detail:"Le déséquilibre chronique dans la réciprocité est épuisant. Ce n'est pas égoïste de le remarquer. C'est juste."},
+  {titre:"\"Je me sens jugée ou moquée, souvent sous couvert d'humour.\"",detail:"\"C'était juste une blague\" est l'une des phrases les plus utilisées pour minimiser les blessures. Ce que tu ressens est valide, indépendamment de l'intention affichée."},
+  {titre:"\"Cette personne critique mes autres relations et cherche à m'isoler.\"",detail:"L'isolement progressif des autres liens est un schéma classique dans les relations toxiques ou contrôlantes. Si quelqu'un cherche à être ta seule source de lien, c'est un signal d'alarme."},
+  {titre:"\"Après chaque conflit, c'est toujours moi qui m'excuse.\"",detail:"Dans une relation saine, les deux personnes peuvent reconnaître leurs torts et réparer. Si c'est toujours toi qui t'adaptes et cèdes : la dynamique n'est pas équilibrée."},
+];
+
+const ecritureQs=[
+  {q:"Pense à une relation vraiment nourrissante. Qu'est-ce qu'elle t'apporte, et qu'a-t-elle éveillé en toi ?",sous:"Décris cette personne, ce que tu ressens avec elle, ce qu'elle a renforcé ou révélé de toi.",placeholder:"Cette personne c'est... / Avec elle je me sens... / Elle m'a appris que..."},
+  {q:"Y a-t-il une relation qui t'épuise ou t'a épuisée, et reconnais-tu des signaux de toxicité ?",sous:"Pas pour accuser. Pour voir clairement et décider en connaissance de cause.",placeholder:"Cette relation m'épuise parce que... / Je reconnais le signal... / Ce que je veux faire c'est..."},
+  {q:"Y a-t-il une relation que tu aimerais nourrir davantage, et qu'est-ce qui t'en empêche ?",sous:"Parfois c'est le temps, parfois la peur, parfois une ancienne blessure.",placeholder:"La relation que j'aimerais nourrir c'est... / Ce qui m'en empêche c'est..."},
+  {q:"Qu'est-ce que tu veux apporter dans tes relations cette semaine, concrètement ?",sous:"Une action simple et réaliste. Pas une résolution parfaite, juste un geste intentionnel.",placeholder:"Cette semaine je vais..."},
+];
+
+let theorieIdx=0,eIdx=0,eReponses=[];
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='ecriture') renderE();
+}
+
+const pc=document.getElementById('preview-container');
+[{e:'🧬',t:'Les relations, nécessité biologique'},{e:'🪞',t:'On se construit dans le regard de l\'autre'},{e:'⚡',t:'Ce qui nourrit vs ce qui épuise'},{e:'🕸️',t:'Interdépendance et neurones miroirs'},{e:'🗺️',t:'Cartographie de mes relations'},{e:'🛡️',t:'Relations toxiques, 6 signaux à reconnaître'},{e:'✍️',t:'Écriture guidée'},{e:'🌱',t:'Nourrir sans se perdre soi-même'}].forEach(i=>{
+  pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
+});
+
+function renderTheorie(){
+  const t=theorie[theorieIdx];
+  document.getElementById('t-label').textContent=`Théorie · ${theorieIdx+1}/${theorie.length}`;
+  document.getElementById('t-titre-small').textContent=t.emoji+' '+t.titre;
+  document.getElementById('t-progress').style.width=((theorieIdx+1)/theorie.length*100)+'%';
+  document.getElementById('t-emoji').textContent=t.emoji;
+  document.getElementById('t-titre').textContent=t.titre;
+  document.getElementById('t-source').textContent=t.source?'📚 '+t.source:'';
+  const el=document.getElementById('t-contenu');
+  el.innerHTML='';
+  t.contenu.forEach(item=>{
+    if(item.type==='texte') el.innerHTML+=`<p style="font-size:17px;color:#504868;line-height:1.85;margin-bottom:12px;">${item.texte}</p>`;
+    else if(item.type==='hl') el.innerHTML+=`<div class="hl ${item.classe||''}">${item.texte}</div>`;
+    else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
+  });
+  document.querySelector('#phase-theorie .btn').textContent=theorieIdx===theorie.length-1?'L\'interdépendance 🕸️':'Continuer →';
+}
+
+function nextTheorie(){
+  if(theorieIdx<theorie.length-1){theorieIdx++;renderTheorie();window.scrollTo(0,0);}
+  else showPhase('interdependance');
+}
+
+function addChamp(id,couleur){
+  const el=document.getElementById(id);
+  const input=document.createElement('input');
+  input.type='text';input.className='relation-field';
+  input.placeholder='Prénom ou initiale...';
+  input.style.borderColor=couleur+'44';
+  input.addEventListener('focus',()=>input.style.borderColor=couleur);
+  input.addEventListener('blur',()=>input.style.borderColor=couleur+'44');
+  el.appendChild(input);
+}
+
+const sc=document.getElementById('signaux-container');
+signaux.forEach((s,i)=>{
+  const btn=document.createElement('button');
+  btn.className='signal-btn';
+  btn.innerHTML=`<div><div class="signal-titre">${s.titre}</div><div class="signal-detail">${s.detail}</div></div>`;
+  btn.onclick=()=>btn.classList.toggle('open');
+  sc.appendChild(btn);
+});
+
+function renderE(){
+  const q=ecritureQs[eIdx];
+  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
+  document.getElementById('e-question').textContent=q.q;
+  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-textarea').value='';
+  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Nourrir sans se perdre 🌱';
+}
+
+function checkE(){/* écriture libre */}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
+  if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showPhase('nourrir');
+}
+
+function showFin(){
+  const rc=document.getElementById('recap-container');
+  rc.innerHTML='';
+  eReponses.forEach((r,i)=>{
+    rc.innerHTML+=`<div class="recap-box" ${i<eReponses.length-1?'style="margin-bottom:10px;"':''}><div class="recap-q">${r.q}</div><div class="recap-r">"${r.r}"</div></div>`;
+  });
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-fin').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+['c-nourrissantes','c-epuisantes','c-equilibrees','c-distantes'].forEach(id=>{
+  const c={'c-nourrissantes':'#80c8a8','c-epuisantes':'#e8857a','c-equilibrees':'#a090c8','c-distantes':'#c8a870'};
+  addChamp(id,c[id]);
+});
+renderTheorie();
+
+function telechargerReponses(){
+  var recap=document.getElementById('recap-container');
+  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+    +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
+    +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
+    +'<h1>Jour 11 · Mes relations</h1>'
+    +'<div class="date">Mes reponses du '+date+'</div>'
+    +contenu
+    +'<div class="footer">@alarenverse.coaching</div>';
+  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
+  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='jour11-relations-mes-reponses.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>
