@@ -60,6 +60,7 @@
   .retenir-box{background:white;border-radius:20px;padding:24px 26px;box-shadow:0 4px 24px rgba(160,180,200,0.1);border:1px solid rgba(160,200,220,0.18);margin-top:14px}
   .suite-box{background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:20px;padding:22px;border:1px solid rgba(160,200,220,0.25);text-align:center;margin-top:14px}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -113,7 +114,7 @@
     <div style="text-align:left;">
       <div class="prep-item"><span class="prep-num">1</span><span class="prep-texte">Assieds-toi confortablement, dos droit mais sans rigidité</span></div>
       <div class="prep-item"><span class="prep-num">2</span><span class="prep-texte">Pose une main sur ton ventre, sens-le se gonfler à l'inspire</span></div>
-      <div class="prep-item"><span class="prep-num">3</span><span class="prep-texte">👃 Inspire par le nez · 👄 Expire par la bouche : le flux d'air est plus facile à doser et à contrôler</span></div>
+      <div class="prep-item"><span class="prep-num">3</span><span class="prep-texte">👃 Inspire par le nez · 👄 Expire par la bouche : le flux d'air est plus facile à doser et à contrôler</span></div>
       <div class="prep-item"><span class="prep-num">4</span><span class="prep-texte">Ferme les yeux ou fixe un point devant toi</span></div>
       <div class="prep-item"><span class="prep-num">5</span><span class="prep-texte">Tu n'as rien à faire, juste suivre le souffle</span></div>
     </div>
@@ -143,9 +144,10 @@
     <span class="emoji-hero">🌿</span>
     <h2>Prends un instant...</h2>
     <p>Voilà. Tu viens d'envoyer un signal de sécurité à ton corps. Ce que tu ressens là, maintenant, même si c'est tout petit, même si c'est juste un soupçon de détente, c'est ton système nerveux qui glisse du mode alerte vers le mode repos. Reste un moment avec ça.</p>
-    <p style="font-size:17px;color:#3d4e58;margin-bottom:6px;">Dans quel état était ton système nerveux avant de commencer ?</p>
-    <p class="small" style="text-align:center;margin-bottom:14px;">Combat/fuite, figement, ou déjà en sécurité ? Et qu'est-ce que tu remarques maintenant ?</p>
-    <textarea id="reflexion-text" rows="4" placeholder="Avant j'étais... / Maintenant je ressens dans mon corps..." oninput="checkReflexionFin()"></textarea>
+    <p style="font-size:17px;color:#3d4e58;margin-bottom:6px;">Dans quel état était ton système nerveux avant de commencer ?</p>
+    <p class="small" style="text-align:center;margin-bottom:14px;">Combat/fuite, figement, ou déjà en sécurité ? Et qu'est-ce que tu remarques maintenant ?</p>
+    <div class="exemple">Par exemple : « Avant, j'étais en combat-fuite : les épaules hautes, la tête qui tournait sur la liste de demain. Maintenant, mon ventre s'est relâché et je respire plus bas. » Ou : « Avant, j'étais plutôt éteinte, sans énergie. Maintenant je sens un peu mieux mes mains et mes pieds. »</div>
+      <textarea id="reflexion-text" rows="4" placeholder="Avant j'étais... / Maintenant je ressens dans mon corps..." oninput="checkReflexionFin()"></textarea>
     <button class="btn" id="btn-save" style="width:100%;margin-top:14px;" disabled onclick="saveReflexion()">Enregistrer ✨</button>
     <div id="reflexion-saved" style="display:none;background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:14px;padding:18px 20px;border:1px solid rgba(160,200,220,0.2);text-align:left;margin-top:14px;">
       <div style="font-size:11px;color:#90a8b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-family:'Jost',sans-serif;">✍️ Ma réflexion du Jour 3</div>
@@ -165,7 +167,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#5a7080;"><strong>Demain, Jour 4 :</strong> le sommeil et les rituels du soir</p>
+    <p style="font-size:14px;color:#5a7080;"><strong>Demain, Jour 4 :</strong> le sommeil et les rituels du soir</p>
     <p class="hint" style="margin-top:6px;">27 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -175,29 +177,29 @@ const theorie = [
   { emoji:"🧠", titre:"Pourquoi le corps doit passer en premier", intro:null, source:"Dr Bessel van der Kolk, Le Corps n'oublie rien", contenu:[
     {type:"texte",texte:"Quand tu ne te sens pas en sécurité, stressée, anxieuse, débordée, ton cerveau qui réfléchit se déconnecte. Littéralement. La partie qui relativise, qui prend du recul, qui décide, elle se met en veille. C'est pas toi qui choisis, c'est ton système nerveux qui prend le dessus."},
     {type:"highlight",texte:"💡 C'est exactement pour ça que se dire \"calme-toi\" ne marche jamais dans ces moments-là. Tu ne peux pas réfléchir pour sortir du stress quand la partie qui réfléchit est justement celle qui s'est éteinte."},
-    {type:"texte",texte:"Alors on fait l'inverse. On passe par le corps d'abord. C'est ce que les neurosciences appellent l'approche bottom-up : de bas en haut. Et la respiration, c'est la porte d'entrée la plus directe qu'on ait. La plus simple aussi. Tu l'as toujours avec toi."},
+    {type:"texte",texte:"Alors on fait l'inverse. On passe par le corps d'abord. C'est ce que les neurosciences appellent l'approche bottom-up : de bas en haut. Et la respiration, c'est la porte d'entrée la plus directe qu'on ait. La plus simple aussi. Tu l'as toujours avec toi."},
   ]},
-  { emoji:"⚡", titre:"Les 3 états de ton système nerveux", intro:"Le Dr Stephen Porges a décrit 3 modes dans lesquels ton système nerveux peut basculer. Les reconnaître, c'est déjà commencer à les apprivoiser :", source:"Dr Stephen Porges, La théorie polyvagale (1994)", contenu:[
+  { emoji:"⚡", titre:"Les 3 états de ton système nerveux", intro:"Le Dr Stephen Porges a décrit 3 modes dans lesquels ton système nerveux peut basculer. Les reconnaître, c'est déjà commencer à les apprivoiser :", source:"Dr Stephen Porges, La théorie polyvagale (1994)", contenu:[
     {type:"etat",couleur:"#80c8a8",bg:"#eaf5f0",label:"🟢 SÉCURITÉ",texte:"Tu te sens ancrée, posée, capable de réfléchir. C'est le mode où tu peux apprendre, créer, te relier vraiment aux autres. C'est là qu'on veut revenir."},
     {type:"etat",couleur:"#e8a85c",bg:"#fdf3e6",label:"🟠 COMBAT / FUITE",texte:"Le cœur qui s'emballe, les muscles tendus, le souffle court. Tu es irritable, agitée, sur le qui-vive. Ton corps est prêt à se battre ou à fuir, même quand le danger n'est qu'une boîte mail."},
-    {type:"etat",couleur:"#e8857a",bg:"#fde8e6",label:"🔴 FIGEMENT",texte:"Quand la menace semble trop grande, le corps se coupe. Tu te sens vidée, paralysée, incapable de bouger. Et je veux que ce soit clair : c'est un mécanisme de survie, pas une faiblesse. Ton corps fait ce qu'il peut pour te protéger."},
+    {type:"etat",couleur:"#e8857a",bg:"#fde8e6",label:"🔴 FIGEMENT",texte:"Quand la menace semble trop grande, le corps se coupe. Tu te sens vidée, paralysée, incapable de bouger. Et je veux que ce soit clair : c'est un mécanisme de survie, pas une faiblesse. Ton corps fait ce qu'il peut pour te protéger."},
   ]},
   { emoji:"🫀", titre:"Ce qui se passe dans ton corps quand tu respires", intro:null, source:"Dr Arielle Schwartz, Applied Polyvagal Theory", contenu:[
-    {type:"texte",texte:"Le nerf vague, c'est l'autoroute qui relie ton cerveau à tous tes organes : ton cœur, tes poumons, ton ventre. C'est lui qui régule ton état intérieur en permanence, sans que tu t'en rendes compte."},
-    {type:"highlight",texte:"🌬️ Et voilà le truc : quand tu expires plus longtemps que tu n'inspires, tu stimules ce nerf vague. Ton cœur ralentit, ta tension baisse, tes muscles lâchent. Ton corps reçoit un message clair : le danger est passé, tu peux te poser."},
+    {type:"texte",texte:"Le nerf vague, c'est l'autoroute qui relie ton cerveau à tous tes organes : ton cœur, tes poumons, ton ventre. C'est lui qui régule ton état intérieur en permanence, sans que tu t'en rendes compte."},
+    {type:"highlight",texte:"🌬️ Et voilà le truc : quand tu expires plus longtemps que tu n'inspires, tu stimules ce nerf vague. Ton cœur ralentit, ta tension baisse, tes muscles lâchent. Ton corps reçoit un message clair : le danger est passé, tu peux te poser."},
     {type:"highlight",texte:"👃 Inspire par le nez, expire par la bouche. Le nez active mieux le nerf vague, et l'expiration par la bouche te permet de mieux doser, de vraiment vider tes poumons. C'est tout bête, mais ça fait la différence."},
   ]},
   { emoji:"⚠️", titre:"Ce que beaucoup ne savent pas, et qui change tout", intro:null, source:"Dr Andrew Huberman, Huberman Lab", contenu:[
     {type:"highlight",texte:"🔑 La respiration, ce n'est pas d'abord un truc pour gérer une crise sur le moment. Et c'est important que tu le saches, sinon tu vas essayer en pleine panique, sentir que ça t'aide à peine, et croire que ça ne marche pas sur toi."},
     {type:"texte",texte:"Son vrai pouvoir, il est dans la répétition. Une fois par jour, minimum. Tous les jours. Dans un moment calme, au lever ou au coucher, c'est l'idéal. Pas quand tu craques. Quand tout est tranquille."},
-    {type:"texte",texte:"Pourquoi dans le calme ? Parce que c'est là que ton corps apprend. À force de répéter ce geste jour après jour, ton système nerveux finit par l'enregistrer comme un raccourci vers la sécurité. Il l'assimile, doucement, comme une ressource."},
-    {type:"highlight",texte:"🌱 Et c'est seulement là, une fois que l'habitude est installée et que les bienfaits se font vraiment sentir, que tu peux te dire : OK, dans le stress, j'utilise cette ressource. Parce que ton corps, lui, l'a déjà reconnue. Il sait où elle mène. Tu ne lui demandes plus quelque chose d'inconnu en pleine tempête, tu actives un chemin qu'il connaît déjà par cœur."},
-    {type:"texte",texte:"Imagine ton système nerveux comme un thermostat. Réglé en permanence sur \"alerte\", le moindre truc devient une menace : un mail, un regard, un silence. La respiration quotidienne baisse doucement ce niveau de base. Petit à petit, ton seuil remonte."},
+    {type:"texte",texte:"Pourquoi dans le calme ? Parce que c'est là que ton corps apprend. À force de répéter ce geste jour après jour, ton système nerveux finit par l'enregistrer comme un raccourci vers la sécurité. Il l'assimile, doucement, comme une ressource."},
+    {type:"highlight",texte:"🌱 Et c'est seulement là, une fois que l'habitude est installée et que les bienfaits se font vraiment sentir, que tu peux te dire : OK, dans le stress, j'utilise cette ressource. Parce que ton corps, lui, l'a déjà reconnue. Il sait où elle mène. Tu ne lui demandes plus quelque chose d'inconnu en pleine tempête, tu actives un chemin qu'il connaît déjà par cœur."},
+    {type:"texte",texte:"Imagine ton système nerveux comme un thermostat. Réglé en permanence sur \"alerte\", le moindre truc devient une menace : un mail, un regard, un silence. La respiration quotidienne baisse doucement ce niveau de base. Petit à petit, ton seuil remonte."},
     {type:"highlight",texte:"💡 5 minutes par jour quand tu vas bien valent infiniment plus qu'une heure en pleine crise. C'est pas l'intensité qui transforme. C'est la régularité, et elle seule. Sois tranquille avec ça, tu n'as pas besoin d'en faire des tonnes. Juste d'y revenir chaque jour."},
   ]},
-  { emoji:"📊", titre:"Ce que la recherche a observé sur le long terme", intro:"Chez les personnes qui pratiquent régulièrement quelques minutes par jour pendant plusieurs semaines, les études observent :", source:null, contenu:[
+  { emoji:"📊", titre:"Ce que la recherche a observé sur le long terme", intro:"Chez les personnes qui pratiquent régulièrement quelques minutes par jour pendant plusieurs semaines, les études observent :", source:null, contenu:[
     {type:"stat",texte:"Une baisse notable du cortisol, l'hormone du stress",source:"Frontiers in Psychology, 2017"},
-    {type:"stat",texte:"Une meilleure variabilité de la fréquence cardiaque : un marqueur clé de la résilience émotionnelle",source:"Journal of Clinical Psychology, 2021"},
+    {type:"stat",texte:"Une meilleure variabilité de la fréquence cardiaque : un marqueur clé de la résilience émotionnelle",source:"Journal of Clinical Psychology, 2021"},
     {type:"stat",texte:"Une diminution des symptômes d'anxiété et de dépression",source:"Méta-analyse, JAMA Internal Medicine, 2022"},
     {type:"stat",texte:"Un sommeil de meilleure qualité",source:"Sleep Medicine Reviews, 2020"},
     {type:"stat",texte:"Un système immunitaire renforcé",source:"Psychosomatic Medicine, 2018"},
@@ -228,7 +230,7 @@ function renderTheorie() {
   const introEl = document.getElementById('t-intro');
   if (t.intro) { introEl.textContent = t.intro; introEl.style.display='block'; } else { introEl.style.display='none'; }
   const sourceEl = document.getElementById('t-source');
-  sourceEl.textContent = t.source ? '📚 ' + t.source : '';
+  sourceEl.textContent = t.source ? '📚 ' + t.source : '';
 
   const contenu = document.getElementById('t-contenu');
   contenu.innerHTML = '';
@@ -245,7 +247,7 @@ function renderTheorie() {
   });
 
   const btn = document.querySelector('#phase-theorie .btn');
-  btn.textContent = theorieIdx < theorie.length-1 ? 'Continuer →' : 'Passons à la pratique 🌬️';
+  btn.textContent = theorieIdx < theorie.length-1 ? 'Continuer →' : 'Passons à la pratique 🌬️';
 }
 
 function nextTheorie() {
@@ -286,7 +288,7 @@ function updateDots() {
   for(let i=0;i<TOTAL;i++){
     const d = document.getElementById('dot-'+i);
     if(!d) return;
-    d.className = 'dot' + (i < cycle ? ' done' : i === cycle ? ' current' : '');
+    d.className = 'dot' + (i < cycle ? ' done' : i === cycle ? ' current' : '');
   }
 }
 
@@ -340,7 +342,10 @@ function saveReflexion() {
 function telechargerReponses(){
   var recap=document.getElementById('recap-container');
   var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
-  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
+  var contenu='';var t=document.getElementById('reflexion-text');var v=t?t.value.trim():'';
+  function bx(q,r){return '<div class="recap-box"><div class="recap-q">'+q+'</div><div class="recap-r">'+r+'</div></div>';}
+  if(v) contenu+=bx('Ce que j\'ai ressenti apres la respiration',v.replace(/\n/g,'<br>'));
+  contenu+=bx('Ma pratique','Respiration 4-6 : inspire 4 secondes par le nez, expire 6 secondes par la bouche. Une fois par jour, dans le calme, au lever ou au coucher. Une fois l\'habitude ancree, ton corps saura la retrouver dans les moments difficiles.');
   var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
     +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
     +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
@@ -366,6 +371,51 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j3', TITRE="La respiration";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

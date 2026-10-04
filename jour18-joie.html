@@ -80,6 +80,7 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#fdf8ee,#fef5e0);border-radius:20px;padding:22px;border:1px solid rgba(220,180,60,0.22);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -134,7 +135,7 @@
     <div class="pratique-etape">
       <div class="etape-num">Étape 1</div>
       <div class="etape-titre">Ancre-toi dans ton corps</div>
-      <div class="etape-desc">Ferme les yeux. Pose les deux pieds à plat sur le sol. Sens le contact. Inspire profondément par le nez, expire par la bouche, 3 fois. Dis intérieurement : "Je suis là. Je suis en sécurité."</div>
+      <div class="etape-desc">Ferme les yeux. Pose les deux pieds à plat sur le sol. Sens le contact. Inspire profondément par le nez, expire par la bouche, 3 fois. Dis intérieurement : "Je suis là. Je suis en sécurité."</div>
       <div class="etape-duree">1 minute</div>
     </div>
 
@@ -148,7 +149,7 @@
     <div class="pratique-etape">
       <div class="etape-num">Étape 3</div>
       <div class="etape-titre">Cherche la joie dans le corps</div>
-      <div class="etape-desc">En tenant ce souvenir, scan ton corps. Où est-ce que tu sens quelque chose ? Un léger réchauffement dans la poitrine ? Un sourire qui monte ? Une légèreté dans les épaules ? Un picotement dans les mains ? La joie se loge dans le corps avant de monter au cerveau. Nomme où tu la sens.</div>
+      <div class="etape-desc">En tenant ce souvenir, scan ton corps. Où est-ce que tu sens quelque chose ? Un léger réchauffement dans la poitrine ? Un sourire qui monte ? Une légèreté dans les épaules ? Un picotement dans les mains ? La joie se loge dans le corps avant de monter au cerveau. Nomme où tu la sens.</div>
       <div class="etape-duree">2 minutes</div>
     </div>
 
@@ -166,7 +167,8 @@
       <div class="etape-duree">2 minutes</div>
     </div>
 
-    <textarea id="pratique-note" rows="3" placeholder="J'ai senti la joie dans... / Le souvenir qui l'a fait apparaître c'est..." style="margin-top:8px;"></textarea>
+    <div class="exemple">Par exemple : « Je l'ai sentie dans la poitrine, comme une chaleur. Le souvenir : un fou rire avec ma sœur dans la voiture. »</div>
+      <textarea id="pratique-note" rows="3" placeholder="J'ai senti la joie dans... / Le souvenir qui l'a fait apparaître c'est..." style="margin-top:8px;"></textarea>
     <button class="btn" onclick="showPhase('inventaire')">Passer à mon inventaire de joie →</button>
   </div>
 </div>
@@ -175,7 +177,7 @@
 <div class="phase" id="phase-inventaire">
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">🌻</span>
-    <h2>Mes sources de joie : ce qui me rend vivante</h2>
+    <h2>Mes sources de joie : ce qui me rend vivante</h2>
     <p style="text-align:center;margin-bottom:6px;">Pas ce qui devrait te rendre heureuse. Pas ce qui est "bien". Ce qui te fait te sentir vivante, présente, légère, même brièvement.</p>
     <p class="small" style="text-align:center;margin-bottom:20px;">Coche tout ce qui résonne. Ajoute les tiennes. Il n'y a pas de bonnes ou mauvaises réponses.</p>
     <div id="inventaire-container"></div>
@@ -183,7 +185,8 @@
     <div style="margin-top:20px;">
       <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a030;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Mes 3 sources de joie les plus puissantes</div>
       <div class="sources-perso">
-        <input class="source-field" placeholder="Ma première source de joie c'est..." id="s1">
+        <div class="exemple">Par exemple : chanter fort en voiture, le soleil sur la terrasse, rire avec une amie jusqu'aux larmes, l'odeur du pain chaud.</div>
+      <input class="source-field" placeholder="Ma première source de joie c'est..." id="s1">
         <input class="source-field" placeholder="Ma deuxième source de joie c'est..." id="s2">
         <input class="source-field" placeholder="Ma troisième source de joie c'est..." id="s3">
       </div>
@@ -199,18 +202,18 @@
     <span class="emoji-hero">📊</span>
     <h2>L'agenda Maîtrise / Plaisir</h2>
     <p>C'est un outil issu des thérapies cognitives et comportementales, simple, très concret, et redoutablement efficace pour identifier ce qui te nourrit vraiment vs ce qui te vide.</p>
-    <p>Le principe : pendant une journée ou une semaine, tu notes tes activités par tranche horaire et tu leur attribues deux notes de 0 à 5 : une pour le plaisir que tu en as tiré, une pour le sentiment de maîtrise (le fait de bien faire quelque chose).</p>
+    <p>Le principe : pendant une journée ou une semaine, tu notes tes activités par tranche horaire et tu leur attribues deux notes de 0 à 5 : une pour le plaisir que tu en as tiré, une pour le sentiment de maîtrise (le fait de bien faire quelque chose).</p>
 
     <div class="hl" style="margin-bottom:14px;">
-      <strong>Pourquoi ça change quelque chose :</strong><br><br>
+      <strong>Pourquoi ça change quelque chose :</strong><br><br>
       Quand on est déprimée ou épuisée, on a tendance à penser qu'on ne fait "rien de bien" et que "rien ne nous fait plaisir". L'agenda objective ça, et souvent il révèle qu'il y a plus de plaisir et de maîtrise dans la journée qu'on ne le croyait. Il révèle aussi clairement ce qui vide sans rien apporter.
     </div>
 
     <div class="hl vert" style="margin-bottom:14px;">
-      <strong>Comment l'utiliser :</strong><br><br>
+      <strong>Comment l'utiliser :</strong><br><br>
       Chaque tranche horaire, note l'activité que tu as faite.<br>
-      Maîtrise (M) : à quel point tu t'es sentie compétente, efficace, capable. 0 = rien / 5 = vraiment bien fait.<br>
-      Plaisir (P) : à quel point tu as apprécié ce moment. 0 = rien / 5 = vraiment agréable.<br><br>
+      Maîtrise (M) : à quel point tu t'es sentie compétente, efficace, capable. 0 = rien / 5 = vraiment bien fait.<br>
+      Plaisir (P) : à quel point tu as apprécié ce moment. 0 = rien / 5 = vraiment agréable.<br><br>
       Pas besoin de noter 5 partout, l'honnêteté est plus utile que l'idéal.
     </div>
 
@@ -220,7 +223,7 @@
     </div>
 
     <div class="hl orange">
-      Après avoir rempli une journée, regarde les patterns. Les activités avec un bon score de plaisir ET de maîtrise sont tes ressources. Celles avec un score de 0 partout : ce sont peut-être des choses à questionner ou à redistribuer.
+      Après avoir rempli une journée, regarde les patterns. Les activités avec un bon score de plaisir ET de maîtrise sont tes ressources. Celles avec un score de 0 partout : ce sont peut-être des choses à questionner ou à redistribuer.
     </div>
 
     <button class="btn" onclick="showPhase('ecriture')">Réflexion finale ✍️</button>
@@ -239,6 +242,7 @@
   <div class="card">
     <p class="e-q" id="e-question"></p>
     <p class="e-sous" id="e-sous"></p>
+    <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
     <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
   </div>
@@ -257,7 +261,7 @@
     </div>
 
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À pratiquer :</strong> Chaque jour cette semaine, trouve un micro-moment de joie et dis-le à voix haute ou note-le. Pas "j'essaie d'être heureuse". Juste : "Là, maintenant, j'ai ressenti quelque chose de vivant." C'est suffisant.
+      🔑 <strong>À pratiquer :</strong> Chaque jour cette semaine, trouve un micro-moment de joie et dis-le à voix haute ou note-le. Pas "j'essaie d'être heureuse". Juste : "Là, maintenant, j'ai ressenti quelque chose de vivant." C'est suffisant.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -267,7 +271,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#907040;"><strong style="color:#3d2d10;">Demain, Jour 19 :</strong> les croyances limitantes & qui suis-je vraiment ?</p>
+    <p style="font-size:14px;color:#907040;"><strong style="color:#3d2d10;">Demain, Jour 19 :</strong> les croyances limitantes & qui suis-je vraiment ?</p>
     <p class="hint" style="margin-top:6px;">12 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -277,29 +281,29 @@ const theorie=[
   {emoji:"🔬",titre:"La joie et le bonheur, ce n'est pas pareil",source:"Dr Barbara Fredrickson / Spinoza",contenu:[
     {type:"texte",texte:"On mélange souvent les deux mots, joie et bonheur, comme s'ils voulaient dire la même chose. Mais ils sont très différents, et les confondre, c'est une des grandes sources de souffrance discrète, celle qu'on ne voit pas venir."},
     {type:"comparaison"},
-    {type:"hl",texte:"💡 La joie est un état passager, incarné, spontané : une réponse à quelque chose de vivant dans le moment présent. Le bonheur est une construction cognitive, un jugement sur sa vie, souvent projeté dans le futur ou le passé. On peut ressentir de la joie au milieu de la tristesse. On peut être \"heureux\" sur le papier et ne jamais ressentir de joie."},
-    {type:"stat",texte:"À l'imagerie cérébrale, la joie et le bonheur n'allument même pas les mêmes zones : la joie touche les régions profondes du corps et des sensations, alors que le bonheur, lui, active surtout la zone du jugement et de l'évaluation. Deux choses vraiment distinctes",source:"Dr Antonio Damasio"},
+    {type:"hl",texte:"💡 La joie est un état passager, incarné, spontané : une réponse à quelque chose de vivant dans le moment présent. Le bonheur est une construction cognitive, un jugement sur sa vie, souvent projeté dans le futur ou le passé. On peut ressentir de la joie au milieu de la tristesse. On peut être \"heureux\" sur le papier et ne jamais ressentir de joie."},
+    {type:"stat",texte:"À l'imagerie cérébrale, la joie et le bonheur n'allument même pas les mêmes zones : la joie touche les régions profondes du corps et des sensations, alors que le bonheur, lui, active surtout la zone du jugement et de l'évaluation. Deux choses vraiment distinctes",source:"Dr Antonio Damasio"},
     {type:"hl",texte:"🌸 Spinoza, au 17ème siècle, définissait la joie comme \"le passage d'une moindre à une plus grande perfection\", non pas un état stable, mais un mouvement, une expansion. On ne possède pas la joie. On la traverse.",classe:"vert"},
   ]},
   {emoji:"🫀",titre:"La joie vit dans le corps, pas dans la tête",source:"Dr Bessel van der Kolk / Dr Peter Levine",contenu:[
-    {type:"texte",texte:"La joie, ce n'est pas d'abord une pensée. C'est une sensation, dans le corps : une chaleur dans la poitrine, un sourire qui monte tout seul avant même que tu y penses, une légèreté dans les jambes, un picotement dans les mains."},
-    {type:"hl",texte:"🫀 Van der Kolk le dit simplement : la joie est dans le corps, pas dans les pensées. Quand on est épuisée ou qu'on a beaucoup encaissé, on perd souvent le contact avec elle, pas parce qu'elle a disparu, mais parce que le lien entre le corps et le cerveau s'est un peu refermé, pour se protéger."},
+    {type:"texte",texte:"La joie, ce n'est pas d'abord une pensée. C'est une sensation, dans le corps : une chaleur dans la poitrine, un sourire qui monte tout seul avant même que tu y penses, une légèreté dans les jambes, un picotement dans les mains."},
+    {type:"hl",texte:"🫀 Van der Kolk le dit simplement : la joie est dans le corps, pas dans les pensées. Quand on est épuisée ou qu'on a beaucoup encaissé, on perd souvent le contact avec elle, pas parce qu'elle a disparu, mais parce que le lien entre le corps et le cerveau s'est un peu refermé, pour se protéger."},
     {type:"texte",texte:"Cela explique pourquoi on peut \"savoir\" intellectuellement qu'on devrait être content, avoir une belle vie, des gens qui nous aiment, et ne rien ressentir. La joie ne se commande pas par la tête. Elle se retrouve par le corps."},
-    {type:"hl",texte:"💡 Les pratiques qui rouvrent l'accès à la joie sont donc somatiques : le mouvement, la respiration, le toucher, la musique, la nature, le jeu, la créativité. Pas la pensée positive.",classe:"orange"},
+    {type:"hl",texte:"💡 Les pratiques qui rouvrent l'accès à la joie sont donc somatiques : le mouvement, la respiration, le toucher, la musique, la nature, le jeu, la créativité. Pas la pensée positive.",classe:"orange"},
   ]},
   {emoji:"⚠️",titre:"Pourquoi chercher le bonheur à tout prix rend malheureuse",source:"Dr Russ Harris / Viktor Frankl",contenu:[
-    {type:"texte",texte:"Tu la connais, cette petite musique : \"sois positive\", \"vis ta meilleure vie\", \"le bonheur est un choix\". Ça part d'une bonne intention, mais c'est un vrai poison pour le moral. Parce que vouloir être heureuse tout le temps, ça t'amène à te battre contre toutes les émotions qui ne sont pas joyeuses."},
-    {type:"hl",texte:"⚠️ Le paradoxe hédoniste : plus on cherche activement le bonheur comme état permanent, plus on souffre des émotions qui ne correspondent pas à cet idéal. La tristesse, la colère, l'anxiété deviennent des \"échecs\" du bonheur, et on y ajoute de la honte et de la résistance."},
-    {type:"stat",texte:"C'est presque paradoxal : les personnes qui font du bonheur leur grand objectif de vie se sentent souvent moins bien, plus seules, plus déconnectées que celles qui cherchent plutôt le sens et la présence dans l'instant",source:"Dr Iris Mauss, UC Berkeley"},
-    {type:"hl",texte:"🌿 Viktor Frankl, survivant des camps de concentration : \"Le bonheur ne peut pas être poursuivi, il doit s'ensuivre.\" Il arrive comme conséquence d'une vie vécue avec présence et sens, pas comme objectif en soi.",classe:"vert"},
-    {type:"hl",texte:"💡 La joie fonctionne différemment du bonheur : on ne la cherche pas, on lui fait de la place. On crée les conditions dans lesquelles elle peut apparaître, et on l'accueille quand elle vient, sans chercher à la retenir.",classe:"orange"},
+    {type:"texte",texte:"Tu la connais, cette petite musique : \"sois positive\", \"vis ta meilleure vie\", \"le bonheur est un choix\". Ça part d'une bonne intention, mais c'est un vrai poison pour le moral. Parce que vouloir être heureuse tout le temps, ça t'amène à te battre contre toutes les émotions qui ne sont pas joyeuses."},
+    {type:"hl",texte:"⚠️ Le paradoxe hédoniste : plus on cherche activement le bonheur comme état permanent, plus on souffre des émotions qui ne correspondent pas à cet idéal. La tristesse, la colère, l'anxiété deviennent des \"échecs\" du bonheur, et on y ajoute de la honte et de la résistance."},
+    {type:"stat",texte:"C'est presque paradoxal : les personnes qui font du bonheur leur grand objectif de vie se sentent souvent moins bien, plus seules, plus déconnectées que celles qui cherchent plutôt le sens et la présence dans l'instant",source:"Dr Iris Mauss, UC Berkeley"},
+    {type:"hl",texte:"🌿 Viktor Frankl, survivant des camps de concentration : \"Le bonheur ne peut pas être poursuivi, il doit s'ensuivre.\" Il arrive comme conséquence d'une vie vécue avec présence et sens, pas comme objectif en soi.",classe:"vert"},
+    {type:"hl",texte:"💡 La joie fonctionne différemment du bonheur : on ne la cherche pas, on lui fait de la place. On crée les conditions dans lesquelles elle peut apparaître, et on l'accueille quand elle vient, sans chercher à la retenir.",classe:"orange"},
   ]},
   {emoji:"⚡",titre:"Les micro-moments · ces petits éclairs de joie",source:"Dr Barbara Fredrickson / Dr Rick Hanson",contenu:[
-    {type:"texte",texte:"La joie ne vient pas surtout des grands moments : les mariages, les vacances, les réussites. Elle vient bien plus souvent des tout petits instants. Des éclairs courts, ordinaires, presque invisibles, qui parsèment une journée."},
-    {type:"stat",texte:"Quand on mesure le bien-être en temps réel, on voit que les pics de joie viennent de riens : une lumière qui tombe joliment sur un objet, un rire spontané, une bouchée de quelque chose de bon, le regard d'un animal ou d'un bébé qui croise le tien",source:"Dr Barbara Fredrickson, UNC"},
-    {type:"hl",texte:"💡 Rick Hanson a une image que j'aime beaucoup : câbler le bonheur dans le cerveau. Quand tu t'attardes quelques secondes sur un petit moment de joie, au lieu de le laisser filer, tu crées une trace dans ton cerveau. Et à force de répéter, ces traces finissent par changer ta façon de voir. Doucement, ton regard apprend à capter le bon."},
+    {type:"texte",texte:"La joie ne vient pas surtout des grands moments : les mariages, les vacances, les réussites. Elle vient bien plus souvent des tout petits instants. Des éclairs courts, ordinaires, presque invisibles, qui parsèment une journée."},
+    {type:"stat",texte:"Quand on mesure le bien-être en temps réel, on voit que les pics de joie viennent de riens : une lumière qui tombe joliment sur un objet, un rire spontané, une bouchée de quelque chose de bon, le regard d'un animal ou d'un bébé qui croise le tien",source:"Dr Barbara Fredrickson, UNC"},
+    {type:"hl",texte:"💡 Rick Hanson a une image que j'aime beaucoup : câbler le bonheur dans le cerveau. Quand tu t'attardes quelques secondes sur un petit moment de joie, au lieu de le laisser filer, tu crées une trace dans ton cerveau. Et à force de répéter, ces traces finissent par changer ta façon de voir. Doucement, ton regard apprend à capter le bon."},
     {type:"stat",texte:"Notre cerveau retient bien plus fort le négatif que le positif, c'est un vieux réflexe de survie. S'attarder exprès sur les petits moments positifs, c'est justement une façon de rééquilibrer la balance",source:"Dr Rick Hanson"},
-    {type:"hl",texte:"🌸 La pratique : quand tu ressens un micro-moment de joie, arrête-toi. 20 secondes. Ferme les yeux si tu peux. Sens-le dans ton corps. Dis-toi : \"J'enregistre ça.\" Ce n'est pas de la pensée positive, c'est de la neuroplasticité intentionnelle.",classe:"vert"},
+    {type:"hl",texte:"🌸 La pratique : quand tu ressens un micro-moment de joie, arrête-toi. 20 secondes. Ferme les yeux si tu peux. Sens-le dans ton corps. Dis-toi : \"J'enregistre ça.\" Ce n'est pas de la pensée positive, c'est de la neuroplasticité intentionnelle.",classe:"vert"},
   ]},
 ];
 
@@ -312,9 +316,9 @@ const inventaireItems=[
 ];
 
 const ecritureQs=[
-  {q:"Quand as-tu ressenti de la joie pour la dernière fois, même brièvement, même en marge ?",sous:"Pas le bonheur. Un éclair de vivant. Un micro-moment.",placeholder:"La dernière fois que j'ai ressenti quelque chose de joyeux c'était..."},
-  {q:"Qu'est-ce qui t'empêche de te laisser aller à la joie : la culpabilité, la fatigue, l'impression de ne pas la mériter ?",sous:"Honnêteté bienveillante, sans jugement.",placeholder:"Ce qui m'empêche de laisser entrer la joie c'est..."},
-  {q:"Comment tu vas faire de la place pour la joie cette semaine, concrètement ?",sous:"Pas un objectif de bonheur. Juste un geste vers quelque chose qui te fait te sentir vivante.",placeholder:"Cette semaine je vais faire de la place pour la joie en..."},
+  {ex:"« Hier, en entendant mon fils rire dans son bain. » « Ce matin, le soleil sur le lac en allant au travail. » « Une chanson à la radio qui m'a fait sourire toute seule. »",q:"Quand as-tu ressenti de la joie pour la dernière fois, même brièvement, même en marge ?",sous:"Pas le bonheur. Un éclair de vivant. Un micro-moment.",placeholder:"La dernière fois que j'ai ressenti quelque chose de joyeux c'était..."},
+  {ex:"« La culpabilité : je me dis que ce n'est pas le moment, qu'il y a trop à faire. » « La peur que ça ne dure pas. » « La fatigue : je n'ai même plus l'énergie d'avoir envie. »",q:"Qu'est-ce qui t'empêche de te laisser aller à la joie : la culpabilité, la fatigue, l'impression de ne pas la mériter ?",sous:"Honnêteté bienveillante, sans jugement.",placeholder:"Ce qui m'empêche de laisser entrer la joie c'est..."},
+  {ex:"« Mettre ma musique préférée en préparant le repas. » « Appeler l'amie qui me fait rire. » « Un quart d'heure dehors, sans but. »",q:"Comment tu vas faire de la place pour la joie cette semaine, concrètement ?",sous:"Pas un objectif de bonheur. Juste un geste vers quelque chose qui te fait te sentir vivante.",placeholder:"Cette semaine je vais faire de la place pour la joie en..."},
 ];
 
 let theorieIdx=0, checkedJoie=new Set(), eIdx=0, eReponses=[];
@@ -350,25 +354,25 @@ function renderTheorie(){
     else if(item.type==='comparaison') el.innerHTML+=`
       <div style="margin-bottom:14px;">
         <div class="hl" style="margin-bottom:10px;">
-          <strong>Un exemple concret :</strong><br><br>
+          <strong>Un exemple concret :</strong><br><br>
           Tu traverses une période difficile, fatiguée, surchargée, des tensions à la maison. Objectivement, tu n'es pas "heureuse".<br><br>
-          Et pourtant : ce matin, en préparant ton café, la lumière frappe ta tasse d'une façon particulière. Ou ton enfant éclate de rire pour rien. Ou tu entends une chanson que tu aimes. Et pendant 10 secondes, tu ressens quelque chose de chaud dans la poitrine.<br><br>
+          Et pourtant : ce matin, en préparant ton café, la lumière frappe ta tasse d'une façon particulière. Ou ton enfant éclate de rire pour rien. Ou tu entends une chanson que tu aimes. Et pendant 10 secondes, tu ressens quelque chose de chaud dans la poitrine.<br><br>
           <strong>Ça, c'est la joie.</strong> Pas le bonheur. Le bonheur, tu ne l'as pas ce matin. Mais la joie, si. Les deux peuvent coexister.
         </div>
         <div style="background:#fdf8ee;border-radius:14px;padding:14px 18px;border:1px solid rgba(245,200,66,0.3);margin-bottom:10px;">
-          <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a030;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">La Joie : ce que c'est vraiment</div>
+          <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a030;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">La Joie : ce que c'est vraiment</div>
           <div style="font-size:13px;color:#5d3d10;line-height:1.75;font-style:normal;">
-            C'est un <strong>éclair dans le corps</strong> : un sourire qui monte tout seul, un réchauffement dans la poitrine, une légèreté soudaine. Elle arrive sans prévenir, souvent dans des moments ordinaires. Elle dure quelques secondes à quelques minutes. Elle ne demande pas que ta vie soit parfaite. Elle peut surgir au milieu d'une journée difficile, au milieu d'une période sombre. Elle est <strong>dans le présent</strong>, pas dans le futur ni dans le passé.
+            C'est un <strong>éclair dans le corps</strong> : un sourire qui monte tout seul, un réchauffement dans la poitrine, une légèreté soudaine. Elle arrive sans prévenir, souvent dans des moments ordinaires. Elle dure quelques secondes à quelques minutes. Elle ne demande pas que ta vie soit parfaite. Elle peut surgir au milieu d'une journée difficile, au milieu d'une période sombre. Elle est <strong>dans le présent</strong>, pas dans le futur ni dans le passé.
           </div>
         </div>
         <div style="background:#f0f5fa;border-radius:14px;padding:14px 18px;border:1px solid rgba(100,140,200,0.3);">
-          <div style="font-family:'Jost',sans-serif;font-size:10px;color:#6080b0;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Le Bonheur : ce que c'est vraiment</div>
+          <div style="font-family:'Jost',sans-serif;font-size:10px;color:#6080b0;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Le Bonheur : ce que c'est vraiment</div>
           <div style="font-size:13px;color:#3d4060;line-height:1.75;font-style:normal;">
-            C'est un <strong>jugement sur sa vie</strong>, "est-ce que ma vie est bonne ?", "est-ce que je suis satisfaite de là où j'en suis ?". C'est une évaluation mentale, souvent conditionnelle : "je serai heureuse quand...", "j'étais heureuse avant...". Il demande des conditions : une situation stable, des objectifs atteints, une vie qui ressemble à ce qu'on voulait. Il est <strong>dans le mental</strong>, pas dans le corps.
+            C'est un <strong>jugement sur sa vie</strong>, "est-ce que ma vie est bonne ?", "est-ce que je suis satisfaite de là où j'en suis ?". C'est une évaluation mentale, souvent conditionnelle : "je serai heureuse quand...", "j'étais heureuse avant...". Il demande des conditions : une situation stable, des objectifs atteints, une vie qui ressemble à ce qu'on voulait. Il est <strong>dans le mental</strong>, pas dans le corps.
           </div>
         </div>
         <div class="hl orange" style="margin-top:10px;">
-          <strong>Le problème :</strong> on nous apprend à chercher le bonheur, cet état stable et durable. Mais le bonheur, ça ne s'attrape pas. Ça s'évalue rétrospectivement. La joie, elle, est accessible maintenant, même dans les jours difficiles. C'est elle qu'on va apprendre à retrouver aujourd'hui.
+          <strong>Le problème :</strong> on nous apprend à chercher le bonheur, cet état stable et durable. Mais le bonheur, ça ne s'attrape pas. Ça s'évalue rétrospectivement. La joie, elle, est accessible maintenant, même dans les jours difficiles. C'est elle qu'on va apprendre à retrouver aujourd'hui.
         </div>
       </div>`;
   });
@@ -441,7 +445,7 @@ function renderE(){
   document.getElementById('e-label').textContent=`Réflexion · ${eIdx+1}/${ecritureQs.length}`;
   document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
   document.getElementById('e-question').textContent=q.q;
-  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-sous').textContent=q.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=q.placeholder;
   document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 18 ✨';
@@ -525,6 +529,52 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j18', TITRE="Retrouver la joie";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+    try{ if(typeof eReponses!=='undefined'&&Array.isArray(eReponses)) eReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

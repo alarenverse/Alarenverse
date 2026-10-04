@@ -63,6 +63,7 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#f5f0fa,#f0f5fa);border-radius:20px;padding:22px;border:1px solid rgba(160,140,200,0.22);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -184,17 +185,17 @@
     <p class="small" style="text-align:center;margin-bottom:20px;">Clique sur les signaux que tu reconnais, dans une relation présente ou passée.</p>
     <div id="signaux-container"></div>
     <div class="hl rouge" style="margin-top:8px;">
-      <strong>Important :</strong> reconnaître une dynamique toxique ne signifie pas qu'il faut nécessairement quitter la relation immédiatement. Ça signifie la voir clairement, et décider en connaissance de cause.
+      <strong>Important :</strong> reconnaître une dynamique toxique ne signifie pas qu'il faut nécessairement quitter la relation immédiatement. Ça signifie la voir clairement, et décider en connaissance de cause.
     </div>
     <div class="hl" style="margin-top:8px;">
-      <strong>Difficile vs toxique :</strong><br><br>
+      <strong>Difficile vs toxique :</strong><br><br>
       Une relation difficile peut traverser des crises et rester fondamentalement saine si les deux personnes peuvent réparer. Une relation toxique se caractérise par la répétition des mêmes schémas blessants, l'absence de remise en question de l'autre, et le fait que tu te perdes systématiquement pour y rester.
     </div>
     <div class="hl vert" style="margin-top:8px;">
       <strong>Une dynamique peut changer, si les deux personnes le veulent vraiment</strong><br><br>
-      C'est une nuance essentielle que l'on oublie souvent : une relation dont la dynamique est douloureuse n'est pas nécessairement condamnée. Si les deux personnes ont conscience du problème, si les deux ont une réelle envie de travailler sur elles-mêmes et sur le lien : la transformation est possible.<br><br>
-      Ce qui ne peut pas changer une dynamique : tes seuls efforts à toi. Si tu es la seule à te remettre en question, à t'adapter, à faire le travail : la relation restera déséquilibrée, quoi que tu fasses.<br><br>
-      La vraie question n'est donc pas seulement "est-ce que cette relation me fait du mal ?" mais aussi "est-ce que l'autre personne est capable et désireuse de faire évoluer cette dynamique avec moi ?" C'est cette réponse qui guide la décision, pas la peur de perdre le lien.
+      C'est une nuance essentielle que l'on oublie souvent : une relation dont la dynamique est douloureuse n'est pas nécessairement condamnée. Si les deux personnes ont conscience du problème, si les deux ont une réelle envie de travailler sur elles-mêmes et sur le lien : la transformation est possible.<br><br>
+      Ce qui ne peut pas changer une dynamique : tes seuls efforts à toi. Si tu es la seule à te remettre en question, à t'adapter, à faire le travail : la relation restera déséquilibrée, quoi que tu fasses.<br><br>
+      La vraie question n'est donc pas seulement "est-ce que cette relation me fait du mal ?" mais aussi "est-ce que l'autre personne est capable et désireuse de faire évoluer cette dynamique avec moi ?" C'est cette réponse qui guide la décision, pas la peur de perdre le lien.
     </div>
     <button class="btn" onclick="showPhase('ecriture')">Passer à l'écriture guidée ✍️</button>
   </div>
@@ -212,6 +213,7 @@
   <div class="card">
     <p class="e-q" id="e-question"></p>
     <p class="e-sous" id="e-sous"></p>
+    <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
     <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
   </div>
@@ -241,7 +243,7 @@
       </div>
       <div style="background:linear-gradient(135deg,#fdf8ee,#fdf5f0);border-radius:14px;padding:16px 18px;border:1px solid rgba(200,168,112,0.2);">
         <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;">Principe 4</div>
-        <div style="font-size:17px;color:#2d2845;margin-bottom:4px;">La vulnérabilité : le ciment de la vraie connexion</div>
+        <div style="font-size:17px;color:#2d2845;margin-bottom:4px;">La vulnérabilité : le ciment de la vraie connexion</div>
         <div style="font-size:13px;color:#806040;line-height:1.65;">La perfection crée de la distance. L'authenticité crée de la connexion. (Dr Brené Brown)</div>
       </div>
     </div>
@@ -260,7 +262,7 @@
       <div id="recap-container"></div>
     </div>
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À faire cette semaine :</strong> Choisis une personne de ta liste "relations nourrissantes" et prends 5 minutes pour lui dire ce que sa présence dans ta vie t'apporte vraiment, par message ou en personne.
+      🔑 <strong>À faire cette semaine :</strong> Choisis une personne de ta liste "relations nourrissantes" et prends 5 minutes pour lui dire ce que sa présence dans ta vie t'apporte vraiment, par message ou en personne.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -270,7 +272,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#706890;"><strong style="color:#2d2845;">Demain, Jour 12 :</strong> la régulation émotionnelle</p>
+    <p style="font-size:14px;color:#706890;"><strong style="color:#2d2845;">Demain, Jour 12 :</strong> la régulation émotionnelle</p>
     <p class="hint" style="margin-top:6px;">19 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -286,14 +288,14 @@ const theorie=[
   ]},
   {emoji:"🪞",titre:"On se construit dans le regard de l'autre",source:"Donald Winnicott / Dr Dan Siegel",contenu:[
     {type:"texte",texte:"Ton identité ne s'est pas fabriquée toute seule, dans le vide. Elle s'est construite dans la relation, d'abord avec tes parents, puis avec tes amies, tes amours, tout ce que tu as traversé avec d'autres."},
-    {type:"hl",texte:"🪞 Winnicott disait une chose magnifique : le tout premier miroir d'un bébé, c'est le visage de sa mère. Quand elle lui sourit en retour, l'enfant apprend \"j'existe, je compte, on me voit\". Et la bonne nouvelle, c'est que ce miroir peut se réparer plus tard, dans d'autres relations. Ton cerveau reste capable de changer toute ta vie."},
+    {type:"hl",texte:"🪞 Winnicott disait une chose magnifique : le tout premier miroir d'un bébé, c'est le visage de sa mère. Quand elle lui sourit en retour, l'enfant apprend \"j'existe, je compte, on me voit\". Et la bonne nouvelle, c'est que ce miroir peut se réparer plus tard, dans d'autres relations. Ton cerveau reste capable de changer toute ta vie."},
     {type:"texte",texte:"Chaque relation importante t'a appris quelque chose sur toi. Les difficiles t'ont montré tes blessures et tes limites. Les douces t'ont montré ta valeur. Les deux sont précieuses, même celles qui ont fait mal portaient une information."},
-    {type:"hl",texte:"🌱 Et retiens bien ça : des relations qui te nourrissent aujourd'hui peuvent réparer des blessures très anciennes. Tu n'es pas condamnée à rejouer éternellement tes premières expériences. On peut réapprendre à être en lien, à tout âge.",classe:"vert"},
+    {type:"hl",texte:"🌱 Et retiens bien ça : des relations qui te nourrissent aujourd'hui peuvent réparer des blessures très anciennes. Tu n'es pas condamnée à rejouer éternellement tes premières expériences. On peut réapprendre à être en lien, à tout âge.",classe:"vert"},
   ]},
   {emoji:"⚡",titre:"Ce qui te nourrit, ce qui t'épuise",source:"Dr Sue Johnson, Hold Me Tight",contenu:[
     {type:"texte",texte:"Toutes les relations ne se valent pas. Une relation qui nourrit n'est pas une relation parfaite, c'est une relation où tu te sens fondamentalement en sécurité, vue, et libre d'être pleinement toi-même."},
-    {type:"hl",texte:"🟢 Une relation qui nourrit : après l'avoir vue, tu te sens plus légère, plus toi. Elle peut te dire des choses difficiles, mais avec douceur. Tu peux te montrer vulnérable sans avoir peur."},
-    {type:"hl",texte:"🔴 Une relation qui épuise : après l'avoir vue, tu te sens vidée, ou plus petite. Tu marches sur des œufs. Tu te perds pour lui plaire. Tu ressens une culpabilité diffuse, sans trop savoir pourquoi.",classe:"rouge"},
+    {type:"hl",texte:"🟢 Une relation qui nourrit : après l'avoir vue, tu te sens plus légère, plus toi. Elle peut te dire des choses difficiles, mais avec douceur. Tu peux te montrer vulnérable sans avoir peur."},
+    {type:"hl",texte:"🔴 Une relation qui épuise : après l'avoir vue, tu te sens vidée, ou plus petite. Tu marches sur des œufs. Tu te perds pour lui plaire. Tu ressens une culpabilité diffuse, sans trop savoir pourquoi.",classe:"rouge"},
     {type:"texte",texte:"Et parfois, une relation épuise non pas parce que la personne est mauvaise, mais simplement parce que la dynamique ne te convient plus. Le reconnaître, ce n'est pas être froide ou ingrate. C'est juste être lucide, avec bienveillance, envers toi-même."},
   ]},
 ];
@@ -304,14 +306,14 @@ const signaux=[
   {titre:"\"Je donne beaucoup, mais je ne reçois presque rien en retour.\"",detail:"Le déséquilibre chronique dans la réciprocité est épuisant. Ce n'est pas égoïste de le remarquer. C'est juste."},
   {titre:"\"Je me sens jugée ou moquée, souvent sous couvert d'humour.\"",detail:"\"C'était juste une blague\" est l'une des phrases les plus utilisées pour minimiser les blessures. Ce que tu ressens est valide, indépendamment de l'intention affichée."},
   {titre:"\"Cette personne critique mes autres relations et cherche à m'isoler.\"",detail:"L'isolement progressif des autres liens est un schéma classique dans les relations toxiques ou contrôlantes. Si quelqu'un cherche à être ta seule source de lien, c'est un signal d'alarme."},
-  {titre:"\"Après chaque conflit, c'est toujours moi qui m'excuse.\"",detail:"Dans une relation saine, les deux personnes peuvent reconnaître leurs torts et réparer. Si c'est toujours toi qui t'adaptes et cèdes : la dynamique n'est pas équilibrée."},
+  {titre:"\"Après chaque conflit, c'est toujours moi qui m'excuse.\"",detail:"Dans une relation saine, les deux personnes peuvent reconnaître leurs torts et réparer. Si c'est toujours toi qui t'adaptes et cèdes : la dynamique n'est pas équilibrée."},
 ];
 
 const ecritureQs=[
-  {q:"Pense à une relation vraiment nourrissante. Qu'est-ce qu'elle t'apporte, et qu'a-t-elle éveillé en toi ?",sous:"Décris cette personne, ce que tu ressens avec elle, ce qu'elle a renforcé ou révélé de toi.",placeholder:"Cette personne c'est... / Avec elle je me sens... / Elle m'a appris que..."},
-  {q:"Y a-t-il une relation qui t'épuise ou t'a épuisée, et reconnais-tu des signaux de toxicité ?",sous:"Pas pour accuser. Pour voir clairement et décider en connaissance de cause.",placeholder:"Cette relation m'épuise parce que... / Je reconnais le signal... / Ce que je veux faire c'est..."},
-  {q:"Y a-t-il une relation que tu aimerais nourrir davantage, et qu'est-ce qui t'en empêche ?",sous:"Parfois c'est le temps, parfois la peur, parfois une ancienne blessure.",placeholder:"La relation que j'aimerais nourrir c'est... / Ce qui m'en empêche c'est..."},
-  {q:"Qu'est-ce que tu veux apporter dans tes relations cette semaine, concrètement ?",sous:"Une action simple et réaliste. Pas une résolution parfaite, juste un geste intentionnel.",placeholder:"Cette semaine je vais..."},
+  {ex:"« Mon amie d'enfance. Avec elle, je peux arriver en pleurs sans me justifier. Elle m'a appris que je n'ai pas besoin d'être parfaite pour être aimée. »",q:"Pense à une relation vraiment nourrissante. Qu'est-ce qu'elle t'apporte, et qu'a-t-elle éveillé en toi ?",sous:"Décris cette personne, ce que tu ressens avec elle, ce qu'elle a renforcé ou révélé de toi.",placeholder:"Cette personne c'est... / Avec elle je me sens... / Elle m'a appris que..."},
+  {ex:"« Une collègue qui ne parle que d'elle et me laisse vidée après chaque pause. » « Une relation où je me sens toujours obligée de me justifier. »",q:"Y a-t-il une relation qui t'épuise ou t'a épuisée, et reconnais-tu des signaux de toxicité ?",sous:"Pas pour accuser. Pour voir clairement et décider en connaissance de cause.",placeholder:"Cette relation m'épuise parce que... / Je reconnais le signal... / Ce que je veux faire c'est..."},
+  {ex:"« Ma sœur. On se voit de moins en moins, et j'ai peur de la déranger. » « Un ancien ami. J'ai honte d'avoir laissé filer le lien. »",q:"Y a-t-il une relation que tu aimerais nourrir davantage, et qu'est-ce qui t'en empêche ?",sous:"Parfois c'est le temps, parfois la peur, parfois une ancienne blessure.",placeholder:"La relation que j'aimerais nourrir c'est... / Ce qui m'en empêche c'est..."},
+  {ex:"« Appeler ma grand-mère dimanche. » « Dire à mon amie ce qu'elle représente pour moi. » « Ne plus répondre tout de suite aux messages qui me vident. »",q:"Qu'est-ce que tu veux apporter dans tes relations cette semaine, concrètement ?",sous:"Une action simple et réaliste. Pas une résolution parfaite, juste un geste intentionnel.",placeholder:"Cette semaine je vais..."},
 ];
 
 let theorieIdx=0,eIdx=0,eReponses=[];
@@ -376,7 +378,7 @@ function renderE(){
   document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
   document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
   document.getElementById('e-question').textContent=q.q;
-  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-sous').textContent=q.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=q.placeholder;
   document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Nourrir sans se perdre 🌱';
@@ -437,6 +439,52 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j11', TITRE="Les relations";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+    try{ if(typeof eReponses!=='undefined'&&Array.isArray(eReponses)) eReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>L'Effet Papillon · Le programme pour les femmes qui portent trop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  html{background:#fffaf4 !important;-webkit-text-size-adjust:100%}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Lora',serif;background:#fffaf4 !important;color:#6d5540;font-size:17.5px;line-height:1.8;font-weight:400}
+  .wrap{max-width:660px;margin:0 auto;padding:0 22px}
+  section{padding:52px 0;background:#fffaf4}
+  .creme{background:#fdf5ec !important}
+  .rose{background:linear-gradient(165deg,#fdf3f5,#fdf8f2) !important}
+
+  /* HERO */
+  .hero{background:linear-gradient(170deg,#fdf2f0 0%,#fbf0f6 45%,#fdf8f0 100%);padding:58px 0 48px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:rgba(240,210,198,0.4)}
+  .hero::after{content:'';position:absolute;bottom:-80px;left:-60px;width:200px;height:200px;border-radius:50%;background:rgba(190,215,200,0.3)}
+  .hero .wrap{position:relative;z-index:1}
+  .butterfly{font-size:42px;display:block;margin-bottom:16px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#b8926e;margin-bottom:16px}
+  h1{font-size:clamp(27px,6.4vw,38px);font-weight:500;line-height:1.3;color:#5e4632;margin-bottom:20px}
+  .hero .accroche{font-size:19px;color:#7a6149;max-width:530px;margin:0 auto 14px;line-height:1.75}
+  .hero .sous{font-size:17px;color:#93795e;max-width:500px;margin:0 auto}
+
+  h2{font-size:clamp(22px,4.9vw,29px);font-weight:500;color:#5e4632;line-height:1.38;margin-bottom:20px}
+  h3{font-size:18.5px;font-weight:500;color:#5e4632;margin-bottom:9px}
+  p{margin-bottom:17px}
+  p:last-child{margin-bottom:0}
+  strong{font-weight:600;color:#5e4632}
+
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c2836a;margin-bottom:12px}
+
+  /* CTA */
+  .cta-zone{text-align:center;padding:14px 0 4px}
+  .cta{display:inline-block;background:linear-gradient(135deg,#c2836a,#cfa876);color:#fff;text-decoration:none;padding:17px 40px;border-radius:50px;font-family:'Lora',serif;font-size:17.5px;font-weight:500;box-shadow:0 6px 24px rgba(194,131,106,0.3);transition:transform 0.2s}
+  .cta:hover{transform:translateY(-2px)}
+  .cta-sous{font-family:'Jost',sans-serif;font-size:13.5px;color:#a8917a;margin-top:12px;line-height:1.6}
+  .cta-inline{margin:32px 0 0}
+
+  /* MIROIR */
+  .miroir ul{list-style:none;margin:22px 0 6px}
+  .miroir li{padding:15px 0 15px 30px;position:relative;font-size:17.5px;line-height:1.72;border-bottom:1px solid rgba(226,209,190,0.65);color:#6d5540}
+  .miroir li:last-child{border-bottom:none}
+  .miroir li::before{content:'';position:absolute;left:8px;top:25px;width:7px;height:7px;border-radius:50%;background:#dba894}
+  .verdict{background:#fff;border-left:3px solid #c2836a;border-radius:0 14px 14px 0;padding:22px 24px;margin-top:24px;font-size:18px;color:#5e4632;box-shadow:0 2px 14px rgba(200,170,140,0.08)}
+
+  .bloc{background:#fff;border-radius:18px;padding:23px 25px;margin-bottom:13px;border:1px solid #f0e2d2}
+  .bloc h3{color:#c2836a;font-size:17px}
+  .bloc p{font-size:16.5px;color:#7a6149;margin-bottom:0}
+
+  /* SEMAINES */
+  .semaines{display:grid;gap:13px;margin-top:24px}
+  .semaine{background:#fff;border-radius:18px;padding:21px 25px;border:1px solid #f0e2d2;position:relative;overflow:hidden}
+  .semaine::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+  .s1::before{background:#e0b2b2}.s2::before{background:#9db8cc}.s3::before{background:#d5b585}.s4::before{background:#a3c4ac}
+  .semaine .num{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b8926e;margin-bottom:5px}
+  .semaine h3{font-size:19.5px;margin-bottom:7px}
+  .semaine p{font-size:15.5px;color:#7a6149;margin-bottom:0;line-height:1.7}
+
+  /* INCLUS */
+  .inclus-grid{display:grid;gap:11px;margin-top:22px}
+  .inclus-item{display:flex;gap:15px;align-items:flex-start;background:#fff;border-radius:14px;padding:17px 19px;border:1px solid #f0e2d2}
+  .inclus-item .ic{font-size:23px;flex-shrink:0;line-height:1.2}
+  .inclus-item .txt h3{font-size:16.5px;margin-bottom:3px}
+  .inclus-item .txt p{font-size:15px;color:#87705a;margin-bottom:0;line-height:1.65}
+
+  /* QUI */
+  .qui-card{background:#fff;border-radius:22px;padding:29px 27px;border:1px solid #f0e2d2}
+  .qui-card p{font-size:16.5px;color:#7a6149}
+  .signature{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.1em;color:#b8926e;margin-top:17px}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid #eeddc9;padding:17px 0}
+  .faq-item:last-child{border-bottom:none}
+  .faq-q{font-size:17px;font-weight:500;color:#5e4632;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px}
+  .faq-q span{color:#c2836a;font-size:22px;flex-shrink:0;transition:transform 0.25s}
+  .faq-item.open .faq-q span{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+  .faq-item.open .faq-a{max-height:420px}
+  .faq-a p{font-size:16px;color:#7a6149;padding-top:11px;margin-bottom:0;line-height:1.75}
+
+  /* FINAL */
+  .final{background:linear-gradient(170deg,#fdf3f0,#fbf0f6);text-align:center;padding:60px 0}
+  .final p{font-size:18px;color:#7a6149;max-width:520px;margin:0 auto 22px}
+
+
+  /* VIDEO */
+  .video-section{padding:0 0 56px;background:linear-gradient(170deg,#faedf5 0%,#fdf8f0 100%)}
+  .video-cadre{position:relative;width:100%;border-radius:22px;overflow:hidden;box-shadow:0 12px 44px rgba(90,68,52,0.16);background:#e8d8cc}
+  .video-cadre.horizontal{padding-top:56.25%}
+  .video-cadre.vertical{padding-top:177.78%;max-width:360px;margin:0 auto}
+  .video-cadre iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+  .video-legende{text-align:center;font-family:'Jost',sans-serif;font-size:14px;color:#9a8570;margin-top:16px}
+
+  footer{text-align:center;padding:32px 22px;font-family:'Jost',sans-serif;font-size:12px;color:#b8a48c;letter-spacing:0.08em}
+  footer a{color:#b8a48c;text-decoration:none;border-bottom:1px solid rgba(184,164,140,0.4)}
+  .mention{font-size:13.5px;color:#a8917a;font-family:'Jost',sans-serif;line-height:1.7;margin-top:26px;padding-top:19px;border-top:1px solid #eeddc9}
+</style>
+</head>
+<body>
+
+<!-- HERO : la douleur d'abord -->
+<div class="hero">
+  <div class="wrap">
+    <span class="butterfly">🦋</span>
+    <div class="surtitre">L'Effet Papillon</div>
+    <h1>Tu tiens tout.<br>Et personne ne voit que tu t'éteins.</h1>
+    <p class="accroche">Tu gères tout. Tout le monde compte sur toi : tes proches, ton travail, tes enfants. Tu portes les besoins et les émotions de chacun. Et toi, dans tout ça, il te reste quoi ?</p>
+    <p class="sous">Tu n'as pas besoin de tenir davantage. Tu as besoin de comprendre pourquoi tu portes autant, et de savoir quoi en faire.</p>
+    <div class="cta-zone" style="margin-top:30px">
+      <a href="LIEN_SKOOL_ICI" class="cta">Je veux commencer</a>
+      <div class="cta-sous">30 jours · accès à vie · communauté incluse</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- VIDEO DE PRESENTATION -->
+<!-- Pour une vidéo filmée à l'horizontale, remplace class="video-cadre vertical" par class="video-cadre horizontal" -->
+<section class="video-section">
+  <div class="wrap">
+    <div class="video-cadre vertical">
+      <iframe src="https://www.youtube-nocookie.com/embed/ID_VIDEO_ICI?rel=0&modestbranding=1&playsinline=1"
+        title="Debora présente L'Effet Papillon"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen loading="lazy"></iframe>
+    </div>
+    <p class="video-legende">Deux minutes pour te présenter le programme, et te dire pourquoi je l'ai créé.</p>
+  </div>
+</section>
+
+<!-- MIROIR -->
+<section class="miroir creme">
+  <div class="wrap">
+    <div class="label">Dis-moi si tu te reconnais</div>
+    <h2>Ce que tu vis, et que tu n'oses dire à personne</h2>
+    <ul>
+      <li>Ton cerveau ne s'arrête jamais. Même la nuit. Même en vacances.</li>
+      <li>Tu dis oui avec la bouche alors que c'est non à l'intérieur.</li>
+      <li>Tu exploses sur tes enfants ou ton conjoint, puis tu culpabilises pendant des jours.</li>
+      <li>Tu te parles durement, d'une façon que tu n'oserais jamais avec une amie.</li>
+      <li>Tu t'effondres d'épuisement le soir, sans jamais t'être vraiment reposée.</li>
+      <li>Et parfois, tu te demandes qui tu es encore, en dehors de tout ce que tu portes.</li>
+    </ul>
+    <div class="verdict">
+      Si tu t'es reconnue dans trois de ces phrases, tu es exactement au bon endroit. Et non, tu n'es ni faible, ni trop sensible, ni mal organisée.
+    </div>
+    <div class="cta-zone cta-inline">
+      <a href="LIEN_SKOOL_ICI" class="cta">C'est moi, je veux avancer</a>
+    </div>
+  </div>
+</section>
+
+<!-- POURQUOI -->
+<section>
+  <div class="wrap">
+    <div class="label">Et pourtant tu as déjà essayé</div>
+    <h2>Pourquoi rien n'a tenu jusqu'ici</h2>
+    <div class="bloc">
+      <h3>Les contenus qui expliquent sans jamais dire quoi faire</h3>
+      <p>Tu comprends mieux, mais ta vie ne change pas d'un centimètre. Comprendre est une étape, pas une destination.</p>
+    </div>
+    <div class="bloc">
+      <h3>Les programmes qui demandent une heure par jour</h3>
+      <p>Tu tiens quatre jours. Puis la vraie vie reprend le dessus, et tu ajoutes un échec de plus à ta liste.</p>
+    </div>
+    <div class="bloc">
+      <h3>Le développement personnel qui culpabilise</h3>
+      <p>« Il suffit de vouloir. » Sauf que non. Et l'entendre quand tu es à bout, ça enfonce au lieu d'aider.</p>
+    </div>
+    <div class="bloc">
+      <h3>Et le fait que ressentir ne suffit pas</h3>
+      <p>On peut passer des années à ressentir sans que rien ne bouge. Ce qui transforme, c'est ce que tu fais de ce que tu ressens.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LA SOLUTION -->
+<section class="rose">
+  <div class="wrap">
+    <div class="label">Ce que je te propose</div>
+    <h2>30 jours, un pas par jour</h2>
+    <p>Une page à ouvrir quand tu veux dans ta journée. Le matin avec ton café, le midi dans ta voiture, ou le soir quand tout le monde dort. Quelques minutes suffisent.</p>
+    <p>Tu lis, tu comprends ce qui se passe en toi, tu fais un exercice, et tu télécharges tes réponses. Rien à caser en plus dans ta journée.</p>
+    <p><strong>Un levier pour te transformer pas à pas, et sur lequel revenir dès que tu en auras besoin.</strong></p>
+
+    <div class="semaines">
+      <div class="semaine s1">
+        <div class="num">Semaine 1 · Jours 1 à 7</div>
+        <h3>Se connaître</h3>
+        <p>Mettre des mots sur tes émotions. Comprendre pourquoi ton corps réagit comme ça. Regarder ton repos, tes limites, ton rapport à ton corps.</p>
+      </div>
+      <div class="semaine s2">
+        <div class="num">Semaine 2 · Jours 8 à 14</div>
+        <h3>Se réguler</h3>
+        <p>Apaiser ta voix critique. Bouger sans performance. Voir ce que tes relations te donnent et ce qu'elles te prennent. Et savoir quoi faire quand ça déborde.</p>
+      </div>
+      <div class="semaine s3">
+        <div class="num">Semaine 3 · Jours 15 à 21</div>
+        <h3>Se délester</h3>
+        <p>Nommer ta charge mentale et la redistribuer pour de vrai. Avancer avec ton cycle. Questionner les croyances qui te limitent sans que tu le saches.</p>
+      </div>
+      <div class="semaine s4">
+        <div class="num">Semaine 4 · Jours 22 à 30</div>
+        <h3>Se retrouver</h3>
+        <p>Faire de ta colère un moteur. Te pardonner. Reconstruire ton estime, clarifier tes valeurs, ressentir la femme que tu as envie d'être.</p>
+      </div>
+    </div>
+
+    <div class="cta-zone cta-inline">
+      <a href="LIEN_SKOOL_ICI" class="cta">Je commence mes 30 jours</a>
+      <div class="cta-sous">Accès immédiat, et à vie</div>
+    </div>
+  </div>
+</section>
+
+<!-- CE QUI EST INCLUS -->
+<section>
+  <div class="wrap">
+    <div class="label">Ce que tu reçois</div>
+    <h2>Tout est à toi, pour toujours</h2>
+    <div class="inclus-grid">
+      <div class="inclus-item">
+        <span class="ic">📖</span>
+        <div class="txt">
+          <h3>Les 30 modules interactifs</h3>
+          <p>Un par jour, accessibles à vie. Tu avances à ton rythme, tu reviens quand tu veux.</p>
+        </div>
+      </div>
+      <div class="inclus-item">
+        <span class="ic">✍️</span>
+        <div class="txt">
+          <h3>Tes réponses téléchargeables</h3>
+          <p>Chaque jour, tu repars avec ce que tu as écrit. Ton carnet de bord, construit au fil des 30 jours.</p>
+        </div>
+      </div>
+      <div class="inclus-item">
+        <span class="ic">🧰</span>
+        <div class="txt">
+          <h3>Le livret de tous les exercices</h3>
+          <p>Ta boîte à outils illustrée, rangée par besoin. Le jour où tu seras submergée, tu ouvres la bonne page.</p>
+        </div>
+      </div>
+      <div class="inclus-item">
+        <span class="ic">🌿</span>
+        <div class="txt">
+          <h3>Deux modules bonus</h3>
+          <p>L'alimentation et le mental. Et un module sur les souffrances féminines peu nommées, avec les ressources d'aide.</p>
+        </div>
+      </div>
+      <div class="inclus-item">
+        <span class="ic">💬</span>
+        <div class="txt">
+          <h3>La communauté</h3>
+          <p>Un espace pour poser tes questions, lire celles des autres, et te rappeler que tu n'es pas seule à traverser ça.</p>
+        </div>
+      </div>
+      <div class="inclus-item">
+        <span class="ic">🎥</span>
+        <div class="txt">
+          <h3>Les lives avec moi</h3>
+          <p>Pour creuser les sujets qui remuent et répondre à tes questions. On avance ensemble, pas chacune dans son coin.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cta-zone cta-inline">
+      <a href="LIEN_SKOOL_ICI" class="cta">Je rejoins le programme</a>
+    </div>
+  </div>
+</section>
+
+<!-- HONNETETE -->
+<section class="creme">
+  <div class="wrap">
+    <div class="label">Parlons franchement</div>
+    <h2>Ce que 30 jours peuvent faire, et ce qu'ils ne peuvent pas</h2>
+    <p>Tu as sûrement déjà lu des promesses de transformation. Moi je préfère te dire les choses comme elles sont.</p>
+
+    <div class="bloc" style="border-left:3px solid #a3c4ac">
+      <h3 style="color:#6a9478">Ce que ces 30 jours font vraiment</h3>
+      <p>Tu comprends ce qui se passe en toi, et pourquoi tu fonctionnes comme ça. Tu repars avec des outils concrets que tu sais utiliser. Tu fais tes premiers gestes différents. Et tu arrêtes de croire que tout ça vient d'un défaut chez toi.</p>
+    </div>
+
+    <div class="bloc" style="border-left:3px solid #dba894">
+      <h3 style="color:#b8765c">Ce qu'ils ne feront pas</h3>
+      <p>Ils ne vont pas effacer des années d'épuisement en un mois. Ils ne vont pas réparer une relation difficile à ta place, ni remplacer un suivi si tu en as besoin.</p>
+    </div>
+
+    <p style="margin-top:20px">Ce qui change vraiment, ce n'est pas seulement ce qui se passe pendant les 30 jours. C'est ce que tu fais des mois suivants, avec ce que tu auras compris.</p>
+    <p><strong>C'est pour ça que tu gardes l'accès à vie.</strong> Tu peux refaire un jour six mois plus tard, quand la vie te remet devant la même difficulté.</p>
+  </div>
+</section>
+
+<!-- QUI -->
+<section class="rose">
+  <div class="wrap">
+    <div class="label">Qui je suis</div>
+    <h2>Je m'appelle Debora</h2>
+    <div class="qui-card">
+      <p>Je suis <strong>infirmière en santé mentale</strong>. Je travaille tous les jours avec des femmes qui craquent, qui tiennent, qui recommencent.</p>
+      <p>Je suis aussi mère. Et j'ai connu ces nuits sans sommeil, ces journées où on donne tout, ces moments où on ne se reconnaît plus dans le miroir.</p>
+      <p>J'ai créé L'Effet Papillon parce que je voyais toujours les deux mêmes extrêmes. D'un côté des contenus qui font du bien mais qui ne reposent sur rien. De l'autre des approches sérieuses mais froides, écrites pour des professionnels.</p>
+      <p>Alors j'ai fait ce qui manquait. Les outils que j'utilise vraiment, traduits dans une langue qui parle à une femme épuisée un mardi soir à 22 heures.</p>
+      <div class="signature">Debora · @alarenverse.coaching</div>
+    </div>
+    <div class="cta-zone cta-inline">
+      <a href="LIEN_SKOOL_ICI" class="cta">Je fais le premier pas</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="label">Les questions que tu te poses</div>
+    <h2>Avant de te décider</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Combien de temps ça me prend chaque jour ?<span>+</span></div>
+      <div class="faq-a"><p>Entre 15 et 25 minutes, à l'heure qui t'arrange. Certains jours moins. Et si tu sautes un jour, tu reprends le lendemain sans rattraper. Le programme est conçu pour une vie chargée, pas pour une vie idéale.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Et si je n'arrive pas à suivre ?<span>+</span></div>
+      <div class="faq-a"><p>Tu gardes l'accès à vie. Tu peux mettre en pause, reprendre trois semaines plus tard, refaire un jour qui t'a marquée. Aucun calendrier imposé, aucune échéance, personne pour te dire que tu es en retard.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">D'où viennent les outils du programme ?<span>+</span></div>
+      <div class="faq-a"><p>Ils s'inspirent d'approches reconnues en psychologie : les thérapies cognitives et comportementales, l'approche somatique, la thérapie d'acceptation et d'engagement, le travail sur l'auto-compassion. Je les ai traduits en français simple et en exercices faisables. Et quand une idée populaire ne repose sur rien de solide, je te le dis.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Est-ce que ça remplace une thérapie ?<span>+</span></div>
+      <div class="faq-a"><p>Non, et je suis très claire là-dessus. L'Effet Papillon est un programme de coaching, pas un soin. Si ce que tu traverses est lourd, s'il dure, si tu ne t'en sors pas seule, entoure-toi d'un professionnel. Les deux peuvent très bien avancer ensemble.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Je n'ai jamais fait ce genre de travail sur moi<span>+</span></div>
+      <div class="faq-a"><p>C'est justement pour toi que je l'ai écrit. Tout est expliqué simplement, sans vocabulaire de spécialiste. Tu n'as besoin d'aucune connaissance préalable.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Je n'ai pas d'enfants, est-ce que c'est pour moi ?<span>+</span></div>
+      <div class="faq-a"><p>Oui. La maternité est évoquée parce qu'elle concerne beaucoup de femmes, mais le programme parle de charge mentale, de limites, de colère, d'estime de soi et de sens. Rien de tout ça ne demande d'être mère.</p></div>
+    </div>
+
+    <div class="mention">
+      L'Effet Papillon est un programme de coaching. Il ne constitue ni un diagnostic, ni un traitement, ni un suivi médical ou psychothérapeutique, et ne remplace pas l'avis d'un professionnel de santé.
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="wrap">
+    <span class="butterfly">🦋</span>
+    <h2>Tu peux continuer comme ça</h2>
+    <p>Tenir, encore. Attendre que ça passe. Espérer que l'année prochaine sera plus calme.</p>
+    <p><strong>Ou décider que ça commence maintenant.</strong></p>
+    <div class="cta-zone">
+      <a href="LIEN_SKOOL_ICI" class="cta">Je rejoins L'Effet Papillon</a>
+      <div class="cta-sous">Accès immédiat · à vie · communauté et lives inclus</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  L'EFFET PAPILLON · <a href="https://www.instagram.com/alarenverse.coaching" target="_blank" rel="noopener">@ALARENVERSE.COACHING</a>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(function(item){
+  item.querySelector('.faq-q').addEventListener('click', function(){
+    item.classList.toggle('open');
+  });
+});
+</script>
+
+</body>
+</html>

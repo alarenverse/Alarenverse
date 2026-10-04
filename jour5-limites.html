@@ -72,6 +72,7 @@
 
   .suite-box{background:linear-gradient(135deg,#fdf0ec,#f5eefa);border-radius:20px;padding:22px;border:1px solid rgba(200,150,180,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -122,7 +123,7 @@
   <div class="progress-wrap">
     <div class="progress-meta">
       <span id="q-label">Quiz · 1/6</span>
-      <span style="font-family:'Jost',sans-serif;">Où en sont tes limites ?</span>
+      <span style="font-family:'Jost',sans-serif;">Où en sont tes limites ?</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
   </div>
@@ -158,8 +159,9 @@
   <div class="card">
     <p class="ecriture-question" id="e-question"></p>
     <p class="ecriture-sous" id="e-sous"></p>
+    <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="Écris librement, sans te censurer..." oninput="checkEcriture()"></textarea>
-    <button class="btn" id="btn-e-next" style="width:100%;margin-top:12px;" disabled onclick="nextEcriture()">Continuer →</button>
+    <button class="btn" id="btn-e-next" style="width:100%;margin-top:12px;" onclick="nextEcriture()">Continuer →</button>
   </div>
 </div>
 
@@ -186,7 +188,7 @@
       <div id="recap-container"></div>
     </div>
     <div class="highlight" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À retenir :</strong> Poser une limite ne détruit pas une relation. Si quelqu'un ne peut pas respecter tes limites, c'est une information précieuse sur cette relation, pas une raison de te sacrifier.
+      🔑 <strong>À retenir :</strong> Poser une limite ne détruit pas une relation. Si quelqu'un ne peut pas respecter tes limites, c'est une information précieuse sur cette relation, pas une raison de te sacrifier.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -196,7 +198,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#906070;"><strong style="color:#5d3040;">Demain, Jour 6 :</strong> prendre soin de son corps avec douceur</p>
+    <p style="font-size:14px;color:#906070;"><strong style="color:#5d3040;">Demain, Jour 6 :</strong> prendre soin de son corps avec douceur</p>
     <p class="hint" style="margin-top:6px;">25 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -206,26 +208,26 @@ const theorie = [
   { emoji:"🧠", titre:"Pourquoi c'est si dur de dire non", intro:null, source:"Dr Harriet Lerner, The Dance of Anger", contenu:[
     {type:"texte",texte:"Si tu n'arrives pas à dire non, ce n'est pas parce que tu es trop gentille ou pas assez forte. On t'a appris ça. Depuis toute petite. Et ce qui a été appris peut se désapprendre."},
     {type:"highlight",texte:"👧 Petites, on nous répète d'être sages, de faire plaisir, de ne pas déranger. \"Sois gentille.\" \"Ne fais pas de peine.\" \"Pense aux autres.\" À force, ces phrases s'impriment si profond qu'elles deviennent une part de nous, au point qu'on ne les entend même plus."},
-    {type:"texte",texte:"Du coup, dire non se met à ressembler à un danger. Ton cerveau associe le refus au risque d'être rejetée, de décevoir, de provoquer la colère de l'autre. Et il réagit comme face à une vraie menace : le corps se contracte, la gorge se serre, les mots restent coincés."},
-    {type:"highlight",texte:"💡 Tu vois ? Ce n'est pas un manque de courage. C'est un vieux câblage, posé par l'éducation. Et un câblage, ça se refait. Petit à petit, avec de la pratique et beaucoup de douceur envers toi.",classe:"violet"},
+    {type:"texte",texte:"Du coup, dire non se met à ressembler à un danger. Ton cerveau associe le refus au risque d'être rejetée, de décevoir, de provoquer la colère de l'autre. Et il réagit comme face à une vraie menace : le corps se contracte, la gorge se serre, les mots restent coincés."},
+    {type:"highlight",texte:"💡 Tu vois ? Ce n'est pas un manque de courage. C'est un vieux câblage, posé par l'éducation. Et un câblage, ça se refait. Petit à petit, avec de la pratique et beaucoup de douceur envers toi.",classe:"violet"},
   ]},
   { emoji:"🪞", titre:"Ce que ça te coûte de ne jamais dire non", intro:null, source:"Dr Brené Brown, Dare to Lead", contenu:[
     {type:"texte",texte:"Quand tu ne poses pas de limites, tu ne te sacrifies pas joyeusement pour les autres. Tu accumules. De la fatigue, de la frustration, du ressentiment qui monte sans bruit. Et un jour, tu finis par donner avec amertume ce que tu aurais tellement voulu donner avec amour."},
     {type:"texte",texte:"C'est ça, le vrai prix. Pas juste d'être débordée, mais de t'éloigner peu à peu des gens que tu aimes, parce qu'à force de tout porter, tu n'as plus rien à donner de joyeux."},
     {type:"stat",texte:"Le burn-out touche davantage les femmes que les hommes, et l'une des causes majeures est justement cette difficulté à poser des limites, au travail comme dans les relations",source:"OMS / Étude Gallup"},
-    {type:"highlight",texte:"🔑 Une limite, ce n'est pas un mur pour tenir les autres à distance. C'est une frontière qui dit où tu finis et où l'autre commence. Et crois-moi : ça protège la relation autant que ça te protège, toi.",classe:"violet"},
+    {type:"highlight",texte:"🔑 Une limite, ce n'est pas un mur pour tenir les autres à distance. C'est une frontière qui dit où tu finis et où l'autre commence. Et crois-moi : ça protège la relation autant que ça te protège, toi.",classe:"violet"},
   ]},
   { emoji:"🧩", titre:"Si tu ne sais même pas où sont tes limites", intro:null, source:"Dr Nedra Tawwab, Set Boundaries, Find Peace", contenu:[
     {type:"texte",texte:"Souvent, si tu n'arrives pas à repérer tes limites, c'est tout simplement parce que personne ne t'a appris à écouter tes propres besoins. On t'a appris l'inverse, à capter ceux des autres, à t'ajuster, à anticiper. Tes besoins à toi sont passés au second plan si longtemps que tu ne les entends plus bien."},
-    {type:"highlight",texte:"💡 Voilà les signaux qu'une limite vient d'être franchie : tu ressors vidée après avoir vu quelqu'un, une colère ou un ressentiment monte sans trop savoir pourquoi, tu dis oui avec la bouche mais c'est non à l'intérieur, et tu t'oublies sans même t'en rendre compte. Apprends à les reconnaître : ce sont tes meilleurs indicateurs."},
-    {type:"texte",texte:"Et rassure-toi : tes limites ne sont pas des règles rigides gravées dans le marbre. Elles bougent avec toi, changent selon les personnes, les moments. Ce qui compte, c'est qu'elles collent à ce qui est vrai pour toi, là, maintenant."},
-    {type:"texte",texte:"Parce qu'une bonne partie de l'anxiété vient de là : du sentiment de n'avoir aucune prise sur ce qu'on laisse entrer dans sa vie. Reprendre ce pouvoir, c'est apaiser quelque chose de profond."},
+    {type:"highlight",texte:"💡 Voilà les signaux qu'une limite vient d'être franchie : tu ressors vidée après avoir vu quelqu'un, une colère ou un ressentiment monte sans trop savoir pourquoi, tu dis oui avec la bouche mais c'est non à l'intérieur, et tu t'oublies sans même t'en rendre compte. Apprends à les reconnaître : ce sont tes meilleurs indicateurs."},
+    {type:"texte",texte:"Et rassure-toi : tes limites ne sont pas des règles rigides gravées dans le marbre. Elles bougent avec toi, changent selon les personnes, les moments. Ce qui compte, c'est qu'elles collent à ce qui est vrai pour toi, là, maintenant."},
+    {type:"texte",texte:"Parce qu'une bonne partie de l'anxiété vient de là : du sentiment de n'avoir aucune prise sur ce qu'on laisse entrer dans sa vie. Reprendre ce pouvoir, c'est apaiser quelque chose de profond."},
   ]},
   { emoji:"💬", titre:"Dire non sans te justifier ni culpabiliser", intro:null, source:"Dr Anne Katherine, Where to Draw the Line", contenu:[
     {type:"texte",texte:"Tu n'as pas à te justifier à chaque non. \"Non\" est une phrase complète à elle seule. Mais je sais qu'au début, quand on réapprend à poser ses limites, c'est vertigineux de s'arrêter là. Alors des formulations douces et honnêtes aident à passer le cap."},
-    {type:"highlight",texte:"🗣️ La différence entre poser une limite et attaquer : une limite parle de toi. \"J'ai besoin d'un peu de temps pour moi ce week-end\", ça, c'est une limite. \"Tu ne me laisses jamais souffler\", ça, c'est un reproche. Une limite n'accuse pas. Elle informe, tout simplement."},
-    {type:"texte",texte:"Et cette culpabilité que tu sens monter après avoir dit non ? Ce n'est pas la preuve que tu as mal fait. C'est juste le signe que tu déranges un vieux réflexe. C'est inconfortable, oui. Mais à chaque non que tu prononces, ça s'allège un peu. Pas du jour au lendemain, mais ça s'allège, je te le promets."},
-    {type:"highlight",texte:"✨ Garde ça avec toi : chaque fois que tu dis non à quelque chose qui ne t'appartient pas, tu dis oui à quelque chose qui te ressemble.",classe:"violet"},
+    {type:"highlight",texte:"🗣️ La différence entre poser une limite et attaquer : une limite parle de toi. \"J'ai besoin d'un peu de temps pour moi ce week-end\", ça, c'est une limite. \"Tu ne me laisses jamais souffler\", ça, c'est un reproche. Une limite n'accuse pas. Elle informe, tout simplement."},
+    {type:"texte",texte:"Et cette culpabilité que tu sens monter après avoir dit non ? Ce n'est pas la preuve que tu as mal fait. C'est juste le signe que tu déranges un vieux réflexe. C'est inconfortable, oui. Mais à chaque non que tu prononces, ça s'allège un peu. Pas du jour au lendemain, mais ça s'allège, je te le promets."},
+    {type:"highlight",texte:"✨ Garde ça avec toi : chaque fois que tu dis non à quelque chose qui ne t'appartient pas, tu dis oui à quelque chose qui te ressemble.",classe:"violet"},
   ]},
 ];
 
@@ -239,10 +241,10 @@ const quizQuestions = [
 ];
 
 const ecritureQuestions = [
-  { q:"Dans quelle situation de ta vie tu dis oui alors que tout en toi crie non ?", sous:"Prends ton temps. Sois honnête avec toi-même.", placeholder:"Écris la situation, le contexte, ce que tu ressens quand tu dis ce oui..." },
-  { q:"Qu'est-ce que tu as peur qu'il se passe si tu poses tes limites dans cette situation ?", sous:"La peur est valide. Nomme-la.", placeholder:"J'ai peur que... / Je redoute que..." },
-  { q:"De quoi as-tu vraiment besoin dans cette relation ou cette situation ?", sous:"Pas ce que tu penses devoir vouloir : ce dont tu as vraiment besoin.", placeholder:"J'ai besoin de... / Ce qui me manque vraiment c'est..." },
-  { q:"Quelle serait la phrase que tu aimerais pouvoir dire, si tu n'avais pas peur ?", sous:"Laisse-toi rêver une limite honnête et courageuse.", placeholder:"Ce que j'aurais envie de dire c'est..." },
+  {ex:"« Quand ma collègue me demande de la remplacer au dernier moment, je dis oui alors que j'avais prévu de voir une amie. » « Quand ma mère appelle pour la troisième fois de la journée, je décroche alors que je n'en peux plus. »", q:"Dans quelle situation de ta vie tu dis oui alors que tout en toi crie non ?", sous:"Prends ton temps. Sois honnête avec toi-même.", placeholder:"Écris la situation, le contexte, ce que tu ressens quand tu dis ce oui..." },
+  {ex:"« Qu'elle me trouve égoïste. » « Qu'il se fâche et que l'ambiance devienne lourde. » « Qu'on ne m'aime plus si je ne suis plus celle qui dit toujours oui. »", q:"Qu'est-ce que tu as peur qu'il se passe si tu poses tes limites dans cette situation ?", sous:"La peur est valide. Nomme-la.", placeholder:"J'ai peur que... / Je redoute que..." },
+  {ex:"« Qu'on me demande avant de décider pour moi. » « Du temps pour moi sans avoir à me justifier. » « Être considérée, pas seulement utile. »", q:"De quoi as-tu vraiment besoin dans cette relation ou cette situation ?", sous:"Pas ce que tu penses devoir vouloir : ce dont tu as vraiment besoin.", placeholder:"J'ai besoin de... / Ce qui me manque vraiment c'est..." },
+  {ex:"« Non, cette fois je ne peux pas. » « Je t'aime, et j'ai besoin de souffler ce week-end. » « Je te réponds demain, je veux y réfléchir. »", q:"Quelle serait la phrase que tu aimerais pouvoir dire, si tu n'avais pas peur ?", sous:"Laisse-toi rêver une limite honnête et courageuse.", placeholder:"Ce que j'aurais envie de dire c'est..." },
 ];
 
 const phrasesTypes = [
@@ -250,7 +252,7 @@ const phrasesTypes = [
   { situation:"Quand tu as besoin de temps seule", phrase:"\"J'ai besoin de temps pour moi ce week-end, je me ressource pour être vraiment présente ensuite.\"", why:"Tu expliques le bénéfice pour la relation, sans te justifier excessivement." },
   { situation:"Quand quelqu'un franchit une limite", phrase:"\"Je veux qu'on continue à bien se parler, et pour ça j'ai besoin que tu ne fasses plus ça.\"", why:"Tu parles de toi et de ton besoin. Tu ne blâmes pas, tu informes." },
   { situation:"Quand on te demande une réponse immédiate", phrase:"\"J'ai besoin d'un peu de temps pour réfléchir avant de te répondre.\"", why:"Tu ne dis pas oui sous pression. Tu prends l'espace de décider vraiment." },
-  { situation:"Au travail, face à une demande excessive", phrase:"\"Je ne peux pas prendre ça en charge en ce moment. On peut voir ensemble ce qui peut être réajusté ?\"", why:"Tu poses ta limite et tu proposes une solution, sans t'excuser d'exister." },
+  { situation:"Au travail, face à une demande excessive", phrase:"\"Je ne peux pas prendre ça en charge en ce moment. On peut voir ensemble ce qui peut être réajusté ?\"", why:"Tu poses ta limite et tu proposes une solution, sans t'excuser d'exister." },
   { situation:"Quand tu te sens coupable d'avoir dit non", phrase:"\"Me respecter n'est pas égoïste. C'est ce qui me permet de donner vraiment.\"", why:"Dis-toi ça à toi-même. Autant de fois que nécessaire." },
 ];
 
@@ -270,7 +272,7 @@ function showPhase(id) {
 
 // Preview
 const pc = document.getElementById('preview-container');
-[{e:'🧠',t:'Pourquoi les femmes ont du mal à dire non'},{e:'🪞',t:"Ce que l'absence de limites coûte vraiment"},{e:'🧩',t:'Identifier où sont tes limites'},{e:'💬',t:'Dire non sans se justifier'},{e:'📋',t:'Quiz, où en sont tes limites ?'},{e:'✍️',t:'Écriture guidée, explorer tes limites'},{e:'💬',t:'Phrases types pour dire non'}].forEach(item=>{
+[{e:'🧠',t:'Pourquoi les femmes ont du mal à dire non'},{e:'🪞',t:"Ce que l'absence de limites coûte vraiment"},{e:'🧩',t:'Identifier où sont tes limites'},{e:'💬',t:'Dire non sans se justifier'},{e:'📋',t:'Quiz, où en sont tes limites ?'},{e:'✍️',t:'Écriture guidée, explorer tes limites'},{e:'💬',t:'Phrases types pour dire non'}].forEach(item=>{
   pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${item.e}</span><span>${item.t}</span></div>`;
 });
 
@@ -338,7 +340,7 @@ function showQuizResults() {
   const max=quizQuestions.length*5;
   const pct=total/max;
   let msg;
-  if(pct<=0.35) msg="Tes limites sont très fragilisées en ce moment. Tu te mets souvent de côté pour les autres. Ce programme va t'aider à te retrouver : une limite à la fois. Tu mérites d'exister pleinement.";
+  if(pct<=0.35) msg="Tes limites sont très fragilisées en ce moment. Tu te mets souvent de côté pour les autres. Ce programme va t'aider à te retrouver : une limite à la fois. Tu mérites d'exister pleinement.";
   else if(pct<=0.55) msg="Tu as conscience de l'importance des limites, mais tu peines encore à les poser vraiment. C'est normal, c'est un apprentissage. Tu es sur le bon chemin.";
   else if(pct<=0.75) msg="Tu poses des limites dans certains domaines, mais d'autres restent des zones floues. Continue à t'écouter, tu développes quelque chose de précieux.";
   else msg="Tes limites sont globalement bien posées. Continue à les nourrir et à les affiner, c'est un travail de toute une vie, jamais terminé.";
@@ -359,22 +361,21 @@ function renderEcriture() {
   document.getElementById('e-label').textContent=`Écriture · ${ecritureIdx+1}/${ecritureQuestions.length}`;
   document.getElementById('e-progress').style.width=((ecritureIdx+1)/ecritureQuestions.length*100)+'%';
   document.getElementById('e-question').textContent=e.q;
-  document.getElementById('e-sous').textContent=e.sous;
+  document.getElementById('e-sous').textContent=e.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=e.ex?('Par exemple : '+e.ex):'';x.style.display=e.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=e.placeholder;
-  document.getElementById('btn-e-next').disabled=true;
+  /* libre */
   const isLast=ecritureIdx===ecritureQuestions.length-1;
   document.getElementById('btn-e-next').textContent=isLast?'Voir les phrases types 💬':'Continuer →';
 }
 
 function checkEcriture() {
-  document.getElementById('btn-e-next').disabled=!document.getElementById('e-textarea').value.trim();
+  /* libre */
 }
 
 function nextEcriture() {
   const val=document.getElementById('e-textarea').value.trim();
-  if(!val)return;
-  ecritureReponses.push({q:ecritureQuestions[ecritureIdx].q,r:val});
+  if(val) ecritureReponses.push({q:ecritureQuestions[ecritureIdx].q,r:val});
   if(ecritureIdx<ecritureQuestions.length-1){ecritureIdx++;renderEcriture();window.scrollTo(0,0);}
   else{renderPhrases();showPhase('phrases');}
 }
@@ -433,6 +434,52 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j5', TITRE="Poser ses limites";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+    try{ if(typeof ecritureReponses!=='undefined'&&Array.isArray(ecritureReponses)) ecritureReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

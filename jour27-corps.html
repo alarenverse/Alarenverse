@@ -63,6 +63,7 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#fdf0f5,#f5f0fa);border-radius:20px;padding:22px;border:1px solid rgba(200,100,150,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -78,7 +79,7 @@
     <span class="emoji-hero">🌸</span>
     <div class="label">Jour 27 · Le rapport au corps</div>
     <h2>Ton corps n'est pas un problème à résoudre, c'est ta maison</h2>
-    <p>On apprend aux femmes très tôt à regarder leur corps de l'extérieur : l'évaluer, le comparer, le corriger. Rarement à l'habiter. Aujourd'hui on explore cette relation, et on commence à la transformer.</p>
+    <p>On apprend aux femmes très tôt à regarder leur corps de l'extérieur : l'évaluer, le comparer, le corriger. Rarement à l'habiter. Aujourd'hui on explore cette relation, et on commence à la transformer.</p>
     <p class="small" style="margin-bottom:20px;">Ce jour peut toucher à des endroits sensibles. Vas-y à ton propre rythme, avec bienveillance.</p>
     <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 🌸</button>
@@ -117,8 +118,8 @@
     <div id="zones-container"></div>
 
     <div class="hl vert" style="margin-top:8px;">
-      <strong>Le changement de perspective :</strong><br><br>
-      On passe toute notre vie à regarder notre corps. Est-il assez mince, assez ferme, assez jeune ? Et si on essayait de l'habiter à la place ? Sentir ses pieds sur le sol. Sentir son ventre se soulever. Sentir sa chaleur. Pas évaluer. Être.
+      <strong>Le changement de perspective :</strong><br><br>
+      On passe toute notre vie à regarder notre corps. Est-il assez mince, assez ferme, assez jeune ? Et si on essayait de l'habiter à la place ? Sentir ses pieds sur le sol. Sentir son ventre se soulever. Sentir sa chaleur. Pas évaluer. Être.
     </div>
 
     <button class="btn" onclick="showPhase('ecriture')">L'écriture de soi ✍️</button>
@@ -134,26 +135,30 @@
     <p class="small" style="text-align:center;margin-bottom:20px;">Réponds avec honnêteté, sans censure et sans jugement.</p>
 
     <div class="e-bloc">
-      <div class="e-q">Quel est ton premier souvenir d'une pensée négative sur ton corps ? Et d'où venait-elle ?</div>
+      <div class="e-q">Quel est ton premier souvenir d'une pensée négative sur ton corps ? Et d'où venait-elle ?</div>
       <div class="e-sous">Un commentaire, un regard, un message médiatique... La blessure a souvent une origine précise.</div>
+      <div class="exemple">Par exemple : « À 12 ans, ma tante m'a dit de faire attention, que je prenais des hanches. » « Les magazines dans la salle d'attente, avec les avant/après. »</div>
       <textarea id="e1" rows="4" placeholder="Mon premier souvenir c'est... / Cette pensée venait de..." oninput="checkEcriture()"></textarea>
     </div>
 
     <div class="e-bloc">
-      <div class="e-q">Quelle partie de ton corps as-tu le plus de mal à accepter ? Et qu'est-ce que tu lui reproches vraiment ?</div>
-      <div class="e-sous">Derrière le reproche physique, il y a souvent quelque chose de plus profond : une peur, une honte, un message reçu.</div>
+      <div class="e-q">Quelle partie de ton corps as-tu le plus de mal à accepter ? Et qu'est-ce que tu lui reproches vraiment ?</div>
+      <div class="e-sous">Derrière le reproche physique, il y a souvent quelque chose de plus profond : une peur, une honte, un message reçu.</div>
+      <div class="exemple">Par exemple : « Mon ventre. Je lui reproche de ne plus être plat. Au fond, j'ai peur de ne plus être désirable. » « Mes cuisses. Au fond, elles me rappellent les moqueries à l'école. »</div>
       <textarea id="e2" rows="4" placeholder="La partie de mon corps que j'ai le plus de mal à accepter c'est... / Ce que je lui reproche vraiment c'est..." oninput="checkEcriture()"></textarea>
     </div>
 
     <div class="e-bloc">
-      <div class="e-q">Qu'est-ce que ton corps a traversé ? Et pour quoi mérite-t-il d'être remercié ?</div>
+      <div class="e-q">Qu'est-ce que ton corps a traversé ? Et pour quoi mérite-t-il d'être remercié ?</div>
       <div class="e-sous">Maternité, maladie, fatigue chronique, douleur, vieillissement, stress... Ton corps a tenu debout.</div>
+      <div class="exemple">Par exemple : « Une grossesse, une opération, des années de nuits courtes. Il mérite d'être remercié de m'avoir portée malgré tout. » « Un burn-out. Il a tenu, même quand je ne l'écoutais pas. »</div>
       <textarea id="e3" rows="4" placeholder="Mon corps a traversé... / Pour ça, il mérite d'être remercié parce que..." oninput="checkEcriture()"></textarea>
     </div>
 
     <div class="e-bloc">
-      <div class="e-q">Comment voudrais-tu parler de ton corps ? À toi-même, et devant tes enfants ou les personnes que tu aimes ?</div>
-      <div class="e-sous">On transmet notre rapport au corps. Qu'est-ce que tu veux transmettre ?</div>
+      <div class="e-q">Comment voudrais-tu parler de ton corps ? À toi-même, et devant tes enfants ou les personnes que tu aimes ?</div>
+      <div class="e-sous">On transmet notre rapport au corps. Qu'est-ce que tu veux transmettre ?</div>
+      <div class="exemple">Par exemple : « Arrêter de dire je suis énorme devant ma fille. » « Parler de ce que mon corps me permet de faire, pas de ce à quoi il ressemble. »</div>
       <textarea id="e4" rows="4" placeholder="Je voudrais parler de mon corps en disant... / Je veux transmettre..." oninput="checkEcriture()"></textarea>
     </div>
 
@@ -172,7 +177,7 @@
       <div id="recap-container"></div>
     </div>
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À pratiquer :</strong> Chaque matin devant le miroir, au lieu de chercher ce qui ne va pas, pose ta main sur une partie de ton corps et dis-lui merci pour quelque chose qu'elle fait. Un geste. Cinq secondes. Ça change le dialogue intérieur, lentement mais sûrement.
+      🔑 <strong>À pratiquer :</strong> Chaque matin devant le miroir, au lieu de chercher ce qui ne va pas, pose ta main sur une partie de ton corps et dis-lui merci pour quelque chose qu'elle fait. Un geste. Cinq secondes. Ça change le dialogue intérieur, lentement mais sûrement.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -182,7 +187,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#906070;"><strong style="color:#3d1d30;">Demain, Jour 28 :</strong> la créativité comme soin</p>
+    <p style="font-size:14px;color:#906070;"><strong style="color:#3d1d30;">Demain, Jour 28 :</strong> la créativité comme soin</p>
     <p class="hint" style="margin-top:6px;">3 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -193,27 +198,27 @@ const theorie=[
     {type:"texte",texte:"Le rapport difficile des femmes à leur corps n'est pas naturel, il est construit. Dès l'enfance, les filles apprennent à regarder leur corps de l'extérieur, à l'évaluer selon des standards extérieurs, à le voir comme un objet à améliorer plutôt qu'une maison à habiter."},
     {type:"stat",texte:"L'insatisfaction du corps commence très tôt chez les filles, parfois dès l'école primaire. À l'adolescence, une grande majorité d'entre elles se disent mal dans leur corps. Et les réseaux sociaux n'arrangent rien",source:"Recherches sur l'image corporelle"},
     {type:"hl",texte:"📱 Les réseaux sociaux ont amplifié ce phénomène de façon dramatique. Des documents internes de Facebook, révélés par la presse, ont montré que l'entreprise savait qu'Instagram abîme le rapport au corps d'une part importante des adolescentes. Les filtres, les retouches et les corps \"parfaits\" créent des standards impossibles qui génèrent une honte chronique.",classe:"rouge"},
-    {type:"texte",texte:"Le Dr Susie Orbach décrit ce phénomène comme l'\"objectification\" : le fait d'apprendre à se voir soi-même comme un objet plutôt qu'un sujet. Cette auto-objectification a des effets mesurables sur la santé mentale : anxiété, dépression, troubles alimentaires, et une relation dissociée au corps."},
+    {type:"texte",texte:"Le Dr Susie Orbach décrit ce phénomène comme l'\"objectification\" : le fait d'apprendre à se voir soi-même comme un objet plutôt qu'un sujet. Cette auto-objectification a des effets mesurables sur la santé mentale : anxiété, dépression, troubles alimentaires, et une relation dissociée au corps."},
     {type:"hl",texte:"💡 Ce n'est pas une fragilité. C'est le résultat d'une pression culturelle systématique, répétée depuis l'enfance. Reconnaître l'origine extérieure de ce regard critique est la première étape pour commencer à le transformer.",classe:"vert"},
   ]},
   {emoji:"🧠",titre:"L'image corporelle et le corps réel",source:"Dr Thomas Cash",contenu:[
     {type:"texte",texte:"L'image corporelle n'est pas une photo fidèle de ton corps. C'est une construction mentale, teintée d'émotions, de souvenirs, de messages reçus et de biais cognitifs. Ce que tu vois dans le miroir n'est pas ton corps réel. C'est ton corps filtré par tout ce que tu crois de toi-même."},
-    {type:"hl",texte:"🧠 Le cerveau construit l'image du corps à partir de plusieurs sources simultanées : les sensations physiques (proprioception), les perceptions visuelles, les souvenirs émotionnels liés au corps, et les jugements appris. Ces sources ne sont pas toujours cohérentes, et les jugements appris peuvent déformer radicalement la perception."},
+    {type:"hl",texte:"🧠 Le cerveau construit l'image du corps à partir de plusieurs sources simultanées : les sensations physiques (proprioception), les perceptions visuelles, les souvenirs émotionnels liés au corps, et les jugements appris. Ces sources ne sont pas toujours cohérentes, et les jugements appris peuvent déformer radicalement la perception."},
     {type:"stat",texte:"Quand l'image de son corps est très abîmée, se regarder dans un miroir déclenche dans le cerveau la même alerte qu'une menace réelle. Le corps devient alors quelque chose dont on se protège, au lieu d'un endroit où habiter",source:"Recherche en psychiatrie"},
-    {type:"hl",texte:"💡 Ce que ça signifie : la honte corporelle n'est pas une réponse rationnelle à une réalité objective. C'est une réponse émotionnelle à une image construite. Et comme toute construction mentale, elle peut être déconstruite et reconstruite différemment.",classe:"or"},
+    {type:"hl",texte:"💡 Ce que ça signifie : la honte corporelle n'est pas une réponse rationnelle à une réalité objective. C'est une réponse émotionnelle à une image construite. Et comme toute construction mentale, elle peut être déconstruite et reconstruite différemment.",classe:"or"},
   ]},
   {emoji:"🏠",titre:"Renouer avec son corps, le passer de jugé à habité",source:"Dr Bessel van der Kolk et Dr Peter Levine",contenu:[
-    {type:"texte",texte:"La plupart des femmes ont une relation au corps qui passe essentiellement par le regard : comment il paraît. Rarement par la sensation : comment il se sent. Cette dissociation entre être dans son corps et regarder son corps est au cœur de beaucoup de souffrances."},
-    {type:"hl",texte:"🏠 Habiter son corps plutôt que le juger, c'est passer de la question \"comment est-ce que j'ai l'air ?\" à \"comment est-ce que je me sens ?\". Ce changement de perspective est le cœur du travail somatique, et c'est ce qu'on pratique depuis le Jour 3 avec la respiration, le Jour 6 avec le scan corporel, et le Jour 9 avec le mouvement."},
+    {type:"texte",texte:"La plupart des femmes ont une relation au corps qui passe essentiellement par le regard : comment il paraît. Rarement par la sensation : comment il se sent. Cette dissociation entre être dans son corps et regarder son corps est au cœur de beaucoup de souffrances."},
+    {type:"hl",texte:"🏠 Habiter son corps plutôt que le juger, c'est passer de la question \"comment est-ce que j'ai l'air ?\" à \"comment est-ce que je me sens ?\". Ce changement de perspective est le cœur du travail somatique, et c'est ce qu'on pratique depuis le Jour 3 avec la respiration, le Jour 6 avec le scan corporel, et le Jour 9 avec le mouvement."},
     {type:"texte",texte:"Le Dr van der Kolk a documenté comment les blessures, y compris celles de l'humiliation corporelle répétée, se loge dans le corps et crée une dissociation. Renouer avec les sensations du corps, apprendre à l'écouter plutôt qu'à le juger, est l'un des chemins de guérison les plus directs."},
     {type:"hl",texte:"🌸 La neutralité corporelle est un objectif bien plus accessible que l'amour inconditionnel de son corps, qui peut sembler hors de portée. Ne pas aimer chaque centimètre de soi. Juste cesser de le haïr. Juste lui permettre d'exister sans verdict permanent.",classe:"vert"},
-    {type:"hl",texte:"💡 Et si la question n'était pas \"est-ce que j'aime mon corps ?\" mais \"est-ce que je peux lui faire confiance ? Est-ce que je peux l'écouter ? Est-ce que je peux le remercier pour ce qu'il fait ?\" Ces questions ouvrent un espace différent.",classe:"violet"},
+    {type:"hl",texte:"💡 Et si la question n'était pas \"est-ce que j'aime mon corps ?\" mais \"est-ce que je peux lui faire confiance ? Est-ce que je peux l'écouter ? Est-ce que je peux le remercier pour ce qu'il fait ?\" Ces questions ouvrent un espace différent.",classe:"violet"},
   ]},
 ];
 
 const zones=[
   {titre:"Mes jambes",msg:"Elles me portent. Chaque jour, sans réclamer de remerciement.",detail:"Elles t'ont portée quand tu étais épuisée, elles t'ont amenée là où tu devais aller, elles ont couru, marché, dansé, tenu debout. Quelle que soit leur forme, leur taille, leurs cicatrices, elles font leur travail.",bg:"#fdf0f5",border:"rgba(200,100,150,0.3)"},
-  {titre:"Mon ventre",msg:"Il a digéré, respiré, peut-être porté une vie.",detail:"Le ventre est souvent la zone la plus jugée et la plus maltraitée. Et c'est aussi la zone la plus vivante : elle respire, elle digère, elle ressent avant même que le mental comprenne. Et pour certaines, elle a porté, nourri, donné la vie.",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)"},
+  {titre:"Mon ventre",msg:"Il a digéré, respiré, peut-être porté une vie.",detail:"Le ventre est souvent la zone la plus jugée et la plus maltraitée. Et c'est aussi la zone la plus vivante : elle respire, elle digère, elle ressent avant même que le mental comprenne. Et pour certaines, elle a porté, nourri, donné la vie.",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)"},
   {titre:"Mes bras et mes mains",msg:"Ils ont créé, consolé, construit, tenu.",detail:"Tes mains ont préparé des repas, écrit des messages d'amour, consolé un enfant qui pleurait, créé quelque chose. Tes bras ont enlacé. Peu importe leur forme, ce qu'ils ont donné est réel.",bg:"#eaf5f0",border:"rgba(128,200,168,0.3)"},
   {titre:"Ma poitrine et mon cœur",msg:"Ils ont aimé, ressenti, battu à travers tout.",detail:"Ton cœur bat environ 100 000 fois par jour sans que tu aies à y penser. Ta poitrine a porté des émotions, des deuils, des joies, des peurs. Elle a tenu debout sous des poids que personne ne voyait.",bg:"#fdf8ee",border:"rgba(200,168,112,0.3)"},
   {titre:"Mon visage",msg:"Il a exprimé ce que les mots ne pouvaient pas dire.",detail:"Ton visage a souri à tes enfants, pleuré avec des amis, exprimé de la compassion, de la colère, de la tendresse. Il porte les traces du temps, et chaque trace est une histoire vécue. Ce n'est pas une imperfection. C'est une vie.",bg:"#fde8e6",border:"rgba(232,133,122,0.3)"},
@@ -322,6 +327,51 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j27', TITRE="Le rapport au corps";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

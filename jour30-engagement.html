@@ -57,6 +57,11 @@
   .recap-r{font-size:16px;color:#3d2d50;line-height:1.7}
   .suite-box{background:linear-gradient(135deg,#f5f0fa,#f0f8f5);border-radius:20px;padding:24px;border:1px solid rgba(160,128,200,0.2);text-align:center;margin-top:16px;max-width:580px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
+  .mm-box{background:rgba(255,255,255,0.72);border:1px dashed rgba(160,130,170,0.55);border-radius:16px;padding:16px 18px;margin:0 0 22px;text-align:left}
+  .mm-titre{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.75;margin:12px 0 3px}
+  .mm-r{font-size:15.5px;font-style:italic;line-height:1.6;margin-bottom:4px}
+  .btn-carnet{background:linear-gradient(135deg,#b0a0d0,#c9a0c2)!important}
 </style>
 </head>
 <body>
@@ -87,7 +92,7 @@
     <span class="emoji-hero">⚓</span>
     <h2>Mes rituels d'ancrage</h2>
     <p>Un rituel d'ancrage ce n'est pas une contrainte supplémentaire. C'est un point de retour, quelque chose de suffisamment simple pour être fait même les jours difficiles, et suffisamment régulier pour devenir automatique.</p>
-    <p>La science des habitudes est claire là-dessus : ce n'est pas l'intensité qui crée le changement durable, c'est la régularité. Même une chose. Même 5 minutes. Faite chaque jour, elle recâble progressivement le cerveau.</p>
+    <p>La science des habitudes est claire là-dessus : ce n'est pas l'intensité qui crée le changement durable, c'est la régularité. Même une chose. Même 5 minutes. Faite chaque jour, elle recâble progressivement le cerveau.</p>
     <p class="note" style="text-align:center;margin-bottom:20px;">Choisis 2 ou 3 rituels maximum. Ceux qui te semblent faisables même les jours où tu es épuisée, pas ceux qui te semblent idéaux.</p>
 
     <div id="rituels-container"></div>
@@ -105,27 +110,31 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">🎯</span>
     <h2>Mon engagement envers moi</h2>
+    <div class="mm-box" id="mes-mots-bilans" style="display:none"></div>
     <p>Pas une promesse que tu vas tenir à la lettre. Un cap. Une intention. Quelque chose qui te dit dans quelle direction tu veux aller, et à quoi tu peux revenir les jours où tu te perds.</p>
     <p class="note" style="text-align:center;margin-bottom:20px;">Réponds honnêtement. Ce que tu écris ici c'est pour toi.</p>
 
     <div class="engagement-bloc">
       <div class="engagement-label">Ce que je garde</div>
-      <div class="engagement-q">Quelle est la pratique ou la prise de conscience de ces 30 jours que tu ne veux surtout pas perdre ?</div>
+      <div class="engagement-q">Quelle est la pratique ou la prise de conscience de ces 30 jours que tu ne veux surtout pas perdre ?</div>
       <div class="engagement-sous">Une seule suffit. La vraie, celle qui a changé quelque chose.</div>
+      <div class="exemple">Par exemple : « Les quatre questions : qu'est-ce que je ressens, où, à combien, de quoi j'ai besoin. » « Me parler comme à une amie. »</div>
       <textarea id="e1" rows="3" placeholder="Ce que je veux absolument garder c'est..." oninput="checkEngagement()"></textarea>
     </div>
 
     <div class="engagement-bloc">
       <div class="engagement-label">Ce que je déleste</div>
-      <div class="engagement-q">Qu'est-ce que tu veux arrêter de te faire : une façon de te parler, une habitude, une croyance que tu traînes ?</div>
+      <div class="engagement-q">Qu'est-ce que tu veux arrêter de te faire : une façon de te parler, une habitude, une croyance que tu traînes ?</div>
       <div class="engagement-sous">Pas une résolution parfaite. Juste une chose que tu déposes, parce qu'elle t'alourdit.</div>
+      <div class="exemple">Par exemple : « Me traiter d'idiote quand je fais une erreur. » « Répondre aux messages à 23 h. » « Croire que je dois tout gérer seule. »</div>
       <textarea id="e2" rows="3" placeholder="Ce que je veux déposer c'est..." oninput="checkEngagement()"></textarea>
     </div>
 
     <div class="engagement-bloc">
       <div class="engagement-label">Ma promesse</div>
-      <div class="engagement-q">Complete cette phrase, depuis ce que tu ressens vraiment, pas ce que tu penses qu'il faudrait dire :</div>
+      <div class="engagement-q">Complete cette phrase, depuis ce que tu ressens vraiment, pas ce que tu penses qu'il faudrait dire :</div>
       <div class="engagement-sous">"Je m'engage envers moi-même à..."</div>
+      <div class="exemple">Par exemple : « Je m'engage envers moi-même à m'arrêter trois fois par jour pour me demander comment je vais. » « Je m'engage à dire non sans me justifier. »</div>
       <textarea id="e3" rows="3" placeholder="Je m'engage envers moi-même à..." oninput="checkEngagement()"></textarea>
     </div>
 
@@ -143,6 +152,7 @@
 
     <div class="lettre-zone">
       <div class="lettre-debut">Chère moi,</div>
+      <div class="exemple">Par exemple : « Si tu lis cette lettre, c'est peut-être que c'est difficile en ce moment. Souviens-toi du jour où tu as osé dire non et où rien ne s'est effondré. Tu sais faire. Respire. »</div>
       <textarea class="lettre-textarea" id="lettre" placeholder="Si tu lis cette lettre c'est peut-être parce que c'est difficile en ce moment...&#10;&#10;Je veux te rappeler que...&#10;&#10;Ce que j'ai appris sur toi pendant ces 30 jours c'est...&#10;&#10;Ce que tu mérites de te dire les jours difficiles c'est...&#10;&#10;Ce qui peut t'aider quand tout semble trop lourd c'est..."></textarea>
       <div class="lettre-fin">Avec toute la douceur que tu mérites,<br>Toi.</div>
     </div>
@@ -157,7 +167,7 @@
     <span class="emoji-hero">⚓</span>
     <h2>L'ancrage commence maintenant.</h2>
     <p>Ce que tu viens de faire en 30 jours, regarder tes émotions, ton corps, tes relations, tes croyances, tes valeurs, la plupart des gens ne le font jamais. Pas par manque de volonté. Par manque d'espace et d'outils.</p>
-    <p>Tu as maintenant les deux. Ce qui se passe ensuite dépend d'une seule chose : est-ce que tu reviens à ce que tu as construit quand c'est difficile ? Pas quand tout va bien. Quand tout va mal.</p>
+    <p>Tu as maintenant les deux. Ce qui se passe ensuite dépend d'une seule chose : est-ce que tu reviens à ce que tu as construit quand c'est difficile ? Pas quand tout va bien. Quand tout va mal.</p>
     <p>Les rituels que tu as choisis, même un seul pratiqué régulièrement, vont faire plus pour ta santé mentale sur le long terme que ces 30 jours intensifs. C'est la régularité qui ancre. Pas l'intensité.</p>
 
     <div style="background:linear-gradient(135deg,#f5f0fa,#f0f8f5);border-radius:16px;padding:22px;border:1px solid rgba(160,128,200,0.2);text-align:left;margin-top:16px;">
@@ -174,11 +184,20 @@
       📥 Télécharger mes réponses
     </button>
     <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+    <button class="btn btn-carnet" onclick="telechargerCarnet()" style="margin-top:14px;">📖 Mon carnet complet</button>
+    <p style="font-size:13px;opacity:0.75;text-align:center;margin-top:6px;font-family:'Jost',sans-serif;">Toutes tes réponses depuis le jour 1, réunies dans un seul fichier. Il contient ce qui a été gardé sur cet appareil.</p>
+
+    <div class="mm-box" style="text-align:center;border-style:solid;margin-top:18px;">
+      <div class="label" style="margin-bottom:6px;">🦋 Ton chemin depuis le jour 1</div>
+      <p style="font-size:16px;margin-bottom:12px;">Refais le questionnaire du premier jour. Tu verras ta toile d'aujourd'hui posée sur celle du début.</p>
+      <a href="jour1-questionnaire.html#j30" class="btn" style="display:inline-block;text-decoration:none;">Voir mon avant/après</a>
+    </div>
+
   </div>
   <div class="suite-box">
     <div style="font-size:28px;margin-bottom:10px;">✨</div>
     <p style="font-size:18px;color:#3d2d50;margin-bottom:8px;"><strong>Tu as terminé le programme.</strong></p>
-    <p style="font-size:16px;color:#7d6090;margin-bottom:4px;">Deux modules bonus t'attendent si tu veux aller plus loin :</p>
+    <p style="font-size:16px;color:#7d6090;margin-bottom:4px;">Deux modules bonus t'attendent si tu veux aller plus loin :</p>
     <p style="font-size:15px;color:#9a84a8;font-family:'Jost',sans-serif;">🥗 Alimentation & santé mentale<br>🧠 Anxiété · Burn-out · Solitude · Post-partum</p>
   </div>
 </div>
@@ -191,7 +210,7 @@ const rituels=[
   {nom:"Un micro-moment de joie",desc:"Le repérer. Le nommer. Le savourer 20 secondes avant de passer à autre chose. Pas le partager, juste le garder pour toi un instant.",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.25)"},
   {nom:"Bouger mon corps autrement que pour brûler des calories",desc:"Danser seule dans la cuisine. Marcher sans destination. Étirer ce qui est tendu. Pas pour une raison, juste parce que ton corps mérite d'être habité, pas seulement géré.",couleur:"#7090c0",bg:"#eef4fb",border:"rgba(112,144,192,0.25)"},
   {nom:"Relire mes valeurs une fois par semaine",desc:"Pas longtemps. Juste se souvenir de ce qui compte vraiment. Pour que les choix de la semaine soient un peu plus alignés avec qui tu veux être.",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.25)"},
-  {nom:"Me parler comme à quelqu'un que j'aime",desc:"Quand la voix critique monte, remarquer. Et demander : est-ce que je dirais ça à une amie ? Si non, changer le ton. Pas toujours facile. Mais possible.",couleur:"#60a880",bg:"#eaf5f0",border:"rgba(96,168,128,0.25)"},
+  {nom:"Me parler comme à quelqu'un que j'aime",desc:"Quand la voix critique monte, remarquer. Et demander : est-ce que je dirais ça à une amie ? Si non, changer le ton. Pas toujours facile. Mais possible.",couleur:"#60a880",bg:"#eaf5f0",border:"rgba(96,168,128,0.25)"},
   {nom:"Poser une limite par semaine",desc:"Une seule. Même petite. Dire non à quelque chose qui te vide. Dire oui à quelque chose qui te nourrit. Chaque semaine, une fois. C'est suffisant pour que ça devienne naturel.",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.25)"},
 ];
 
@@ -295,5 +314,117 @@ function telechargerReponses(){
 }
 
 </script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j30', TITRE="Mon engagement envers moi";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
+</script>
+<script>
+/* Carnet du programme : relire ses mots, télécharger tout son parcours */
+var LABELS_J1=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"];
+function carnetLire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
+function carnetEsc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+function carnetCourt(t,n){t=String(t);return t.length>n?t.slice(0,n).replace(/\s+\S*$/,'')+'…':t;}
+function afficherMesMots(id,jours,titre,intro){
+  var el=document.getElementById(id); if(!el)return;
+  var c=carnetLire(),h='',n=0;
+  jours.forEach(function(j){
+    var d=c['j'+j]; if(!d)return;
+    var lignes=[];
+    if(j===2&&d.donnees){
+      if(d.donnees.mots&&d.donnees.mots.length) lignes.push('Mes mots : '+d.donnees.mots.join(', '));
+      if(d.donnees.besoin) lignes.push('Mon besoin : '+d.donnees.besoin);
+    }
+    (d.items||[]).forEach(function(it){ if(lignes.length<2&&it.r) lignes.push(it.r); });
+    if(!lignes.length)return;
+    n++;
+    h+='<div class="mm-titre">Jour '+j+' · '+carnetEsc(d.titre||'')+'</div>';
+    lignes.forEach(function(l){h+='<div class="mm-r">« '+carnetEsc(carnetCourt(l,220))+' »</div>';});
+  });
+  if(!n){el.style.display='none';return;}
+  el.innerHTML='<div class="label" style="text-align:left;margin-bottom:4px;">'+titre+'</div><p style="font-size:15px;margin:0 0 4px;opacity:0.85;">'+intro+'</p>'+h;
+  el.style.display='block';
+}
+function telechargerCarnet(){
+  var c=carnetLire(),corps='',ordre=[];
+  for(var i=1;i<=30;i++)ordre.push('j'+i);
+  ordre.push('bonus1');
+  function toile(t,d){
+    if(!d||!d.answers)return '';
+    var h='<h2>'+t+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
+    d.answers.forEach(function(v,i){h+='<div class="ligne"><span>'+(LABELS_J1[i]||'')+'</span><span>'+v+' / 5</span></div>';});
+    return h;
+  }
+  corps+=toile('Jour 1 · Mon état des lieux',c.j1);
+  ordre.forEach(function(k){
+    if(k==='j1')return;
+    var d=c[k]; if(!d)return;
+    var nom=k==='bonus1'?'Bonus · ':'Jour '+k.slice(1)+' · ';
+    var items=d.items||[]; if(!items.length&&!d.donnees)return;
+    corps+='<h2>'+nom+carnetEsc(d.titre||'')+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
+    items.forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});
+  });
+  corps+=toile('Jour 30 · Mon état des lieux',c.j30toile);
+  if(!corps) corps='<p>Ton carnet est vide sur cet appareil. Les fichiers que tu as téléchargés chaque jour restent ta sauvegarde.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:36px 22px;max-width:640px;margin:0 auto;line-height:1.75;}'
+   +'h1{font-size:24px;border-bottom:2px solid #c8a060;padding-bottom:8px;margin-bottom:4px;}'
+   +'h2{font-size:18px;color:#6a4a78;margin:30px 0 2px;}'
+   +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+   +'.date{font-size:13px;color:#9a84a8;margin-bottom:10px;}'
+   +'.box{background:#fdf8ee;border-radius:8px;padding:11px 15px;border-left:3px solid #c8a060;margin-bottom:9px;}'
+   +'.q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;}'
+   +'.r{font-size:15px;}'
+   +'.ligne{display:flex;justify-content:space-between;border-bottom:1px dotted #e0d0e0;padding:4px 0;font-size:15px;}'
+   +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mon carnet</title><style>'+css+'</style></head><body>'
+   +'<div class="programme">L\'Effet Papillon · 30 jours pour prendre soin de ma santé mentale</div><h1>Mon carnet</h1>'
+   +'<div class="date">Téléchargé le '+new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>'
+   +corps+'<div class="footer">@alarenverse.coaching</div></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='Mon-carnet-Effet-Papillon.html';document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+}
+</script>
+<script>afficherMesMots('mes-mots-bilans',[7,14,21],'Relis ce que tu voulais garder','Tes mots des bilans de chaque semaine.');</script>
 </body>
 </html>

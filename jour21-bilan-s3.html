@@ -63,6 +63,11 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#f5f0fa,#fdf8f0);border-radius:20px;padding:24px;border:1px solid rgba(160,120,200,0.2);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
+  .mm-box{background:rgba(255,255,255,0.72);border:1px dashed rgba(160,130,170,0.55);border-radius:16px;padding:16px 18px;margin:0 0 22px;text-align:left}
+  .mm-titre{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.75;margin:12px 0 3px}
+  .mm-r{font-size:15.5px;font-style:italic;line-height:1.6;margin-bottom:4px}
+  .btn-carnet{background:linear-gradient(135deg,#b0a0d0,#c9a0c2)!important}
 </style>
 </head>
 <body>
@@ -107,27 +112,33 @@
     <h2>Ce que la Semaine 3 a remué</h2>
     <p style="text-align:center;margin-bottom:20px;">Quatre questions honnêtes. La semaine 3 touche à des sujets profonds, prends le temps qu'il faut.</p>
 
+    <div class="mm-box" id="mes-mots-semaine" style="display:none"></div>
+
     <div class="bilan-bloc">
-      <div class="bilan-q">Quel thème de cette semaine t'a le plus touchée ou bousculée ?</div>
+      <div class="bilan-q">Quel thème de cette semaine t'a le plus touchée ou bousculée ?</div>
       <div class="bilan-sous">Un mot, une phrase, une prise de conscience, même petite.</div>
+      <div class="exemple">Par exemple : « La charge mentale : j'ai enfin mis des mots sur tout ce que je porte. » « La lettre du jour 20. J'ai pleuré, et ça m'a fait du bien. »</div>
       <textarea id="b1" rows="3" placeholder="Ce qui m'a le plus touchée c'est..." oninput="checkBilan()"></textarea>
     </div>
 
     <div class="bilan-bloc">
-      <div class="bilan-q">Y a-t-il quelque chose que tu as eu du mal à regarder en face cette semaine ?</div>
+      <div class="bilan-q">Y a-t-il quelque chose que tu as eu du mal à regarder en face cette semaine ?</div>
       <div class="bilan-sous">La charge mentale, un deuil non reconnu, une croyance tenace... La résistance dit quelque chose d'important.</div>
+      <div class="exemple">Par exemple : « Mon cycle : je ne voulais pas voir que mes pires jours revenaient chaque mois. » « La croyance que je dois tout gérer seule. »</div>
       <textarea id="b2" rows="3" placeholder="Ce que j'ai eu du mal à regarder c'est..." oninput="checkBilan()"></textarea>
     </div>
 
     <div class="bilan-bloc">
-      <div class="bilan-q">Qu'est-ce qui a commencé à changer, même légèrement, dans ta façon de te voir ou de prendre soin de toi ?</div>
+      <div class="bilan-q">Qu'est-ce qui a commencé à changer, même légèrement, dans ta façon de te voir ou de prendre soin de toi ?</div>
       <div class="bilan-sous">Même infime. Une pensée différente, un réflexe nouveau, une douceur envers toi-même.</div>
+      <div class="exemple">Par exemple : « J'ai demandé de l'aide une fois cette semaine. » « Je me surprends à me dire : ce n'est qu'une pensée. »</div>
       <textarea id="b3" rows="3" placeholder="Ce qui a commencé à changer c'est..." oninput="checkBilan()"></textarea>
     </div>
 
     <div class="bilan-bloc">
-      <div class="bilan-q">Qu'est-ce que tu veux absolument garder pour la dernière semaine ?</div>
+      <div class="bilan-q">Qu'est-ce que tu veux absolument garder pour la dernière semaine ?</div>
       <div class="bilan-sous">Une intention, une pratique, une façon d'être avec toi-même.</div>
+      <div class="exemple">Par exemple : « Mon carnet de joie. » « Ma permission du jour 16 : un repas tout simple le mercredi. »</div>
       <textarea id="b4" rows="3" placeholder="Je veux garder..." oninput="checkBilan()"></textarea>
     </div>
 
@@ -140,9 +151,10 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">🌿</span>
     <h2>Mes pratiques de la Semaine 3 à garder</h2>
-    <p style="text-align:center;margin-bottom:6px;">Parmi tout ce qu'on a vu cette semaine, qu'est-ce qui te semble le plus précieux à intégrer dans ta vie ?</p>
+    <p style="text-align:center;margin-bottom:6px;">Parmi tout ce qu'on a vu cette semaine, qu'est-ce qui te semble le plus précieux à intégrer dans ta vie ?</p>
     <p class="small" style="text-align:center;margin-bottom:6px;" id="pratiques-compteur">Choisis jusqu'à 3 pratiques</p>
     <div id="pratiques-container"></div>
+    <button class="btn" id="btn-pratiques" onclick="renderS4();showPhase('s4')">Voir la Semaine 4 →</button>
   </div>
 </div>
 
@@ -173,13 +185,16 @@
     </div>
 
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>Pour la Semaine 4 :</strong> Elle sera différente. Moins de travail sur ce qui va mal, plus de reconnaissance de ce qui est bien. Tu mérites de te célébrer. Pas de te féliciter de tout : de te voir vraiment, avec bienveillance.
+      🔑 <strong>Pour la Semaine 4 :</strong> Elle sera différente. Moins de travail sur ce qui va mal, plus de reconnaissance de ce qui est bien. Tu mérites de te célébrer. Pas de te féliciter de tout : de te voir vraiment, avec bienveillance.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
       📥 Télécharger mes réponses
     </button>
     <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+    <button class="btn btn-carnet" onclick="telechargerCarnet()" style="margin-top:14px;">📖 Mon carnet complet</button>
+    <p style="font-size:13px;opacity:0.75;text-align:center;margin-top:6px;font-family:'Jost',sans-serif;">Toutes tes réponses depuis le jour 1, réunies dans un seul fichier. Il contient ce qui a été gardé sur cet appareil.</p>
+
   </div>
   <div class="suite-box">
     <div style="font-size:32px;margin-bottom:10px;">✨</div>
@@ -195,7 +210,7 @@ const jours = [
   {num:"16",titre:"Gérer la charge mentale",sous:"Redistribuer, lâcher, le suffisamment bon",couleur:"#6080c8"},
   {num:"17",titre:"Le cycle féminin",sous:"4 phases, SPM, PMDD, périménopause",couleur:"#c9a0c2"},
   {num:"18",titre:"Retrouver la joie",sous:"Joie vs bonheur, micro-moments, pratique corporelle",couleur:"#f5c842"},
-  {num:"19",titre:"Les croyances limitantes",sous:"Origines, Byron Katie, qui suis-je vraiment ?",couleur:"#8060c0"},
+  {num:"19",titre:"Les croyances limitantes",sous:"Origines, Byron Katie, qui suis-je vraiment ?",couleur:"#8060c0"},
   {num:"20",titre:"Le deuil et les transitions",sous:"Toutes les pertes, transitions féminines, deuil de soi",couleur:"#9090c0"},
   {num:"21",titre:"Bilan Semaine 3",sous:"Intégration et préparation",couleur:"#a080c8"},
 ];
@@ -317,18 +332,10 @@ function togglePratique(i,p) {
   }
   const n = selectedPratiques.size;
   document.getElementById('pratiques-compteur').textContent =
-    n===0?'Choisis jusqu\'à 3 pratiques':
+    n===0?'Choisis jusqu\'à 3 pratiques, ou passe directement à la suite':
     n===1?'1 pratique sélectionnée, encore 2 si tu veux':
     n===2?'2 pratiques sélectionnées, encore 1 si tu veux':
     '3 pratiques sélectionnées ✓';
-  if(n>=1 && !document.getElementById('btn-pratiques')){
-    const btn = document.createElement('button');
-    btn.id = 'btn-pratiques';
-    btn.className = 'btn';
-    btn.textContent = 'Voir la Semaine 4 →';
-    btn.onclick = ()=>{renderS4();showPhase('s4');};
-    document.getElementById('pratiques-container').after(btn);
-  }
 }
 
 function renderS4() {
@@ -390,5 +397,117 @@ function telechargerReponses(){
 }
 
 </script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j21', TITRE="Bilan Semaine 3";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
+</script>
+<script>
+/* Carnet du programme : relire ses mots, télécharger tout son parcours */
+var LABELS_J1=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"];
+function carnetLire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
+function carnetEsc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+function carnetCourt(t,n){t=String(t);return t.length>n?t.slice(0,n).replace(/\s+\S*$/,'')+'…':t;}
+function afficherMesMots(id,jours,titre,intro){
+  var el=document.getElementById(id); if(!el)return;
+  var c=carnetLire(),h='',n=0;
+  jours.forEach(function(j){
+    var d=c['j'+j]; if(!d)return;
+    var lignes=[];
+    if(j===2&&d.donnees){
+      if(d.donnees.mots&&d.donnees.mots.length) lignes.push('Mes mots : '+d.donnees.mots.join(', '));
+      if(d.donnees.besoin) lignes.push('Mon besoin : '+d.donnees.besoin);
+    }
+    (d.items||[]).forEach(function(it){ if(lignes.length<2&&it.r) lignes.push(it.r); });
+    if(!lignes.length)return;
+    n++;
+    h+='<div class="mm-titre">Jour '+j+' · '+carnetEsc(d.titre||'')+'</div>';
+    lignes.forEach(function(l){h+='<div class="mm-r">« '+carnetEsc(carnetCourt(l,220))+' »</div>';});
+  });
+  if(!n){el.style.display='none';return;}
+  el.innerHTML='<div class="label" style="text-align:left;margin-bottom:4px;">'+titre+'</div><p style="font-size:15px;margin:0 0 4px;opacity:0.85;">'+intro+'</p>'+h;
+  el.style.display='block';
+}
+function telechargerCarnet(){
+  var c=carnetLire(),corps='',ordre=[];
+  for(var i=1;i<=30;i++)ordre.push('j'+i);
+  ordre.push('bonus1');
+  function toile(t,d){
+    if(!d||!d.answers)return '';
+    var h='<h2>'+t+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
+    d.answers.forEach(function(v,i){h+='<div class="ligne"><span>'+(LABELS_J1[i]||'')+'</span><span>'+v+' / 5</span></div>';});
+    return h;
+  }
+  corps+=toile('Jour 1 · Mon état des lieux',c.j1);
+  ordre.forEach(function(k){
+    if(k==='j1')return;
+    var d=c[k]; if(!d)return;
+    var nom=k==='bonus1'?'Bonus · ':'Jour '+k.slice(1)+' · ';
+    var items=d.items||[]; if(!items.length&&!d.donnees)return;
+    corps+='<h2>'+nom+carnetEsc(d.titre||'')+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
+    items.forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});
+  });
+  corps+=toile('Jour 30 · Mon état des lieux',c.j30toile);
+  if(!corps) corps='<p>Ton carnet est vide sur cet appareil. Les fichiers que tu as téléchargés chaque jour restent ta sauvegarde.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:36px 22px;max-width:640px;margin:0 auto;line-height:1.75;}'
+   +'h1{font-size:24px;border-bottom:2px solid #c8a060;padding-bottom:8px;margin-bottom:4px;}'
+   +'h2{font-size:18px;color:#6a4a78;margin:30px 0 2px;}'
+   +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+   +'.date{font-size:13px;color:#9a84a8;margin-bottom:10px;}'
+   +'.box{background:#fdf8ee;border-radius:8px;padding:11px 15px;border-left:3px solid #c8a060;margin-bottom:9px;}'
+   +'.q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;}'
+   +'.r{font-size:15px;}'
+   +'.ligne{display:flex;justify-content:space-between;border-bottom:1px dotted #e0d0e0;padding:4px 0;font-size:15px;}'
+   +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mon carnet</title><style>'+css+'</style></head><body>'
+   +'<div class="programme">L\'Effet Papillon · 30 jours pour prendre soin de ma santé mentale</div><h1>Mon carnet</h1>'
+   +'<div class="date">Téléchargé le '+new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>'
+   +corps+'<div class="footer">@alarenverse.coaching</div></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='Mon-carnet-Effet-Papillon.html';document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+}
+</script>
+<script>afficherMesMots('mes-mots-semaine',[15, 16, 17, 18, 19, 20],'Avant de répondre, relis-toi','Voici quelques mots que tu as écrits cette semaine.');</script>
 </body>
 </html>

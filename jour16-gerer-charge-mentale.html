@@ -79,6 +79,7 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#eef0fa,#f0eefa);border-radius:20px;padding:22px;border:1px solid rgba(100,120,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -94,7 +95,7 @@
     <span class="emoji-hero">🌿</span>
     <div class="label">Jour 16 · Gérer & Délester</div>
     <h2>Hier tu as nommé. Aujourd'hui tu agis, et tu poses.</h2>
-    <p>Voir sa charge mentale c'est déjà un pas énorme. Mais voir sans agir peut aussi devenir une nouvelle source de frustration. Aujourd'hui on passe à la suite : redistribuer, délester ce qui peut l'être, et trouver les mots pour le dire.</p>
+    <p>Voir sa charge mentale c'est déjà un pas énorme. Mais voir sans agir peut aussi devenir une nouvelle source de frustration. Aujourd'hui on passe à la suite : redistribuer, délester ce qui peut l'être, et trouver les mots pour le dire.</p>
     <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 🌿</button>
     <p class="hint">Théorie · Plan de redistribution · Phrases types · Exercice de délestage · ~25 min</p>
@@ -130,10 +131,10 @@
     <p class="small" style="text-align:center;margin-bottom:20px;">Pas une liste parfaite. Un premier pas réaliste.</p>
 
     <div class="hl" style="margin-bottom:16px;">
-      <strong>Rappel important :</strong> redistribuer ne signifie pas "demander de l'aide". Ça signifie transférer la responsabilité, pas juste l'exécution. "Peux-tu t'occuper du suivi des rendez-vous médicaux des enfants ?" est une redistribution. "Peux-tu m'aider à prendre les rendez-vous ?" maintient la charge mentale chez toi.
+      <strong>Rappel important :</strong> redistribuer ne signifie pas "demander de l'aide". Ça signifie transférer la responsabilité, pas juste l'exécution. "Peux-tu t'occuper du suivi des rendez-vous médicaux des enfants ?" est une redistribution. "Peux-tu m'aider à prendre les rendez-vous ?" maintient la charge mentale chez toi.
     </div>
 
-    <p style="font-family:'Jost',sans-serif;font-size:11px;color:#9098b8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Des idées pour commencer, touche pour ajouter :</p>
+    <p style="font-family:'Jost',sans-serif;font-size:11px;color:#9098b8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Des idées pour commencer, touche pour ajouter :</p>
     <div id="suggestions-container" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;"></div>
 
     <div style="display:flex;gap:8px;margin-bottom:8px;">
@@ -144,8 +145,8 @@
     <button class="add-btn" onclick="addTache()">+ Ajouter une tâche</button>
 
     <div class="hl vert" style="margin-top:16px;">
-      <strong>Et ce que tu peux tout simplement arrêter de faire :</strong><br><br>
-      Certaines tâches n'ont pas besoin d'être redistribuées, elles peuvent être supprimées. Le repas parfait tous les soirs. Les réponses instantanées aux messages. Les maisons rangées avant les visites. Demande-toi : "Si je ne le faisais pas, qu'est-ce qui se passerait vraiment ?"
+      <strong>Et ce que tu peux tout simplement arrêter de faire :</strong><br><br>
+      Certaines tâches n'ont pas besoin d'être redistribuées, elles peuvent être supprimées. Le repas parfait tous les soirs. Les réponses instantanées aux messages. Les maisons rangées avant les visites. Demande-toi : "Si je ne le faisais pas, qu'est-ce qui se passerait vraiment ?"
     </div>
 
     <button class="btn" onclick="showPhase('phrases')">Les phrases pour avoir la conversation →</button>
@@ -173,7 +174,7 @@
     <p class="small" style="text-align:center;margin-bottom:20px;">Coche ce que tu choisis de délester cette semaine, même un seul suffit.</p>
 
     <div class="hl rouge" style="margin-bottom:16px;">
-      <strong>Pourquoi c'est si difficile de déposer, pour nous :</strong><br><br>
+      <strong>Pourquoi c'est si difficile de déposer, pour nous :</strong><br><br>
       Le perfectionnisme féminin est en grande partie une réponse à la peur du jugement, "si je ne le fais pas bien, on dira que je suis une mauvaise mère / mauvaise femme / mauvaise professionnelle." Délester, c'est aussi accepter que le regard des autres ne définit pas ta valeur.
     </div>
 
@@ -181,7 +182,7 @@
 
     <div class="hl vert" style="margin-top:8px;">
       <strong>La notion de "suffisamment bon", Winnicott</strong><br><br>
-      Le pédiatre Winnicott a introduit le concept de "good enough mother" : la mère suffisamment bonne. Pas parfaite. Juste suffisamment présente, suffisamment aimante, suffisamment là. Ce concept s'applique à tout : le repas suffisamment bon, la maison suffisamment propre, le travail suffisamment bien fait. La perfection épuise. Le suffisamment bon libère.
+      Le pédiatre Winnicott a introduit le concept de "good enough mother" : la mère suffisamment bonne. Pas parfaite. Juste suffisamment présente, suffisamment aimante, suffisamment là. Ce concept s'applique à tout : le repas suffisamment bon, la maison suffisamment propre, le travail suffisamment bien fait. La perfection épuise. Le suffisamment bon libère.
     </div>
 
     <button class="btn" onclick="showPhase('ecriture')">Mon engagement ✍️</button>
@@ -193,17 +194,19 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">✍️</span>
     <h2>Mon engagement de la semaine</h2>
-    <p style="text-align:center;margin-bottom:20px;">Deux questions courtes : une action, une permission.</p>
+    <p style="text-align:center;margin-bottom:20px;">Deux questions courtes : une action, une permission.</p>
 
     <div style="margin-bottom:20px;">
-      <p class="e-q">Quelle est la première tâche concrète que tu vas redistribuer ou arrêter cette semaine ?</p>
+      <p class="e-q">Quelle est la première tâche concrète que tu vas redistribuer ou arrêter cette semaine ?</p>
       <p class="e-sous">Pas une liste. Une seule chose, précise, réaliste, avec un délai.</p>
+      <div class="exemple">Par exemple : « Dès lundi, c'est mon compagnon qui gère les inscriptions aux activités. Je le lui dis ce soir. » « J'arrête de répondre aux mails du travail après 19 h, dès demain. »</div>
       <textarea id="e1" rows="3" placeholder="Cette semaine je vais redistribuer / arrêter de faire... / Je vais demander à... de prendre en charge..." oninput="checkEngagement()"></textarea>
     </div>
 
     <div style="margin-bottom:20px;">
-      <p class="e-q">Quelle permission tu te donnes à toi-même à partir d'aujourd'hui ?</p>
+      <p class="e-q">Quelle permission tu te donnes à toi-même à partir d'aujourd'hui ?</p>
       <p class="e-sous">Une permission de délester, d'être imparfaite, de te faire de la place.</p>
+      <div class="exemple">Par exemple : « Je me permets un repas tout simple le mercredi. » « Je m'autorise à ne plus tout anticiper pour tout le monde. »</div>
       <textarea id="e2" rows="3" placeholder="Je me permets de... / Je m'autorise à ne plus... / Je décide que c'est suffisant de..." oninput="checkEngagement()"></textarea>
     </div>
 
@@ -224,7 +227,7 @@
     </div>
 
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À retenir :</strong> "Suffisamment bon" n'est pas de la résignation. C'est de la sagesse. Le perfectionnisme protège de la critique extérieure, mais il épuise de l'intérieur. Tu mérites de te ménager.
+      🔑 <strong>À retenir :</strong> "Suffisamment bon" n'est pas de la résignation. C'est de la sagesse. Le perfectionnisme protège de la critique extérieure, mais il épuise de l'intérieur. Tu mérites de te ménager.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -234,7 +237,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#607090;"><strong style="color:#2d3040;">Demain, Jour 17 :</strong> le cycle féminin et les émotions</p>
+    <p style="font-size:14px;color:#607090;"><strong style="color:#2d3040;">Demain, Jour 17 :</strong> le cycle féminin et les émotions</p>
     <p class="hint" style="margin-top:6px;">14 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -243,35 +246,35 @@
 const theorie=[
   {emoji:"🔄",titre:"La redistribution, bien plus qu'une question d'organisation",source:"Eve Rodsky, Fair Play / Hochschild",contenu:[
     {type:"texte",texte:"La charge mentale ne se règle pas avec un meilleur agenda ou une appli de plus. Elle se règle par une vraie redistribution de la responsabilité, pas juste de l'exécution."},
-    {type:"hl",texte:"🔑 Toute la différence est là : quand tu demandes \"tu peux faire les courses ?\", c'est encore toi qui penses aux courses, qui fais la liste, qui surveilles le frigo. Quand tu confies la responsabilité des courses, c'est l'autre qui pense, qui liste, qui surveille. Ça, c'est une redistribution."},
-    {type:"texte",texte:"Eve Rodsky, dans Fair Play, découpe chaque tâche en trois temps : concevoir (y penser), planifier (l'organiser), exécuter (la faire). La vraie redistribution transfère les trois, pas seulement le dernier."},
+    {type:"hl",texte:"🔑 Toute la différence est là : quand tu demandes \"tu peux faire les courses ?\", c'est encore toi qui penses aux courses, qui fais la liste, qui surveilles le frigo. Quand tu confies la responsabilité des courses, c'est l'autre qui pense, qui liste, qui surveille. Ça, c'est une redistribution."},
+    {type:"texte",texte:"Eve Rodsky, dans Fair Play, découpe chaque tâche en trois temps : concevoir (y penser), planifier (l'organiser), exécuter (la faire). La vraie redistribution transfère les trois, pas seulement le dernier."},
     {type:"stat",texte:"Les couples qui ont une vraie conversation sur la répartition des tâches, y compris mentales, en ressortent avec une relation plus satisfaisante et nettement moins de stress, surtout chez les femmes",source:"Recherche sur le couple et la famille"},
-    {type:"hl",texte:"💡 Oui, cette conversation fait peur. Mais ne pas l'avoir coûte plus cher : le ressentiment qui s'accumule en silence est l'un des poisons les plus sûrs d'une relation à long terme.",classe:"or"},
+    {type:"hl",texte:"💡 Oui, cette conversation fait peur. Mais ne pas l'avoir coûte plus cher : le ressentiment qui s'accumule en silence est l'un des poisons les plus sûrs d'une relation à long terme.",classe:"or"},
   ]},
   {emoji:"📤",titre:"Sortir de ta tête, l'externalisation",source:"Recherche en psychologie cognitive, cognitive offloading",contenu:[
-    {type:"texte",texte:"Ton cerveau n'est pas fait pour stocker cinquante choses à ne pas oublier. Chaque \"il faut que je pense à...\" qui tourne dans ta tête consomme de la mémoire de travail : cette ressource limitée dont tu as besoin pour réfléchir, décider, être présente."},
-    {type:"hl",texte:"🧠 La science est claire là-dessus : noter quelque chose libère ta mémoire de travail et te permet de passer à autre chose, sans la peur d'oublier. C'est ce qu'on appelle l'externalisation cognitive, sortir les choses de ta tête vers un support extérieur. Et ça marche remarquablement bien."},
-    {type:"texte",texte:"Concrètement : une liste unique où tout atterrit (papier ou téléphone, peu importe), un agenda partagé visible par toute la famille, un tableau dans la cuisine. Le support importe peu. Ce qui compte, c'est que ta tête ne soit plus le seul endroit où l'information existe."},
+    {type:"texte",texte:"Ton cerveau n'est pas fait pour stocker cinquante choses à ne pas oublier. Chaque \"il faut que je pense à...\" qui tourne dans ta tête consomme de la mémoire de travail : cette ressource limitée dont tu as besoin pour réfléchir, décider, être présente."},
+    {type:"hl",texte:"🧠 La science est claire là-dessus : noter quelque chose libère ta mémoire de travail et te permet de passer à autre chose, sans la peur d'oublier. C'est ce qu'on appelle l'externalisation cognitive, sortir les choses de ta tête vers un support extérieur. Et ça marche remarquablement bien."},
+    {type:"texte",texte:"Concrètement : une liste unique où tout atterrit (papier ou téléphone, peu importe), un agenda partagé visible par toute la famille, un tableau dans la cuisine. Le support importe peu. Ce qui compte, c'est que ta tête ne soit plus le seul endroit où l'information existe."},
     {type:"hl",texte:"✨ Le vrai gain, c'est le silence mental. Quand ton cerveau sait que c'est noté quelque part de fiable, il arrête de te le rappeler en boucle à 23h. Tu peux enfin penser à autre chose, ou à rien du tout.",classe:"vert"},
   ]},
   {emoji:"🎯",titre:"Mettre ton énergie là où tu as une prise",source:"Approche cognitivo-comportementale, résolution de problème",contenu:[
-    {type:"texte",texte:"Face à la surcharge, on gaspille souvent une énergie folle sur ce qui ne dépend pas de nous : ruminer, se plaindre, vouloir changer l'autre, refaire mentalement la journée. Et c'est humain, c'est même le premier mouvement de tout le monde face à ce qui déborde."},
-    {type:"hl",texte:"🎯 Mais il y a une question qui change tout : \"À quel endroit mon énergie sera-t-elle le plus utile ?\" Prends une source de charge qui t'épuise, et trie en deux colonnes : ce qui est sous ta prise (ce que tu peux changer, déléguer, abandonner, dire), et ce qui ne l'est pas (les réactions des autres, le passé, les imprévus)."},
-    {type:"texte",texte:"Ensuite, transforme ce qui est sous ta prise en une action toute petite et très concrète : pas \"mieux répartir les tâches\" mais \"proposer à mon partenaire mercredi soir qu'il reprenne entièrement les lessives\". Avec un quand, un où, un comment. Plus c'est précis et modeste, plus ça se fait réellement."},
+    {type:"texte",texte:"Face à la surcharge, on gaspille souvent une énergie folle sur ce qui ne dépend pas de nous : ruminer, se plaindre, vouloir changer l'autre, refaire mentalement la journée. Et c'est humain, c'est même le premier mouvement de tout le monde face à ce qui déborde."},
+    {type:"hl",texte:"🎯 Mais il y a une question qui change tout : \"À quel endroit mon énergie sera-t-elle le plus utile ?\" Prends une source de charge qui t'épuise, et trie en deux colonnes : ce qui est sous ta prise (ce que tu peux changer, déléguer, abandonner, dire), et ce qui ne l'est pas (les réactions des autres, le passé, les imprévus)."},
+    {type:"texte",texte:"Ensuite, transforme ce qui est sous ta prise en une action toute petite et très concrète : pas \"mieux répartir les tâches\" mais \"proposer à mon partenaire mercredi soir qu'il reprenne entièrement les lessives\". Avec un quand, un où, un comment. Plus c'est précis et modeste, plus ça se fait réellement."},
     {type:"hl",texte:"🌿 Et pour le reste, ce qui n'est pas sous ta prise, l'énergie que tu y mettais peut être doucement rapatriée vers toi. Ce n'est pas de la résignation. C'est de la stratégie.",classe:"vert"},
   ]},
   {emoji:"🎈",titre:"Délester · enlever du poids sans tout lâcher",source:"Dr Kristin Neff / Dr Susan David",contenu:[
     {type:"texte",texte:"On te dira souvent qu'il faut \"lâcher prise\". Je n'aime pas cette expression. Lâcher prise, ça sonne comme un saut dans le vide sans élastique, on tient tout, ou on lâche tout. C'est extrême, ça fait peur, et franchement, ça veut tout et rien dire."},
-    {type:"hl",texte:"🎈 Ce que je te propose, c'est autre chose : délester. Comme une montgolfière qui enlève quelques sacs de sable pour prendre de la hauteur. Tu ne lâches pas la charge, tu en déposes une partie. Tu gardes la main, tu gardes le contrôle, mais tu t'offres de la distance et de l'espace."},
-    {type:"texte",texte:"Et cette nuance change tout, psychologiquement. Parce que déposer un sac, c'est faisable, progressif, réversible. Ça n'exige pas de renoncer à tout du jour au lendemain. Ça demande juste de choisir : qu'est-ce que je continue à porter, qu'est-ce que je redistribue, qu'est-ce que je pose ?"},
-    {type:"hl",texte:"⚠️ Et si c'est si dur pour nous, il y a une raison : le perfectionnisme féminin est souvent une réponse logique à un monde qui juge plus sévèrement les femmes sur leur maison, leurs enfants, leur organisation. Délester, c'est aussi affronter ce regard, qu'il soit réel ou qu'on l'ait intériorisé."},
+    {type:"hl",texte:"🎈 Ce que je te propose, c'est autre chose : délester. Comme une montgolfière qui enlève quelques sacs de sable pour prendre de la hauteur. Tu ne lâches pas la charge, tu en déposes une partie. Tu gardes la main, tu gardes le contrôle, mais tu t'offres de la distance et de l'espace."},
+    {type:"texte",texte:"Et cette nuance change tout, psychologiquement. Parce que déposer un sac, c'est faisable, progressif, réversible. Ça n'exige pas de renoncer à tout du jour au lendemain. Ça demande juste de choisir : qu'est-ce que je continue à porter, qu'est-ce que je redistribue, qu'est-ce que je pose ?"},
+    {type:"hl",texte:"⚠️ Et si c'est si dur pour nous, il y a une raison : le perfectionnisme féminin est souvent une réponse logique à un monde qui juge plus sévèrement les femmes sur leur maison, leurs enfants, leur organisation. Délester, c'est aussi affronter ce regard, qu'il soit réel ou qu'on l'ait intériorisé."},
     {type:"stat",texte:"Les femmes qui s'accordent le droit à l'imperfection, avec de la douceur envers elles-mêmes, vivent avec moins d'anxiété et s'épuisent bien moins que celles qui tiennent des standards de perfection",source:"Dr Kristin Neff, recherche sur l'auto-compassion"},
-    {type:"hl",texte:"🌿 Chaque charge que tu délestes libère de l'espace, pour respirer, pour toi, pour ce qui compte vraiment. C'est ça le but : pas le vide, mais la légèreté. Être plus disponible pour ta propre vie.",classe:"vert"},
+    {type:"hl",texte:"🌿 Chaque charge que tu délestes libère de l'espace, pour respirer, pour toi, pour ce qui compte vraiment. C'est ça le but : pas le vide, mais la légèreté. Être plus disponible pour ta propre vie.",classe:"vert"},
   ]},
   {emoji:"✨",titre:"Le \"suffisamment bon\", te libérer du perfectionnisme",source:"Donald Winnicott / Brené Brown",contenu:[
-    {type:"texte",texte:"Winnicott a offert au monde un concept magnifique : la \"mère suffisamment bonne\". Son observation, après des années à observer des familles : les enfants n'ont pas besoin de mères parfaites. Ils ont besoin de mères suffisamment présentes, suffisamment aimantes, suffisamment là."},
-    {type:"hl",texte:"💡 Et ça s'applique à tout : le repas suffisamment nourrissant (pas gastronomique), la maison suffisamment propre (pas immaculée), le travail suffisamment bien fait (pas irréprochable). La perfection est un horizon qui recule à mesure qu'on avance, et qui épuise en chemin."},
-    {type:"texte",texte:"Brené Brown l'a montré : le perfectionnisme n'est pas de l'excellence, c'est de la protection. On devient parfaite pour devancer le jugement des autres. Sauf que cette armure coûte très cher : l'épuisement, la peur en continu, et le plaisir de faire qui disparaît."},
+    {type:"texte",texte:"Winnicott a offert au monde un concept magnifique : la \"mère suffisamment bonne\". Son observation, après des années à observer des familles : les enfants n'ont pas besoin de mères parfaites. Ils ont besoin de mères suffisamment présentes, suffisamment aimantes, suffisamment là."},
+    {type:"hl",texte:"💡 Et ça s'applique à tout : le repas suffisamment nourrissant (pas gastronomique), la maison suffisamment propre (pas immaculée), le travail suffisamment bien fait (pas irréprochable). La perfection est un horizon qui recule à mesure qu'on avance, et qui épuise en chemin."},
+    {type:"texte",texte:"Brené Brown l'a montré : le perfectionnisme n'est pas de l'excellence, c'est de la protection. On devient parfaite pour devancer le jugement des autres. Sauf que cette armure coûte très cher : l'épuisement, la peur en continu, et le plaisir de faire qui disparaît."},
     {type:"hl",texte:"🌸 Te donner la permission d'être suffisamment bonne, ce n'est pas baisser tes standards. C'est choisir des standards humains plutôt qu'impossibles, et te traiter avec la même bienveillance que tu offres si naturellement aux autres.",classe:"violet"},
   ]},
 ];
@@ -279,7 +282,7 @@ const theorie=[
 const phrases=[
   {situation:"Ouvrir la conversation sur la charge mentale",texte:"\"J'ai besoin qu'on parle de quelque chose d'important pour moi. Je ne veux pas que ça soit une dispute, je veux qu'on trouve ensemble comment mieux répartir ce que je porte seule en ce moment.\"",pourquoi:"Pose le cadre collaboratif avant de commencer. Enlève la dimension accusatrice."},
   {situation:"Expliquer ce qu'est la charge mentale",texte:"\"Ce n'est pas juste de faire des tâches. C'est de penser à tout, anticiper, planifier, se souvenir, gérer. Et ce travail-là, je le fais presque entièrement seule, même quand tu fais des choses.\"",pourquoi:"Nomme la différence entre exécution et responsabilité mentale, sans agressivité."},
-  {situation:"Demander une redistribution concrète",texte:"\"J'aimerais que tu prennes en charge [tâche précise], complètement. Pas m'aider à le faire, mais en être responsable : y penser, le planifier, le faire. Est-ce que tu peux faire ça ?\"",pourquoi:"Précis, concret, et transfert complet de responsabilité, pas juste d'exécution."},
+  {situation:"Demander une redistribution concrète",texte:"\"J'aimerais que tu prennes en charge [tâche précise], complètement. Pas m'aider à le faire, mais en être responsable : y penser, le planifier, le faire. Est-ce que tu peux faire ça ?\"",pourquoi:"Précis, concret, et transfert complet de responsabilité, pas juste d'exécution."},
   {situation:"Quand l'autre dit 'dis-moi juste ce que tu veux que je fasse'",texte:"\"Le problème, c'est que me demander de te dire ce que tu as à faire, c'est encore moi qui gère. J'ai besoin que tu vois toi-même ce qu'il y a à faire et que tu le prennes en charge sans que j'aie à le penser.\"",pourquoi:"Nomme le mécanisme sans l'attaque personnelle. C'est souvent un angle mort, pas de la mauvaise volonté."},
   {situation:"Parler à un proche qui sollicite trop",texte:"\"Je t'aime et je veux être là pour toi. Et en ce moment j'ai besoin de te dire que je n'ai plus les ressources pour être aussi présente. J'ai besoin de me recharger.\"",pourquoi:"Pose une limite sans rejeter l'autre, en nommant ton état et ton besoin, pas ses comportements."},
   {situation:"Se parler à soi-même, la permission intérieure",texte:"\"Ce n'est pas parfait, et c'est suffisant. Je fais de mon mieux avec ce que j'ai. Je me donne la permission d'en faire moins aujourd'hui.\"",pourquoi:"La conversation la plus importante est souvent celle qu'on a avec soi-même."},
@@ -305,7 +308,7 @@ function showPhase(id){
 
 // Preview
 const pc=document.getElementById('preview-container');
-[{e:'🔄',t:'La redistribution, responsabilité vs exécution'},{e:'📤',t:'Sortir de ta tête, l\'externalisation'},{e:'🎯',t:'Mettre ton énergie là où tu as une prise'},{e:'🎈',t:'Délester, enlever du poids sans tout lâcher'},{e:'✨',t:'Le suffisamment bon, Winnicott & Brown'},{e:'📋',t:'Mon plan de redistribution concret'},{e:'💬',t:'Phrases types pour avoir la conversation'},{e:'🎈',t:'Exercice : ce que je choisis de délester'},{e:'✍️',t:'Mon engagement de la semaine'}].forEach(i=>{
+[{e:'🔄',t:'La redistribution, responsabilité vs exécution'},{e:'📤',t:'Sortir de ta tête, l\'externalisation'},{e:'🎯',t:'Mettre ton énergie là où tu as une prise'},{e:'🎈',t:'Délester, enlever du poids sans tout lâcher'},{e:'✨',t:'Le suffisamment bon, Winnicott & Brown'},{e:'📋',t:'Mon plan de redistribution concret'},{e:'💬',t:'Phrases types pour avoir la conversation'},{e:'🎈',t:'Exercice : ce que je choisis de délester'},{e:'✍️',t:'Mon engagement de la semaine'}].forEach(i=>{
   pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
 });
 
@@ -372,9 +375,9 @@ function addTache(texte){
   const row=document.createElement('div');
   row.className='tache-row';
   row.innerHTML=`
-    <input class="tache-field" placeholder="Ex : Gérer les rendez-vous médicaux des enfants...">
+    <input class="tache-field" placeholder="Ex : Gérer les rendez-vous médicaux des enfants...">
     <select class="tache-a-qui">
-      <option value="">À qui ?</option>
+      <option value="">À qui ?</option>
       <option value="partenaire">Partenaire</option>
       <option value="enfant">Enfant(s)</option>
       <option value="famille">Famille</option>
@@ -465,7 +468,7 @@ function checkEngagement(){
 function showFin(){
   const rc=document.getElementById('recap-container');
   rc.innerHTML='';
-  // Plan de redistribution : tâches + à qui
+  // Plan de redistribution : tâches + à qui
   const labels={partenaire:"Partenaire",enfant:"Enfant(s)",famille:"Famille",collegue:"Collègue",pro:"Professionnel",supprimer:"À supprimer"};
   const lignes=[];
   document.querySelectorAll('#plan-container .tache-row').forEach(row=>{
@@ -527,6 +530,51 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j16', TITRE="Gérer la charge mentale";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

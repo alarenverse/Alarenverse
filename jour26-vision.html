@@ -68,6 +68,7 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#eef2fb,#fdf8f0);border-radius:20px;padding:22px;border:1px solid rgba(80,120,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -83,7 +84,7 @@
     <span class="emoji-hero">🌅</span>
     <div class="label">Jour 26 · Ma vision & ma lettre</div>
     <h2>Ressentir qui tu as envie d'être</h2>
-    <p>Aujourd'hui est un jour en deux temps : d'abord ressentir la femme que tu as envie d'être. Pas une liste d'objectifs à atteindre, mais une façon d'être que tu peux déjà commencer à habiter. Puis lui écrire une lettre, depuis elle, à toi aujourd'hui.</p>
+    <p>Aujourd'hui est un jour en deux temps : d'abord ressentir la femme que tu as envie d'être. Pas une liste d'objectifs à atteindre, mais une façon d'être que tu peux déjà commencer à habiter. Puis lui écrire une lettre, depuis elle, à toi aujourd'hui.</p>
     <p class="small" style="margin-bottom:20px;">C'est un des exercices les plus puissants du programme. Prends le temps qu'il faut.</p>
     <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 🌅</button>
@@ -116,27 +117,32 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">🏗️</span>
     <h2>Ma vision, domaine par domaine</h2>
-    <p style="text-align:center;margin-bottom:8px;">La question n'est pas <em>"qu'est-ce que je veux avoir ?"</em> mais <em>"comment est-ce que je veux être et me sentir ?"</em></p>
+    <p style="text-align:center;margin-bottom:8px;">La question n'est pas <em>"qu'est-ce que je veux avoir ?"</em> mais <em>"comment est-ce que je veux être et me sentir ?"</em></p>
     <p class="small" style="text-align:center;margin-bottom:20px;">Écris au présent, comme si tu y étais. Pas d'objectifs chiffrés, juste ce que tu ressens.</p>
 
     <div class="domaine-card" style="background:#eef2fb;border-color:rgba(80,120,200,0.2);">
-      <div class="domaine-titre" style="color:#6080c8;">🌸 Moi : comment je veux me sentir dans mon corps et dans ma tête</div>
+      <div class="domaine-titre" style="color:#6080c8;">🌸 Moi : comment je veux me sentir dans mon corps et dans ma tête</div>
+      <div class="exemple">Par exemple : « Je me sens posée. Je me réveille sans boule au ventre. Je suis quelqu'un qui s'écoute avant de dire oui. »</div>
       <input class="domaine-input" placeholder="Je me sens... / Je suis quelqu'un qui..." id="d1">
     </div>
     <div class="domaine-card" style="background:#fdf8ee;border-color:rgba(200,160,80,0.2);">
-      <div class="domaine-titre" style="color:#c8a060;">💛 Relations : comment je veux vivre mes liens</div>
+      <div class="domaine-titre" style="color:#c8a060;">💛 Relations : comment je veux vivre mes liens</div>
+      <div class="exemple">Par exemple : « Je suis entourée de personnes avec qui je peux être moi, sans jouer un rôle. Je rentre de mes soirées nourrie, pas vidée. »</div>
       <input class="domaine-input" placeholder="Dans mes relations je veux..." id="d2">
     </div>
     <div class="domaine-card" style="background:#eaf5f0;border-color:rgba(80,160,120,0.2);">
-      <div class="domaine-titre" style="color:#60a880;">🌿 Travail et contribution : ce que je veux apporter</div>
+      <div class="domaine-titre" style="color:#60a880;">🌿 Travail et contribution : ce que je veux apporter</div>
+      <div class="exemple">Par exemple : « J'apporte du calme aux personnes que j'accompagne, sans m'oublier. Mon travail a du sens et il laisse de la place au reste. »</div>
       <input class="domaine-input" placeholder="Dans mon travail / ma contribution je veux..." id="d3">
     </div>
     <div class="domaine-card" style="background:#f5f0fa;border-color:rgba(160,128,200,0.2);">
-      <div class="domaine-titre" style="color:#a080c8;">✨ Croissance : qui je veux continuer à devenir</div>
+      <div class="domaine-titre" style="color:#a080c8;">✨ Croissance : qui je veux continuer à devenir</div>
+      <div class="exemple">Par exemple : « Je continue à apprendre à demander de l'aide. Je deviens quelqu'un qui ose prendre la parole. »</div>
       <input class="domaine-input" placeholder="Je veux continuer à grandir en..." id="d4">
     </div>
     <div class="domaine-card" style="background:#fde8e6;border-color:rgba(232,133,122,0.2);">
       <div class="domaine-titre" style="color:#c04030;">🔥 Ce que je veux laisser derrière moi</div>
+      <div class="exemple">Par exemple : « La culpabilité de me reposer. » « Le besoin que tout le monde m'aime. » « L'épuisement comme preuve de ma valeur. »</div>
       <input class="domaine-input" placeholder="Je veux laisser derrière moi..." id="d5">
     </div>
 
@@ -155,28 +161,28 @@
     <div class="visu-etape">
       <div class="visu-num">Étape 1</div>
       <div class="visu-titre">Ancre-toi dans le présent</div>
-      <div class="visu-desc">Ferme les yeux. 3 respirations profondes. Sens ton corps. Tu es là, maintenant, en sécurité. Dis intérieurement : "Je suis là, en sécurité. Je peux ressentir librement."</div>
+      <div class="visu-desc">Ferme les yeux. 3 respirations profondes. Sens ton corps. Tu es là, maintenant, en sécurité. Dis intérieurement : "Je suis là, en sécurité. Je peux ressentir librement."</div>
       <div class="visu-duree">1 minute</div>
     </div>
 
     <div class="visu-etape">
       <div class="visu-num">Étape 2</div>
       <div class="visu-titre">Laisse venir l'image</div>
-      <div class="visu-desc">Imagine-toi dans une journée ordinaire d'une vie qui te ressemble vraiment. Pas parfaite, mais juste. Une vie où tu te reconnais. Où es-tu ? Comment est la lumière ? Qu'est-ce que tu entends ? Laisse l'image venir sans forcer.</div>
+      <div class="visu-desc">Imagine-toi dans une journée ordinaire d'une vie qui te ressemble vraiment. Pas parfaite, mais juste. Une vie où tu te reconnais. Où es-tu ? Comment est la lumière ? Qu'est-ce que tu entends ? Laisse l'image venir sans forcer.</div>
       <div class="visu-duree">2 minutes</div>
     </div>
 
     <div class="visu-etape">
       <div class="visu-num">Étape 3</div>
       <div class="visu-titre">Sens dans ton corps</div>
-      <div class="visu-desc">Dans cette vie, comment te sens-tu dans ton corps ? Légère ? Ancrée ? Libre ? Où est la sensation ? Poitrine, ventre, épaules ? La vision juste génère une sensation corporelle, pas une liste. Cherche la sensation.</div>
+      <div class="visu-desc">Dans cette vie, comment te sens-tu dans ton corps ? Légère ? Ancrée ? Libre ? Où est la sensation ? Poitrine, ventre, épaules ? La vision juste génère une sensation corporelle, pas une liste. Cherche la sensation.</div>
       <div class="visu-duree">2 minutes</div>
     </div>
 
     <div class="visu-etape">
       <div class="visu-num">Étape 4</div>
       <div class="visu-titre">Observe ta vie et tes relations</div>
-      <div class="visu-desc">Qui est autour de toi ? Comment se passent tes journées ? Pas en termes de tâches, mais d'énergie et de présence. Qu'est-ce qui a changé par rapport à maintenant ?</div>
+      <div class="visu-desc">Qui est autour de toi ? Comment se passent tes journées ? Pas en termes de tâches, mais d'énergie et de présence. Qu'est-ce qui a changé par rapport à maintenant ?</div>
       <div class="visu-duree">2 minutes</div>
     </div>
 
@@ -187,7 +193,8 @@
       <div class="visu-duree">3 minutes</div>
     </div>
 
-    <textarea id="visu-note" rows="4" placeholder="Ce que j'ai vu / ressenti / entendu... / La sensation dans mon corps c'était... / Ce qui m'a surprise c'est..."></textarea>
+    <div class="exemple">Par exemple : « Une terrasse au soleil, une tasse chaude, pas de montre. Mes épaules étaient basses. J'entendais des rires dans la maison. »</div>
+      <textarea id="visu-note" rows="4" placeholder="Ce que j'ai vu / ressenti / entendu... / La sensation dans mon corps c'était... / Ce qui m'a surprise c'est..."></textarea>
     <button class="btn" onclick="showPhase('lettre')" style="margin-top:12px;">Écrire ma lettre ✉️</button>
   </div>
 </div>
@@ -198,12 +205,13 @@
     <span class="emoji-hero">✉️</span>
     <h2>Une lettre de cette femme, à toi</h2>
     <p style="text-align:center;margin-bottom:8px;">Mets-toi à la place de cette femme que tu viens de ressentir. Elle a traversé ce que tu traverses. Elle te regarde aujourd'hui, avec toute la tendresse et le recul qu'elle a acquis.</p>
-    <p class="small" style="text-align:center;margin-bottom:8px;">Qu'est-ce que tu voudrais dire à celle que tu es maintenant ?</p>
+    <p class="small" style="text-align:center;margin-bottom:8px;">Qu'est-ce que tu voudrais dire à celle que tu es maintenant ?</p>
     <p class="small" style="text-align:center;margin-bottom:20px;">Écris librement, sans censure. Laisse venir ce qui vient.</p>
 
     <div class="lettre-zone">
-      <div class="lettre-entete">De : celle que je deviens &nbsp;·&nbsp; À : moi aujourd'hui</div>
+      <div class="lettre-entete">De : celle que je deviens &nbsp;·&nbsp; À : moi aujourd'hui</div>
       <div class="lettre-debut">Chère moi,</div>
+      <div class="exemple">Par exemple : « Chère moi, je t'écris depuis un matin tranquille. Tu te demandes si ça vaut la peine de continuer. Oui. Ces petits pas que tu fais maintenant, ce sont eux qui m'ont amenée ici. »</div>
       <textarea class="lettre-textarea" id="lettre-corps"
         placeholder="Je t'écris depuis l'endroit où tu voulais arriver...&#10;&#10;Ce que je voudrais que tu saches...&#10;&#10;Ce que tu peux lâcher dès maintenant...&#10;&#10;Ce dont tu es capable et que tu ne vois pas encore...&#10;&#10;Ce qui va changer, et ce qui restera...&#10;&#10;Ce qui compte vraiment, et ce qui ne compte pas..."></textarea>
       <div class="lettre-fin">Avec tout ce que tu vas devenir,<br><em>Toi.</em></div>
@@ -226,7 +234,7 @@
     </div>
 
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À retenir :</strong> Une vision juste ne génère pas de pression, elle génère de l'élan. Et une lettre à soi-même est un des actes de compassion les plus puissants qu'on puisse se faire.
+      🔑 <strong>À retenir :</strong> Une vision juste ne génère pas de pression, elle génère de l'élan. Et une lettre à soi-même est un des actes de compassion les plus puissants qu'on puisse se faire.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -236,7 +244,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#507090;"><strong style="color:#1d2840;">Demain, Jour 27 :</strong> le rapport au corps & l'image de soi</p>
+    <p style="font-size:14px;color:#507090;"><strong style="color:#1d2840;">Demain, Jour 27 :</strong> le rapport au corps & l'image de soi</p>
     <p class="hint" style="margin-top:6px;">4 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -249,11 +257,11 @@ const theorie=[
     {type:"hl",texte:"🌱 Une vision, c'est autre chose. C'est ressentir qui tu as envie d'être. Comment tu veux te sentir dans ton corps, dans tes liens, dans tes journées. Ce n'est pas un plan à exécuter, c'est une sensation à retrouver.",classe:"vert"},
     {type:"texte",texte:"Et cette sensation, tu peux commencer à l'habiter dès maintenant. Pas dans cinq ans. Aujourd'hui, dans un choix, dans une façon de te parler, dans un geste. C'est ça qui rend une vision vivante plutôt qu'angoissante."},
     {type:"stat",texte:"Quand tu ressens intensément une scène, ton cerveau active les mêmes zones que si tu la vivais vraiment. À force, la façon d'être que tu ressens devient plus familière, plus accessible, plus naturelle",source:"Dr Álvaro Pascual-Leone, Harvard Medical School"},
-    {type:"hl",texte:"✅ D'où la différence entre une vision et un objectif.<br><br>L'objectif dit : je serai bien quand j'aurai obtenu ceci. La vision dit : voilà la femme que j'ai envie d'être, et je peux déjà l'incarner un peu aujourd'hui.<br><br>L'un met ton bien-être en attente. L'autre te le rend disponible tout de suite.",classe:"vert"},
+    {type:"hl",texte:"✅ D'où la différence entre une vision et un objectif.<br><br>L'objectif dit : je serai bien quand j'aurai obtenu ceci. La vision dit : voilà la femme que j'ai envie d'être, et je peux déjà l'incarner un peu aujourd'hui.<br><br>L'un met ton bien-être en attente. L'autre te le rend disponible tout de suite.",classe:"vert"},
   ]},
   {emoji:"✉️",titre:"La lettre à soi-même",source:"Dr James Pennebaker et Dr Kristin Neff",contenu:[
     {type:"texte",texte:"Écrire sur soi avec intention a des effets réels sur le moral, le stress et la clarté d'esprit. La lettre à soi-même est l'une des formes les plus puissantes de cette écriture."},
-    {type:"stat",texte:"Écrire sur ses émotions et ses expériences, quelques fois de suite, apaise l'anxiété et améliore le bien-être de façon durable. Ce n'est pas juste se soulager sur le moment : ça réorganise la façon dont on comprend ce qu'on vit",source:"Dr James Pennebaker, University of Texas"},
+    {type:"stat",texte:"Écrire sur ses émotions et ses expériences, quelques fois de suite, apaise l'anxiété et améliore le bien-être de façon durable. Ce n'est pas juste se soulager sur le moment : ça réorganise la façon dont on comprend ce qu'on vit",source:"Dr James Pennebaker, University of Texas"},
     {type:"hl",texte:"💡 Écrire depuis ton futur, en te projetant dans une version de toi qui a traversé ce que tu vis maintenant, t'aide à prendre du recul avec les émotions du présent. C'est une technique utilisée en thérapie cognitive."},
     {type:"hl",texte:"🌸 Et c'est aussi un geste de douceur envers toi. Te parler comme tu parlerais à quelqu'un que tu aimes. Kristin Neff a montré que cette bienveillance envers soi soutient mieux le moral sur le long terme que l'estime de soi, parce qu'elle ne dépend pas de tes performances.",classe:"vert"},
   ]},
@@ -353,6 +361,51 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j26', TITRE="Ma vision et ma lettre";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

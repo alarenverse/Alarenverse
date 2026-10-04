@@ -123,15 +123,15 @@ const questions=[
   {
     id:'note',
     titre:'La note globale',
-    question:"Est-ce que ce programme t'a aidée ?",
+    question:"Est-ce que ce programme t'a aidée ?",
     sous:"Ton ressenti global, honnêtement.",
     type:'stars',
-    labels:['','Pas vraiment','Un peu','Plutôt oui','Vraiment oui','Transformatrice !']
+    labels:['','Pas vraiment','Un peu','Plutôt oui','Vraiment oui','Transformatrice !']
   },
   {
     id:'jour_prefere',
     titre:'Le moment préféré',
-    question:"Quel jour ou module t'a le plus marquée ?",
+    question:"Quel jour ou module t'a le plus marquée ?",
     sous:"Celui qui a ouvert quelque chose, ou que tu as relus plusieurs fois.",
     type:'choix',
     options:[
@@ -146,7 +146,7 @@ const questions=[
   {
     id:'changement',
     titre:'Ce qui a changé',
-    question:"Qu'est-ce que tu fais différemment depuis ce programme ?",
+    question:"Qu'est-ce que tu fais différemment depuis ce programme ?",
     sous:"Même une toute petite chose. Même juste une façon de te parler.",
     type:'texte',
     placeholder:"Depuis le programme je..."
@@ -154,7 +154,7 @@ const questions=[
   {
     id:'manque',
     titre:'Ce qui manquait',
-    question:"Y a-t-il un sujet que tu aurais aimé voir traité, et qui n'était pas là ?",
+    question:"Y a-t-il un sujet que tu aurais aimé voir traité, et qui n'était pas là ?",
     sous:"Ça m'aide à compléter le programme pour les prochaines.",
     type:'texte',
     placeholder:"J'aurais aimé qu'on parle de..."
@@ -162,7 +162,7 @@ const questions=[
   {
     id:'recommandation',
     titre:'La recommandation',
-    question:'Sur une échelle de 0 à 10, recommanderais-tu ce programme ?',
+    question:'Sur une échelle de 0 à 10, recommanderais-tu ce programme ?',
     sous:"0 = non, pas du tout · 10 = absolument, sans hésiter",
     type:'scale'
   }
@@ -221,7 +221,7 @@ function renderQ(){
 
 function selectStar(n){
   starSelected=n;
-  const labels=['','Pas vraiment','Un peu','Plutôt oui','Vraiment oui','Transformatrice !'];
+  const labels=['','Pas vraiment','Un peu','Plutôt oui','Vraiment oui','Transformatrice !'];
   for(let i=1;i<=5;i++) document.getElementById('star-'+i).className='star'+(i<=n?' active':'');
   document.getElementById('star-label').textContent=labels[n];
   answers[questions[current].id]=n;
@@ -272,15 +272,15 @@ async function submitForm(){
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({
-        note: answers['note'] ? answers['note'] + '/5 étoiles' : 'non renseigné',
+        note: answers['note'] ? answers['note'] + '/5 étoiles' : 'non renseigné',
         module_prefere: answers['jour_prefere'] || 'non renseigné',
         ce_qui_a_change: answers['changement'] || 'non renseigné',
         ce_qui_manquait: answers['manque'] || 'non renseigné',
-        recommandation: answers['recommandation'] !== null ? answers['recommandation'] + '/10' : 'non renseigné',
+        recommandation: answers['recommandation'] !== null ? answers['recommandation'] + '/10' : 'non renseigné',
       })
     });
   } catch(e) {
-    console.log('Erreur envoi :', e);
+    console.log('Erreur envoi :', e);
   }
   showPhase('fin');
 }

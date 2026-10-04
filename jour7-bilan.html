@@ -58,6 +58,11 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#fdf8ee,#f0f8f0);border-radius:20px;padding:22px;border:1px solid rgba(200,180,120,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
+  .mm-box{background:rgba(255,255,255,0.72);border:1px dashed rgba(160,130,170,0.55);border-radius:16px;padding:16px 18px;margin:0 0 22px;text-align:left}
+  .mm-titre{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.75;margin:12px 0 3px}
+  .mm-r{font-size:15.5px;font-style:italic;line-height:1.6;margin-bottom:4px}
+  .btn-carnet{background:linear-gradient(135deg,#b0a0d0,#c9a0c2)!important}
 </style>
 </head>
 <body>
@@ -78,8 +83,8 @@
     <p class="small" style="margin-bottom:22px;">Aujourd'hui on ne va pas plus loin. On regarde derrière, on prend la mesure du chemin parcouru, et on se prépare doucement pour la semaine 2.</p>
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:22px;text-align:left;">
       <div style="display:flex;align-items:center;gap:12px;background:rgba(200,180,120,0.07);border:1px solid rgba(200,180,120,0.15);border-radius:12px;padding:10px 14px;"><span style="font-size:16px;">🧠</span><span style="font-size:13px;color:#907850;font-family:'Jost',sans-serif;">Pourquoi les bilans sont essentiels en psychologie</span></div>
-      <div style="display:flex;align-items:center;gap:12px;background:rgba(200,180,120,0.07);border:1px solid rgba(200,180,120,0.15);border-radius:12px;padding:10px 14px;"><span style="font-size:16px;">💭</span><span style="font-size:13px;color:#907850;font-family:'Jost',sans-serif;">Bilan réflexif : ce qui a résonné, ce qui a été difficile</span></div>
-      <div style="display:flex;align-items:center;gap:12px;background:rgba(200,180,120,0.07);border:1px solid rgba(200,180,120,0.15);border-radius:12px;padding:10px 14px;"><span style="font-size:16px;">🌿</span><span style="font-size:13px;color:#907850;font-family:'Jost',sans-serif;">Roue de la vie, où en es-tu après 7 jours ?</span></div>
+      <div style="display:flex;align-items:center;gap:12px;background:rgba(200,180,120,0.07);border:1px solid rgba(200,180,120,0.15);border-radius:12px;padding:10px 14px;"><span style="font-size:16px;">💭</span><span style="font-size:13px;color:#907850;font-family:'Jost',sans-serif;">Bilan réflexif : ce qui a résonné, ce qui a été difficile</span></div>
+      <div style="display:flex;align-items:center;gap:12px;background:rgba(200,180,120,0.07);border:1px solid rgba(200,180,120,0.15);border-radius:12px;padding:10px 14px;"><span style="font-size:16px;">🌿</span><span style="font-size:13px;color:#907850;font-family:'Jost',sans-serif;">Roue de la vie, où en es-tu après 7 jours ?</span></div>
     </div>
     <button class="btn" onclick="showPhase('theorie')">Commencer mon bilan 🗓️</button>
     <p class="hint">~15 minutes de douceur et de recul</p>
@@ -95,7 +100,7 @@
     </div>
     <p>On vit souvent en pilote automatique, d'une tâche à l'autre, sans jamais prendre le temps de regarder ce qu'on traverse. Or s'arrêter pour faire le point, c'est une des choses les plus protectrices qui soient pour ton mental.</p>
     <div class="highlight">
-      💡 Il y a une expression en psychologie que j'aime beaucoup : "name it to tame it", nomme-le pour l'apprivoiser. Le simple fait de mettre des mots sur ce que tu as vécu change la façon dont ton cerveau le range et le digère. Ce que tu nommes a moins d'emprise sur toi.
+      💡 Il y a une expression en psychologie que j'aime beaucoup : "name it to tame it", nomme-le pour l'apprivoiser. Le simple fait de mettre des mots sur ce que tu as vécu change la façon dont ton cerveau le range et le digère. Ce que tu nommes a moins d'emprise sur toi.
     </div>
     <p>Faire un bilan, ce n'est pas un exercice scolaire avec des bonnes et des mauvaises réponses. C'est un moment où tu prends un peu de recul sur ta propre vie, et ce recul, justement, te permet d'observer ce que tu vis au lieu de seulement le subir.</p>
     <div class="highlight" style="border-left-color:#80b890;background:linear-gradient(135deg,#f0f8f0,#f8fdf4);">
@@ -114,27 +119,33 @@
     <h2>Bilan de ta semaine 1</h2>
     <p style="text-align:center;margin-bottom:22px;">Prends le temps de répondre à ce qui te parle, sans te juger, sans chercher la bonne réponse. Tu peux laisser des questions de côté.</p>
 
+    <div class="mm-box" id="mes-mots-semaine" style="display:none"></div>
+
     <div class="bilan-item">
-      <div class="bilan-q">Parmi les 6 journées, laquelle a le plus résonné en toi ? Pourquoi ?</div>
-      <div class="bilan-sous">Émotions · Respiration · Sommeil · Limites · Corps · ou autre chose ?</div>
+      <div class="bilan-q">Parmi les 6 journées, laquelle a le plus résonné en toi ? Pourquoi ?</div>
+      <div class="bilan-sous">Émotions · Respiration · Sommeil · Limites · Corps · ou autre chose ?</div>
+      <div class="exemple">Par exemple : « Le jour 2. J'ai compris que ma colère cachait souvent de la fatigue. » « Le jour 5, parce que je me suis reconnue dans chaque situation où je dis oui. »</div>
       <textarea id="b1" rows="4" placeholder="Le jour qui m'a le plus touchée c'est..." oninput="checkBilan()"></textarea>
     </div>
 
     <div class="bilan-item">
-      <div class="bilan-q">Qu'est-ce qui a été difficile ou résistant cette semaine ?</div>
+      <div class="bilan-q">Qu'est-ce qui a été difficile ou résistant cette semaine ?</div>
       <div class="bilan-sous">Une pratique que tu n'as pas réussi à faire, quelque chose qui t'a heurtée, une résistance intérieure...</div>
+      <div class="exemple">Par exemple : « La respiration : dès que je fermais les yeux, j'avais envie de me lever pour faire autre chose. » « Lire que j'avais le droit de dire non. Ça m'a mise mal à l'aise. »</div>
       <textarea id="b2" rows="4" placeholder="Ce qui a été difficile c'est..." oninput="checkBilan()"></textarea>
     </div>
 
     <div class="bilan-item">
-      <div class="bilan-q">Quelle est la chose la plus importante que tu as apprise ou réalisée sur toi-même cette semaine ?</div>
-      <div class="bilan-sous">Même petite, même subtile : une prise de conscience compte.</div>
+      <div class="bilan-q">Quelle est la chose la plus importante que tu as apprise ou réalisée sur toi-même cette semaine ?</div>
+      <div class="bilan-sous">Même petite, même subtile : une prise de conscience compte.</div>
+      <div class="exemple">Par exemple : « Je réalise que je ne me demande jamais ce que je ressens. » « Mon corps me prévient bien avant ma tête. »</div>
       <textarea id="b3" rows="4" placeholder="J'ai réalisé que..." oninput="checkBilan()"></textarea>
     </div>
 
     <div class="bilan-item">
-      <div class="bilan-q">Comment tu vas prendre soin de toi différemment la semaine prochaine ?</div>
+      <div class="bilan-q">Comment tu vas prendre soin de toi différemment la semaine prochaine ?</div>
       <div class="bilan-sous">Une seule chose concrète, pas une liste. Une intention.</div>
+      <div class="exemple">Par exemple : « Trois respirations lentes avant de sortir de la voiture le soir. » « Me demander une fois par jour : qu'est-ce que je ressens ? »</div>
       <textarea id="b4" rows="3" placeholder="La semaine prochaine je vais..." oninput="checkBilan()"></textarea>
     </div>
 
@@ -165,7 +176,7 @@
   <div class="card" style="text-align:center;margin-top:24px;">
     <span class="emoji-hero">🌟</span>
     <h2>Une semaine de chemin parcouru</h2>
-    <p>Tu as fait quelque chose que beaucoup n'osent pas : tu t'es arrêtée pour te regarder avec honnêteté. C'est le fondement de tout changement durable.</p>
+    <p>Tu as fait quelque chose que beaucoup n'osent pas : tu t'es arrêtée pour te regarder avec honnêteté. C'est le fondement de tout changement durable.</p>
 
     <div style="background:linear-gradient(135deg,#fdf8ee,#f0f8f0);border-radius:16px;padding:20px;border:1px solid rgba(200,180,120,0.2);text-align:left;margin:16px 0;">
       <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c8a870;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">💭 Tes réflexions de la semaine 1</div>
@@ -173,7 +184,7 @@
     </div>
 
     <div class="highlight" style="text-align:left;">
-      🔑 <strong>À retenir :</strong> Le changement ne se fait pas en ligne droite. Il y a des jours de grâce et des jours de résistance. Les deux font partie du chemin. Tu es exactement là où tu dois être.
+      🔑 <strong>À retenir :</strong> Le changement ne se fait pas en ligne droite. Il y a des jours de grâce et des jours de résistance. Les deux font partie du chemin. Tu es exactement là où tu dois être.
     </div>
   </div>
 
@@ -181,6 +192,9 @@
       📥 Télécharger mes réponses
     </button>
     <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+    <button class="btn btn-carnet" onclick="telechargerCarnet()" style="margin-top:14px;">📖 Mon carnet complet</button>
+    <p style="font-size:13px;opacity:0.75;text-align:center;margin-top:6px;font-family:'Jost',sans-serif;">Toutes tes réponses depuis le jour 1, réunies dans un seul fichier. Il contient ce qui a été gardé sur cet appareil.</p>
+
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:10px;">🌱</div>
@@ -223,7 +237,7 @@ function renderRoue() {
       <div class="roue-item">
         <div class="roue-label">
           <span class="roue-nom">${dim.nom}</span>
-          <span class="roue-val">${val > 0 ? val+'/5' : ''}</span>
+          <span class="roue-val">${val > 0 ? val+'/5' : ''}</span>
         </div>
         <div class="roue-track">
           <div class="roue-fill" id="fill-${i}" style="width:${pct}%;background:linear-gradient(90deg,${dim.couleur},${dim.couleur}99);"></div>
@@ -361,5 +375,117 @@ function telechargerReponses(){
 }
 
 </script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j7', TITRE="Bilan de la semaine 1";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
+</script>
+<script>
+/* Carnet du programme : relire ses mots, télécharger tout son parcours */
+var LABELS_J1=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"];
+function carnetLire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
+function carnetEsc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+function carnetCourt(t,n){t=String(t);return t.length>n?t.slice(0,n).replace(/\s+\S*$/,'')+'…':t;}
+function afficherMesMots(id,jours,titre,intro){
+  var el=document.getElementById(id); if(!el)return;
+  var c=carnetLire(),h='',n=0;
+  jours.forEach(function(j){
+    var d=c['j'+j]; if(!d)return;
+    var lignes=[];
+    if(j===2&&d.donnees){
+      if(d.donnees.mots&&d.donnees.mots.length) lignes.push('Mes mots : '+d.donnees.mots.join(', '));
+      if(d.donnees.besoin) lignes.push('Mon besoin : '+d.donnees.besoin);
+    }
+    (d.items||[]).forEach(function(it){ if(lignes.length<2&&it.r) lignes.push(it.r); });
+    if(!lignes.length)return;
+    n++;
+    h+='<div class="mm-titre">Jour '+j+' · '+carnetEsc(d.titre||'')+'</div>';
+    lignes.forEach(function(l){h+='<div class="mm-r">« '+carnetEsc(carnetCourt(l,220))+' »</div>';});
+  });
+  if(!n){el.style.display='none';return;}
+  el.innerHTML='<div class="label" style="text-align:left;margin-bottom:4px;">'+titre+'</div><p style="font-size:15px;margin:0 0 4px;opacity:0.85;">'+intro+'</p>'+h;
+  el.style.display='block';
+}
+function telechargerCarnet(){
+  var c=carnetLire(),corps='',ordre=[];
+  for(var i=1;i<=30;i++)ordre.push('j'+i);
+  ordre.push('bonus1');
+  function toile(t,d){
+    if(!d||!d.answers)return '';
+    var h='<h2>'+t+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
+    d.answers.forEach(function(v,i){h+='<div class="ligne"><span>'+(LABELS_J1[i]||'')+'</span><span>'+v+' / 5</span></div>';});
+    return h;
+  }
+  corps+=toile('Jour 1 · Mon état des lieux',c.j1);
+  ordre.forEach(function(k){
+    if(k==='j1')return;
+    var d=c[k]; if(!d)return;
+    var nom=k==='bonus1'?'Bonus · ':'Jour '+k.slice(1)+' · ';
+    var items=d.items||[]; if(!items.length&&!d.donnees)return;
+    corps+='<h2>'+nom+carnetEsc(d.titre||'')+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
+    items.forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});
+  });
+  corps+=toile('Jour 30 · Mon état des lieux',c.j30toile);
+  if(!corps) corps='<p>Ton carnet est vide sur cet appareil. Les fichiers que tu as téléchargés chaque jour restent ta sauvegarde.</p>';
+  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:36px 22px;max-width:640px;margin:0 auto;line-height:1.75;}'
+   +'h1{font-size:24px;border-bottom:2px solid #c8a060;padding-bottom:8px;margin-bottom:4px;}'
+   +'h2{font-size:18px;color:#6a4a78;margin:30px 0 2px;}'
+   +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
+   +'.date{font-size:13px;color:#9a84a8;margin-bottom:10px;}'
+   +'.box{background:#fdf8ee;border-radius:8px;padding:11px 15px;border-left:3px solid #c8a060;margin-bottom:9px;}'
+   +'.q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;}'
+   +'.r{font-size:15px;}'
+   +'.ligne{display:flex;justify-content:space-between;border-bottom:1px dotted #e0d0e0;padding:4px 0;font-size:15px;}'
+   +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mon carnet</title><style>'+css+'</style></head><body>'
+   +'<div class="programme">L\'Effet Papillon · 30 jours pour prendre soin de ma santé mentale</div><h1>Mon carnet</h1>'
+   +'<div class="date">Téléchargé le '+new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>'
+   +corps+'<div class="footer">@alarenverse.coaching</div></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='Mon-carnet-Effet-Papillon.html';document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+}
+</script>
+<script>afficherMesMots('mes-mots-semaine',[2, 3, 4, 5, 6],'Avant de répondre, relis-toi','Voici quelques mots que tu as écrits cette semaine.');</script>
 </body>
 </html>

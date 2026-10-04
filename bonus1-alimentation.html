@@ -79,6 +79,7 @@
   .recap-r{font-size:16px;color:#1d3020;line-height:1.7}
   .suite-box{background:linear-gradient(135deg,#eaf5ec,#f0f8ee);border-radius:20px;padding:24px;border:1px solid rgba(80,160,80,0.2);text-align:center;margin-top:16px;max-width:580px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -141,7 +142,7 @@
     <p>Pas des compléments miracles. Des nutriments essentiels dont beaucoup de femmes manquent, souvent sans le savoir, et dont la carence a des effets directs et mesurables sur l'humeur, le sommeil et l'anxiété.</p>
     <div id="nutriments-container"></div>
     <div class="hl orange" style="margin-top:8px;">
-      Avant toute supplémentation : un bilan sanguin chez ton médecin. La vitamine D, le magnésium et les oméga-3 peuvent être dosés. Et un professionnel de santé pourra t'orienter vers les bonnes doses selon ta situation personnelle.
+      Avant toute supplémentation : un bilan sanguin chez ton médecin. La vitamine D, le magnésium et les oméga-3 peuvent être dosés. Et un professionnel de santé pourra t'orienter vers les bonnes doses selon ta situation personnelle.
     </div>
     <button class="btn" onclick="showPhase('bilan')">Mon bilan alimentaire →</button>
   </div>
@@ -171,26 +172,30 @@
     <p class="note" style="text-align:center;margin-bottom:20px;">Ces questions explorent ta relation à la nourriture, au-delà des nutriments. Réponds honnêtement, sans te juger.</p>
 
     <div class="e-bloc">
-      <div class="e-q">Est-ce que tu remarques un lien entre ce que tu manges et ton humeur ou ton énergie ?</div>
+      <div class="e-q">Est-ce que tu remarques un lien entre ce que tu manges et ton humeur ou ton énergie ?</div>
       <div class="e-sous">Certains aliments qui t'apaisent, d'autres qui t'agitent, des moments où la nourriture devient une régulation émotionnelle...</div>
+      <div class="exemple">Par exemple : « Quand je saute le repas de midi, je suis irritable vers 16 h. » « Le soir, je grignote du sucré quand je suis épuisée, pas quand j'ai faim. »</div>
       <textarea id="e1" rows="3" placeholder="Quand je mange... / Je remarque que..." oninput="checkE()"></textarea>
     </div>
 
     <div class="e-bloc">
-      <div class="e-q">Y a-t-il un nutriment ou une habitude alimentaire dont tu penses manquer, et qui pourrait expliquer certains de tes symptômes ?</div>
-      <div class="e-sous">Fatigue chronique, anxiété, mauvais sommeil, irritabilité, brouillard mental : ces symptômes ont parfois une composante nutritionnelle.</div>
+      <div class="e-q">Y a-t-il un nutriment ou une habitude alimentaire dont tu penses manquer, et qui pourrait expliquer certains de tes symptômes ?</div>
+      <div class="e-sous">Fatigue chronique, anxiété, mauvais sommeil, irritabilité, brouillard mental : ces symptômes ont parfois une composante nutritionnelle.</div>
+      <div class="exemple">Par exemple : « Je me demande si je manque de fer : je suis essoufflée et fatiguée depuis des mois. » « Je bois très peu d'eau dans la journée. »</div>
       <textarea id="e2" rows="3" placeholder="Je pense que je manque peut-être de... / Depuis que j'ai changé..." oninput="checkE()"></textarea>
     </div>
 
     <div class="e-bloc">
-      <div class="e-q">Quelle est ta relation à la nourriture, est-ce que c'est un plaisir, une obligation, une source d'anxiété ?</div>
+      <div class="e-q">Quelle est ta relation à la nourriture, est-ce que c'est un plaisir, une obligation, une source d'anxiété ?</div>
       <div class="e-sous">Pas de bonne réponse. Juste regarder honnêtement comment tu vis le fait de manger.</div>
+      <div class="exemple">Par exemple : « Une course : je mange debout, vite, en pensant à autre chose. » « Un vrai plaisir le week-end, une corvée la semaine. »</div>
       <textarea id="e3" rows="3" placeholder="Pour moi manger c'est..." oninput="checkE()"></textarea>
     </div>
 
     <div class="e-bloc">
       <div class="e-q">Une petite chose concrète que tu pourrais changer cette semaine pour soutenir ta santé mentale par l'alimentation</div>
       <div class="e-sous">Pas un régime. Pas une révolution. Un ajout, un remplacement, une attention différente.</div>
+      <div class="exemple">Par exemple : « Ajouter une poignée de noix à mon goûter. » « Manger assise à midi, même dix minutes. »</div>
       <textarea id="e4" rows="3" placeholder="Cette semaine je vais essayer de..." oninput="checkE()"></textarea>
     </div>
 
@@ -209,7 +214,7 @@
       <div id="recap-container"></div>
     </div>
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 Si tu retiens une seule chose : 95% de la sérotonine est fabriquée dans l'intestin. Ce que tu manges n'affecte pas que ton corps, il parle directement à ton cerveau.
+      🔑 Si tu retiens une seule chose : 95% de la sérotonine est fabriquée dans l'intestin. Ce que tu manges n'affecte pas que ton corps, il parle directement à ton cerveau.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -219,7 +224,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:28px;margin-bottom:10px;">🧠</div>
-    <p style="font-size:18px;color:#1d3020;margin-bottom:6px;"><strong>Bonus 2 :</strong> Anxiété · Burn-out · Solitude · Post-partum</p>
+    <p style="font-size:18px;color:#1d3020;margin-bottom:6px;"><strong>Bonus 2 :</strong> Anxiété · Burn-out · Solitude · Post-partum</p>
     <p class="note" style="margin-top:4px;">Pour aller encore plus loin 🌸</p>
   </div>
 </div>
@@ -231,11 +236,11 @@ const theorie=[
     {type:"stat",texte:"95% de la sérotonine du corps, le neurotransmetteur de l'humeur stable et du bien-être, est produite dans l'intestin, pas dans le cerveau. Ce que tu manges influence directement cette production",source:"Dr Michael Gershon, The Second Brain"},
     {type:"hl",texte:"Ce qu'on appelle aujourd'hui la psychonutrition, la science de l'influence de l'alimentation sur la santé mentale, s'est accumulée massivement ces 15 dernières années. Les études contrôlées montrent des liens clairs entre alimentation et dépression, anxiété, troubles du sommeil et déclin cognitif."},
     {type:"stat",texte:"Une méta-analyse de 2019 portant sur plus de 45 000 personnes montre qu'une alimentation de type méditerranéen, riche en légumes, poissons gras, légumineuses et huile d'olive, est associée à une réduction significative du risque de dépression",source:"Psychiatry Research, 2019"},
-    {type:"hl",texte:"La chrononutrition ajoute une dimension supplémentaire : consommer des protéines le matin, avant 10h, fournit au cerveau les acides aminés nécessaires pour fabriquer les neurotransmetteurs stimulants (dopamine, noradrénaline) au bon moment de la journée. Le soir, les protéines légers et les glucides complexes favorisent la production de sérotonine et de mélatonine pour le sommeil.",classe:"bleu"},
+    {type:"hl",texte:"La chrononutrition ajoute une dimension supplémentaire : consommer des protéines le matin, avant 10h, fournit au cerveau les acides aminés nécessaires pour fabriquer les neurotransmetteurs stimulants (dopamine, noradrénaline) au bon moment de la journée. Le soir, les protéines légers et les glucides complexes favorisent la production de sérotonine et de mélatonine pour le sommeil.",classe:"bleu"},
   ]},
   {emoji:"⚠️",titre:"Ce qui bouscule ta chimie intérieure",source:"Dr Uma Naidoo, This Is Your Brain on Food",contenu:[
     {type:"p",texte:"Avant de parler de ce qui aide, un mot sur ce qui perturbe. Pas pour te culpabiliser, ni pour dresser une liste d'interdits. Juste pour que tu comprennes pourquoi certains jours tu te sens plus anxieuse ou plus à plat sans savoir pourquoi."},
-    {type:"hl",texte:"🍬 <strong>Le sucre raffiné</strong> fait monter puis chuter brutalement ta glycémie. Et ces chutes déclenchent une réaction de stress dans ton corps. Résultat : cette irritabilité, ce coup de barre ou cette angoisse diffuse en milieu d'après-midi ne viennent pas forcément de ta journée. Parfois, c'est juste ce que tu as mangé deux heures plus tôt.",classe:"rouge"},
+    {type:"hl",texte:"🍬 <strong>Le sucre raffiné</strong> fait monter puis chuter brutalement ta glycémie. Et ces chutes déclenchent une réaction de stress dans ton corps. Résultat : cette irritabilité, ce coup de barre ou cette angoisse diffuse en milieu d'après-midi ne viennent pas forcément de ta journée. Parfois, c'est juste ce que tu as mangé deux heures plus tôt.",classe:"rouge"},
     {type:"hl",texte:"🏭 <strong>Les aliments ultra-transformés</strong> appauvrissent la flore de ton intestin, celle-là même qui participe à fabriquer tes neurotransmetteurs. Plus ils prennent de place dans ton alimentation, plus le lien avec la déprime se renforce dans les études.",classe:"orange"},
     {type:"hl",texte:"🍷 <strong>L'alcool</strong> calme sur le moment, c'est vrai. Mais il épuise ensuite les mêmes ressources qui te permettent de rester apaisée, et il abîme la phase du sommeil qui digère tes émotions. Cette angoisse du lendemain que tu connais peut-être, elle n'est pas dans ta tête. Elle est chimique.",classe:"rouge"},
     {type:"stat",texte:"Le café maintient ton système nerveux en état d'alerte. Et si tu es anxieuse, ou en périménopause, ta sensibilité augmente sans que tu t'en rendes compte. Son effet sur ton anxiété et ton sommeil est souvent bien plus grand qu'on ne le pense",source:"Journal of Psychopharmacology, 2021"},
@@ -244,20 +249,20 @@ const theorie=[
 
 const neuros=[
   {titre:"Sérotonine",role:"Humeur stable · Bien-être · Sommeil · Appétit",couleur:"#60a870",bg:"#eaf5ec",border:"rgba(80,160,80,0.3)",
-   detail:"La sérotonine est fabriquée à partir du tryptophane : un acide aminé présent dans les protéines. Elle régule l'humeur, le sommeil (elle se transforme en mélatonine la nuit), l'appétit et la digestion. Un manque de sérotonine est associé à la dépression, l'anxiété, les fringales sucrées et les troubles du sommeil.<br><br><strong>Ce qui soutient sa production :</strong> tryptophane (dinde, œufs, banane, fromage, graines de courge), magnésium, vitamines B6 et B9, exposition au soleil (vitamine D). La sérotonine a besoin de glucides pour traverser la barrière hémato-encéphalique, d'où les fringales de sucre lors d'un manque."},
+   detail:"La sérotonine est fabriquée à partir du tryptophane : un acide aminé présent dans les protéines. Elle régule l'humeur, le sommeil (elle se transforme en mélatonine la nuit), l'appétit et la digestion. Un manque de sérotonine est associé à la dépression, l'anxiété, les fringales sucrées et les troubles du sommeil.<br><br><strong>Ce qui soutient sa production :</strong> tryptophane (dinde, œufs, banane, fromage, graines de courge), magnésium, vitamines B6 et B9, exposition au soleil (vitamine D). La sérotonine a besoin de glucides pour traverser la barrière hémato-encéphalique, d'où les fringales de sucre lors d'un manque."},
   {titre:"Dopamine",role:"Motivation · Concentration · Plaisir · Élan",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)",
-   detail:"La dopamine est fabriquée à partir de la tyrosine : un acide aminé. Elle gouverne la motivation, le plaisir, la concentration, la mémoire et l'élan. Un manque de dopamine se traduit par une démotivation profonde, une difficulté à ressentir du plaisir, un brouillard mental et une fatigue même après le repos.<br><br><strong>Ce qui soutient sa production :</strong> tyrosine (viande, poisson, œufs, produits laitiers, avocats, amandes), fer, vitamines B6 et B9, cuivre. L'exercice physique stimule également la production de dopamine de façon significative."},
+   detail:"La dopamine est fabriquée à partir de la tyrosine : un acide aminé. Elle gouverne la motivation, le plaisir, la concentration, la mémoire et l'élan. Un manque de dopamine se traduit par une démotivation profonde, une difficulté à ressentir du plaisir, un brouillard mental et une fatigue même après le repos.<br><br><strong>Ce qui soutient sa production :</strong> tyrosine (viande, poisson, œufs, produits laitiers, avocats, amandes), fer, vitamines B6 et B9, cuivre. L'exercice physique stimule également la production de dopamine de façon significative."},
   {titre:"GABA",role:"Calme · Anti-anxiété · Relaxation musculaire",couleur:"#7090c0",bg:"#eef4fb",border:"rgba(100,144,192,0.3)",
-   detail:"Le GABA est le principal neurotransmetteur inhibiteur du cerveau, il calme l'activité neuronale et réduit l'anxiété. Quand le GABA est insuffisant, le cerveau reste en état d'alerte permanent. C'est la cible principale des médicaments anxiolytiques comme les benzodiazépines.<br><br><strong>Ce qui soutient sa production :</strong> glutamate (présent dans de nombreux aliments), magnésium, vitamine B6, zinc. La pratique régulière de la respiration lente et de la méditation augmente l'activité GABA de façon mesurable."},
+   detail:"Le GABA est le principal neurotransmetteur inhibiteur du cerveau, il calme l'activité neuronale et réduit l'anxiété. Quand le GABA est insuffisant, le cerveau reste en état d'alerte permanent. C'est la cible principale des médicaments anxiolytiques comme les benzodiazépines.<br><br><strong>Ce qui soutient sa production :</strong> glutamate (présent dans de nombreux aliments), magnésium, vitamine B6, zinc. La pratique régulière de la respiration lente et de la méditation augmente l'activité GABA de façon mesurable."},
   {titre:"Noradrénaline",role:"Énergie · Vigilance · Réponse au stress",couleur:"#e8857a",bg:"#fde8e6",border:"rgba(232,133,122,0.3)",
-   detail:"La noradrénaline est un neurotransmetteur stimulant, elle donne l'énergie du matin, la vigilance et la capacité de réponse au stress. Un manque est associé à une fatigue matinale persistante, une difficulté à démarrer la journée et un état dépressif.<br><br><strong>Ce qui soutient sa production :</strong> tyrosine, vitamine C (cofacteur essentiel), cuivre, fer. Elle est fabriquée à partir de la dopamine, donc tout ce qui soutient la dopamine soutient également la noradrénaline."},
+   detail:"La noradrénaline est un neurotransmetteur stimulant, elle donne l'énergie du matin, la vigilance et la capacité de réponse au stress. Un manque est associé à une fatigue matinale persistante, une difficulté à démarrer la journée et un état dépressif.<br><br><strong>Ce qui soutient sa production :</strong> tyrosine, vitamine C (cofacteur essentiel), cuivre, fer. Elle est fabriquée à partir de la dopamine, donc tout ce qui soutient la dopamine soutient également la noradrénaline."},
 ];
 
 const nutriments=[
   {emoji:"🐟",titre:"Oméga-3 (EPA et DHA)",sous:"Le nutriment anti-inflammatoire du cerveau",couleur:"#6090c0",bg:"#eef4fb",border:"rgba(100,144,192,0.25)",
    desc:"Les acides gras oméga-3, EPA et DHA, constituent les membranes des neurones et facilitent la transmission des neurotransmetteurs, notamment la sérotonine et la dopamine. Des études montrent que les personnes déprimées ont des réserves d'oméga-3 significativement plus faibles que la population générale.",
    sources:"Poissons gras (saumon, maquereau, sardines, hareng) 2-3x/semaine · Noix · Graines de lin et de chia · Huile de lin",
-   dose:"EPA+DHA : 1 à 2g/jour en supplémentation si alimentation insuffisante en poissons gras",
+   dose:"EPA+DHA : 1 à 2g/jour en supplémentation si alimentation insuffisante en poissons gras",
    doseStyle:"background:rgba(100,144,192,0.12);color:#4070a0;"},
   {emoji:"🌿",titre:"Magnésium",sous:"Le minéral anti-stress et anti-anxiété",couleur:"#60a870",bg:"#eaf5ec",border:"rgba(80,160,80,0.25)",
    desc:"Le magnésium régule le système nerveux, réduit la réponse au stress, participe à la production de sérotonine et améliore la qualité du sommeil. Une carence, très fréquente, surtout en cas de stress chronique, est directement associée à l'anxiété, l'irritabilité et l'insomnie. Le stress épuise les réserves de magnésium, créant un cercle vicieux.",
@@ -271,12 +276,12 @@ const nutriments=[
    doseStyle:"background:rgba(200,160,80,0.12);color:#7d5020;"},
   {emoji:"🥩",titre:"Vitamines B (B6, B9, B12)",sous:"Les cofacteurs de tous les neurotransmetteurs",couleur:"#c870a0",bg:"#fdf0f5",border:"rgba(200,112,160,0.25)",
    desc:"Les vitamines du groupe B sont indispensables à la fabrication de presque tous les neurotransmetteurs, sérotonine, dopamine, GABA, noradrénaline. La B12 est particulièrement importante pour le système nerveux et souvent déficiente chez les végétariens et végétaliens. La B9 (folates) joue un rôle clé dans la prévention de la dépression.",
-   sources:"B12 : viande, poissons, œufs, produits laitiers (supplémentation indispensable si végétalienne) · B9 : légumes verts feuillus, légumineuses, foie · B6 : poulet, poisson, banane, pomme de terre",
+   sources:"B12 : viande, poissons, œufs, produits laitiers (supplémentation indispensable si végétalienne) · B9 : légumes verts feuillus, légumineuses, foie · B6 : poulet, poisson, banane, pomme de terre",
    dose:"Supplémentation en complexe B recommandée si alimentation restrictive ou végétalienne",
    doseStyle:"background:rgba(200,112,160,0.12);color:#803060;"},
   {emoji:"🌰",titre:"Zinc et Fer",sous:"Les oligo-éléments oubliés",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.25)",
-   desc:"Le zinc régule les neurotransmetteurs et l'axe hypothalamo-hypophyso-surrénalien : le système du stress. De faibles niveaux de zinc sont associés à la dépression et à l'anxiété. Le fer est essentiel à la production de dopamine et de sérotonine : une anémie ferriprive provoque fatigue, brouillard mental et irritabilité. Chez les femmes réglées, les pertes de fer sont importantes.",
-   sources:"Zinc : huîtres, viande rouge, graines de courge, légumineuses · Fer : viande rouge, foie, légumineuses, épinards (avec vitamine C pour l'absorption)",
+   desc:"Le zinc régule les neurotransmetteurs et l'axe hypothalamo-hypophyso-surrénalien : le système du stress. De faibles niveaux de zinc sont associés à la dépression et à l'anxiété. Le fer est essentiel à la production de dopamine et de sérotonine : une anémie ferriprive provoque fatigue, brouillard mental et irritabilité. Chez les femmes réglées, les pertes de fer sont importantes.",
+   sources:"Zinc : huîtres, viande rouge, graines de courge, légumineuses · Fer : viande rouge, foie, légumineuses, épinards (avec vitamine C pour l'absorption)",
    dose:"Bilan sanguin recommandé pour évaluer les niveaux, supplémentation selon résultats",
    doseStyle:"background:rgba(160,128,200,0.12);color:#5040a0;"},
 ];
@@ -306,7 +311,7 @@ function showPhase(id){
 }
 
 const pc=document.getElementById('preview-container');
-[{e:'🧠',t:'L\'axe intestin-cerveau : ton deuxième cerveau'},{e:'⚠️',t:'Ce qui sabote la neurochimie'},{e:'🧪',t:'Les neurotransmetteurs et leur carburant'},{e:'💊',t:'Les nutriments clés, magnésium, oméga-3, vitamine D...'},{e:'📋',t:'Mon bilan alimentaire'},{e:'✍️',t:'Ma relation à la nourriture'}].forEach(i=>{
+[{e:'🧠',t:'L\'axe intestin-cerveau : ton deuxième cerveau'},{e:'⚠️',t:'Ce qui sabote la neurochimie'},{e:'🧪',t:'Les neurotransmetteurs et leur carburant'},{e:'💊',t:'Les nutriments clés, magnésium, oméga-3, vitamine D...'},{e:'📋',t:'Mon bilan alimentaire'},{e:'✍️',t:'Ma relation à la nourriture'}].forEach(i=>{
   pc.innerHTML+=`<div class="preview-item"><span style="font-size:18px;">${i.e}</span><span>${i.t}</span></div>`;
 });
 
@@ -363,7 +368,7 @@ function renderNutriments(){
           </div>
         </div>
         <div class="nutriment-desc">${n.desc}</div>
-        <div class="nutriment-sources" style="background:rgba(0,0,0,0.03);"><strong>Sources :</strong> ${n.sources}</div>
+        <div class="nutriment-sources" style="background:rgba(0,0,0,0.03);"><strong>Sources :</strong> ${n.sources}</div>
         <div class="nutriment-dose" style="${n.doseStyle}">💊 ${n.dose}</div>
       </div>`;
   });
@@ -462,6 +467,51 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='bonus1', TITRE="Alimentation & santé mentale";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

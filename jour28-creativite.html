@@ -65,6 +65,7 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#f5f0fa,#f0f8f5);border-radius:20px;padding:22px;border:1px solid rgba(160,100,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -120,7 +121,7 @@
 
     <div class="hl vert" style="margin-top:8px;">
       <strong>Ce qui compte, ce n'est pas le résultat, c'est le processus.</strong><br><br>
-      Le bénéfice neurologique de la créativité vient de l'acte de créer, pas de la qualité de ce qu'on produit. Un gribouillage fait avec attention vaut autant qu'une aquarelle soignée. Une recette improvisée vaut autant qu'un plat gastronomique. Ce qui compte c'est d'être en état de création : présente, concentrée, dans le flux.
+      Le bénéfice neurologique de la créativité vient de l'acte de créer, pas de la qualité de ce qu'on produit. Un gribouillage fait avec attention vaut autant qu'une aquarelle soignée. Une recette improvisée vaut autant qu'un plat gastronomique. Ce qui compte c'est d'être en état de création : présente, concentrée, dans le flux.
     </div>
 
     <button class="btn" onclick="showPhase('exercice')">L'exercice créatif du jour →</button>
@@ -164,8 +165,9 @@
       <div class="ex-etape">3. Arrange, déplace, jusqu'à ce que ça te fasse sourire</div>
     </div>
 
-    <div style="font-family:'Jost',sans-serif;font-size:11px;color:#9080b0;text-transform:uppercase;letter-spacing:0.1em;margin:16px 0 8px;">Note ce que tu as créé ou ressenti :</div>
-    <textarea id="exercice-note" rows="3" placeholder="J'ai choisi l'exercice... / J'ai créé... / Ce que j'ai ressenti pendant c'est..."></textarea>
+    <div style="font-family:'Jost',sans-serif;font-size:11px;color:#9080b0;text-transform:uppercase;letter-spacing:0.1em;margin:16px 0 8px;">Note ce que tu as créé ou ressenti :</div>
+    <div class="exemple">Par exemple : « J'ai choisi le collage. J'ai découpé du bleu et des mains. Pendant vingt minutes, je n'ai pensé à rien d'autre. »</div>
+      <textarea id="exercice-note" rows="3" placeholder="J'ai choisi l'exercice... / J'ai créé... / Ce que j'ai ressenti pendant c'est..."></textarea>
 
     <button class="btn" onclick="showPhase('ecriture-libre')" style="margin-top:12px;">Écriture libre →</button>
   </div>
@@ -176,18 +178,19 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">📝</span>
     <h2>Écriture libre, sans censure ni objectif</h2>
-    <p style="text-align:center;margin-bottom:8px;">L'écriture libre est l'une des formes de créativité les plus accessibles et les plus thérapeutiques. La règle : écrire sans s'arrêter, sans corriger, sans juger.</p>
+    <p style="text-align:center;margin-bottom:8px;">L'écriture libre est l'une des formes de créativité les plus accessibles et les plus thérapeutiques. La règle : écrire sans s'arrêter, sans corriger, sans juger.</p>
     <p class="small" style="text-align:center;margin-bottom:20px;">Mets un minuteur sur 10 minutes. Commence par la phrase d'amorce ci-dessous, et laisse venir ce qui vient. Ne soulève pas le stylo (ou les doigts) avant que le minuteur sonne.</p>
 
     <div class="hl" style="margin-bottom:16px;">
-      <strong>La règle de l'écriture libre :</strong><br><br>
+      <strong>La règle de l'écriture libre :</strong><br><br>
       On écrit sans s'arrêter. Si on ne sait pas quoi écrire, on écrit "je ne sais pas quoi écrire" jusqu'à ce que quelque chose vienne. On ne corrige pas les fautes. On ne relit pas pendant qu'on écrit. On ne juge pas. L'objectif est le flux, pas le contenu.
     </div>
 
-    <div style="font-family:'Jost',sans-serif;font-size:11px;color:#a060c8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Phrase d'amorce, commence par ici :</div>
+    <div style="font-family:'Jost',sans-serif;font-size:11px;color:#a060c8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Phrase d'amorce, commence par ici :</div>
     <div style="font-size:18px;color:#2d1d40;margin-bottom:16px;padding:12px 16px;background:rgba(160,100,200,0.08);border-radius:12px;border-left:3px solid #a060c8;">"Ce que je n'ai jamais dit à voix haute, c'est..."</div>
 
-    <textarea class="ecriture-libre" id="ecriture-libre-text" placeholder="Ce que je n'ai jamais dit à voix haute, c'est... (continue sans t'arrêter pendant 10 minutes)"></textarea>
+    <div class="exemple">Par exemple : « Ce que je n'ai jamais dit à voix haute, c'est que j'aimerais tout arrêter pendant un mois. Juste pour voir qui je suis quand je ne cours pas. »</div>
+      <textarea class="ecriture-libre" id="ecriture-libre-text" placeholder="Ce que je n'ai jamais dit à voix haute, c'est... (continue sans t'arrêter pendant 10 minutes)"></textarea>
 
     <div style="font-size:12px;color:#9080b0;font-family:'Jost',sans-serif;margin-top:8px;">Tu n'as pas à partager ce texte. Il est pour toi seule. Tu peux même le brûler ou le supprimer après. Le bienfait vient de l'acte d'écrire, pas de la conservation.</div>
 
@@ -206,7 +209,7 @@
       <div id="recap-container"></div>
     </div>
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À pratiquer :</strong> 10 minutes de création par jour : dessin, cuisine, jardinage, écriture, chant, arrangement. Peu importe. Pas pour un résultat. Pour le processus. Le cerveau a besoin de créer comme il a besoin de dormir.
+      🔑 <strong>À pratiquer :</strong> 10 minutes de création par jour : dessin, cuisine, jardinage, écriture, chant, arrangement. Peu importe. Pas pour un résultat. Pour le processus. Le cerveau a besoin de créer comme il a besoin de dormir.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -216,7 +219,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#706088;"><strong style="color:#2d1d40;">Demain, Jour 29 :</strong> célébrer mon chemin</p>
+    <p style="font-size:14px;color:#706088;"><strong style="color:#2d1d40;">Demain, Jour 29 :</strong> célébrer mon chemin</p>
     <p class="hint" style="margin-top:6px;">2 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -225,16 +228,16 @@
 const theorie=[
   {emoji:"🧠",titre:"Ce que créer fait à ton cerveau",source:"Dr Girija Kaimal, Drexel University",contenu:[
     {type:"texte",texte:"Quand tu crées, ton cerveau bascule dans un réseau bien particulier, celui de l'imagination, de la rêverie et de la construction du sens. Créer n'a rien de superficiel. C'est l'un des états les plus profonds et les plus réparateurs que ton cerveau puisse traverser."},
-    {type:"stat",texte:"Une séance d'activité créative fait baisser le cortisol, l'hormone du stress. Et voilà le plus rassurant : ça marche quel que soit ton niveau. Les débutantes en profitent autant que les artistes confirmées",source:"Dr Girija Kaimal, Drexel University"},
+    {type:"stat",texte:"Une séance d'activité créative fait baisser le cortisol, l'hormone du stress. Et voilà le plus rassurant : ça marche quel que soit ton niveau. Les débutantes en profitent autant que les artistes confirmées",source:"Dr Girija Kaimal, Drexel University"},
     {type:"hl",texte:"🎨 Créer libère aussi de la dopamine, la molécule de la motivation et du plaisir. Pendant que tu crées, et encore après en regardant ce que tu as fait. C'est pour ça que créer donne de l'élan, même quand tu étais épuisée avant de commencer."},
     {type:"hl",texte:"💡 Et il y a cet état d'absorption totale, où tu perds la notion du temps, où plus rien n'existe que ce que tu es en train de faire. Csikszentmihalyi l'a appelé le flow. C'est l'un des états de bien-être les plus intenses qu'on puisse vivre. Et il ne demande aucune expertise, juste d'être absorbée.",classe:"vert"},
   ]},
   {emoji:"🚧",titre:"Pourquoi on arrête de créer, et comment y revenir",source:"Julia Cameron et Brené Brown",contenu:[
     {type:"texte",texte:"La plupart des adultes ont arrêté de créer librement à un moment de leur vie. Souvent à cause d'un commentaire, d'une note, d'un regard. Ou simplement parce que la vie a pris toute la place."},
-    {type:"hl",texte:"🚧 Les raisons les plus fréquentes :<br><br>\"Je ne suis pas douée\", après une critique reçue trop tôt.<br><br>\"Je n'ai pas le temps\", la créativité reléguée tout en bas de la liste.<br><br>\"Ça ne sert à rien\", cette culture du productif qui dévalorise tout ce qui n'est pas utile.<br><br>\"Je ne suis pas créative\", la croyance la plus répandue, et la plus fausse.",classe:"rouge"},
-    {type:"texte",texte:"Julia Cameron, dans The Artist's Way, part d'une idée simple : tout le monde est créatif. Mais beaucoup ont été blessés dans leur créativité par des jugements reçus trop jeunes. On répare ça en recréant sans objectif de résultat, juste pour le plaisir de créer."},
+    {type:"hl",texte:"🚧 Les raisons les plus fréquentes :<br><br>\"Je ne suis pas douée\", après une critique reçue trop tôt.<br><br>\"Je n'ai pas le temps\", la créativité reléguée tout en bas de la liste.<br><br>\"Ça ne sert à rien\", cette culture du productif qui dévalorise tout ce qui n'est pas utile.<br><br>\"Je ne suis pas créative\", la croyance la plus répandue, et la plus fausse.",classe:"rouge"},
+    {type:"texte",texte:"Julia Cameron, dans The Artist's Way, part d'une idée simple : tout le monde est créatif. Mais beaucoup ont été blessés dans leur créativité par des jugements reçus trop jeunes. On répare ça en recréant sans objectif de résultat, juste pour le plaisir de créer."},
     {type:"texte",texte:"Brené Brown a montré que la honte est le principal frein à la créativité adulte. Cette petite voix qui dit \"je ne suis pas assez bonne pour ça\". Créer demande du courage, parce que mettre quelque chose de soi dans le monde, même un gribouillage, c'est se rendre vulnérable."},
-    {type:"hl",texte:"🌸 Alors pour y revenir : commence petit, commence seule, commence sans rien montrer à personne. Le but n'est pas de produire quelque chose de beau. C'est de retrouver le plaisir de créer pour créer. Le reste vient après, ou ne vient pas, et ce n'est pas grave.",classe:"vert"},
+    {type:"hl",texte:"🌸 Alors pour y revenir : commence petit, commence seule, commence sans rien montrer à personne. Le but n'est pas de produire quelque chose de beau. C'est de retrouver le plaisir de créer pour créer. Le reste vient après, ou ne vient pas, et ce n'est pas grave.",classe:"vert"},
   ]},
 ];
 
@@ -370,6 +373,51 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j28', TITRE="La créativité comme soin";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

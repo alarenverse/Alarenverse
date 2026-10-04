@@ -12,47 +12,121 @@
   .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b09aac;margin-bottom:8px}
   h1{font-size:clamp(22px,5vw,30px);font-weight:500;color:#3d2e45;line-height:1.3}
   .sep{width:40px;height:2px;background:linear-gradient(90deg,#c9a0c2,#a0b8d8);margin:12px auto 0;border-radius:2px}
-  .phase{display:none}
+  .phase{display:none;width:100%;max-width:560px}
   .phase.active{display:block;animation:fadeUp 0.5s ease}
-  .card{background:white;border-radius:24px;padding:34px 28px;box-shadow:0 8px 40px rgba(180,150,200,0.12);border:1px solid rgba(200,180,220,0.25);max-width:560px;width:100%;margin-top:24px}
-  .emoji-hero{font-size:48px;display:block;text-align:center;margin-bottom:14px}
+  .card{background:white;border-radius:24px;padding:34px 26px;box-shadow:0 8px 40px rgba(180,150,200,0.12);border:1px solid rgba(200,180,220,0.25);width:100%;margin-top:24px}
+  .emoji-hero{font-size:46px;display:block;text-align:center;margin-bottom:14px}
   .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c09ab8;text-align:center;margin-bottom:10px}
+  .etape{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:#b09aac;text-align:center;margin-bottom:6px}
   h2{font-size:24px;font-weight:500;color:#3d2e45;text-align:center;margin-bottom:14px;line-height:1.4}
+  h3{font-size:19px;font-weight:600;color:#3d2e45;margin:6px 0 10px;line-height:1.4}
   p{color:#5d4868;font-size:18px;line-height:1.8;margin-bottom:12px}
   p.small{font-size:15px;color:#8a7090}
-  .savoir-box{background:#fdf6fd;border-radius:14px;padding:16px 20px;border:1px solid rgba(200,180,220,0.2);margin-bottom:26px}
+  .centre{text-align:center}
+  .savoir-box{background:#fdf6fd;border-radius:14px;padding:16px 20px;border:1px solid rgba(200,180,220,0.25);margin:18px 0 24px;text-align:left}
   .savoir-box p{font-size:16px;color:#5d4868;line-height:1.7;margin:0}
-  .btn{background:linear-gradient(135deg,#c9a0c2,#a0b8d8);color:white;border:none;border-radius:50px;padding:14px 42px;font-size:17px;cursor:pointer;font-family:'Lora',serif;font-weight:500;letter-spacing:0.03em;box-shadow:0 4px 20px rgba(180,140,200,0.3);display:block;margin:0 auto;transition:transform 0.2s}
+  .phrase-cle{background:linear-gradient(135deg,#fdf0f8,#f0f4fd);border-radius:16px;padding:18px 20px;margin:18px 0;border:1px solid rgba(200,180,220,0.3)}
+  .phrase-cle p{font-size:18px;color:#3d2e45;margin:0;line-height:1.7}
+  .btn{background:linear-gradient(135deg,#c9a0c2,#a0b8d8);color:white;border:none;border-radius:50px;padding:14px 38px;font-size:17px;cursor:pointer;font-family:'Lora',serif;font-weight:500;letter-spacing:0.03em;box-shadow:0 4px 20px rgba(180,140,200,0.3);display:block;margin:22px auto 0;transition:transform 0.2s}
   .btn:hover{transform:translateY(-2px)}
-  .btn:disabled{background:rgba(200,180,220,0.3);color:#b0a0b8;box-shadow:none;cursor:not-allowed;transform:none}
-  .hint{font-size:13px;color:#b0a0b8;text-align:center;margin-top:14px;font-family:'Jost',sans-serif}
+  .btn-sec{background:white;color:#8a6a98;border:2px solid rgba(200,160,210,0.5);box-shadow:none;font-size:16px;padding:11px 26px}
+  .hint{font-size:13px;color:#b0a0b8;text-align:center;margin-top:12px;font-family:'Jost',sans-serif}
+  .retour{background:none;border:none;color:#a890b4;font-family:'Jost',sans-serif;font-size:14px;cursor:pointer;display:block;margin:14px auto 0;text-decoration:underline}
 
-  .famille-card{border-radius:16px;margin-bottom:12px;border:2px solid;overflow:hidden;transition:all 0.2s}
-  .famille-header{padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all 0.2s}
-  .famille-header:hover{filter:brightness(0.98)}
-  .famille-emoji{font-size:30px;flex-shrink:0}
-  .famille-nom{font-size:18px;color:#3d2e45;font-weight:600;flex:1}
-  .famille-chevron{font-size:18px;color:#b0a0b8;transition:transform 0.3s}
-  .famille-card.open .famille-chevron{transform:rotate(180deg)}
-  .famille-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
-  .famille-card.open .famille-body{max-height:1400px}
-  .famille-body-inner{padding:4px 18px 18px}
-  .nuance{border-radius:12px;padding:13px 16px;margin-bottom:8px;background:white}
-  .nuance-nom{font-size:16px;color:#3d2e45;font-weight:600;margin-bottom:3px}
-  .nuance-def{font-size:15px;color:#6d5878;line-height:1.6}
+  /* Temps */
+  .temps{display:flex;gap:14px;align-items:flex-start;background:#fdf8fd;border-radius:14px;padding:14px 16px;margin-bottom:10px;border:1px solid rgba(200,180,220,0.2)}
+  .temps-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#c9a0c2,#a0b8d8);color:white;font-family:'Jost',sans-serif;font-size:15px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .temps-titre{font-size:17px;font-weight:600;color:#3d2e45;margin-bottom:2px}
+  .temps-txt{font-size:16px;color:#6d5878;line-height:1.6}
+  .temps.fort{background:#fdf0f8;border-color:rgba(201,160,194,0.5)}
 
+  .exemple{font-size:14.5px;color:#7a6488;background:#fbf7fc;border-left:2px solid #d8bcd4;border-radius:0 10px 10px 0;padding:9px 13px;margin-bottom:10px;line-height:1.6;font-style:italic}
+  /* Pistes */
+  .piste-box{display:none;background:#fdf0f8;border-radius:14px;padding:13px 16px;border:1px solid rgba(201,160,194,0.45);font-size:16px;color:#3d2e45;line-height:1.6;font-style:italic}
+  .entrer{background:#f6f2fb;border-radius:16px;padding:16px 18px;margin-bottom:22px;border:1px solid rgba(180,160,210,0.3)}
+  .entrer p{font-size:16px;margin:0;line-height:1.7}
+  /* Train */
+  .train{background:#f6f2fb;border-radius:16px;padding:20px;margin-top:20px;border:1px solid rgba(180,160,210,0.3)}
+  .train-scene{font-size:17px;color:#3d2e45;line-height:1.7;margin-bottom:12px;font-style:italic}
+  .pensee{background:white;border-radius:12px;padding:12px 16px;margin-bottom:8px;border-left:3px solid #c9a0c2}
+  .pensee-txt{font-size:16px;color:#3d2e45;font-style:italic}
+  .pensee-emo{font-size:14px;color:#9a84a8;font-family:'Jost',sans-serif;margin-top:2px}
+  #train-reveal{display:none;margin-top:14px}
+
+  /* Champs */
   textarea{width:100%;border:2px solid rgba(200,180,220,0.35);border-radius:14px;padding:14px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#3d2e45;line-height:1.7;outline:none;resize:vertical;background:#fdf8fd}
   textarea:focus{border-color:#c9a0c2}
   input[type=text]{width:100%;border:2px solid rgba(200,180,220,0.35);border-radius:14px;padding:13px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#3d2e45;outline:none;background:#fdf8fd}
   input[type=text]:focus{border-color:#c9a0c2}
-  .e-bloc{margin-bottom:20px}
+  .e-bloc{margin-bottom:24px}
   .e-q{font-size:17px;color:#3d2e45;font-weight:600;line-height:1.5;margin-bottom:4px}
-  .e-sous{font-size:14px;color:#9a84a8;margin-bottom:10px;font-family:'Jost',sans-serif}
-  .recap-box{background:#fdf6fd;border-radius:12px;padding:14px 18px;border-left:3px solid #c9a0c2;margin-bottom:10px}
-  .recap-q{font-size:11px;color:#b09aac;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
+  .e-sous{font-size:14px;color:#9a84a8;margin-bottom:10px;font-family:'Jost',sans-serif;line-height:1.55}
+  .rappel{background:#fdf6fd;border-radius:12px;padding:12px 16px;border-left:3px solid #c9a0c2;margin-bottom:22px;font-size:16px;color:#5a4868;font-style:italic;display:none}
+
+  /* Chips */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .chip{background:#fdf8fd;border:2px solid rgba(200,180,220,0.4);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#6d5878;cursor:pointer;transition:all 0.15s;user-select:none}
+  .chip.sel{background:linear-gradient(135deg,#c9a0c2,#a0b8d8);border-color:transparent;color:white}
+  .echelle{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0 4px}
+  .num{width:40px;height:40px;border-radius:50%;border:2px solid rgba(200,180,220,0.45);background:#fdf8fd;font-family:'Jost',sans-serif;font-size:15px;color:#6d5878;cursor:pointer;display:flex;align-items:center;justify-content:center;user-select:none}
+  .num.sel{background:linear-gradient(135deg,#c9a0c2,#a0b8d8);color:white;border-color:transparent}
+  .echelle-legende{display:flex;justify-content:space-between;font-size:12px;color:#b0a0b8;font-family:'Jost',sans-serif;max-width:470px;margin:0 auto}
+
+  /* Carte des émotions */
+  .famille-card{border-radius:16px;margin-bottom:12px;border:2px solid;overflow:hidden}
+  .famille-header{padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:14px}
+  .famille-emoji{font-size:28px;flex-shrink:0}
+  .famille-nom{font-size:18px;color:#3d2e45;font-weight:600;flex:1}
+  .famille-chevron{font-size:18px;color:#b0a0b8;transition:transform 0.3s}
+  .famille-card.open .famille-chevron{transform:rotate(180deg)}
+  .famille-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+  .famille-card.open .famille-body{max-height:1600px}
+  .famille-body-inner{padding:4px 16px 16px}
+  .nuance{border-radius:12px;padding:12px 15px;margin-bottom:8px;background:white;cursor:pointer;border:2px solid transparent;transition:all 0.15s}
+  .nuance.sel{border-color:#c9a0c2;background:#fdf0f8}
+  .nuance-nom{font-size:16px;color:#3d2e45;font-weight:600;margin-bottom:2px}
+  .nuance.sel .nuance-nom::after{content:"  ✓";color:#b080a8}
+  .nuance-def{font-size:15px;color:#6d5878;line-height:1.6}
+  .mes-mots{background:#fdf6fd;border-radius:14px;padding:14px 16px;margin:6px 0 18px;border:1px dashed rgba(200,160,210,0.6);font-size:16px;color:#5a4868;min-height:52px}
+  .mes-mots strong{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#b09aac;font-weight:400;display:block;margin-bottom:4px}
+
+  /* Primaire / secondaire */
+  .type-card{border-radius:14px;padding:14px 16px;margin-bottom:10px}
+  .type-card.prim{background:#eef6f0;border:1px solid rgba(120,180,140,0.35)}
+  .type-card.sec{background:#fbf1ea;border:1px solid rgba(210,150,110,0.35)}
+  .type-titre{font-size:17px;font-weight:600;color:#3d2e45;margin-bottom:2px}
+  .type-txt{font-size:16px;color:#5d4868;line-height:1.6}
+  .liste-douce{list-style:none;margin:6px 0 14px}
+  .liste-douce li{font-size:16px;color:#5d4868;padding:6px 0 6px 22px;position:relative;line-height:1.55}
+  .liste-douce li::before{content:"•";position:absolute;left:6px;color:#c9a0c2}
+
+  /* Besoins */
+  .emo-row{border-radius:14px;padding:13px 16px;margin-bottom:8px;background:#fdf8fd;border:1px solid rgba(200,180,220,0.25)}
+  .emo-nom{font-size:17px;font-weight:600;color:#3d2e45}
+  .emo-l{font-size:15px;color:#6d5878;line-height:1.55;margin-top:3px}
+  .emo-l b{font-family:'Jost',sans-serif;font-weight:400;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#b09aac;margin-right:4px}
+
+  /* Avant / après */
+  .compare{display:none;margin-top:18px;border-radius:16px;padding:18px 20px;background:linear-gradient(135deg,#fdf0f8,#f0f4fd);border:1px solid rgba(200,180,220,0.3)}
+  .compare-chiffres{display:flex;justify-content:center;gap:26px;margin-bottom:10px}
+  .compare-chiffres div{text-align:center}
+  .compare-chiffres span{display:block;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#b09aac}
+  .compare-chiffres b{font-size:32px;color:#3d2e45;font-weight:500}
+  .compare p{font-size:16px;margin:0}
+
+  /* Facultatif */
+  .facultatif{background:#f7f4fb;border-radius:16px;padding:18px;border:1px dashed rgba(170,150,200,0.55);margin-top:8px}
+  .badge{display:inline-block;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#8a7aa8;background:white;border-radius:50px;padding:3px 12px;margin-bottom:10px;border:1px solid rgba(170,150,200,0.4)}
+  .securite{font-size:14px;color:#7a6a90;font-family:'Jost',sans-serif;line-height:1.6;margin-top:10px}
+
+  /* Récap */
+  .recap-titre{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:#b09aac;margin:18px 0 8px}
+  .recap-box{background:#fdf6fd;border-radius:12px;padding:13px 17px;border-left:3px solid #c9a0c2;margin-bottom:9px}
+  .recap-q{font-size:11px;color:#b09aac;font-family:'Jost',sans-serif;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.08em}
   .recap-r{font-size:16px;color:#5a4868;line-height:1.6}
   .suite-box{background:linear-gradient(135deg,#fdf0f8,#f0f4fd);border-radius:20px;padding:22px;border:1px solid rgba(200,180,220,0.3);text-align:center;margin-top:16px}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @media (max-width:420px){.card{padding:28px 18px}.num{width:36px;height:36px;font-size:14px}}
 </style>
 </head>
 <body>
@@ -68,92 +142,316 @@
   <div class="card" style="text-align:center;">
     <span class="emoji-hero">💛</span>
     <div class="label">Jour 2 · Identifier ses émotions</div>
-    <h2>Nommer ce qu'on ressent, c'est déjà commencer à le traverser</h2>
-    <p>Hier tu as fait un état des lieux. Aujourd'hui on va plus loin, apprendre à nommer précisément ce que tu ressens.</p>
-    <p class="small">Tes émotions ne sont pas tes ennemies. Ce sont des messagères. Et quand tu les nommes, elles perdent un peu de leur emprise.</p>
+    <h2>Mettre le bon mot sur ce que tu ressens</h2>
+    <p>Hier tu as fait ton état des lieux. Aujourd'hui, on apprend à lire ce qui se passe en toi quand une émotion arrive. Pas en théorie : sur un moment que tu as vraiment vécu.</p>
+    <p class="small">Une émotion n'est pas un bug. C'est une information qui arrive avant que tu aies eu le temps de réfléchir. Elle te dit que quelque chose vient de se passer, et que ça compte pour toi.</p>
     <div class="savoir-box">
-      <p>🧠 <strong>Le savoir du jour :</strong> nommer une émotion, ce que les chercheurs appellent l'affect labeling, réduit son intensité dans le cerveau. Mettre des mots sur ce qu'on ressent apaise littéralement le système nerveux. C'est visible à l'imagerie cérébrale.</p>
+      <p>🧠 <strong>Le savoir du jour :</strong> des chercheurs de l'université de Californie (UCLA) ont demandé à des participants si nommer leur émotion allait les apaiser. Ils pensaient que ça les ferait se sentir plus mal. C'est l'inverse qui s'est produit : leur détresse a baissé. Mettre des mots calme, même quand on n'y croit pas.</p>
     </div>
-    <button class="btn" onclick="showPhase('roue')">Explorer mes émotions ✨</button>
-    <p class="hint">~10 minutes · à ton rythme</p>
+    <button class="btn" onclick="showPhase('moment')">Commencer ✨</button>
+    <p class="hint">~20 minutes · à ton rythme · tu peux laisser des cases vides</p>
   </div>
 </div>
 
-<!-- EXPLORATION LIBRE -->
-<div class="phase" id="phase-roue">
+<!-- 1. LE MOMENT -->
+<div class="phase" id="phase-moment">
   <div class="card">
-    <p style="font-size:18px;color:#3d2e45;text-align:center;margin-bottom:6px;line-height:1.6;font-weight:600;">La carte des émotions</p>
-    <p class="small" style="text-align:center;margin-bottom:8px;">Explore librement. Déplie les familles qui te parlent, lis les nuances, prends ton temps.</p>
-    <p class="small" style="text-align:center;margin-bottom:22px;">Souvent on ressent plusieurs choses en même temps, c'est normal.</p>
+    <div class="etape">Étape 1 sur 9</div>
+    <h2>Choisis un moment</h2>
+    <p>On va travailler sur un moment que tu as vraiment vécu. Choisis-en un qui te touche encore un peu quand tu y repenses, sans être le plus lourd de ta vie.</p>
+
+    <div class="e-bloc">
+      <div class="e-q">Si rien ne vient, choisis une piste :</div>
+      <div class="chips" id="chips-pistes"></div>
+      <div class="piste-box" id="piste-box"></div>
+    </div>
+
+    <div class="entrer">
+      <div class="label" style="text-align:left;margin-bottom:6px;">Entre dans la scène</div>
+      <p>Ferme les yeux quelques secondes si tu veux. Où étais-tu ? Qui était là ? Qu'est-ce que tu as vu, entendu ? Quels mots ont été dits ? Laisse la scène revenir, sans forcer.</p>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Que s'est-il passé ?</div>
+      <div class="e-sous">Où tu étais, qui était là, ce qui a été dit ou fait.</div>
+      <div class="exemple">Par exemple : « Dimanche soir, dans la cuisine. J'ai demandé à mon compagnon de m'aider pour le repas. Il a répondu sans lever les yeux de son téléphone : deux minutes. Une demi-heure plus tard, j'avais tout fait seule. »</div>
+      <textarea id="m-situation" rows="4" placeholder="C'était..."></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Maintenant que tu es dans la scène, à combien est l'émotion quand tu y repenses ?</div>
+      <div class="echelle" id="echelle-avant"></div>
+      <div class="echelle-legende"><span>0 · rien</span><span>10 · ça prend toute la place</span></div>
+      <p class="hint">Garde ce chiffre en tête. On y reviendra à la fin.</p>
+    </div>
+
+    <button class="btn" onclick="showPhase('temps')">Continuer →</button>
+  </div>
+</div>
+
+<!-- 2. LES 5 TEMPS -->
+<div class="phase" id="phase-temps">
+  <div class="card">
+    <div class="etape">Étape 2 sur 9</div>
+    <h2>Ce qui se passe en toi, en cinq temps</h2>
+    <p class="small centre">Une émotion ne tombe pas du ciel. Elle suit toujours le même chemin.</p>
+
+    <div class="temps"><div class="temps-num">1</div><div><div class="temps-titre">Le déclencheur</div><div class="temps-txt">Quelque chose arrive. Dehors : un message, une remarque, un retard. Ou dedans : une pensée, un souvenir, une sensation.</div></div></div>
+    <div class="temps fort"><div class="temps-num">2</div><div><div class="temps-titre">Ce que tu te racontes</div><div class="temps-txt">C'est ici que tout se joue, et presque personne ne le voit. Ce n'est pas l'événement qui crée l'émotion. C'est ce que tu te dis à propos de l'événement.</div></div></div>
+    <div class="temps"><div class="temps-num">3</div><div><div class="temps-titre">L'émotion</div><div class="temps-txt">Elle arrive dans le corps, dans ce que tu ressens, et avec une envie d'agir. Cette envie est le maillon le plus important : c'est là que se fait la différence entre réagir et choisir.</div></div></div>
+    <div class="temps"><div class="temps-num">4</div><div><div class="temps-titre">L'expression</div><div class="temps-txt">Par le corps, par les mots, par un geste. Ou par rien du tout, ce qui est aussi une façon de l'exprimer.</div></div></div>
+    <div class="temps fort"><div class="temps-num">5</div><div><div class="temps-titre">Le mot</div><div class="temps-txt">Mettre un mot dessus. C'est le moment où tu reprends la main. Et c'est celui qu'on saute presque toujours.</div></div></div>
+
+    <div class="train">
+      <div class="label" style="text-align:left;">Une scène, plusieurs émotions</div>
+      <p class="train-scene">Ça ne va pas fort. Tu prends ton courage et tu écris un long message à une amie proche pour lui dire ce que tu traverses. Tu vois qu'elle l'a lu. Une heure passe. Puis deux. Pas de réponse.</p>
+      <div class="e-q">Qu'est-ce que tu te dirais ?</div>
+      <div class="e-sous">La première phrase qui te vient, sans la corriger.</div>
+      <input type="text" id="train-moi" placeholder="Je me dirais que...">
+      <div class="e-q" style="margin-top:14px;">Et qu'est-ce que tu ressentirais ?</div>
+      <div class="e-sous">Un mot suffit. Si rien ne vient, regarde ce que fait ton corps quand tu relis la scène.</div>
+      <input type="text" id="train-emo" placeholder="Je ressentirais...">
+      <button class="btn btn-sec" onclick="revelerTrain()">Voir ce que d'autres se disent</button>
+      <div id="train-reveal">
+        <div class="pensee"><div class="pensee-txt">« Je suis trop lourde, je la dérange avec mes histoires. »</div><div class="pensee-emo">→ de la honte, de la tristesse</div></div>
+        <div class="pensee"><div class="pensee-txt">« Quand c'est moi qui ai besoin, il n'y a jamais personne. »</div><div class="pensee-emo">→ de la colère, un sentiment d'abandon</div></div>
+        <div class="pensee"><div class="pensee-txt">« Il lui est peut-être arrivé quelque chose. »</div><div class="pensee-emo">→ de l'inquiétude</div></div>
+        <div class="pensee"><div class="pensee-txt">« Elle veut prendre le temps de me répondre vraiment. »</div><div class="pensee-emo">→ de l'apaisement, de la patience</div></div>
+        <div class="phrase-cle"><p>Même message. Même silence. Quatre émotions différentes. La différence ne se joue pas dans le téléphone, elle se joue dans ce que tu te racontes.</p></div>
+        <p class="small" style="margin:0;">Et la phrase qui t'est venue en premier n'est pas un hasard. Elle parle souvent de ce que tu portes déjà.</p>
+      </div>
+    </div>
+
+    <button class="btn" onclick="allerDecortiquer()">Revenir à mon moment →</button>
+    <button class="retour" onclick="showPhase('moment')">← Revenir en arrière</button>
+  </div>
+</div>
+
+<!-- 3. DÉCORTIQUER -->
+<div class="phase" id="phase-decortiquer">
+  <div class="card">
+    <div class="etape">Étape 3 sur 9</div>
+    <h2>Ton moment, temps par temps</h2>
+    <div class="rappel" id="rappel-situation"></div>
+
+    <div class="e-bloc">
+      <div class="e-q">Sur le moment, qu'est-ce que tu t'es dit ?</div>
+      <div class="e-sous">La phrase qui a traversé ta tête, même si elle te paraît exagérée maintenant.</div>
+      <div class="exemple">Par exemple : « Je dois toujours tout faire seule. » « Il se fiche de ce que je vis. » « Je suis trop exigeante. » « Si je ne le fais pas, personne ne le fera. »<br>Et si tu creuses un peu : qu'est-ce que ça voulait dire, sur toi ou sur l'autre ?</div>
+      <textarea id="d-pensee" rows="3" placeholder="Je me suis dit que..."></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Où l'as-tu sentie dans ton corps ?</div>
+      <div class="e-sous">Des chercheurs finlandais ont demandé à plus de 700 personnes, en Finlande, en Suède et à Taïwan, de colorier sur une silhouette où elles sentaient chaque émotion. Les cartes se ressemblaient d'une culture à l'autre. Ton corps sait souvent avant ta tête.</div>
+      <div class="chips" id="chips-corps"></div>
+      <div class="exemple">Décris la sensation. Par exemple : « une boule dans la gorge qui m'empêchait de parler », « la mâchoire serrée », « une chaleur qui monte au visage », « un poids sur la poitrine », « les jambes coupées ».</div>
+      <textarea id="d-corps" rows="2" placeholder="C'était serré, lourd, chaud, vide..."></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Qu'est-ce que ça te poussait à faire ?</div>
+      <div class="e-sous">Pas ce que tu as fait. Ce que tout ton corps avait envie de faire.</div>
+      <div class="chips" id="chips-envie"></div>
+      <div class="exemple">Par exemple : « J'avais envie de tout planter là et de partir. En vrai, j'ai souri et j'ai continué à débarrasser la table. »</div>
+      <textarea id="d-fait" rows="2" placeholder="Et ce que j'ai fait, en vrai..."></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('mot')">Trouver le mot juste →</button>
+    <button class="retour" onclick="showPhase('temps')">← Revenir en arrière</button>
+  </div>
+</div>
+
+<!-- 4. LE MOT JUSTE -->
+<div class="phase" id="phase-mot">
+  <div class="card">
+    <div class="etape">Étape 4 sur 9</div>
+    <h2>Le mot juste</h2>
+    <p class="small centre">Ouvre les familles qui te parlent. Touche les nuances qui correspondent à ton moment, tu peux en choisir plusieurs. Souvent on ressent plusieurs choses à la fois.</p>
     <div id="familles-container"></div>
-    <button class="btn" onclick="showPhase('reflexion')" style="margin-top:16px;">Passer à ma réflexion →</button>
+    <div class="mes-mots" id="mes-mots"><strong>Mes mots</strong><span id="mes-mots-liste">Touche une nuance pour l'ajouter ici.</span></div>
+    <div class="e-bloc">
+      <div class="e-q">Un autre mot, le tien ?</div>
+      <div class="exemple">Par exemple : vidée, invisible, à bout, trahie, touchée, soulagée.</div>
+      <input type="text" id="mot-libre" placeholder="Le mot qui me vient...">
+    </div>
+    <button class="btn" onclick="showPhase('dessous')">Continuer →</button>
+    <button class="retour" onclick="showPhase('decortiquer')">← Revenir en arrière</button>
   </div>
 </div>
 
-<!-- RÉFLEXION -->
-<div class="phase" id="phase-reflexion">
+<!-- 5. EN DESSOUS -->
+<div class="phase" id="phase-dessous">
   <div class="card">
-    <div style="text-align:center;margin-bottom:8px;">
-      <span class="emoji-hero" style="font-size:40px;">✍️</span>
-      <h2>Ma réflexion du jour</h2>
-    </div>
-    <p class="small" style="text-align:center;margin-bottom:22px;">Réponds à ce qui te parle. Tu peux laisser des questions vides, il n'y a aucune obligation.</p>
+    <div class="etape">Étape 5 sur 9</div>
+    <h2>Ce qu'il y a en dessous</h2>
+    <p>Parfois, l'émotion qu'on voit n'est pas la première. C'est une réaction à une autre émotion, plus discrète, arrivée juste avant.</p>
+
+    <div class="type-card prim"><div class="type-titre">🌱 L'émotion primaire</div><div class="type-txt">C'est la première. Elle colle à la situation : n'importe qui à ta place l'aurait probablement ressentie. C'est elle qui porte ton besoin.</div></div>
+    <div class="type-card sec"><div class="type-titre">🌀 L'émotion secondaire</div><div class="type-txt">C'est la réaction à la première. Elle arrive souvent avec un jugement, un « je ne devrais pas ». Elle prend toute la place et cache le vrai besoin.</div></div>
+
+    <p class="small" style="margin-top:14px;margin-bottom:4px;">Les enchaînements les plus fréquents :</p>
+    <ul class="liste-douce">
+      <li>La colère qui recouvre la peur.</li>
+      <li>La colère qui recouvre la tristesse.</li>
+      <li>La culpabilité qui recouvre la colère, très fréquent chez les mères.</li>
+      <li>L'anxiété qui recouvre la tristesse.</li>
+      <li>La honte qui recouvre un besoin.</li>
+    </ul>
 
     <div class="e-bloc">
-      <div class="e-q">Quelles émotions reconnais-tu en toi en ce moment ?</div>
-      <div class="e-sous">Une seule, ou plusieurs. Avec leurs nuances si tu veux.</div>
-      <input type="text" id="e0" placeholder="En ce moment je ressens..." oninput="checkE()">
+      <div class="e-q">Reviens à ton moment. Dans la seconde d'avant, juste avant ce que tu as ressenti, il y avait quoi ?</div>
+      <div class="e-sous">Prends ton temps. Si rien ne vient, c'est ok. Ça viendra peut-être plus tard dans la journée.</div>
+      <div class="exemple">Pour t'aider, demande-toi : si je n'avais pas ressenti ça, qu'est-ce que j'aurais ressenti à la place ?<br>Par exemple : « Avant la colère, il y avait une immense fatigue. Et la tristesse de me sentir seule à tout porter. »</div>
+      <textarea id="s-dessous" rows="3" placeholder="Juste avant, il y avait..."></textarea>
+    </div>
+
+    <div class="phrase-cle">
+      <p style="font-size:16px;"><strong>Et un étage au-dessus.</strong> Il y a aussi ce que tu ressens à propos de ce que tu ressens. T'en vouloir d'avoir été en colère. Avoir honte d'avoir pleuré. C'est souvent là que se cache ce qui t'empêche de dormir.</p>
+    </div>
+    <div class="e-bloc">
+      <div class="e-q">Qu'est-ce que tu ressens à propos de ton émotion ?</div>
+      <div class="exemple">Par exemple : « Je m'en veux d'avoir crié. » « J'ai honte d'avoir pleuré devant mes collègues. » « Je me trouve ridicule d'être encore touchée par ça. » Ou au contraire : « Je suis fière d'avoir osé le dire. »</div>
+      <textarea id="s-meta" rows="3" placeholder="Quand je repense à ma réaction, je me sens..."></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('besoin')">Continuer →</button>
+    <button class="retour" onclick="showPhase('mot')">← Revenir en arrière</button>
+  </div>
+</div>
+
+<!-- 6. LE BESOIN -->
+<div class="phase" id="phase-besoin">
+  <div class="card">
+    <div class="etape">Étape 6 sur 9</div>
+    <h2>Ce que ton émotion te demande</h2>
+    <p>Chaque émotion pousse à faire quelque chose. Et en dessous, il y a presque toujours un besoin.</p>
+    <div id="table-besoins"></div>
+    <p class="hint" style="text-align:left;">La peur, la colère, la tristesse, la joie et le dégoût font partie des émotions de base. La honte et la culpabilité sont des émotions sociales : elles s'apprennent plus tard, au contact des autres.</p>
+
+    <div class="e-bloc" style="margin-top:22px;">
+      <div class="e-q">Dans ton moment, de quoi avais-tu besoin, en vrai ?</div>
+      <div class="e-sous">Pas ce que tu aurais dû faire. Ce qui t'aurait fait du bien.</div>
+      <div class="chips" id="chips-besoins"></div>
+      <div class="exemple">Par exemple : « J'avais besoin qu'il pose son téléphone et qu'il me voie. Au fond, j'avais besoin de ne pas me sentir seule. »</div>
+      <textarea id="b-besoin" rows="3" placeholder="J'avais besoin de..."></textarea>
+    </div>
+    <div class="e-bloc">
+      <div class="e-q">Et aujourd'hui, qu'est-ce que tu pourrais faire pour ce besoin, même tout petit ?</div>
+      <div class="exemple">Par exemple : lui dire calmement « le dimanche, j'ai besoin que tu m'aides pour le repas », demander un câlin, m'accorder dix minutes seule, écrire ce que je ressens au lieu de le ravaler.</div>
+      <textarea id="b-action" rows="2" placeholder="Je pourrais..."></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('apres')">Continuer →</button>
+    <button class="retour" onclick="showPhase('dessous')">← Revenir en arrière</button>
+  </div>
+</div>
+
+<!-- 7. APRÈS -->
+<div class="phase" id="phase-apres">
+  <div class="card">
+    <div class="etape">Étape 7 sur 9</div>
+    <h2>Reviens à ta scène</h2>
+    <p class="centre">Repense à ton moment, comme au début. À combien est l'émotion maintenant ?</p>
+    <div class="echelle" id="echelle-apres"></div>
+    <div class="echelle-legende"><span>0 · rien</span><span>10 · ça prend toute la place</span></div>
+
+    <div class="compare" id="compare">
+      <div class="compare-chiffres">
+        <div><span>Au début</span><b id="c-avant">·</b></div>
+        <div><span>Maintenant</span><b id="c-apres">·</b></div>
+      </div>
+      <p id="compare-msg"></p>
+    </div>
+
+    <div class="phrase-cle">
+      <p style="font-size:16px;">Une émotion monte, atteint un sommet et redescend, même si tu ne fais rien. Ce qui la relance, c'est la pensée qui la rallume. <strong>Ce n'est pas l'émotion qui t'épuise, c'est le nombre de fois où tu la rejoues.</strong></p>
+    </div>
+
+    <button class="btn" onclick="showPhase('racines')">Continuer →</button>
+    <button class="retour" onclick="showPhase('besoin')">← Revenir en arrière</button>
+  </div>
+</div>
+
+<!-- RACINES -->
+<div class="phase" id="phase-racines">
+  <div class="card">
+    <span class="emoji-hero" style="font-size:40px;">🌿</span>
+    <div class="etape">Étape 8 sur 9</div>
+    <h2>Et si c'est flou pour toi ?</h2>
+    <p>Beaucoup de femmes qui gèrent tout ne savent pas vraiment ce qu'elles ressentent. Ce n'est pas un défaut chez elles.</p>
+    <p>Il y a d'abord une sensibilité de base, qui varie d'une personne à l'autre. Certaines captent plus, plus vite, plus fort. Ce n'est pas un défaut, c'est un réglage. C'est la même sensibilité qui fait ta finesse et ton épuisement.</p>
+    <p>Et puis il y a ce qu'on a appris. Quand, petite, on entend « il n'y a pas de quoi pleurer », « arrête, tu exagères », « tu es trop sensible », on retient une chose : montrer ce qu'on ressent coûte cher. Autour de nous, on applaudit celle qui tient. Personne ne lui demande ce que ça lui coûte.</p>
+    <div class="phrase-cle">
+      <p>On t'a peut-être demandé de contrôler tes émotions sans jamais t'apprendre comment faire. Ce n'est pas un problème de volonté. C'est un apprentissage qui a manqué. Et ça s'apprend, à tout âge. C'est exactement ce que tu es en train de faire.</p>
     </div>
 
     <div class="e-bloc">
-      <div class="e-q">Dans quelle situation as-tu ressenti une de ces émotions récemment ?</div>
-      <textarea id="e1" rows="3" placeholder="C'était quand..." oninput="checkE()"></textarea>
+      <div class="e-q">Aujourd'hui, quand tu pleures ou que tu te sens débordée, qu'est-ce que tu te dis ?</div>
+      <div class="exemple">Par exemple : « Arrête, tu n'as aucune raison de pleurer. » « Il y a pire que toi. » « Reprends-toi, on compte sur toi. » « Je suis trop sensible. » Ou parfois : « C'est ok, ça va passer. »</div>
+      <textarea id="r-aujourdhui" rows="3" placeholder="Quand je pleure, je me dis..."></textarea>
     </div>
 
+    <div class="facultatif">
+      <span class="badge">Facultatif</span>
+      <div class="e-q">Petite, quand tu pleurais, qu'est-ce qui se passait autour de toi ?</div>
+      <div class="e-sous">Tu peux passer cette question. Si elle réveille quelque chose de lourd, arrête-toi là : pose tes pieds bien à plat, regarde autour de toi et nomme trois choses que tu vois. Tu pourras y revenir plus tard, ou jamais.</div>
+      <div class="exemple">Par exemple : on me disait d'arrêter, on m'envoyait dans ma chambre, on se moquait, personne ne remarquait rien. Ou on me prenait dans les bras. Il n'y a pas de bonne ou de mauvaise réponse.</div>
+      <textarea id="r-enfance" rows="3" placeholder="Quand je pleurais..."></textarea>
+      <p class="securite">Si c'est trop lourd, tu n'as pas à rester seule avec ça. La Main Tendue répond au 143, jour et nuit. Tu trouveras d'autres ressources dans le bonus 2.</p>
+    </div>
+
+    <button class="btn" onclick="showPhase('pratique')">Continuer →</button>
+    <button class="retour" onclick="showPhase('apres')">← Revenir en arrière</button>
+  </div>
+</div>
+
+<!-- PRATIQUE -->
+<div class="phase" id="phase-pratique">
+  <div class="card">
+    <span class="emoji-hero" style="font-size:40px;">🔁</span>
+    <div class="etape">Étape 9 sur 9</div>
+    <h2>Ta pratique des prochains jours</h2>
+    <p>Identifier ce qu'on ressent, ça s'entraîne. Comme un réflexe que personne ne t'a jamais appris.</p>
+    <p>Choisis jusqu'à trois moments dans ta journée où tu t'arrêtes quelques secondes pour te demander :</p>
+    <div class="savoir-box" style="margin-top:6px;">
+      <p>Qu'est-ce que je ressens ?<br>Où, dans mon corps ?<br>À combien, de 0 à 10 ?<br>De quoi j'ai besoin ?</p>
+    </div>
     <div class="e-bloc">
-      <div class="e-q">Cette émotion essaie de te dire quelque chose, quoi, selon toi ?</div>
-      <div class="e-sous">Les émotions sont des messagères. Qu'est-ce que celle-là pointe du doigt ?</div>
-      <textarea id="e2" rows="3" placeholder="Je crois qu'elle me dit que..." oninput="checkE()"></textarea>
+      <div class="e-q">Mes moments</div>
+      <div class="chips" id="chips-moments"></div>
+      <input type="text" id="p-autre" placeholder="Un autre moment, par exemple : en fermant la portière de la voiture...">
     </div>
-
-    <div class="e-bloc">
-      <div class="e-q">Comment se manifeste-t-elle dans ton corps ?</div>
-      <div class="e-sous">Gorge serrée, ventre noué, poitrine lourde, épaules tendues...</div>
-      <textarea id="e3" rows="3" placeholder="Dans mon corps je sens..." oninput="checkE()"></textarea>
-    </div>
-
-    <div class="e-bloc">
-      <div class="e-q">De quoi as-tu besoin quand tu ressens ça ?</div>
-      <textarea id="e4" rows="3" placeholder="J'ai besoin de..." oninput="checkE()"></textarea>
-    </div>
-
-    <button class="btn" id="btn-fin" disabled onclick="showFin()">Terminer ma pratique ✨</button>
+    <p class="hint">Pas besoin d'écrire. Juste te poser la question. Si tu oublies, ce n'est pas grave, tu reprends au moment suivant.</p>
+    <button class="btn" onclick="showFin()">Terminer ma pratique ✨</button>
+    <button class="retour" onclick="showPhase('racines')">← Revenir en arrière</button>
   </div>
 </div>
 
 <!-- FIN -->
 <div class="phase" id="phase-fin">
   <div class="card" style="text-align:center;margin-bottom:16px;">
-    <span class="emoji-hero">🌿</span>
+    <span class="emoji-hero">🌸</span>
     <h2>Bravo pour cette pratique</h2>
-    <p>Tu viens de faire quelque chose de puissant, tu t'es arrêtée, tu as regardé en toi, et tu as mis des mots sur ce que tu ressens. C'est exactement comme ça qu'on reprend du pouvoir sur ses émotions.</p>
-    <div style="background:#fdf6fd;border-radius:16px;padding:20px;border:1px solid rgba(200,180,220,0.2);text-align:left;margin-top:16px;">
-      <div class="label" style="text-align:left;margin-bottom:12px;">✍️ Tes réponses du jour</div>
+    <p>Tu as pris un moment de ta vie et tu l'as regardé de près, temps par temps, jusqu'au besoin qu'il cachait. C'est ce geste-là qu'on va entraîner pendant 30 jours.</p>
+    <div style="background:#fdfafd;border-radius:16px;padding:16px 18px;border:1px solid rgba(200,180,220,0.2);text-align:left;margin-top:16px;">
+      <div class="label" style="text-align:left;margin-bottom:4px;">✍️ Tes réponses du jour</div>
       <div id="recap-container"></div>
     </div>
-    <button class="btn" onclick="telechargerReponses()" style="margin-top:16px;background:linear-gradient(135deg,#c8a060,#a080c8);">
-      📥 Télécharger mes réponses
-    </button>
-    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
+    <button class="btn" onclick="telechargerReponses()" style="background:linear-gradient(135deg,#c8a060,#a080c8);">📥 Télécharger mes réponses</button>
+    <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur, appuie sur Partager, puis Imprimer, et fais un zoom sur l'aperçu pour l'enregistrer en PDF.</p>
+    <p style="font-size:13px;color:#b0a0b8;text-align:center;margin-top:10px;font-family:'Jost',sans-serif;">Tes réponses sont aussi gardées sur cet appareil, pour que ton programme puisse te les rappeler aux prochains bilans. Le fichier téléchargé reste ta sauvegarde.</p>
+    <button class="retour" onclick="showPhase('pratique')">← Revenir modifier mes réponses</button>
   </div>
   <div class="suite-box">
     <div style="font-size:28px;margin-bottom:10px;">🗓️</div>
-    <p style="font-size:16px;color:#6d5878;"><strong>Demain, Jour 3 :</strong> la respiration et le système nerveux</p>
+    <p style="font-size:16px;color:#6d5878;"><strong>Demain, Jour 3 :</strong> la respiration et le système nerveux</p>
     <p class="hint" style="margin-top:6px;">28 jours restants dans ton programme</p>
   </div>
 </div>
 
 <script>
+/* ---------- Données ---------- */
 const emotions=[
   {famille:"Joie",emoji:"☀️",couleur:"#f5c842",bg:"#fffbea",nuances:[
     {nom:"Légèreté",def:"Une sensation de flottement, d'être libérée du poids du quotidien."},
@@ -161,120 +459,298 @@ const emotions=[
     {nom:"Enthousiasme",def:"Une énergie qui pousse vers l'avant, vers ce qui t'allume."},
     {nom:"Fierté",def:"Te sentir fière de toi, de ce que tu as accompli ou surmonté."},
     {nom:"Sérénité",def:"Un calme profond, une paix intérieure sans effort."},
+    {nom:"Soulagement",def:"Le poids qui retombe quand ce que tu redoutais n'arrive pas, ou se termine."}
   ]},
   {famille:"Tristesse",emoji:"🌧️",couleur:"#7ab0d4",bg:"#eef6fc",nuances:[
     {nom:"Mélancolie",def:"Une nostalgie douce-amère, un regard tendre sur ce qui est passé."},
     {nom:"Déception",def:"Quand la réalité ne correspond pas à ce qu'on espérait."},
     {nom:"Solitude",def:"Se sentir seule, même entourée de monde."},
-    {nom:"Deuil",def:"La douleur d'une perte, d'une personne, d'un rêve, d'une version de soi."},
+    {nom:"Deuil",def:"La douleur d'une perte : une personne, un rêve, une version de soi."},
     {nom:"Découragement",def:"L'impression que les efforts ne suffisent plus, que c'est trop lourd."},
+    {nom:"Impuissance",def:"Voir ce qui se passe et sentir que tu n'as aucune prise dessus."}
   ]},
   {famille:"Colère",emoji:"🔥",couleur:"#e8775a",bg:"#fef2ee",nuances:[
     {nom:"Frustration",def:"Quand quelque chose bloque, qu'on ne peut pas avancer comme on voudrait."},
     {nom:"Injustice",def:"Le sentiment que quelque chose n'est pas juste, que tu méritais mieux."},
     {nom:"Irritabilité",def:"Une tension en surface, prête à éclater au moindre déclencheur."},
     {nom:"Indignation",def:"Une colère saine face à ce qui transgresse tes valeurs."},
-    {nom:"Rage",def:"Une émotion intense, souvent le signe d'une limite longtemps franchie."},
+    {nom:"Agacement",def:"Une petite colère qui gratte, souvent quand tes limites sont effleurées."},
+    {nom:"Rage",def:"Une émotion intense, souvent le signe d'une limite longtemps franchie."}
   ]},
   {famille:"Peur",emoji:"🌀",couleur:"#a08ec2",bg:"#f4f0fa",nuances:[
-    {nom:"Anxiété",def:"Une inquiétude diffuse, souvent sans objet précis : le futur qui fait peur."},
+    {nom:"Anxiété",def:"Une inquiétude diffuse, souvent sans objet précis : le futur qui fait peur."},
+    {nom:"Inquiétude",def:"Une peur tournée vers quelqu'un ou quelque chose qui compte pour toi."},
     {nom:"Doute",def:"Ne plus savoir si tu fais les bons choix, si tu es à ta place."},
     {nom:"Insécurité",def:"Un manque de confiance en toi ou dans la situation."},
     {nom:"Appréhension",def:"La peur anticipée d'une chose qui n'a pas encore eu lieu."},
-    {nom:"Panique",def:"Une peur intense et soudaine qui envahit le corps et l'esprit."},
+    {nom:"Panique",def:"Une peur intense et soudaine qui envahit le corps et l'esprit."}
+  ]},
+  {famille:"Dégoût",emoji:"🍋",couleur:"#9cb86a",bg:"#f3f8ec",nuances:[
+    {nom:"Rejet",def:"Tout en toi dit non. Ce n'est pas pour toi, tu veux t'en éloigner."},
+    {nom:"Écœurement",def:"Une saturation : tu en as eu trop, tu ne peux plus."},
+    {nom:"Mépris",def:"Le sentiment que l'autre est en dessous, que son attitude ne mérite pas ton respect."},
+    {nom:"Aversion",def:"Une répulsion nette envers une situation, une personne ou une idée."}
   ]},
   {famille:"Honte / Culpabilité",emoji:"🍂",couleur:"#c2836a",bg:"#faf0eb",nuances:[
-    {nom:"Honte",def:"Le sentiment d'être fondamentalement défectueuse, de ne pas être assez."},
-    {nom:"Culpabilité",def:"Penser avoir mal agi, avoir blessé quelqu'un ou failli à quelque chose."},
+    {nom:"Honte",def:"Le sentiment d'être défectueuse, de ne pas être assez. Elle vise qui tu es."},
+    {nom:"Culpabilité",def:"Penser avoir mal agi, avoir blessé quelqu'un ou failli à quelque chose. Elle vise ce que tu as fait."},
     {nom:"Gêne",def:"Un inconfort social, la peur du regard des autres."},
     {nom:"Regret",def:"Revenir sur un choix, une parole, une action avec douleur."},
     {nom:"Indignité",def:"Se sentir ne pas mériter l'amour, la réussite, le bonheur."},
+    {nom:"Humiliation",def:"Te sentir rabaissée devant les autres, blessée dans ta dignité."}
   ]},
   {famille:"Amour / Connexion",emoji:"🌸",couleur:"#e8a0b4",bg:"#fdf0f5",nuances:[
     {nom:"Tendresse",def:"Un amour doux, qui prend soin, qui enveloppe sans étouffer."},
     {nom:"Appartenance",def:"Se sentir à sa place, acceptée, partie d'un tout."},
     {nom:"Admiration",def:"Être touchée par la beauté, la force ou la bonté de quelqu'un."},
     {nom:"Compassion",def:"Ressentir la douleur de l'autre et vouloir alléger son fardeau."},
-    {nom:"Désir de connexion",def:"Le besoin profond d'être vue, comprise et aimée pour qui tu es vraiment."},
-  ]},
+    {nom:"Désir de connexion",def:"Le besoin profond d'être vue, comprise et aimée pour qui tu es vraiment."}
+  ]}
 ];
+const pistes=[
+  {n:"Une dispute",q:"La dernière fois que tu t'es disputée avec quelqu'un de proche. Qu'est-ce qui a été dit, par qui ?"},
+  {n:"Une mauvaise nouvelle",q:"Une nouvelle qui t'a coupé le souffle, même un instant. Où étais-tu quand tu l'as apprise ? Qui te l'a annoncée ?"},
+  {n:"Une phrase qui t'a blessée",q:"Une phrase qui est restée, venant d'un proche, d'un collègue, de ta mère. Qui l'a dite, et sur quel ton ?"},
+  {n:"Te sentir mise de côté",q:"Un moment où tu t'es sentie oubliée, pas écoutée ou pas choisie. Qu'est-ce qui s'est passé juste avant ?"},
+  {n:"Un moment où tu as craqué",q:"Un moment où tu as explosé ou fondu en larmes, alors que tu tenais depuis longtemps. Qu'est-ce qui a été la goutte de trop ?"},
+  {n:"Une peur pour quelqu'un",q:"Un moment où tu as eu peur pour quelqu'un que tu aimes. Qu'est-ce que tu as imaginé ?"},
+  {n:"Un moment de joie ou de fierté",q:"Les émotions agréables aussi se nomment. Un moment où tu t'es sentie fière, touchée ou légère. Qu'est-ce qui l'a rendu si particulier ?"}
+];
+const besoinsListe=["Être écoutée","Être aidée","Être reconnue","Être rassurée","Du respect","Du calme","Du repos","Me sentir en sécurité","Compter pour quelqu'un","Avoir le choix","Être consolée","Du temps pour moi"];
+const corps=["Gorge","Mâchoire","Poitrine","Cœur qui s'accélère","Ventre","Épaules","Nuque","Mains","Jambes","Tête","Chaleur au visage","Rien de précis"];
+const envies=["Partir","Me taire","Crier","Pleurer","Me cacher","Me justifier","Réparer","Tout contrôler","Me replier","Aller vers quelqu'un","Attaquer","Me figer"];
+const moments=["Au réveil","Avant de manger","Dans les transports ou la voiture","En fin de journée","Au coucher","Quand je sens que mon état change"];
+const besoins=[
+  {e:"Peur",p:"Fuir, éviter, se figer, ou attaquer pour se protéger.",b:"Me mettre en sécurité. Protéger ce à quoi je tiens."},
+  {e:"Colère",p:"Repousser, attaquer, franchir l'obstacle.",b:"Une limite a été franchie et demande à être posée."},
+  {e:"Tristesse",p:"Se retirer, baisser le volume du monde. Et appeler à l'aide.",b:"Être réconfortée. Me protéger dans un moment fragile. Revoir des attentes qui ne tenaient pas."},
+  {e:"Joie",p:"Aller vers les autres, partager, explorer.",b:"Entretenir ce qui fait du bien. Prendre soin des liens qui comptent."},
+  {e:"Dégoût",p:"Repousser, tenir à distance, renoncer.",b:"Ce n'est pas pour moi. Quelque chose ne me convient pas."},
+  {e:"Honte",p:"Se cacher, disparaître, se faire toute petite.",b:"Préserver un lien important. Attention : la honte se trompe souvent."},
+  {e:"Culpabilité",p:"Réparer, s'excuser, se rattraper.",b:"Un tort a peut-être été causé. À vérifier avant d'agir : on le fera ensemble au jour 23."}
+];
+
+/* ---------- État ---------- */
+const etat={avant:null,apres:null,corps:[],envies:[],moments:[],mots:[],piste:null,besoins:[]};
 
 function showPhase(id){
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
   document.getElementById('phase-'+id).classList.add('active');
   window.scrollTo(0,0);
 }
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br>');}
+function val(id){var el=document.getElementById(id);return el?el.value.trim():'';}
 
+/* ---------- Échelles 0 à 10 ---------- */
+function construireEchelle(conteneurId,cle){
+  const c=document.getElementById(conteneurId);
+  for(let i=0;i<=10;i++){
+    const b=document.createElement('div');
+    b.className='num';b.textContent=i;
+    b.onclick=()=>{
+      if(etat[cle]===i){etat[cle]=null;b.classList.remove('sel');}
+      else{c.querySelectorAll('.num').forEach(n=>n.classList.remove('sel'));b.classList.add('sel');etat[cle]=i;}
+      if(cle==='apres'||cle==='avant')majCompare();
+    };
+    c.appendChild(b);
+  }
+}
+construireEchelle('echelle-avant','avant');
+construireEchelle('echelle-apres','apres');
+
+function majCompare(){
+  const box=document.getElementById('compare');
+  if(etat.apres===null){box.style.display='none';return;}
+  box.style.display='block';
+  document.getElementById('c-avant').textContent=etat.avant===null?'·':etat.avant;
+  document.getElementById('c-apres').textContent=etat.apres;
+  let m;
+  if(etat.avant===null){
+    m="Tu n'avais pas noté de chiffre au début, et c'est ok. Garde celui-ci : la prochaine fois qu'une émotion te traverse, compare avant et après l'avoir nommée.";
+  }else if(etat.apres<etat.avant){
+    m="Elle a baissé. Tu viens de vivre ce que les chercheurs observent : mettre des mots calme. Tu n'as rien forcé, tu as juste regardé et nommé.";
+  }else if(etat.apres===etat.avant){
+    m="Elle n'a pas bougé, et c'est ok. Certaines émotions demandent plus de temps, surtout quand elles touchent quelque chose d'important. Tu as quand même fait le plus difficile : la regarder.";
+  }else{
+    m="Elle est montée, et ce n'est pas un échec. Parfois, nommer rend présent ce qu'on tenait à distance depuis longtemps. Pose une main sur ta poitrine, regarde cinq choses autour de toi et laisse ta respiration ralentir. Demain, au jour 3, on apprend justement à apaiser le corps.";
+  }
+  document.getElementById('compare-msg').textContent=m;
+}
+
+/* ---------- Chips ---------- */
+function construireChips(conteneurId,liste,cle){
+  const c=document.getElementById(conteneurId);
+  liste.forEach(txt=>{
+    const ch=document.createElement('div');
+    ch.className='chip';ch.textContent=txt;
+    ch.onclick=()=>{
+      const i=etat[cle].indexOf(txt);
+      if(i>-1){etat[cle].splice(i,1);ch.classList.remove('sel');}
+      else{
+        if(cle==='moments'&&etat.moments.length>=3)return;
+        etat[cle].push(txt);ch.classList.add('sel');
+      }
+    };
+    c.appendChild(ch);
+  });
+}
+(function(){
+  const c=document.getElementById('chips-pistes'),box=document.getElementById('piste-box');
+  pistes.forEach(pi=>{
+    const ch=document.createElement('div');ch.className='chip';ch.textContent=pi.n;
+    ch.onclick=()=>{
+      const deja=etat.piste===pi.n;
+      c.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));
+      if(deja){etat.piste=null;box.style.display='none';return;}
+      etat.piste=pi.n;ch.classList.add('sel');box.textContent=pi.q;box.style.display='block';
+    };
+    c.appendChild(ch);
+  });
+})();
+construireChips('chips-corps',corps,'corps');
+construireChips('chips-envie',envies,'envies');
+construireChips('chips-moments',moments,'moments');
+construireChips('chips-besoins',besoinsListe,'besoins');
+
+/* ---------- Train ---------- */
+function revelerTrain(){document.getElementById('train-reveal').style.display='block';}
+
+/* ---------- Rappel de la situation ---------- */
+function allerDecortiquer(){
+  const s=val('m-situation');
+  const r=document.getElementById('rappel-situation');
+  if(s){r.innerHTML='Ton moment : '+esc(s);r.style.display='block';}else{r.style.display='none';}
+  showPhase('decortiquer');
+}
+
+/* ---------- Carte des émotions ---------- */
 const fc=document.getElementById('familles-container');
 emotions.forEach(e=>{
   const card=document.createElement('div');
   card.className='famille-card';
   card.style.borderColor=e.couleur+'55';
   card.style.background=e.bg;
-  let nuancesHtml='';
+  const head=document.createElement('div');
+  head.className='famille-header';
+  head.innerHTML=`<span class="famille-emoji">${e.emoji}</span><span class="famille-nom">${e.famille}</span><span class="famille-chevron">⌄</span>`;
+  head.onclick=()=>card.classList.toggle('open');
+  const body=document.createElement('div');body.className='famille-body';
+  const inner=document.createElement('div');inner.className='famille-body-inner';
   e.nuances.forEach(n=>{
-    nuancesHtml+=`<div class="nuance"><div class="nuance-nom">${n.nom}</div><div class="nuance-def">${n.def}</div></div>`;
+    const d=document.createElement('div');
+    d.className='nuance';
+    d.innerHTML=`<div class="nuance-nom">${n.nom}</div><div class="nuance-def">${n.def}</div>`;
+    d.onclick=()=>{
+      const i=etat.mots.indexOf(n.nom);
+      if(i>-1){etat.mots.splice(i,1);d.classList.remove('sel');}
+      else{etat.mots.push(n.nom);d.classList.add('sel');}
+      majMots();
+    };
+    inner.appendChild(d);
   });
-  card.innerHTML=`
-    <div class="famille-header" style="background:${e.bg};">
-      <span class="famille-emoji">${e.emoji}</span>
-      <span class="famille-nom">${e.famille}</span>
-      <span class="famille-chevron">⌄</span>
-    </div>
-    <div class="famille-body"><div class="famille-body-inner">${nuancesHtml}</div></div>`;
-  card.querySelector('.famille-header').onclick=()=>card.classList.toggle('open');
+  body.appendChild(inner);
+  card.appendChild(head);card.appendChild(body);
   fc.appendChild(card);
 });
+function majMots(){
+  document.getElementById('mes-mots-liste').textContent=etat.mots.length?etat.mots.join(' · '):"Touche une nuance pour l'ajouter ici.";
+}
 
-function checkE(){
-  const ok=['e0','e1','e2','e3','e4'].some(id=>document.getElementById(id).value.trim());
-  document.getElementById('btn-fin').disabled=!ok;
+/* ---------- Table des besoins ---------- */
+const tb=document.getElementById('table-besoins');
+besoins.forEach(x=>{
+  const d=document.createElement('div');d.className='emo-row';
+  d.innerHTML=`<div class="emo-nom">${x.e}</div><div class="emo-l"><b>Elle pousse à</b>${x.p}</div><div class="emo-l"><b>Le besoin en dessous</b>${x.b}</div>`;
+  tb.appendChild(d);
+});
+
+/* ---------- Récapitulatif ---------- */
+function collecter(){
+  const items=[];
+  function add(sec,q,r){if(r!==''&&r!==null&&r!==undefined)items.push({sec:sec,q:q,r:String(r)});}
+  add('Mon moment','Ma piste',etat.piste||'');
+  add('Mon moment','Ce qui s\'est passé',val('m-situation'));
+  add('Mon moment','Intensité au début',etat.avant===null?'':etat.avant+' / 10');
+  add('La scène du message','Ce que je me dirais',val('train-moi'));
+  add('La scène du message','Ce que je ressentirais',val('train-emo'));
+  add('Temps par temps','Ce que je me suis raconté',val('d-pensee'));
+  add('Temps par temps','Dans mon corps',[etat.corps.join(', '),val('d-corps')].filter(Boolean).join(' · '));
+  add('Temps par temps','Ce que ça me poussait à faire',etat.envies.join(', '));
+  add('Temps par temps','Ce que j\'ai fait, en vrai',val('d-fait'));
+  add('Le mot juste','Mes mots',[etat.mots.join(', '),val('mot-libre')].filter(Boolean).join(', '));
+  add('En dessous','L\'émotion d\'avant',val('s-dessous'));
+  add('En dessous','Ce que je ressens à propos de mon émotion',val('s-meta'));
+  add('Mon besoin','Ce dont j\'avais besoin',[etat.besoins.join(', '),val('b-besoin')].filter(Boolean).join(' · '));
+  add('Mon besoin','Ce que je peux faire pour ce besoin',val('b-action'));
+  add('Après','Intensité à la fin',etat.apres===null?'':etat.apres+' / 10');
+  add('Mes racines','Ce que je me dis quand je pleure',val('r-aujourdhui'));
+  add('Mes racines','Petite, quand je pleurais',val('r-enfance'));
+  add('Ma pratique','Mes moments pour m\'arrêter',[etat.moments.join(', '),val('p-autre')].filter(Boolean).join(', '));
+  return items;
+}
+function recapHtml(items){
+  if(!items.length)return '<p style="font-size:15px;color:#9a84a8;margin-top:10px;">Tu n\'as rien noté aujourd\'hui, et c\'est ok. Le simple fait d\'avoir lu et réfléchi compte.</p>';
+  let h='',sec='';
+  items.forEach(it=>{
+    if(it.sec!==sec){sec=it.sec;h+=`<div class="recap-titre">${sec}</div>`;}
+    h+=`<div class="recap-box"><div class="recap-q">${esc(it.q)}</div><div class="recap-r">${esc(it.r)}</div></div>`;
+  });
+  return h;
+}
+
+/* ---------- Mémoire du programme (sur l'appareil) ---------- */
+function carnetSave(jour,titre,items,donnees){
+  try{
+    const k='alarenverse_carnet';
+    const c=JSON.parse(localStorage.getItem(k)||'{}');
+    c['j'+jour]={titre:titre,date:new Date().toISOString(),items:items,donnees:donnees||{}};
+    localStorage.setItem(k,JSON.stringify(c));
+  }catch(e){}
 }
 
 function showFin(){
-  const rc=document.getElementById('recap-container');
-  rc.innerHTML='';
-  const qs=[
-    {id:'e0',label:'Les émotions que je reconnais'},
-    {id:'e1',label:'La situation récente'},
-    {id:'e2',label:'Ce que cette émotion me dit'},
-    {id:'e3',label:'Dans mon corps'},
-    {id:'e4',label:'Ce dont j\'ai besoin'},
-  ];
-  qs.forEach(q=>{
-    const val=document.getElementById(q.id).value.trim();
-    if(val) rc.innerHTML+=`<div class="recap-box"><div class="recap-q">${q.label}</div><div class="recap-r">"${val}"</div></div>`;
+  const items=collecter();
+  document.getElementById('recap-container').innerHTML=recapHtml(items);
+  carnetSave(2,'Identifier ses émotions',items,{
+    mots:etat.mots.concat(val('mot-libre')?[val('mot-libre')]:[]),
+    avant:etat.avant,apres:etat.apres,
+    besoin:[etat.besoins.join(', '),val('b-besoin')].filter(Boolean).join(' · '),action:val('b-action'),
+    corps:etat.corps,moments:etat.moments
   });
   showPhase('fin');
 }
 
 function telechargerReponses(){
-  var recap=document.getElementById('recap-container');
-  var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
-  var contenu=recap?recap.innerHTML:'<p>Aucune reponse enregistree.</p>';
-  var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
+  const items=collecter();
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  const css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px 24px;max-width:620px;margin:0 auto;line-height:1.8;}'
     +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
     +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
-    +'.date{font-size:13px;color:#9a84a8;margin-bottom:30px;}'
-    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:14px 18px;border-left:3px solid #c8a060;margin-bottom:14px;}'
-    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}'
+    +'.date{font-size:13px;color:#9a84a8;margin-bottom:24px;}'
+    +'.recap-titre{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#b0a080;margin:22px 0 8px;}'
+    +'.recap-box{background:#fdf8ee;border-radius:8px;padding:12px 16px;border-left:3px solid #c8a060;margin-bottom:10px;}'
+    +'.recap-q{font-size:11px;color:#b0a080;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}'
     +'.recap-r{font-size:15px;color:#3d2d50;line-height:1.65;}'
+    +'.retenir{background:#f6f0fb;border-radius:8px;padding:14px 18px;margin-top:26px;font-size:15px;line-height:1.7;}'
     +'.footer{margin-top:40px;padding-top:16px;border-top:1px solid #e8d8c0;font-size:12px;color:#b0a080;text-align:center;}';
-  var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
-    +'<h1>Jour 2 · Mes emotions</h1>'
-    +'<div class="date">Mes reponses du '+date+'</div>'
-    +contenu
+  const body='<div class="programme">30 jours pour prendre soin de ma santé mentale</div>'
+    +'<h1>Jour 2 · Identifier mes émotions</h1>'
+    +'<div class="date">Mes réponses du '+date+'</div>'
+    +recapHtml(items)
+    +'<div class="retenir"><strong>À garder :</strong> ce n\'est pas l\'événement qui crée l\'émotion, c\'est ce que je me raconte. Et ce n\'est pas l\'émotion qui m\'épuise, c\'est le nombre de fois où je la rejoue.<br><br><strong>Mes quatre questions :</strong> Qu\'est-ce que je ressens ? Où, dans mon corps ? À combien, de 0 à 10 ? De quoi j\'ai besoin ?</div>'
     +'<div class="footer">@alarenverse.coaching</div>';
-  var fullhtml='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+css+'</style></head><body>'+body+'</body></html>';
-  var blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;
-  a.download='Jour2-mes-reponses.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  const fullhtml='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Jour 2 · Mes réponses</title><style>'+css+'</style></head><body>'+body+'</body></html>';
+  carnetSave(2,'Identifier ses émotions',items,{
+    mots:etat.mots.concat(val('mot-libre')?[val('mot-libre')]:[]),
+    avant:etat.avant,apres:etat.apres,besoin:[etat.besoins.join(', '),val('b-besoin')].filter(Boolean).join(' · '),action:val('b-action'),
+    corps:etat.corps,moments:etat.moments
+  });
+  const blob=new Blob([fullhtml],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='Jour2-mes-reponses.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 </script>
 </body>

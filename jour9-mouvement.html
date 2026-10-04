@@ -79,6 +79,7 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#eaf5f0,#eef4fb);border-radius:20px;padding:22px;border:1px solid rgba(120,180,140,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -96,7 +97,7 @@
     <div class="label">Jour 9 · Le mouvement comme soin</div>
     <h2>Ton corps est fait pour bouger, mais pas n'importe comment, ni n'importe quand</h2>
     <p>Bouger, ce n'est pas qu'une histoire de forme ou de silhouette. C'est l'un des outils les plus puissants que tu aies pour réguler tes émotions, calmer ton système nerveux, prendre soin de ta tête.</p>
-    <p class="small" style="margin-bottom:20px;">Mais tout est là : choisir le bon mouvement au bon moment. Selon ton état du jour, selon ton cycle, selon ce dont ton corps a vraiment besoin, pas selon ce qu'on est censées faire.</p>
+    <p class="small" style="margin-bottom:20px;">Mais tout est là : choisir le bon mouvement au bon moment. Selon ton état du jour, selon ton cycle, selon ce dont ton corps a vraiment besoin, pas selon ce qu'on est censées faire.</p>
     <div id="preview-container" style="text-align:left;margin-bottom:22px;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 🌿</button>
     <p class="hint">Théorie · Mouvement guidé selon ton état · Journal · ~20 min</p>
@@ -133,9 +134,9 @@
 
     <div class="pilates-box">
       <div class="pilates-badge">Recommandation clinique</div>
-      <div class="pilates-titre">Le Pilates et le Yoga : les alliés du système nerveux</div>
+      <div class="pilates-titre">Le Pilates et le Yoga : les alliés du système nerveux</div>
       <div class="pilates-texte">
-        Quand le système nerveux est en mode combat/fuite ou figement, les sports intenses, HIIT, course rapide, sports de compétition, peuvent <strong>aggraver</strong> l'état : ils ajoutent du cortisol à un corps déjà saturé.<br><br>
+        Quand le système nerveux est en mode combat/fuite ou figement, les sports intenses, HIIT, course rapide, sports de compétition, peuvent <strong>aggraver</strong> l'état : ils ajoutent du cortisol à un corps déjà saturé.<br><br>
         Le Pilates et le Yoga travaillent différemment. Ils activent le <strong>nerf vague</strong> via la respiration consciente, les mouvements lents et contrôlés, et la connexion corps-esprit. Ils passent le système nerveux du mode alerte au mode sécurité, exactement comme la respiration 4-6 que tu pratiques depuis le Jour 3.<br><br>
         Ce n'est pas de la faiblesse. C'est de la précision.
       </div>
@@ -151,7 +152,7 @@
     </div>
 
     <div class="highlight terre" style="margin-top:4px;">
-      <strong>Important :</strong> cela ne signifie pas qu'il faut éviter les sports intenses. Ça signifie qu'il faut les choisir au bon moment, quand le système nerveux est en mode sécurité, pas quand il est déjà à bout.
+      <strong>Important :</strong> cela ne signifie pas qu'il faut éviter les sports intenses. Ça signifie qu'il faut les choisir au bon moment, quand le système nerveux est en mode sécurité, pas quand il est déjà à bout.
     </div>
 
     <button class="btn" onclick="showPhase('etat')">Choisir mon mouvement du jour →</button>
@@ -162,7 +163,7 @@
 <div class="phase" id="phase-etat">
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">🌡️</span>
-    <h2>Comment te sens-tu en ce moment ?</h2>
+    <h2>Comment te sens-tu en ce moment ?</h2>
     <p style="text-align:center;margin-bottom:22px;">Choisis l'état qui te ressemble le plus aujourd'hui. Tu recevras des suggestions de mouvement adaptées à ce que ton corps et ton système nerveux ont vraiment besoin.</p>
     <div id="etats-container"></div>
     <button class="btn" id="btn-etat" disabled onclick="showSuggestions()">Voir mes suggestions →</button>
@@ -190,6 +191,7 @@
   <div class="card">
     <p class="journal-q" id="j-question"></p>
     <p class="journal-sous" id="j-sous"></p>
+    <div class="exemple" id="j-exemple" style="display:none"></div>
     <textarea id="j-textarea" rows="5" placeholder="" oninput="checkJournal()"></textarea>
     <button class="btn" id="btn-j-next" style="width:100%;margin-top:12px;" onclick="nextJournal()">Continuer →</button>
   </div>
@@ -211,13 +213,13 @@
   <div class="card" style="text-align:center;margin-top:24px;">
     <span class="emoji-hero">🌱</span>
     <h2>Le mouvement comme langage</h2>
-    <p>Tu viens d'apprendre quelque chose d'important : bouger n'est pas une obligation ni une punition. C'est une conversation avec ton corps, et elle peut être douce, intense, lente ou joyeuse, selon ce dont tu as besoin.</p>
+    <p>Tu viens d'apprendre quelque chose d'important : bouger n'est pas une obligation ni une punition. C'est une conversation avec ton corps, et elle peut être douce, intense, lente ou joyeuse, selon ce dont tu as besoin.</p>
     <div style="background:linear-gradient(135deg,#eaf5f0,#eef4fb);border-radius:16px;padding:20px;border:1px solid rgba(120,180,140,0.2);text-align:left;margin-top:16px;">
       <div style="font-family:'Jost',sans-serif;font-size:11px;color:#80c8a8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Ton journal du Jour 9</div>
       <div id="recap-container"></div>
     </div>
     <div class="highlight" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À retenir :</strong> Quand ton système nerveux est saturé, commence par le Pilates ou le Yoga. Quand tu te sens ancrée et en sécurité, tu peux aller vers des sports plus intenses. Écoute d'abord, bouge ensuite.
+      🔑 <strong>À retenir :</strong> Quand ton système nerveux est saturé, commence par le Pilates ou le Yoga. Quand tu te sens ancrée et en sécurité, tu peux aller vers des sports plus intenses. Écoute d'abord, bouge ensuite.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -227,7 +229,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#507060;"><strong style="color:#2d4030;">Demain, Jour 10 :</strong> la gratitude</p>
+    <p style="font-size:14px;color:#507060;"><strong style="color:#2d4030;">Demain, Jour 10 :</strong> la gratitude</p>
     <p class="hint" style="margin-top:6px;">21 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -241,39 +243,39 @@ const theorie = [
     {type:"highlight",texte:"💡 Le Dr Ratey appelle le mouvement l'\"engrais miracle du cerveau\". En bougeant, tu stimules la fabrication de nouveaux neurones, notamment dans la zone du cerveau qui gère la mémoire et les émotions. Tu ne muscles pas que ton corps, tu muscles ta tête."},
   ]},
   { emoji:"🔋", titre:"Quand tu crois être épuisée · la fluctuation", source:"Méta-analyse · O'Connor, University of Georgia", contenu:[
-    {type:"texte",texte:"Voilà quelque chose de contre-intuitif mais essentiel : tout est fluctuant. Ton énergie n'est pas un réservoir fixe qui se vide. Et parfois, ce que tu prends pour de l'épuisement, c'est en réalité un corps qui a besoin de bouger pour relancer la machine."},
+    {type:"texte",texte:"Voilà quelque chose de contre-intuitif mais essentiel : tout est fluctuant. Ton énergie n'est pas un réservoir fixe qui se vide. Et parfois, ce que tu prends pour de l'épuisement, c'est en réalité un corps qui a besoin de bouger pour relancer la machine."},
     {type:"highlight",texte:"⚡ Quand tu bouges, tu fais circuler le sang, les hormones, l'oxygène, et tes pensées avec. Un corps immobile depuis trop longtemps stagne, et cette stagnation, on la ressent comme de la fatigue. Le mouvement, même léger, remet tout en circulation."},
-    {type:"texte",texte:"La recherche est claire là-dessus : énergie et fatigue ne sont pas la même chose. On peut faire monter son énergie même quand la fatigue est là. Un mouvement doux d'une vingtaine de minutes, quand on part justement d'un état fatigué, peut relancer l'énergie de façon nette. Ce n'est pas magique, c'est physiologique."},
-    {type:"highlight",texte:"🌱 Alors la prochaine fois que tu te dis \"je suis trop crevée pour bouger\", pose-toi la question : est-ce que mon corps a besoin de repos... ou est-ce qu'il a besoin de bouger pour se réveiller ? Les deux existent. Apprendre à les distinguer, c'est un vrai pouvoir.",classe:"terre"},
+    {type:"texte",texte:"La recherche est claire là-dessus : énergie et fatigue ne sont pas la même chose. On peut faire monter son énergie même quand la fatigue est là. Un mouvement doux d'une vingtaine de minutes, quand on part justement d'un état fatigué, peut relancer l'énergie de façon nette. Ce n'est pas magique, c'est physiologique."},
+    {type:"highlight",texte:"🌱 Alors la prochaine fois que tu te dis \"je suis trop crevée pour bouger\", pose-toi la question : est-ce que mon corps a besoin de repos... ou est-ce qu'il a besoin de bouger pour se réveiller ? Les deux existent. Apprendre à les distinguer, c'est un vrai pouvoir.",classe:"terre"},
   ]},
   { emoji:"🎯", titre:"Pourquoi c'est plus dur pour certaines · et le truc des 5 minutes", source:"Johns Hopkins Medicine · Recherche sur la dopamine", contenu:[
     {type:"texte",texte:"Tu t'es peut-être déjà demandé pourquoi certaines personnes bougent si facilement, alors que pour toi c'est une montagne à chaque fois. Ce n'est pas une question de volonté ni de discipline. C'est une histoire de chimie du cerveau."},
-    {type:"highlight",texte:"🧠 La dopamine, encore elle, détermine en grande partie si l'effort physique te semble facile ou épuisant. Chez certaines personnes, le signal dopaminergique est plus efficace : bouger leur paraît naturel, presque agréable d'avance. Chez d'autres, le même mouvement demande un effort intérieur bien plus grand juste pour démarrer."},
+    {type:"highlight",texte:"🧠 La dopamine, encore elle, détermine en grande partie si l'effort physique te semble facile ou épuisant. Chez certaines personnes, le signal dopaminergique est plus efficace : bouger leur paraît naturel, presque agréable d'avance. Chez d'autres, le même mouvement demande un effort intérieur bien plus grand juste pour démarrer."},
     {type:"texte",texte:"Et c'est important de le savoir, parce que ça déculpabilise énormément. Si bouger te coûte plus qu'à ta copine qui adore le sport, ce n'est pas que tu es paresseuse ou pas assez motivée. Vos cerveaux ne partent pas avec le même élan de départ. Point."},
-    {type:"highlight",texte:"💡 La dopamine, c'est ce qui déclenche l'initiation du mouvement : le tout premier pas. Souvent, ce qui te manque ce n'est pas l'énergie pour faire la séance entière, c'est juste l'impulsion pour commencer. Une fois lancée, le corps suit. C'est le démarrage qui coince, pas la suite."},
-    {type:"texte",texte:"C'est là qu'un petit objectif tout simple change tout : se dire \"je commence par 5 minutes, et si vraiment je n'ai pas envie de continuer, j'arrête\". Le plus souvent, tu réalises qu'il te manquait juste l'amorce. Tu donnes à ta dopamine le petit coup de pouce du départ, et le reste se met en route presque tout seul."},
+    {type:"highlight",texte:"💡 La dopamine, c'est ce qui déclenche l'initiation du mouvement : le tout premier pas. Souvent, ce qui te manque ce n'est pas l'énergie pour faire la séance entière, c'est juste l'impulsion pour commencer. Une fois lancée, le corps suit. C'est le démarrage qui coince, pas la suite."},
+    {type:"texte",texte:"C'est là qu'un petit objectif tout simple change tout : se dire \"je commence par 5 minutes, et si vraiment je n'ai pas envie de continuer, j'arrête\". Le plus souvent, tu réalises qu'il te manquait juste l'amorce. Tu donnes à ta dopamine le petit coup de pouce du départ, et le reste se met en route presque tout seul."},
   ]},
-  { emoji:"🔑", titre:"\"J'arrive pas à m'y mettre\" : la vraie raison, et comment la changer", source:"Dr Wendy Wood, Good Habits, Bad Habits", contenu:[
-    {type:"texte",texte:"Si tu te dis souvent \"je n'arrive pas à me mettre au sport, ça me semble tellement difficile\", écoute bien : ce n'est pas un défaut de volonté. Et ce n'est pas qu'une croyance dans ta tête non plus. Il y a une vraie mécanique derrière, et la bonne nouvelle, c'est qu'elle se change."},
-    {type:"highlight",texte:"🧠 Voilà le cœur du problème : ton cerveau a besoin d'une récompense rapide pour ancrer un comportement. Or quand tu commences le sport, la récompense, se sentir mieux, plus en forme, met des semaines à arriver. Pendant ce temps, c'est juste difficile et inconfortable. Ton cerveau ne reçoit pas son \"shoot\" de dopamine assez vite, alors il décroche. Ce n'est pas toi qui es faible. C'est ta chimie qui n'a pas encore trouvé sa récompense."},
-    {type:"texte",texte:"Les chercheurs sur les habitudes, Wendy Wood en tête, sont formels : ce qui fait tenir une habitude, ce n'est pas la motivation ni la discipline. Ce sont deux choses : la récompense immédiate, et la réduction de la friction. Autrement dit, rendre le truc facile à démarrer et agréable tout de suite."},
-    {type:"highlight",texte:"💡 Comment faire concrètement :<br><br>• <strong>Choisis un mouvement que tu aimes</strong>, pas celui que tu \"devrais\" faire. Danser dans ton salon compte autant qu'une salle de sport.<br>• <strong>Associe-le à un plaisir immédiat</strong> : ta playlist préférée, un podcast que tu gardes juste pour ça, un beau lieu de marche.<br>• <strong>Réduis la friction</strong> : prépare tes affaires la veille, choisis quelque chose de proche et simple.<br>• <strong>Célèbre tout de suite</strong>, même un petit \"je l'ai fait !\" intérieur. Ça nourrit la dopamine au bon moment.",classe:"terre"},
-    {type:"highlight",texte:"🎁 Une stratégie qui marche très bien : les récompenses par paliers. \"Si j'arrive à inclure 3 séances cette semaine, je m'offre cette jolie brassière que je voulais.\" Tu donnes à ton cerveau un objectif concret et une récompense réelle au bout, exactement ce dont il a besoin pour s'accrocher au début, quand le plaisir du sport n'est pas encore là."},
-    {type:"texte",texte:"Une seule chose à garder en tête : ces récompenses externes sont un échafaudage. Elles sont géniales pour démarrer et passer le cap difficile. Mais petit à petit, laisse la vraie récompense prendre le relais, celle de te sentir bien, plus claire, plus fière, plus vivante après avoir bougé. C'est elle qui fera tenir l'habitude sur le long terme, quand il n'y aura plus de brassière à la clé."},
-    {type:"texte",texte:"Et voilà le plus encourageant : plus tu bouges, plus ton cerveau fabrique de récepteurs à dopamine. Concrètement, ça veut dire que bouger devient de plus en plus facile avec le temps. Le démarrage est dur parce que ton cerveau n'est pas encore équipé, mais il s'équipe, séance après séance. Ce qui te coûte un effort énorme aujourd'hui deviendra presque naturel dans quelques semaines. Ce n'est pas une promesse en l'air, c'est de la plasticité cérébrale."},
+  { emoji:"🔑", titre:"\"J'arrive pas à m'y mettre\" : la vraie raison, et comment la changer", source:"Dr Wendy Wood, Good Habits, Bad Habits", contenu:[
+    {type:"texte",texte:"Si tu te dis souvent \"je n'arrive pas à me mettre au sport, ça me semble tellement difficile\", écoute bien : ce n'est pas un défaut de volonté. Et ce n'est pas qu'une croyance dans ta tête non plus. Il y a une vraie mécanique derrière, et la bonne nouvelle, c'est qu'elle se change."},
+    {type:"highlight",texte:"🧠 Voilà le cœur du problème : ton cerveau a besoin d'une récompense rapide pour ancrer un comportement. Or quand tu commences le sport, la récompense, se sentir mieux, plus en forme, met des semaines à arriver. Pendant ce temps, c'est juste difficile et inconfortable. Ton cerveau ne reçoit pas son \"shoot\" de dopamine assez vite, alors il décroche. Ce n'est pas toi qui es faible. C'est ta chimie qui n'a pas encore trouvé sa récompense."},
+    {type:"texte",texte:"Les chercheurs sur les habitudes, Wendy Wood en tête, sont formels : ce qui fait tenir une habitude, ce n'est pas la motivation ni la discipline. Ce sont deux choses : la récompense immédiate, et la réduction de la friction. Autrement dit, rendre le truc facile à démarrer et agréable tout de suite."},
+    {type:"highlight",texte:"💡 Comment faire concrètement :<br><br>• <strong>Choisis un mouvement que tu aimes</strong>, pas celui que tu \"devrais\" faire. Danser dans ton salon compte autant qu'une salle de sport.<br>• <strong>Associe-le à un plaisir immédiat</strong> : ta playlist préférée, un podcast que tu gardes juste pour ça, un beau lieu de marche.<br>• <strong>Réduis la friction</strong> : prépare tes affaires la veille, choisis quelque chose de proche et simple.<br>• <strong>Célèbre tout de suite</strong>, même un petit \"je l'ai fait !\" intérieur. Ça nourrit la dopamine au bon moment.",classe:"terre"},
+    {type:"highlight",texte:"🎁 Une stratégie qui marche très bien : les récompenses par paliers. \"Si j'arrive à inclure 3 séances cette semaine, je m'offre cette jolie brassière que je voulais.\" Tu donnes à ton cerveau un objectif concret et une récompense réelle au bout, exactement ce dont il a besoin pour s'accrocher au début, quand le plaisir du sport n'est pas encore là."},
+    {type:"texte",texte:"Une seule chose à garder en tête : ces récompenses externes sont un échafaudage. Elles sont géniales pour démarrer et passer le cap difficile. Mais petit à petit, laisse la vraie récompense prendre le relais, celle de te sentir bien, plus claire, plus fière, plus vivante après avoir bougé. C'est elle qui fera tenir l'habitude sur le long terme, quand il n'y aura plus de brassière à la clé."},
+    {type:"texte",texte:"Et voilà le plus encourageant : plus tu bouges, plus ton cerveau fabrique de récepteurs à dopamine. Concrètement, ça veut dire que bouger devient de plus en plus facile avec le temps. Le démarrage est dur parce que ton cerveau n'est pas encore équipé, mais il s'équipe, séance après séance. Ce qui te coûte un effort énorme aujourd'hui deviendra presque naturel dans quelques semaines. Ce n'est pas une promesse en l'air, c'est de la plasticité cérébrale."},
     {type:"highlight",texte:"🌱 Alors sois patiente et douce avec toi au début. Tu n'es pas en train d'échouer, tu es en train de recâbler ton cerveau. Et ça, ça prend un peu de temps. Chaque petite séance, même ridiculement courte, construit le terrain pour la suivante."},
   ]},
-  { emoji:"⚡", titre:"Quel mouvement selon ton état du moment ?", source:"Dr Peter Levine, Somatic Experiencing", contenu:[
+  { emoji:"⚡", titre:"Quel mouvement selon ton état du moment ?", source:"Dr Peter Levine, Somatic Experiencing", contenu:[
     {type:"texte",texte:"Tous les sports ne se valent pas selon l'état dans lequel tu es. Un corps déjà en mode alerte, saturé de cortisol, n'a pas besoin qu'on lui en rajoute avec un entraînement intense. Il a besoin d'être régulé, apaisé. C'est très différent."},
-    {type:"highlight",texte:"🟢 Quand tu te sens posée, en sécurité → tu peux y aller franchement : course, renforcement, natation, sport collectif. Ton corps a les ressources pour encaisser l'effort et en tirer du bon."},
-    {type:"highlight",texte:"🟠 Quand tu te sens agitée, anxieuse, sur le qui-vive → va vers des mouvements réguliers et prévisibles : marche rapide, vélo tranquille, danse libre. C'est le rythme régulier, répétitif, qui vient calmer ton système nerveux.",classe:"bleu"},
+    {type:"highlight",texte:"🟢 Quand tu te sens posée, en sécurité → tu peux y aller franchement : course, renforcement, natation, sport collectif. Ton corps a les ressources pour encaisser l'effort et en tirer du bon."},
+    {type:"highlight",texte:"🟠 Quand tu te sens agitée, anxieuse, sur le qui-vive → va vers des mouvements réguliers et prévisibles : marche rapide, vélo tranquille, danse libre. C'est le rythme régulier, répétitif, qui vient calmer ton système nerveux.",classe:"bleu"},
     {type:"highlight",texte:"🔴 Quand tu es épuisée, à plat, vidée → Pilates, yoga doux, étirements, marche lente dans la nature. Ces pratiques réveillent ton nerf vague et te ramènent doucement du mode survie vers le mode sécurité, sans rajouter de stress à un corps déjà à bout.",classe:"terre"},
-    {type:"texte",texte:"La règle d'or, c'est celle-là : écoute d'abord où en est ton corps, ensuite choisis ton mouvement. Choisir le Pilates un jour d'épuisement, ce n'est pas se ménager par faiblesse, c'est de l'intelligence corporelle. C'est connaître son corps et le respecter."},
+    {type:"texte",texte:"La règle d'or, c'est celle-là : écoute d'abord où en est ton corps, ensuite choisis ton mouvement. Choisir le Pilates un jour d'épuisement, ce n'est pas se ménager par faiblesse, c'est de l'intelligence corporelle. C'est connaître son corps et le respecter."},
   ]},
   { emoji:"🌙", titre:"Bouger avec ton cycle, pas contre lui", source:"Dr Stacy Sims, Roar", contenu:[
     {type:"texte",texte:"Ton énergie, ta force, ta récupération changent au fil de ton cycle. Si tu l'ignores, tu rames à contre-courant de ta propre biologie. Si tu t'y adaptes, tu avances avec elle, et tout devient plus facile."},
-    {type:"stat",texte:"Dans la première moitié du cycle (après les règles), l'œstrogène monte : ta force, ton endurance et ta récupération sont à leur top. C'est le moment idéal pour les entraînements plus intenses, si tu en as envie",source:"Dr Stacy Sims"},
-    {type:"stat",texte:"Dans la seconde moitié (avant les règles), ton corps tourne différemment : la température monte, la récupération ralentit, la fatigue arrive plus vite. Les mouvements doux sont souvent plus justes à ce moment-là",source:"Recherche en physiologie féminine"},
+    {type:"stat",texte:"Dans la première moitié du cycle (après les règles), l'œstrogène monte : ta force, ton endurance et ta récupération sont à leur top. C'est le moment idéal pour les entraînements plus intenses, si tu en as envie",source:"Dr Stacy Sims"},
+    {type:"stat",texte:"Dans la seconde moitié (avant les règles), ton corps tourne différemment : la température monte, la récupération ralentit, la fatigue arrive plus vite. Les mouvements doux sont souvent plus justes à ce moment-là",source:"Recherche en physiologie féminine"},
     {type:"highlight",texte:"💡 Attention, adapter à ton cycle ce n'est pas une excuse pour ne rien faire. C'est une façon de bouger plus intelligemment, plus longtemps, avec plus de plaisir, et moins de risque de te blesser ou de t'épuiser."},
   ]},
 ];
@@ -306,7 +308,7 @@ const etats = [
       titre:"Ton corps a besoin de rythme régulier",
       desc:"Quand tu es en mode combat/fuite, les mouvements rhythmiques et prévisibles régulent ton système nerveux mieux que les sports intenses.",
       mouvements:[
-        {nom:"Marche consciente en nature", detail:"20 à 30 minutes, à allure modérée. Concentre-toi sur les sensations : le sol sous tes pieds, l'air sur ta peau. La nature amplifie l'effet régulateur.", duree:"20-30 min", bg:"#fdf3e6", border:"#e8a85c", couleur:"#604020"},
+        {nom:"Marche consciente en nature", detail:"20 à 30 minutes, à allure modérée. Concentre-toi sur les sensations : le sol sous tes pieds, l'air sur ta peau. La nature amplifie l'effet régulateur.", duree:"20-30 min", bg:"#fdf3e6", border:"#e8a85c", couleur:"#604020"},
         {nom:"Vélo ou vélo elliptique", detail:"L'alternance régulière des jambes crée un rythme bilatéral qui apaise le système nerveux, comme la marche, mais plus intense si tu en as besoin.", duree:"25-35 min", bg:"#fdf3e6", border:"#e8a85c", couleur:"#604020"},
         {nom:"Danse libre", detail:"Mettre de la musique que tu aimes et laisser ton corps bouger librement est l'une des façons les plus naturelles de réguler les émotions et de sortir de l'anxiété.", duree:"15-20 min", bg:"#fdf3e6", border:"#e8a85c", couleur:"#604020"},
         {nom:"Renforcement musculaire à charges modérées", detail:"Quand tu es anxieuse, la musculation peut être excellente, à condition d'adapter les charges. Des séries plus longues, charges moyennes, mouvements contrôlés. Le focus sur la technique détourne le mental des pensées anxieuses.", duree:"30-40 min", bg:"#fdf3e6", border:"#e8a85c", couleur:"#604020"},
@@ -342,7 +344,7 @@ const etats = [
       desc:"Quand l'énergie est variable, la clé est de vérifier l'état de ton système nerveux avant de choisir ton mouvement, pas de suivre une routine fixe.",
       mouvements:[
         {nom:"Pilates, ton ancre quotidienne", detail:"Peu importe l'état de ton système nerveux, le Pilates s'adapte. Quand tu vas bien, tu peux intensifier. Quand tu es épuisée, tu ralentis. C'est la pratique la plus versatile pour les femmes dont l'énergie varie.", duree:"20-40 min", bg:"#f5edf5", border:"#c9a0c2", couleur:"#503050"},
-        {nom:"Marche : le mouvement universel", detail:"Simple, accessible, régulateur. Adapte le rythme à ton état du jour. La marche est le seul mouvement recommandé à tous les états du système nerveux.", duree:"20-40 min", bg:"#f5edf5", border:"#c9a0c2", couleur:"#503050"},
+        {nom:"Marche : le mouvement universel", detail:"Simple, accessible, régulateur. Adapte le rythme à ton état du jour. La marche est le seul mouvement recommandé à tous les états du système nerveux.", duree:"20-40 min", bg:"#f5edf5", border:"#c9a0c2", couleur:"#503050"},
         {nom:"Musculation, adapte les charges à ton état", detail:"La musculation est l'une des rares pratiques qui s'adapte à tous les états du système nerveux. Charges lourdes quand tu es en sécurité et en énergie. Charges légères, mouvements lents quand tu es fatiguée ou saturée. Évalue ton état avant de choisir ton programme du jour.", duree:"20-45 min", bg:"#f5edf5", border:"#c9a0c2", couleur:"#503050"},
       ]
     }
@@ -353,12 +355,12 @@ const cyclePhases = [
   {
     label:"Phase menstruelle · Jours 1 à 5",
     couleur:"#e8857a", bg:"#fde8e6", border:"rgba(232,133,122,0.3)",
-    texte:"Énergie basse, corps en travail. C'est le moment du Yoga Yin, des étirements doux, de la marche lente. Pas de sport intense : le corps a besoin de ses ressources pour autre chose.",
+    texte:"Énergie basse, corps en travail. C'est le moment du Yoga Yin, des étirements doux, de la marche lente. Pas de sport intense : le corps a besoin de ses ressources pour autre chose.",
   },
   {
     label:"Phase folliculaire · Jours 6 à 13",
     couleur:"#80c8a8", bg:"#eaf5f0", border:"rgba(128,200,168,0.3)",
-    texte:"Énergie montante, force maximale. C'est le meilleur moment pour les sports intenses : HIIT, musculation, course, natation rapide. Profite de cette fenêtre d'énergie.",
+    texte:"Énergie montante, force maximale. C'est le meilleur moment pour les sports intenses : HIIT, musculation, course, natation rapide. Profite de cette fenêtre d'énergie.",
   },
   {
     label:"Ovulation · Jours 14 à 16",
@@ -373,9 +375,9 @@ const cyclePhases = [
 ];
 
 const journalQuestions = [
-  {q:"Quel mouvement as-tu choisi aujourd'hui, ou lequel voudrais-tu essayer cette semaine ?", sous:"Pas d'obligation de résultat, juste une intention.", placeholder:"J'aimerais essayer / J'ai fait..."},
-  {q:"Comment te sens-tu dans ton corps en ce moment, avant de bouger ou après ?", sous:"Sensations physiques, énergie, tensions... Décris ce que tu ressens.", placeholder:"Dans mon corps je ressens..."},
-  {q:"Est-ce que tu as tendance à te forcer à faire du sport même quand ton corps dit non, ou au contraire à éviter le mouvement même quand il te ferait du bien ?", sous:"Honnêteté bienveillante, sans jugement.", placeholder:"Ma relation au mouvement c'est plutôt..."},
+  {ex:"« Dix minutes de marche après le repas. » « Les étirements du matin, allongée sur le tapis. » « Danser dans la cuisine sur une chanson que j'aime. »",q:"Quel mouvement as-tu choisi aujourd'hui, ou lequel voudrais-tu essayer cette semaine ?", sous:"Pas d'obligation de résultat, juste une intention.", placeholder:"J'aimerais essayer / J'ai fait..."},
+  {ex:"« Avant : les épaules nouées et la tête lourde. Après : plus chaude, plus présente. » « J'ai envie de bouger, mais je me sens molle. »",q:"Comment te sens-tu dans ton corps en ce moment, avant de bouger ou après ?", sous:"Sensations physiques, énergie, tensions... Décris ce que tu ressens.", placeholder:"Dans mon corps je ressens..."},
+  {ex:"« Je vais courir même malade, sinon je culpabilise. » « Je sais que marcher me ferait du bien, mais je reste sur le canapé en me disant que dix minutes, ça ne sert à rien. »",q:"Est-ce que tu as tendance à te forcer à faire du sport même quand ton corps dit non, ou au contraire à éviter le mouvement même quand il te ferait du bien ?", sous:"Honnêteté bienveillante, sans jugement.", placeholder:"Ma relation au mouvement c'est plutôt..."},
 ];
 
 let theorieIdx = 0;
@@ -396,7 +398,7 @@ const pc = document.getElementById('preview-container');
 [
   {e:'⚗️', t:'Le sport et le cerveau, dopamine, sérotonine, endorphines'},
   {e:'⚡', t:'Quel mouvement selon ton système nerveux'},
-  {e:'🧘', t:'Pilates et Yoga : les alliés du système nerveux saturé'},
+  {e:'🧘', t:'Pilates et Yoga : les alliés du système nerveux saturé'},
   {e:'🌙', t:'Le cycle féminin et le sport'},
   {e:'🌡️', t:'Programme guidé selon ton état du jour'},
   {e:'✍️', t:'Journal de mouvement'},
@@ -422,7 +424,7 @@ function renderTheorie() {
     else if(item.type==='stat') el.innerHTML+=`<div class="stat-item"><div class="stat-dot"></div><div><div class="stat-text">${item.texte}</div><div class="stat-source">${item.source}</div></div></div>`;
   });
   const isLast = theorieIdx===theorie.length-1;
-  document.querySelector('#phase-theorie .btn').textContent = isLast ? 'Piates, Yoga et système nerveux 🧘' : 'Continuer →';
+  document.querySelector('#phase-theorie .btn').textContent = isLast ? 'Piates, Yoga et système nerveux 🧘' : 'Continuer →';
 }
 
 function nextTheorie() {
@@ -494,20 +496,19 @@ function renderJournal() {
   document.getElementById('j-label').textContent=`Journal · ${journalIdx+1}/${journalQuestions.length}`;
   document.getElementById('j-progress').style.width=((journalIdx+1)/journalQuestions.length*100)+'%';
   document.getElementById('j-question').textContent=q.q;
-  document.getElementById('j-sous').textContent=q.sous;
+  document.getElementById('j-sous').textContent=q.sous;(function(){var x=document.getElementById('j-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('j-textarea').value='';
   document.getElementById('j-textarea').placeholder=q.placeholder;
   document.getElementById('btn-j-next').textContent=journalIdx<journalQuestions.length-1?'Continuer →':'Voir le bilan du cycle 🌙';
 }
 
 function checkJournal(){
-  // Journal libre : le bouton reste accessible
+  // Journal libre : le bouton reste accessible
 }
 
 function nextJournal(){
   const val=document.getElementById('j-textarea').value.trim();
-  if(!val)return;
-  journalReponses.push({q:journalQuestions[journalIdx].q,r:val});
+  if(val) journalReponses.push({q:journalQuestions[journalIdx].q,r:val});
   if(journalIdx<journalQuestions.length-1){journalIdx++;renderJournal();window.scrollTo(0,0);}
   else{showPhase('cycle');}
 }
@@ -554,6 +555,52 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j9', TITRE="Le mouvement";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+    try{ if(typeof journalReponses!=='undefined'&&Array.isArray(journalReponses)) journalReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

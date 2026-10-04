@@ -71,6 +71,7 @@
   .reponse-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#fdf0f5,#fdf5ee);border-radius:20px;padding:22px;border:1px solid rgba(220,160,180,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -87,7 +88,7 @@
     <span class="emoji-hero">🌸</span>
     <div class="label">Jour 6 · Prendre soin de son corps</div>
     <h2>Ton corps n'est pas ton ennemi</h2>
-    <p>Tu as appris à respirer, à te reposer, à poser tes limites. Aujourd'hui on se tourne vers quelque chose qu'on a souvent appris à ignorer, à critiquer, à fuir : son propre corps.</p>
+    <p>Tu as appris à respirer, à te reposer, à poser tes limites. Aujourd'hui on se tourne vers quelque chose qu'on a souvent appris à ignorer, à critiquer, à fuir : son propre corps.</p>
     <p class="small" style="margin-bottom:22px;">On va comprendre pourquoi corps et esprit ne font qu'un, écouter ton corps avec un scan tout doux, et lui offrir un petit geste de soin. Sans jugement, sans performance.</p>
     <div id="preview-container" style="text-align:left;margin-bottom:22px;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 🌸</button>
@@ -133,7 +134,7 @@
   <div style="background:white;border-radius:24px;padding:22px 24px;border:1px solid rgba(220,160,180,0.2);max-width:560px;width:100%;margin-top:18px;text-align:center;box-shadow:0 4px 20px rgba(200,140,160,0.1);">
     <div style="font-size:32px;margin-bottom:8px;">🌸</div>
     <h3 style="margin-bottom:6px;">Ton rituel de soin du jour</h3>
-    <p class="small" style="margin:0 0 6px;">Des gestes simples et doux. Choisis ceux qui te font envie : un seul suffit. Tu n'as pas à tout faire, juste à t'offrir un moment.</p>
+    <p class="small" style="margin:0 0 6px;">Des gestes simples et doux. Choisis ceux qui te font envie : un seul suffit. Tu n'as pas à tout faire, juste à t'offrir un moment.</p>
   </div>
   <div id="rituel-container" style="max-width:560px;width:100%;margin-top:12px;"></div>
   <div style="text-align:center;max-width:560px;width:100%;">
@@ -154,8 +155,9 @@
   <div class="card">
     <p class="ecriture-q" id="e-question"></p>
     <p class="ecriture-sous" id="e-sous"></p>
+    <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="Écris librement..." oninput="checkEcriture()"></textarea>
-    <button class="btn" id="btn-e-next" style="width:100%;margin-top:12px;" disabled onclick="nextEcriture()">Continuer →</button>
+    <button class="btn" id="btn-e-next" style="width:100%;margin-top:12px;" onclick="nextEcriture()">Continuer →</button>
   </div>
 </div>
 
@@ -172,7 +174,7 @@
     </div>
 
     <div class="highlight terre" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À retenir :</strong> Prendre soin de son corps n'est pas de la superficialité, c'est un acte profond de présence à soi-même. Chaque geste doux que tu poses sur ton corps lui dit : "Tu as de la valeur. Tu mérites d'être choyé."
+      🔑 <strong>À retenir :</strong> Prendre soin de son corps n'est pas de la superficialité, c'est un acte profond de présence à soi-même. Chaque geste doux que tu poses sur ton corps lui dit : "Tu as de la valeur. Tu mérites d'être choyé."
     </div>
   </div>
 
@@ -183,7 +185,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#906070;"><strong style="color:#5d3040;">Demain, Jour 7 :</strong> faire le point, 1 semaine de chemin parcouru</p>
+    <p style="font-size:14px;color:#906070;"><strong style="color:#5d3040;">Demain, Jour 7 :</strong> faire le point, 1 semaine de chemin parcouru</p>
     <p class="hint" style="margin-top:6px;">24 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -193,16 +195,16 @@ const theorie = [
   { emoji:"🧬", titre:"Ton corps et ta tête, c'est la même chose", intro:null, source:"Dr Bessel van der Kolk, Le Corps n'oublie rien", contenu:[
     {type:"texte",texte:"Pendant longtemps, on a fait comme si le corps et l'esprit étaient deux choses séparées. Comme si on pouvait soigner l'un sans toucher l'autre. C'est faux. Ils sont liés au point qu'on ne peut pas vraiment les distinguer."},
     {type:"highlight",texte:"💡 Tes émotions ne vivent pas que dans ta tête. Elles vivent dans ton corps, dans tes épaules qui se crispent, ton ventre qui se noue, ta poitrine qui se serre. Ignorer ton corps, c'est passer à côté d'une part entière de ce que tu ressens vraiment."},
-    {type:"texte",texte:"Van der Kolk a passé sa vie à étudier comment les blessures et les émotions se logent dans le corps. Sa conclusion tient en une phrase : pour aller mieux pour de vrai, il faut passer par le corps. Pas seulement par les mots ou par la réflexion."},
+    {type:"texte",texte:"Van der Kolk a passé sa vie à étudier comment les blessures et les émotions se logent dans le corps. Sa conclusion tient en une phrase : pour aller mieux pour de vrai, il faut passer par le corps. Pas seulement par les mots ou par la réflexion."},
   ]},
   { emoji:"🪞", titre:"Ce rapport compliqué qu'on a à notre corps", intro:null, source:"Dr Niva Piran, Developmental Theory of Embodiment", contenu:[
     {type:"texte",texte:"La plupart d'entre nous avons appris à habiter notre corps de l'extérieur. À le regarder, le juger, le comparer. Jamais de l'intérieur, à le ressentir, l'écouter, lui faire confiance. On nous a appris à être spectatrices de notre corps, pas à l'habiter."},
     {type:"highlight",texte:"📊 La grande majorité des femmes ont au moins une pensée négative sur leur corps chaque jour. Chaque jour. Ce n'est pas ton problème à toi toute seule, c'est un truc culturel, dans lequel on baigne depuis toujours."},
-    {type:"texte",texte:"Et ça pèse lourd sur le moral. Plus on est en guerre avec son corps, plus l'anxiété, le mal-être et le manque d'estime de soi s'installent. C'est logique, comment se sentir en paix quand on se bat contre soi-même toute la journée ?"},
+    {type:"texte",texte:"Et ça pèse lourd sur le moral. Plus on est en guerre avec son corps, plus l'anxiété, le mal-être et le manque d'estime de soi s'installent. C'est logique, comment se sentir en paix quand on se bat contre soi-même toute la journée ?"},
     {type:"highlight",texte:"🌸 Habiter son corps de l'intérieur, c'est un des plus beaux chemins vers le mieux-être. Et attention, ça n'a rien à voir avec l'apparence. C'est une histoire de présence, pas de perfection.",classe:"terre"},
   ]},
   { emoji:"🤲", titre:"Pourquoi un simple geste de soin change tout", intro:null, source:"Dr Tiffany Field, Touch Research Institute", contenu:[
-    {type:"texte",texte:"Quand tu poses une main douce sur ton corps, il se passe quelque chose de concret. Tu actives ton système nerveux parasympathique : le même que la respiration d'il y a quelques jours. Tu envoies à ton cerveau un signal clair : tu es en sécurité."},
+    {type:"texte",texte:"Quand tu poses une main douce sur ton corps, il se passe quelque chose de concret. Tu actives ton système nerveux parasympathique : le même que la respiration d'il y a quelques jours. Tu envoies à ton cerveau un signal clair : tu es en sécurité."},
     {type:"stat",texte:"Le toucher doux libère de l'ocytocine, l'hormone du lien et du réconfort. Il fait baisser le cortisol et réveille les zones du cerveau liées à la sécurité et à la tendresse",source:"Touch Research Institute, University of Miami"},
     {type:"highlight",texte:"💡 Et le plus beau, c'est que ça n'a pas besoin d'être compliqué. Une crème appliquée lentement, une douche vécue vraiment, une main posée sur ton ventre avec douceur, ça suffit à changer ton état intérieur. Pas besoin de rituel élaboré.",classe:"terre"},
   ]},
@@ -210,30 +212,30 @@ const theorie = [
     {type:"texte",texte:"Être douce avec ton corps, ce n'est pas du laisser-aller ni de la faiblesse. C'est la condition pour que ton corps puisse te faire confiance, et pour que toi, tu puisses lui faire confiance en retour. C'est une relation à reconstruire, des deux côtés."},
     {type:"highlight",texte:"🌸 La bienveillance envers ton corps, ça ne veut pas dire adorer chaque partie de toi tous les jours. Ça veut dire le traiter avec le même soin que tu offrirais à quelqu'un que tu aimes, surtout les jours difficiles, justement."},
     {type:"texte",texte:"La compassion envers soi-même, y compris envers son corps, apaise vraiment, elle fait reculer le mal-être et l'anxiété quand on la pratique régulièrement. Ce n'est pas magique, c'est de l'entraînement. Et ça marche."},
-    {type:"texte",texte:"Alors aujourd'hui, on va faire deux choses toutes simples : un scan de ton corps pour l'écouter là où il en est, et un petit geste de soin pour lui offrir un peu d'attention. Rien de plus. C'est déjà beaucoup."},
+    {type:"texte",texte:"Alors aujourd'hui, on va faire deux choses toutes simples : un scan de ton corps pour l'écouter là où il en est, et un petit geste de soin pour lui offrir un peu d'attention. Rien de plus. C'est déjà beaucoup."},
   ]},
 ];
 
 const scanZones = [
-  { emoji:"😮‍💨", nom:"La gorge & la mâchoire", question:"Est-ce que tu serres les dents ? Ta gorge est-elle nouée, contractée ? Est-ce qu'il y a des mots que tu retiens ?", conseil:"La gorge est souvent le siège des émotions non exprimées. Si tu y sens de la tension, tu peux inspirer profondément et expirer en laissant échapper un soupir sonore, laisse sortir ce qui veut sortir." },
-  { emoji:"🫁", nom:"La poitrine & le cœur", question:"Est-ce que ta poitrine est légère ou lourde ? Est-ce qu'il y a de la contraction, de la pression ? Ou de l'espace, de l'ouverture ?", conseil:"Pose une main sur ta poitrine. Sens-la se soulever à chaque inspiration. Dis intérieurement : \"Je t'écoute.\"" },
-  { emoji:"🫄", nom:"Le ventre", question:"Est-ce que ton ventre est détendu ou contracté ? Est-ce qu'il y a de la tension, des nœuds ? Le ventre est souvent le premier endroit où le stress se loge.", conseil:"Le ventre est ton deuxième cerveau, il contient autant de neurones que la colonne vertébrale. Si tu y sens de la tension, place une main dessus et respire vers ta main, en laissant le ventre se gonfler." },
-  { emoji:"💪", nom:"Les épaules & le cou", question:"Est-ce que tes épaules sont remontées vers tes oreilles ? Est-ce que ton cou est raide ? Tes épaules portent souvent le poids de tes responsabilités.", conseil:"Laisse tes épaules descendre lentement. Fais rouler doucement la tête de droite à gauche. Les femmes portent souvent des charges invisibles dans cette zone." },
-  { emoji:"🦵", nom:"Les jambes & les pieds", question:"Est-ce que tes jambes sont lourdes ou légères ? Est-ce que tu sens tes pieds sur le sol ? Te sens-tu ancrée, ou plutôt dans ta tête, déconnectée de ton bas du corps ?", conseil:"Appuie tes pieds à plat sur le sol. Sens le contact, le poids, la stabilité. Les pieds sont notre lien avec la terre, avec le sentiment d'être en sécurité ici et maintenant." },
+  { emoji:"😮‍💨", nom:"La gorge & la mâchoire", question:"Est-ce que tu serres les dents ? Ta gorge est-elle nouée, contractée ? Est-ce qu'il y a des mots que tu retiens ?", conseil:"La gorge est souvent le siège des émotions non exprimées. Si tu y sens de la tension, tu peux inspirer profondément et expirer en laissant échapper un soupir sonore, laisse sortir ce qui veut sortir." },
+  { emoji:"🫁", nom:"La poitrine & le cœur", question:"Est-ce que ta poitrine est légère ou lourde ? Est-ce qu'il y a de la contraction, de la pression ? Ou de l'espace, de l'ouverture ?", conseil:"Pose une main sur ta poitrine. Sens-la se soulever à chaque inspiration. Dis intérieurement : \"Je t'écoute.\"" },
+  { emoji:"🫄", nom:"Le ventre", question:"Est-ce que ton ventre est détendu ou contracté ? Est-ce qu'il y a de la tension, des nœuds ? Le ventre est souvent le premier endroit où le stress se loge.", conseil:"Le ventre est ton deuxième cerveau, il contient autant de neurones que la colonne vertébrale. Si tu y sens de la tension, place une main dessus et respire vers ta main, en laissant le ventre se gonfler." },
+  { emoji:"💪", nom:"Les épaules & le cou", question:"Est-ce que tes épaules sont remontées vers tes oreilles ? Est-ce que ton cou est raide ? Tes épaules portent souvent le poids de tes responsabilités.", conseil:"Laisse tes épaules descendre lentement. Fais rouler doucement la tête de droite à gauche. Les femmes portent souvent des charges invisibles dans cette zone." },
+  { emoji:"🦵", nom:"Les jambes & les pieds", question:"Est-ce que tes jambes sont lourdes ou légères ? Est-ce que tu sens tes pieds sur le sol ? Te sens-tu ancrée, ou plutôt dans ta tête, déconnectée de ton bas du corps ?", conseil:"Appuie tes pieds à plat sur le sol. Sens le contact, le poids, la stabilité. Les pieds sont notre lien avec la terre, avec le sentiment d'être en sécurité ici et maintenant." },
 ];
 
 const rituelItems = [
   { emoji:"💧", titre:"Une douche ou un bain conscient", desc:"Pas pour être propre, pour être présente. Sens l'eau sur ta peau, sa température, son contact. Tu es dans ton corps, là, maintenant.", conseil:"Si tu peux, ferme les yeux un instant sous l'eau. Laisse-la emporter ce que tu veux lâcher de la journée.", couleur:"#90b8d0" },
   { emoji:"🧴", titre:"Un geste de soin lent", desc:"Une crème, une huile, un baume, appliqué lentement, avec attention. Ce n'est pas une corvée. C'est un acte d'amour envers ton corps.", conseil:"Essaie de toucher ton corps comme tu toucherais quelqu'un que tu aimes, avec douceur, avec présence.", couleur:"#e8a0b4" },
-  { emoji:"🤲", titre:"Une main sur le cœur", desc:"Pose une main sur ta poitrine. Sens les battements. Dis intérieurement, ou à voix haute : \"Merci de me porter. Je prends soin de toi.\"", conseil:"Ça peut sembler bizarre au début. C'est normal. Continue quand même : ton système nerveux répond à ce geste, même si ton mental résiste.", couleur:"#c2836a" },
-  { emoji:"🧘", titre:"3 étirements doux", desc:"N'importe lesquels : ce dont ton corps a envie. Épaules, cou, dos, hanches. Laisse ton corps te guider, pas une routine imposée.", conseil:"L'étirement n'est pas une performance. C'est une conversation avec ton corps, tu lui demandes ce dont il a besoin.", couleur:"#80c8a8" },
+  { emoji:"🤲", titre:"Une main sur le cœur", desc:"Pose une main sur ta poitrine. Sens les battements. Dis intérieurement, ou à voix haute : \"Merci de me porter. Je prends soin de toi.\"", conseil:"Ça peut sembler bizarre au début. C'est normal. Continue quand même : ton système nerveux répond à ce geste, même si ton mental résiste.", couleur:"#c2836a" },
+  { emoji:"🧘", titre:"3 étirements doux", desc:"N'importe lesquels : ce dont ton corps a envie. Épaules, cou, dos, hanches. Laisse ton corps te guider, pas une routine imposée.", conseil:"L'étirement n'est pas une performance. C'est une conversation avec ton corps, tu lui demandes ce dont il a besoin.", couleur:"#80c8a8" },
   { emoji:"☕", titre:"Un moment de plaisir simple", desc:"Un thé, un café, un carré de chocolat, savouré lentement, consciemment. Pas en regardant ton téléphone. Juste toi et ce plaisir.", conseil:"Le plaisir conscient active le système parasympathique. Savourer pleinement quelque chose, c'est offrir du repos à ton système nerveux.", couleur:"#a08ec2" },
 ];
 
 const ecritureQuestions = [
-  { q:"Quel est le mot qui décrit le mieux ta relation à ton corps en ce moment ?", sous:"Un seul mot, qui vient spontanément, sans réfléchir.", placeholder:"Mon mot est..." },
-  { q:"Qu'est-ce que ton corps essaie de te dire en ce moment, que tu n'écoutes pas toujours ?", sous:"Sois honnête. Ton corps parle souvent, mais on apprend à ne plus l'entendre.", placeholder:"Mon corps essaie de me dire que..." },
-  { q:"Comment voudrais-tu habiter ton corps différemment d'ici la fin de ces 30 jours ?", sous:"Pas une transformation physique : une façon différente d'être en lien avec lui.", placeholder:"Je voudrais habiter mon corps en étant..." },
+  {ex:"« Étrangère. » « En guerre. » « Fatigué, mais fidèle. » « Je l'oublie, je ne le sens que quand il a mal. »", q:"Quel est le mot qui décrit le mieux ta relation à ton corps en ce moment ?", sous:"Un seul mot, qui vient spontanément, sans réfléchir.", placeholder:"Mon mot est..." },
+  {ex:"« Que je suis fatiguée depuis des mois et que je continue comme si de rien n'était. » « Mon dos me dit que je porte trop. » « Mon ventre se serre chaque dimanche soir, avant la semaine. »", q:"Qu'est-ce que ton corps essaie de te dire en ce moment, que tu n'écoutes pas toujours ?", sous:"Sois honnête. Ton corps parle souvent, mais on apprend à ne plus l'entendre.", placeholder:"Mon corps essaie de me dire que..." },
+  {ex:"« Prendre deux minutes le matin pour sentir mes pieds avant de courir partout. » « Manger assise, sans écran. » « Arrêter de m'excuser pour mon corps. »", q:"Comment voudrais-tu habiter ton corps différemment d'ici la fin de ces 30 jours ?", sous:"Pas une transformation physique : une façon différente d'être en lien avec lui.", placeholder:"Je voudrais habiter mon corps en étant..." },
 ];
 
 let theorieIdx = 0;
@@ -250,7 +252,7 @@ function showPhase(id) {
 
 // Preview
 const pc = document.getElementById('preview-container');
-[{e:'🧬',t:'Le corps et l\'esprit ne font qu\'un'},{e:'🪞',t:'La relation des femmes à leur corps'},{e:'🤲',t:'Pourquoi les gestes de soin changent le cerveau'},{e:'🌱',t:'Réapprendre à habiter son corps'},{e:'🫀',t:'Scan corporel guidé, 5 zones'},{e:'🌸',t:'Rituel de soin doux, 5 gestes'},{e:'✍️',t:'Écriture : ta relation à ton corps'}].forEach(item=>{
+[{e:'🧬',t:'Le corps et l\'esprit ne font qu\'un'},{e:'🪞',t:'La relation des femmes à leur corps'},{e:'🤲',t:'Pourquoi les gestes de soin changent le cerveau'},{e:'🌱',t:'Réapprendre à habiter son corps'},{e:'🫀',t:'Scan corporel guidé, 5 zones'},{e:'🌸',t:'Rituel de soin doux, 5 gestes'},{e:'✍️',t:'Écriture : ta relation à ton corps'}].forEach(item=>{
   pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${item.e}</span><span>${item.t}</span></div>`;
 });
 
@@ -323,8 +325,8 @@ function renderRituel() {
           <div class="rituel-desc">${r.desc}</div>
           ${!done?`<div class="rituel-conseil">💡 ${r.conseil}</div>`:''}
           ${!done
-            ? `<button class="rituel-btn" onclick="completeRituel(${i})" style="background:linear-gradient(135deg,${r.couleur}cc,${r.couleur}88);">✓ C'est fait</button>`
-            : `<div class="rituel-done-label" style="color:${r.couleur};">✅ Fait avec soin</div>`
+            ? `<button class="rituel-btn" onclick="completeRituel(${i})" style="background:linear-gradient(135deg,${r.couleur}cc,${r.couleur}88);">✓ C'est fait</button>`
+            : `<div class="rituel-done-label" style="color:${r.couleur};">✅ Fait avec soin</div>`
           }
         </div>
       </div>`;
@@ -347,21 +349,20 @@ function renderEcriture() {
   document.getElementById('e-label').textContent=`Écriture · ${ecritureIdx+1}/${ecritureQuestions.length}`;
   document.getElementById('e-progress').style.width=((ecritureIdx+1)/ecritureQuestions.length*100)+'%';
   document.getElementById('e-question').textContent=e.q;
-  document.getElementById('e-sous').textContent=e.sous;
+  document.getElementById('e-sous').textContent=e.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=e.ex?('Par exemple : '+e.ex):'';x.style.display=e.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=e.placeholder;
-  document.getElementById('btn-e-next').disabled=true;
+  /* libre */
   document.getElementById('btn-e-next').textContent=ecritureIdx<ecritureQuestions.length-1?'Continuer →':'Terminer le Jour 6 🌸';
 }
 
 function checkEcriture() {
-  document.getElementById('btn-e-next').disabled=!document.getElementById('e-textarea').value.trim();
+  /* libre */
 }
 
 function nextEcriture() {
   const val=document.getElementById('e-textarea').value.trim();
-  if(!val)return;
-  ecritureReponses.push({q:ecritureQuestions[ecritureIdx].q,r:val});
+  if(val) ecritureReponses.push({q:ecritureQuestions[ecritureIdx].q,r:val});
   if(ecritureIdx<ecritureQuestions.length-1){ecritureIdx++;renderEcriture();window.scrollTo(0,0);}
   else{showFin();}
 }
@@ -414,6 +415,52 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j6', TITRE="Prendre soin de son corps";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+    try{ if(typeof ecritureReponses!=='undefined'&&Array.isArray(ecritureReponses)) ecritureReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

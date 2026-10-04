@@ -70,6 +70,7 @@
   .recap-r{font-size:16px;color:#3d2d50;line-height:1.7}
   .suite-box{background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:20px;padding:24px;border:1px solid rgba(200,160,80,0.2);text-align:center;margin-top:16px;max-width:580px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -137,7 +138,7 @@
     <p>Mais recevoir, vraiment recevoir, c'est aussi une compétence. Et elle se travaille.</p>
 
     <div class="hl" style="margin-bottom:14px;">
-      Pourquoi c'est si difficile de se féliciter ? Parce qu'on confond humilité et auto-effacement. Parce qu'on a peur d'avoir l'air arrogante. Parce qu'on a appris que se mettre en avant, c'est mal. Mais reconnaître ce qu'on a fait, sans fanfare, juste pour soi, ce n'est pas de l'arrogance. C'est de l'honnêteté.
+      Pourquoi c'est si difficile de se féliciter ? Parce qu'on confond humilité et auto-effacement. Parce qu'on a peur d'avoir l'air arrogante. Parce qu'on a appris que se mettre en avant, c'est mal. Mais reconnaître ce qu'on a fait, sans fanfare, juste pour soi, ce n'est pas de l'arrogance. C'est de l'honnêteté.
     </div>
 
     <div id="recevoir-container"></div>
@@ -151,34 +152,38 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">✨</span>
     <h2>Ce dont je suis fière, sans minimiser</h2>
-    <p>Pas de liste de performances. Pas de ce que tu as accompli pour les autres. Juste ce que tu as fait pour toi : ce que tu as osé, traversé, tenu, délesté, appris.</p>
+    <p>Pas de liste de performances. Pas de ce que tu as accompli pour les autres. Juste ce que tu as fait pour toi : ce que tu as osé, traversé, tenu, délesté, appris.</p>
     <p class="note" style="text-align:center;margin-bottom:20px;">Réponds honnêtement. Interdit de minimiser.</p>
 
     <div class="fierte-bloc">
       <div class="fierte-label">Ce que j'ai osé</div>
-      <div class="fierte-q">Qu'est-ce que tu as osé faire, penser ou ressentir pendant ces 29 jours, que tu n'aurais pas osé avant ?</div>
+      <div class="fierte-q">Qu'est-ce que tu as osé faire, penser ou ressentir pendant ces 29 jours, que tu n'aurais pas osé avant ?</div>
       <div class="fierte-sous">Même une toute petite chose. Même juste nommer une émotion que tu évitais.</div>
+      <div class="exemple">Par exemple : « J'ai osé dire à mon compagnon que j'étais épuisée. » « J'ai osé pleurer devant quelqu'un. » « J'ai osé dire non à ma mère. »</div>
       <textarea id="f1" rows="3" placeholder="J'ai osé..." oninput="checkFierte()"></textarea>
     </div>
 
     <div class="fierte-bloc">
       <div class="fierte-label">Ce que j'ai traversé</div>
-      <div class="fierte-q">Qu'est-ce qui était difficile dans ce programme, et que tu as traversé quand même ?</div>
+      <div class="fierte-q">Qu'est-ce qui était difficile dans ce programme, et que tu as traversé quand même ?</div>
       <div class="fierte-sous">La résistance compte aussi. Avoir lu quelque chose de difficile et être restée avec ça, c'est du courage.</div>
+      <div class="exemple">Par exemple : « La lettre du jour 20. J'ai failli fermer la page, et je suis restée. » « Regarder ma charge mentale en face. »</div>
       <textarea id="f2" rows="3" placeholder="Ce qui était difficile et que j'ai traversé quand même..." oninput="checkFierte()"></textarea>
     </div>
 
     <div class="fierte-bloc">
       <div class="fierte-label">Ce qui a changé</div>
-      <div class="fierte-q">Qu'est-ce qui est différent en toi, même légèrement, depuis le Jour 1 ?</div>
+      <div class="fierte-q">Qu'est-ce qui est différent en toi, même légèrement, depuis le Jour 1 ?</div>
       <div class="fierte-sous">Pas forcément visible de l'extérieur. Quelque chose qui a bougé dans ta façon de te voir ou de te parler.</div>
+      <div class="exemple">Par exemple : « Je remarque plus vite quand je suis en train de me juger. » « Je sais nommer ce que je ressens, au lieu de dire juste : ça ne va pas. »</div>
       <textarea id="f3" rows="3" placeholder="Ce qui a changé, même subtilement..." oninput="checkFierte()"></textarea>
     </div>
 
     <div class="fierte-bloc">
       <div class="fierte-label">Ce dont je suis fière</div>
-      <div class="fierte-q">Complète cette phrase, sans t'arrêter, sans corriger :</div>
+      <div class="fierte-q">Complète cette phrase, sans t'arrêter, sans corriger :</div>
       <div class="fierte-sous">"Je suis fière de moi parce que..."</div>
+      <div class="exemple">Par exemple : « Je suis fière de moi parce que je me suis choisie un peu, chaque jour, alors que tout me poussait à m'oublier. »</div>
       <textarea id="f4" rows="3" placeholder="Je suis fière de moi parce que..." oninput="checkFierte()"></textarea>
     </div>
 
@@ -210,7 +215,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:28px;margin-bottom:10px;">🎯</div>
-    <p style="font-size:18px;color:#3d2d50;margin-bottom:6px;"><strong>Demain, Jour 30 :</strong> mon engagement envers moi</p>
+    <p style="font-size:18px;color:#3d2d50;margin-bottom:6px;"><strong>Demain, Jour 30 :</strong> mon engagement envers moi</p>
     <p class="note" style="margin-top:4px;">Le dernier jour, et le plus important 🌸</p>
   </div>
 </div>
@@ -233,15 +238,15 @@ const theorie=[
 
 const semaines=[
   {titre:"Semaine 1 · Se connaître",sous:"Jours 1 à 7",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)",detail:"Tu es partie d'un état des lieux honnête, sans te raconter d'histoires. Puis tu as appris à mettre des mots sur tes émotions, à respirer autrement, à regarder ton repos et tes limites en face."},
-  {titre:"Semaine 2 · Se réguler",sous:"Jours 8 à 14",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)",detail:"Là tu es allée vers ce qui apaise : ta voix intérieure, le mouvement, la gratitude. Tu as aussi regardé tes relations, ce qu'elles te donnent et ce qu'elles te prennent, et découvert comment ton système nerveux se règle sur celui des autres."},
+  {titre:"Semaine 2 · Se réguler",sous:"Jours 8 à 14",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)",detail:"Là tu es allée vers ce qui apaise : ta voix intérieure, le mouvement, la gratitude. Tu as aussi regardé tes relations, ce qu'elles te donnent et ce qu'elles te prennent, et découvert comment ton système nerveux se règle sur celui des autres."},
   {titre:"Semaine 3 · Se délester",sous:"Jours 15 à 21",couleur:"#c870a0",bg:"#fdf0f5",border:"rgba(200,112,160,0.3)",detail:"La semaine où tu as posé des choses. La charge mentale d'abord, en cherchant comment la redistribuer. Puis ton cycle, la joie, ces croyances qui te limitaient sans que tu le saches. Et les deuils que tu portais sans les avoir nommés."},
   {titre:"Semaine 4 · Se retrouver",sous:"Jours 22 à 29",couleur:"#60a880",bg:"#eaf5f0",border:"rgba(96,168,128,0.3)",detail:"La semaine du retour à toi. Ta colère et ce qu'elle voulait te dire. Le pardon, aux autres et surtout à toi. Ton estime, tes valeurs, la femme que tu as envie d'être. Ton corps, la création. Et aujourd'hui, tout ce chemin."},
 ];
 
 const recevoirItems=[
-  {titre:"Quand quelqu'un te complimente",desc:"Au lieu de minimiser, essaie juste de dire merci et de laisser le silence. Tu n'as pas à renvoyer le compliment. Tu n'as pas à expliquer que c'était rien. Juste : merci.",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)"},
+  {titre:"Quand quelqu'un te complimente",desc:"Au lieu de minimiser, essaie juste de dire merci et de laisser le silence. Tu n'as pas à renvoyer le compliment. Tu n'as pas à expliquer que c'était rien. Juste : merci.",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)"},
   {titre:"Quand tu réussis quelque chose",desc:"Arrête-toi un instant pour le sentir dans ton corps avant d'enchaîner. Quelques secondes suffisent. C'est ce petit temps d'arrêt qui fait que ça reste.",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)"},
-  {titre:"Quand tu te félicites toi-même",desc:"Pas besoin de le dire à voix haute. Juste une pensée claire : \"j'ai bien fait\". Sans le \"mais\" qui suit. Sans la comparaison avec ce que tu aurais pu faire mieux. Juste : j'ai bien fait.",couleur:"#60a880",bg:"#eaf5f0",border:"rgba(96,168,128,0.3)"},
+  {titre:"Quand tu te félicites toi-même",desc:"Pas besoin de le dire à voix haute. Juste une pensée claire : \"j'ai bien fait\". Sans le \"mais\" qui suit. Sans la comparaison avec ce que tu aurais pu faire mieux. Juste : j'ai bien fait.",couleur:"#60a880",bg:"#eaf5f0",border:"rgba(96,168,128,0.3)"},
 ];
 
 let theorieIdx=0;
@@ -361,6 +366,51 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j29', TITRE="Célébrer mon chemin";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>

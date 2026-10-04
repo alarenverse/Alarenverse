@@ -86,6 +86,7 @@
   .suite-box{background:rgba(200,160,220,0.08);border-radius:20px;padding:22px;border:1px solid rgba(200,160,220,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%;position:relative;z-index:1}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
   @keyframes twinkle{0%,100%{opacity:0.3}50%{opacity:0.8}}
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
 <body>
@@ -171,8 +172,8 @@
     </div>
 
     <div class="hl rouge">
-      <strong>PMDD, quand consulter :</strong><br><br>
-      Si tu reconnais les symptômes du PMDD, une détresse émotionnelle sévère, répétitive, liée au cycle, qui disparaît avec les règles, tu mérites une prise en charge médicale adaptée. Ce n'est pas "dans ta tête". C'est une condition reconnue par le DSM-5 (depuis 2013) avec des traitements efficaces disponibles : thérapie, régulation hormonale, antidépresseurs si nécessaire.<br><br>
+      <strong>PMDD, quand consulter :</strong><br><br>
+      Si tu reconnais les symptômes du PMDD, une détresse émotionnelle sévère, répétitive, liée au cycle, qui disparaît avec les règles, tu mérites une prise en charge médicale adaptée. Ce n'est pas "dans ta tête". C'est une condition reconnue par le DSM-5 (depuis 2013) avec des traitements efficaces disponibles : thérapie, régulation hormonale, antidépresseurs si nécessaire.<br><br>
       Un suivi de cycle pendant 2 mois suffit souvent à établir le diagnostic. Parles-en à ton médecin ou gynécologue.
     </div>
 
@@ -188,28 +189,28 @@
 <div class="phase" id="phase-perimenopause">
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">🌿</span>
-    <h2>Périménopause & Ménopause : les bouleversements incompris</h2>
+    <h2>Périménopause & Ménopause : les bouleversements incompris</h2>
     <p style="text-align:center;margin-bottom:20px;">La périménopause peut commencer dès 35-40 ans et durer 10 ans. Ses effets sur la santé mentale sont réels, documentés, et encore trop souvent ignorés ou mal diagnostiqués.</p>
 
     <div class="hl">
-      <strong>Ce qu'est la périménopause :</strong><br><br>
+      <strong>Ce qu'est la périménopause :</strong><br><br>
       La transition vers la ménopause pendant laquelle les niveaux d'œstrogènes et de progestérone fluctuent de façon irrégulière et imprévisible. Ce n'est pas une ligne droite, c'est des montagnes russes hormonales qui peuvent durer des années.
     </div>
 
     <div class="hl rouge">
-      <strong>Les symptômes psychiatriques souvent mal attribués :</strong><br><br>
+      <strong>Les symptômes psychiatriques souvent mal attribués :</strong><br><br>
       Anxiété inexpliquée, dépression soudaine (souvent le premier épisode dépressif de la vie), troubles du sommeil sévères, irritabilité intense, brouillard mental ("brain fog"), perte de mémoire, perte de confiance en soi, crises de larmes.<br><br>
       Ces symptômes sont souvent diagnostiqués comme "dépression" ou "anxiété généralisée", et traités avec des antidépresseurs sans investigation hormonale. Le traitement hormonal substitutif (THS), quand il est approprié, peut changer radicalement la situation.
     </div>
 
     <div class="hl vert">
-      <strong>Ce que la science dit maintenant :</strong><br><br>
+      <strong>Ce que la science dit maintenant :</strong><br><br>
       Le cerveau féminin est profondément sensible aux œstrogènes, ils régulent la sérotonine, la dopamine et le GABA. Quand les œstrogènes fluctuent ou chutent, tout le système de régulation émotionnelle est déstabilisé. Ce n'est pas psychologique d'abord, c'est neurobiologique.<br><br>
       <span style="font-size:11px;color:#60a080;">Dr Lisa Mosconi, The Menopause Brain / Dr Mary Claire Haver, The New Menopause, 2024</span>
     </div>
 
     <div class="hl or">
-      <strong>Quand consulter :</strong> Si tu as plus de 35 ans et ressens une anxiété ou dépression nouvelle, des troubles du sommeil inhabituels, une irritabilité intense ou un brouillard mental qui ne s'explique pas autrement, demande une évaluation hormonale à ton médecin. Pas juste un antidépresseur d'emblée.
+      <strong>Quand consulter :</strong> Si tu as plus de 35 ans et ressens une anxiété ou dépression nouvelle, des troubles du sommeil inhabituels, une irritabilité intense ou un brouillard mental qui ne s'explique pas autrement, demande une évaluation hormonale à ton médecin. Pas juste un antidépresseur d'emblée.
     </div>
 
     <button class="btn" onclick="showPhase('suivi')">Identifier ma phase aujourd'hui →</button>
@@ -220,7 +221,7 @@
 <div class="phase" id="phase-suivi">
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">🌡️</span>
-    <h2>Où en es-tu dans ton cycle aujourd'hui ?</h2>
+    <h2>Où en es-tu dans ton cycle aujourd'hui ?</h2>
     <p style="text-align:center;margin-bottom:6px;">Choisis la phase qui correspond à où tu en es, ou la situation qui te ressemble le plus.</p>
     <p class="small" style="text-align:center;margin-bottom:20px;">Tu recevras des conseils adaptés à ce que ton corps et tes émotions ont besoin en ce moment.</p>
     <div id="suivi-container"></div>
@@ -249,6 +250,7 @@
   <div class="card">
     <p class="e-q" id="e-question"></p>
     <p class="e-sous" id="e-sous"></p>
+    <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
     <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
   </div>
@@ -265,7 +267,7 @@
       <div id="recap-container"></div>
     </div>
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À faire :</strong> Commence à noter dans ton agenda, même juste un mot, où tu en es dans ton cycle chaque semaine. En quelques mois, tu verras des patterns qui t'aideront à comprendre tes émotions avec beaucoup plus de clarté.
+      🔑 <strong>À faire :</strong> Commence à noter dans ton agenda, même juste un mot, où tu en es dans ton cycle chaque semaine. En quelques mois, tu verras des patterns qui t'aideront à comprendre tes émotions avec beaucoup plus de clarté.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -275,7 +277,7 @@
   </div>
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
-    <p style="font-size:14px;color:#7d6d8a;"><strong style="color:#4a3358;">Demain, Jour 18 :</strong> retrouver la joie</p>
+    <p style="font-size:14px;color:#7d6d8a;"><strong style="color:#4a3358;">Demain, Jour 18 :</strong> retrouver la joie</p>
     <p class="hint" style="margin-top:6px;">13 jours restants dans ton programme 🌸</p>
   </div>
 </div>
@@ -295,22 +297,22 @@ const theorie=[
     {type:"texte",texte:"Tes hormones, œstrogènes, progestérone et les autres, ne s'occupent pas seulement de ton système reproducteur. Elles agissent directement sur ton cerveau, sur la sérotonine, la dopamine, le GABA, le cortisol. C'est exactement ça qui explique pourquoi tes émotions changent autant selon le moment du cycle."},
     {type:"stat",texte:"Les œstrogènes rendent la sérotonine et la dopamine plus disponibles dans le cerveau. C'est pour ça qu'en première partie de cycle, quand ils montent, l'humeur est souvent plus lumineuse, l'énergie plus haute, l'esprit plus vif",source:"Dr Lisa Mosconi, Weill Cornell Medicine"},
     {type:"stat",texte:"La progestérone, elle, a un effet apaisant, presque sédatif, elle agit sur les mêmes zones du cerveau que certains calmants. Sa chute juste avant les règles explique en grande partie l'anxiété, l'insomnie et l'irritabilité d'avant-règles",source:"Recherche en neuroendocrinologie"},
-    {type:"hl",texte:"💡 Alors non, les femmes ne sont pas \"instables émotionnellement\". Tes émotions bougent parce que ta chimie intérieure bouge : de façon réelle, mesurable, cyclique. Ce n'est pas \"dans ta tête\" au sens où on l'entend d'habitude. C'est dans ton cerveau, pour de vrai."},
-    {type:"hl",texte:"🔬 Et il y a quelque chose de fascinant : le cerveau féminin traverse plusieurs grands remaniements dans une vie : la puberté, la grossesse, le post-partum, la ménopause. Chacune de ces étapes est à la fois une période de fragilité et de transformation profonde. Une vraie force, cachée dans le mouvement.",classe:"vert"},
+    {type:"hl",texte:"💡 Alors non, les femmes ne sont pas \"instables émotionnellement\". Tes émotions bougent parce que ta chimie intérieure bouge : de façon réelle, mesurable, cyclique. Ce n'est pas \"dans ta tête\" au sens où on l'entend d'habitude. C'est dans ton cerveau, pour de vrai."},
+    {type:"hl",texte:"🔬 Et il y a quelque chose de fascinant : le cerveau féminin traverse plusieurs grands remaniements dans une vie : la puberté, la grossesse, le post-partum, la ménopause. Chacune de ces étapes est à la fois une période de fragilité et de transformation profonde. Une vraie force, cachée dans le mouvement.",classe:"vert"},
   ]},
   {emoji:"🌈",titre:"Les 4 phases, 4 versions de toi",source:"Alexandra Pope & Sjanie Hugo Wurlitzer, Wild Power",contenu:[
     {type:"texte",texte:"Ton cycle, ce n'est pas juste \"les règles\". C'est un cycle complet en quatre phases, chacune avec sa propre chimie, ses forces, ses besoins. Apprendre à les connaître, c'est apprendre à avancer avec toi-même, au lieu de te forcer contre ton propre courant. Il faut environ un mois pour le traverser en entier."},
-    {type:"hl",texte:"🌑 HIVER · quand tu as tes règles : repli, intuition, besoin de calme et de silence. L'énergie est basse, et c'est voulu. Ton cerveau traite, digère, intègre. C'est une phase de sagesse intérieure, pas de faiblesse."},
-    {type:"hl",texte:"🌱 PRINTEMPS · après tes règles : l'énergie remonte, l'esprit s'éclaircit, la créativité et l'envie des autres reviennent. C'est ta phase du \"oui\", parfaite pour les projets, les conversations importantes, les nouveaux départs.",classe:"vert"},
-    {type:"hl",texte:"☀️ ÉTÉ · autour de l'ovulation : pic d'énergie, de confiance, les mots viennent facilement. Tu rayonnes. Le moment idéal pour ce qui demande de la présence : présentations, négociations, retrouvailles.",classe:"or"},
-    {type:"hl",texte:"🍂 AUTOMNE · avant tes règles : besoin de ralentir, de terminer les choses, de te tourner vers l'intérieur. Si tu te forces à vivre l'automne comme le printemps, tu épuises tes réserves. Ralentir n'est pas paresser, c'est respecter ta saison.",classe:"rouge"},
+    {type:"hl",texte:"🌑 HIVER · quand tu as tes règles : repli, intuition, besoin de calme et de silence. L'énergie est basse, et c'est voulu. Ton cerveau traite, digère, intègre. C'est une phase de sagesse intérieure, pas de faiblesse."},
+    {type:"hl",texte:"🌱 PRINTEMPS · après tes règles : l'énergie remonte, l'esprit s'éclaircit, la créativité et l'envie des autres reviennent. C'est ta phase du \"oui\", parfaite pour les projets, les conversations importantes, les nouveaux départs.",classe:"vert"},
+    {type:"hl",texte:"☀️ ÉTÉ · autour de l'ovulation : pic d'énergie, de confiance, les mots viennent facilement. Tu rayonnes. Le moment idéal pour ce qui demande de la présence : présentations, négociations, retrouvailles.",classe:"or"},
+    {type:"hl",texte:"🍂 AUTOMNE · avant tes règles : besoin de ralentir, de terminer les choses, de te tourner vers l'intérieur. Si tu te forces à vivre l'automne comme le printemps, tu épuises tes réserves. Ralentir n'est pas paresser, c'est respecter ta saison.",classe:"rouge"},
   ]},
 ];
 
 const phases4=[
   {nom:"Phase menstruelle",emoji:"🌑",jours:"Jours 1 à 5",couleur:"#c9a0c2",bg:"rgba(201,160,194,0.1)",border:"rgba(201,160,194,0.3)",
     hormones:"Oestrogènes & Progestérone au plus bas",hormonesStyle:"background:rgba(201,160,194,0.2);color:#c9a0c2;",
-    desc:"Le corps travaille intensément. L'énergie est intentionnellement basse : ton système nerveux est en mode récupération.",
+    desc:"Le corps travaille intensément. L'énergie est intentionnellement basse : ton système nerveux est en mode récupération.",
     emotions:"Besoin de calme, d'intériorité, de douceur. Intuition souvent accrue. Vulnérabilité émotionnelle réelle.",
     conseils:"Réduire les engagements si possible. Repos, chaleur, soupe. Pas le moment des grandes décisions. Yoga Yin, étirements doux. Honorer ce besoin de retrait sans culpabilité."},
   {nom:"Phase folliculaire",emoji:"🌒",jours:"Jours 6 à 13",couleur:"#80c8a8",bg:"rgba(128,200,168,0.1)",border:"rgba(128,200,168,0.3)",
@@ -327,16 +329,16 @@ const phases4=[
     hormones:"Progestérone monte puis chute",hormonesStyle:"background:rgba(232,168,92,0.2);color:#e8a85c;",
     desc:"L'énergie décroît progressivement. La progestérone, sédatif naturel, monte puis s'effondre avant les règles.",
     emotions:"Irritabilité croissante, sensibilité accrue, besoin de repli, critique intérieure plus forte. C'est hormonal, pas un défaut de caractère.",
-    conseils:"Réduire progressivement l'intensité des engagements. Pilates, yoga, marche. Prioriser le sommeil. En fin de phase : douceur maximale. Éviter les grandes décisions les 3 derniers jours."},
+    conseils:"Réduire progressivement l'intensité des engagements. Pilates, yoga, marche. Prioriser le sommeil. En fin de phase : douceur maximale. Éviter les grandes décisions les 3 derniers jours."},
 ];
 
 const suiviOptions=[
   {id:"menstruelle",titre:"Phase menstruelle · j'ai mes règles",sous:"Je suis en début de cycle, fatiguée, repliée sur moi-même.",couleur:"#c9a0c2",
     conseils:{
       energie:"Ton énergie est intentionnellement basse, c'est biologique, pas psychologique. Honore ce besoin de repos sans culpabilité.",
-      mouvement:"Yoga Yin, étirements très doux, marche lente. Pas de sport intense : ton corps a d'autres priorités.",
+      mouvement:"Yoga Yin, étirements très doux, marche lente. Pas de sport intense : ton corps a d'autres priorités.",
       emotions:"Si tu pleures sans raison apparente ou que tu te sens très sensible, c'est normal. Tes hormones sont au plus bas. Sois ta meilleure amie.",
-      nutrition:"Fer, magnésium, oméga-3. Chocolat noir si tu en as envie : le magnésium qu'il contient aide vraiment.",
+      nutrition:"Fer, magnésium, oméga-3. Chocolat noir si tu en as envie : le magnésium qu'il contient aide vraiment.",
       eviter:"Les grandes décisions, les confrontations, la sur-stimulation sociale. Ce n'est pas le bon moment.",
     }
   },
@@ -371,7 +373,7 @@ const suiviOptions=[
     conseils:{
       energie:"Douceur maximale. Ce n'est pas le moment de performer, c'est le moment de survivre avec grâce.",
       mouvement:"Étirements doux, yoga très calme, promenade. Pas de sport intense.",
-      emotions:"Si tes symptômes sont très intenses et récurrents, note-les : le PMDD mérite une consultation médicale.",
+      emotions:"Si tes symptômes sont très intenses et récurrents, note-les : le PMDD mérite une consultation médicale.",
       nutrition:"Repas chauds, réconfortants. Éviter l'alcool, le sucre, la caféine, ils aggravent les symptômes prémenstruels.",
       eviter:"Les grandes décisions, les conflits importants, la comparaison aux autres. Toutes les pensées négatives sont amplifiées par la chute hormonale.",
     }
@@ -388,9 +390,9 @@ const suiviOptions=[
 ];
 
 const ecritureQs=[
-  {q:"Est-ce que tu reconnais des patterns émotionnels liés à ton cycle, que tu n'avais pas nommés comme tels avant ?",sous:"Des moments récurrents de tristesse, d'irritabilité, d'énergie ou de clarté...",placeholder:"Je remarque que chaque mois je ressens... / Je comprends maintenant que..."},
-  {q:"Est-ce qu'il y a des symptômes cycliques qui mériteraient que tu consultes, et que tu as peut-être minimisés jusqu'ici ?",sous:"SPM sévère, PMDD possible, périménopause non investiguée...",placeholder:"Ce que j'ai minimisé jusqu'ici c'est... / Ce que j'aimerais aborder avec mon médecin c'est..."},
-  {q:"Comment aimerais-tu adapter ta vie à ton cycle : de façon réaliste ?",sous:"Dans ton travail, tes engagements, tes pratiques de soin, tes relations...",placeholder:"Ce que j'aimerais adapter c'est..."},
+  {ex:"« Deux ou trois jours avant mes règles, je me sens nulle et je pleure pour un rien. » « Au milieu du cycle, j'ai une énergie folle et je prends trop d'engagements. »",q:"Est-ce que tu reconnais des patterns émotionnels liés à ton cycle, que tu n'avais pas nommés comme tels avant ?",sous:"Des moments récurrents de tristesse, d'irritabilité, d'énergie ou de clarté...",placeholder:"Je remarque que chaque mois je ressens... / Je comprends maintenant que..."},
+  {ex:"« Des migraines qui reviennent à chaque cycle, que je mets sur le compte du stress. » « Des sautes d'humeur plus fortes depuis un an, et des nuits en sueur. »",q:"Est-ce qu'il y a des symptômes cycliques qui mériteraient que tu consultes, et que tu as peut-être minimisés jusqu'ici ?",sous:"SPM sévère, PMDD possible, périménopause non investiguée...",placeholder:"Ce que j'ai minimisé jusqu'ici c'est... / Ce que j'aimerais aborder avec mon médecin c'est..."},
+  {ex:"« Éviter de caler les rendez-vous difficiles juste avant mes règles. » « Prévoir des soirées calmes en fin de cycle. » « Noter mon cycle dans mon agenda. »",q:"Comment aimerais-tu adapter ta vie à ton cycle : de façon réaliste ?",sous:"Dans ton travail, tes engagements, tes pratiques de soin, tes relations...",placeholder:"Ce que j'aimerais adapter c'est..."},
 ];
 
 let theorieIdx=0, selectedSuivi=null, eIdx=0, eReponses=[];
@@ -500,7 +502,7 @@ function showConseilsSuivi(i){
       </div>`;
   });
   // Navigation vers les autres phases
-  let autresHtml='<div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(200,180,220,0.2);"><p style="font-size:14px;color:#6d5d7a;text-align:center;margin-bottom:12px;font-family:\'Jost\',sans-serif;">Explore aussi les conseils des autres phases : ce sont toutes des versions de toi :</p>';
+  let autresHtml='<div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(200,180,220,0.2);"><p style="font-size:14px;color:#6d5d7a;text-align:center;margin-bottom:12px;font-family:\'Jost\',sans-serif;">Explore aussi les conseils des autres phases : ce sont toutes des versions de toi :</p>';
   suiviOptions.forEach((autre,idx)=>{
     if(idx!==selectedSuivi){
       autresHtml+=`<button onclick="showConseilsSuivi(${idx})" style="width:100%;text-align:left;padding:12px 15px;border-radius:12px;border:1.5px solid ${autre.couleur}55;background:rgba(255,255,255,0.6);cursor:pointer;font-family:'Lora',serif;font-size:14.5px;font-weight:500;color:${autre.couleur};margin-bottom:8px;">→ ${autre.titre}</button>`;
@@ -516,7 +518,7 @@ function renderE(){
   document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
   document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
   document.getElementById('e-question').textContent=q.q;
-  document.getElementById('e-sous').textContent=q.sous;
+  document.getElementById('e-sous').textContent=q.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=q.placeholder;
   document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 17 🌙';
@@ -575,6 +577,52 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+</script>
+<script>
+/* Mémoire du programme : tes réponses restent sur cet appareil */
+(function(){
+  var JOUR='j17', TITRE="Le cycle féminin";
+  function lab(el){
+    var n=el,d=0;
+    while(n&&d<4){
+      var p=n.previousElementSibling;
+      while(p){
+        if(!/^(TEXTAREA|INPUT|BUTTON|SCRIPT|BR|SVG)$/i.test(p.tagName)&&!(p.classList&&p.classList.contains('exemple'))){
+          var t=(p.textContent||'').replace(/\s+/g,' ').trim();
+          if(t.length>6)return t.slice(0,180);
+        }
+        p=p.previousElementSibling;
+      }
+      n=n.parentElement;d++;
+    }
+    return el.placeholder||'';
+  }
+  function collecte(){
+    var items=[];
+    try{ if(typeof eReponses!=='undefined'&&Array.isArray(eReponses)) eReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
+
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      var v=(el.value||'').trim(); if(!v)return;
+      items.push({q:lab(el),r:v});
+    });
+    return items;
+  }
+  function sauver(){
+    try{
+      var items=collecte(); if(!items.length)return;
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      var ancien=(c[JOUR]&&c[JOUR].items)||[],neuf={};
+      items.forEach(function(i){neuf[i.q]=1;});
+      c[JOUR]={titre:TITRE,date:new Date().toISOString(),items:ancien.filter(function(i){return !neuf[i.q];}).concat(items)};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  var t;function bientot(){clearTimeout(t);t=setTimeout(sauver,600);}
+  document.addEventListener('input',bientot,true);
+  document.addEventListener('click',bientot,true);
+  window.addEventListener('pagehide',sauver);
+})();
 </script>
 </body>
 </html>
