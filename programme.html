@@ -100,6 +100,16 @@
   .video-cadre iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
   .video-legende{text-align:center;font-family:'Jost',sans-serif;font-size:14px;color:#9a8570;margin-top:16px}
 
+  /* POUR QUI */
+  .pourqui .bloc ul{list-style:none;margin:8px 0 0}
+  .pourqui .bloc li{padding:7px 0 7px 24px;position:relative;font-size:16.5px;color:#7a6149;line-height:1.65}
+  .pourqui .bloc li::before{content:'';position:absolute;left:6px;top:17px;width:7px;height:7px;border-radius:50%}
+  .pourqui .oui li::before{background:#a3c4ac}
+  .pourqui .non li::before{background:#dba894}
+  .aide{background:#fdf5ec;border-radius:18px;padding:22px 24px;border:1px solid #f0e2d2;margin-top:18px}
+  .aide h3{font-size:17px;margin-bottom:10px}
+  .aide p{font-family:'Jost',sans-serif;font-size:15.5px;color:#7a6149;margin-bottom:7px;line-height:1.6}
+  .aide .num{font-family:'Lora',serif;font-weight:600;font-size:17px;color:#5e4632}
   footer{text-align:center;padding:32px 22px;font-family:'Jost',sans-serif;font-size:12px;color:#b8a48c;letter-spacing:0.08em}
   footer a{color:#b8a48c;text-decoration:none;border-bottom:1px solid rgba(184,164,140,0.4)}
   .mention{font-size:13.5px;color:#a8917a;font-family:'Jost',sans-serif;line-height:1.7;margin-top:26px;padding-top:19px;border-top:1px solid #eeddc9}
@@ -174,7 +184,7 @@
     </div>
     <div class="bloc">
       <h3>Le développement personnel qui culpabilise</h3>
-      <p>« Il suffit de vouloir. » Sauf que non. Et l'entendre quand tu es à bout, ça enfonce au lieu d'aider.</p>
+      <p>« Il suffit de vouloir. » Sauf que non. Et l'entendre quand tu es à bout, ça enfonce au lieu d'aider.</p>
     </div>
     <div class="bloc">
       <h3>Et le fait que ressentir ne suffit pas</h3>
@@ -299,6 +309,48 @@
   </div>
 </section>
 
+<!-- POUR QUI -->
+<section class="pourqui">
+  <div class="wrap">
+    <div class="label">Pour qui</div>
+    <h2>Est-ce que ce programme est fait pour toi ?</h2>
+
+    <div class="bloc oui" style="border-left:3px solid #a3c4ac">
+      <h3 style="color:#6a9478">Il est fait pour toi si…</h3>
+      <ul>
+        <li>Tu tiens ton quotidien, mais à l'intérieur, tu es à bout.</li>
+        <li>Tu encaisses beaucoup, tu ressens fort, et tu passes souvent après les autres.</li>
+        <li>Tu veux comprendre ce qui se passe en toi, et repartir avec des outils concrets.</li>
+        <li>Tu peux t'accorder une vingtaine de minutes par jour, la plupart des jours.</li>
+      </ul>
+    </div>
+
+    <div class="bloc non" style="border-left:3px solid #dba894">
+      <h3 style="color:#b8765c">Ce n'est pas le bon moment si…</h3>
+      <ul>
+        <li>Tu n'arrives plus à faire face au quotidien : te lever, manger, t'occuper de toi ou des tiens.</li>
+        <li>Tu as des idées de mort ou de suicide.</li>
+        <li>Tu vis de la violence, à la maison ou dans ton couple.</li>
+        <li>Tu traverses une dépression, un burn-out ou un trouble alimentaire, et personne ne t'accompagne encore.</li>
+      </ul>
+    </div>
+
+    <p style="margin-top:20px">Ce n'est pas que tu ne mérites pas d'aide. C'est que tu mérites une aide plus solide qu'un programme en ligne, dès maintenant.</p>
+
+    <div class="aide">
+      <h3>Si c'est ton cas aujourd'hui</h3>
+      <p><span class="num">143</span> · La Main Tendue, pour parler à quelqu'un, 24 h/24, anonyme</p>
+      <p><span class="num">142</span> · violences domestiques, 24 h/24, gratuit et confidentiel</p>
+      <p><span class="num">144</span> · urgence médicale · <span class="num">117</span> · danger immédiat</p>
+      <p>Et ton médecin traitant, qui peut t'orienter vers un suivi.</p>
+    </div>
+
+    <p style="margin-top:22px"><strong>Tu es déjà suivie ?</strong> Si tu vois un psy, un psychiatre ou ton médecin pour ce que tu traverses, parle-lui du programme avant de commencer. Il peut accompagner ton suivi, il ne le remplace pas.</p>
+    <p><strong>Tu hésites ?</strong> Écris-moi en privé sur Instagram. Je te dirai franchement si c'est le bon moment pour toi.</p>
+  </div>
+</section>
+
+
 <!-- QUI -->
 <section class="rose">
   <div class="wrap">
@@ -385,5 +437,9 @@ document.querySelectorAll('.faq-item').forEach(function(item){
 });
 </script>
 
+<script>
+/* Tant que la vidéo n'est pas en ligne, le cadre vidéo reste caché */
+(function(){var f=document.querySelector('.video-section iframe');if(f&&f.src.indexOf('ID_VIDEO_ICI')>-1){var s=f.closest('.video-section');if(s)s.style.display='none';}})();
+</script>
 </body>
 </html>

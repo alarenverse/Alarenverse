@@ -214,7 +214,7 @@
       <div id="recap-container"></div>
     </div>
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 Si tu retiens une seule chose : 95% de la sérotonine est fabriquée dans l'intestin. Ce que tu manges n'affecte pas que ton corps, il parle directement à ton cerveau.
+      🔑 Si tu retiens une seule chose : il ne s'agit pas de manger parfaitement. Des repas réguliers, des protéines le matin, des légumes, des légumineuses et des poissons gras : c'est ce type d'alimentation qui est associé à un meilleur moral.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -232,11 +232,11 @@
 <script>
 const theorie=[
   {emoji:"🧠",titre:"L'axe intestin-cerveau, ton deuxième cerveau",source:"Dr Michael Gershon, The Second Brain / Psychonutrition, La Revue du Praticien 2024",contenu:[
-    {type:"p",texte:"L'intestin contient plus de 500 millions de neurones, plus que la moelle épinière. Il communique en permanence avec le cerveau via le nerf vague, et produit lui-même une grande partie des molécules qui régulent ton humeur."},
-    {type:"stat",texte:"95% de la sérotonine du corps, le neurotransmetteur de l'humeur stable et du bien-être, est produite dans l'intestin, pas dans le cerveau. Ce que tu manges influence directement cette production",source:"Dr Michael Gershon, The Second Brain"},
+    {type:"p",texte:"L'intestin contient plus de 500 millions de neurones, plus que la moelle épinière. Il communique en permanence avec le cerveau via le nerf vague, et produit lui-même de nombreuses molécules, dont la sérotonine."},
+    {type:"stat",texte:"95% de la sérotonine du corps est produite dans l'intestin, où elle sert surtout à la digestion. Celle du cerveau est fabriquée sur place, à partir du tryptophane apporté par ce que tu manges",source:"Dr Michael Gershon, The Second Brain"},
     {type:"hl",texte:"Ce qu'on appelle aujourd'hui la psychonutrition, la science de l'influence de l'alimentation sur la santé mentale, s'est accumulée massivement ces 15 dernières années. Les études contrôlées montrent des liens clairs entre alimentation et dépression, anxiété, troubles du sommeil et déclin cognitif."},
     {type:"stat",texte:"Une méta-analyse de 2019 portant sur plus de 45 000 personnes montre qu'une alimentation de type méditerranéen, riche en légumes, poissons gras, légumineuses et huile d'olive, est associée à une réduction significative du risque de dépression",source:"Psychiatry Research, 2019"},
-    {type:"hl",texte:"La chrononutrition ajoute une dimension supplémentaire : consommer des protéines le matin, avant 10h, fournit au cerveau les acides aminés nécessaires pour fabriquer les neurotransmetteurs stimulants (dopamine, noradrénaline) au bon moment de la journée. Le soir, les protéines légers et les glucides complexes favorisent la production de sérotonine et de mélatonine pour le sommeil.",classe:"bleu"},
+    {type:"hl",texte:"Le matin, un petit-déjeuner avec des protéines (œufs, yaourt, fromage blanc, noix) aide à garder une glycémie plus stable jusqu'au repas suivant : moins de coups de barre et de fringales. Ta dopamine, elle, suit un rythme jour-nuit : plus active le jour, plus basse la nuit. Le soir, un repas plus léger avec des glucides complexes peut aider à s'endormir.",classe:"bleu"},
   ]},
   {emoji:"⚠️",titre:"Ce qui bouscule ta chimie intérieure",source:"Dr Uma Naidoo, This Is Your Brain on Food",contenu:[
     {type:"p",texte:"Avant de parler de ce qui aide, un mot sur ce qui perturbe. Pas pour te culpabiliser, ni pour dresser une liste d'interdits. Juste pour que tu comprennes pourquoi certains jours tu te sens plus anxieuse ou plus à plat sans savoir pourquoi."},
@@ -249,7 +249,7 @@ const theorie=[
 
 const neuros=[
   {titre:"Sérotonine",role:"Humeur stable · Bien-être · Sommeil · Appétit",couleur:"#60a870",bg:"#eaf5ec",border:"rgba(80,160,80,0.3)",
-   detail:"La sérotonine est fabriquée à partir du tryptophane : un acide aminé présent dans les protéines. Elle régule l'humeur, le sommeil (elle se transforme en mélatonine la nuit), l'appétit et la digestion. Un manque de sérotonine est associé à la dépression, l'anxiété, les fringales sucrées et les troubles du sommeil.<br><br><strong>Ce qui soutient sa production :</strong> tryptophane (dinde, œufs, banane, fromage, graines de courge), magnésium, vitamines B6 et B9, exposition au soleil (vitamine D). La sérotonine a besoin de glucides pour traverser la barrière hémato-encéphalique, d'où les fringales de sucre lors d'un manque."},
+   detail:"La sérotonine est fabriquée à partir du tryptophane : un acide aminé présent dans les protéines. Elle régule l'humeur, le sommeil (elle se transforme en mélatonine la nuit), l'appétit et la digestion. Un manque de sérotonine est associé à la dépression, l'anxiété, les fringales sucrées et les troubles du sommeil.<br><br><strong>Ce qui soutient sa production :</strong> tryptophane (dinde, œufs, banane, fromage, graines de courge), magnésium, vitamines B6 et B9, exposition au soleil (vitamine D)."},
   {titre:"Dopamine",role:"Motivation · Concentration · Plaisir · Élan",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)",
    detail:"La dopamine est fabriquée à partir de la tyrosine : un acide aminé. Elle gouverne la motivation, le plaisir, la concentration, la mémoire et l'élan. Un manque de dopamine se traduit par une démotivation profonde, une difficulté à ressentir du plaisir, un brouillard mental et une fatigue même après le repos.<br><br><strong>Ce qui soutient sa production :</strong> tyrosine (viande, poisson, œufs, produits laitiers, avocats, amandes), fer, vitamines B6 et B9, cuivre. L'exercice physique stimule également la production de dopamine de façon significative."},
   {titre:"GABA",role:"Calme · Anti-anxiété · Relaxation musculaire",couleur:"#7090c0",bg:"#eef4fb",border:"rgba(100,144,192,0.3)",
@@ -262,27 +262,27 @@ const nutriments=[
   {emoji:"🐟",titre:"Oméga-3 (EPA et DHA)",sous:"Le nutriment anti-inflammatoire du cerveau",couleur:"#6090c0",bg:"#eef4fb",border:"rgba(100,144,192,0.25)",
    desc:"Les acides gras oméga-3, EPA et DHA, constituent les membranes des neurones et facilitent la transmission des neurotransmetteurs, notamment la sérotonine et la dopamine. Des études montrent que les personnes déprimées ont des réserves d'oméga-3 significativement plus faibles que la population générale.",
    sources:"Poissons gras (saumon, maquereau, sardines, hareng) 2-3x/semaine · Noix · Graines de lin et de chia · Huile de lin",
-   dose:"EPA+DHA : 1 à 2g/jour en supplémentation si alimentation insuffisante en poissons gras",
+   dose:"À titre indicatif : EPA+DHA 1 à 2 g/jour en supplément si tu manges peu de poissons gras. À regarder avec ton médecin traitant.",
    doseStyle:"background:rgba(100,144,192,0.12);color:#4070a0;"},
   {emoji:"🌿",titre:"Magnésium",sous:"Le minéral anti-stress et anti-anxiété",couleur:"#60a870",bg:"#eaf5ec",border:"rgba(80,160,80,0.25)",
    desc:"Le magnésium régule le système nerveux, réduit la réponse au stress, participe à la production de sérotonine et améliore la qualité du sommeil. Une carence, très fréquente, surtout en cas de stress chronique, est directement associée à l'anxiété, l'irritabilité et l'insomnie. Le stress épuise les réserves de magnésium, créant un cercle vicieux.",
    sources:"Légumes verts feuillus (épinards, blettes) · Oléagineux (amandes, noix de cajou) · Légumineuses · Chocolat noir · Céréales complètes · Eau minérale riche en magnésium",
-   dose:"300 à 400mg/jour, apport souvent insuffisant uniquement par l'alimentation",
+   dose:"À titre indicatif : 300 à 400 mg/jour, souvent difficiles à atteindre par l'alimentation seule. À regarder avec ton médecin traitant.",
    doseStyle:"background:rgba(80,160,80,0.12);color:#3d7050;"},
   {emoji:"☀️",titre:"Vitamine D",sous:"La vitamine du soleil et de l'humeur",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.25)",
    desc:"La vitamine D est en réalité une hormone qui influence directement la production de sérotonine et de dopamine. Une carence, extrêmement fréquente sous nos latitudes, notamment en automne et hiver, est associée à la dépression saisonnière, la fatigue chronique et les troubles de l'humeur. Les femmes enceintes, allaitantes et ménopausées sont particulièrement à risque.",
    sources:"Exposition solaire quotidienne (15 à 30 min, avant 11h ou après 16h) · Poissons gras · Jaune d'œuf · Champignons exposés au soleil",
-   dose:"1000 à 2000 UI/jour en supplémentation, à vérifier par dosage sanguin (25-OH vitamine D)",
+   dose:"À titre indicatif : 1000 à 2000 UI/jour en supplément, après un dosage sanguin (25-OH vitamine D). À regarder avec ton médecin traitant.",
    doseStyle:"background:rgba(200,160,80,0.12);color:#7d5020;"},
   {emoji:"🥩",titre:"Vitamines B (B6, B9, B12)",sous:"Les cofacteurs de tous les neurotransmetteurs",couleur:"#c870a0",bg:"#fdf0f5",border:"rgba(200,112,160,0.25)",
    desc:"Les vitamines du groupe B sont indispensables à la fabrication de presque tous les neurotransmetteurs, sérotonine, dopamine, GABA, noradrénaline. La B12 est particulièrement importante pour le système nerveux et souvent déficiente chez les végétariens et végétaliens. La B9 (folates) joue un rôle clé dans la prévention de la dépression.",
    sources:"B12 : viande, poissons, œufs, produits laitiers (supplémentation indispensable si végétalienne) · B9 : légumes verts feuillus, légumineuses, foie · B6 : poulet, poisson, banane, pomme de terre",
-   dose:"Supplémentation en complexe B recommandée si alimentation restrictive ou végétalienne",
+   dose:"À titre indicatif : un complexe B si ton alimentation est restrictive ou végétalienne. À regarder avec ton médecin traitant.",
    doseStyle:"background:rgba(200,112,160,0.12);color:#803060;"},
   {emoji:"🌰",titre:"Zinc et Fer",sous:"Les oligo-éléments oubliés",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.25)",
    desc:"Le zinc régule les neurotransmetteurs et l'axe hypothalamo-hypophyso-surrénalien : le système du stress. De faibles niveaux de zinc sont associés à la dépression et à l'anxiété. Le fer est essentiel à la production de dopamine et de sérotonine : une anémie ferriprive provoque fatigue, brouillard mental et irritabilité. Chez les femmes réglées, les pertes de fer sont importantes.",
    sources:"Zinc : huîtres, viande rouge, graines de courge, légumineuses · Fer : viande rouge, foie, légumineuses, épinards (avec vitamine C pour l'absorption)",
-   dose:"Bilan sanguin recommandé pour évaluer les niveaux, supplémentation selon résultats",
+   dose:"À titre indicatif : un bilan sanguin pour connaître tes niveaux, puis une supplémentation selon les résultats. À regarder avec ton médecin traitant.",
    doseStyle:"background:rgba(160,128,200,0.12);color:#5040a0;"},
 ];
 

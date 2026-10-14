@@ -82,7 +82,7 @@
     <div class="label">Ton avis compte</div>
     <h2>30 jours ensemble, j'aimerais savoir comment ça s'est passé pour toi</h2>
     <p>Ce questionnaire prend 3 minutes. Il m'aide à améliorer ce programme pour les femmes qui viendront après toi.</p>
-    <p class="note">5 questions · anonyme si tu le souhaites · 3 minutes</p>
+    <p class="note">6 questions · anonyme si tu le souhaites · 3 minutes</p>
     <button class="btn" onclick="showPhase('questions');renderQ()">Je donne mon avis 💛</button>
   </div>
 </div>
@@ -91,10 +91,10 @@
 <div class="phase" id="phase-questions">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="q-counter">Question 1 / 5</span>
+      <span id="q-counter">Question 1 / 6</span>
       <span id="q-titre-small"></span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="q-progress" style="width:20%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="q-progress" style="width:17%"></div></div>
   </div>
   <div class="card" id="q-card">
     <div id="q-contenu"></div>
@@ -158,6 +158,21 @@ const questions=[
     sous:"Ça m'aide à compléter le programme pour les prochaines.",
     type:'texte',
     placeholder:"J'aurais aimé qu'on parle de..."
+  },
+  {
+    id:'prix',
+    titre:'Le juste prix',
+    question:"Selon toi, combien vaut ce programme ?",
+    sous:"Pas ce que tu as payé : ce qu'il vaut pour toi, tel que tu l'as vécu. Ta réponse m'aide à fixer un prix juste.",
+    type:'choix',
+    options:[
+      'Moins de 100 CHF',
+      '100 à 200 CHF',
+      '200 à 300 CHF',
+      '300 à 400 CHF',
+      '400 à 500 CHF',
+      'Plus de 500 CHF',
+    ]
   },
   {
     id:'recommandation',
@@ -279,9 +294,10 @@ async function submitForm(){
     Jour_prefere:val('jour_prefere'),
     Ce_qui_a_change:val('changement'),
     Ce_qui_manquait:val('manque'),
+    Prix_estime:val('prix'),
     Recommandation:val('recommandation',' / 10'),
     Date:new Date().toLocaleString('fr-CH'),
-    message:"AVIS SUR LE PROGRAMME\n\nNote : "+val('note',' / 5')+"\nJour préféré : "+val('jour_prefere')+"\nCe qui a changé : "+val('changement')+"\nCe qui manquait : "+val('manque')+"\nRecommandation : "+val('recommandation',' / 10')
+    message:"AVIS SUR LE PROGRAMME\n\nNote : "+val('note',' / 5')+"\nJour préféré : "+val('jour_prefere')+"\nCe qui a changé : "+val('changement')+"\nCe qui manquait : "+val('manque')+"\nPrix estimé : "+val('prix')+"\nRecommandation : "+val('recommandation',' / 10')
   };
   try{
     const rep=await fetch('https://api.web3forms.com/submit',{

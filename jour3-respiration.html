@@ -145,8 +145,8 @@
     <h2>Prends un instant...</h2>
     <p>Voilà. Tu viens d'envoyer un signal de sécurité à ton corps. Ce que tu ressens là, maintenant, même si c'est tout petit, même si c'est juste un soupçon de détente, c'est ton système nerveux qui glisse du mode alerte vers le mode repos. Reste un moment avec ça.</p>
     <p style="font-size:17px;color:#3d4e58;margin-bottom:6px;">Dans quel état était ton système nerveux avant de commencer ?</p>
-    <p class="small" style="text-align:center;margin-bottom:14px;">Combat/fuite, figement, ou déjà en sécurité ? Et qu'est-ce que tu remarques maintenant ?</p>
-    <div class="exemple">Par exemple : « Avant, j'étais en combat-fuite : les épaules hautes, la tête qui tournait sur la liste de demain. Maintenant, mon ventre s'est relâché et je respire plus bas. » Ou : « Avant, j'étais plutôt éteinte, sans énergie. Maintenant je sens un peu mieux mes mains et mes pieds. »</div>
+    <p class="small" style="text-align:center;margin-bottom:14px;">Sur-activée, sous-activée, ou déjà posée ? Et qu'est-ce que tu remarques maintenant ?</p>
+    <div class="exemple">Par exemple : « Avant, j'étais sur-activée : les épaules hautes, la tête qui tournait sur la liste de demain. Maintenant, mon ventre s'est relâché et je respire plus bas. » Ou : « Avant, j'étais plutôt éteinte, sans énergie. Maintenant je sens un peu mieux mes mains et mes pieds. »</div>
       <textarea id="reflexion-text" rows="4" placeholder="Avant j'étais... / Maintenant je ressens dans mon corps..." oninput="checkReflexionFin()"></textarea>
     <button class="btn" id="btn-save" style="width:100%;margin-top:14px;" disabled onclick="saveReflexion()">Enregistrer ✨</button>
     <div id="reflexion-saved" style="display:none;background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:14px;padding:18px 20px;border:1px solid rgba(160,200,220,0.2);text-align:left;margin-top:14px;">
@@ -174,22 +174,22 @@
 
 <script>
 const theorie = [
-  { emoji:"🧠", titre:"Pourquoi le corps doit passer en premier", intro:null, source:"Dr Bessel van der Kolk, Le Corps n'oublie rien", contenu:[
-    {type:"texte",texte:"Quand tu ne te sens pas en sécurité, stressée, anxieuse, débordée, ton cerveau qui réfléchit se déconnecte. Littéralement. La partie qui relativise, qui prend du recul, qui décide, elle se met en veille. C'est pas toi qui choisis, c'est ton système nerveux qui prend le dessus."},
-    {type:"highlight",texte:"💡 C'est exactement pour ça que se dire \"calme-toi\" ne marche jamais dans ces moments-là. Tu ne peux pas réfléchir pour sortir du stress quand la partie qui réfléchit est justement celle qui s'est éteinte."},
+  { emoji:"🧠", titre:"Pourquoi le corps doit passer en premier", intro:null, source:"Arnsten, Nature Reviews Neuroscience, 2009", contenu:[
+    {type:"texte",texte:"Quand tu es stressée, anxieuse, débordée, la partie de ton cerveau qui relativise, qui prend du recul et qui décide devient moins disponible. Sous un stress fort, elle tourne au ralenti. C'est pas toi qui choisis, c'est ton système nerveux qui prend le dessus."},
+    {type:"highlight",texte:"💡 C'est exactement pour ça que se dire \"calme-toi\" ne marche jamais dans ces moments-là. C'est très difficile de réfléchir pour sortir du stress quand la partie qui réfléchit est justement celle qui tourne au ralenti."},
     {type:"texte",texte:"Alors on fait l'inverse. On passe par le corps d'abord. C'est ce que les neurosciences appellent l'approche bottom-up : de bas en haut. Et la respiration, c'est la porte d'entrée la plus directe qu'on ait. La plus simple aussi. Tu l'as toujours avec toi."},
   ]},
-  { emoji:"⚡", titre:"Les 3 états de ton système nerveux", intro:"Le Dr Stephen Porges a décrit 3 modes dans lesquels ton système nerveux peut basculer. Les reconnaître, c'est déjà commencer à les apprivoiser :", source:"Dr Stephen Porges, La théorie polyvagale (1994)", contenu:[
-    {type:"etat",couleur:"#80c8a8",bg:"#eaf5f0",label:"🟢 SÉCURITÉ",texte:"Tu te sens ancrée, posée, capable de réfléchir. C'est le mode où tu peux apprendre, créer, te relier vraiment aux autres. C'est là qu'on veut revenir."},
-    {type:"etat",couleur:"#e8a85c",bg:"#fdf3e6",label:"🟠 COMBAT / FUITE",texte:"Le cœur qui s'emballe, les muscles tendus, le souffle court. Tu es irritable, agitée, sur le qui-vive. Ton corps est prêt à se battre ou à fuir, même quand le danger n'est qu'une boîte mail."},
-    {type:"etat",couleur:"#e8857a",bg:"#fde8e6",label:"🔴 FIGEMENT",texte:"Quand la menace semble trop grande, le corps se coupe. Tu te sens vidée, paralysée, incapable de bouger. Et je veux que ce soit clair : c'est un mécanisme de survie, pas une faiblesse. Ton corps fait ce qu'il peut pour te protéger."},
+  { emoji:"⚡", titre:"Les 3 états de ton système nerveux", intro:"Pour te repérer, on peut décrire 3 états, comme une carte. Ce n'est pas une classification scientifique stricte, c'est un repère pour te reconnaître :", source:null, contenu:[
+    {type:"etat",couleur:"#80c8a8",bg:"#eaf5f0",label:"🟢 POSÉE",texte:"Tu te sens ancrée, posée, capable de réfléchir. C'est le mode où tu peux apprendre, créer, te relier vraiment aux autres. C'est là qu'on veut revenir."},
+    {type:"etat",couleur:"#e8a85c",bg:"#fdf3e6",label:"🟠 SUR-ACTIVÉE · combat ou fuite",texte:"Le cœur qui s'emballe, les muscles tendus, le souffle court. Tu es irritable, agitée, sur le qui-vive. Ton corps est prêt à se battre ou à fuir, même quand le danger n'est qu'une boîte mail."},
+    {type:"etat",couleur:"#e8857a",bg:"#fde8e6",label:"🔴 SOUS-ACTIVÉE · figée, coupée",texte:"Quand la menace semble trop grande, le corps se coupe. Tu te sens vidée, paralysée, incapable de bouger. Et je veux que ce soit clair : c'est un mécanisme de survie, pas une faiblesse. Ton corps fait ce qu'il peut pour te protéger."},
   ]},
-  { emoji:"🫀", titre:"Ce qui se passe dans ton corps quand tu respires", intro:null, source:"Dr Arielle Schwartz, Applied Polyvagal Theory", contenu:[
+  { emoji:"🫀", titre:"Ce qui se passe dans ton corps quand tu respires", intro:null, source:"Laborde et al., Neuroscience & Biobehavioral Reviews, 2022", contenu:[
     {type:"texte",texte:"Le nerf vague, c'est l'autoroute qui relie ton cerveau à tous tes organes : ton cœur, tes poumons, ton ventre. C'est lui qui régule ton état intérieur en permanence, sans que tu t'en rendes compte."},
     {type:"highlight",texte:"🌬️ Et voilà le truc : quand tu expires plus longtemps que tu n'inspires, tu stimules ce nerf vague. Ton cœur ralentit, ta tension baisse, tes muscles lâchent. Ton corps reçoit un message clair : le danger est passé, tu peux te poser."},
-    {type:"highlight",texte:"👃 Inspire par le nez, expire par la bouche. Le nez active mieux le nerf vague, et l'expiration par la bouche te permet de mieux doser, de vraiment vider tes poumons. C'est tout bête, mais ça fait la différence."},
+    {type:"highlight",texte:"👃 Inspire par le nez, expire par la bouche : l'expiration par la bouche permet de mieux doser le souffle et de l'allonger. Si tu préfères expirer par le nez, c'est très bien aussi."},
   ]},
-  { emoji:"⚠️", titre:"Ce que beaucoup ne savent pas, et qui change tout", intro:null, source:"Dr Andrew Huberman, Huberman Lab", contenu:[
+  { emoji:"⚠️", titre:"Ce que beaucoup ne savent pas, et qui change tout", intro:null, source:null, contenu:[
     {type:"highlight",texte:"🔑 La respiration, ce n'est pas d'abord un truc pour gérer une crise sur le moment. Et c'est important que tu le saches, sinon tu vas essayer en pleine panique, sentir que ça t'aide à peine, et croire que ça ne marche pas sur toi."},
     {type:"texte",texte:"Son vrai pouvoir, il est dans la répétition. Une fois par jour, minimum. Tous les jours. Dans un moment calme, au lever ou au coucher, c'est l'idéal. Pas quand tu craques. Quand tout est tranquille."},
     {type:"texte",texte:"Pourquoi dans le calme ? Parce que c'est là que ton corps apprend. À force de répéter ce geste jour après jour, ton système nerveux finit par l'enregistrer comme un raccourci vers la sécurité. Il l'assimile, doucement, comme une ressource."},
@@ -198,11 +198,9 @@ const theorie = [
     {type:"highlight",texte:"💡 5 minutes par jour quand tu vas bien valent infiniment plus qu'une heure en pleine crise. C'est pas l'intensité qui transforme. C'est la régularité, et elle seule. Sois tranquille avec ça, tu n'as pas besoin d'en faire des tonnes. Juste d'y revenir chaque jour."},
   ]},
   { emoji:"📊", titre:"Ce que la recherche a observé sur le long terme", intro:"Chez les personnes qui pratiquent régulièrement quelques minutes par jour pendant plusieurs semaines, les études observent :", source:null, contenu:[
-    {type:"stat",texte:"Une baisse notable du cortisol, l'hormone du stress",source:"Frontiers in Psychology, 2017"},
-    {type:"stat",texte:"Une meilleure variabilité de la fréquence cardiaque : un marqueur clé de la résilience émotionnelle",source:"Journal of Clinical Psychology, 2021"},
-    {type:"stat",texte:"Une diminution des symptômes d'anxiété et de dépression",source:"Méta-analyse, JAMA Internal Medicine, 2022"},
-    {type:"stat",texte:"Un sommeil de meilleure qualité",source:"Sleep Medicine Reviews, 2020"},
-    {type:"stat",texte:"Un système immunitaire renforcé",source:"Psychosomatic Medicine, 2018"},
+    {type:"stat",texte:"Une baisse du cortisol, l'hormone du stress, après 8 semaines d'entraînement",source:"Ma et al., Frontiers in Psychology, 2017"},
+    {type:"stat",texte:"Une meilleure variabilité de la fréquence cardiaque pendant la respiration lente, un marqueur de la capacité à récupérer",source:"Laborde et al., Neuroscience & Biobehavioral Reviews, 2022"},
+    {type:"stat",texte:"Moins de stress, d'anxiété et de symptômes dépressifs rapportés, avec des effets modestes",source:"Fincham et al., Scientific Reports, 2023"},
   ]},
 ];
 
