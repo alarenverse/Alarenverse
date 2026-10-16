@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mon corps ma maison</title>
+<meta name="description" content="Le guide illustré pour parler du corps, du consentement et des secrets avec votre enfant dès 3 ans, sans lui faire peur. Par une infirmière en santé mentale et maman.">
+<meta name="theme-color" content="#FFF9F0">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<!-- Aperçu de partage (WhatsApp, Instagram, Facebook) : à compléter avec l'adresse finale de la page
+<meta property="og:title" content="Mon corps ma maison · Les P'tits Lions">
+<meta property="og:description" content="Les mots pour apprendre à votre enfant qu'il peut dire non, même à quelqu'un qu'il aime. Dès 3 ans, sans lui faire peur.">
+<meta property="og:image" content="https://ADRESSE-DE-LA-PAGE/assets/partage.png">
+-->
+<link rel="preload" href="fonts/baloo-2-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- PIXEL META : coller ici le code du pixel (Gestionnaire d'événements Meta) -->
+<style>
+/* Concept : la maison. Les P'tits Lions vivent dans une maison au toit pointu,
+   le reste de la page est calme, en bandes papier / crème, avec un seul bouton qui compte. */
+@font-face{font-family:"Baloo 2";src:url("fonts/baloo-2-latin-600-normal.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Baloo 2";src:url("fonts/baloo-2-latin-800-normal.woff2") format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url("fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url("fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url("fonts/atkinson-hyperlegible-latin-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+
+:root{
+  /* Palette de la marque (crinières, visage, museau, terracotta, brun) */
+  --paper:#FFF9F0;
+  --cream:#FBEFD8;
+  --face:#F7D9A6;
+  --mane:#E8913C;
+  --honey:#EBA24A;
+  --terra:#D77A4C;
+  --cta:#B9572A;
+  --cta-hover:#9E4720;
+  --ink:#4A3423;
+  --ink-soft:#7A5A42;
+  --line:#EAD7B8;
+  --white:#FFFFFF;
+  /* Typo */
+  --display:"Baloo 2", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", Roboto, system-ui, sans-serif;
+  /* Échelle */
+  --t-s:0.9375rem; --t-m:1.0625rem; --t-l:1.375rem; --t-xl:1.75rem; --t-xxl:clamp(2rem, 6.4vw, 3.4rem);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:var(--t-m);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mane);outline-offset:3px;border-radius:6px}
+
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.band{padding-block:clamp(48px, 9vw, 88px)}
+.band--cream{background:var(--cream)}
+.band--ink{background:var(--ink);color:var(--cream)}
+.prose{max-width:62ch}
+
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-0.01em}
+h1{font-size:var(--t-xxl)}
+h2{font-size:clamp(1.65rem, 4.6vw, 2.4rem)}
+h3{font-size:var(--t-l);font-weight:600;line-height:1.25}
+p{margin:0}
+.nw{white-space:nowrap}
+.eyebrow{font-family:var(--body);font-weight:700;font-size:0.8125rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--cta)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.stack-l{display:flex;flex-direction:column;gap:28px}
+
+/* Barre du haut */
+.topbar{padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.25rem;text-decoration:none;color:var(--ink)}
+.brand img{width:38px;height:auto}
+
+/* Héro */
+.hero{padding-block:8px 40px}
+.hero-grid{display:grid;gap:28px;align-items:center}
+.hero-text{display:flex;flex-direction:column;gap:18px;min-width:0}
+.hero-sub{font-size:1.125rem;color:var(--ink-soft);max-width:48ch}
+.hero-sub strong{color:var(--ink)}
+
+/* La maison : le seul geste fort de la page */
+.house{position:relative;width:min(100%, 380px);margin:0 auto;aspect-ratio:1/0.92;max-width:100%}
+.house::before{content:"";position:absolute;inset:0;background:var(--face);
+  clip-path:polygon(50% 0, 100% 34%, 100% 100%, 0 100%, 0 34%);border-radius:0}
+.house::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18%;background:var(--honey);opacity:.35}
+.house img{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);width:76%;z-index:1}
+.house-tag{position:absolute;z-index:2;top:2%;right:0;background:var(--white);color:var(--ink);font-family:var(--display);font-weight:600;
+  font-size:0.95rem;line-height:1.2;padding:8px 12px;border-radius:14px;box-shadow:0 6px 18px rgba(74,52,35,.14);transform:rotate(4deg);text-align:center}
+.house-tag b{display:block;font-size:1.35rem;color:var(--cta);font-weight:800}
+
+/* Bloc prix */
+.offer{display:flex;flex-direction:column;gap:14px;background:var(--white);border:2px solid var(--line);border-radius:22px;padding:18px 18px 20px;max-width:440px}
+.price-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.price-normal{font-size:var(--t-s);color:var(--ink-soft)}
+.badge{background:var(--mane);color:var(--ink);font-weight:700;font-size:0.8125rem;padding:3px 10px;border-radius:999px}
+.price-now{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price-now .big{font-family:var(--display);font-weight:800;font-size:2.6rem;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.price-now .code{font-size:var(--t-s);color:var(--ink)}
+.code-pill{font-family:var(--display);font-weight:800;letter-spacing:.06em;border:2px dashed var(--terra);border-radius:8px;padding:1px 8px;white-space:nowrap}
+.deadline{font-size:var(--t-s);color:var(--ink-soft)}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:12px 22px;border-radius:16px;
+  background:var(--cta);color:var(--white);font-family:var(--display);font-weight:800;font-size:1.25rem;text-decoration:none;
+  box-shadow:0 5px 0 var(--cta-hover);transition:transform .12s ease, box-shadow .12s ease, background .12s ease}
+.btn:hover{background:var(--cta-hover)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--cta-hover)}
+.btn svg{width:22px;height:22px;flex:none}
+.btn-note{font-size:0.875rem;color:var(--ink-soft);text-align:center}
+.trust{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:0.875rem;color:var(--ink-soft);justify-content:center}
+.trust span{display:inline-flex;align-items:center;gap:6px}
+.trust span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mane)}
+
+/* Vidéo */
+.video-head{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.video{position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:var(--face);border:0;padding:0;cursor:pointer;display:block;color:var(--ink)}
+.video-poster{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:4%}
+.video-poster img{height:72%;width:auto}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:var(--cta);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(74,52,35,.28)}
+.play svg{width:30px;height:30px;margin-left:4px}
+.video-label{position:absolute;left:16px;bottom:14px;background:var(--white);border-radius:999px;padding:6px 14px;font-weight:700;font-size:0.875rem}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.preview-note{margin-top:12px;font-size:0.875rem;color:var(--cta);font-weight:700}
+
+/* Reconnaissance */
+.recognize{display:grid;gap:12px;padding:0;margin:0;list-style:none}
+.recognize li{background:var(--white);border-radius:18px;padding:16px 18px;border:2px solid var(--line)}
+.turn{font-family:var(--display);font-weight:600;font-size:var(--t-l);line-height:1.3;max-width:34ch}
+.turn em{font-style:normal;color:var(--cta)}
+
+/* Contenu */
+.contents-grid{display:grid;gap:32px;align-items:start}
+.contents{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px}
+.contents li{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start}
+.contents li > div{min-width:0}
+.tick{width:30px;height:30px;border-radius:50%;background:var(--mane);display:flex;align-items:center;justify-content:center;margin-top:2px}
+.tick svg{width:16px;height:16px}
+.contents b{font-family:var(--display);font-weight:600;font-size:1.2rem;display:block;line-height:1.25}
+.contents span{color:var(--ink-soft)}
+.contents-art{display:none}
+
+/* Différent */
+.diff-grid{display:grid;gap:14px}
+.diff{background:var(--white);border-radius:22px;padding:22px 20px;display:flex;flex-direction:column;gap:8px;position:relative;min-width:0}
+.diff p{color:var(--ink-soft)}
+.diff--malo{padding-right:120px;min-height:190px}
+.diff--malo img{position:absolute;right:14px;bottom:0;width:92px}
+
+/* À propos */
+.about{display:grid;gap:24px;align-items:center}
+.about-art{display:flex;gap:8px;justify-content:center}
+.about-art img{width:110px}
+.signature{font-family:var(--display);font-weight:600;font-size:1.3rem;color:var(--cta)}
+
+/* Appel final */
+.final{display:flex;flex-direction:column;gap:22px;align-items:center;text-align:center}
+.final h2{color:var(--white)}
+.final-head p{color:var(--face)}
+.final-head{align-items:center}
+.final .offer{color:var(--ink);text-align:left;width:100%}
+
+/* FAQ */
+.faq{display:flex;flex-direction:column;gap:10px;max-width:720px}
+.faq details{background:var(--white);border:2px solid var(--line);border-radius:16px;padding:0 18px}
+.faq summary{cursor:pointer;list-style:none;padding:16px 0;font-family:var(--display);font-weight:600;font-size:1.15rem;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:800;color:var(--cta);font-size:1.5rem;line-height:1;flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding-bottom:16px;color:var(--ink-soft)}
+
+/* Fiche offerte */
+.gift{display:grid;gap:18px;align-items:center;background:var(--white);border:2px dashed var(--honey);border-radius:22px;padding:22px 20px}
+.gift img{width:120px;margin:0 auto}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 18px;border-radius:14px;border:2px solid var(--ink);
+  color:var(--ink);font-weight:700;text-decoration:none;background:transparent}
+.btn-ghost:hover{background:var(--cream)}
+
+/* Pied de page */
+footer{padding-block:36px 120px;font-size:0.875rem;color:var(--ink-soft)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 18px;margin-block:12px}
+footer nav a{text-decoration:underline;text-underline-offset:3px}
+
+/* Barre d'achat collante (mobile) */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--white);border-top:2px solid var(--line);
+  padding:10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .25s ease;box-shadow:0 -6px 20px rgba(74,52,35,.08)}
+.sticky.show{transform:none}
+.sticky-price{line-height:1.2;font-size:0.875rem;color:var(--ink-soft);min-width:0}
+.sticky-price b{display:block;font-family:var(--display);font-weight:800;font-size:1.35rem;color:var(--ink)}
+.sticky .btn{min-height:48px;font-size:1.05rem;padding:8px 18px;flex:none}
+
+@media (min-width:760px){
+  .hero-grid{grid-template-columns:1.1fr .9fr}
+  .house{width:100%}
+  .recognize{grid-template-columns:1fr 1fr}
+  .contents-grid{grid-template-columns:1fr 260px}
+  .contents-art{display:block;position:sticky;top:24px}
+  .diff-grid{grid-template-columns:1fr 1fr}
+  .about{grid-template-columns:260px 1fr}
+  .gift{grid-template-columns:140px 1fr auto}
+  .gift img{margin:0}
+  .sticky{display:none}
+  footer{padding-block:36px 48px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="https://lesptitslions.com" aria-label="Les P'tits Lions, site principal">
+      <img src="assets/tete-malo.png" alt="" width="38" height="43">
+      Les P'tits Lions
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">Guide de prévention · enfants de 3 à 10&nbsp;ans</p>
+        <h1>Votre enfant <span class="nw">sait-il</span> qu'il peut dire non, même à quelqu'un qu'il aime&nbsp;?</h1>
+        <p class="hero-sub"><strong>«&nbsp;Mon corps ma maison&nbsp;»</strong> vous donne les mots pour en parler avec lui dès 3&nbsp;ans, avec Malo et Naya. Simplement, et sans lui faire peur.</p>
+
+        <div class="offer" id="offre">
+          <div class="price-line">
+            <span class="price-normal">Prix du guide&nbsp;: 48.75&nbsp;CHF</span>
+            <span class="badge">-20&nbsp;%</span>
+          </div>
+          <div class="price-now">
+            <span class="big">39&nbsp;CHF</span>
+            <span class="code">avec le code <span class="code-pill">PROTEGE</span></span>
+          </div>
+          <p class="deadline">Offre de lancement jusqu'au 31 décembre 2026</p>
+          <a class="btn js-buy" id="cta-hero" href="#" rel="noopener">
+            Je veux le guide
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <p class="btn-note">Code appliqué automatiquement au paiement.</p>
+          <div class="trust"><span>PDF de 31&nbsp;pages</span><span>Téléchargement immédiat</span><span>Paiement sécurisé</span></div>
+        </div>
+      </div>
+
+      <div class="house" role="img" aria-label="Malo et Naya, les deux lionceaux du guide, devant leur maison">
+        <img src="assets/malo-naya.png" alt="" width="706" height="700">
+        <div class="house-tag">13&nbsp;fiches<b>illustrées</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--cream" id="video-section">
+    <div class="wrap">
+      <div class="video-head">
+        <p class="eyebrow">Une minute avec Debora</p>
+        <h2>Pourquoi j'ai créé ce guide</h2>
+      </div>
+      <button class="video" type="button" id="video" aria-label="Regarder la vidéo de présentation, 1 minute">
+        <span class="video-poster">
+          <img src="assets/tete-malo.png" alt="" width="232" height="260">
+          <img src="assets/tete-naya.png" alt="" width="245" height="239">
+        </span>
+        <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="#FFFFFF"/></svg></span>
+        <span class="video-label">Regarder · 1&nbsp;min</span>
+      </button>
+      <p class="preview-note" id="preview-note" hidden>Aperçu&nbsp;: ta vidéo YouTube (non répertoriée) viendra ici, avec ton visage en vignette.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap stack-l">
+      <h2>Vous vous reconnaissez peut-être</h2>
+      <ul class="recognize">
+        <li>Votre enfant refuse un bisou à sa grand-mère, et vous ne savez pas comment réagir.</li>
+        <li>Il vous pose une question sur son corps au moment du bain, et vous cherchez vos mots.</li>
+        <li>Vous aimeriez lui parler des secrets ou des parties intimes, mais vous avez peur de l'inquiéter.</li>
+        <li>Vous vous dites «&nbsp;je lui en parlerai quand il sera plus grand&nbsp;», et le moment ne vient pas.</li>
+      </ul>
+      <p class="turn">La plupart des parents veulent aborder ces sujets. Il leur manque souvent <em>les mots</em>. Le guide vous les donne, âge par âge.</p>
+    </div>
+  </section>
+
+  <section class="band band--cream">
+    <div class="wrap contents-grid">
+      <div class="stack-l">
+        <div class="stack">
+          <p class="eyebrow">31&nbsp;pages à lire, à imprimer, à garder</p>
+          <h2>Ce que contient le guide</h2>
+        </div>
+        <ul class="contents">
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#4A3423" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><b>13&nbsp;fiches illustrées avec Malo et Naya</b><span>Une règle par fiche&nbsp;: le corps, le droit de dire non, la règle du maillot, les surprises et les secrets, les adultes de confiance. À lire avec votre enfant, une par soir.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#4A3423" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><b>Des repères par âge</b><span>Les mots adaptés à chaque étape (3 à 4&nbsp;ans, 5 à 6&nbsp;ans, 7 à 8&nbsp;ans et plus), pour ne dire ni trop, ni trop peu.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#4A3423" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><b>Des phrases prêtes à l'emploi</b><span>Pour renforcer les repères de sécurité au quotidien, sans en faire un grand discours.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#4A3423" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><b>Habituel ou inquiétant&nbsp;?</b><span>Pour distinguer ce qui fait partie du développement de votre enfant de ce qui mérite de demander conseil.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#4A3423" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><b>Si votre enfant se confie</b><span>Quoi dire, quoi éviter, à qui vous adresser. Pas à pas.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#4A3423" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><b>Les ressources utiles</b><span>En Suisse, en France, en Belgique et au Luxembourg.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#4A3423" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><b>Vos bonus à imprimer</b><span>12&nbsp;cartes à découper et le diplôme du Petit Lion Courageux.</span></div></li>
+        </ul>
+      </div>
+      <div class="contents-art"><img src="assets/naya.png" alt="Naya, la lionne du guide" width="368" height="616"></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap stack-l">
+      <h2>Ce qui rend ce guide différent</h2>
+      <div class="diff-grid">
+        <article class="diff diff--malo">
+          <h3>Le droit de dire non</h3>
+          <p>Même à quelqu'un qu'il aime, même pour un bisou. Votre enfant apprend que son corps lui appartient.</p>
+          <img src="assets/malo-main-levee.png" alt="Malo lève la main pour dire non" width="203" height="350">
+        </article>
+        <article class="diff">
+          <h3>Des surprises, pas des secrets</h3>
+          <p>Il apprend la différence entre une surprise, qu'on finit par révéler, et un secret qu'on lui demande de cacher. Celui-là, il peut le confier à un adulte de confiance.</p>
+        </article>
+        <article class="diff">
+          <h3>Pas seulement les inconnus</h3>
+          <p>Les violences sexuelles sur enfants sont fréquemment commises par une personne connue de l'enfant. Le guide l'aide à repérer ce qu'on lui demande, quelle que soit la personne.</p>
+        </article>
+        <article class="diff">
+          <h3>Votre réaction compte</h3>
+          <p>S'il vient vous parler, la façon dont vous l'accueillez compte autant que ce qu'il dit. Le guide vous accompagne pas à pas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--cream">
+    <div class="wrap about">
+      <div class="about-art">
+        <img src="assets/tete-malo.png" alt="" width="232" height="260">
+        <img src="assets/tete-naya.png" alt="" width="245" height="239">
+      </div>
+      <div class="stack prose">
+        <h2>Qui est derrière ce guide</h2>
+        <p>Je m'appelle Debora. Je suis infirmière en santé mentale et maman, en Suisse. J'ai créé Les P'tits Lions pour rendre la prévention simple, douce et accessible aux familles.</p>
+        <p>Le guide s'appuie sur des programmes de prévention reconnus (Conseil de l'Europe, NSPCC, Protective Behaviours). Les références figurent à la fin du document.</p>
+        <p class="signature">«&nbsp;Tu aimes, tu protèges.&nbsp;»</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--ink">
+    <div class="wrap final">
+      <div class="stack final-head">
+        <h2>Commencez par une fiche, ce soir</h2>
+        <p class="prose">Quelques minutes avec votre enfant suffisent pour commencer. Les conversations sont plus simples quand elles commencent tôt, en temps normal.</p>
+      </div>
+      <div class="offer">
+        <div class="price-line">
+          <span class="price-normal">Prix du guide&nbsp;: 48.75&nbsp;CHF</span>
+          <span class="badge">-20&nbsp;%</span>
+        </div>
+        <div class="price-now">
+          <span class="big">39&nbsp;CHF</span>
+          <span class="code">avec le code <span class="code-pill">PROTEGE</span></span>
+        </div>
+        <p class="deadline">Offre de lancement jusqu'au 31 décembre 2026</p>
+        <a class="btn js-buy" id="cta-final" href="#" rel="noopener">
+          Je veux le guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="btn-note">Code appliqué automatiquement au paiement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap stack-l">
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        <details><summary>Pour quel âge&nbsp;?</summary><p>Dès 3&nbsp;ans. Le guide donne des repères adaptés à chaque âge, jusqu'à 8&nbsp;ans et plus.</p></details>
+        <details><summary>Est-ce que ça va lui faire peur&nbsp;?</summary><p>C'est tout l'enjeu du guide&nbsp;: des personnages, des situations du quotidien, un ton doux. On parle de corps, de respect et de confiance, pas de danger.</p></details>
+        <details><summary>Comment je reçois le guide&nbsp;?</summary><p>C'est un PDF de 31&nbsp;pages, à télécharger dès la confirmation du paiement. Vous pouvez le lire sur votre téléphone et l'imprimer pour votre foyer.</p></details>
+        <details><summary>Comment j'utilise le code PROTEGE&nbsp;?</summary><p>Vous n'avez rien à faire&nbsp;: le bouton l'applique pour vous, et vous voyez la réduction avant de payer. Si elle n'apparaît pas, saisissez PROTEGE dans le champ «&nbsp;Code de réduction&nbsp;».</p></details>
+        <details><summary>J'ai plusieurs enfants&nbsp;?</summary><p>Le guide s'utilise pour tous les enfants de votre foyer.</p></details>
+        <details><summary>Remplace-t-il un professionnel&nbsp;?</summary><p>Non. C'est un outil éducatif de prévention. Si une situation précise vous inquiète, il vous oriente vers les professionnels et les services à contacter.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--cream" id="fiche-offerte">
+    <div class="wrap">
+      <div class="gift">
+        <img src="assets/maison.png" alt="" width="209" height="163">
+        <div class="stack">
+          <h3>Envie de commencer en douceur&nbsp;?</h3>
+          <p>Recevez la fiche offerte «&nbsp;La règle du maillot de bain&nbsp;», extraite du guide. Une page à lire avec votre enfant.</p>
+        </div>
+        <a class="btn-ghost" href="https://lesptitslions.com/products/fiche-offerte-regle-du-maillot-de-bain" rel="noopener">Recevoir la fiche offerte</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Les P'tits Lions</b> · Tu aimes, tu protèges.</p>
+    <nav aria-label="Informations légales">
+      <a href="https://lesptitslions.com/pages/conditions-generales-de-vente">Conditions générales de vente</a>
+      <a href="https://lesptitslions.com/pages/mentions-legales">Mentions légales</a>
+      <a href="https://lesptitslions.com/policies/privacy-policy">Confidentialité</a>
+      <a href="https://lesptitslions.com/pages/contact">Contact</a>
+    </nav>
+    <p>Outil éducatif de prévention. Il ne remplace pas l'accompagnement d'un professionnel. Aucun outil de prévention ne permet de garantir l'absence de violence.</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <div class="sticky-price"><b>39&nbsp;CHF</b>avec le code PROTEGE</div>
+  <a class="btn js-buy" href="#" rel="noopener" tabindex="-1">Je veux le guide</a>
+</div>
+
+<script>
+(function(){
+  /* ---- Réglages ---- */
+  var CHECKOUT_URL = "https://lesptitslions.com/cart/53780724744458:1?discount=PROTEGE";
+  var YOUTUBE_ID = "";          /* ex. "dQw4w9WgXcQ" : l'identifiant de ta vidéo non répertoriée */
+  var PREVIEW = false;    /* true seulement pour l'aperçu */
+
+  /* Boutons d'achat : paiement direct, code déjà appliqué */
+  var buys = document.querySelectorAll(".js-buy");
+  for (var i = 0; i < buys.length; i++) {
+    buys[i].href = CHECKOUT_URL;
+    buys[i].addEventListener("click", function(){
+      try { if (window.fbq) window.fbq("track", "InitiateCheckout", {value: 39, currency: "CHF"}); } catch(e) {}
+    });
+  }
+
+  /* Vidéo : YouTube ne se charge qu'au clic (page rapide, aucun cookie avant) */
+  var video = document.getElementById("video");
+  var section = document.getElementById("video-section");
+  if (!YOUTUBE_ID) {
+    if (PREVIEW) { document.getElementById("preview-note").hidden = false; }
+    else { section.hidden = true; }
+  } else {
+    video.addEventListener("click", function(){
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(YOUTUBE_ID) + "?autoplay=1&rel=0&playsinline=1";
+      f.title = "Présentation du guide par Debora";
+      f.allow = "autoplay; encrypted-media; picture-in-picture";
+      f.allowFullscreen = true;
+      video.innerHTML = "";
+      video.appendChild(f);
+      try { if (window.fbq) window.fbq("trackCustom", "VideoPlay"); } catch(e) {}
+    }, {once: true});
+  }
+
+  /* Barre d'achat collante : visible quand les boutons principaux sont hors écran */
+  var sticky = document.getElementById("sticky");
+  var targets = [document.getElementById("cta-hero"), document.getElementById("cta-final")];
+  var visible = {};
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ visible[e.target.id] = e.isIntersecting; });
+      var heroGone = document.getElementById("cta-hero").getBoundingClientRect().bottom < 0;
+      var show = heroGone && !visible["cta-final"];
+      sticky.classList.toggle("show", show);
+      sticky.setAttribute("aria-hidden", show ? "false" : "true");
+      sticky.querySelector("a").tabIndex = show ? 0 : -1;
+    });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
