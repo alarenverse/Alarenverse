@@ -830,6 +830,9 @@ async function submitAndShowResults(){
   prenomSaisi=document.getElementById('input-prenom').value.trim();
   emailSaisi=document.getElementById('input-email').value.trim();
 
+  /* Sécurité : rien ne part sans les 10 réponses, le prénom et un e-mail (bloque les robots) */
+  if(answers.length!==questions.length||!prenomSaisi||emailSaisi.indexOf('@')<1){return;}
+
   btn.disabled=true;
   btn.textContent='Un instant...';
   boiteErreur.style.display='none';
