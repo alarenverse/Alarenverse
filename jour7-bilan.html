@@ -458,7 +458,7 @@ function telechargerCarnet(){
   }
   corps+=toile('Jour 1 · Mon état des lieux',c.j1);
   ordre.forEach(function(k){
-    if(k==='j1')return;
+    if(k==='j1'){((c.j1&&c.j1.items)||[]).forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});return;}
     var d=c[k]; if(!d)return;
     var nom=k==='bonus1'?'Bonus · ':'Jour '+k.slice(1)+' · ';
     var items=d.items||[]; if(!items.length&&!d.donnees)return;
