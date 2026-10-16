@@ -319,7 +319,7 @@
         </button>
       </a>
     </div>
-  </div>
+  
   <div class="suite-box">
     <div style="font-size:30px;margin-bottom:10px;">🌸</div>
     <p style="font-size:17px;color:#7d6040;margin-bottom:6px;"><strong>Semaine 3 · Se délester</strong></p>
@@ -608,6 +608,7 @@ function telechargerCarnet(){
     corps+='<h2>'+nom+carnetEsc(d.titre||'')+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
     items.forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});
   });
+  if(c.croyance&&(c.croyance.texte||c.croyance.preuves)){var cr=c.croyance,pr=cr.preuves||{};corps+='<h2>Ma nouvelle croyance et mon carnet de preuves</h2>';if(cr.texte)corps+='<div class="box"><div class="q">Ma nouvelle croyance</div><div class="r">'+carnetEsc(cr.texte)+'</div></div>';var nt=[];if(cr.note19!=null)nt.push('Jour 19 : '+cr.note19+' %');if(cr.note30!=null)nt.push('Jour 30 : '+cr.note30+' %');if(nt.length)corps+='<div class="box"><div class="q">À combien j\'y crois</div><div class="r">'+nt.join(' · ')+'</div></div>';Object.keys(pr).sort(function(a,b){return a-b;}).forEach(function(j){corps+='<div class="box"><div class="q">Preuve du jour '+j+'</div><div class="r">'+carnetEsc(pr[j])+'</div></div>';});}
   corps+=toile('Jour 30 · Mon état des lieux',c.j30toile);
   if(!corps) corps='<p>Ton carnet est vide sur cet appareil. Les fichiers que tu as téléchargés chaque jour restent ta sauvegarde.</p>';
   var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:36px 22px;max-width:640px;margin:0 auto;line-height:1.75;}'

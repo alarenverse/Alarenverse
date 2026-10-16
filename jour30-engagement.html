@@ -101,6 +101,16 @@
       Le secret d'un rituel qui tient dans le temps, tu l'as vu au Jour 14, c'est de le coller à quelque chose que tu fais déjà. Pas de créer une nouvelle tranche horaire impossible à tenir. Juste glisser quelque chose de doux dans ce qui existe déjà.
     </div>
 
+    <button class="btn" onclick="apresRituels()">Mon engagement envers moi →</button>
+  </div>
+</div>
+
+<!-- CARNET DE PREUVES -->
+<div class="phase" id="phase-preuves">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌱</span>
+    <h2>Ta nouvelle croyance, onze jours plus tard</h2>
+    <div id="preuves-container"></div>
     <button class="btn" onclick="showPhase('engagement')">Mon engagement envers moi →</button>
   </div>
 </div>
@@ -193,7 +203,7 @@
       <a href="jour1-questionnaire.html#j30" class="btn" style="display:inline-block;text-decoration:none;">Voir mon avant/après</a>
     </div>
 
-  </div>
+  
   <div class="suite-box">
     <div style="font-size:28px;margin-bottom:10px;">✨</div>
     <p style="font-size:18px;color:#3d2d50;margin-bottom:8px;"><strong>Tu as terminé le programme.</strong></p>
@@ -257,6 +267,62 @@ function renderRituels(){
   });
 }
 
+// Après les rituels : le carnet de preuves, si elle a choisi une nouvelle croyance au jour 19
+function apresRituels(){
+  const cr=(carnetLire().croyance)||{};
+  if(cr.texte){renderPreuves();showPhase('preuves');}
+  else showPhase('engagement');
+}
+
+function sauverCroyance30(champ,valeur){
+  try{
+    const k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+    c.croyance=c.croyance||{}; c.croyance.preuves=c.croyance.preuves||{};
+    if(champ==='preuve'){ if(valeur) c.croyance.preuves[30]=valeur; else delete c.croyance.preuves[30]; }
+    else c.croyance.note30=valeur;
+    localStorage.setItem(k,JSON.stringify(c));
+  }catch(e){}
+}
+
+function renderPreuves(){
+  const cr=(carnetLire().croyance)||{}, pr=cr.preuves||{};
+  const jours=Object.keys(pr).filter(j=>j!=='30').sort((a,b)=>a-b);
+  let h='<p>Au jour 19, tu as choisi une nouvelle croyance :</p>'
+    +'<div class="pj-croyance" style="text-align:center;font-size:19px;margin:6px 0 16px;">« '+carnetEsc(cr.texte)+' »</div>';
+  if(jours.length){
+    h+='<p>Depuis, tu lui as trouvé '+(jours.length>1?jours.length+' preuves':'une preuve')+'. Relis-les doucement.</p><div style="text-align:left;margin-bottom:16px;">';
+    jours.forEach(j=>{ h+='<div class="recap-box" style="margin-bottom:8px;"><div class="recap-q">Jour '+j+'</div><div class="recap-r">'+carnetEsc(pr[j])+'</div></div>'; });
+    h+='</div>';
+  } else {
+    h+='<p>Tu n\'as pas encore noté de preuve, et ce n\'est pas grave. Tu peux commencer aujourd\'hui.</p>';
+  }
+  const n0=cr.note30!=null?cr.note30:(cr.note19!=null?cr.note19:10);
+  h+='<div class="preuve-jour" style="margin-top:4px;">'
+    +'<p class="pj-q"><strong>Ta preuve du jour 30 :</strong> aujourd\'hui, qu\'est-ce qui est allé dans ce sens ?</p>'
+    +'<textarea class="pj-texte" id="pj30" rows="3" placeholder="Aujourd\'hui, ...">'+carnetEsc(pr[30]||'').replace(/<br>/g,'\n')+'</textarea>'
+    +'<p class="pj-q" style="margin-top:8px !important;"><strong>Et aujourd\'hui, tu y crois à combien ?</strong></p>'
+    +'<div style="display:flex;align-items:center;gap:14px;"><input type="range" id="note30" min="0" max="100" step="5" value="'+n0+'" style="flex:1;accent-color:#60a880;"><span id="note30-val" style="font-family:Jost,sans-serif;font-size:20px;color:#3f8a62;min-width:58px;text-align:right;">'+n0+' %</span></div>'
+    +'<p class="pj-q" id="comparaison" style="margin-top:12px !important;"></p>'
+    +'</div>';
+  document.getElementById('preuves-container').innerHTML=h;
+  const ta=document.getElementById('pj30'), sl=document.getElementById('note30');
+  let t;
+  ta.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(()=>sauverCroyance30('preuve',ta.value.trim()),400);});
+  ta.addEventListener('blur',()=>sauverCroyance30('preuve',ta.value.trim()));
+  sl.addEventListener('input',()=>{document.getElementById('note30-val').textContent=sl.value+' %';sauverCroyance30('note',parseInt(sl.value,10));comparer();});
+  comparer();
+}
+
+function comparer(){
+  const cr=(carnetLire().croyance)||{}, el=document.getElementById('comparaison');
+  if(!el) return;
+  const n30=parseInt(document.getElementById('note30').value,10), n19=cr.note19;
+  if(n19==null){el.textContent='Note ce chiffre quelque part : dans quelques mois, refais l\'exercice et regarde où tu en es.';return;}
+  if(n30>n19) el.textContent='Au jour 19, tu y croyais à '+n19+' %. Aujourd\'hui, à '+n30+' %. Ce sont tes preuves qui l\'ont fait grandir, une par une.';
+  else if(n30===n19) el.textContent='Au jour 19, tu y croyais à '+n19+' %, et c\'est pareil aujourd\'hui. Une croyance de fond se construit sur des mois, pas en onze jours. Continue à lui noter des preuves, même une par semaine.';
+  else el.textContent='Au jour 19, tu y croyais à '+n19+' %, aujourd\'hui à '+n30+' %. Ça arrive, surtout dans une période plus dure. Tes preuves restent vraies : relis-les, et continue à en noter, même une par semaine.';
+}
+
 function checkEngagement(){
   // écriture libre
 }
@@ -268,6 +334,13 @@ function showFin(){
   if(selectedRituels.size>0){
     const noms=[...selectedRituels].map(i=>rituels[i].nom).join(' · ');
     rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mes rituels choisis</div><div class="recap-r">${noms}</div></div>`;
+  }
+
+  const crF=(carnetLire().croyance)||{};
+  if(crF.texte){
+    const nbP=Object.keys(crF.preuves||{}).length;
+    const notes=(crF.note19!=null?'Jour 19 : '+crF.note19+' %':'')+(crF.note30!=null?(crF.note19!=null?' · ':'')+'Jour 30 : '+crF.note30+' %':'');
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ma nouvelle croyance</div><div class="recap-r">"${carnetEsc(crF.texte)}"${notes?'<br><span style="font-style:normal;font-size:14px;">'+notes+'</span>':''}${nbP?'<br><span style="font-style:normal;font-size:14px;">'+nbP+(nbP>1?' preuves notées':' preuve notée')+'</span>':''}</div></div>`;
   }
 
   const qs=['Ce que je garde','Ce que je déleste','Mon engagement'];
@@ -337,7 +410,7 @@ function telechargerReponses(){
     var items=[];
 
     document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
-      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      if(el.id==='e-textarea'||el.id==='j-textarea'||(el.closest&&el.closest('.preuve-jour')))return;
       var v=(el.value||'').trim(); if(!v)return;
       items.push({q:lab(el),r:v});
     });
@@ -404,6 +477,7 @@ function telechargerCarnet(){
     corps+='<h2>'+nom+carnetEsc(d.titre||'')+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
     items.forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});
   });
+  if(c.croyance&&(c.croyance.texte||c.croyance.preuves)){var cr=c.croyance,pr=cr.preuves||{};corps+='<h2>Ma nouvelle croyance et mon carnet de preuves</h2>';if(cr.texte)corps+='<div class="box"><div class="q">Ma nouvelle croyance</div><div class="r">'+carnetEsc(cr.texte)+'</div></div>';var nt=[];if(cr.note19!=null)nt.push('Jour 19 : '+cr.note19+' %');if(cr.note30!=null)nt.push('Jour 30 : '+cr.note30+' %');if(nt.length)corps+='<div class="box"><div class="q">À combien j\'y crois</div><div class="r">'+nt.join(' · ')+'</div></div>';Object.keys(pr).sort(function(a,b){return a-b;}).forEach(function(j){corps+='<div class="box"><div class="q">Preuve du jour '+j+'</div><div class="r">'+carnetEsc(pr[j])+'</div></div>';});}
   corps+=toile('Jour 30 · Mon état des lieux',c.j30toile);
   if(!corps) corps='<p>Ton carnet est vide sur cet appareil. Les fichiers que tu as téléchargés chaque jour restent ta sauvegarde.</p>';
   var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:36px 22px;max-width:640px;margin:0 auto;line-height:1.75;}'
@@ -426,5 +500,44 @@ function telechargerCarnet(){
 }
 </script>
 <script>afficherMesMots('mes-mots-bilans',[7,14,21],'Relis ce que tu voulais garder','Tes mots des bilans de chaque semaine.');</script>
+<script>
+/* Carnet de preuves : la nouvelle croyance du jour 19, et une preuve par jour jusqu'au jour 30 */
+(function(){
+  var JOURN=30, INTRO="", AUTO=false;
+  function lire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
+  function ecrire(c){try{localStorage.setItem('alarenverse_carnet',JSON.stringify(c));}catch(e){}}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  if(!document.getElementById('preuve-style')){var st=document.createElement('style');st.id='preuve-style';st.textContent=".preuve-jour{background:linear-gradient(135deg,#f1f8f3,#f8fbf5);border:1px solid rgba(96,168,128,0.35);border-left:4px solid #60a880;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.pj-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#3f8a62;margin-bottom:10px}.pj-croyance{font-family:'Lora',serif;font-size:18px;color:#2d3d34;line-height:1.5;margin-bottom:10px;font-style:normal}.pj-q{font-family:'Jost',sans-serif !important;font-size:15.5px !important;color:#4d5a52 !important;line-height:1.65 !important;margin:0 0 10px !important;font-style:normal !important;text-align:left !important}.pj-q strong{color:#2d3d34}.pj-texte,.pj-input{width:100%;box-sizing:border-box;border:2px solid rgba(96,168,128,0.3);border-radius:12px;padding:12px 14px;font-size:16px;font-family:'Lora',serif;color:#2d3d34;background:white;outline:none;resize:vertical;line-height:1.6;margin-bottom:6px}.pj-texte:focus,.pj-input:focus{border-color:#60a880}.pj-ok{font-family:'Jost',sans-serif;font-size:13px;color:#3f8a62;opacity:0;transition:opacity .3s;text-align:right;min-height:18px}";document.head.appendChild(st);}
+  window.installerPreuve=function(){
+    var fin=document.getElementById('phase-fin'); if(!fin) return;
+    var ancien=document.getElementById('preuve-jour'); if(ancien&&ancien.parentNode) ancien.parentNode.removeChild(ancien);
+    var c=lire(), cr=c.croyance||{};
+    var box=document.createElement('div'); box.className='preuve-jour'; box.id='preuve-jour';
+    box.innerHTML='<div class="pj-label">'+(JOURN===19?'🌱 Ton carnet de preuves commence aujourd\'hui':'🌱 Ton carnet de preuves · jour '+JOURN)+'</div>'
+      +(cr.texte?'<div class="pj-croyance">« '+esc(cr.texte)+' »</div>'
+        :'<p class="pj-q">Écris ici la nouvelle croyance que tu as choisie au jour 19.</p><input type="text" class="pj-input" id="pj-croyance" placeholder="Ma nouvelle croyance : ...">')
+      +INTRO
+      +'<p class="pj-q"><strong>'+(JOURN===19?'Ta première preuve':'Ta preuve du jour')+' :</strong> aujourd\'hui, qu\'est-ce qui est allé dans ce sens, même un tout petit peu ?</p>'
+      +'<textarea class="pj-texte" id="pj-texte" rows="3" placeholder="Aujourd\'hui, ..."></textarea>'
+      +'<div class="pj-ok" id="pj-ok">Gardé dans ton carnet ✓</div>';
+    var dl=fin.querySelector('button[onclick^="telechargerReponses"]');
+    if(dl&&dl.parentNode) dl.parentNode.insertBefore(box,dl); else fin.appendChild(box);
+    var ta=document.getElementById('pj-texte'), ci=document.getElementById('pj-croyance'), ok=document.getElementById('pj-ok'), t;
+    ta.value=(cr.preuves&&cr.preuves[JOURN])||'';
+    ok.style.opacity=ta.value?1:0;
+    function sauver(){
+      var c=lire(); c.croyance=c.croyance||{}; c.croyance.preuves=c.croyance.preuves||{};
+      if(ci&&ci.value.trim()) c.croyance.texte=ci.value.trim();
+      var v=ta.value.trim(); if(v) c.croyance.preuves[JOURN]=v; else delete c.croyance.preuves[JOURN];
+      ecrire(c); ok.style.opacity=v?1:0;
+    }
+    function bientot(){clearTimeout(t);t=setTimeout(sauver,400);}
+    ta.addEventListener('input',bientot); ta.addEventListener('blur',sauver);
+    if(ci){ci.addEventListener('input',bientot);ci.addEventListener('blur',sauver);}
+    window.addEventListener('pagehide',sauver);
+  };
+  if(AUTO){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',window.installerPreuve); else window.installerPreuve(); }
+})();
+</script>
 </body>
 </html>

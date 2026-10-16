@@ -218,7 +218,7 @@
       📥 Télécharger mes réponses
     </button>
     <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
-  </div>
+  
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
     <p style="font-size:14px;color:#806050;"><strong style="color:#3d1d10;">Demain, Jour 23 :</strong> le pardon</p>
@@ -390,7 +390,7 @@ function telechargerReponses(){
     try{ if(typeof eReponses!=='undefined'&&Array.isArray(eReponses)) eReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
 
     document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
-      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      if(el.id==='e-textarea'||el.id==='j-textarea'||(el.closest&&el.closest('.preuve-jour')))return;
       var v=(el.value||'').trim(); if(!v)return;
       items.push({q:lab(el),r:v});
     });
@@ -410,6 +410,45 @@ function telechargerReponses(){
   document.addEventListener('input',bientot,true);
   document.addEventListener('click',bientot,true);
   window.addEventListener('pagehide',sauver);
+})();
+</script>
+<script>
+/* Carnet de preuves : la nouvelle croyance du jour 19, et une preuve par jour jusqu'au jour 30 */
+(function(){
+  var JOURN=22, INTRO="", AUTO=true;
+  function lire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
+  function ecrire(c){try{localStorage.setItem('alarenverse_carnet',JSON.stringify(c));}catch(e){}}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  if(!document.getElementById('preuve-style')){var st=document.createElement('style');st.id='preuve-style';st.textContent=".preuve-jour{background:linear-gradient(135deg,#f1f8f3,#f8fbf5);border:1px solid rgba(96,168,128,0.35);border-left:4px solid #60a880;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.pj-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#3f8a62;margin-bottom:10px}.pj-croyance{font-family:'Lora',serif;font-size:18px;color:#2d3d34;line-height:1.5;margin-bottom:10px;font-style:normal}.pj-q{font-family:'Jost',sans-serif !important;font-size:15.5px !important;color:#4d5a52 !important;line-height:1.65 !important;margin:0 0 10px !important;font-style:normal !important;text-align:left !important}.pj-q strong{color:#2d3d34}.pj-texte,.pj-input{width:100%;box-sizing:border-box;border:2px solid rgba(96,168,128,0.3);border-radius:12px;padding:12px 14px;font-size:16px;font-family:'Lora',serif;color:#2d3d34;background:white;outline:none;resize:vertical;line-height:1.6;margin-bottom:6px}.pj-texte:focus,.pj-input:focus{border-color:#60a880}.pj-ok{font-family:'Jost',sans-serif;font-size:13px;color:#3f8a62;opacity:0;transition:opacity .3s;text-align:right;min-height:18px}";document.head.appendChild(st);}
+  window.installerPreuve=function(){
+    var fin=document.getElementById('phase-fin'); if(!fin) return;
+    var ancien=document.getElementById('preuve-jour'); if(ancien&&ancien.parentNode) ancien.parentNode.removeChild(ancien);
+    var c=lire(), cr=c.croyance||{};
+    var box=document.createElement('div'); box.className='preuve-jour'; box.id='preuve-jour';
+    box.innerHTML='<div class="pj-label">'+(JOURN===19?'🌱 Ton carnet de preuves commence aujourd\'hui':'🌱 Ton carnet de preuves · jour '+JOURN)+'</div>'
+      +(cr.texte?'<div class="pj-croyance">« '+esc(cr.texte)+' »</div>'
+        :'<p class="pj-q">Écris ici la nouvelle croyance que tu as choisie au jour 19.</p><input type="text" class="pj-input" id="pj-croyance" placeholder="Ma nouvelle croyance : ...">')
+      +INTRO
+      +'<p class="pj-q"><strong>'+(JOURN===19?'Ta première preuve':'Ta preuve du jour')+' :</strong> aujourd\'hui, qu\'est-ce qui est allé dans ce sens, même un tout petit peu ?</p>'
+      +'<textarea class="pj-texte" id="pj-texte" rows="3" placeholder="Aujourd\'hui, ..."></textarea>'
+      +'<div class="pj-ok" id="pj-ok">Gardé dans ton carnet ✓</div>';
+    var dl=fin.querySelector('button[onclick^="telechargerReponses"]');
+    if(dl&&dl.parentNode) dl.parentNode.insertBefore(box,dl); else fin.appendChild(box);
+    var ta=document.getElementById('pj-texte'), ci=document.getElementById('pj-croyance'), ok=document.getElementById('pj-ok'), t;
+    ta.value=(cr.preuves&&cr.preuves[JOURN])||'';
+    ok.style.opacity=ta.value?1:0;
+    function sauver(){
+      var c=lire(); c.croyance=c.croyance||{}; c.croyance.preuves=c.croyance.preuves||{};
+      if(ci&&ci.value.trim()) c.croyance.texte=ci.value.trim();
+      var v=ta.value.trim(); if(v) c.croyance.preuves[JOURN]=v; else delete c.croyance.preuves[JOURN];
+      ecrire(c); ok.style.opacity=v?1:0;
+    }
+    function bientot(){clearTimeout(t);t=setTimeout(sauver,400);}
+    ta.addEventListener('input',bientot); ta.addEventListener('blur',sauver);
+    if(ci){ci.addEventListener('input',bientot);ci.addEventListener('blur',sauver);}
+    window.addEventListener('pagehide',sauver);
+  };
+  if(AUTO){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',window.installerPreuve); else window.installerPreuve(); }
 })();
 </script>
 </body>

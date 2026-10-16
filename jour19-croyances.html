@@ -75,6 +75,24 @@
   .recap-q{font-size:11px;color:#a090c0;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#f0eefa,#f8f0ff);border-radius:20px;padding:22px;border:1px solid rgba(140,100,210,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
+  /* Défusion */
+  .defusion{background:linear-gradient(135deg,#f5f8fd,#f8f5ff);border-radius:16px;padding:18px 20px;margin-bottom:18px;border:1px solid rgba(120,140,200,0.25)}
+  .def-intro{font-size:15px !important;font-style:normal !important;color:#4d4870 !important;line-height:1.7 !important;font-family:'Jost',sans-serif;margin-bottom:12px !important}
+  .def-etape{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(140,100,210,0.1);font-size:16.5px;color:#2d1d50;line-height:1.55}
+  .def-etape:last-of-type{border-bottom:none}
+  .def-num{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#8060c0,#c090d0);color:white;font-family:'Jost',sans-serif;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .def-fin{font-size:14.5px !important;font-style:normal !important;color:#6d5890 !important;line-height:1.7 !important;font-family:'Jost',sans-serif;margin:12px 0 0 !important}
+  /* Nouvelle croyance */
+  .note-zone{background:white;border:1px solid rgba(140,100,210,0.2);border-radius:14px;padding:14px 16px;margin:14px 0 10px}
+  .note-zone label{font-family:'Jost',sans-serif;font-size:14px;color:#6d5890;display:block;margin-bottom:6px}
+  .note-ligne{display:flex;align-items:center;gap:14px}
+  .note-ligne input[type=range]{flex:1;accent-color:#60a880}
+  .note-val{font-family:'Jost',sans-serif;font-size:20px;color:#3f8a62;min-width:58px;text-align:right}
+  /* Rappel du jour 1 */
+  .rappel-j1{background:#fdf6f0;border-left:3px solid #c8a070;border-radius:12px;padding:12px 16px;margin-bottom:12px;text-align:left}
+  .rj1-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#a07850;margin-bottom:4px}
+  .rj1-q{font-family:'Jost',sans-serif;font-size:13px;color:#8a7a6a;margin-top:8px;line-height:1.5}
+  .rj1-r{font-size:15.5px;color:#3d2d3a;line-height:1.6}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
@@ -95,7 +113,7 @@
     <p>Tes croyances les plus limitantes ne sont pas des vérités. Ce sont des histoires que tu t'es racontées, souvent toute petite, pour survivre à ce qui était dur. Aujourd'hui on les repère, on les questionne, et on part à la rencontre de qui tu es, vraiment, en dessous.</p>
     <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 🔮</button>
-    <p class="hint">Théorie · Identifier · Questionner · Qui suis-je ? · ~25 min</p>
+    <p class="hint">Théorie · Identifier · Questionner · Ta nouvelle croyance · Qui suis-je ? · ~30 min</p>
   </div>
 </div>
 
@@ -141,45 +159,88 @@
 
     <div style="margin-bottom:16px;">
       <div class="exemple">Par exemple : « Je dois tout gérer seule. » « Si je dis non, on ne m'aimera plus. » « Je ne suis pas assez. » « Montrer mes émotions, c'est être faible. »</div>
-      <input type="text" id="ma-croyance" placeholder="Ma croyance limitante : ex. Je suis trop sensible..." style="width:100%;border:2px solid rgba(140,100,210,0.25);border-radius:12px;padding:12px 16px;font-size:15px;font-family:'Lora',serif;color:#2d1d50;outline:none;background:white;">
+      <input type="text" id="ma-croyance" oninput="majDefusion()" placeholder="Ma croyance limitante : ex. Je suis trop sensible..." style="width:100%;border:2px solid rgba(140,100,210,0.25);border-radius:12px;padding:12px 16px;font-size:15px;font-family:'Lora',serif;color:#2d1d50;outline:none;background:white;">
+    </div>
+
+    <div class="defusion">
+      <div class="katie-num">D'abord, une minute pour prendre de la distance</div>
+      <p class="def-intro">Avant de la questionner, regarde ce qui se passe quand tu changes juste la façon de la dire. Lis chaque phrase lentement, dans ta tête, et remarque ce que ça te fait.</p>
+      <div class="def-etape"><span class="def-num">1</span><span>« <span class="def-c1">Je suis trop sensible</span>. »</span></div>
+      <div class="def-etape"><span class="def-num">2</span><span>« J'ai la pensée que <span class="def-c">je suis trop sensible</span>. »</span></div>
+      <div class="def-etape"><span class="def-num">3</span><span>« Je remarque que j'ai la pensée que <span class="def-c">je suis trop sensible</span>. »</span></div>
+      <div class="def-etape"><span class="def-num">4</span><span>Et donne-lui un nom, comme le titre d'une vieille histoire : « Tiens, revoilà l'histoire de… »</span></div>
+      <div class="exemple" style="margin-top:6px;">Par exemple : « l'histoire de celle qui n'est jamais à la hauteur », « l'histoire de la fille qui doit tout porter ».</div>
+      <input type="text" id="nom-histoire" placeholder="Revoilà l'histoire de..." style="width:100%;border:2px solid rgba(140,100,210,0.22);border-radius:12px;padding:10px 14px;font-size:15px;font-family:'Lora',serif;color:#2d1d50;outline:none;background:white;">
+      <p class="def-fin">Les mots de ta croyance sont restés les mêmes, mais tu la regardes un peu de l'extérieur. En ACT, on appelle ça la défusion : tu remarques ta pensée au lieu d'être dedans.</p>
     </div>
 
     <div class="hl" style="margin-bottom:16px;">
-      Byron Katie propose 4 questions pour défaire une croyance. Pas pour la nier, pour voir si elle est vraiment vraie. Réponds honnêtement, sans te censurer.
+      Byron Katie propose 4 questions, puis un retournement. Pas pour nier ta croyance, pour voir si elle est vraiment vraie. Réponds honnêtement, sans te censurer.
     </div>
 
     <div class="katie-question">
       <div class="katie-num">Question 1</div>
-      <div class="katie-q">Est-ce que c'est absolument vrai ?</div>
-      <div class="katie-aide">Pas "probablement vrai" ou "ça me semble vrai". Peux-tu en être certaine à 100% ? Y a-t-il une exception, un contre-exemple ?</div>
-      <div class="exemple">Par exemple : « Non. La semaine dernière, j'ai demandé de l'aide et ma collègue a dit oui tout de suite. Donc ce n'est pas vrai à 100 %. »</div>
-      <textarea class="katie-input" id="k1" placeholder="Quand je cherche vraiment..."></textarea>
+      <div class="katie-q">Est-ce que c'est vrai ?</div>
+      <div class="katie-aide">Réponds juste par oui ou par non, avec ce qui vient en premier.</div>
+      <div class="exemple">Par exemple : « Oui. J'ai vraiment l'impression que c'est vrai. »</div>
+      <textarea class="katie-input" id="k1" placeholder="Oui / non..."></textarea>
     </div>
 
     <div class="katie-question">
       <div class="katie-num">Question 2</div>
-      <div class="katie-q">Comment réagis-tu quand tu crois cette pensée ?</div>
-      <div class="katie-aide">Qu'est-ce que tu fais, tu évites, tu ressens dans ton corps ? Comment cette croyance change-t-elle tes comportements ?</div>
-      <div class="exemple">Par exemple : « Je dis oui à tout, je serre la mâchoire, et je me couche épuisée, en colère contre moi. »</div>
-      <textarea class="katie-input" id="k2" placeholder="Quand je crois ça, je..."></textarea>
+      <div class="katie-q">Peux-tu être absolument certaine que c'est vrai ?</div>
+      <div class="katie-aide">Pas "probablement vrai" ou "ça me semble vrai". Peux-tu en être certaine à 100% ? Y a-t-il une exception, un contre-exemple ?</div>
+      <div class="exemple">Par exemple : « Non. La semaine dernière, j'ai demandé de l'aide et ma collègue a dit oui tout de suite. Donc ce n'est pas vrai à 100 %. »</div>
+      <textarea class="katie-input" id="k2" placeholder="Quand je cherche vraiment..."></textarea>
     </div>
 
     <div class="katie-question">
       <div class="katie-num">Question 3</div>
-      <div class="katie-q">Qui serais-tu sans cette pensée ?</div>
-      <div class="katie-aide">Ferme les yeux. Imagine-toi dans la même situation, mais sans cette croyance dans ta tête. Qu'est-ce qui serait différent ?</div>
-      <div class="exemple">Par exemple : « Plus légère. Je demanderais de l'aide sans avoir honte. Je respirerais mieux. »</div>
-      <textarea class="katie-input" id="k3" placeholder="Sans cette croyance, je serais..."></textarea>
+      <div class="katie-q">Comment réagis-tu quand tu crois cette pensée ?</div>
+      <div class="katie-aide">Qu'est-ce que tu fais, tu évites, tu ressens dans ton corps ? Comment cette croyance change-t-elle tes comportements ?</div>
+      <div class="exemple">Par exemple : « Je dis oui à tout, je serre la mâchoire, et je me couche épuisée, en colère contre moi. »</div>
+      <textarea class="katie-input" id="k3" placeholder="Quand je crois ça, je..."></textarea>
     </div>
 
     <div class="katie-question">
-      <div class="katie-num">Question 4, La retournée</div>
-      <div class="katie-q">Quel est l'opposé de ta croyance, et est-ce qu'il pourrait être aussi vrai ?</div>
-      <div class="katie-aide">Ex : "Je suis trop sensible" → "Je suis suffisamment sensible" ou "Ma sensibilité est une force". Est-ce que cet opposé peut être vrai ?</div>
-      <div class="exemple">Par exemple : « Je peux partager la charge. Ça pourrait être vrai : il y a des choses que d'autres font très bien, à leur façon. »</div>
-      <textarea class="katie-input" id="k4" placeholder="L'opposé pourrait être vrai parce que..."></textarea>
+      <div class="katie-num">Question 4</div>
+      <div class="katie-q">Qui serais-tu sans cette pensée ?</div>
+      <div class="katie-aide">Ferme les yeux. Imagine-toi dans la même situation, mais sans cette croyance dans ta tête. Qu'est-ce qui serait différent ?</div>
+      <div class="exemple">Par exemple : « Plus légère. Je demanderais de l'aide sans avoir honte. Je respirerais mieux. »</div>
+      <textarea class="katie-input" id="k4" placeholder="Sans cette croyance, je serais..."></textarea>
     </div>
 
+    <div class="katie-question">
+      <div class="katie-num">Et pour finir, le retournement</div>
+      <div class="katie-q">Quel est l'opposé de ta croyance, et est-ce qu'il pourrait être aussi vrai ?</div>
+      <div class="katie-aide">Ex : "Je suis trop sensible" → "Je suis suffisamment sensible" ou "Ma sensibilité est une force". Est-ce que cet opposé peut être vrai ? Cherche un ou deux exemples concrets où il l'a été.</div>
+      <div class="exemple">Par exemple : « Je peux partager la charge. Ça pourrait être vrai : il y a des choses que d'autres font très bien, à leur façon. »</div>
+      <textarea class="katie-input" id="k5" placeholder="L'opposé pourrait être vrai parce que..."></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('rechange')">Ma nouvelle croyance 🌱</button>
+  </div>
+</div>
+
+<!-- MA NOUVELLE CROYANCE -->
+<div class="phase" id="phase-rechange">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🌱</span>
+    <h2>Ce que tu veux croire à la place</h2>
+    <p>Une croyance ne disparaît pas parce qu'on la contredit. Elle trie ce que tu remarques : tout ce qui va dans son sens s'imprime, et tout le reste glisse. C'est pour ça qu'on ne va pas se battre contre l'ancienne. On va en construire une nouvelle, et lui chercher des preuves, jour après jour.</p>
+    <div class="hl" style="margin-bottom:14px;">
+      Écris-la avec tes mots, au présent et à l'affirmatif. Évite les petites nuances du genre « parfois, un peu » : l'ancienne croyance les avalerait comme des exceptions. Et tu n'as pas besoin d'y croire aujourd'hui pour la choisir.
+    </div>
+    <div class="exemple">Par exemple : « J'ai le droit de prendre de la place. » « Je mérite qu'on prenne soin de moi. » « Mes émotions sont légitimes. » « Je peux compter sur les autres. »</div>
+    <input type="text" id="nouvelle-croyance" oninput="majCroyance()" placeholder="Ma nouvelle croyance : ..." style="width:100%;border:2px solid rgba(96,168,128,0.35);border-radius:12px;padding:12px 16px;font-size:16px;font-family:'Lora',serif;color:#2d1d50;outline:none;background:white;">
+    <div class="note-zone">
+      <label for="note19">Aujourd'hui, tu y crois à combien ?</label>
+      <div class="note-ligne"><input type="range" id="note19" min="0" max="100" step="5" value="10" oninput="majCroyance()"><span class="note-val" id="note19-val">10 %</span></div>
+    </div>
+    <p class="small" style="font-style:normal;font-size:15.5px;font-family:'Jost',sans-serif;">Même 5 %, c'est un point de départ. On ne mesure pas à quel point l'ancienne baisse, on regarde à quel point la nouvelle grandit. Tu ne vas pas la répéter comme une affirmation : à force de répétition, une phrase qu'on ne croit pas peut même faire l'effet inverse. Tu vas lui chercher des preuves.</p>
+    <div class="hl vert" style="margin-top:6px;">
+      C'est différent de la pensée alternative de la fiche à 5 colonnes, qui doit te sembler crédible tout de suite. Une croyance de fond, elle, se construit sur des semaines. À la fin de cette journée, tu vas commencer ton carnet de preuves.
+    </div>
     <button class="btn" onclick="showPhase('beck')">La fiche à 5 colonnes 📋</button>
   </div>
 </div>
@@ -243,7 +304,7 @@
       </div>
       <div style="margin-bottom:12px;">
         <div style="font-family:'Jost',sans-serif;font-size:12px;color:#8060c0;margin-bottom:6px;">4 · Pensée alternative (conviction 0 à 100%)</div>
-        <div class="exemple">Par exemple : « Qu'est-ce qui pourrait rendre ma pensée fausse ? Elle a critiqué un point précis de mon rapport. Le mois dernier, elle a validé mon projet tel quel. Ma nouvelle pensée : je suis compétente, et ce rapport peut être amélioré. Je la crois à 60 %. »</div>
+        <div class="exemple">Par exemple : « Qu'est-ce qui pourrait rendre ma pensée fausse ? Elle a critiqué un point précis de mon rapport. Le mois dernier, elle a validé mon projet tel quel. Ma nouvelle pensée : je suis compétente, et ce rapport peut être amélioré. Je la crois à 60 %. »</div>
       <textarea id="beck4" rows="2" style="width:100%;border:2px solid rgba(140,100,210,0.2);border-radius:10px;padding:10px;font-family:'Lora',serif;font-size:15px;font-weight:500;outline:none;resize:vertical;background:white;" placeholder="Une autre façon de voir... / Je la crois à ... %"></textarea>
       </div>
       <div>
@@ -253,7 +314,7 @@
       </div>
     </div>
 
-    <button class="btn" onclick="showPhase('ecriture')">Réflexion finale ✍️</button>
+    <button class="btn" onclick="showPhase('identite')">Qui suis-je vraiment ? 🪞</button>
   </div>
 </div>
 
@@ -261,14 +322,15 @@
 <div class="phase" id="phase-ecriture">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="e-label">Écriture · 1/4</span>
+      <span id="e-label">Écriture · 1/3</span>
       <span style="font-family:'Jost',sans-serif;">✍️ Qui je suis vraiment</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
   </div>
   <div class="card">
     <p class="e-q" id="e-question"></p>
     <p class="e-sous" id="e-sous"></p>
+    <div class="rappel-j1" id="e-rappel" style="display:none"></div>
     <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
     <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
@@ -293,7 +355,7 @@
       📥 Télécharger mes réponses
     </button>
     <p style="font-size:14px;color:#9a84a8;text-align:center;margin-top:8px;font-family:'Jost',sans-serif;">Le fichier va se télécharger. Ouvre-le dans ton navigateur → appuie sur Partager → Imprimer → fais un zoom sur l'aperçu pour enregistrer en PDF.</p>
-  </div>
+  
   <div class="suite-box">
     <div style="font-size:26px;margin-bottom:8px;">🗓️</div>
     <p style="font-size:14px;color:#7060a0;"><strong style="color:#2d1d50;">Demain, Jour 20 :</strong> le deuil et les transitions</p>
@@ -318,12 +380,12 @@ const theorie=[
     {type:"hl",texte:"🚩 Signal 4, La réaction émotionnelle disproportionnée : une remarque anodine provoque une honte intense, une critique légère effondre. La croyance est activée, et réagit comme si c'était une question de survie.",classe:"rouge"},
     {type:"texte",texte:"En ACT, thérapie d'acceptation et d'engagement, on apprend à \"défuser\" des croyances : les observer comme des pensées, pas comme des vérités. \"J'ai la pensée que je suis trop sensible\" est différent de \"je suis trop sensible\"."},
   ]},
-  {emoji:"🪞",titre:"Qui suis-je vraiment, au-delà des rôles et des étiquettes",source:"Dr Dan Siegel, Mindsight / Viktor Frankl / Philosophie bouddhiste",contenu:[
+  {emoji:"🪞",titre:"Qui suis-je vraiment, au-delà des rôles et des étiquettes",source:"Dr Dan Siegel, Mindsight / Philosophie bouddhiste",contenu:[
     {type:"texte",texte:"Si tu n'es ni tes rôles (mère, professionnelle, fille, partenaire) ni tes croyances (trop sensible, pas assez patiente, toujours fatiguée), qui es-tu ?"},
     {type:"hl",texte:"🪞 Le Dr Dan Siegel propose le concept de \"mindsight\" : la capacité à observer ses propres pensées et émotions sans s'identifier à elles. Quand tu observes ta colère sans être la colère, tu touches quelque chose de plus stable, de plus vaste que l'émotion."},
     {type:"texte",texte:"L'identité profonde n'est pas une chose fixe qu'on trouve une fois pour toutes. C'est un mouvement vers ce qui est vivant en toi : tes valeurs, tes élans naturels, ce qui t'anime quand tu n'es pas épuisée ou en train de performer pour quelqu'un."},
-    {type:"hl",texte:"💡 Une façon d'approcher la question \"qui suis-je ?\" : observe ce qui reste quand tu enlèves les rôles. Quand tu n'es pas en train d'être mère, professionnelle, fille, qu'est-ce qui est encore là ? Qu'est-ce qui t'attire, te touche, te met en mouvement depuis toujours ?",classe:"vert"},
-    {type:"hl",texte:"🌸 Viktor Frankl : \"Entre le stimulus et la réponse, il y a un espace. Dans cet espace se trouve notre pouvoir de choisir notre réponse. Dans notre réponse se trouvent notre croissance et notre liberté.\" Cet espace, c'est là que tu existes, au-delà de tes réflexes et de tes croyances.",classe:"rose"},
+    {type:"hl",texte:"💡 Une façon d'approcher la question \"qui suis-je ?\" : observe ce qui reste quand tu enlèves les rôles. Quand tu n'es pas en train d'être mère, professionnelle, fille, qu'est-ce qui est encore là ? Qu'est-ce qui t'attire, te touche, te met en mouvement depuis toujours ?",classe:"vert"},
+    {type:"hl",texte:"🌸 On attribue souvent à Viktor Frankl cette phrase : \"Entre le stimulus et la réponse, il y a un espace. Dans cet espace se trouve notre pouvoir de choisir notre réponse. Dans notre réponse se trouvent notre croissance et notre liberté.\" Cet espace, c'est là que tu existes, au-delà de tes réflexes et de tes croyances.",classe:"rose"},
   ]},
 ];
 
@@ -350,7 +412,6 @@ const ecritureQs=[
   {ex:"« Je dois être forte. Ça vient de ma mère, qui ne pleurait jamais devant nous. » « Je dérange. Petite, on me disait souvent de ne pas faire de bruit. »",q:"Quelle croyance limitante te pèse le plus en ce moment, et d'où penses-tu qu'elle vient ?",sous:"Cherche l'origine, une personne, une expérience, un message répété.",placeholder:"La croyance qui me pèse le plus c'est... / Je pense qu'elle vient de..."},
   {ex:"« Je vois que c'est une pensée, pas un fait. » « J'ai trouvé trois exceptions. Ça fissure un peu la certitude. »",q:"Après le questionnement Byron Katie, qu'est-ce qui a légèrement bougé dans ta façon de voir cette croyance ?",sous:"Même un tout petit décalage compte. Même juste un doute là où il y avait certitude.",placeholder:"Ce qui a légèrement bougé c'est... / Je commence à voir que..."},
   {ex:"« Quelqu'un qui aime les longues marches seule. Quelqu'un de curieux, qui rit facilement. » « Je ne sais pas encore, et c'est peut-être ça que je découvre. »",q:"En dehors de tes rôles, mère, professionnelle, fille, partenaire, qui es-tu ?",sous:"Pas une liste de qualités. Ce qui reste quand on enlève tout ce que tu fais pour les autres.",placeholder:"Au-delà de mes rôles, je suis quelqu'un qui..."},
-  {ex:"« J'ai le droit de demander de l'aide. » « Je peux être fatiguée et compétente à la fois. »",q:"Quelle nouvelle croyance sur toi-même voudrais-tu commencer à cultiver ?",sous:"Pas nécessairement l'opposé exact de la limitante, quelque chose qui te semble plus juste et plus vaste.",placeholder:"La croyance que je veux cultiver c'est..."},
 ];
 
 let theorieIdx=0, selectedCroyances=new Set(), eIdx=0, eReponses=[];
@@ -364,7 +425,7 @@ function showPhase(id){
 }
 
 const pc=document.getElementById('preview-container');
-[{e:'🌱',t:'D\'où viennent les croyances limitantes'},{e:'🔍',t:'Comment les identifier : les 4 signaux'},{e:'🪞',t:'Qui suis-je au-delà des rôles et étiquettes'},{e:'🔍',t:'Identifier mes croyances, exercice interactif'},{e:'❓',t:'Questionner avec Byron Katie, 4 questions'},{e:'🪞',t:'Explorer mon identité profonde'},{e:'✍️',t:'Écriture guidée'}].forEach(i=>{
+[{e:'🌱',t:'D\'où viennent les croyances limitantes'},{e:'🔍',t:'Comment les identifier : les 4 signaux'},{e:'🪞',t:'Qui suis-je au-delà des rôles et étiquettes'},{e:'🔍',t:'Identifier mes croyances, exercice interactif'},{e:'❓',t:'Prendre de la distance, puis questionner avec Byron Katie'},{e:'🌱',t:'Ma nouvelle croyance et mon carnet de preuves'},{e:'📋',t:'La fiche à 5 colonnes'},{e:'🪞',t:'Explorer mon identité profonde'},{e:'✍️',t:'Écriture guidée'}].forEach(i=>{
   pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
 });
 
@@ -447,7 +508,7 @@ function renderE(){
   document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
   document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
   document.getElementById('e-question').textContent=q.q;
-  document.getElementById('e-sous').textContent=q.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
+  document.getElementById('e-sous').textContent=q.sous;(function(){var r=document.getElementById('e-rappel');if(!r)return;var h=eIdx===0?rappelJ1():'';r.innerHTML=h;r.style.display=h?'block':'none';})();(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=q.placeholder;
   document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 19 🔮';
@@ -478,17 +539,24 @@ function showFin(){
 
   // 3. Les 4 questions de Byron Katie
   const katieQs=[
-    "Est-ce que c'est absolument vrai ?",
+    "Est-ce que c'est vrai ?",
+    "Puis-je être absolument certaine que c'est vrai ?",
     "Comment je réagis quand je crois cette pensée ?",
     "Qui je serais sans cette pensée ?",
-    "La retournée, l'opposé pourrait-il être vrai ?"
+    "Le retournement : l'opposé pourrait-il être vrai ?"
   ];
-  const katieVals=[1,2,3,4].map(n=>document.getElementById('k'+n)?.value.trim());
+  const katieVals=[1,2,3,4,5].map(n=>document.getElementById('k'+n)?.value.trim());
   if(katieVals.some(v=>v)){
     let kh='';
     katieVals.forEach((v,i)=>{ if(v) kh+=`<strong style="color:#8060c0;">${katieQs[i]}</strong><br>"${v}"<br><br>`; });
-    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon questionnement en 4 questions</div><div class="recap-r" style="font-style:normal;font-size:15px;">${kh}</div></div>`;
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon questionnement avec Byron Katie</div><div class="recap-r" style="font-style:normal;font-size:15px;">${kh}</div></div>`;
   }
+
+  // 3 bis. Distance et nouvelle croyance
+  const histoire=document.getElementById('nom-histoire')?.value.trim();
+  if(histoire) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Le nom de mon histoire</div><div class="recap-r">"Revoilà l'histoire de ${histoire}"</div></div>`;
+  const nouvelle=document.getElementById('nouvelle-croyance')?.value.trim();
+  if(nouvelle) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ma nouvelle croyance</div><div class="recap-r">"${nouvelle}"<br><span style="font-style:normal;font-size:14px;">J'y crois aujourd'hui à ${document.getElementById('note19').value} %</span></div></div>`;
 
   // 4. Fiche à 5 colonnes de Beck
   const beckLabels=['1 · Situation','2 · Émotions','3 · Pensée automatique','4 · Pensée alternative','5 · Résultat'];
@@ -506,10 +574,56 @@ function showFin(){
 
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
   document.getElementById('phase-fin').classList.add('active');
+  if(window.installerPreuve) window.installerPreuve();
   window.scrollTo(0,0);
 }
 
 renderTheorie();
+
+function escJ19(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+// La minute de défusion reprend la croyance qu'elle a écrite
+function majDefusion(){
+  let v=(document.getElementById('ma-croyance').value||'').trim().replace(/^["«\s]+|["»\s.!]+$/g,'');
+  if(!v) v='Je suis trop sensible';
+  const bas=v.charAt(0).toLowerCase()+v.slice(1), haut=v.charAt(0).toUpperCase()+v.slice(1);
+  document.querySelectorAll('.def-c').forEach(e=>e.textContent=bas);
+  document.querySelectorAll('.def-c1').forEach(e=>e.textContent=haut);
+}
+
+// La nouvelle croyance est gardée pour le carnet de preuves (jours 19 à 30)
+function majCroyance(){
+  const v=document.getElementById('nouvelle-croyance').value.trim();
+  const n=parseInt(document.getElementById('note19').value,10);
+  document.getElementById('note19-val').textContent=n+' %';
+  try{
+    const k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+    c.croyance=c.croyance||{}; c.croyance.preuves=c.croyance.preuves||{};
+    if(v) c.croyance.texte=v;
+    c.croyance.note19=n; c.croyance.date19=new Date().toISOString();
+    const a=document.getElementById('ma-croyance').value.trim(); if(a) c.croyance.ancienne=a;
+    localStorage.setItem(k,JSON.stringify(c));
+  }catch(e){}
+}
+(function(){
+  try{
+    const cr=(JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}').croyance)||{};
+    if(cr.texte) document.getElementById('nouvelle-croyance').value=cr.texte;
+    if(cr.note19!=null){document.getElementById('note19').value=cr.note19;document.getElementById('note19-val').textContent=cr.note19+' %';}
+  }catch(e){}
+})();
+
+// Ce qu'elle avait écrit au jour 1
+function rappelJ1(){
+  try{
+    const its=((JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}').j1)||{}).items||[];
+    const a=its.find(x=>x.n===2), b=its.find(x=>x.n===3);
+    if(!a&&!b) return '';
+    let h='<div class="rj1-label">Ce que tu avais écrit au jour 1</div>';
+    [a,b].forEach(x=>{ if(x) h+='<div class="rj1-q">'+escJ19(x.q)+'</div><div class="rj1-r">« '+escJ19(x.r)+' »</div>'; });
+    return h;
+  }catch(e){return '';}
+}
 
 function telechargerReponses(){
   var recap=document.getElementById('recap-container');
@@ -565,7 +679,7 @@ function telechargerReponses(){
     try{ if(typeof eReponses!=='undefined'&&Array.isArray(eReponses)) eReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
 
     document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
-      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      if(el.id==='e-textarea'||el.id==='j-textarea'||(el.closest&&el.closest('.preuve-jour')))return;
       var v=(el.value||'').trim(); if(!v)return;
       items.push({q:lab(el),r:v});
     });
@@ -585,6 +699,45 @@ function telechargerReponses(){
   document.addEventListener('input',bientot,true);
   document.addEventListener('click',bientot,true);
   window.addEventListener('pagehide',sauver);
+})();
+</script>
+<script>
+/* Carnet de preuves : la nouvelle croyance du jour 19, et une preuve par jour jusqu'au jour 30 */
+(function(){
+  var JOURN=19, INTRO="<p class=\"pj-q\">Jusqu'au jour 30, un petit encadré comme celui-ci t'attend à la fin de chaque page. Tu y notes un fait qui va dans le sens de ta nouvelle croyance. Un fait minuscule suffit : quelqu'un qui t'a remerciée, un moment où tu as pris ta place, une aide demandée qui s'est bien passée.</p><p class=\"pj-q\">Si ta croyance ressemble à une règle, comme « si je dis non, on ne m'aimera plus », tu peux aussi faire un petit test en vrai, et noter ce qui s'est réellement passé.</p>", AUTO=false;
+  function lire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
+  function ecrire(c){try{localStorage.setItem('alarenverse_carnet',JSON.stringify(c));}catch(e){}}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  if(!document.getElementById('preuve-style')){var st=document.createElement('style');st.id='preuve-style';st.textContent=".preuve-jour{background:linear-gradient(135deg,#f1f8f3,#f8fbf5);border:1px solid rgba(96,168,128,0.35);border-left:4px solid #60a880;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.pj-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#3f8a62;margin-bottom:10px}.pj-croyance{font-family:'Lora',serif;font-size:18px;color:#2d3d34;line-height:1.5;margin-bottom:10px;font-style:normal}.pj-q{font-family:'Jost',sans-serif !important;font-size:15.5px !important;color:#4d5a52 !important;line-height:1.65 !important;margin:0 0 10px !important;font-style:normal !important;text-align:left !important}.pj-q strong{color:#2d3d34}.pj-texte,.pj-input{width:100%;box-sizing:border-box;border:2px solid rgba(96,168,128,0.3);border-radius:12px;padding:12px 14px;font-size:16px;font-family:'Lora',serif;color:#2d3d34;background:white;outline:none;resize:vertical;line-height:1.6;margin-bottom:6px}.pj-texte:focus,.pj-input:focus{border-color:#60a880}.pj-ok{font-family:'Jost',sans-serif;font-size:13px;color:#3f8a62;opacity:0;transition:opacity .3s;text-align:right;min-height:18px}";document.head.appendChild(st);}
+  window.installerPreuve=function(){
+    var fin=document.getElementById('phase-fin'); if(!fin) return;
+    var ancien=document.getElementById('preuve-jour'); if(ancien&&ancien.parentNode) ancien.parentNode.removeChild(ancien);
+    var c=lire(), cr=c.croyance||{};
+    var box=document.createElement('div'); box.className='preuve-jour'; box.id='preuve-jour';
+    box.innerHTML='<div class="pj-label">'+(JOURN===19?'🌱 Ton carnet de preuves commence aujourd\'hui':'🌱 Ton carnet de preuves · jour '+JOURN)+'</div>'
+      +(cr.texte?'<div class="pj-croyance">« '+esc(cr.texte)+' »</div>'
+        :'<p class="pj-q">Écris ici la nouvelle croyance que tu as choisie au jour 19.</p><input type="text" class="pj-input" id="pj-croyance" placeholder="Ma nouvelle croyance : ...">')
+      +INTRO
+      +'<p class="pj-q"><strong>'+(JOURN===19?'Ta première preuve':'Ta preuve du jour')+' :</strong> aujourd\'hui, qu\'est-ce qui est allé dans ce sens, même un tout petit peu ?</p>'
+      +'<textarea class="pj-texte" id="pj-texte" rows="3" placeholder="Aujourd\'hui, ..."></textarea>'
+      +'<div class="pj-ok" id="pj-ok">Gardé dans ton carnet ✓</div>';
+    var dl=fin.querySelector('button[onclick^="telechargerReponses"]');
+    if(dl&&dl.parentNode) dl.parentNode.insertBefore(box,dl); else fin.appendChild(box);
+    var ta=document.getElementById('pj-texte'), ci=document.getElementById('pj-croyance'), ok=document.getElementById('pj-ok'), t;
+    ta.value=(cr.preuves&&cr.preuves[JOURN])||'';
+    ok.style.opacity=ta.value?1:0;
+    function sauver(){
+      var c=lire(); c.croyance=c.croyance||{}; c.croyance.preuves=c.croyance.preuves||{};
+      if(ci&&ci.value.trim()) c.croyance.texte=ci.value.trim();
+      var v=ta.value.trim(); if(v) c.croyance.preuves[JOURN]=v; else delete c.croyance.preuves[JOURN];
+      ecrire(c); ok.style.opacity=v?1:0;
+    }
+    function bientot(){clearTimeout(t);t=setTimeout(sauver,400);}
+    ta.addEventListener('input',bientot); ta.addEventListener('blur',sauver);
+    if(ci){ci.addEventListener('input',bientot);ci.addEventListener('blur',sauver);}
+    window.addEventListener('pagehide',sauver);
+  };
+  if(AUTO){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',window.installerPreuve); else window.installerPreuve(); }
 })();
 </script>
 </body>
