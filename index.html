@@ -237,7 +237,7 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
             Je veux le guide
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <p class="btn-note">Code appliqué automatiquement au paiement.</p>
+          <p class="btn-note">Le guide arrive dans votre panier, code PROTEGE déjà appliqué.</p>
           <div class="trust"><span>PDF de 31&nbsp;pages</span><span>Téléchargement immédiat</span><span>Paiement sécurisé</span></div>
         </div>
       </div>
@@ -368,7 +368,7 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
           Je veux le guide
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <p class="btn-note">Code appliqué automatiquement au paiement.</p>
+        <p class="btn-note">Le guide arrive dans votre panier, code PROTEGE déjà appliqué.</p>
       </div>
     </div>
   </section>
@@ -380,7 +380,7 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
         <details><summary>Pour quel âge&nbsp;?</summary><p>Dès 3&nbsp;ans. Le guide donne des repères adaptés à chaque âge, jusqu'à 8&nbsp;ans et plus.</p></details>
         <details><summary>Est-ce que ça va lui faire peur&nbsp;?</summary><p>C'est tout l'enjeu du guide&nbsp;: des personnages, des situations du quotidien, un ton doux. On parle de corps, de respect et de confiance, pas de danger.</p></details>
         <details><summary>Comment je reçois le guide&nbsp;?</summary><p>C'est un PDF de 31&nbsp;pages, à télécharger dès la confirmation du paiement. Vous pouvez le lire sur votre téléphone et l'imprimer pour votre foyer.</p></details>
-        <details><summary>Comment j'utilise le code PROTEGE&nbsp;?</summary><p>Vous n'avez rien à faire&nbsp;: le bouton l'applique pour vous, et vous voyez la réduction avant de payer. Si elle n'apparaît pas, saisissez PROTEGE dans le champ «&nbsp;Code de réduction&nbsp;».</p></details>
+        <details><summary>Comment j'utilise le code PROTEGE&nbsp;?</summary><p>Vous n'avez rien à faire&nbsp;: le bouton ajoute le guide à votre panier avec le code déjà appliqué, et vous voyez la réduction avant de payer. Si elle n'apparaît pas, saisissez PROTEGE dans le champ «&nbsp;Code de réduction&nbsp;».</p></details>
         <details><summary>J'ai plusieurs enfants&nbsp;?</summary><p>Le guide s'utilise pour tous les enfants de votre foyer.</p></details>
         <details><summary>Remplace-t-il un professionnel&nbsp;?</summary><p>Non. C'est un outil éducatif de prévention. Si une situation précise vous inquiète, il vous oriente vers les professionnels et les services à contacter.</p></details>
       </div>
@@ -422,16 +422,17 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
 <script>
 (function(){
   /* ---- Réglages ---- */
-  var CHECKOUT_URL = "https://lesptitslions.com/cart/53780724744458:1?discount=PROTEGE";
+  /* Panier de la boutique (et pas le paiement direct) : la case de consentement s'y affiche */
+  var BUY_URL = "https://lesptitslions.com/cart/53780724744458:1?storefront=true&discount=PROTEGE";
   var YOUTUBE_ID = "";          /* ex. "dQw4w9WgXcQ" : l'identifiant de ta vidéo non répertoriée */
   var PREVIEW = false;    /* true seulement pour l'aperçu */
 
   /* Boutons d'achat : paiement direct, code déjà appliqué */
   var buys = document.querySelectorAll(".js-buy");
   for (var i = 0; i < buys.length; i++) {
-    buys[i].href = CHECKOUT_URL;
+    buys[i].href = BUY_URL;
     buys[i].addEventListener("click", function(){
-      try { if (window.fbq) window.fbq("track", "InitiateCheckout", {value: 39, currency: "CHF"}); } catch(e) {}
+      try { if (window.fbq) window.fbq("track", "AddToCart", {value: 39, currency: "CHF"}); } catch(e) {}
     });
   }
 
