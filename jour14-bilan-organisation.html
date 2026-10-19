@@ -47,6 +47,31 @@
   .pratique-temps{font-family:'Jost',sans-serif;font-size:11px;color:#a09070;margin-bottom:4px}
   .pratique-desc{font-size:13px;color:#8a7050;line-height:1.55;font-style:normal}
 
+  /* Boîte à outils */
+  .outil-theme{width:100%;display:flex;align-items:center;gap:10px;margin:26px 0 12px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--c);font-weight:500}
+  .outil-theme:first-child{margin-top:6px}
+  .outil-theme::after{content:'';flex:1;height:1px;background:var(--c);opacity:0.3}
+  .outil{background:var(--bg);border:2px solid transparent;border-radius:18px;padding:14px 14px 10px;margin-bottom:10px;transition:border-color 0.2s,box-shadow 0.2s}
+  .outil.garde{border-color:var(--c);box-shadow:0 4px 16px rgba(0,0,0,0.06)}
+  .outil-haut{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+  .outil-ic{flex-shrink:0;line-height:0}
+  .outil-ic svg{width:58px;height:58px}
+  .outil-ic svg>circle:first-child,.chip svg>circle:first-child{fill:#fff}
+  .outil-nom{font-size:17px;color:#3d3020;line-height:1.3}
+  .outil-meta{font-family:'Jost',sans-serif;font-size:11.5px;color:var(--c);margin:3px 0 4px;letter-spacing:0.03em}
+  .outil-quand{font-size:14px;color:#7a6548;line-height:1.5;font-style:italic}
+  .outil-etapes{display:none;margin:12px 0 2px;padding:12px 14px 12px 32px;background:rgba(255,255,255,0.75);border-radius:12px;font-size:15px;color:#3d3020;line-height:1.6;font-style:normal}
+  .outil-etapes li{margin-bottom:5px}
+  .outil.ouvert .outil-etapes{display:block}
+  .outil-bas{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
+  .outil-voir{background:none;border:none;font-family:'Jost',sans-serif;font-size:13.5px;color:var(--c);cursor:pointer;padding:8px 2px}
+  .outil-garder{background:white;border:1.5px solid var(--c);color:var(--c);border-radius:50px;padding:7px 15px;font-family:'Jost',sans-serif;font-size:13.5px;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+  .outil.garde .outil-garder{background:var(--c);color:white}
+  .compteur-boite{font-family:'Jost',sans-serif;font-size:14.5px;font-style:normal;color:#7a6548;text-align:center;line-height:1.55;background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border:1px solid rgba(200,170,100,0.2);border-radius:14px;padding:10px 14px;margin:6px 0 0}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--bg);color:#3d3020;border:1px solid var(--c);border-radius:50px;padding:4px 12px 4px 5px;font-size:13.5px;line-height:1.3}
+  .chip svg{width:26px;height:26px;flex-shrink:0}
+
   /* Planning */
   .planning-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
   .planning-moment{font-family:'Jost',sans-serif;font-size:11px;color:#a09070;text-transform:uppercase;letter-spacing:0.1em;width:70px;flex-shrink:0}
@@ -90,7 +115,7 @@
       C'est exactement pour ça qu'aujourd'hui on s'arrête. Pas pour faire plus, pour choisir ce qui reste, ce qui te parle vraiment, et construire quelque chose de réaliste avec ça. La régularité de trois choses simples vaut infiniment plus que la perfection de quatorze choses impossibles.
     </div>
     <button class="btn" onclick="showPhase('recap14')">Mon bilan des 14 premiers jours →</button>
-    <p class="hint">Bilan · Sélection · Planning · Organisation · ~20 min</p>
+    <p class="hint">Bilan · Boîte à outils · Planning · Organisation · ~20 min</p>
   </div>
 </div>
 
@@ -144,20 +169,23 @@
       <textarea id="b4" rows="3" placeholder="Je veux garder..." oninput="checkBilan()"></textarea>
     </div>
 
-    <button class="btn" id="btn-bilan" onclick="showPhase('selection')">Choisir mes pratiques essentielles →</button>
+    <button class="btn" id="btn-bilan" onclick="showPhase('selection')">Ouvrir ma boîte à outils →</button>
   </div>
 </div>
 
 <!-- SÉLECTION DES PRATIQUES -->
 <div class="phase" id="phase-selection">
   <div class="card" style="margin-top:24px;">
-    <span class="emoji-hero">🌿</span>
-    <h2>Tes 3 pratiques non-négociables</h2>
-    <p style="text-align:center;margin-bottom:8px;">Pas une liste exhaustive. Pas la perfection. Juste 3 choses que tu t'engages à faire régulièrement, parce qu'elles te font du bien.</p>
+    <span class="emoji-hero">🧰</span>
+    <h2>Ta boîte à outils</h2>
+    <p style="text-align:center;margin-bottom:8px;">Depuis le jour 2, tu as appris plein de petits outils. Ils sont tous réunis ici, rangés par thème, avec une image pour te rappeler chacun d'eux.</p>
+    <p class="small" style="text-align:center;margin-bottom:6px;">Mon conseil : garde-en trois pour commencer, ceux qui te parlent le plus. Et puis après, fais comme tu veux. C'est ta boîte, tu y pioches ce dont tu as besoin, quand tu en as besoin.</p>
     <p class="small" style="text-align:center;margin-bottom:6px;">Choisis en fonction de ce qui t'a le plus parlé, pas de ce qui te semble le plus "sérieux".</p>
-    <p class="small" style="text-align:center;margin-bottom:20px;" id="selection-compteur">Choisis les pratiques qui te parlent, idéalement autour de 3</p>
-    <div id="pratiques-container"></div>
-    <button class="btn" onclick="showPhase('planning')" style="margin-top:20px;">Construire mon planning →</button>
+    <p class="small" style="text-align:center;margin-bottom:14px;">Touche un outil pour voir comment le faire. Tu retrouveras toute ta boîte à outils en images dans ton plan de soin à télécharger, à la fin du jour.</p>
+    <p class="compteur-boite" style="margin-bottom:10px;" id="selection-compteur"></p>
+    <div id="pratiques-container" style="width:100%;"></div>
+    <p class="compteur-boite" style="margin-top:16px;" id="selection-compteur2"></p>
+    <button class="btn" onclick="sauverBoite();showPhase('planning')" style="margin-top:16px;">Construire mon planning →</button>
   </div>
 </div>
 
@@ -166,7 +194,8 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">📅</span>
     <h2>Mon planning de soin, réaliste et durable</h2>
-    <p style="text-align:center;margin-bottom:8px;">Place tes 3 pratiques dans ta journée, pas comme des obligations, mais comme des rendez-vous avec toi-même.</p>
+    <p style="text-align:center;margin-bottom:8px;">Place les outils que tu as gardés dans ta journée, pas comme des obligations, mais comme des rendez-vous avec toi-même.</p>
+    <div id="planning-choisies" style="display:none;margin:4px 0 16px;"></div>
     <p class="small" style="text-align:center;margin-bottom:20px;">La régularité prime sur la durée. 5 minutes tous les jours > 1 heure une fois par semaine.</p>
 
     <div class="hl" style="margin-bottom:20px;">
@@ -299,7 +328,7 @@
     </div>
 
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À retenir :</strong> Tu n'as pas à tout faire parfaitement. Tu as juste à revenir, encore et encore, avec douceur, à tes 3 pratiques choisies. C'est la constance, pas la perfection, qui transforme.
+      🔑 <strong>À retenir :</strong> Tu n'as pas à tout faire parfaitement. Tu as juste à revenir, encore et encore, avec douceur, aux outils que tu as gardés. C'est la constance, pas la perfection, qui transforme.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -312,7 +341,7 @@
 
     <div style="margin-top:22px;padding-top:20px;border-top:1px solid rgba(200,160,120,0.25);">
       <p style="font-size:15px;color:#7d6040;text-align:center;margin-bottom:4px;"><strong>🌿 Ton plan de soin à remplir et afficher</strong></p>
-      <p style="font-size:14px;color:#907050;text-align:center;margin-bottom:14px;font-family:'Jost',sans-serif;">Un document à toi : tes 3 pratiques, ton planning, tes formules d'ancrage et un tracker de la semaine à cocher. Remplis-le sur ton ordi, imprime-le, et garde-le sous les yeux.</p>
+      <p style="font-size:14px;color:#907050;text-align:center;margin-bottom:14px;font-family:'Jost',sans-serif;">Un document à toi : les outils que tu gardes, ton planning, tes formules d'ancrage, un suivi de la semaine à cocher, et toute ta boîte à outils en images. Remplis-le sur ton ordi, imprime-le, et garde-le sous les yeux.</p>
       <a href="jour14-mon-plan-de-soin.pdf" download style="display:block;text-decoration:none;">
         <button class="btn" style="width:100%;background:linear-gradient(135deg,#c2836a,#c8a060);">
           📋 Télécharger mon plan de soin (PDF à remplir)
@@ -346,15 +375,44 @@ const jours14=[
   {num:"14",titre:"Bilan & Organisation",couleur:"#c8a870"},
 ];
 
+/* La boîte à outils : chaque outil vu du jour 2 au jour 13, avec son illustration */
+const themesBoite=[{"id": "calmer", "titre": "Me calmer quand ça monte", "bg": "#e9f1f8", "c": "#46688a"}, {"id": "figement", "titre": "Sortir du figement", "bg": "#eceefa", "c": "#565c9c"}, {"id": "emotions", "titre": "Comprendre ce que je ressens", "bg": "#fbedf2", "c": "#a24f6e"}, {"id": "corps", "titre": "Prendre soin de mon corps", "bg": "#f9eee6", "c": "#a5633f"}, {"id": "sommeil", "titre": "Mieux dormir, mieux me reposer", "bg": "#f0ecf8", "c": "#6b5597"}, {"id": "voix", "titre": "Apaiser ma voix intérieure", "bg": "#f5edf8", "c": "#7d4f8f"}, {"id": "liens", "titre": "Mes limites et mes relations", "bg": "#ecf5f0", "c": "#3f7a5b"}, {"id": "bon", "titre": "Voir aussi le bon", "bg": "#fbf3e3", "c": "#946d27"}];
 const pratiques=[
-  {id:"respiration",nom:"Respiration 4-6",temps:"50 secondes à 5 minutes",desc:"Inspire 4s par le nez, expire 6s par la bouche. 3 à 5 cycles. L'outil le plus rapide pour réguler le système nerveux.",bg:"#eef4fb",border:"#6090c0"},
-  {id:"gratitude",nom:"Journal de gratitude profonde",temps:"3 à 5 minutes",desc:"Une seule chose, décrite en détail, avec l'émotion qu'elle génère. Pas une liste.",bg:"#fdf8ee",border:"#c8a870"},
-  {id:"corps",nom:"Scan corporel",temps:"5 minutes",desc:"Parcourir les 5 zones du corps, observer sans chercher à changer. Reconnecter corps et esprit.",bg:"#fdf0f5",border:"#e8a0b4"},
-  {id:"mouvement",nom:"Mouvement conscient",temps:"15 à 30 minutes",desc:"Pilates, yoga, marche, musculation adaptée, selon l'état de ton système nerveux du jour.",bg:"#eaf5f0",border:"#80c8a8"},
-  {id:"rituel_soir",nom:"Rituel du soir",temps:"20 à 30 minutes",desc:"Écrans posés, lumière baissée, corps choyé, respiration, gratitude, intention. Le signal que la journée est terminée.",bg:"#f0eefa",border:"#a080c8"},
-  {id:"ecriture",nom:"Écriture libre",temps:"5 à 10 minutes",desc:"Écrire sans censure ce qui est là, émotions, pensées, réflexions. Vidange mentale et traitement émotionnel.",bg:"#faf0eb",border:"#c2836a"},
-  {id:"limites",nom:"Pratique des limites",temps:"Quotidien",desc:"Un non par jour. Une limite posée, même petite. Nommer clairement un besoin à une personne de confiance.",bg:"#fde8e6",border:"#e8857a"},
-  {id:"voix",nom:"Dialogue avec la voix intérieure",temps:"2 à 5 minutes",desc:"Quand la voix critique parle, l'observer, la nommer, lui répondre avec une phrase de compassion.",bg:"#f5f0fa",border:"#a080c8"},
+{"id": "respiration", "theme": "calmer", "nom": "Respiration 4-6", "jour": 3, "duree": "1 à 5 min", "quand": "Quand le stress monte, avant de dormir, ou quelques fois par jour en prévention.", "etapes": ["Inspire par le nez en comptant jusqu'à 4.", "Expire lentement par la bouche en comptant jusqu'à 6.", "Recommence 5 à 10 fois, sans forcer."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#e9f1f8\"/><g fill=\"none\" stroke=\"#46688a\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 44 C14 44,19 18,24 18 C33 18,43 44,56 44\"/><text x=\"15\" y=\"24\" text-anchor=\"middle\" font-family=\"Jost,Arial,sans-serif\" font-size=\"11\" font-weight=\"600\" fill=\"#46688a\" stroke=\"none\">4</text><text x=\"44\" y=\"26\" text-anchor=\"middle\" font-family=\"Jost,Arial,sans-serif\" font-size=\"11\" font-weight=\"600\" fill=\"#46688a\" stroke=\"none\">6</text></g></svg>"},
+{"id": "ancrage", "theme": "calmer", "nom": "Ancrage 5-4-3-2-1", "jour": 12, "duree": "2 min", "quand": "Quand l'angoisse monte ou que les pensées tournent en boucle.", "etapes": ["Nomme 5 choses que tu vois, puis 4 que tu touches.", "Puis 3 que tu entends, 2 que tu sens, 1 que tu goûtes.", "Prends ton temps pour chacune : c'est ce qui te ramène ici."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#e9f1f8\"/><g fill=\"none\" stroke=\"#46688a\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 28 Q32 12 52 28 Q32 44 12 28Z\"/><circle cx=\"32\" cy=\"28\" r=\"5\"/><text x=\"32\" y=\"52\" text-anchor=\"middle\" font-family=\"Jost,Arial,sans-serif\" font-size=\"9\" font-weight=\"600\" fill=\"#46688a\" stroke=\"none\">5·4·3·2·1</text></g></svg>"},
+{"id": "balancier", "theme": "calmer", "nom": "Le balancier", "jour": 12, "duree": "1 à 3 min", "quand": "Quand tu te sens agitée et que ton corps a besoin de bouger.", "etapes": ["Marche, ou balance-toi doucement d'un pied sur l'autre.", "Tu peux aussi tapoter tes genoux, gauche puis droite, lentement.", "Garde un rythme régulier, et laisse ta respiration le suivre."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#e9f1f8\"/><g fill=\"none\" stroke=\"#46688a\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"32\" cy=\"12\" r=\"2\"/><path d=\"M32 14 L32 40\"/><circle cx=\"32\" cy=\"45\" r=\"5\"/><g opacity=\".4\"><path d=\"M32 14 L19 37\"/><circle cx=\"16.5\" cy=\"41.5\" r=\"5\"/><path d=\"M32 14 L45 37\"/><circle cx=\"47.5\" cy=\"41.5\" r=\"5\"/></g></g></svg>"},
+{"id": "nommer", "theme": "calmer", "nom": "Nommer l'émotion", "jour": 12, "duree": "30 secondes", "quand": "Dès que tu sens une émotion forte arriver.", "etapes": ["Dis-la, à voix haute ou dans ta tête : « Là, je ressens de la peur. »", "Cherche celle qui est en dessous, pas seulement celle qui déborde.", "Mettre un mot dessus l'aide souvent à prendre un peu moins de place."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#e9f1f8\"/><g fill=\"none\" stroke=\"#46688a\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 16 h36 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-22 l-8 7 v-7 h-6 a4 4 0 0 1 -4 -4 v-16 a4 4 0 0 1 4 -4z\"/><path d=\"M20 24 h24\"/><path d=\"M20 31 h14\"/></g></svg>"},
+{"id": "activation", "theme": "figement", "nom": "Réveiller le corps en douceur", "jour": 12, "duree": "2 à 5 min", "quand": "Quand tu te sens vide, à plat, coupée de tout.", "etapes": ["Commence tout petit : bouge les doigts, les épaules, la tête.", "Étire-toi, balance-toi, fais quelques pas lents.", "Pas de sport intense : on réveille, on ne bouscule pas."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#eceefa\"/><g fill=\"none\" stroke=\"#565c9c\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"32\" cy=\"19\" r=\"4\"/><path d=\"M32 23 v14\"/><path d=\"M32 27 l-11 -12\"/><path d=\"M32 27 l11 -12\"/><path d=\"M32 37 l-7 13\"/><path d=\"M32 37 l7 13\"/><path d=\"M15 12 q-3 3 0 6\"/><path d=\"M49 12 q3 3 0 6\"/></g></svg>"},
+{"id": "appuis", "theme": "figement", "nom": "Sentir mes appuis", "jour": 12, "duree": "1 min", "quand": "Quand tu te sens absente, comme à côté de toi-même.", "etapes": ["Appuie fermement tes pieds dans le sol.", "Frotte tes mains l'une contre l'autre, puis presse les paumes ensemble.", "Remarque le contact, le poids, la chaleur."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#eceefa\"/><g fill=\"none\" stroke=\"#565c9c\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 50 h40\"/><path d=\"M22 16 v22\"/><path d=\"M17 33 l5 6 l5 -6\"/><path d=\"M42 16 v22\"/><path d=\"M37 33 l5 6 l5 -6\"/><path d=\"M16 46 q6 -4 12 0\"/><path d=\"M36 46 q6 -4 12 0\"/></g></svg>"},
+{"id": "activante", "theme": "figement", "nom": "Respiration qui réveille", "jour": 12, "duree": "1 min", "quand": "Quand tu es éteinte et que tu dois redémarrer.", "etapes": ["Inspire profondément par le nez.", "Expire par petits coups brefs, comme pour souffler des bougies.", "Quelques respirations suffisent : on réveille, sans s'épuiser."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#eceefa\"/><g fill=\"none\" stroke=\"#565c9c\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"34\" y=\"30\" width=\"9\" height=\"20\" rx=\"2\"/><path d=\"M38.5 30 v-4\"/><path d=\"M38.5 26 c-4 -4 0 -9 0 -9 c0 0 4 5 0 9\"/><path d=\"M12 26 h8\"/><path d=\"M14 32 h9\"/><path d=\"M12 38 h8\"/></g></svg>"},
+{"id": "sens", "theme": "figement", "nom": "Un réconfort pour les sens", "jour": 12, "duree": "2 min", "quand": "Quand tu as besoin de revenir dans ton corps.", "etapes": ["Une boisson chaude entre les mains, ou une crème qui sent bon.", "Ou un peu d'eau fraîche sur le visage ou les poignets.", "Reste quelques secondes sur la sensation, rien d'autre."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#eceefa\"/><g fill=\"none\" stroke=\"#565c9c\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 30 h24 v8 a10 10 0 0 1 -10 10 h-4 a10 10 0 0 1 -10 -10z\"/><path d=\"M40 32 a5 5 0 0 1 0 10\"/><path d=\"M22 24 c-2 -3 2 -5 0 -9\"/><path d=\"M29 24 c-2 -3 2 -5 0 -9\"/><path d=\"M36 24 c-2 -3 2 -5 0 -9\"/></g></svg>"},
+{"id": "confiance", "theme": "figement", "nom": "Aller vers quelqu'un de confiance", "jour": 13, "duree": "Le temps qu'il faut", "quand": "Quand c'est trop lourd pour être porté seule.", "etapes": ["Si tu peux, rapproche-toi d'une personne qui t'apaise.", "Sa voix, sa présence, un regard suffisent souvent.", "Si elle est loin, un appel ou un vocal fonctionne aussi."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#eceefa\"/><g fill=\"none\" stroke=\"#565c9c\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"23\" cy=\"22\" r=\"6\"/><circle cx=\"41\" cy=\"22\" r=\"6\"/><path d=\"M12 46 a11 11 0 0 1 22 0\"/><path d=\"M30 46 a11 11 0 0 1 22 0\"/><path transform=\"translate(32 30) scale(0.55)\" d=\"M0 4 C-2 -1,-8 -1,-8 4 C-8 8,-3 11,0 14 C3 11,8 8,8 4 C8 -1,2 -1,0 4Z\"/></g></svg>"},
+{"id": "questions", "theme": "emotions", "nom": "Les 4 questions", "jour": 2, "duree": "30 secondes", "quand": "Jusqu'à trois fois par jour, à des moments que tu choisis.", "etapes": ["Qu'est-ce que je ressens ?", "Où, dans mon corps ? À combien, de 0 à 10 ?", "De quoi j'ai besoin ?"], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#fbedf2\"/><g fill=\"none\" stroke=\"#a24f6e\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"32\" y=\"42\" text-anchor=\"middle\" font-family=\"Jost,Arial,sans-serif\" font-size=\"30\" font-weight=\"500\" fill=\"#a24f6e\" stroke=\"none\">?</text><circle cx=\"14\" cy=\"20\" r=\"2.2\"/><circle cx=\"50\" cy=\"20\" r=\"2.2\"/><circle cx=\"14\" cy=\"44\" r=\"2.2\"/><circle cx=\"50\" cy=\"44\" r=\"2.2\"/></g></svg>"},
+{"id": "journal_emo", "theme": "emotions", "nom": "Le journal du soir", "jour": 12, "duree": "5 min", "quand": "Le soir, avant de dormir.", "etapes": ["Quelle émotion ai-je le plus ressentie aujourd'hui ?", "Étais-je plutôt agitée, éteinte, ou bien dans ma fenêtre ?", "Qu'est-ce qui m'a aidée, et qu'est-ce qui ne m'a pas aidée ?"], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#fbedf2\"/><g fill=\"none\" stroke=\"#a24f6e\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"18\" y=\"12\" width=\"28\" height=\"40\" rx=\"3\"/><path d=\"M24 12 v40\"/><path d=\"M29 22 h11\"/><path d=\"M29 29 h11\"/><path d=\"M29 36 h7\"/></g></svg>"},
+{"id": "lecture", "theme": "emotions", "nom": "Chercher une autre lecture", "jour": 12, "duree": "3 min", "quand": "Quand une situation te chamboule, en dehors des moments de crise.", "etapes": ["Demande-toi : « Est-ce qu'il y a une autre façon de voir ça ? »", "Cherche les faits, pas seulement ce que tu ressens.", "Le but n'est pas de nier ton émotion, mais de vérifier si la pensée qui la nourrit est juste."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#fbedf2\"/><g fill=\"none\" stroke=\"#a24f6e\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"22\" cy=\"34\" r=\"8\"/><circle cx=\"42\" cy=\"34\" r=\"8\"/><path d=\"M30 33 q2 -2 4 0\"/><path d=\"M14 32 l-4 -8\"/><path d=\"M50 32 l4 -8\"/></g></svg>"},
+{"id": "accueillir", "theme": "emotions", "nom": "Laisser l'émotion être là", "jour": 12, "duree": "2 min", "quand": "Quand tu te bats contre ce que tu ressens.", "etapes": ["Dis-toi : « Cette émotion est là. Je la laisse être. »", "Observe-la dans ton corps, sans chercher à la chasser.", "Lutter contre une émotion ajoute souvent une souffrance en plus."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#fbedf2\"/><g fill=\"none\" stroke=\"#a24f6e\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 36 q6 14 20 10\"/><path d=\"M52 36 q-6 14 -20 10\"/><path d=\"M12 36 l4 -4\"/><path d=\"M52 36 l-4 -4\"/><circle cx=\"32\" cy=\"24\" r=\"7\"/></g></svg>"},
+{"id": "ecriture", "theme": "emotions", "nom": "Écriture libre", "jour": null, "duree": "5 min", "quand": "Quand ta tête est trop pleine.", "etapes": ["Mets un minuteur de 5 minutes.", "Écris tout ce qui vient, sans te relire ni te corriger.", "Tu n'as pas besoin de relire : le but, c'est de sortir ce qui tourne en boucle."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#fbedf2\"/><g fill=\"none\" stroke=\"#a24f6e\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 46 c6 -4 10 4 16 0 s10 -4 14 0\"/><path d=\"M14 36 c6 -4 10 4 16 0\"/><path d=\"M40 14 l10 10 l-14 14 l-12 2 l2 -12z\"/></g></svg>"},
+{"id": "scan", "theme": "corps", "nom": "Scan corporel", "jour": 6, "duree": "5 min", "quand": "Quand tu veux savoir où tu en es, ou pour te poser.", "etapes": ["Ferme les yeux et parcours ton corps : gorge, poitrine, ventre, épaules, jambes.", "Remarque ce qui est tendu, sans chercher à le changer.", "Pose une main là où ça serre, et respire vers elle."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f9eee6\"/><g fill=\"none\" stroke=\"#a5633f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"32\" cy=\"14\" r=\"5\"/><path d=\"M24 50 v-18 a8 8 0 0 1 16 0 v18\"/><path d=\"M10 32 h44\" stroke-dasharray=\"3 4\"/></g></svg>"},
+{"id": "douche", "theme": "corps", "nom": "Douche consciente", "jour": 6, "duree": "Le temps d'une douche", "quand": "Le matin ou le soir, à la place d'une douche en pilote automatique.", "etapes": ["Sens vraiment l'eau : sa chaleur, son poids sur ta peau.", "Quand tes pensées partent, reviens à la sensation.", "Imagine que l'eau emporte un peu de ta journée."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f9eee6\"/><g fill=\"none\" stroke=\"#a5633f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 14 h14 a10 10 0 0 1 10 10\"/><path d=\"M34 24 h16\"/><path d=\"M36 30 v4\"/><path d=\"M42 30 v6\"/><path d=\"M48 30 v4\"/><path d=\"M39 40 v4\"/><path d=\"M45 42 v4\"/><path d=\"M42 50 v2\"/></g></svg>"},
+{"id": "soin", "theme": "corps", "nom": "Un geste de soin lent", "jour": 6, "duree": "3 min", "quand": "Quand tu as besoin de douceur.", "etapes": ["Prends une crème, une huile ou un baume.", "Applique-le lentement, comme tu le ferais pour quelqu'un que tu aimes.", "C'est un moment pour toi, pas une corvée de plus."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f9eee6\"/><g fill=\"none\" stroke=\"#a5633f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"20\" y=\"22\" width=\"24\" height=\"7\" rx=\"2\"/><rect x=\"22\" y=\"29\" width=\"20\" height=\"21\" rx=\"4\"/><path transform=\"translate(32 34) scale(0.6)\" d=\"M0 4 C-2 -1,-8 -1,-8 4 C-8 8,-3 11,0 14 C3 11,8 8,8 4 C8 -1,2 -1,0 4Z\"/></g></svg>"},
+{"id": "coeur", "theme": "corps", "nom": "Une main sur le cœur", "jour": 6, "duree": "1 min", "quand": "Quand tu te sens seule, triste, ou dure avec toi-même.", "etapes": ["Pose une main sur ta poitrine et sens-la se soulever.", "Dis-toi : « Merci de me porter. Je prends soin de toi. »", "Ça peut sembler bizarre au début, c'est normal."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f9eee6\"/><g fill=\"none\" stroke=\"#a5633f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path transform=\"translate(32 20) scale(1.9)\" d=\"M0 4 C-2 -1,-8 -1,-8 4 C-8 8,-3 11,0 14 C3 11,8 8,8 4 C8 -1,2 -1,0 4Z\"/></g></svg>"},
+{"id": "etirements", "theme": "corps", "nom": "3 étirements doux", "jour": 6, "duree": "3 min", "quand": "Quand ton corps est raide ou que tu as trop tenu.", "etapes": ["Choisis ce qui tire : épaules, cou, dos ou hanches.", "Étire lentement, en respirant, sans forcer.", "C'est ton corps qui te guide, pas une routine imposée."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f9eee6\"/><g fill=\"none\" stroke=\"#a5633f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"24\" cy=\"15\" r=\"4\"/><path d=\"M26 19 q8 12 2 22\"/><path d=\"M28 41 l-6 10\"/><path d=\"M28 41 l6 10\"/><path d=\"M27 24 q10 -10 20 -8\"/></g></svg>"},
+{"id": "plaisir", "theme": "corps", "nom": "Un moment de plaisir simple", "jour": 6, "duree": "5 min", "quand": "Une fois par jour, juste pour toi.", "etapes": ["Un thé, un café, un carré de chocolat.", "Savoure-le lentement, sans ton téléphone.", "Juste toi et ce plaisir, quelques minutes."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f9eee6\"/><g fill=\"none\" stroke=\"#a5633f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"16\" y=\"20\" width=\"32\" height=\"24\" rx=\"3\"/><path d=\"M27 20 v24\"/><path d=\"M38 20 v24\"/><path d=\"M16 32 h32\"/></g></svg>"},
+{"id": "cinq", "theme": "corps", "nom": "La règle des 5 minutes", "jour": 9, "duree": "5 min", "quand": "Quand bouger te semble une montagne.", "etapes": ["Engage-toi pour 5 minutes, pas plus.", "Mets tes baskets et commence, même tout doucement.", "Au bout de 5 minutes, tu as le droit d'arrêter. Souvent, tu continues."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f9eee6\"/><g fill=\"none\" stroke=\"#a5633f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"32\" cy=\"35\" r=\"15\"/><path d=\"M28 14 h8\"/><path d=\"M32 14 v6\"/><text x=\"32\" y=\"40\" text-anchor=\"middle\" font-family=\"Jost,Arial,sans-serif\" font-size=\"14\" font-weight=\"600\" fill=\"#a5633f\" stroke=\"none\">5</text></g></svg>"},
+{"id": "marche", "theme": "corps", "nom": "Marche consciente", "jour": 9, "duree": "10 à 30 min", "quand": "Quand tu as besoin de te vider la tête.", "etapes": ["Marche à ton rythme, idéalement dehors ou dans la nature.", "Sens tes pieds qui touchent le sol, l'air sur ta peau.", "Quand tes pensées partent, reviens à tes pas."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f9eee6\"/><g fill=\"none\" stroke=\"#a5633f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"26\" cy=\"14\" r=\"4\"/><path d=\"M26 18 l-2 16\"/><path d=\"M24 34 l-6 14\"/><path d=\"M24 34 l8 12\"/><path d=\"M25 22 l-8 8\"/><path d=\"M25 22 l8 6\"/><path d=\"M46 22 l-6 12 h12z\"/><path d=\"M46 34 v10\"/></g></svg>"},
+{"id": "trois_r", "theme": "sommeil", "nom": "Les 3R", "jour": 4, "duree": "10 min", "quand": "Les nuits où le sommeil ne vient pas.", "etapes": ["Allongée, balaie ton corps et repère les tensions.", "Respire vers chaque tension, comme pour créer de l'espace autour.", "Répète doucement : « J'ai le droit de me relâcher. J'ai le droit de me reposer. J'ai le droit de me recharger. »"], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f0ecf8\"/><g fill=\"none\" stroke=\"#6b5597\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M44 11 a11 11 0 1 0 9 17 a8.5 8.5 0 1 1 -9 -17z\"/><text x=\"27\" y=\"47\" text-anchor=\"middle\" font-family=\"Jost,Arial,sans-serif\" font-size=\"15\" font-weight=\"600\" fill=\"#6b5597\" stroke=\"none\">3R</text></g></svg>"},
+{"id": "rituel", "theme": "sommeil", "nom": "Rituel du soir", "jour": 4, "duree": "20 à 30 min", "quand": "Chaque soir, avant d'aller au lit.", "etapes": ["Pose ton téléphone 30 minutes avant de dormir.", "Baisse les lumières, garde ta chambre fraîche et sombre.", "Une fois couchée, quelques respirations lentes."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f0ecf8\"/><g fill=\"none\" stroke=\"#6b5597\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 14 h20 l6 14 h-32z\"/><path d=\"M32 28 v18\"/><path d=\"M22 50 h20\"/><path d=\"M14 22 l-3 -2\"/><path d=\"M50 22 l3 -2\"/></g></svg>"},
+{"id": "repos", "theme": "sommeil", "nom": "Me reposer sans dormir", "jour": 4, "duree": "Aussi longtemps que tu veux", "quand": "Quand tu es éveillée en pleine nuit.", "etapes": ["Arrête de te battre pour dormir.", "Relâche ton corps et ralentis ta respiration.", "Ce n'est pas du sommeil, mais c'est du vrai repos pour ton corps."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f0ecf8\"/><g fill=\"none\" stroke=\"#6b5597\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 44 v-18\"/><path d=\"M10 38 h44 v6\"/><path d=\"M54 44 v6\"/><path d=\"M10 44 v6\"/><rect x=\"14\" y=\"30\" width=\"10\" height=\"7\" rx=\"3\"/><path d=\"M26 34 h24\"/></g></svg>"},
+{"id": "amie", "theme": "voix", "nom": "Me parler comme à une amie", "jour": 8, "duree": "1 min", "quand": "Quand ta voix critique est dure avec toi.", "etapes": ["Demande-toi : « Est-ce que je dirais ça à une amie ? »", "Si non, cherche ce que tu lui dirais, à elle.", "Et dis-le-toi, avec les mêmes mots."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f5edf8\"/><g fill=\"none\" stroke=\"#7d4f8f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 14 h26 a3 3 0 0 1 3 3 v11 a3 3 0 0 1 -3 3 h-16 l-6 5 v-5 h-4 a3 3 0 0 1 -3 -3 v-11 a3 3 0 0 1 3 -3z\"/><path d=\"M54 30 h-20 a3 3 0 0 0 -3 3 v10 a3 3 0 0 0 3 3 h12 l6 5 v-5 h2 a3 3 0 0 0 3 -3 v-10 a3 3 0 0 0 -3 -3z\"/><path transform=\"translate(43 34) scale(0.5)\" d=\"M0 4 C-2 -1,-8 -1,-8 4 C-8 8,-3 11,0 14 C3 11,8 8,8 4 C8 -1,2 -1,0 4Z\"/></g></svg>"},
+{"id": "distance", "theme": "voix", "nom": "« Mon cerveau me dit que… »", "jour": 8, "duree": "30 secondes", "quand": "Quand une pensée te colle à la peau.", "etapes": ["Remarque la pensée dure : « Je suis nulle. »", "Reformule-la : « Mon cerveau me dit que je suis nulle. »", "La pensée est toujours là, mais elle devient une pensée, plus une vérité."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f5edf8\"/><g fill=\"none\" stroke=\"#7d4f8f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 50 v-8 a14 14 0 1 1 18 -4 l2 6 h-6 v6\"/><circle cx=\"46\" cy=\"16\" r=\"5\"/><circle cx=\"40\" cy=\"26\" r=\"2\"/></g></svg>"},
+{"id": "phrases", "theme": "voix", "nom": "Ma phrase de compassion", "jour": 8, "duree": "1 min", "quand": "Les jours où la voix critique est forte.", "etapes": ["Choisis une phrase qui te parle, par exemple : « J'ai fait de mon mieux avec ce que j'avais. »", "Écris-la quelque part où tu la verras.", "Reviens-y quand tu en as besoin, sans te forcer à y croire tout de suite."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#f5edf8\"/><g fill=\"none\" stroke=\"#7d4f8f\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 16 h36 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-22 l-8 7 v-7 h-6 a4 4 0 0 1 -4 -4 v-16 a4 4 0 0 1 4 -4z\"/><path transform=\"translate(32 22) scale(0.75)\" d=\"M0 4 C-2 -1,-8 -1,-8 4 C-8 8,-3 11,0 14 C3 11,8 8,8 4 C8 -1,2 -1,0 4Z\"/></g></svg>"},
+{"id": "non", "theme": "liens", "nom": "Dire non sans me justifier", "jour": 5, "duree": "Quelques secondes", "quand": "Quand tu sens que tu vas dire oui à contrecœur.", "etapes": ["Commence petit : un non par jour, sur quelque chose de facile.", "Une phrase courte suffit : « Non, cette fois je ne peux pas. »", "Pas besoin de te justifier pendant des heures."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#ecf5f0\"/><g fill=\"none\" stroke=\"#3f7a5b\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 16 h36 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-22 l-8 7 v-7 h-6 a4 4 0 0 1 -4 -4 v-16 a4 4 0 0 1 4 -4z\"/><text x=\"32\" y=\"33\" text-anchor=\"middle\" font-family=\"Jost,Arial,sans-serif\" font-size=\"11\" font-weight=\"700\" fill=\"#3f7a5b\" stroke=\"none\">NON</text></g></svg>"},
+{"id": "demain", "theme": "liens", "nom": "« Je te réponds demain »", "jour": 5, "duree": "Quelques secondes", "quand": "Quand on te demande quelque chose et que tu hésites.", "etapes": ["Ne réponds pas tout de suite.", "Dis : « Je te réponds demain, je veux y réfléchir. »", "Tu as le temps de voir si tu en as vraiment envie."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#ecf5f0\"/><g fill=\"none\" stroke=\"#3f7a5b\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"14\" y=\"18\" width=\"36\" height=\"32\" rx=\"4\"/><path d=\"M14 27 h36\"/><path d=\"M23 13 v8\"/><path d=\"M41 13 v8\"/><text x=\"32\" y=\"44\" text-anchor=\"middle\" font-family=\"Jost,Arial,sans-serif\" font-size=\"11\" font-weight=\"700\" fill=\"#3f7a5b\" stroke=\"none\">+1</text></g></svg>"},
+{"id": "message", "theme": "liens", "nom": "Dire à quelqu'un ce qu'il m'apporte", "jour": 11, "duree": "5 min", "quand": "Une fois par semaine, par exemple.", "etapes": ["Choisis une personne qui te fait du bien.", "Dis-lui, en vrai ou par message, ce que sa présence t'apporte.", "Quelques mots suffisent, et le lien se renforce des deux côtés."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#ecf5f0\"/><g fill=\"none\" stroke=\"#3f7a5b\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"21\" y=\"10\" width=\"22\" height=\"44\" rx=\"4\"/><path d=\"M29 48 h6\"/><path transform=\"translate(32 24) scale(0.75)\" d=\"M0 4 C-2 -1,-8 -1,-8 4 C-8 8,-3 11,0 14 C3 11,8 8,8 4 C8 -1,2 -1,0 4Z\"/></g></svg>"},
+{"id": "deux", "theme": "liens", "nom": "Rester calme pour deux", "jour": 13, "duree": "Pendant la crise", "quand": "Quand un enfant ou un proche est en crise à côté de toi.", "etapes": ["Pose une main sur ton ventre et expire long, lentement.", "Reste avec lui, à sa hauteur, sans gestes brusques.", "Parle lentement, d'une voix grave et douce."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#ecf5f0\"/><g fill=\"none\" stroke=\"#3f7a5b\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 26 c6 -8 12 -8 18 0 s12 8 18 0 s6 -6 8 -4\"/><path d=\"M10 40 c6 -8 12 -8 18 0 s12 8 18 0 s6 -6 8 -4\"/></g></svg>"},
+{"id": "decharger", "theme": "liens", "nom": "Décharger en sortant", "jour": 13, "duree": "2 min", "quand": "En sortant d'un endroit très chargé : travail, réunion, repas de famille.", "etapes": ["Fais quelques respirations dehors.", "Marche un peu, secoue tes mains.", "Un grand soupir, et tu laisses l'agitation derrière toi."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#ecf5f0\"/><g fill=\"none\" stroke=\"#3f7a5b\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"14\" y=\"12\" width=\"20\" height=\"40\" rx=\"2\"/><circle cx=\"29\" cy=\"33\" r=\"1.5\"/><path d=\"M38 32 h14\"/><path d=\"M47 27 l5 5 l-5 5\"/><path d=\"M44 18 l4 -4\"/><path d=\"M48 22 l5 -2\"/></g></svg>"},
+{"id": "gratitude", "theme": "bon", "nom": "Gratitude profonde", "jour": 10, "duree": "5 min", "quand": "Une fois par semaine suffit.", "etapes": ["Une seule chose, pas une liste.", "Décris-la en détail : qui, quoi, ce que tu as ressenti.", "Demande-toi pourquoi elle compte pour toi."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#fbf3e3\"/><g fill=\"none\" stroke=\"#946d27\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M32 12 C34 26,38 30,52 32 C38 34,34 38,32 52 C30 38,26 34,12 32 C26 30,30 26,32 12Z\"/><path d=\"M48 14 v6\"/><path d=\"M45 17 h6\"/></g></svg>"},
+{"id": "soi", "theme": "bon", "nom": "Gratitude envers moi", "jour": 10, "duree": "3 min", "quand": "Le soir, quand tu as l'impression de n'avoir rien fait.", "etapes": ["Remercie-toi pour une chose que tu as faite aujourd'hui.", "Même petite : avoir tenu, avoir demandé de l'aide, t'être reposée.", "Écris-la comme tu l'écrirais pour une amie."], "icone": "<svg viewBox=\"0 0 64 64\" width=\"64\" height=\"64\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"31\" fill=\"#fbf3e3\"/><g fill=\"none\" stroke=\"#946d27\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><ellipse cx=\"32\" cy=\"30\" rx=\"14\" ry=\"18\"/><path d=\"M26 50 l-4 6\"/><path d=\"M38 50 l4 6\"/><path transform=\"translate(32 25) scale(0.75)\" d=\"M0 4 C-2 -1,-8 -1,-8 4 C-8 8,-3 11,0 14 C3 11,8 8,8 4 C8 -1,2 -1,0 4Z\"/></g></svg>"}
 ];
 
 let checkedJours=new Set();
@@ -409,57 +467,105 @@ function checkBilan(){
   // Bilan libre, bouton toujours accessible
 }
 
-// Pratiques
+// Boîte à outils
+function thOf(id){return themesBoite.find(function(t){return t.id===id;});}
+function metaOutil(p){return (p.jour?'Jour '+p.jour+' · ':'')+p.duree;}
+function outilsGardes(){return pratiques.filter(function(p){return selectedPratiques.has(p.id);});}
 const pc=document.getElementById('pratiques-container');
-pratiques.forEach((p,i)=>{
-  const div=document.createElement('div');
-  div.className='pratique-card';
-  div.style.cssText=`background:${p.bg};border-color:${p.border}40;`;
-  div.id='pratique-'+i;
-  div.innerHTML=`
-    <div class="pratique-check" id="pcheck-${i}"></div>
-    <div style="flex:1;">
-      <div class="pratique-nom">${p.nom}</div>
-      <div class="pratique-temps">${p.temps}</div>
-      <div class="pratique-desc">${p.desc}</div>
-    </div>`;
-  div.onclick=()=>togglePratique(i,p);
-  pc.appendChild(div);
+themesBoite.forEach(function(th){
+  const h=document.createElement('div');
+  h.className='outil-theme';h.style.setProperty('--c',th.c);h.textContent=th.titre;
+  pc.appendChild(h);
+  pratiques.filter(function(p){return p.theme===th.id;}).forEach(function(p){
+    const d=document.createElement('div');
+    d.className='outil';d.id='outil-'+p.id;
+    d.style.setProperty('--c',th.c);d.style.setProperty('--bg',th.bg);
+    d.innerHTML='<div class="outil-haut" onclick="voirOutil(\''+p.id+'\')"><div class="outil-ic">'+p.icone+'</div>'
+      +'<div style="flex:1;min-width:0;"><div class="outil-nom">'+p.nom+'</div><div class="outil-meta">'+metaOutil(p)+'</div><div class="outil-quand">'+p.quand+'</div></div></div>'
+      +'<ol class="outil-etapes">'+p.etapes.map(function(e){return '<li>'+e+'</li>';}).join('')+'</ol>'
+      +'<div class="outil-bas"><button type="button" class="outil-voir" onclick="voirOutil(\''+p.id+'\')">Comment faire ▾</button>'
+      +'<button type="button" class="outil-garder" onclick="togglePratique(\''+p.id+'\')">＋ Je le garde</button></div>';
+    pc.appendChild(d);
+  });
 });
 
-function togglePratique(i,p){
-  const check=document.getElementById('pcheck-'+i);
-  const card=document.getElementById('pratique-'+i);
-  if(selectedPratiques.has(i)){
-    selectedPratiques.delete(i);
-    check.classList.remove('done');
-    check.textContent='';
-    card.style.borderColor=p.border+'40';
-    card.classList.remove('selected');
-  } else {
-    if(selectedPratiques.size>=3){
-      // Retirer la première sélectionnée
-      const first=[...selectedPratiques][0];
-      selectedPratiques.delete(first);
-      document.getElementById('pcheck-'+first).classList.remove('done');
-      document.getElementById('pcheck-'+first).textContent='';
-      document.getElementById('pratique-'+first).style.borderColor=pratiques[first].border+'40';
-      document.getElementById('pratique-'+first).classList.remove('selected');
-    }
-    selectedPratiques.add(i);
-    check.classList.add('done');
-    check.textContent='✓';
-    card.style.borderColor=p.border;
-    card.classList.add('selected');
-  }
-  const n=selectedPratiques.size;
-  document.getElementById('selection-compteur').textContent=
-    n===0?'Choisis les pratiques qui te parlent, idéalement autour de 3':
-    n===1?'1 pratique choisie':
-    n===2?'2 pratiques choisies':
-    n===3?'3 pratiques choisies ✓, parfait !':
-    n+' pratiques choisies';
+function voirOutil(id){
+  const d=document.getElementById('outil-'+id);
+  const o=d.classList.toggle('ouvert');
+  d.querySelector('.outil-voir').textContent=o?'Fermer ▴':'Comment faire ▾';
 }
+
+function togglePratique(id){
+  if(selectedPratiques.has(id))selectedPratiques.delete(id);else selectedPratiques.add(id);
+  majBoite();
+  sauverBoite();
+}
+
+function majBoite(){
+  pratiques.forEach(function(p){
+    const d=document.getElementById('outil-'+p.id);if(!d)return;
+    const g=selectedPratiques.has(p.id);
+    d.classList.toggle('garde',g);
+    d.querySelector('.outil-garder').textContent=g?'✓ Gardé':'＋ Je le garde';
+  });
+  const n=selectedPratiques.size;
+  const m=n===0?'Coche ceux que tu gardes. Pour commencer, trois, c\'est l\'idéal.':
+    n===1?'1 outil gardé.':
+    n===2?'2 outils gardés.':
+    n===3?'3 outils gardés ✓ C\'est une très bonne base.':
+    'Tu en as choisi '+n+'. Si ça te semble beaucoup, garde les 3 qui te parlent le plus. Les autres restent dans ta boîte à outils.';
+  ['selection-compteur','selection-compteur2'].forEach(function(id){const e=document.getElementById(id);if(e)e.textContent=m;});
+  const ch=document.getElementById('planning-choisies');
+  if(ch){
+    const L=outilsGardes();
+    ch.innerHTML=L.length?'<div class="label" style="margin-bottom:10px;">Tes outils gardés</div><div class="chips">'+L.map(function(p){const th=thOf(p.theme);return '<span class="chip" style="--c:'+th.c+';--bg:'+th.bg+';">'+p.icone+p.nom+'</span>';}).join('')+'</div>':'';
+    ch.style.display=L.length?'block':'none';
+  }
+}
+
+/* Une fiche outil, prête à imprimer (styles intégrés : elle sert aussi dans le carnet complet) */
+function carteOutil(p,garde){
+  const th=thOf(p.theme);
+  return '<div style="display:flex;gap:14px;align-items:flex-start;background:'+th.bg+';border-radius:12px;padding:12px 14px;margin-bottom:10px;border-left:4px solid '+th.c+';page-break-inside:avoid;break-inside:avoid;">'
+    +'<div style="flex:0 0 56px;line-height:0;">'+p.icone.replace('width="64" height="64"','width="56" height="56"').replace('fill="'+th.bg+'"','fill="#ffffff"')+'</div>'
+    +'<div style="flex:1;"><div style="font-size:16px;font-weight:bold;color:#3d2d50;line-height:1.35;">'+(garde?'✓ ':'')+p.nom+'</div>'
+    +'<div style="font-size:12px;color:'+th.c+';margin:2px 0 4px;">'+metaOutil(p)+'</div>'
+    +'<div style="font-size:14px;font-style:italic;color:#6a5a70;line-height:1.5;">'+p.quand+'</div>'
+    +'<ol style="margin:6px 0 0;padding-left:20px;font-size:14.5px;line-height:1.55;">'+p.etapes.map(function(e){return '<li>'+e+'</li>';}).join('')+'</ol></div></div>';
+}
+function boiteHTML(){
+  const L=outilsGardes(),reste=pratiques.filter(function(p){return !selectedPratiques.has(p.id);});
+  let h='<h2 style="font-size:20px;color:#6a4a78;margin:34px 0 4px;">Ma boîte à outils</h2>'
+    +'<p style="font-size:14.5px;color:#6a5a70;margin:0 0 14px;line-height:1.6;">Les outils découverts du jour 2 au jour 13. Garde-en trois pour commencer, et puis après, fais comme tu veux : c\'est ta boîte.</p>';
+  if(L.length){
+    h+='<h3 style="font-size:16px;color:#3d2d50;margin:18px 0 10px;">Les outils que je garde</h3>';
+    L.forEach(function(p){h+=carteOutil(p,true);});
+  }
+  if(reste.length){
+    h+='<h3 style="font-size:16px;color:#3d2d50;margin:26px 0 4px;">'+(L.length?'Le reste de ma boîte à outils':'Tous mes outils')+'</h3>';
+    themesBoite.forEach(function(th){
+      const R=reste.filter(function(p){return p.theme===th.id;});if(!R.length)return;
+      h+='<div style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:'+th.c+';margin:18px 0 8px;page-break-after:avoid;break-after:avoid;">'+th.titre+'</div>';
+      R.forEach(function(p){h+=carteOutil(p,false);});
+    });
+  }
+  return h;
+}
+function sauverBoite(){
+  try{
+    const k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+    c.boite={choisies:outilsGardes().map(function(p){return p.id;}),date:new Date().toISOString(),html:boiteHTML()};
+    localStorage.setItem(k,JSON.stringify(c));
+  }catch(e){}
+}
+/* Si elle revient sur la page, ses outils gardés sont toujours cochés */
+(function(){
+  try{
+    const c=JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');
+    if(c.boite&&c.boite.choisies)c.boite.choisies.forEach(function(id){if(pratiques.some(function(p){return p.id===id;}))selectedPratiques.add(id);});
+  }catch(e){}
+  majBoite();
+})();
 
 function showFin(){
   // Plan récap
@@ -475,7 +581,11 @@ function showFin(){
   if(soir) pr.innerHTML+=`<div style="margin-bottom:8px;"><span style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.1em;">Soir</span><p style="font-size:14px;color:#5d4820;margin:2px 0 0;">${soir}</p></div>`;
   if(crise) pr.innerHTML+=`<div><span style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.1em;">Si crise</span><p style="font-size:14px;color:#5d4820;margin:2px 0 0;">${crise}</p></div>`;
 
+  const gardes=outilsGardes();
+  if(gardes.length) pr.innerHTML=`<div style="margin-bottom:12px;"><span style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.1em;">Mes outils gardés</span><p style="font-size:14px;color:#5d4820;margin:2px 0 0;">${gardes.map(function(p){return p.nom;}).join(' · ')}</p></div>`+pr.innerHTML;
+
   if(!pr.innerHTML) pr.innerHTML=`<p style="font-size:14px;color:#a09070;">Continue à intégrer les pratiques qui te parlent, à ton rythme.</p>`;
+  sauverBoite();
 
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
   document.getElementById('phase-fin').classList.add('active');
@@ -488,9 +598,9 @@ function telechargerReponses(){
   var contenu='';function bx(q,r){return '<div class="recap-box"><div class="recap-q">'+q+'</div><div class="recap-r">'+r+'</div></div>';}
   var labs=['Ce qui m\'a le plus touchee','Ce qui a ete difficile a regarder','Ce qui a change','Ce que je veux garder'];
   ['b1','b2','b3','b4'].forEach(function(id,i){var e=document.getElementById(id);if(e&&e.value.trim())contenu+=bx(labs[i],e.value.trim().replace(/\n/g,'<br>'));});
-  if(typeof selectedPratiques!=='undefined'&&selectedPratiques.size){contenu+=bx('Mes pratiques essentielles',[...selectedPratiques].map(function(i){var p=pratiques[i]||pratiques.find(function(x){return x.id===i});return p?p.nom:i;}).join('<br>'));}
   var pl='';[['p-matin','Matin'],['p-midi','Midi'],['p-soir','Soir'],['p-crise','Si crise']].forEach(function(a){var e=document.getElementById(a[0]);if(e&&e.value.trim())pl+='<strong>'+a[1]+'</strong> : '+e.value.trim()+'<br>';});
   if(pl)contenu+=bx('Mon planning de soin',pl);
+  contenu+=boiteHTML();
   if(!contenu)contenu='<p>Aucune reponse enregistree.</p>';
   var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
     +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
@@ -608,6 +718,7 @@ function telechargerCarnet(){
     corps+='<h2>'+nom+carnetEsc(d.titre||'')+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
     items.forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});
   });
+  if(c.boite&&c.boite.html)corps+=c.boite.html;
   if(c.croyance&&(c.croyance.texte||c.croyance.preuves)){var cr=c.croyance,pr=cr.preuves||{};corps+='<h2>Ma nouvelle croyance et mon carnet de preuves</h2>';if(cr.texte)corps+='<div class="box"><div class="q">Ma nouvelle croyance</div><div class="r">'+carnetEsc(cr.texte)+'</div></div>';var nt=[];if(cr.note19!=null)nt.push('Jour 19 : '+cr.note19+' %');if(cr.note30!=null)nt.push('Jour 30 : '+cr.note30+' %');if(nt.length)corps+='<div class="box"><div class="q">À combien j\'y crois</div><div class="r">'+nt.join(' · ')+'</div></div>';Object.keys(pr).sort(function(a,b){return a-b;}).forEach(function(j){corps+='<div class="box"><div class="q">Preuve du jour '+j+'</div><div class="r">'+carnetEsc(pr[j])+'</div></div>';});}
   corps+=toile('Jour 30 · Mon état des lieux',c.j30toile);
   if(!corps) corps='<p>Ton carnet est vide sur cet appareil. Les fichiers que tu as téléchargés chaque jour restent ta sauvegarde.</p>';
