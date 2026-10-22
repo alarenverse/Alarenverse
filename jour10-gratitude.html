@@ -174,7 +174,7 @@
     </div>
 
     <div class="highlight" style="margin-top:16px;text-align:left;">
-      🔑 <strong>À pratiquer chaque soir :</strong> Pas une liste de 3 choses. Une seule chose, ressentie vraiment, avec détail. Pourquoi est-ce que ça compte ? Qu'est-ce que ça t'a apporté ? C'est la profondeur qui change le cerveau, pas la quantité.
+      🔑 <strong>À retenir :</strong> La gratitude, ce n'est pas une liste. C'est une seule chose, vraiment ressentie, avec ses détails : pourquoi elle compte, ce qu'elle t'apporte. C'est la profondeur qui fait la différence, pas la quantité.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -266,10 +266,10 @@ const journalQuestions = [
     placeholder:"Cette chose simple c'est..."
   },
   {
-    q:"Comment vas-tu garder cette pratique vivante cette semaine : de façon réaliste ?",
-    sous:"Pas un objectif parfait. Juste quelque chose de faisable et honnête.",
-    exemple:"Par exemple : « Une chose notée dans mon téléphone, le soir avant de dormir. » « Dire merci à une personne par jour, à voix haute. »",
-    placeholder:"Ce que je vais faire c'est..."
+    q:"Qu'est-ce que ça t'a fait, de chercher ce qui est bon ?",
+    sous:"Pas de bonne réponse. Ça peut être doux, étrange, difficile, ou rien du tout.",
+    exemple:"Par exemple : « Ça m'a fait du bien de repenser à ce moment. » « J'ai eu du mal à trouver, et ça m'a rendue un peu triste. »",
+    placeholder:"Ce que ça m'a fait c'est..."
   },
 ];
 
@@ -482,7 +482,7 @@ function telechargerReponses(){
     try{ if(typeof journalReponses!=='undefined'&&Array.isArray(journalReponses)) journalReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
 
     document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
-      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      if(el.id==='e-textarea'||el.id==='j-textarea'||(el.closest&&el.closest('.realise-jour')))return;
       var v=(el.value||'').trim(); if(!v)return;
       items.push({q:lab(el),r:v});
     });
@@ -502,6 +502,67 @@ function telechargerReponses(){
   document.addEventListener('input',bientot,true);
   document.addEventListener('click',bientot,true);
   window.addEventListener('pagehide',sauver);
+})();
+</script>
+<script>
+/* Ce que je réalise aujourd'hui : trois questions pour fermer la journée, rassemblées ensuite aux bilans et dans le carnet */
+(function(){
+  var N=10, EX=["Je réalise que je ne remarque presque jamais ce qui va bien.", "De la douceur, et un peu d'émotion.", "J'ai envie de lâcher l'idée que tout doit être parfait pour que je sois contente."], CLE='j'+N;
+  var Q=[["Aujourd'hui, je réalise que…","Ce que je fais, ce que je porte, ce que je ne voyais pas."],["Quand je le vois, je ressens…",""],["Ce que j'ai envie de lâcher, ou de faire autrement…",""]];
+  var LAB=['Je réalise que','Je ressens',"J'ai envie de lâcher, ou de faire autrement"];
+  function lire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br>');}
+  function titre(){var p=document.title.split(' · ');return p.length>1?p[1]:'';}
+  function valeurs(){var v=[];for(var i=1;i<=3;i++){var el=document.getElementById('rl-'+i);v.push(el?el.value.trim():'');}return v;}
+  function sauver(){
+    try{
+      var v=valeurs(),c=lire();c.realise=c.realise||{};
+      if(v[0]||v[1]||v[2])c.realise[CLE]={titre:titre(),date:new Date().toISOString(),r1:v[0],r2:v[1],r3:v[2]};
+      else delete c.realise[CLE];
+      localStorage.setItem('alarenverse_carnet',JSON.stringify(c));
+      var ok=document.getElementById('rl-ok');if(ok)ok.style.opacity=(v[0]||v[1]||v[2])?1:0;
+    }catch(e){}
+  }
+  function installer(){
+    if(N===1&&location.hash==='#j30')return;
+    var fin=document.getElementById('phase-fin');if(!fin||document.getElementById('realise-jour'))return;
+    if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
+    var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
+    var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
+    for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
+    box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
+    var ancre=document.getElementById('preuve-jour')||fin.querySelector('button[onclick^="telechargerReponses"]');
+    if(ancre&&ancre.parentNode)ancre.parentNode.insertBefore(box,ancre);else fin.appendChild(box);
+    var r=(lire().realise||{})[CLE]||{},t;
+    ['r1','r2','r3'].forEach(function(k,i){var el=document.getElementById('rl-'+(i+1));el.value=r[k]||'';
+      el.addEventListener('input',function(){clearTimeout(t);t=setTimeout(sauver,400);});el.addEventListener('blur',sauver);});
+    var ok=document.getElementById('rl-ok');ok.style.opacity=(r.r1||r.r2||r.r3)?1:0;
+    window.addEventListener('pagehide',sauver);
+  }
+  /* Les réponses de la carte rejoignent aussi le fichier « Télécharger mes réponses » du jour */
+  if(!window.__realiseBlob){
+    window.__realiseBlob=1;var B=window.Blob;
+    var section=function(){
+      var v=valeurs();if(!(v[0]||v[1]||v[2]))return '';
+      var s='<div data-realise="1" style="margin-top:26px;"><div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#a080c8;margin-bottom:8px;">Ce que je réalise aujourd\'hui</div>';
+      v.forEach(function(x,i){if(x)s+='<div style="background:#f8f3fb;border-left:3px solid #a080c8;border-radius:8px;padding:12px 16px;margin-bottom:10px;"><div style="font-size:11px;color:#9a84a8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">'+LAB[i]+'</div><div style="font-size:15px;line-height:1.6;">'+esc(x)+'</div></div>';});
+      return s+'</div>';
+    };
+    var NB=function(parts,opts){
+      try{
+        if(parts&&parts.length===1&&typeof parts[0]==='string'&&/text\/html/.test((opts&&opts.type)||'')
+           &&parts[0].indexOf('data-realise')<0&&parts[0].indexOf('<h1>Mon carnet</h1>')<0){
+          var k=parts[0].lastIndexOf('<div class="footer"'),s=section();
+          if(k>-1&&s)parts=[parts[0].slice(0,k)+s+parts[0].slice(k)];
+        }
+      }catch(e){}
+      return new B(parts,opts);
+    };
+    NB.prototype=B.prototype;window.Blob=NB;
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installer);else installer();
 })();
 </script>
 </body>

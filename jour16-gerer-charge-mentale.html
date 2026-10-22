@@ -171,7 +171,7 @@
     <span class="emoji-hero">🎈</span>
     <h2>Ce que tu peux délester</h2>
     <p style="text-align:center;margin-bottom:8px;">Délester, ce n'est pas ne plus te soucier de rien. C'est déposer une partie du poids pour t'offrir de l'espace, choisir ce qui mérite ton énergie, et ce qui peut attendre, être fait autrement, ou disparaître.</p>
-    <p class="small" style="text-align:center;margin-bottom:20px;">Coche ce que tu choisis de délester cette semaine, même un seul suffit.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Coche ce que tu choisis de délester, même un seul suffit.</p>
 
     <div class="hl rouge" style="margin-bottom:16px;">
       <strong>Pourquoi c'est si difficile de déposer, pour nous :</strong><br><br>
@@ -185,7 +185,7 @@
       Le pédiatre Winnicott a introduit le concept de "good enough mother" : la mère suffisamment bonne. Pas parfaite. Juste suffisamment présente, suffisamment aimante, suffisamment là. Ce concept s'applique à tout : le repas suffisamment bon, la maison suffisamment propre, le travail suffisamment bien fait. La perfection épuise. Le suffisamment bon libère.
     </div>
 
-    <button class="btn" onclick="showPhase('ecriture')">Mon engagement ✍️</button>
+    <button class="btn" onclick="showPhase('ecriture')">Ce que je choisis ✍️</button>
   </div>
 </div>
 
@@ -193,14 +193,14 @@
 <div class="phase" id="phase-ecriture">
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">✍️</span>
-    <h2>Mon engagement de la semaine</h2>
+    <h2>Ce que je redistribue, ce que je m'autorise</h2>
     <p style="text-align:center;margin-bottom:20px;">Deux questions courtes : une action, une permission.</p>
 
     <div style="margin-bottom:20px;">
-      <p class="e-q">Quelle est la première tâche concrète que tu vas redistribuer ou arrêter cette semaine ?</p>
-      <p class="e-sous">Pas une liste. Une seule chose, précise, réaliste, avec un délai.</p>
-      <div class="exemple">Par exemple : « Dès lundi, c'est mon compagnon qui gère les inscriptions aux activités. Je le lui dis ce soir. » « J'arrête de répondre aux mails du travail après 19 h, dès demain. »</div>
-      <textarea id="e1" rows="3" placeholder="Cette semaine je vais redistribuer / arrêter de faire... / Je vais demander à... de prendre en charge..." oninput="checkEngagement()"></textarea>
+      <p class="e-q">Quelle tâche tu choisis de redistribuer ou d'arrêter ?</p>
+      <p class="e-sous">Pas une liste. Une seule chose, précise et réaliste.</p>
+      <div class="exemple">Par exemple : « Les inscriptions aux activités, c'est mon compagnon qui les gère. » « Les mails du travail après 19 h, j'arrête. »</div>
+      <textarea id="e1" rows="3" placeholder="Je choisis de redistribuer / d'arrêter... / Je demande à... de prendre en charge..." oninput="checkEngagement()"></textarea>
     </div>
 
     <div style="margin-bottom:20px;">
@@ -222,7 +222,7 @@
     <p>Redistribuer et délester ne sont pas des abandons. C'est de la sagesse, déposer une partie du poids pour que ton énergie serve vraiment ce qui compte pour toi. Et gagner de la place pour respirer.</p>
 
     <div style="background:linear-gradient(135deg,#eef0fa,#f0eefa);border-radius:16px;padding:20px;border:1px solid rgba(100,120,200,0.15);text-align:left;margin-top:16px;">
-      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#6080c8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🌿 Tes engagements du Jour 16</div>
+      <div style="font-family:'Jost',sans-serif;font-size:11px;color:#6080c8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">🌿 Ce que tu as choisi au Jour 16</div>
       <div id="recap-container"></div>
     </div>
 
@@ -308,7 +308,7 @@ function showPhase(id){
 
 // Preview
 const pc=document.getElementById('preview-container');
-[{e:'🔄',t:'La redistribution, responsabilité vs exécution'},{e:'📤',t:'Sortir de ta tête, l\'externalisation'},{e:'🎯',t:'Mettre ton énergie là où tu as une prise'},{e:'🎈',t:'Délester, enlever du poids sans tout lâcher'},{e:'✨',t:'Le suffisamment bon, Winnicott & Brown'},{e:'📋',t:'Mon plan de redistribution concret'},{e:'💬',t:'Phrases types pour avoir la conversation'},{e:'🎈',t:'Exercice : ce que je choisis de délester'},{e:'✍️',t:'Mon engagement de la semaine'}].forEach(i=>{
+[{e:'🔄',t:'La redistribution, responsabilité vs exécution'},{e:'📤',t:'Sortir de ta tête, l\'externalisation'},{e:'🎯',t:'Mettre ton énergie là où tu as une prise'},{e:'🎈',t:'Délester, enlever du poids sans tout lâcher'},{e:'✨',t:'Le suffisamment bon, Winnicott & Brown'},{e:'📋',t:'Mon plan de redistribution concret'},{e:'💬',t:'Phrases types pour avoir la conversation'},{e:'🎈',t:'Exercice : ce que je choisis de délester'},{e:'✍️',t:'Ce que je redistribue, ce que je m\'autorise'}].forEach(i=>{
   pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
 });
 
@@ -483,7 +483,7 @@ function showFin(){
   }
   const e1=document.getElementById('e1').value.trim();
   const e2=document.getElementById('e2').value.trim();
-  if(e1) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ce que je vais redistribuer / arrêter</div><div class="recap-r">"${e1}"</div></div>`;
+  if(e1) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ce que je choisis de redistribuer / d'arrêter</div><div class="recap-r">"${e1}"</div></div>`;
   if(e2) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">La permission que je me donne</div><div class="recap-r">"${e2}"</div></div>`;
   if(lacherSelected.size>0){
     const lacher=[...lacherSelected].map(i=>lacherItems[i].titre).join(' / ');
@@ -554,7 +554,7 @@ function telechargerReponses(){
     var items=[];
 
     document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
-      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      if(el.id==='e-textarea'||el.id==='j-textarea'||(el.closest&&el.closest('.realise-jour')))return;
       var v=(el.value||'').trim(); if(!v)return;
       items.push({q:lab(el),r:v});
     });
@@ -574,6 +574,67 @@ function telechargerReponses(){
   document.addEventListener('input',bientot,true);
   document.addEventListener('click',bientot,true);
   window.addEventListener('pagehide',sauver);
+})();
+</script>
+<script>
+/* Ce que je réalise aujourd'hui : trois questions pour fermer la journée, rassemblées ensuite aux bilans et dans le carnet */
+(function(){
+  var N=16, EX=["Je réalise que si je ne lâche rien, c'est aussi parce que j'ai peur que ce soit mal fait.", "Un peu de honte, et du soulagement de le voir enfin.", "J'ai envie d'accepter que ce soit fait autrement."], CLE='j'+N;
+  var Q=[["Aujourd'hui, je réalise que…","Ce que je fais, ce que je porte, ce que je ne voyais pas."],["Quand je le vois, je ressens…",""],["Ce que j'ai envie de lâcher, ou de faire autrement…",""]];
+  var LAB=['Je réalise que','Je ressens',"J'ai envie de lâcher, ou de faire autrement"];
+  function lire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br>');}
+  function titre(){var p=document.title.split(' · ');return p.length>1?p[1]:'';}
+  function valeurs(){var v=[];for(var i=1;i<=3;i++){var el=document.getElementById('rl-'+i);v.push(el?el.value.trim():'');}return v;}
+  function sauver(){
+    try{
+      var v=valeurs(),c=lire();c.realise=c.realise||{};
+      if(v[0]||v[1]||v[2])c.realise[CLE]={titre:titre(),date:new Date().toISOString(),r1:v[0],r2:v[1],r3:v[2]};
+      else delete c.realise[CLE];
+      localStorage.setItem('alarenverse_carnet',JSON.stringify(c));
+      var ok=document.getElementById('rl-ok');if(ok)ok.style.opacity=(v[0]||v[1]||v[2])?1:0;
+    }catch(e){}
+  }
+  function installer(){
+    if(N===1&&location.hash==='#j30')return;
+    var fin=document.getElementById('phase-fin');if(!fin||document.getElementById('realise-jour'))return;
+    if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
+    var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
+    var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
+    for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
+    box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
+    var ancre=document.getElementById('preuve-jour')||fin.querySelector('button[onclick^="telechargerReponses"]');
+    if(ancre&&ancre.parentNode)ancre.parentNode.insertBefore(box,ancre);else fin.appendChild(box);
+    var r=(lire().realise||{})[CLE]||{},t;
+    ['r1','r2','r3'].forEach(function(k,i){var el=document.getElementById('rl-'+(i+1));el.value=r[k]||'';
+      el.addEventListener('input',function(){clearTimeout(t);t=setTimeout(sauver,400);});el.addEventListener('blur',sauver);});
+    var ok=document.getElementById('rl-ok');ok.style.opacity=(r.r1||r.r2||r.r3)?1:0;
+    window.addEventListener('pagehide',sauver);
+  }
+  /* Les réponses de la carte rejoignent aussi le fichier « Télécharger mes réponses » du jour */
+  if(!window.__realiseBlob){
+    window.__realiseBlob=1;var B=window.Blob;
+    var section=function(){
+      var v=valeurs();if(!(v[0]||v[1]||v[2]))return '';
+      var s='<div data-realise="1" style="margin-top:26px;"><div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#a080c8;margin-bottom:8px;">Ce que je réalise aujourd\'hui</div>';
+      v.forEach(function(x,i){if(x)s+='<div style="background:#f8f3fb;border-left:3px solid #a080c8;border-radius:8px;padding:12px 16px;margin-bottom:10px;"><div style="font-size:11px;color:#9a84a8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">'+LAB[i]+'</div><div style="font-size:15px;line-height:1.6;">'+esc(x)+'</div></div>';});
+      return s+'</div>';
+    };
+    var NB=function(parts,opts){
+      try{
+        if(parts&&parts.length===1&&typeof parts[0]==='string'&&/text\/html/.test((opts&&opts.type)||'')
+           &&parts[0].indexOf('data-realise')<0&&parts[0].indexOf('<h1>Mon carnet</h1>')<0){
+          var k=parts[0].lastIndexOf('<div class="footer"'),s=section();
+          if(k>-1&&s)parts=[parts[0].slice(0,k)+s+parts[0].slice(k)];
+        }
+      }catch(e){}
+      return new B(parts,opts);
+    };
+    NB.prototype=B.prototype;window.Blob=NB;
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installer);else installer();
 })();
 </script>
 </body>

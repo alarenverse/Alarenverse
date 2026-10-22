@@ -120,6 +120,7 @@
     <p style="text-align:center;margin-bottom:22px;">Prends le temps de répondre à ce qui te parle, sans te juger, sans chercher la bonne réponse. Tu peux laisser des questions de côté.</p>
 
     <div class="mm-box" id="mes-mots-semaine" style="display:none"></div>
+    <div class="mm-box" id="mes-realise" style="display:none"></div>
 
     <div class="bilan-item">
       <div class="bilan-q">Parmi les 6 journées, laquelle a le plus résonné en toi ? Pourquoi ?</div>
@@ -446,6 +447,22 @@ function afficherMesMots(id,jours,titre,intro){
   el.innerHTML='<div class="label" style="text-align:left;margin-bottom:4px;">'+titre+'</div><p style="font-size:15px;margin:0 0 4px;opacity:0.85;">'+intro+'</p>'+h;
   el.style.display='block';
 }
+/* Les prises de conscience des jours, relues aux bilans */
+function afficherRealise(id,jours,titre,intro,court){
+  var el=document.getElementById(id); if(!el)return;
+  var r=carnetLire().realise||{},h='',n=0;
+  jours.forEach(function(j){
+    var x=r['j'+j]; if(!x||!(x.r1||x.r2||x.r3))return;
+    n++;
+    h+='<div class="mm-titre">Jour '+j+(x.titre?' · '+carnetEsc(x.titre):'')+'</div>';
+    if(x.r1)h+='<div class="mm-r">« '+carnetEsc(carnetCourt(x.r1,220))+' »</div>';
+    if(x.r3&&(!court||!x.r1))h+='<div class="mm-r" style="opacity:0.85;">→ '+carnetEsc(carnetCourt(x.r3,180))+'</div>';
+    else if(x.r2&&!x.r1)h+='<div class="mm-r" style="opacity:0.85;">→ '+carnetEsc(carnetCourt(x.r2,180))+'</div>';
+  });
+  if(!n){el.style.display='none';return;}
+  el.innerHTML='<div class="label" style="text-align:left;margin-bottom:4px;">'+titre+'</div><p style="font-size:15px;margin:0 0 4px;opacity:0.85;">'+intro+'</p>'+h;
+  el.style.display='block';
+}
 function telechargerCarnet(){
   var c=carnetLire(),corps='',ordre=[];
   for(var i=1;i<=30;i++)ordre.push('j'+i);
@@ -457,13 +474,17 @@ function telechargerCarnet(){
     return h;
   }
   corps+=toile('Jour 1 · Mon état des lieux',c.j1);
+  /* Ce que j'ai réalisé à la fin de chaque jour */
+  function rzHtml(rz){if(!rz)return '';var h='';[['Ce que je réalise',rz.r1],['Ce que je ressens',rz.r2],['Ce que j\'ai envie de lâcher',rz.r3]].forEach(function(x){if(x[1])h+='<div class="box"><div class="q">'+x[0]+'</div><div class="r">'+carnetEsc(x[1])+'</div></div>';});return h;}
   ordre.forEach(function(k){
-    if(k==='j1'){((c.j1&&c.j1.items)||[]).forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});return;}
-    var d=c[k]; if(!d)return;
+    var rz=(c.realise||{})[k];
+    if(k==='j1'){((c.j1&&c.j1.items)||[]).forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});corps+=rzHtml(rz);return;}
+    var d=c[k]; if(!d&&!rz)return; d=d||{titre:rz.titre,date:rz.date};
     var nom=k==='bonus1'?'Bonus · ':'Jour '+k.slice(1)+' · ';
-    var items=d.items||[]; if(!items.length&&!d.donnees)return;
+    var items=d.items||[]; if(!items.length&&!d.donnees&&!rz)return;
     corps+='<h2>'+nom+carnetEsc(d.titre||'')+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
     items.forEach(function(it){corps+='<div class="box"><div class="q">'+carnetEsc(it.q)+'</div><div class="r">'+carnetEsc(it.r)+'</div></div>';});
+    corps+=rzHtml(rz);
   });
   if(c.boite&&c.boite.html)corps+=c.boite.html;
   if(c.croyance&&(c.croyance.texte||c.croyance.preuves)){var cr=c.croyance,pr=cr.preuves||{};corps+='<h2>Ma nouvelle croyance et mon carnet de preuves</h2>';if(cr.texte)corps+='<div class="box"><div class="q">Ma nouvelle croyance</div><div class="r">'+carnetEsc(cr.texte)+'</div></div>';var nt=[];if(cr.note19!=null)nt.push('Jour 19 : '+cr.note19+' %');if(cr.note30!=null)nt.push('Jour 30 : '+cr.note30+' %');if(nt.length)corps+='<div class="box"><div class="q">À combien j\'y crois</div><div class="r">'+nt.join(' · ')+'</div></div>';Object.keys(pr).sort(function(a,b){return a-b;}).forEach(function(j){corps+='<div class="box"><div class="q">Preuve du jour '+j+'</div><div class="r">'+carnetEsc(pr[j])+'</div></div>';});}
@@ -489,5 +510,6 @@ function telechargerCarnet(){
 }
 </script>
 <script>afficherMesMots('mes-mots-semaine',[2, 3, 4, 5, 6],'Avant de répondre, relis-toi','Voici quelques mots que tu as écrits cette semaine.');</script>
+<script>afficherRealise('mes-realise',[1, 2, 3, 4, 5, 6],"Ce que tu as réalisé cette semaine","Relis-les. C'est souvent en les voyant ensemble qu'on comprend le plus.",false);</script>
 </body>
 </html>

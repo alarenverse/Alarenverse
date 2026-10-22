@@ -155,10 +155,10 @@
     </div>
   </div>
   <div class="retenir-box">
-    <div style="font-size:13px;color:#90a8b8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;font-family:'Jost',sans-serif;">🔑 À retenir absolument</div>
-    <p style="margin-bottom:10px;">Une fois par jour, minimum. Tous les jours. Dans un moment calme, au lever ou au coucher. Pas quand tu craques. Quand tout va bien.</p>
-    <p style="font-size:14px;margin-bottom:10px;">C'est seulement comme ça que ton corps assimile la respiration comme une ressource. Et c'est seulement après, une fois l'habitude bien ancrée et les bienfaits installés, que tu pourras t'appuyer dessus dans le stress, parce que ton corps, lui, connaîtra déjà le chemin.</p>
-    <p style="font-size:14px;">5 minutes chaque matin avant d'attraper ton téléphone. Tu n'as rien à forcer. Juste à revenir, encore et encore. C'est la régularité, et elle seule, qui transforme.</p>
+    <div style="font-size:13px;color:#90a8b8;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;font-family:'Jost',sans-serif;">🔑 À retenir</div>
+    <p style="margin-bottom:10px;">La respiration devient une ressource quand ton corps la connaît. Et il l'apprend dans les moments calmes, pas quand tu craques.</p>
+    <p style="font-size:14px;margin-bottom:10px;">Plus elle te devient familière quand tout va bien, plus ton corps saura retrouver le chemin le jour où le stress monte.</p>
+    <p style="font-size:14px;">Tu n'as rien à forcer. Elle t'attend dans ta boîte à outils, au jour 14.</p>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
       📥 Télécharger mes réponses
@@ -191,7 +191,7 @@ const theorie = [
   ]},
   { emoji:"⚠️", titre:"Ce que beaucoup ne savent pas, et qui change tout", intro:null, source:null, contenu:[
     {type:"highlight",texte:"🔑 La respiration, ce n'est pas d'abord un truc pour gérer une crise sur le moment. Et c'est important que tu le saches, sinon tu vas essayer en pleine panique, sentir que ça t'aide à peine, et croire que ça ne marche pas sur toi."},
-    {type:"texte",texte:"Son vrai pouvoir, il est dans la répétition. Une fois par jour, minimum. Tous les jours. Dans un moment calme, au lever ou au coucher, c'est l'idéal. Pas quand tu craques. Quand tout est tranquille."},
+    {type:"texte",texte:"Son vrai pouvoir, il est dans la répétition. C'est en la pratiquant dans un moment calme, au lever ou au coucher par exemple, que ton corps l'apprend. Pas quand tu craques : quand tout est tranquille."},
     {type:"texte",texte:"Pourquoi dans le calme ? Parce que c'est là que ton corps apprend. À force de répéter ce geste jour après jour, ton système nerveux finit par l'enregistrer comme un raccourci vers la sécurité. Il l'assimile, doucement, comme une ressource."},
     {type:"highlight",texte:"🌱 Et c'est seulement là, une fois que l'habitude est installée et que les bienfaits se font vraiment sentir, que tu peux te dire : OK, dans le stress, j'utilise cette ressource. Parce que ton corps, lui, l'a déjà reconnue. Il sait où elle mène. Tu ne lui demandes plus quelque chose d'inconnu en pleine tempête, tu actives un chemin qu'il connaît déjà par cœur."},
     {type:"texte",texte:"Imagine ton système nerveux comme un thermostat. Réglé en permanence sur \"alerte\", le moindre truc devient une menace : un mail, un regard, un silence. La respiration quotidienne baisse doucement ce niveau de base. Petit à petit, ton seuil remonte."},
@@ -343,7 +343,7 @@ function telechargerReponses(){
   var contenu='';var t=document.getElementById('reflexion-text');var v=t?t.value.trim():'';
   function bx(q,r){return '<div class="recap-box"><div class="recap-q">'+q+'</div><div class="recap-r">'+r+'</div></div>';}
   if(v) contenu+=bx('Ce que j\'ai ressenti apres la respiration',v.replace(/\n/g,'<br>'));
-  contenu+=bx('Ma pratique','Respiration 4-6 : inspire 4 secondes par le nez, expire 6 secondes par la bouche. Une fois par jour, dans le calme, au lever ou au coucher. Une fois l\'habitude ancree, ton corps saura la retrouver dans les moments difficiles.');
+  contenu+=bx('Ce que je retiens','Respiration 4-6 : inspire 4 secondes par le nez, expire 6 secondes par la bouche. Le corps l\'apprend dans le calme, et saura la retrouver dans les moments difficiles.');
   var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
     +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
     +'.programme{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a060;margin-bottom:8px;}'
@@ -393,7 +393,7 @@ function telechargerReponses(){
     var items=[];
 
     document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
-      if(el.id==='e-textarea'||el.id==='j-textarea')return;
+      if(el.id==='e-textarea'||el.id==='j-textarea'||(el.closest&&el.closest('.realise-jour')))return;
       var v=(el.value||'').trim(); if(!v)return;
       items.push({q:lab(el),r:v});
     });
@@ -413,6 +413,67 @@ function telechargerReponses(){
   document.addEventListener('input',bientot,true);
   document.addEventListener('click',bientot,true);
   window.addEventListener('pagehide',sauver);
+})();
+</script>
+<script>
+/* Ce que je réalise aujourd'hui : trois questions pour fermer la journée, rassemblées ensuite aux bilans et dans le carnet */
+(function(){
+  var N=3, EX=["Je réalise que je retiens mon souffle dès que je suis pressée.", "Mes épaules qui remontent.", "J'ai envie de me laisser respirer, même quand ça presse."], CLE='j'+N;
+  var Q=[["Aujourd'hui, je réalise que…","Ce que je fais, ce que je porte, ce que je ne voyais pas."],["Quand je le vois, je ressens…",""],["Ce que j'ai envie de lâcher, ou de faire autrement…",""]];
+  var LAB=['Je réalise que','Je ressens',"J'ai envie de lâcher, ou de faire autrement"];
+  function lire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br>');}
+  function titre(){var p=document.title.split(' · ');return p.length>1?p[1]:'';}
+  function valeurs(){var v=[];for(var i=1;i<=3;i++){var el=document.getElementById('rl-'+i);v.push(el?el.value.trim():'');}return v;}
+  function sauver(){
+    try{
+      var v=valeurs(),c=lire();c.realise=c.realise||{};
+      if(v[0]||v[1]||v[2])c.realise[CLE]={titre:titre(),date:new Date().toISOString(),r1:v[0],r2:v[1],r3:v[2]};
+      else delete c.realise[CLE];
+      localStorage.setItem('alarenverse_carnet',JSON.stringify(c));
+      var ok=document.getElementById('rl-ok');if(ok)ok.style.opacity=(v[0]||v[1]||v[2])?1:0;
+    }catch(e){}
+  }
+  function installer(){
+    if(N===1&&location.hash==='#j30')return;
+    var fin=document.getElementById('phase-fin');if(!fin||document.getElementById('realise-jour'))return;
+    if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
+    var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
+    var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
+    for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
+    box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
+    var ancre=document.getElementById('preuve-jour')||fin.querySelector('button[onclick^="telechargerReponses"]');
+    if(ancre&&ancre.parentNode)ancre.parentNode.insertBefore(box,ancre);else fin.appendChild(box);
+    var r=(lire().realise||{})[CLE]||{},t;
+    ['r1','r2','r3'].forEach(function(k,i){var el=document.getElementById('rl-'+(i+1));el.value=r[k]||'';
+      el.addEventListener('input',function(){clearTimeout(t);t=setTimeout(sauver,400);});el.addEventListener('blur',sauver);});
+    var ok=document.getElementById('rl-ok');ok.style.opacity=(r.r1||r.r2||r.r3)?1:0;
+    window.addEventListener('pagehide',sauver);
+  }
+  /* Les réponses de la carte rejoignent aussi le fichier « Télécharger mes réponses » du jour */
+  if(!window.__realiseBlob){
+    window.__realiseBlob=1;var B=window.Blob;
+    var section=function(){
+      var v=valeurs();if(!(v[0]||v[1]||v[2]))return '';
+      var s='<div data-realise="1" style="margin-top:26px;"><div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#a080c8;margin-bottom:8px;">Ce que je réalise aujourd\'hui</div>';
+      v.forEach(function(x,i){if(x)s+='<div style="background:#f8f3fb;border-left:3px solid #a080c8;border-radius:8px;padding:12px 16px;margin-bottom:10px;"><div style="font-size:11px;color:#9a84a8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">'+LAB[i]+'</div><div style="font-size:15px;line-height:1.6;">'+esc(x)+'</div></div>';});
+      return s+'</div>';
+    };
+    var NB=function(parts,opts){
+      try{
+        if(parts&&parts.length===1&&typeof parts[0]==='string'&&/text\/html/.test((opts&&opts.type)||'')
+           &&parts[0].indexOf('data-realise')<0&&parts[0].indexOf('<h1>Mon carnet</h1>')<0){
+          var k=parts[0].lastIndexOf('<div class="footer"'),s=section();
+          if(k>-1&&s)parts=[parts[0].slice(0,k)+s+parts[0].slice(k)];
+        }
+      }catch(e){}
+      return new B(parts,opts);
+    };
+    NB.prototype=B.prototype;window.Blob=NB;
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installer);else installer();
 })();
 </script>
 </body>
