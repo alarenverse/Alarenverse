@@ -138,7 +138,7 @@
 
     <div class="bilan-item">
       <div class="bilan-q">Quelle est la chose la plus importante que tu as apprise ou réalisée sur toi-même cette semaine ?</div>
-      <div class="bilan-sous">Même petite, même subtile : une prise de conscience compte.</div>
+      <div class="bilan-sous">Une prise de conscience compte, aussi petite ou subtile soit-elle.</div>
       <div class="exemple">Par exemple : « Je réalise que je ne me demande jamais ce que je ressens. » « Mon corps me prévient bien avant ma tête. »</div>
       <textarea id="b3" rows="4" placeholder="J'ai réalisé que..." oninput="checkBilan()"></textarea>
     </div>
@@ -423,7 +423,8 @@ function telechargerReponses(){
 </script>
 <script>
 /* Carnet du programme : relire ses mots, télécharger tout son parcours */
-var LABELS_J1=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"];
+var LABELS_J1=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps en alerte","Lien au corps","Repos","Relations","Cycle","Sens de soi"];
+var LABELS_J1_AVANT=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"]; /* réponses enregistrées avant décembre 2026 */
 function carnetLire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
 function carnetEsc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 function carnetCourt(t,n){t=String(t);return t.length>n?t.slice(0,n).replace(/\s+\S*$/,'')+'…':t;}
@@ -470,7 +471,8 @@ function telechargerCarnet(){
   function toile(t,d){
     if(!d||!d.answers)return '';
     var h='<h2>'+t+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
-    d.answers.forEach(function(v,i){h+='<div class="ligne"><span>'+(LABELS_J1[i]||'')+'</span><span>'+v+' / 5</span></div>';});
+    var L=d.answers.length===10?LABELS_J1_AVANT:LABELS_J1;
+    d.answers.forEach(function(v,i){h+='<div class="ligne"><span>'+(L[i]||'')+'</span><span>'+v+' / 5</span></div>';});
     return h;
   }
   corps+=toile('Jour 1 · Mon état des lieux',c.j1);
