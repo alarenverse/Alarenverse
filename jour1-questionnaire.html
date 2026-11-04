@@ -366,7 +366,7 @@
     <div class="label">Jour 1 · Ton point de départ</div>
     <h2>Avant de commencer, on regarde d'où tu pars</h2>
     <p>Aujourd'hui, il y a deux temps.</p>
-    <p>D'abord, dix questions rapides. Si tu as fait le bilan, tu vas les reconnaître, et c'est voulu : on les refera aux jours 7, 14, 21 et 30 pour voir ce qui bouge chez toi. Réponds vite, sans trop réfléchir.</p>
+    <p>D'abord, onze questions rapides. Si tu as fait le bilan, tu vas les reconnaître, et c'est voulu : on les refera aux jours 7, 14, 21 et 30 pour voir ce qui bouge chez toi. Réponds vite, sans trop réfléchir.</p>
     <p>Ensuite, on va plus loin que le bilan, avec cinq questions à écrire pour toi : pourquoi tu portes autant, et depuis quand.</p>
     <p class="note">Garde-toi un moment au calme pour la deuxième partie. Ce que tu écris reste sur ton appareil, personne d'autre ne le lit.</p>
     <button class="btn" onclick="showPhase('quiz');renderQuestion()">Je commence</button>
@@ -479,57 +479,67 @@ const questions=[
    theme:"emotions",
    text:"Quand une émotion forte te traverse (colère, tristesse, angoisse), qu'est-ce qui se passe le plus souvent ?",
    options:[
-     "Elle me submerge complètement. Je perds pied et je ne me reconnais plus.",
-     "Je la ravale. Je fais bonne figure et ça ressort ailleurs, plus tard.",
-     "Je la sens monter mais je ne sais pas trop quoi en faire.",
-     "Je commence à la reconnaître et à lui laisser un peu de place.",
-     "Je la traverse. Elle passe, et je reste moi."
+     "Tout se mélange. Un rien me fait déborder.",
+     "Je ne la sens pas sur le moment. Je fonctionne en pilote automatique, et tout me tombe dessus le soir.",
+     "Je la sens monter, mais je ne sais pas quoi en faire.",
+     "J'arrive à nommer mes émotions, et parfois à comprendre d'où elles viennent.",
+     "Je sais ce que je ressens, et ce dont j'ai besoin."
    ]},
   {category:"🧠 Ta charge mentale",
    theme:"charge",
    text:"Ton cerveau, il s'arrête quand ?",
    options:[
-     "Jamais. Même la nuit, même en vacances, il tourne en continu.",
-     "Presque jamais. Je pense toujours à ce qu'il ne faut pas oublier, pour tout le monde.",
-     "Rarement. Il faut vraiment que je m'isole pour qu'il se taise.",
-     "De temps en temps, quand j'arrive à déposer les choses quelque part.",
-     "Il s'arrête. Je sais faire des pauses vraies, sans culpabiliser."
+     "Jamais, même la nuit : je refais la liste de tout ce qu'il ne faut pas oublier.",
+     "Presque jamais. Je pense à tout, pour tout le monde. Si je lâche, tout s'écroule.",
+     "Seulement quand je suis seule. Et encore.",
+     "Quand j'arrive à poser les choses sur papier, ou à en confier une partie.",
+     "Il sait s'arrêter. Je dépose, je partage, et je souffle."
    ]},
   {category:"🗣️ Ta voix intérieure",
    theme:"voix",
-   text:"Quand tu rates quelque chose, tu te parles comment ?",
+   text:"Tu t'étais promis de prendre soin de toi (bouger, mieux dormir, souffler). Au bout de 3 jours, tu lâches. Tu te dis quoi ?",
    options:[
-     "Durement. Je m'en veux longtemps, je me traite de tous les noms.",
-     "Sévèrement. Je me dis des choses que je ne dirais à personne d'autre.",
-     "Ça dépend des jours. Parfois dure, parfois plus douce.",
-     "Plutôt correctement. J'essaie de me rappeler que c'est humain.",
-     "Avec douceur. Comme je parlerais à quelqu'un que j'aime."
+     "Que je suis nulle, que je n'y arrive jamais. Alors j'abandonne tout.",
+     "Que si ce n'est pas parfait, ça ne sert à rien.",
+     "Je m'en veux, je me dis “lundi, je recommence”… et ça recommence.",
+     "Que c'est humain, et j'essaie de reprendre là où j'en étais.",
+     "Je me parle comme à une amie, et je reprends tranquillement."
    ]},
   {category:"🛡️ Tes limites",
    theme:"limites",
-   text:"Combien de fois par jour tu penses à ce dont les autres ont besoin, avant de penser à toi ?",
+   text:"Dire non, demander de l'aide : c'est comment pour toi ?",
    options:[
-     "Tout le temps. Je passe systématiquement après tout le monde.",
-     "Très souvent. Dire non me fait culpabiliser pendant des heures.",
-     "Souvent. Je dis oui, puis je regrette.",
-     "Ça s'équilibre doucement. J'arrive parfois à me prioriser.",
-     "Je sais poser mes limites. Je me respecte dans mes relations."
+     "Je dis oui à tout, et je ne demande jamais rien. C'est moi qu'on vient voir, pas l'inverse.",
+     "Dire non me fait culpabiliser pendant des heures. Et demander de l'aide, j'ai peur de déranger.",
+     "Je dis oui, puis je regrette. Et quand ça ne va pas, je le dis à moitié, en rigolant.",
+     "Ça s'équilibre doucement. J'arrive parfois à dire non, ou à demander un coup de main.",
+     "Je sais poser mes limites, et j'accepte l'aide qu'on me donne."
    ]},
   {category:"🔥 Ta colère",
    theme:"colere",
    text:"Ta colère, elle va où ?",
    options:[
      "Elle explose sur les mauvaises personnes, souvent mes proches, et je culpabilise après.",
-     "Je la ravale entièrement. Elle se transforme en tristesse ou en tensions.",
-     "Je la sens, mais je ne sais pas quoi en faire. Alors elle stagne.",
-     "J'arrive parfois à la dire, sans que ça déborde.",
-     "Je l'écoute. Elle me montre ce qui doit changer, et j'agis dessus."
+     "Je la ravale. Elle se transforme en tristesse ou en tensions.",
+     "Je fais tout en soupirant. Elle stagne, et personne ne voit rien.",
+     "J'arrive parfois à dire “là, c'est trop” avant que ça déborde.",
+     "Je l'écoute. Elle me montre ce qui doit changer, et je le dis calmement."
    ]},
-  {category:"🌸 Ton corps",
+  {category:"⚡ Ton corps en alerte",
+   theme:"alerte",
+   text:"Ton corps, il te dit quoi pendant cette période de ta vie ?",
+   options:[
+     "Il est tendu en permanence. Mâchoire, épaules, ventre : je suis toujours en alerte.",
+     "Il m'envoie des signaux (fatigue, maux de tête, ventre) et je les ignore jusqu'à ce que ça lâche.",
+     "Je sens les tensions, mais je ne sais pas comment les relâcher.",
+     "J'arrive parfois à le calmer : respirer, bouger, ralentir.",
+     "Je sens quand il passe en alerte, et je sais le ramener au calme."
+   ]},
+  {category:"🌸 Ton corps et toi",
    theme:"corps",
    text:"Ton corps et toi, vous en êtes où ?",
    options:[
-     "En conflit. Je le critique, je l'ignore, ou il me fait mal et ça m'épuise.",
+     "En conflit. Je le critique sans arrêt.",
      "Distants. Je ne l'écoute pas vraiment, je le subis.",
      "Neutres. Il est là, je fais avec.",
      "On se réapprivoise doucement. J'écoute un peu ce qu'il me dit.",
@@ -537,12 +547,12 @@ const questions=[
    ]},
   {category:"😴 Ton repos",
    theme:"repos",
-   text:"T'accorder du repos, sans rien faire de \"utile\", c'est possible pour toi ?",
+   text:"T'accorder du repos, sans rien faire d'« utile », c'est possible pour toi ?",
    options:[
-     "Impossible. Je m'effondre d'épuisement, mais je ne me repose jamais vraiment.",
-     "Très difficile. Je culpabilise dès que je m'arrête.",
+     "Impossible. Je me repose seulement quand mon corps me force : malade ou à bout.",
+     "Très difficile. Je m'assieds 5 minutes, et la culpabilité me relève.",
      "Rarement. Il faut que tout soit fini avant, et ça ne l'est jamais.",
-     "Parfois. J'arrive à m'accorder des moments sans les justifier.",
+     "Parfois. Je m'accorde des moments, mais je me sens obligée de les justifier.",
      "Oui. Je sais me recharger, et je me donne le droit de le faire."
    ]},
   {category:"🤝 Tes relations",
@@ -551,19 +561,19 @@ const questions=[
    options:[
      "Vidée. Je donne beaucoup, je reçois peu, et je n'ose rien dire.",
      "Souvent fatiguée. Je marche un peu sur des œufs.",
-     "Ça dépend beaucoup des personnes.",
+     "Ça va, mais je joue un rôle. Je suis rarement moi-même.",
      "Plutôt bien, avec quelques relations qui pèsent.",
      "Nourrie. Je peux être moi-même et ça me fait du bien."
    ]},
-  {category:"🌙 Ton cycle",
+  {category:"🌙 Ton cycle et ton énergie",
    theme:"cycle",
-   text:"Ton énergie et ton humeur changent selon ton cycle. Tu fais comment avec ça ?",
+   text:"Il y a des semaines où tout est plus lourd (cycle, pilule, préménopause, ménopause). Tu fais comment ?",
    options:[
-     "Certaines semaines sont très dures et je m'en veux de ne pas tenir le rythme.",
-     "Je subis les variations sans les comprendre, et ça me déstabilise.",
-     "Je remarque des différences mais je m'organise comme si de rien n'était.",
-     "Je commence à adapter mon rythme à mes phases.",
-     "Je vis avec mon cycle plutôt qu'en lutte contre lui. Ou je ne suis plus concernée."
+     "Je m'en veux de ne pas tenir le rythme, et je force encore plus.",
+     "Je subis sans comprendre ce qui m'arrive.",
+     "Je le remarque, mais je fais comme si de rien n'était.",
+     "Je commence à alléger mon agenda ces semaines-là.",
+     "Je connais mes variations, et j'adapte mon rythme."
    ]},
   {category:"🧭 Toi, au-delà des rôles",
    theme:"sens",
@@ -578,11 +588,12 @@ const questions=[
 ];
 
 const territoires={
-  emotions:{nom:"tes émotions qui débordent",force:"ta capacité à traverser tes émotions",jours:"Jours 2, 3 et 12 : identifier tes émotions, calmer ton système nerveux, revenir dans ta fenêtre de tolérance"},
+  emotions:{nom:"tes émotions qui débordent, ou que tu ne sens plus",force:"ta capacité à traverser tes émotions",jours:"Jours 2 et 12 : identifier tes émotions, revenir dans ta fenêtre de tolérance"},
   charge:{nom:"ta charge mentale",force:"ta capacité à déposer les choses",jours:"Jours 15 et 16 : nommer ce que tu portes, redistribuer, délester"},
   voix:{nom:"la dureté de ta voix intérieure",force:"la douceur avec laquelle tu te parles",jours:"Jours 8 et 24 : apaiser ta critique intérieure, reconstruire ton estime"},
   limites:{nom:"tes limites qui s'effacent",force:"ta capacité à poser tes limites",jours:"Jours 5 et 16 : dire non sans culpabiliser, redistribuer ce qui n'est pas à toi"},
   colere:{nom:"ta colère qui n'a pas de place",force:"ta façon d'écouter ta colère",jours:"Jour 22 : laisser ta colère prendre sa place, et en faire un moteur de changement"},
+  alerte:{nom:"ton corps toujours en alerte",force:"ta capacité à ramener ton corps au calme",jours:"Jours 3, 12 et 13 : calmer ton système nerveux, revenir dans ta fenêtre de tolérance, t'apaiser au contact des autres"},
   corps:{nom:"ton lien abîmé avec ton corps",force:"le lien que tu as avec ton corps",jours:"Jours 6, 9 et 27 : réhabiter ton corps, bouger juste, prendre soin"},
   repos:{nom:"ton épuisement et ce repos que tu ne t'autorises pas",force:"ta capacité à te recharger",jours:"Jours 4 et 14 : t'autoriser à te recharger, organiser ton soin"},
   relations:{nom:"tes relations qui te vident",force:"la qualité de tes relations",jours:"Jours 11 et 13 : voir ce qui te nourrit, te protéger de ce qui t'épuise"},
@@ -590,7 +601,9 @@ const territoires={
   sens:{nom:"cette impression de t'être perdue en route",force:"la clarté que tu as sur qui tu es",jours:"Jours 19, 24, 25 et 26 : questionner tes croyances, retrouver tes valeurs, dessiner ta vision"},
 };
 
-const labelsCourts=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"];
+const labelsCourts=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps en alerte","Lien au corps","Repos","Relations","Cycle","Sens de soi"];
+/* Les réponses enregistrées avant décembre 2026 n'ont que 10 domaines : on les aligne sur les 11 (pas de valeur pour « Corps en alerte ») */
+function versOnze(a){if(Array.isArray(a)&&a.length===10){return a.slice(0,5).concat([null],a.slice(5));}return a;}
 
 function genererToile(vals,avant){
   const cx=200, cy=195, R=100, n=vals.length;
@@ -611,7 +624,7 @@ function genererToile(vals,avant){
     svg+=`<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(201,160,194,0.25)" stroke-width="1"/>`;
   }
   // Toile du jour 1, en pointillés
-  if(avant){let d0='';avant.forEach((v,i)=>{const [x,y]=pt(i,R*v/5);d0+=(i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);});d0+='Z';svg+=`<path d="${d0}" fill="rgba(168,154,184,0.12)" stroke="#a89ab8" stroke-width="2" stroke-dasharray="5 4" stroke-linejoin="round"/>`;}
+  if(avant){let d0='';avant.forEach((v,i)=>{if(v==null)return;const [x,y]=pt(i,R*v/5);d0+=(d0===''?'M':'L')+x.toFixed(1)+','+y.toFixed(1);});d0+='Z';svg+=`<path d="${d0}" fill="rgba(168,154,184,0.12)" stroke="#a89ab8" stroke-width="2" stroke-dasharray="5 4" stroke-linejoin="round"/>`;}
   // Polygone des réponses
   let d='';
   vals.forEach((v,i)=>{const [x,y]=pt(i,R*v/5); d+=(i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);});
@@ -692,7 +705,7 @@ function comparaisonJ1(apres,avant){
     return '<p class="profil-desc" style="margin-top:6px;">Ta toile du jour 1 n\'a pas été retrouvée sur cet appareil. Si tu as téléchargé tes réponses du premier jour, ouvre le fichier et pose les deux toiles côte à côte.</p>';
   }
   const plus=[],moins=[];
-  apres.forEach((v,i)=>{const d=v-avant[i]; if(d>=1)plus.push(labelsCourts[i]); else if(d<=-1)moins.push(labelsCourts[i]);});
+  apres.forEach((v,i)=>{if(avant[i]==null)return;const d=v-avant[i]; if(d>=1)plus.push(labelsCourts[i]); else if(d<=-1)moins.push(labelsCourts[i]);});
   let h='<div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-family:Jost,sans-serif;font-size:13px;color:#7d6888;margin:2px 0 14px;">'
     +'<span><span style="display:inline-block;width:20px;border-top:2px dashed #a89ab8;vertical-align:middle;margin-right:6px;"></span>Jour 1</span>'
     +'<span><span style="display:inline-block;width:20px;border-top:2px solid #b585ad;vertical-align:middle;margin-right:6px;"></span>Aujourd\'hui</span></div>';
@@ -705,7 +718,7 @@ function comparaisonJ1(apres,avant){
 if(location.hash==='#j30'){
   document.addEventListener('DOMContentLoaded',function(){
     const c=document.querySelector('#phase-intro .card');
-    if(c){c.innerHTML='<span class="emoji-hero">🌸</span><div class="label">Jour 30 · Ton avant/après</div><h2>Les dix questions du premier jour</h2><p>Tu refais les dix questions rapides du jour 1. Réponds comme ça se passe pour toi aujourd\'hui, sans essayer de te souvenir de ce que tu avais mis.</p><p>À la fin, tu verras tes deux toiles superposées, et ce que tu avais écrit le premier jour.</p><button class="btn" onclick="showPhase(\'quiz\');renderQuestion()">Je commence</button>';}
+    if(c){c.innerHTML='<span class="emoji-hero">🌸</span><div class="label">Jour 30 · Ton avant/après</div><h2>Les questions du premier jour</h2><p>Tu refais les questions rapides du jour 1. Réponds comme ça se passe pour toi aujourd\'hui, sans essayer de te souvenir de ce que tu avais mis.</p><p>À la fin, tu verras tes deux toiles superposées, et ce que tu avais écrit le premier jour.</p><button class="btn" onclick="showPhase(\'quiz\');renderQuestion()">Je commence</button>';}
   });
 }
 
@@ -715,7 +728,7 @@ function renderResultats(){
   try{
     const k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
     if(location.hash==='#j30'){
-      if(c.j1&&Array.isArray(c.j1.answers)&&c.j1.answers.length===answers.length) avantJ1=c.j1.answers;
+      if(c.j1&&Array.isArray(c.j1.answers)){const a1=versOnze(c.j1.answers);if(a1.length===answers.length) avantJ1=a1;}
       c.j30toile={titre:'Mon état des lieux au jour 30',date:new Date().toISOString(),answers:answers.slice()};
     }else{
       c.j1=Object.assign({},c.j1||{},{titre:'Mon état des lieux',date:new Date().toISOString(),answers:answers.slice()});
@@ -975,7 +988,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';

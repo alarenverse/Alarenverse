@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
 <meta name="supported-color-schemes" content="light">
-<title>Où en es-tu vraiment ? · Le bilan · L'Effet Papillon</title>
+<title>Bilan gratuit · L'Effet Papillon</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{color-scheme:light}
@@ -444,13 +444,72 @@
   .soin-box p{font-size:15.5px;line-height:1.75;color:#5d4868;margin-bottom:10px;font-family:'Jost',sans-serif}
   .soin-box p:last-child{margin-bottom:0}
 
+  /* Accueil pensé pour la pub Instagram */
+  header.cache{display:none}
+  .hero{max-width:580px;width:100%;text-align:center;padding:34px 4px 6px}
+  .badge{
+    display:inline-block;
+    font-family:'Jost',sans-serif;
+    font-size:12.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:#fff;
+    background:#c2836a;
+    border-radius:50px;
+    padding:6px 16px;
+    margin:12px 0 16px;
+  }
+  .hero-titre{font-size:clamp(28px,7.4vw,38px);font-weight:500;color:#5e4632;line-height:1.25;margin-bottom:16px}
+  .hero p.promesse{font-size:18px;text-align:center;color:#6b5560;line-height:1.65;margin:0 auto 4px;max-width:500px}
+  .btn-go{font-size:18px;padding:17px 40px;background:linear-gradient(135deg,#c2836a,#c8a870);box-shadow:0 6px 26px rgba(194,131,106,0.32)}
+  .lien-prog{
+    display:inline-block;
+    margin-top:14px;
+    font-family:'Jost',sans-serif;
+    font-size:15px;
+    color:#a0644d;
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+  .apercu{margin:4px auto 6px;max-width:360px}
+  .apercu-legende{font-family:'Jost',sans-serif;font-size:12.5px;color:#b09aac;text-align:center;margin-top:2px}
+  .signature{font-family:'Jost',sans-serif;font-size:13.5px;color:#9a84a8;text-align:center;margin-top:18px;line-height:1.6}
+  .signature strong{color:var(--violet);font-weight:500}
+
+  /* Bouton vers la page de vente, en fin de bilan */
+  .novembre{
+    background:white;
+    border:1px solid rgba(194,131,106,0.35);
+    border-radius:18px;
+    padding:22px 14px 18px;
+    margin-top:10px;
+    text-align:center;
+  }
+  .novembre .nov-titre{font-size:20px;color:var(--violet);text-align:center;margin-bottom:8px;line-height:1.4}
+  .novembre p{text-align:center}
+  .novembre .btn-programme{line-height:1.4;padding:15px 16px;font-size:17px}
+  @keyframes attention{0%,86%,100%{transform:translateX(0) rotate(0)}88%{transform:translateX(-4px) rotate(-2deg)}90%{transform:translateX(4px) rotate(2deg)}92%{transform:translateX(-4px) rotate(-1.5deg)}94%{transform:translateX(3px) rotate(1deg)}96%{transform:translateX(-2px) rotate(-.5deg)}98%{transform:translateX(1px) rotate(0)}}
+  .cta-achat{animation:attention 4s ease-in-out 1.5s infinite}
+  .cta-achat:hover{animation:none;transform:translateY(-2px)}
+
+
+  /* Case « ce qui te travaille », dans le cadre liste d'attente */
+  .partage{margin-top:18px;padding-top:18px;border-top:1px solid rgba(194,131,106,0.25);text-align:left}
+  .partage .partage-titre{font-size:18px;color:var(--violet);text-align:center;margin-bottom:8px;line-height:1.4}
+  .partage p{text-align:left}
+  .partage .exemple-partage{font-family:'Jost',sans-serif;font-size:14px;color:#7a6082;line-height:1.6;margin:8px 0 10px}
+  .partage textarea{width:100%;border:2px solid rgba(200,180,220,0.35);border-radius:12px;padding:13px 16px;font-size:16px;font-family:'Lora',serif;color:var(--violet);outline:none;background:white;resize:vertical;min-height:110px}
+  .partage textarea:focus{border-color:var(--rose)}
+  .partage .btn{margin-top:10px}
+  .partage .partage-ok{display:none;font-family:'Jost',sans-serif;font-size:15px;color:#4f7a60;text-align:center;margin-top:12px}
+  .partage .securite{font-family:'Jost',sans-serif;font-size:13.5px;color:#8a7090;line-height:1.6;margin-top:14px}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
-<header>
+<header class="cache">
   <div class="surtitre">L'Effet Papillon</div>
   <h1>Où en es-tu vraiment ?</h1>
   <div class="sep"></div>
@@ -458,25 +517,30 @@
 
 <!-- INTRO -->
 <div class="phase active" id="phase-intro">
+  <div class="hero">
+    <div class="surtitre">L'Effet Papillon</div>
+    <div class="badge">Bilan gratuit</div>
+    <h1 class="hero-titre">Tu gères tout.<br>Et pourtant, quelque chose coince.</h1>
+    <p class="promesse">En quelques minutes, ce bilan gratuit te montre ce qui pèse le plus en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
+    <button class="btn btn-go" onclick="showPhase('quiz');renderQuestion()">Je fais mon bilan gratuit</button>
+    <p class="hint">11 questions · 7 minutes · ton résultat tout de suite</p>
+  </div>
+
   <div class="card">
-    <span class="fleur">🌸</span>
-    <div class="label">Le bilan · 10 questions</div>
-    <h2>Fais le point, pour de vrai</h2>
-    <p>Pas la réponse que tu donnerais si on te demandait « ça va ? » dans un couloir. La vraie.</p>
-    <p>Dix questions, dix territoires de ta vie intérieure. À la fin, tu n'auras pas une note, mais ton portrait : ce que tu portes en ce moment, ce sur quoi tu peux déjà t'appuyer, et ce qui change si tu décides de t'en occuper.</p>
-    <div class="encart-prog">
-      <p><strong>Ce bilan est gratuit, et il est à toi.</strong> Il te montre où tu en es. Il ne te dira pas comment en sortir, et c'est justement le travail de <strong>L'Effet Papillon</strong>, mon programme de 30 jours. Le bilan en est la première marche.</p>
-    </div>
-    <p class="note">Il n'y a pas de bonnes ou de mauvaises réponses. Juste les tiennes. Réponds à ce qui se passe <strong>le plus souvent</strong> pour toi, ces dernières semaines. Si tu hésites entre deux réponses, prends celle qui te ressemble le plus souvent.</p>
-    <div class="tags">
-      <span class="tag">Émotions</span>
-      <span class="tag">Charge mentale</span>
-      <span class="tag">Colère</span>
-      <span class="tag">Limites</span>
-      <span class="tag">Sens de soi</span>
-    </div>
-    <button class="btn" onclick="showPhase('quiz');renderQuestion()">Je commence</button>
-    <p class="hint">7 minutes · gratuit · pour toi seule</p>
+    <div class="label">L'Effet Papillon, c'est quoi ?</div>
+    <p>30 jours rien qu'à toi, un jour après l'autre, pour comprendre ce qui se passe en toi et te rapprocher davantage de la femme que tu as envie d'être.</p>
+    <p>La première édition est en cours. La prochaine n'a pas encore de date : en faisant le bilan, tu rejoins la liste d'attente, et tu seras prévenue en premier.</p>
+    <p style="margin-bottom:0;">Le bilan, c'est la première étape. Il te montre ce qui pèse le plus en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
+  </div>
+
+  <div class="card">
+    <div class="label">Ce que tu reçois à la fin du bilan</div>
+    <div class="apercu" id="apercu-toile"></div>
+    <p class="apercu-legende">Exemple de portrait</p>
+    <p>Ton portrait sur 11 domaines de ta vie : tes émotions, ta charge mentale, ta colère, tes limites, ton corps, ton repos, et d'autres. Pour ceux qui pèsent le plus, tu vois ce qui peut changer et comment le programme s'en occupe.</p>
+    <p class="note">Réponds comme ça se passe vraiment pour toi ces dernières semaines. Il n'y a pas de bonne ou de mauvaise réponse.</p>
+    <button class="btn btn-go" onclick="showPhase('quiz');renderQuestion()">Je commence mon bilan</button>
+    <p class="signature">Créé par <strong>Debora</strong>, infirmière en santé mentale<br>@alarenverse.coaching</p>
   </div>
 </div>
 
@@ -484,7 +548,7 @@
 <div class="phase" id="phase-quiz">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="q-counter">1 / 10</span>
+      <span id="q-counter">1 / 11</span>
       <span id="q-category"></span>
     </div>
     <div class="progress-track">
@@ -514,7 +578,7 @@
       </label>
       <button class="btn" id="btn-email-submit" disabled onclick="submitAndShowResults()">Voir mon portrait</button>
       <div class="erreur" id="erreur-envoi"></div>
-      <p class="hint" style="margin-top:14px;">Je te préviendrai à l'ouverture de la prochaine cohorte. Pas de spam, tu te désabonnes quand tu veux.</p>
+      <p class="hint" style="margin-top:14px;">Tu rejoins la liste d'attente : je te préviens en premier à l'ouverture de la prochaine édition. Zéro spam, tu te désabonnes quand tu veux.</p>
     </div>
   </div>
 </div>
@@ -546,9 +610,20 @@
       <li><strong>Et surtout, que ça continue.</strong> La dernière semaine sert à ancrer, parce que le vrai changement commence après le jour 30.</li>
     </ul>
     <p>Chaque territoire de ton portrait renvoie à des étapes précises du programme, celles qui travaillent exactement ce que tu viens de nommer.</p>
-    <div style="background:#fdf0f8;border-radius:16px;padding:16px 18px;border:1px solid rgba(201,160,194,0.4);margin-top:6px;">
-      <p style="margin:0;color:#3d2e45;">💌 <strong>Je t'écris personnellement très vite</strong>, à l'adresse que tu m'as laissée, pour te présenter le programme.</p>
-      <p class="hint" style="margin:8px 0 0;text-align:left;">Si tu ne vois rien arriver, jette un œil dans tes spams ou tes promotions.</p>
+    <div class="novembre">
+      <p class="nov-titre">Tu es sur la liste d'attente</p>
+      <p style="font-size:16px;margin-bottom:4px;">La prochaine édition de L'Effet Papillon n'a pas encore de date. Tu fais partie des premières que je préviendrai, dès que les inscriptions ouvrent.</p>
+      <div class="partage" id="bloc-partage">
+        <p class="partage-titre">Et toi, qu'est-ce qui te travaille le plus en ce moment ?</p>
+        <p style="font-size:16px;">Si tu en as envie, écris-le ici. Je lis chaque message, et ce que tu écris reste entre nous.</p>
+        <p class="exemple-partage">Par exemple : « Je me sens bloquée dans ma vie en ce moment, et j'aimerais que ça change. » « Je n'arrive plus à m'arrêter, le soir non plus. » « Je dis oui à tout le monde et je finis vidée. » « Je ne sais plus ce que j'aime, ni ce que je veux. » « Je m'énerve pour un rien avec mes enfants, puis je culpabilise. »</p>
+        <textarea id="input-partage" rows="4" placeholder="Ce qui me travaille le plus en ce moment, c'est..." oninput="document.getElementById('btn-partage').disabled=this.value.trim().length<3"></textarea>
+        <button class="btn" id="btn-partage" disabled onclick="envoyerPartage()">Envoyer à Debora</button>
+        <p class="partage-ok" id="partage-ok">Merci, c'est bien arrivé.</p>
+        <div class="erreur" id="partage-erreur"></div>
+        <p class="securite">Si tu traverses quelque chose de très lourd en ce moment, n'attends pas ma réponse : appelle le 143 (La Main Tendue, 24h/24) ou parle à ton médecin.</p>
+      </div>
+      <a href="https://www.instagram.com/alarenverse.coaching/" target="_blank" rel="noopener" class="btn-programme" style="margin-top:18px;">En attendant, je te suis sur Instagram</a>
     </div>
     <p style="margin-bottom:0;margin-top:20px;font-size:15.5px;color:#7d6888;">Une question d'ici là ? Écris-moi en message privé sur <strong style="white-space:nowrap;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#3d2e45" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px;margin-right:3px;"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="#3d2e45" stroke="none"/></svg>@alarenverse.coaching</strong>.</p>
   </div>
@@ -564,57 +639,67 @@ const questions=[
    theme:"emotions",
    text:"Quand une émotion forte te traverse (colère, tristesse, angoisse), qu'est-ce qui se passe le plus souvent ?",
    options:[
-     "Elle me submerge complètement. Je perds pied et je ne me reconnais plus.",
-     "Je la ravale. Je fais bonne figure et ça ressort ailleurs, plus tard.",
-     "Je la sens monter mais je ne sais pas trop quoi en faire.",
-     "Je commence à la reconnaître et à lui laisser un peu de place.",
-     "Je la traverse. Elle passe, et je reste moi."
+     "Tout se mélange. Un rien me fait déborder.",
+     "Je ne la sens pas sur le moment. Je fonctionne en pilote automatique, et tout me tombe dessus le soir.",
+     "Je la sens monter, mais je ne sais pas quoi en faire.",
+     "J'arrive à nommer mes émotions, et parfois à comprendre d'où elles viennent.",
+     "Je sais ce que je ressens, et ce dont j'ai besoin."
    ]},
   {category:"Ta charge mentale",
    theme:"charge",
    text:"Ton cerveau, il s'arrête quand ?",
    options:[
-     "Jamais. Même la nuit, même en vacances, il tourne en continu.",
-     "Presque jamais. Je pense toujours à ce qu'il ne faut pas oublier, pour tout le monde.",
-     "Rarement. Il faut vraiment que je m'isole pour qu'il se taise.",
-     "De temps en temps, quand j'arrive à déposer les choses quelque part.",
-     "Il s'arrête. Je sais faire des pauses vraies, sans culpabiliser."
+     "Jamais, même la nuit : je refais la liste de tout ce qu'il ne faut pas oublier.",
+     "Presque jamais. Je pense à tout, pour tout le monde. Si je lâche, tout s'écroule.",
+     "Seulement quand je suis seule. Et encore.",
+     "Quand j'arrive à poser les choses sur papier, ou à en confier une partie.",
+     "Il sait s'arrêter. Je dépose, je partage, et je souffle."
    ]},
   {category:"Ta voix intérieure",
    theme:"voix",
-   text:"Quand tu rates quelque chose, tu te parles comment ?",
+   text:"Tu t'étais promis de prendre soin de toi (bouger, mieux dormir, souffler). Au bout de 3 jours, tu lâches. Tu te dis quoi ?",
    options:[
-     "Durement. Je m'en veux longtemps, je me traite de tous les noms.",
-     "Sévèrement. Je me dis des choses que je ne dirais à personne d'autre.",
-     "Ça dépend des jours. Parfois dure, parfois plus douce.",
-     "Plutôt correctement. J'essaie de me rappeler que c'est humain.",
-     "Avec douceur. Comme je parlerais à quelqu'un que j'aime."
+     "Que je suis nulle, que je n'y arrive jamais. Alors j'abandonne tout.",
+     "Que si ce n'est pas parfait, ça ne sert à rien.",
+     "Je m'en veux, je me dis “lundi, je recommence”… et ça recommence.",
+     "Que c'est humain, et j'essaie de reprendre là où j'en étais.",
+     "Je me parle comme à une amie, et je reprends tranquillement."
    ]},
   {category:"Tes limites",
    theme:"limites",
-   text:"Combien de fois par jour tu penses à ce dont les autres ont besoin, avant de penser à toi ?",
+   text:"Dire non, demander de l'aide : c'est comment pour toi ?",
    options:[
-     "Tout le temps. Je passe systématiquement après tout le monde.",
-     "Très souvent. Dire non me fait culpabiliser pendant des heures.",
-     "Souvent. Je dis oui, puis je regrette.",
-     "Ça s'équilibre doucement. J'arrive parfois à me prioriser.",
-     "Je sais poser mes limites. Je me respecte dans mes relations."
+     "Je dis oui à tout, et je ne demande jamais rien. C'est moi qu'on vient voir, pas l'inverse.",
+     "Dire non me fait culpabiliser pendant des heures. Et demander de l'aide, j'ai peur de déranger.",
+     "Je dis oui, puis je regrette. Et quand ça ne va pas, je le dis à moitié, en rigolant.",
+     "Ça s'équilibre doucement. J'arrive parfois à dire non, ou à demander un coup de main.",
+     "Je sais poser mes limites, et j'accepte l'aide qu'on me donne."
    ]},
   {category:"Ta colère",
    theme:"colere",
    text:"Ta colère, elle va où ?",
    options:[
      "Elle explose sur les mauvaises personnes, souvent mes proches, et je culpabilise après.",
-     "Je la ravale entièrement. Elle se transforme en tristesse ou en tensions.",
-     "Je la sens, mais je ne sais pas quoi en faire. Alors elle stagne.",
-     "J'arrive parfois à la dire, sans que ça déborde.",
-     "Je l'écoute. Elle me montre ce qui doit changer, et j'agis dessus."
+     "Je la ravale. Elle se transforme en tristesse ou en tensions.",
+     "Je fais tout en soupirant. Elle stagne, et personne ne voit rien.",
+     "J'arrive parfois à dire “là, c'est trop” avant que ça déborde.",
+     "Je l'écoute. Elle me montre ce qui doit changer, et je le dis calmement."
    ]},
-  {category:"Ton corps",
+  {category:"Ton corps en alerte",
+   theme:"alerte",
+   text:"Ton corps, il te dit quoi pendant cette période de ta vie ?",
+   options:[
+     "Il est tendu en permanence. Mâchoire, épaules, ventre : je suis toujours en alerte.",
+     "Il m'envoie des signaux (fatigue, maux de tête, ventre) et je les ignore jusqu'à ce que ça lâche.",
+     "Je sens les tensions, mais je ne sais pas comment les relâcher.",
+     "J'arrive parfois à le calmer : respirer, bouger, ralentir.",
+     "Je sens quand il passe en alerte, et je sais le ramener au calme."
+   ]},
+  {category:"Ton corps et toi",
    theme:"corps",
    text:"Ton corps et toi, vous en êtes où ?",
    options:[
-     "En conflit. Je le critique, je l'ignore, ou il me fait mal et ça m'épuise.",
+     "En conflit. Je le critique sans arrêt.",
      "Distants. Je ne l'écoute pas vraiment, je le subis.",
      "Neutres. Il est là, je fais avec.",
      "On se réapprivoise doucement. J'écoute un peu ce qu'il me dit.",
@@ -624,10 +709,10 @@ const questions=[
    theme:"repos",
    text:"T'accorder du repos, sans rien faire d'« utile », c'est possible pour toi ?",
    options:[
-     "Impossible. Je m'effondre d'épuisement, mais je ne me repose jamais vraiment.",
-     "Très difficile. Je culpabilise dès que je m'arrête.",
+     "Impossible. Je me repose seulement quand mon corps me force : malade ou à bout.",
+     "Très difficile. Je m'assieds 5 minutes, et la culpabilité me relève.",
      "Rarement. Il faut que tout soit fini avant, et ça ne l'est jamais.",
-     "Parfois. J'arrive à m'accorder des moments sans les justifier.",
+     "Parfois. Je m'accorde des moments, mais je me sens obligée de les justifier.",
      "Oui. Je sais me recharger, et je me donne le droit de le faire."
    ]},
   {category:"Tes relations",
@@ -636,19 +721,19 @@ const questions=[
    options:[
      "Vidée. Je donne beaucoup, je reçois peu, et je n'ose rien dire.",
      "Souvent fatiguée. Je marche un peu sur des œufs.",
-     "Ça dépend beaucoup des personnes.",
+     "Ça va, mais je joue un rôle. Je suis rarement moi-même.",
      "Plutôt bien, avec quelques relations qui pèsent.",
      "Nourrie. Je peux être moi-même et ça me fait du bien."
    ]},
-  {category:"Ton cycle",
+  {category:"Ton cycle et ton énergie",
    theme:"cycle",
-   text:"Ton énergie et ton humeur changent selon ton cycle. Tu fais comment avec ça ?",
+   text:"Il y a des semaines où tout est plus lourd (cycle, pilule, préménopause, ménopause). Tu fais comment ?",
    options:[
-     "Certaines semaines sont très dures et je m'en veux de ne pas tenir le rythme.",
-     "Je subis les variations sans les comprendre, et ça me déstabilise.",
-     "Je remarque des différences mais je m'organise comme si de rien n'était.",
-     "Je commence à adapter mon rythme à mes phases.",
-     "Je vis avec mon cycle plutôt qu'en lutte contre lui. Ou je ne suis plus concernée."
+     "Je m'en veux de ne pas tenir le rythme, et je force encore plus.",
+     "Je subis sans comprendre ce qui m'arrive.",
+     "Je le remarque, mais je fais comme si de rien n'était.",
+     "Je commence à alléger mon agenda ces semaines-là.",
+     "Je connais mes variations, et j'adapte mon rythme."
    ]},
   {category:"Toi, au-delà des rôles",
    theme:"sens",
@@ -664,7 +749,7 @@ const questions=[
 
 const territoires={
   emotions:{
-    nom:"Tes émotions qui débordent",
+    nom:"Tes émotions qui débordent, ou que tu ne sens plus",
     force:"Ta capacité à traverser tes émotions",
     apres:"Tu commences à sentir l'émotion arriver, et tu as quelque chose à faire au lieu de la subir.",
     dans:"Trois étapes du programme : reconnaître ce qui monte, apaiser ton corps quand ça monte, et rester toi pendant que ça traverse."
@@ -684,7 +769,7 @@ const territoires={
   limites:{
     nom:"Tes limites qui s'effacent",
     force:"Ta capacité à poser tes limites",
-    apres:"Tu sais où sont tes limites, et tu as les mots pour les poser. Le reste vient avec la pratique.",
+    apres:"Tu sais où sont tes limites, tu as les mots pour les poser, et tu oses demander de l'aide. Le reste vient avec la pratique.",
     dans:"Deux étapes du programme : comprendre pourquoi dire non te coûte autant, et t'entraîner à le faire en vrai."
   },
   colere:{
@@ -692,6 +777,12 @@ const territoires={
     force:"Ta façon d'écouter ta colère",
     apres:"Tu comprends ce que ta colère essaie de te dire, au lieu de la ravaler ou de la subir.",
     dans:"Une étape entière du programme : lui donner sa place, et en faire un moteur de changement."
+  },
+  alerte:{
+    nom:"Ton corps toujours en alerte",
+    force:"Ta capacité à ramener ton corps au calme",
+    apres:"Tu repères quand ton corps passe en alerte, et tu as des gestes simples pour le ramener au calme.",
+    dans:"Trois étapes du programme : respirer pour calmer ton système nerveux, revenir au calme quand ça monte, et t'apaiser au contact des autres.",
   },
   corps:{
     nom:"Ton lien abîmé avec ton corps",
@@ -725,7 +816,7 @@ const territoires={
   },
 };
 
-const labelsCourts=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"];
+const labelsCourts=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps en alerte","Lien au corps","Repos","Relations","Cycle","Sens de soi"];
 
 let current=0,answers=[],selected=null,prenomSaisi="",emailSaisi="";
 
@@ -733,7 +824,7 @@ function genererToile(vals){
   const cx=200, cy=200, R=100, n=vals.length;
   const angle=i=>(-90 + i*(360/n)) * Math.PI/180;
   const pt=(i,r)=>[cx+r*Math.cos(angle(i)), cy+r*Math.sin(angle(i))];
-  let svg='<svg viewBox="0 0 400 400" role="img" aria-label="Ton portrait en dix territoires" style="width:100%;max-width:380px;height:auto;display:block;margin:0 auto;">';
+  let svg='<svg viewBox="0 0 400 400" role="img" aria-label="Ton portrait en onze territoires" style="width:100%;max-width:380px;height:auto;display:block;margin:0 auto;">';
   for(let niveau=1;niveau<=5;niveau++){
     const r=R*niveau/5;
     let d='';
@@ -770,9 +861,16 @@ function genererToile(vals){
   return svg;
 }
 
+/* Aperçu d'un portrait sur la page d'accueil (exemple) */
+document.addEventListener('DOMContentLoaded',function(){
+  var a=document.getElementById('apercu-toile');
+  if(a) a.innerHTML=genererToile([2,1,3,2,3,2,3,1,4,3,2]).replace('viewBox="0 0 400 400"','viewBox="0 55 400 290"').replace('aria-label="Ton portrait en onze territoires"','aria-label="Exemple de portrait en onze territoires"');
+});
+
 function showPhase(id){
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
   document.getElementById('phase-'+id).classList.add('active');
+  document.querySelector('header').classList.toggle('cache',id==='intro');
   window.scrollTo(0,0);
 }
 
@@ -830,7 +928,7 @@ async function submitAndShowResults(){
   prenomSaisi=document.getElementById('input-prenom').value.trim();
   emailSaisi=document.getElementById('input-email').value.trim();
 
-  /* Sécurité : rien ne part sans les 10 réponses, le prénom et un e-mail (bloque les robots) */
+  /* Sécurité : rien ne part sans toutes les réponses, le prénom et un e-mail (bloque les robots) */
   if(answers.length!==questions.length||!prenomSaisi||emailSaisi.indexOf('@')<1){return;}
 
   btn.disabled=true;
@@ -842,14 +940,14 @@ async function submitAndShowResults(){
 
   const donnees={
     access_key:ACCESS_KEY,
-    subject:"Bilan · "+prenomSaisi,
+    subject:"Bilan (liste d'attente) · "+prenomSaisi,
     from_name:"L'Effet Papillon · Bilan",
     Prenom:prenomSaisi,
     email:emailSaisi,
-    Score:total+" / 50 (moyenne "+moyenne+")",
+    Score:total+" / "+(questions.length*5)+" (moyenne "+moyenne+")",
     Date:new Date().toLocaleString('fr-CH'),
     Consentement:"Oui",
-    message:"BILAN · "+prenomSaisi+"\nScore : "+total+"/50, moyenne "+moyenne+"/5\n\n"+construireRecapTexte()
+    message:"BILAN · "+prenomSaisi+"\nScore : "+total+"/"+(questions.length*5)+", moyenne "+moyenne+"/5\n\n"+construireRecapTexte()
   };
 
   try{
@@ -889,7 +987,7 @@ function renderResultats(){
   } else if(moyenne<3.8){
     portrait="Tu as déjà des ressources solides, et des zones qui fatiguent. C'est une position honnête et vivante, celle depuis laquelle on peut vraiment construire quelque chose.";
   } else {
-    portrait="Tu prends déjà soin de toi, et ça se voit dans tes réponses. Ces 30 jours ne vont pas te réparer, ils vont approfondir ce que tu sais déjà faire, et éclairer les quelques zones encore dans l'ombre.";
+    portrait="Tu prends déjà soin de toi, et ça se voit dans tes réponses. Inutile d'attendre d'être au fond du bac pour aller plus loin : ces 30 jours ne vont pas te réparer, ils vont approfondir ce que tu sais déjà faire, et éclairer les quelques zones encore dans l'ombre.";
   }
 
   let html = '<div class="profil-titre">Voilà où tu en es'+(prenomSaisi?', '+prenomSaisi:'')+'</div>'
@@ -951,6 +1049,39 @@ function renderResultats(){
     + '<p style="color:#3d2e45;margin-bottom:0;">Et surtout : ressentir ne suffit pas. On peut passer des années à ressentir sans que rien ne change. Ce qui transforme, c\'est ce que tu fais de ce que tu ressens.</p>';
 }
 
+
+/* Envoi du message « ce qui la travaille » (facultatif, après le portrait) */
+async function envoyerPartage(){
+  const champ=document.getElementById('input-partage');
+  const btn=document.getElementById('btn-partage');
+  const err=document.getElementById('partage-erreur');
+  const texte=champ.value.trim();
+  if(texte.length<3)return;
+  btn.disabled=true; btn.textContent='Envoi en cours…'; err.style.display='none';
+  try{
+    const rep=await fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({
+        access_key:ACCESS_KEY,
+        subject:"Ce qui la travaille · "+prenomSaisi,
+        from_name:"L'Effet Papillon · Bilan",
+        Prenom:prenomSaisi,
+        email:emailSaisi,
+        Date:new Date().toLocaleString('fr-CH'),
+        message:"CE QUI LA TRAVAILLE · "+prenomSaisi+"\n\n"+texte
+      })
+    });
+    const res=await rep.json();
+    if(!res.success)throw new Error(res.message||'Envoi refusé');
+    champ.style.display='none'; btn.style.display='none';
+    document.getElementById('partage-ok').style.display='block';
+  }catch(e){
+    btn.disabled=false; btn.textContent='Envoyer à Debora';
+    err.innerHTML="Petit souci technique, ton message n'est pas parti. Tu peux réessayer, ou m'écrire en message privé sur Instagram.";
+    err.style.display='block';
+  }
+}
 function telechargerReponses(){
   const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   const total=answers.reduce((a,b)=>a+b,0);
@@ -980,12 +1111,12 @@ function telechargerReponses(){
   const body='<div class="programme">L\'Effet Papillon</div>'
     +'<h1>Mon bilan · Où en suis-je vraiment ?</h1>'
     +'<div class="date">'+(prenomSaisi?prenomSaisi+' · ':'')+date+'</div>'
-    +'<div class="score">Score global : '+total+' sur 50</div>'
+    +'<div class="score">Score global : '+total+' sur '+(questions.length*5)+'</div>'
     +contenu
     +'<div class="suite">'
     +'<h2>Et maintenant ?</h2>'
-    +'<p>Ce bilan te dit où tu en es. Il ne te dit pas comment en sortir.<br>C\'est le travail de L\'Effet Papillon, mon programme de 30 jours.</p>'
-    +'<p><strong>Je t\'écris très vite par e-mail pour te présenter le programme.</strong></p>'
+    +'<p>Ce bilan te dit où tu en es. Il ne te dit pas comment en sortir.<br>C\'est le travail de L\'Effet Papillon, mon programme de 30 jours. Tu es sur la liste d\'attente : je te préviens en premier à l\'ouverture de la prochaine édition.</p>'
+    +'<a href="https://www.instagram.com/alarenverse.coaching/">Me suivre sur Instagram</a>'
     +'</div>'
     +'<div class="footer">@alarenverse.coaching</div>';
 
