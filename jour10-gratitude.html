@@ -217,8 +217,8 @@ const theorie = [
     contenu:[
       {type:"texte", texte:"Quand on est en dépression, épuisée ou en grande souffrance, la gratitude peut sembler une insulte. \"Sois reconnaissante\" peut sonner comme \"arrête de te plaindre\". Ce n'est absolument pas ce qu'on te demande ici. On ne va pas te demander de faire semblant."},
       {type:"highlight", texte:"💡 La règle d'or : la gratitude ne nie jamais la douleur. Elle vit à côté d'elle. Ce n'est pas \"tout va bien\". C'est \"malgré ce qui est dur, il y a aussi ça\". Les deux peuvent être vraies en même temps : ta souffrance ET un petit quelque chose de bon. L'un n'efface pas l'autre."},
-      {type:"texte", texte:"Et quand la gratitude classique te semble impossible, il y a une porte plus douce : être reconnaissante pour les choses toutes simples. Pas les grandes joies, juste l'ordinaire qui aurait pu être autrement. L'eau chaude de la douche. Le fait de pouvoir respirer. Un moment de silence. Un café encore chaud."},
-      {type:"highlight", texte:"🌱 Brené Brown parle de \"pratiquer\" la gratitude plutôt que de la \"ressentir\", parce que dans les moments durs, elle ne vient pas toute seule. On la choisit, volontairement, comme un geste de soin envers soi. Pas comme une obligation d'être heureuse. Juste comme une main qu'on se tend à soi-même.", classe:"vert"},
+      {type:"texte", texte:"Et quand la gratitude classique te semble impossible, il y a une porte plus douce : être reconnaissante pour les choses toutes simples. Laisse les grandes joies de côté, regarde l'ordinaire qui aurait pu être autrement. L'eau chaude de la douche. Le fait de pouvoir respirer. Un moment de silence. Un café encore chaud."},
+      {type:"highlight", texte:"🌱 Brené Brown parle de \"pratiquer\" la gratitude plutôt que de la \"ressentir\", parce que dans les moments durs, elle ne vient pas toute seule. On la choisit, volontairement, comme un geste de soin envers soi. Surtout sans en faire une obligation d'être heureuse. Plutôt comme une main qu'on se tend à soi-même.", classe:"vert"},
     ]
   },
 ];
@@ -242,14 +242,14 @@ const difficiles = [
   },
   {
     titre:"\"Je fais ça depuis des semaines et je ne sens rien de différent.\"",
-    reponse:"La gratitude mécanique, lister 3 choses rapidement sans y plonger vraiment, perd son effet en quelques semaines. L'effet neurologique vient de la profondeur : une seule chose, décrite avec détail, avec l'émotion qu'elle génère, et pourquoi elle compte pour toi."
+    reponse:"La gratitude mécanique, lister 3 choses rapidement sans y plonger vraiment, perd son effet en quelques semaines. L'effet vient de la profondeur : une seule chose, décrite avec détail, avec l'émotion qu'elle génère, et pourquoi elle compte pour toi."
   },
 ];
 
 const journalQuestions = [
   {
     q:"Une personne qui t'a aidée, soutenue ou vue récemment, qui est-ce ?",
-    sous:"Pas forcément un grand geste. Un mot, une présence, un regard peut suffire.",
+    sous:"Un petit geste compte aussi. Un mot, une présence, un regard peut suffire.",
     exemple:"Par exemple : « Ma voisine, qui a gardé mon fils une heure sans que je demande. » « Mon collègue, qui a remarqué que je n'allais pas bien. » « Ma sœur, qui m'a écrit juste pour prendre des nouvelles. »",
     placeholder:"Cette personne c'est... / Ce qu'elle a fait c'est..."
   },
@@ -261,13 +261,13 @@ const journalQuestions = [
   },
   {
     q:"Une chose ordinaire de ta journée, neutre, simple, que tu aurais pu ne pas avoir.",
-    sous:"Pas besoin que ce soit beau ou émouvant. Juste vrai.",
+    sous:"Ça n'a besoin d'être ni beau ni émouvant. Ce qui compte, c'est que ce soit vrai.",
     exemple:"Par exemple : « L'eau chaude de la douche ce matin. » « Mon café bu encore chaud, pour une fois. » « Mes jambes, qui m'ont portée toute la journée. »",
     placeholder:"Cette chose simple c'est..."
   },
   {
     q:"Qu'est-ce que ça t'a fait, de chercher ce qui est bon ?",
-    sous:"Pas de bonne réponse. Ça peut être doux, étrange, difficile, ou rien du tout.",
+    sous:"Toutes les réponses sont justes. Ça peut être doux, étrange, difficile, ou rien du tout.",
     exemple:"Par exemple : « Ça m'a fait du bien de repenser à ce moment. » « J'ai eu du mal à trouver, et ça m'a rendue un peu triste. »",
     placeholder:"Ce que ça m'a fait c'est..."
   },
@@ -284,7 +284,7 @@ const soiQuestions = [
   },
   {ex:"« Hier, j'ai oublié un rendez-vous et je me suis dit : ça arrive. Avant, je me serais traitée d'idiote. »",
     categorie:"Douceur envers soi",
-    question:"Dans quel moment récent as-tu été plus douce envers toi-même qu'avant ? Même légèrement ?"
+    question:"Dans quel moment récent as-tu été un peu plus douce envers toi-même qu'avant ?"
   },
 ];
 
@@ -529,7 +529,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
