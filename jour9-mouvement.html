@@ -328,8 +328,8 @@ const etats = [
       mouvements:[
         {nom:"Pilates doux", detail:"Travail en profondeur des muscles stabilisateurs, respiration lente, attention portée à ton corps. Des mouvements lents et contrôlés, qui ne demandent pas l'énergie que tu n'as pas. Il t'aide à retrouver la sensation de ton corps sans ajouter de fatigue.", duree:"20-40 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050", star:false},
         {nom:"Yoga Yin ou Nidra", detail:"Des postures tenues longtemps (3 à 5 minutes), en respiration profonde. Le Yoga Nidra, ou \"sommeil yogique\", est une pratique de relaxation profonde qui agit sur le système nerveux autonome aussi efficacement qu'une sieste.", duree:"20-45 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050"},
-        {nom:"Étirements doux au sol", detail:"15 minutes d'étirements lents, à l'écoute des sensations. Pas de performance, pas d'objectif, juste reprendre contact avec ton corps avec bienveillance.", duree:"10-20 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050"},
-        {nom:"Renforcement musculaire très doux, charges légères", detail:"Même en épuisement, une musculation très douce reste bénéfique. Charges légères, mouvements lents et contrôlés, peu de séries. L'objectif n'est pas la performance, c'est de maintenir le lien avec son corps et de stimuler doucement le système nerveux sans le saturer.", duree:"15-25 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050"},
+        {nom:"Étirements doux au sol", detail:"15 minutes d'étirements lents, à l'écoute des sensations. Tu laisses la performance et les objectifs de côté, juste pour reprendre contact avec ton corps avec bienveillance.", duree:"10-20 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050"},
+        {nom:"Renforcement musculaire très doux, charges légères", detail:"Une musculation très douce reste bénéfique, y compris quand tu es épuisée. Charges légères, mouvements lents et contrôlés, peu de séries. L'objectif n'est pas la performance, c'est de maintenir le lien avec son corps et de stimuler doucement le système nerveux sans le saturer.", duree:"15-25 min", bg:"#eef4fb", border:"#90b8d0", couleur:"#304050"},
       ]
     }
   },
@@ -355,7 +355,7 @@ const cyclePhases = [
   {
     label:"Phase menstruelle · Jours 1 à 5",
     couleur:"#e8857a", bg:"#fde8e6", border:"rgba(232,133,122,0.3)",
-    texte:"Énergie basse, corps en travail. C'est le moment du Yoga Yin, des étirements doux, de la marche lente. Pas de sport intense : le corps a besoin de ses ressources pour autre chose.",
+    texte:"Énergie basse, corps en travail. C'est le moment du Yoga Yin, des étirements doux, de la marche lente. Le sport intense attendra : le corps a besoin de ses ressources pour autre chose.",
   },
   {
     label:"Phase folliculaire · Jours 6 à 13",
@@ -375,7 +375,7 @@ const cyclePhases = [
 ];
 
 const journalQuestions = [
-  {ex:"« Dix minutes de marche après le repas. » « Les étirements du matin, allongée sur le tapis. » « Danser dans la cuisine sur une chanson que j'aime. »",q:"Quel mouvement as-tu choisi aujourd'hui, ou lequel te fait envie ?", sous:"Pas d'obligation de résultat, juste une envie.", placeholder:"J'ai choisi / Ce qui me fait envie c'est..."},
+  {ex:"« Dix minutes de marche après le repas. » « Les étirements du matin, allongée sur le tapis. » « Danser dans la cuisine sur une chanson que j'aime. »",q:"Quel mouvement as-tu choisi aujourd'hui, ou lequel te fait envie ?", sous:"Aucune obligation de résultat, juste une envie.", placeholder:"J'ai choisi / Ce qui me fait envie c'est..."},
   {ex:"« Avant : les épaules nouées et la tête lourde. Après : plus chaude, plus présente. » « J'ai envie de bouger, mais je me sens molle. »",q:"Comment te sens-tu dans ton corps en ce moment, avant de bouger ou après ?", sous:"Sensations physiques, énergie, tensions... Décris ce que tu ressens.", placeholder:"Dans mon corps je ressens..."},
   {ex:"« Je vais courir même malade, sinon je culpabilise. » « Je sais que marcher me ferait du bien, mais je reste sur le canapé en me disant que dix minutes, ça ne sert à rien. »",q:"Est-ce que tu as tendance à te forcer à faire du sport même quand ton corps dit non, ou au contraire à éviter le mouvement même quand il te ferait du bien ?", sous:"Honnêteté bienveillante, sans jugement.", placeholder:"Ma relation au mouvement c'est plutôt..."},
 ];
@@ -627,7 +627,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
