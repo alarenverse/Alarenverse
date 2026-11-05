@@ -239,7 +239,7 @@ const theorie = [
     {type:"highlight",texte:"🔴 La juge : \"Tu n'es pas assez bien. Tu aurais dû faire mieux. Regarde ce que tu as encore raté.\" → Elle compare, elle condamne, elle punit."},
     {type:"highlight",texte:"😰 La catastrophiste : \"Ça ne marchera jamais. Tout va mal tourner. Les gens vont te laisser tomber.\" → Elle imagine le pire, soi-disant pour t'éviter la déception.",classe:"bleu"},
     {type:"highlight",texte:"👻 La minimiseuse : \"C'est pas si grave ce que tu ressens. D'autres ont de vrais problèmes. Tu exagères.\" → Elle balaie tes émotions pour t'éviter d'être vulnérable.",classe:"bleu"},
-    {type:"texte",texte:"Ces trois voix ont un point commun : elles parlent toujours comme si elles étaient LA vérité. Or ce ne sont que des pensées. Pas des faits. Et ça, ça change absolument tout, parce qu'une pensée, on peut la regarder passer sans la croire."},
+    {type:"texte",texte:"Ces trois voix ont un point commun : elles parlent toujours comme si elles étaient LA vérité. Or ce ne sont que des pensées, jamais des faits. Et ça, ça change absolument tout, parce qu'une pensée, on peut la regarder passer sans la croire."},
   ]},
   { emoji:"💜", titre:"Te parler comme à ta meilleure amie", source:"Dr Kristin Neff, Self-Compassion Research", contenu:[
     {type:"texte",texte:"La compassion envers soi, ce n'est pas de la faiblesse, ni de la complaisance, ni du nombrilisme. C'est simplement se traiter avec la même douceur qu'on offre, sans réfléchir, à quelqu'un qu'on aime."},
@@ -268,7 +268,7 @@ const phrasesCompassion = [
 
 const ecritureQuestions = [
   {ex:"« Tu n'es jamais assez. » « Tu aurais dû faire mieux. » « Pour qui tu te prends ? » « Arrête, tu es trop sensible. »", q:"Quelle est la phrase que ta voix critique répète le plus souvent ?", sous:"Écris-la telle qu'elle, sans la filtrer.", placeholder:"Ma voix critique me dit souvent : ..." },
-  {ex:"« À l'école, quand seules les bonnes notes comptaient à la maison. » « Adolescente, quand on commentait sans arrêt mon corps. » « À mon premier travail, avec une cheffe qui ne disait jamais merci. »", q:"À quelle période de ta vie penses-tu que cette voix s'est formée ?", sous:"Pas besoin de certitude, juste une intuition, une image, un souvenir.", placeholder:"Je pense que cette voix vient de..." },
+  {ex:"« À l'école, quand seules les bonnes notes comptaient à la maison. » « Adolescente, quand on commentait sans arrêt mon corps. » « À mon premier travail, avec une cheffe qui ne disait jamais merci. »", q:"À quelle période de ta vie penses-tu que cette voix s'est formée ?", sous:"Une intuition, une image ou un souvenir suffit. Tu n'as pas besoin de certitude à ce moment-là.", placeholder:"Je pense que cette voix vient de..." },
   {ex:"« Tu as fait de ton mieux avec ce que tu avais ce jour-là. » « Tu as le droit d'être fatiguée. » « Je te trouve épuisée, et courageuse. »", q:"Si ta meilleure amie vivait ce que tu vis, qu'est-ce que tu lui dirais ?", sous:"Écris-lui une vraie réponse bienveillante, puis relis-la en te l'adressant à toi-même.", placeholder:"Si c'était mon amie, je lui dirais : ..." },
 ];
 
@@ -512,7 +512,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
