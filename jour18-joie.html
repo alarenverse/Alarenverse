@@ -142,7 +142,7 @@
     <div class="pratique-etape">
       <div class="etape-num">Étape 2</div>
       <div class="etape-titre">Convoque un souvenir de joie</div>
-      <div class="etape-desc">Pense à un moment, même petit, où tu as ressenti quelque chose de vivant, de léger, de joyeux. Pas forcément une grande joie. Peut-être juste rire avec quelqu'un. Sentir le soleil. Voir ton enfant. Écouter une chanson. Laisse l'image venir.</div>
+      <div class="etape-desc">Pense à un moment, même petit, où tu as ressenti quelque chose de vivant, de léger, de joyeux. Ça n'a pas besoin d'être une grande joie. Peut-être juste rire avec quelqu'un. Sentir le soleil. Voir ton enfant. Écouter une chanson. Laisse l'image venir.</div>
       <div class="etape-duree">2 minutes</div>
     </div>
 
@@ -178,7 +178,7 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">🌻</span>
     <h2>Mes sources de joie : ce qui me rend vivante</h2>
-    <p style="text-align:center;margin-bottom:6px;">Pas ce qui devrait te rendre heureuse. Pas ce qui est "bien". Ce qui te fait te sentir vivante, présente, légère, même brièvement.</p>
+    <p style="text-align:center;margin-bottom:6px;">Ce qui te fait te sentir vivante, présente, légère, même brièvement. Peu importe ce qui devrait te rendre heureuse, ou ce qui est « bien ».</p>
     <p class="small" style="text-align:center;margin-bottom:20px;">Coche tout ce qui résonne. Ajoute les tiennes. Il n'y a pas de bonnes ou mauvaises réponses.</p>
     <div id="inventaire-container"></div>
 
@@ -214,7 +214,7 @@
       Chaque tranche horaire, note l'activité que tu as faite.<br>
       Maîtrise (M) : à quel point tu t'es sentie compétente, efficace, capable. 0 = rien / 5 = vraiment bien fait.<br>
       Plaisir (P) : à quel point tu as apprécié ce moment. 0 = rien / 5 = vraiment agréable.<br><br>
-      Pas besoin de noter 5 partout, l'honnêteté est plus utile que l'idéal.
+      Note honnêtement, sans chercher le 5 partout : c'est plus utile que l'idéal.
     </div>
 
     <div style="background:linear-gradient(135deg,#fdf8ee,#fef5e0);border-radius:16px;padding:20px;border:1px solid rgba(220,180,60,0.2);margin-bottom:16px;">
@@ -289,7 +289,7 @@ const theorie=[
     {type:"texte",texte:"La joie, ce n'est pas d'abord une pensée. C'est une sensation, dans le corps : une chaleur dans la poitrine, un sourire qui monte tout seul avant même que tu y penses, une légèreté dans les jambes, un picotement dans les mains."},
     {type:"hl",texte:"🫀 Van der Kolk le dit simplement : la joie est dans le corps, pas dans les pensées. Quand on est épuisée ou qu'on a beaucoup encaissé, on perd souvent le contact avec elle, pas parce qu'elle a disparu, mais parce que le lien entre le corps et le cerveau s'est un peu refermé, pour se protéger."},
     {type:"texte",texte:"Cela explique pourquoi on peut \"savoir\" intellectuellement qu'on devrait être content, avoir une belle vie, des gens qui nous aiment, et ne rien ressentir. La joie ne se commande pas par la tête. Elle se retrouve par le corps."},
-    {type:"hl",texte:"💡 Les pratiques qui rouvrent l'accès à la joie sont donc somatiques : le mouvement, la respiration, le toucher, la musique, la nature, le jeu, la créativité. Pas la pensée positive.",classe:"orange"},
+    {type:"hl",texte:"💡 Les pratiques qui rouvrent l'accès à la joie sont donc somatiques : le mouvement, la respiration, le toucher, la musique, la nature, le jeu, la créativité. La pensée positive, elle, ne suffit pas.",classe:"orange"},
   ]},
   {emoji:"⚠️",titre:"Pourquoi chercher le bonheur à tout prix rend malheureuse",source:"Dr Russ Harris / Viktor Frankl",contenu:[
     {type:"texte",texte:"Tu la connais, cette petite musique : \"sois positive\", \"vis ta meilleure vie\", \"le bonheur est un choix\". Ça part d'une bonne intention, mais c'est un vrai poison pour le moral. Parce que vouloir être heureuse tout le temps, ça t'amène à te battre contre toutes les émotions qui ne sont pas joyeuses."},
@@ -316,9 +316,9 @@ const inventaireItems=[
 ];
 
 const ecritureQs=[
-  {ex:"« Hier, en entendant mon fils rire dans son bain. » « Ce matin, le soleil sur le lac en allant au travail. » « Une chanson à la radio qui m'a fait sourire toute seule. »",q:"Quand as-tu ressenti de la joie pour la dernière fois, même brièvement, même en marge ?",sous:"Pas le bonheur. Un éclair de vivant. Un micro-moment.",placeholder:"La dernière fois que j'ai ressenti quelque chose de joyeux c'était..."},
+  {ex:"« Hier, en entendant mon fils rire dans son bain. » « Ce matin, le soleil sur le lac en allant au travail. » « Une chanson à la radio qui m'a fait sourire toute seule. »",q:"Quand as-tu ressenti de la joie pour la dernière fois, même brièvement, même en marge ?",sous:"On ne parle pas de bonheur ici. Un éclair de vivant, un micro-moment.",placeholder:"La dernière fois que j'ai ressenti quelque chose de joyeux c'était..."},
   {ex:"« La culpabilité : je me dis que ce n'est pas le moment, qu'il y a trop à faire. » « La peur que ça ne dure pas. » « La fatigue : je n'ai même plus l'énergie d'avoir envie. »",q:"Qu'est-ce qui t'empêche de te laisser aller à la joie : la culpabilité, la fatigue, l'impression de ne pas la mériter ?",sous:"Honnêteté bienveillante, sans jugement.",placeholder:"Ce qui m'empêche de laisser entrer la joie c'est..."},
-  {ex:"« Quand je mets ma musique en préparant le repas. » « Avec l'amie qui me fait rire. » « Dehors, sans but, un quart d'heure. »",q:"Où est-ce que la joie a encore un peu de place dans ta vie ?",sous:"Pas un objectif de bonheur. Juste les moments, les endroits, les personnes avec qui tu te sens vivante.",placeholder:"La joie a encore de la place quand..."},
+  {ex:"« Quand je mets ma musique en préparant le repas. » « Avec l'amie qui me fait rire. » « Dehors, sans but, un quart d'heure. »",q:"Où est-ce que la joie a encore un peu de place dans ta vie ?",sous:"Les moments, les endroits, les personnes avec qui tu te sens vivante. Le bonheur n'est pas l'objectif.",placeholder:"La joie a encore de la place quand..."},
 ];
 
 let theorieIdx=0, checkedJoie=new Set(), eIdx=0, eReponses=[];
@@ -357,7 +357,7 @@ function renderTheorie(){
           <strong>Un exemple concret :</strong><br><br>
           Tu traverses une période difficile, fatiguée, surchargée, des tensions à la maison. Objectivement, tu n'es pas "heureuse".<br><br>
           Et pourtant : ce matin, en préparant ton café, la lumière frappe ta tasse d'une façon particulière. Ou ton enfant éclate de rire pour rien. Ou tu entends une chanson que tu aimes. Et pendant 10 secondes, tu ressens quelque chose de chaud dans la poitrine.<br><br>
-          <strong>Ça, c'est la joie.</strong> Pas le bonheur. Le bonheur, tu ne l'as pas ce matin. Mais la joie, si. Les deux peuvent coexister.
+          <strong>Ça, c'est la joie.</strong> Ce n'est pas le bonheur : le bonheur, tu ne l'as pas ce matin. Mais la joie, si. Les deux peuvent coexister.
         </div>
         <div style="background:#fdf8ee;border-radius:14px;padding:14px 18px;border:1px solid rgba(245,200,66,0.3);margin-bottom:10px;">
           <div style="font-family:'Jost',sans-serif;font-size:10px;color:#c8a030;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">La Joie : ce que c'est vraiment</div>
@@ -601,7 +601,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
