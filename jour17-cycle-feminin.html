@@ -312,9 +312,9 @@ const theorie=[
 const phases4=[
   {nom:"Phase menstruelle",emoji:"🌑",jours:"Jours 1 à 5",couleur:"#c9a0c2",bg:"rgba(201,160,194,0.1)",border:"rgba(201,160,194,0.3)",
     hormones:"Oestrogènes & Progestérone au plus bas",hormonesStyle:"background:rgba(201,160,194,0.2);color:#c9a0c2;",
-    desc:"Le corps travaille intensément. L'énergie est intentionnellement basse : ton système nerveux est en mode récupération.",
+    desc:"Le corps travaille intensément. L'énergie est naturellement basse : ton système nerveux est en mode récupération.",
     emotions:"Besoin de calme, d'intériorité, de douceur. Intuition souvent accrue. Vulnérabilité émotionnelle réelle.",
-    conseils:"Réduire les engagements si possible. Repos, chaleur, soupe. Pas le moment des grandes décisions. Yoga Yin, étirements doux. Honorer ce besoin de retrait sans culpabilité."},
+    conseils:"Réduire les engagements si possible. Repos, chaleur, soupe. Les grandes décisions peuvent attendre. Yoga Yin, étirements doux. Honorer ce besoin de retrait sans culpabilité."},
   {nom:"Phase folliculaire",emoji:"🌒",jours:"Jours 6 à 13",couleur:"#80c8a8",bg:"rgba(128,200,168,0.1)",border:"rgba(128,200,168,0.3)",
     hormones:"Oestrogènes en hausse",hormonesStyle:"background:rgba(128,200,168,0.2);color:#80c8a8;",
     desc:"L'énergie remonte. La clarté mentale revient. C'est ta phase de renaissance, idéale pour commencer, créer, planifier.",
@@ -335,8 +335,8 @@ const phases4=[
 const suiviOptions=[
   {id:"menstruelle",titre:"Phase menstruelle · j'ai mes règles",sous:"Je suis en début de cycle, fatiguée, repliée sur moi-même.",couleur:"#c9a0c2",
     conseils:{
-      energie:"Ton énergie est intentionnellement basse, c'est biologique, pas psychologique. Honore ce besoin de repos sans culpabilité.",
-      mouvement:"Yoga Yin, étirements très doux, marche lente. Pas de sport intense : ton corps a d'autres priorités.",
+      energie:"Ton énergie est naturellement basse, c'est biologique, pas psychologique. Honore ce besoin de repos sans culpabilité.",
+      mouvement:"Yoga Yin, étirements très doux, marche. Le sport intense est peut-être à mettre en stand-by (à voir selon ton énergie). À toi de ressentir comment tu te sens.",
       emotions:"Si tu pleures sans raison apparente ou que tu te sens très sensible, c'est normal. Tes hormones sont au plus bas. Sois ta meilleure amie.",
       nutrition:"Fer, magnésium, oméga-3. Chocolat noir si tu en as envie : le magnésium qu'il contient aide vraiment.",
       eviter:"Les grandes décisions, les confrontations, la sur-stimulation sociale. Ce n'est pas le bon moment.",
@@ -372,7 +372,7 @@ const suiviOptions=[
   {id:"luteale_fin",titre:"Phase lutéale fin, pré-menstruelle",sous:"SPM, irritabilité, larmes, fatigue intense, les règles arrivent bientôt.",couleur:"#e8857a",
     conseils:{
       energie:"Douceur maximale. Ce n'est pas le moment de performer, c'est le moment de survivre avec grâce.",
-      mouvement:"Étirements doux, yoga très calme, promenade. Pas de sport intense.",
+      mouvement:"Ton corps appréciera les étirements doux, le yoga, les promenades, la respiration. La haute intensité est à faire selon ton énergie. Ne force pas, écoute-toi.",
       emotions:"Si tes symptômes sont très intenses et récurrents, note-les : le PMDD mérite une consultation médicale.",
       nutrition:"Repas chauds, réconfortants. Éviter l'alcool, le sucre, la caféine, ils aggravent les symptômes prémenstruels.",
       eviter:"Les grandes décisions, les conflits importants, la comparaison aux autres. Toutes les pensées négatives sont amplifiées par la chute hormonale.",
@@ -649,7 +649,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
