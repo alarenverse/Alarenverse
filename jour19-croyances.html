@@ -143,7 +143,7 @@
     <span class="emoji-hero">🔍</span>
     <h2>Reconnais-tu ces croyances ?</h2>
     <p style="text-align:center;margin-bottom:6px;">Clique sur celles qui résonnent, même légèrement. En les voyant écrites, l'origine souvent devient claire.</p>
-    <p class="small" style="text-align:center;margin-bottom:20px;">Il n'y a pas de bonne ou mauvaise réponse. Juste ce qui est vrai pour toi.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Il n'y a pas de bonne ou mauvaise réponse, seulement ce qui est vrai pour toi.</p>
     <div id="croyances-container"></div>
     <div class="hl" style="margin-top:8px;" id="croyances-message">Clique sur les croyances qui te ressemblent pour voir d'où elles viennent.</div>
     <button class="btn" onclick="showPhase('questionner')">Questionner une croyance →</button>
@@ -175,7 +175,7 @@
     </div>
 
     <div class="hl" style="margin-bottom:16px;">
-      Byron Katie propose 4 questions, puis un retournement. Pas pour nier ta croyance, pour voir si elle est vraiment vraie. Réponds honnêtement, sans te censurer.
+      Byron Katie propose 4 questions, puis un retournement. L'idée n'est pas de nier ta croyance, mais de voir si elle est vraiment vraie. Réponds honnêtement, sans te censurer.
     </div>
 
     <div class="katie-question">
@@ -189,7 +189,7 @@
     <div class="katie-question">
       <div class="katie-num">Question 2</div>
       <div class="katie-q">Peux-tu être absolument certaine que c'est vrai ?</div>
-      <div class="katie-aide">Pas "probablement vrai" ou "ça me semble vrai". Peux-tu en être certaine à 100% ? Y a-t-il une exception, un contre-exemple ?</div>
+      <div class="katie-aide">« Probablement vrai » ou « ça me semble vrai » ne suffisent pas : peux-tu en être certaine à 100 % ? Y a-t-il une exception, un contre-exemple ?</div>
       <div class="exemple">Par exemple : « Non. La semaine dernière, j'ai demandé de l'aide et ma collègue a dit oui tout de suite. Donc ce n'est pas vrai à 100 %. »</div>
       <textarea class="katie-input" id="k2" placeholder="Quand je cherche vraiment..."></textarea>
     </div>
@@ -237,7 +237,7 @@
       <label for="note19">Aujourd'hui, tu y crois à combien ?</label>
       <div class="note-ligne"><input type="range" id="note19" min="0" max="100" step="5" value="10" oninput="majCroyance()"><span class="note-val" id="note19-val">10 %</span></div>
     </div>
-    <p class="small" style="font-style:normal;font-size:15.5px;font-family:'Jost',sans-serif;">Même 5 %, c'est un point de départ. On ne mesure pas à quel point l'ancienne baisse, on regarde à quel point la nouvelle grandit. Tu ne vas pas la répéter comme une affirmation : à force de répétition, une phrase qu'on ne croit pas peut même faire l'effet inverse. Tu vas lui chercher des preuves.</p>
+    <p class="small" style="font-style:normal;font-size:15.5px;font-family:'Jost',sans-serif;">5 %, c'est déjà un point de départ. On ne mesure pas à quel point l'ancienne baisse, on regarde à quel point la nouvelle grandit. Tu ne vas pas la répéter comme une affirmation : à force de répétition, une phrase qu'on ne croit pas peut même faire l'effet inverse. Tu vas lui chercher des preuves.</p>
     <div class="hl vert" style="margin-top:6px;">
       C'est différent de la pensée alternative de la fiche à 5 colonnes, qui doit te sembler crédible tout de suite. Une croyance de fond, elle, se construit sur des semaines. À la fin de cette journée, tu vas commencer ton carnet de preuves.
     </div>
@@ -268,7 +268,7 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">📋</span>
     <h2>La fiche à 5 colonnes de Beck</h2>
-    <p>C'est l'outil TCC le plus utilisé pour travailler les pensées automatiques. Pas parce qu'il faut "penser positif", parce qu'il t'aide à voir que ta pensée automatique n'est pas forcément la réalité.</p>
+    <p>C'est l'outil TCC le plus utilisé pour travailler les pensées automatiques. Il ne sert pas à « penser positif » : il t'aide à voir que ta pensée automatique n'est pas forcément la réalité.</p>
 
     <div class="hl" style="margin-bottom:14px;">
       <strong>Les 5 colonnes :</strong><br><br>
@@ -401,17 +401,17 @@ const croyances=[
 ];
 
 const identiteDimensions=[
-  {titre:"Mes valeurs · ce qui compte vraiment pour moi",desc:"Pas ce qui devrait compter, pas ce qu'on m'a dit de valoriser. Ce qui, quand je le vis, me fait me sentir alignée.",couleur:"#6040a0",bg:"#f0eefa",border:"rgba(128,96,192,0.3)"},
+  {titre:"Mes valeurs · ce qui compte vraiment pour moi",desc:"Ce qui me fait me sentir alignée quand je le vis, peu importe ce qui devrait compter ou ce qu'on m'a dit de valoriser.",couleur:"#6040a0",bg:"#f0eefa",border:"rgba(128,96,192,0.3)"},
   {titre:"Mes élans naturels · ce qui m'attire sans effort",desc:"Ce vers quoi je vais spontanément quand je ne suis pas épuisée ou en train de performer. Ce qui m'a toujours attirée, depuis l'enfance.",couleur:"#8040a8",bg:"#f5f0ff",border:"rgba(160,80,180,0.3)"},
-  {titre:"Mes forces · ce que je fais naturellement bien",desc:"Pas ce pour quoi on me félicite nécessairement : ce qui vient facilement, ce que je fais avec plaisir, ce qui coule.",couleur:"#206050",bg:"#eaf5f0",border:"rgba(80,160,128,0.3)"},
+  {titre:"Mes forces · ce que je fais naturellement bien",desc:"Qu'on me félicite ou non : ce qui me vient facilement, ce que je fais avec plaisir ou ce qui coule.",couleur:"#206050",bg:"#eaf5f0",border:"rgba(80,160,128,0.3)"},
   {titre:"Ce qui me touche · ce qui émeut quelque chose en moi",desc:"La beauté, l'injustice, la vulnérabilité de quelqu'un, un coucher de soleil, une histoire vraie... Ce qui me touche dit quelque chose de profond sur qui je suis.",couleur:"#7a5010",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)"},
-  {titre:"Mes frontières naturelles, ce que je refuse instinctivement",desc:"Pas les règles apprises, ce qui dans mes tripes me dit non. Ce que je ne peux pas faire sans me trahir.",couleur:"#8a2020",bg:"#fde8e6",border:"rgba(220,100,90,0.3)"},
+  {titre:"Mes frontières naturelles, ce que je refuse instinctivement",desc:"Plus profond que les règles apprises : ce qui, dans mes tripes, me dit non. Ce que je ne peux pas faire sans me trahir.",couleur:"#8a2020",bg:"#fde8e6",border:"rgba(220,100,90,0.3)"},
 ];
 
 const ecritureQs=[
   {ex:"« Je dois être forte. Ça vient de ma mère, qui ne pleurait jamais devant nous. » « Je dérange. Petite, on me disait souvent de ne pas faire de bruit. »",q:"Quelle croyance limitante te pèse le plus en ce moment, et d'où penses-tu qu'elle vient ?",sous:"Cherche l'origine, une personne, une expérience, un message répété.",placeholder:"La croyance qui me pèse le plus c'est... / Je pense qu'elle vient de..."},
-  {ex:"« Je vois que c'est une pensée, pas un fait. » « J'ai trouvé trois exceptions. Ça fissure un peu la certitude. »",q:"Après le questionnement Byron Katie, qu'est-ce qui a légèrement bougé dans ta façon de voir cette croyance ?",sous:"Même un tout petit décalage compte. Même juste un doute là où il y avait certitude.",placeholder:"Ce qui a légèrement bougé c'est... / Je commence à voir que..."},
-  {ex:"« Quelqu'un qui aime les longues marches seule. Quelqu'un de curieux, qui rit facilement. » « Je ne sais pas encore, et c'est peut-être ça que je découvre. »",q:"En dehors de tes rôles, mère, professionnelle, fille, partenaire, qui es-tu ?",sous:"Pas une liste de qualités. Ce qui reste quand on enlève tout ce que tu fais pour les autres.",placeholder:"Au-delà de mes rôles, je suis quelqu'un qui..."},
+  {ex:"« Je vois que c'est une pensée, pas un fait. » « J'ai trouvé trois exceptions. Ça fissure un peu la certitude. »",q:"Après le questionnement Byron Katie, qu'est-ce qui a légèrement bougé dans ta façon de voir cette croyance ?",sous:"Un tout petit décalage compte, comme un doute là où il y avait une certitude.",placeholder:"Ce qui a légèrement bougé c'est... / Je commence à voir que..."},
+  {ex:"« Quelqu'un qui aime les longues marches seule. Quelqu'un de curieux, qui rit facilement. » « Je ne sais pas encore, et c'est peut-être ça que je découvre. »",q:"En dehors de tes rôles, mère, professionnelle, fille, partenaire, qui es-tu ?",sous:"Je ne te demande pas une liste de qualités : ce qui reste quand on enlève tout ce que tu fais pour les autres.",placeholder:"Au-delà de mes rôles, je suis quelqu'un qui..."},
 ];
 
 let theorieIdx=0, selectedCroyances=new Set(), eIdx=0, eReponses=[];
@@ -765,7 +765,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
