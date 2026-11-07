@@ -87,6 +87,8 @@
   .suite-box{background:linear-gradient(135deg,#eef4fb,#f0eefa);border-radius:20px;padding:22px;border:1px solid rgba(80,140,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
   textarea{width:100%;border:2px solid rgba(80,140,200,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#1d2d40;line-height:1.7;outline:none;resize:vertical;background:#f4f8fd}
   textarea:focus{border-color:#6090c0}
+  .e-q{font-size:17px;color:#1d2d40;line-height:1.65;text-align:center;margin-bottom:12px}
+  .e-intro{font-size:15px;color:#4a6a8a;line-height:1.65;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
@@ -288,33 +290,25 @@
   <div class="card" style="margin-top:24px;">
     <div id="outils-header" style="text-align:center;margin-bottom:20px;"></div>
     <div id="outils-container"></div>
-    <button class="btn" onclick="showPhase('reflexion')">Ma réflexion du jour ✍️</button>
+    <button class="btn" onclick="showPhase('reflexion');renderE()">Ma réflexion du jour ✍️</button>
   </div>
 </div>
 
 <!-- RÉFLEXION -->
 <div class="phase" id="phase-reflexion">
-  <div class="card" style="margin-top:24px;">
-    <span class="emoji-hero">✍️</span>
-    <h2>Ma réflexion du jour</h2>
-    <p style="text-align:center;margin-bottom:20px;">Trois questions courtes pour ancrer ce que tu as appris aujourd'hui.</p>
-
-    <div style="margin-bottom:18px;">
-      <p style="font-size:16px;color:#1d2d40;margin-bottom:6px;">Quelle est l'émotion que tu as le plus de mal à réguler, et est-ce une émotion primaire ou secondaire ?</p>
-      <div class="exemple">Par exemple : « La colère. Je crois qu'elle est secondaire : dessous, il y a souvent la peur de ne pas y arriver. » « La tristesse, que je transforme très vite en agacement. »</div>
-      <textarea id="r1" rows="3" placeholder="L'émotion qui me pose le plus de problème c'est... / Je pense que c'est une émotion..." oninput="checkReflexion()"></textarea>
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="e-label">Mon lien à cette émotion · 1/12</span>
+      <span style="font-family:'Jost',sans-serif;">✍️ Ma réflexion du jour</span>
     </div>
-    <div style="margin-bottom:18px;">
-      <p style="font-size:16px;color:#1d2d40;margin-bottom:6px;">Dans quelle zone de ta fenêtre de tolérance passes-tu le plus de temps ?</p>
-      <div class="exemple">Par exemple : « Plutôt en hyperactivation : je cours, je m'agace, je dors mal. » « Plutôt en hypoactivation le soir : vidée, devant un écran, incapable de parler. »</div>
-      <textarea id="r2" rows="3" placeholder="Je suis souvent en hyperactivation (agitée, anxieuse) / hypoactivation (vide, gelée) / dans ma fenêtre..." oninput="checkReflexion()"></textarea>
-    </div>
-    <div style="margin-bottom:18px;">
-      <p style="font-size:16px;color:#1d2d40;margin-bottom:6px;">Quel outil te parle le plus, et dans quelle situation tu l'imagines ?</p>
-      <div class="exemple">Par exemple : « La respiration 4-6 quand je sens la colère monter pendant les devoirs. » « Sentir mes pieds au sol et nommer cinq choses autour de moi avant une réunion stressante. »</div>
-      <textarea id="r3" rows="3" placeholder="L'outil qui me parle c'est... / Je l'imagine quand..." oninput="checkReflexion()"></textarea>
-    </div>
-    <button class="btn" id="btn-reflexion" onclick="showFin()">Terminer le Jour 12 🌊</button>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:8%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-intro" id="e-intro">Aujourd'hui, on va un peu plus loin : ton lien à cette émotion, ce qui est difficile, et d'où ça vient. Tu peux passer une question à tout moment.</p>
+    <p class="e-q" id="e-question"></p>
+    <div class="exemple" id="e-exemple" style="display:none"></div>
+    <textarea id="e-textarea" rows="5" placeholder=""></textarea>
+    <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
   </div>
 </div>
 
@@ -510,16 +504,49 @@ function showOutils(i){
   showPhase('outils');
 }
 
-function checkReflexion(){
-  // Réflexion libre, bouton toujours accessible
+const reflexionQs=[
+  {"partie": "Mon lien à cette émotion", "court": "Émotion difficile à réguler", "q": "Quelle est l'émotion que tu as le plus de mal à réguler, et est-ce une émotion primaire ou secondaire ?", "ex": "« La colère. Je crois qu'elle est secondaire : dessous, il y a souvent la peur de ne pas y arriver. » « La tristesse, que je transforme très vite en agacement. »", "placeholder": "L'émotion qui me pose le plus de problème c'est... / Je pense que c'est une émotion..."},
+  {"partie": "Mon lien à cette émotion", "court": "Le plus dur avec elle", "q": "Qu'est-ce qui est le plus dur avec elle : la sentir dans ton corps, la montrer, ou ce que tu te dis quand elle est là ?", "ex": "« La montrer. J'ai peur qu'on me trouve faible. » « Ce que je me dis : tu exagères, il y a pire. »", "placeholder": "Le plus dur, c'est..."},
+  {"partie": "Mon lien à cette émotion", "court": "Ce à quoi elle me ramène", "q": "À quoi elle te ramène ? Une situation, une période, une phrase entendue ?", "ex": "« À l'école, quand je devais être parfaite pour qu'on ne s'énerve pas. » « À une phrase de mon père : arrête ton cinéma. »", "placeholder": "Elle me ramène à..."},
+  {"partie": "Mon lien à cette émotion", "court": "Comment elle était accueillie", "q": "Quand tu étais petite et que tu ressentais cette émotion, comment c'était accueilli autour de toi ?", "ex": "« On m'envoyait dans ma chambre jusqu'à ce que ça passe. » « Personne n'en parlait. Ma mère pleurait en cachette, alors moi aussi. »", "placeholder": "Quand j'étais petite, autour de moi..."},
+  {"partie": "Mon lien à cette émotion", "court": "Ce que je me dis aujourd'hui", "q": "Et aujourd'hui, quand elle arrive, qu'est-ce que tu te dis à toi-même ?", "ex": "« Que je suis trop sensible. » « Que je n'ai pas le droit, avec tout ce que j'ai. »", "placeholder": "Aujourd'hui, je me dis..."},
+  {"partie": "La dernière fois qu'elle a débordé", "court": "La situation", "q": "Que s'est-il passé, concrètement ? Décris-le comme une caméra le filmerait.", "ex": "« Mon compagnon est rentré à 21 h sans prévenir, le repas était froid. » « Ma fille a claqué la porte quand je lui ai demandé de ranger. »", "placeholder": "Ce qui s'est passé..."},
+  {"partie": "La dernière fois qu'elle a débordé", "court": "Ma pensée", "q": "Dans la seconde d'avant, qu'est-ce que tu t'es dit ?", "ex": "« Il se fiche complètement de moi. » « Je suis une mauvaise mère, je n'arrive à rien avec elle. »", "placeholder": "Je me suis dit..."},
+  {"partie": "La dernière fois qu'elle a débordé", "court": "Ce que j'ai fait, ce que ça m'a coûté", "q": "Qu'est-ce que tu as fait ensuite ? Qu'est-ce que ça t'a apporté sur le moment, et qu'est-ce que ça t'a coûté après ?", "ex": "« J'ai crié, puis je me suis fermée. Sur le moment, ça m'a soulagée. Après, on ne s'est plus parlé de la soirée. » « J'ai tout rangé moi-même. Sur le moment, la paix. Après, de la rancœur, et elle ne range toujours pas. »", "placeholder": "J'ai... / Sur le moment... / Après..."},
+  {"partie": "La dernière fois qu'elle a débordé", "court": "Ce que disent les faits", "q": "Qu'est-ce qui pourrait rendre ta pensée fausse ? Que disent les faits ?", "ex": "« Il m'avait écrit à 18 h que la réunion durait, je n'avais pas vu le message. Il était coincé, et il a pensé à me prévenir. » « Ma fille a 13 ans, elle teste les limites. Je suis une mère qui pose des limites, et ça crée des frictions. »", "placeholder": "Les faits disent que..."},
+  {"partie": "La dernière fois qu'elle a débordé", "court": "Son besoin", "q": "De quoi cette émotion avait-elle besoin, à ce moment-là ?", "ex": "« D'être prévenue, et de compter pour lui. » « De soutien, et de partager les règles de la maison. »", "placeholder": "Elle avait besoin de..."},
+  {"partie": "Pour la suite", "court": "Ma zone habituelle", "q": "Dans quelle zone de ta fenêtre de tolérance passes-tu le plus de temps ?", "ex": "« Plutôt en hyperactivation : je cours, je m'agace, je dors mal. » « Plutôt en hypoactivation le soir : vidée, devant un écran, incapable de parler. »", "placeholder": "Je suis souvent en hyperactivation (agitée, anxieuse) / hypoactivation (vide, gelée) / dans ma fenêtre..."},
+  {"partie": "Pour la suite", "court": "L'outil que je veux essayer", "q": "Quel outil te parle le plus, et dans quelle situation tu l'imagines ?", "ex": "« La respiration 4-6 quand je sens la colère monter pendant les devoirs. » « Sentir mes pieds au sol et nommer cinq choses autour de moi avant une réunion stressante. »", "placeholder": "L'outil qui me parle c'est... / Je l'imagine quand..."}
+];
+let eIdx=0, eReponses=[];
+
+function renderE(){
+  const q=reflexionQs[eIdx];
+  document.getElementById('e-label').textContent=q.partie+' · '+(eIdx+1)+'/'+reflexionQs.length;
+  document.getElementById('e-progress').style.width=((eIdx+1)/reflexionQs.length*100)+'%';
+  document.getElementById('e-intro').style.display=eIdx===0?'block':'none';
+  document.getElementById('e-question').textContent=q.q;
+  const x=document.getElementById('e-exemple'); x.textContent='Par exemple : '+q.ex; x.style.display='block';
+  const ta=document.getElementById('e-textarea');
+  const deja=eReponses.find(r=>r.i===eIdx); ta.value=deja?deja.r:''; ta.placeholder=q.placeholder;
+  document.getElementById('btn-e').textContent=eIdx<reflexionQs.length-1?'Continuer →':'Terminer le Jour 12 🌊';
+}
+
+function nextE(){
+  const val=document.getElementById('e-textarea').value.trim();
+  eReponses=eReponses.filter(r=>r.i!==eIdx);
+  if(val) eReponses.push({i:eIdx,q:reflexionQs[eIdx].court,r:val});
+  if(eIdx<reflexionQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
+  else showFin();
 }
 
 function showFin(){
   const rc=document.getElementById('recap-container');
   rc.innerHTML='';
-  [{id:'r1',q:"Émotion difficile à réguler"},{id:'r2',q:"Ma zone habituelle"},{id:'r3',q:"L'outil que je veux essayer"}].forEach((r,i)=>{
-    const val=document.getElementById(r.id).value.trim();
-    if(val) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:${i<2?'10px':'0'}"><div class="recap-q">${r.q}</div><div class="recap-r">"${val}"</div></div>`;
+  const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const tri=eReponses.slice().sort((a,b)=>a.i-b.i);
+  tri.forEach((r,k)=>{
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:${k<tri.length-1?'10px':'0'}"><div class="recap-q">${esc(r.q)}</div><div class="recap-r">"${esc(r.r)}"</div></div>`;
   });
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
   document.getElementById('phase-fin').classList.add('active');
@@ -579,6 +606,7 @@ function telechargerReponses(){
   }
   function collecte(){
     var items=[];
+    try{ if(typeof eReponses!=='undefined'&&Array.isArray(eReponses)) eReponses.forEach(function(x){ if(x&&x.r) items.push({q:String(x.q||''),r:String(x.r)}); }); }catch(e){}
 
     document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
       if(el.id==='e-textarea'||el.id==='j-textarea'||(el.closest&&el.closest('.realise-jour')))return;
