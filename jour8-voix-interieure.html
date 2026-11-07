@@ -76,6 +76,7 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#f8f0fd,#f0f4fd);border-radius:20px;padding:22px;border:1px solid rgba(180,140,210,0.25);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .e-rappel{font-size:15px;color:#5d3860;text-align:center;font-style:italic;background:rgba(240,228,248,0.7);border-radius:12px;padding:10px 14px;margin:0 0 12px;line-height:1.55}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
@@ -172,14 +173,15 @@
 <div class="phase" id="phase-ecriture">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="e-label">Écriture · 1/3</span>
+      <span id="e-label">Ta voix, au quotidien · 1/11</span>
       <span style="font-family:'Jost',sans-serif;">✍️ Dialoguer avec ta voix</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:9%"></div></div>
   </div>
   <div class="card">
     <p class="ecriture-q" id="e-question"></p>
     <p class="ecriture-sous" id="e-sous"></p>
+    <p class="e-rappel" id="e-rappel" style="display:none"></p>
     <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="" oninput="checkEcriture()"></textarea>
     <button class="btn" id="btn-e-next" style="width:100%;margin-top:12px;" onclick="nextEcriture()">Continuer →</button>
@@ -267,9 +269,17 @@ const phrasesCompassion = [
 ];
 
 const ecritureQuestions = [
-  {ex:"« Tu n'es jamais assez. » « Tu aurais dû faire mieux. » « Pour qui tu te prends ? » « Arrête, tu es trop sensible. »", q:"Quelle est la phrase que ta voix critique répète le plus souvent ?", sous:"Écris-la telle qu'elle, sans la filtrer.", placeholder:"Ma voix critique me dit souvent : ..." },
-  {ex:"« À l'école, quand seules les bonnes notes comptaient à la maison. » « Adolescente, quand on commentait sans arrêt mon corps. » « À mon premier travail, avec une cheffe qui ne disait jamais merci. »", q:"À quelle période de ta vie penses-tu que cette voix s'est formée ?", sous:"Une intuition, une image ou un souvenir suffit. Tu n'as pas besoin de certitude à ce moment-là.", placeholder:"Je pense que cette voix vient de..." },
-  {ex:"« Tu as fait de ton mieux avec ce que tu avais ce jour-là. » « Tu as le droit d'être fatiguée. » « Je te trouve épuisée, et courageuse. »", q:"Si ta meilleure amie vivait ce que tu vis, qu'est-ce que tu lui dirais ?", sous:"Écris-lui une vraie réponse bienveillante, puis relis-la en te l'adressant à toi-même.", placeholder:"Si c'était mon amie, je lui dirais : ..." },
+  {"partie": "Ta voix, au quotidien", "q": "Quelle est la phrase que ta voix critique répète le plus souvent ?", "sous": "Écris-la telle qu'elle, sans la filtrer.", "ex": "« Tu n'es jamais assez. » « Tu aurais dû faire mieux. » « Pour qui tu te prends ? » « Arrête, tu es trop sensible. »", "placeholder": "Ma voix critique me dit souvent : ..."},
+  {"partie": "Ta voix, au quotidien", "q": "Dans quelles situations elle parle le plus fort ?", "sous": "", "ex": "« Le soir, quand je fais le bilan de tout ce que je n'ai pas fait. » « Après une réunion, quand je rejoue tout ce que j'ai dit. »", "placeholder": "Elle parle le plus fort quand..."},
+  {"partie": "Ta voix, au quotidien", "q": "Quand elle parle, qu'est-ce que ça te fait, dans ton corps et dans ton énergie ?", "sous": "", "ex": "« Ma poitrine se serre, et je me sens toute petite. » « Je me raidis, puis je n'ai plus envie de rien. »", "placeholder": "Dans mon corps... / Dans mon énergie..."},
+  {"partie": "Ta voix, au quotidien", "q": "Et qu'est-ce que tu fais, juste après ?", "sous": "", "ex": "« Je travaille encore plus. » « Je m'excuse pour tout, même quand ce n'est pas ma faute. »", "placeholder": "Après, je..."},
+  {"partie": "D'où elle vient", "q": "À quelle période de ta vie penses-tu que cette voix s'est formée ?", "sous": "Une intuition, une image ou un souvenir suffit. Tu n'as pas besoin de certitude à ce moment-là.", "ex": "« À l'école, quand seules les bonnes notes comptaient à la maison. » « Adolescente, quand on commentait sans arrêt mon corps. » « À mon premier travail, avec une cheffe qui ne disait jamais merci. »", "placeholder": "Je pense que cette voix vient de..."},
+  {"partie": "D'où elle vient", "q": "Si cette voix avait un ton ou un visage, à qui ressemblerait-elle ?", "sous": "", "ex": "« Au ton de ma mère quand je rapportais une mauvaise note. » « À personne en particulier, plutôt à toutes les remarques entendues sur mon corps. »", "placeholder": "Elle ressemble à..."},
+  {"partie": "D'où elle vient", "q": "Est-ce qu'il t'arrive de parler comme elle aux autres : à tes enfants, à ton compagnon, à tes collègues ?", "sous": "", "ex": "« Oui, à ma fille. Je m'entends lui dire “applique-toi un peu”. » « Avec les autres, je suis douce. C'est seulement avec moi que je suis dure. »", "placeholder": "Avec les autres, je..."},
+  {"partie": "Ce que tu en fais", "q": "À quoi crois-tu qu'elle te sert ? Qu'est-ce qui se passerait si elle se taisait ?", "sous": "", "ex": "« J'ai peur que sans elle, je me laisse aller. » « Elle me protège : si je me critique en premier, les autres ne pourront pas me faire plus mal. »", "placeholder": "Je crois qu'elle me sert à... / Si elle se taisait..."},
+  {"partie": "Ce que tu en fais", "q": "Reprends sa phrase du début. Qu'est-ce qui pourrait la rendre fausse ? Que disent les faits ?", "sous": "", "rappel": true, "ex": "« “Tu n'es jamais assez” : cette semaine, j'ai tenu mon travail, mes enfants et la maison. Je suis une femme qui fait beaucoup. » « “Tu aurais dû faire mieux” : j'ai fait avec l'énergie que j'avais ce jour-là, et c'était ce qu'il fallait. »", "placeholder": "Les faits disent que..."},
+  {"partie": "Ce que tu en fais", "q": "Si ta meilleure amie vivait ce que tu vis, qu'est-ce que tu lui dirais ?", "sous": "Écris-lui une vraie réponse bienveillante, puis relis-la en te l'adressant à toi-même.", "ex": "« Tu as fait de ton mieux avec ce que tu avais ce jour-là. » « Tu as le droit d'être fatiguée. » « Je te trouve épuisée, et courageuse. »", "placeholder": "Si c'était mon amie, je lui dirais : ..."},
+  {"partie": "Ce que tu en fais", "q": "Qu'est-ce que ça te fait, de relire ces mots en te les adressant à toi-même ?", "sous": "", "ex": "", "placeholder": "Quand je relis ces mots..."}
 ];
 
 let theorieIdx = 0;
@@ -338,10 +348,11 @@ function toggleId(i) {
 
 function renderEcriture() {
   const e=ecritureQuestions[ecritureIdx];
-  document.getElementById('e-label').textContent=`Écriture · ${ecritureIdx+1}/${ecritureQuestions.length}`;
+  document.getElementById('e-label').textContent=(e.partie||'Écriture')+' · '+(ecritureIdx+1)+'/'+ecritureQuestions.length;
   document.getElementById('e-progress').style.width=((ecritureIdx+1)/ecritureQuestions.length*100)+'%';
   document.getElementById('e-question').textContent=e.q;
-  document.getElementById('e-sous').textContent=e.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=e.ex?('Par exemple : '+e.ex):'';x.style.display=e.ex?'block':'none';}})();
+  document.getElementById('e-sous').textContent=e.sous||'';document.getElementById('e-sous').style.display=e.sous?'block':'none';
+  (function(){var r=document.getElementById('e-rappel');var p=ecritureReponses.find(function(x){return x.q===ecritureQuestions[0].q;});if(e.rappel&&p){r.textContent='Ta phrase : « '+p.r+' »';r.style.display='block';}else{r.textContent='';r.style.display='none';}})();(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=e.ex?('Par exemple : '+e.ex):'';x.style.display=e.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=e.placeholder;
   document.getElementById('btn-e-next').textContent=ecritureIdx<ecritureQuestions.length-1?'Continuer →':'Voir les phrases de compassion 💜';
