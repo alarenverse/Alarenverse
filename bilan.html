@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
 <meta name="supported-color-schemes" content="light">
-<title>Bilan gratuit · L'Effet Papillon</title>
+<title>Ton bilan · L'Effet Papillon</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{color-scheme:light}
@@ -461,6 +461,17 @@
   }
   .hero-titre{font-size:clamp(28px,7.4vw,38px);font-weight:500;color:#5e4632;line-height:1.25;margin-bottom:16px}
   .hero p.promesse{font-size:18px;text-align:center;color:#6b5560;line-height:1.65;margin:0 auto 4px;max-width:500px}
+  .hero p.hero-sous{font-size:19px;font-style:italic;text-align:center;color:#5e4632;line-height:1.55;margin:0 auto 14px;max-width:500px}
+  a.btn{text-decoration:none;text-align:center;width:fit-content;max-width:100%;box-sizing:border-box}
+  .appel-box{margin-top:26px;padding-top:22px;border-top:1px solid rgba(200,160,200,0.25)}
+  .appel-box p{margin-bottom:0}
+  .echelle-10{display:flex;gap:4px;margin:8px 0 10px}
+  .note10{flex:1;min-width:0;height:46px;border-radius:12px;border:2px solid rgba(200,180,220,0.35);background:white;cursor:pointer;font-family:'Jost',sans-serif;font-size:17px;color:#5d4868;transition:all 0.2s;padding:0}
+  .note10:hover{border-color:var(--rose)}
+  .note10.selected{background:linear-gradient(135deg,var(--rose),var(--bleu));border-color:transparent;color:white;font-weight:600}
+  .note10:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+  .reperes-10{display:flex;justify-content:space-between;gap:16px;font-family:'Jost',sans-serif;font-size:14px;color:#7a6884;line-height:1.45;margin-bottom:4px}
+  .reperes-10 span:last-child{text-align:right}
   .btn-go{font-size:18px;padding:17px 40px;background:linear-gradient(135deg,#c2836a,#c8a870);box-shadow:0 6px 26px rgba(194,131,106,0.32)}
   .lien-prog{
     display:inline-block;
@@ -493,7 +504,7 @@
   .cta-achat:hover{animation:none;transform:translateY(-2px)}
 
 
-  /* Case « ce qui te travaille », dans le cadre liste d'attente */
+  /* Case « ce qui te travaille », après le bouton d'appel */
   .partage{margin-top:18px;padding-top:18px;border-top:1px solid rgba(194,131,106,0.25);text-align:left}
   .partage .partage-titre{font-size:18px;color:var(--violet);text-align:center;margin-bottom:8px;line-height:1.4}
   .partage p{text-align:left}
@@ -519,17 +530,18 @@
 <div class="phase active" id="phase-intro">
   <div class="hero">
     <div class="surtitre">L'Effet Papillon</div>
-    <div class="badge">Bilan gratuit</div>
-    <h1 class="hero-titre">Tu gères tout.<br>Et pourtant, quelque chose coince.</h1>
-    <p class="promesse">En quelques minutes, ce bilan gratuit te montre ce qui pèse le plus en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
-    <button class="btn btn-go" onclick="showPhase('quiz');renderQuestion()">Je fais mon bilan gratuit</button>
-    <p class="hint">11 questions · 7 minutes · ton résultat tout de suite</p>
+    <div class="badge">Ton bilan</div>
+    <h1 class="hero-titre">Tu gères tout, en pilote automatique.</h1>
+    <p class="hero-sous">Tu as déjà des outils. Et pourtant, ça ne suffit pas.</p>
+    <p class="promesse">En quelques minutes, ce bilan te montre ce qui pèse le plus en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
+    <button class="btn btn-go" onclick="showPhase('quiz');renderQuestion()">Je fais mon bilan</button>
+    <p class="hint">12 questions · 7 minutes · ton résultat tout de suite</p>
   </div>
 
   <div class="card">
     <div class="label">L'Effet Papillon, c'est quoi ?</div>
-    <p>30 jours rien qu'à toi, un jour après l'autre, pour comprendre ce qui se passe en toi et te rapprocher davantage de la femme que tu as envie d'être.</p>
-    <p>La première édition est en cours. La prochaine n'a pas encore de date : en faisant le bilan, tu rejoins la liste d'attente, et tu seras prévenue en premier.</p>
+    <p>30 jours rien qu'à toi pour sortir du pilote automatique : repérer le moment où tu bascules et recommencer à ressentir ce que tu vis.</p>
+    <p>La première édition est en cours. Pour rejoindre la prochaine, tout commence par ce bilan, puis un appel avec moi.</p>
     <p style="margin-bottom:0;">Le bilan, c'est la première étape. Il te montre ce qui pèse le plus en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
   </div>
 
@@ -540,7 +552,7 @@
     <p>Ton portrait sur 11 domaines de ta vie : tes émotions, ta charge mentale, ta colère, tes limites, ton corps, ton repos, et d'autres. Pour ceux qui pèsent le plus, tu vois ce qui peut changer et comment le programme s'en occupe.</p>
     <p class="note">Réponds comme ça se passe vraiment pour toi ces dernières semaines. Il n'y a pas de bonne ou de mauvaise réponse.</p>
     <button class="btn btn-go" onclick="showPhase('quiz');renderQuestion()">Je commence mon bilan</button>
-    <p class="signature">Créé par <strong>Debora</strong>, infirmière en santé mentale<br>@alarenverse.coaching</p>
+    <p class="signature">Créé par <strong>Debora</strong>, coach pour femmes et infirmière en santé mentale de formation<br>@alarenverse.coaching</p>
   </div>
 </div>
 
@@ -548,7 +560,7 @@
 <div class="phase" id="phase-quiz">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="q-counter">1 / 11</span>
+      <span id="q-counter">1 / 12</span>
       <span id="q-category"></span>
     </div>
     <div class="progress-track">
@@ -578,7 +590,7 @@
       </label>
       <button class="btn" id="btn-email-submit" disabled onclick="submitAndShowResults()">Voir mon portrait</button>
       <div class="erreur" id="erreur-envoi"></div>
-      <p class="hint" style="margin-top:14px;">Tu rejoins la liste d'attente : je te préviens en premier à l'ouverture de la prochaine édition. Zéro spam, tu te désabonnes quand tu veux.</p>
+      <p class="hint" style="margin-top:14px;">Zéro spam, tu te désabonnes quand tu veux.</p>
     </div>
   </div>
 </div>
@@ -602,17 +614,15 @@
     <div style="font-size:30px;text-align:center;margin-bottom:12px;line-height:1;">🦋</div>
     <div class="label">Et maintenant ?</div>
     <p style="color:#3d2e45;"><strong>Ce bilan te dit où tu en es. Il ne te dit pas comment en sortir.</strong></p>
-    <p>C'est le travail de <strong>L'Effet Papillon</strong>. Et soyons honnêtes : 30 jours ne vont pas défaire des années de survie. Ce qu'ils font, c'est te donner de quoi comprendre ce qui se passe en toi, et des outils que tu sauras vraiment utiliser. Le changement, lui, continue après.</p>
+    <p>C'est le travail de <strong>L'Effet Papillon</strong>. Et soyons honnêtes : 30 jours ne vont pas défaire des années de survie. Ce qu'ils font, c'est t'aider à sortir du pilote automatique, et te donner des outils que tu sauras vraiment utiliser. Le changement, lui, continue après.</p>
     <ul class="etapes">
       <li><strong>Un pas par jour.</strong> Une page à ouvrir, quelques minutes. Rien à caser en plus dans ta journée.</li>
-      <li><strong>Comprendre d'abord.</strong> Pourquoi tu fonctionnes comme ça, sans culpabilité et sans jargon.</li>
+      <li><strong>Ressentir d'abord.</strong> Repérer le moment où tu bascules en pilote automatique, sans culpabilité et sans jargon.</li>
       <li><strong>Des outils concrets.</strong> À utiliser le soir même, dans ta vraie vie, avec tes vrais gens.</li>
       <li><strong>Et surtout, que ça continue.</strong> La dernière semaine sert à ancrer, parce que le vrai changement commence après le jour 30.</li>
     </ul>
     <p>Chaque territoire de ton portrait renvoie à des étapes précises du programme, celles qui travaillent exactement ce que tu viens de nommer.</p>
-    <div class="novembre">
-      <p class="nov-titre">Tu es sur la liste d'attente</p>
-      <p style="font-size:16px;margin-bottom:4px;">La prochaine édition de L'Effet Papillon n'a pas encore de date. Tu fais partie des premières que je préviendrai, dès que les inscriptions ouvrent.</p>
+    <a class="btn btn-go btn-appel" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je réserve mon appel</a>
       <div class="partage" id="bloc-partage">
         <p class="partage-titre">Et toi, qu'est-ce qui te travaille le plus en ce moment ?</p>
         <p style="font-size:16px;">Si tu en as envie, écris-le ici. Je lis chaque message, et ce que tu écris reste entre nous.</p>
@@ -623,9 +633,7 @@
         <div class="erreur" id="partage-erreur"></div>
         <p class="securite">Si tu traverses quelque chose de très lourd en ce moment, n'attends pas ma réponse : appelle le 143 (La Main Tendue, 24h/24) ou parle à ton médecin.</p>
       </div>
-      <a href="https://www.instagram.com/alarenverse.coaching/" target="_blank" rel="noopener" class="btn-programme" style="margin-top:18px;">En attendant, je te suis sur Instagram</a>
-    </div>
-    <p style="margin-bottom:0;margin-top:20px;font-size:15.5px;color:#7d6888;">Une question d'ici là ? Écris-moi en message privé sur <strong style="white-space:nowrap;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#3d2e45" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px;margin-right:3px;"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="#3d2e45" stroke="none"/></svg>@alarenverse.coaching</strong>.</p>
+          <p style="margin-bottom:0;margin-top:20px;font-size:15.5px;color:#7d6888;">Une question d'ici là ? Écris-moi en message privé sur <strong style="white-space:nowrap;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#3d2e45" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px;margin-right:3px;"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="#3d2e45" stroke="none"/></svg>@alarenverse.coaching</strong>.</p>
   </div>
 </div>
 
@@ -818,7 +826,8 @@ const territoires={
 
 const labelsCourts=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps en alerte","Lien au corps","Repos","Relations","Cycle","Sens de soi"];
 
-let current=0,answers=[],selected=null,prenomSaisi="",emailSaisi="";
+let current=0,answers=[],selected=null,prenomSaisi="",emailSaisi="",inconfort=null,etapeInconfort=false;
+const TOTAL_Q=12;
 
 function genererToile(vals){
   const cx=200, cy=200, R=100, n=vals.length;
@@ -876,13 +885,13 @@ function showPhase(id){
 
 function renderQuestion(){
   const q=questions[current];
-  document.getElementById('q-counter').textContent=(current+1)+' / '+questions.length;
+  document.getElementById('q-counter').textContent=(current+1)+' / '+TOTAL_Q;
   document.getElementById('q-category').textContent=q.category;
-  document.getElementById('progress-fill').style.width=(current/questions.length*100)+'%';
+  document.getElementById('progress-fill').style.width=(current/TOTAL_Q*100)+'%';
   document.getElementById('question-text').textContent=q.text;
   selected=null;
   document.getElementById('btn-next').disabled=true;
-  document.getElementById('btn-next').textContent=current<questions.length-1?'Question suivante':'Voir mon portrait';
+  document.getElementById('btn-next').textContent='Question suivante';
   const container=document.getElementById('options-container');
   container.innerHTML='';
   q.options.forEach((opt,i)=>{
@@ -900,11 +909,56 @@ function renderQuestion(){
 }
 
 function nextQuestion(){
+  if(etapeInconfort){
+    if(inconfort===null)return;
+    showPhase('email');
+    return;
+  }
   if(selected===null)return;
   answers.push(selected);
   selected=null;
   if(current<questions.length-1){current++;renderQuestion();window.scrollTo(0,0);}
-  else{showPhase('email');}
+  else{renderInconfort();window.scrollTo(0,0);}
+}
+
+/* 12e question : l'inconfort du jour, de 0 à 10 (hors score, hors toile, hors portrait) */
+function renderInconfort(){
+  etapeInconfort=true;
+  document.getElementById('q-counter').textContent=TOTAL_Q+' / '+TOTAL_Q;
+  document.getElementById('q-category').textContent="Aujourd'hui";
+  document.getElementById('progress-fill').style.width=((TOTAL_Q-1)/TOTAL_Q*100)+'%';
+  document.getElementById('question-text').textContent="Aujourd'hui, ce que tu vis est inconfortable à combien sur 10 ?";
+  const consigne=document.querySelector('#phase-quiz .consigne');
+  if(consigne)consigne.style.display='none';
+  const btnNext=document.getElementById('btn-next');
+  btnNext.textContent='Voir mon portrait';
+  btnNext.disabled=(inconfort===null);
+  const container=document.getElementById('options-container');
+  container.innerHTML='<div class="echelle-10" role="radiogroup" aria-label="Inconfort de 0 à 10"></div>'
+    +'<div class="reperes-10"><span>0 · Ça va, je fais avec</span><span>10 · Je ne veux plus continuer comme ça</span></div>';
+  const box=container.querySelector('.echelle-10');
+  for(let n=0;n<=10;n++){
+    const b=document.createElement('button');
+    b.className='note10'+(inconfort===n?' selected':'');
+    b.textContent=n;
+    b.setAttribute('role','radio');
+    b.setAttribute('aria-checked',inconfort===n?'true':'false');
+    b.onclick=()=>{
+      inconfort=n;
+      box.querySelectorAll('.note10').forEach(x=>{x.classList.remove('selected');x.setAttribute('aria-checked','false');});
+      b.classList.add('selected');b.setAttribute('aria-checked','true');
+      btnNext.disabled=false;
+    };
+    box.appendChild(b);
+  }
+}
+
+/* Lien d'appel cal.com, pré-rempli avec le prénom et l'e-mail */
+function lienAppel(){
+  const p=[];
+  if(prenomSaisi)p.push('name='+encodeURIComponent(prenomSaisi));
+  if(emailSaisi)p.push('email='+encodeURIComponent(emailSaisi));
+  return 'https://cal.com/debora-pilates-puidoux/effetpapillon'+(p.length?'?'+p.join('&'):'');
 }
 
 function checkEmailForm(){
@@ -929,7 +983,7 @@ async function submitAndShowResults(){
   emailSaisi=document.getElementById('input-email').value.trim();
 
   /* Sécurité : rien ne part sans toutes les réponses, le prénom et un e-mail (bloque les robots) */
-  if(answers.length!==questions.length||!prenomSaisi||emailSaisi.indexOf('@')<1){return;}
+  if(answers.length!==questions.length||inconfort===null||!prenomSaisi||emailSaisi.indexOf('@')<1){return;}
 
   btn.disabled=true;
   btn.textContent='Un instant...';
@@ -940,10 +994,11 @@ async function submitAndShowResults(){
 
   const donnees={
     access_key:ACCESS_KEY,
-    subject:"Bilan (liste d'attente) · "+prenomSaisi,
+    subject:"Bilan · "+prenomSaisi+" · Inconfort "+inconfort+"/10",
     from_name:"L'Effet Papillon · Bilan",
     Prenom:prenomSaisi,
     email:emailSaisi,
+    Inconfort:inconfort+"/10",
     Score:total+" / "+(questions.length*5)+" (moyenne "+moyenne+")",
     Date:new Date().toLocaleString('fr-CH'),
     Consentement:"Oui",
@@ -1021,6 +1076,12 @@ function renderResultats(){
     html += '</div>';
   }
 
+  html += '<div class="appel-box">'
+    + '<div class="sous-titre">Tu veux que ça bouge vraiment ?</div>'
+    + '<p>Si tu en as assez d\'être en mode pilote automatique et que tu es prête à investir en toi pour que ça bouge, réserve un appel de 20 minutes avec moi. On regarde ton portrait ensemble, et je te dis honnêtement si L\'Effet Papillon est fait pour toi en ce moment.</p>'
+    + '<a class="btn btn-go btn-appel" href="'+lienAppel()+'" target="_blank" rel="noopener">Je réserve mon appel</a>'
+    + '</div>';
+
   if(forces.length>0){
     html += '<div style="margin-top:24px;">'
       + '<div class="sous-titre">Ce sur quoi tu peux t\'appuyer</div>';
@@ -1040,6 +1101,7 @@ function renderResultats(){
   }
 
   document.getElementById('profil-container').innerHTML = html;
+  document.querySelectorAll('.btn-appel').forEach(a=>{a.href=lienAppel();});
 
   document.getElementById('dimensions-container').innerHTML =
     '<div class="sous-titre" style="margin-bottom:14px;">Ce que tu emportes avec toi</div>'
@@ -1115,8 +1177,9 @@ function telechargerReponses(){
     +contenu
     +'<div class="suite">'
     +'<h2>Et maintenant ?</h2>'
-    +'<p>Ce bilan te dit où tu en es. Il ne te dit pas comment en sortir.<br>C\'est le travail de L\'Effet Papillon, mon programme de 30 jours. Tu es sur la liste d\'attente : je te préviens en premier à l\'ouverture de la prochaine édition.</p>'
-    +'<a href="https://www.instagram.com/alarenverse.coaching/">Me suivre sur Instagram</a>'
+    +'<p>Ce bilan te dit où tu en es. Il ne te dit pas comment en sortir.<br>C\'est le travail de L\'Effet Papillon, mon programme de 30 jours. Pour savoir s\'il est fait pour toi en ce moment, réserve un appel de 20 minutes avec moi.</p>'
+    +'<a href="'+lienAppel()+'">Je réserve mon appel</a>'
+    +'<p style="margin:16px 0 0;font-size:14px;"><a href="https://www.instagram.com/alarenverse.coaching/" style="background:none;color:#a0644d;padding:0;text-decoration:underline;">Me suivre sur Instagram</a></p>'
     +'</div>'
     +'<div class="footer">@alarenverse.coaching</div>';
 
