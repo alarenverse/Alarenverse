@@ -97,7 +97,7 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">📋</span>
     <h2>La Semaine 3 · ce que tu as traversé</h2>
-    <p style="text-align:center;margin-bottom:6px;">Coche les jours que tu as faits. Pas pour te noter, pour voir ton chemin.</p>
+    <p style="text-align:center;margin-bottom:6px;">Coche les jours que tu as faits, juste pour voir ton chemin, sans te noter.</p>
     <p class="small" style="text-align:center;margin-bottom:18px;">Lire, reconnaître quelque chose en soi, résister, c'est déjà du travail.</p>
     <div id="recap-container"></div>
     <div class="hl" style="margin-top:12px;" id="recap-message"></div>
@@ -131,7 +131,7 @@
 
     <div class="bilan-bloc">
       <div class="bilan-q">Qu'est-ce qui a commencé à changer, même légèrement, dans ta façon de te voir ou de prendre soin de toi ?</div>
-      <div class="bilan-sous">Même infime. Une pensée différente, un réflexe nouveau, une douceur envers toi-même.</div>
+      <div class="bilan-sous">Une pensée différente, un réflexe nouveau, une douceur envers toi-même.</div>
       <div class="exemple">Par exemple : « J'ai demandé de l'aide une fois cette semaine. » « Je me surprends à me dire : ce n'est qu'une pensée. »</div>
       <textarea id="b3" rows="3" placeholder="Ce qui a commencé à changer c'est..." oninput="checkBilan()"></textarea>
     </div>
@@ -186,7 +186,7 @@
     </div>
 
     <div class="hl" style="margin-top:16px;text-align:left;">
-      🔑 <strong>Pour la Semaine 4 :</strong> Elle sera différente. Moins de travail sur ce qui va mal, plus de reconnaissance de ce qui est bien. Tu mérites de te célébrer. Pas de te féliciter de tout : de te voir vraiment, avec bienveillance.
+      🔑 <strong>Pour la Semaine 4 :</strong> Elle sera différente. Moins de travail sur ce qui va mal, plus de reconnaissance de ce qui est bien. Tu mérites de te célébrer : te voir vraiment, avec bienveillance, sans avoir à te féliciter de tout.
     </div>
   </div>
       <button class="btn" onclick="telechargerReponses()" style="margin-top:12px;background:linear-gradient(135deg,#c8a060,#a080c8);">
@@ -445,7 +445,8 @@ function telechargerReponses(){
 </script>
 <script>
 /* Carnet du programme : relire ses mots, télécharger tout son parcours */
-var LABELS_J1=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"];
+var LABELS_J1=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps en alerte","Lien au corps","Repos","Relations","Cycle","Sens de soi"];
+var LABELS_J1_AVANT=["Émotions","Charge mentale","Voix intérieure","Limites","Colère","Corps","Repos","Relations","Cycle","Sens de soi"]; /* réponses enregistrées avant décembre 2026 */
 function carnetLire(){try{return JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}');}catch(e){return {};}}
 function carnetEsc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 function carnetCourt(t,n){t=String(t);return t.length>n?t.slice(0,n).replace(/\s+\S*$/,'')+'…':t;}
@@ -492,7 +493,8 @@ function telechargerCarnet(){
   function toile(t,d){
     if(!d||!d.answers)return '';
     var h='<h2>'+t+'</h2><div class="date">'+new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})+'</div>';
-    d.answers.forEach(function(v,i){h+='<div class="ligne"><span>'+(LABELS_J1[i]||'')+'</span><span>'+v+' / 5</span></div>';});
+    var L=d.answers.length===10?LABELS_J1_AVANT:LABELS_J1;
+    d.answers.forEach(function(v,i){h+='<div class="ligne"><span>'+(L[i]||'')+'</span><span>'+v+' / 5</span></div>';});
     return h;
   }
   corps+=toile('Jour 1 · Mon état des lieux',c.j1);
