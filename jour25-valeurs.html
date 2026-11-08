@@ -67,6 +67,13 @@
   textarea{width:100%;border:2px solid rgba(80,160,120,0.25);border-radius:14px;padding:14px 16px;font-size:14px;font-family:'Lora',serif;color:#1d3028;line-height:1.7;outline:none;resize:vertical;background:#f4fbf7}
   textarea:focus{border-color:#60a880}
   .e-q{font-size:17px;font-weight:600;color:#1d3028;line-height:1.65;text-align:center;margin-bottom:6px;font-style:normal}
+  .tr-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;padding:10px 0;border-bottom:1px solid rgba(96,168,128,0.15)}
+  .tr-row:last-child{border-bottom:none}
+  .tr-nom{flex:1 1 auto;font-size:15.5px;color:#1d3028;font-style:normal}
+  .tr-btns{display:flex;gap:6px;flex-shrink:0;margin-left:auto}
+  .tr-btn{border:2px solid rgba(96,168,128,0.3);background:#f5faf7;color:#3d5a48;border-radius:50px;padding:6px 9px;font-size:12.5px;white-space:nowrap;font-family:'Jost',sans-serif;cursor:pointer;transition:all 0.15s}
+  .tr-btn.sel.garde{background:linear-gradient(135deg,#60a880,#80b8a0);border-color:transparent;color:white}
+  .tr-btn.sel.depose{background:linear-gradient(135deg,#a080c8,#b8a0d0);border-color:transparent;color:white}
   .e-sous{white-space:pre-line;font-size:13px;color:#70a080;text-align:center;margin-bottom:16px;font-family:'Jost',sans-serif}
   .recap-box{background:linear-gradient(135deg,#eaf5f0,#f5f0fa);border-radius:14px;padding:14px 18px;border:1px solid rgba(80,160,120,0.15);margin-bottom:10px}
   .recap-q{font-size:11px;color:#80a890;font-family:'Jost',sans-serif;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em}
@@ -243,14 +250,15 @@
 <div class="phase" id="phase-ecriture">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="e-label">Écriture · 1/4</span>
+      <span id="e-label">Écriture · 1/5</span>
       <span style="font-family:'Jost',sans-serif;">✍️ Mes valeurs profondes</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:20%"></div></div>
   </div>
   <div class="card">
     <p class="e-q" id="e-question"></p>
     <p class="e-sous" id="e-sous"></p>
+    <div id="e-transmises" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
     <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
   </div>
@@ -325,6 +333,7 @@ const dixValeurs=[
 ];
 
 const ecritureQs=[
+  {type:"transmises",q:"Parmi les valeurs que ta famille t'a transmises, lesquelles gardes-tu, et lesquelles as-tu envie de déposer ?",sous:"",placeholder:""},
   {q:"Quelles sont tes 3 valeurs les plus profondes ? Celles qui sont ressorties du quiz ou de tes réponses.",
    sous:"Formule-les avec ta propre voix : j'ai à cœur de ... parce que ...\n\nPar exemple : j'ai à cœur de décider moi-même de ma vie, parce que je m'éteins quand on choisit à ma place. Ou : j'ai à cœur d'être là pour les gens que j'aime, parce que je me sens à ma place quand je peux les soutenir.",
    placeholder:"1. J'ai à cœur de ... parce que ...\n\n2. J'ai à cœur de ... parce que ...\n\n3. J'ai à cœur de ... parce que ..."},
@@ -381,16 +390,37 @@ function renderE(){
   document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
   document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
   document.getElementById('e-question').textContent=q.q;
-  document.getElementById('e-sous').textContent=q.sous;
-  document.getElementById('e-textarea').value='';
-  document.getElementById('e-textarea').placeholder=q.placeholder;
+  document.getElementById('e-sous').textContent=q.sous;document.getElementById('e-sous').style.display=q.sous?'block':'none';
+  const tr=document.getElementById('e-transmises'),ta=document.getElementById('e-textarea');
+  if(q.type==='transmises'){ta.style.display='none';tr.style.display='block';renderTransmises();}else{tr.style.display='none';ta.style.display='block';}
+  ta.value='';
+  ta.placeholder=q.placeholder;
   document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 25 🧭';
+}
+
+const valeursTransmises=["L'honnêteté", "La loyauté", "La politesse", "La fidélité", "Le respect des aînés", "La discipline", "L'ambition", "La liberté", "L'indépendance", "La justice", "La générosité", "La sécurité de la famille", "La foi", "Le plaisir de vivre"];
+let transmises={};
+function renderTransmises(){
+  const c=document.getElementById('e-transmises');c.innerHTML='';
+  valeursTransmises.forEach(function(nv){const v={nom:nv};
+    const row=document.createElement('div');row.className='tr-row';
+    const nom=document.createElement('div');nom.className='tr-nom';nom.textContent=v.nom;row.appendChild(nom);
+    const btns=document.createElement('div');btns.className='tr-btns';
+    [['garde','Je la garde'],['depose','Je la dépose']].forEach(function(o){
+      const b=document.createElement('button');b.type='button';b.className='tr-btn'+(transmises[v.nom]===o[0]?' sel '+o[0]:'');b.textContent=o[1];
+      b.onclick=function(){transmises[v.nom]=transmises[v.nom]===o[0]?undefined:o[0];if(!transmises[v.nom])delete transmises[v.nom];renderTransmises();};
+      btns.appendChild(b);});
+    row.appendChild(btns);c.appendChild(row);});
+}
+function texteTransmises(){
+  const g=[],d=[];valeursTransmises.forEach(function(nv){const v={nom:nv};if(transmises[v.nom]==='garde')g.push(v.nom);if(transmises[v.nom]==='depose')d.push(v.nom);});
+  const p=[];if(g.length)p.push('Je garde : '+g.join(', '));if(d.length)p.push('Je dépose : '+d.join(', '));return p.join(' · ');
 }
 
 function checkE(){/* écriture libre */}
 
 function nextE(){
-  const val=document.getElementById('e-textarea').value.trim();
+  const val=ecritureQs[eIdx].type==='transmises'?texteTransmises():document.getElementById('e-textarea').value.trim();
   if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
   if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
   else showFin();
