@@ -28,6 +28,9 @@
   .progress-wrap{max-width:560px;width:100%;margin-top:18px}
   .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a08070;margin-bottom:8px;font-family:'Jost',sans-serif}
   .progress-track{height:3px;background:rgba(200,120,100,0.18);border-radius:4px;overflow:hidden}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .chip{background:#fdf6f3;border:2px solid rgba(200,112,96,0.28);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#6a4a48;cursor:pointer;transition:all 0.15s;user-select:none}
+  .chip.sel{background:linear-gradient(135deg,#c87060,#a080c8);border-color:transparent;color:white}
   .progress-fill{height:100%;background:linear-gradient(90deg,#c87060,#a080c8);border-radius:4px;transition:width 0.4s ease}
   .hl{background:linear-gradient(135deg,#fdf0ee,#f8f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #c87060;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
   .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
@@ -195,14 +198,15 @@
 <div class="phase" id="phase-ecriture">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="e-label">Écriture · 1/3</span>
+      <span id="e-label">Petite, qui t'apaisait ? · 1/9</span>
       <span style="font-family:'Jost',sans-serif;">✍️ Mon expérience de co-régulatrice</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:11%"></div></div>
   </div>
   <div class="card">
     <p class="e-q" id="e-question"></p>
     <p class="e-sous" id="e-sous"></p>
+    <div class="chips" id="e-chips" style="display:none"></div>
     <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
     <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
@@ -312,12 +316,18 @@ const scenarios=[
 ];
 
 const ecritureQs=[
-  {ex:"« Avec mes enfants le soir, avec mon compagnon quand il rentre stressé, avec les personnes que j'accompagne au travail. Personne ne le remarque. » « Avec ma mère âgée. Et personne ne le fait pour moi. »",q:"Dans quelles situations tu co-régules le plus souvent, et est-ce que c'est reconnu par les autres ?",sous:"Enfant, partenaire, collègues, patients... et est-ce que quelqu'un co-régule aussi pour toi ?",placeholder:"Je co-régule surtout... / Ce qui est rarement vu c'est... / Ce qui me manque c'est..."},
-  {ex:"« Vidée, la tête lourde, envie qu'on ne me touche plus. » « Irritable, avec un besoin de silence total. »",q:"Comment tu te sens dans ton corps après une longue période de co-régulation intense ?",sous:"Laisse de côté ce que tu penses devoir ressentir, et écris ce que tu ressens vraiment.",placeholder:"Dans mon corps je ressens... / Les signaux que je remarque c'est..."},
-  {ex:"« Dix minutes seule dans la voiture avant de rentrer, sans téléphone. » « Dire à mon compagnon : ce soir, c'est toi qui prends le relais. »",q:"Qu'est-ce qui t'aiderait à co-réguler sans te vider autant, de façon réaliste et concrète ?",sous:"Quelque chose de faisable dans ta vie telle qu'elle est, loin de la liste de vœux.",placeholder:"Ce qui m'aiderait vraiment c'est..."},
+  {"partie": "Petite, qui t'apaisait ?", "q": "Quand tu étais petite et bouleversée, qui t'apaisait, et comment ?", "sous": "Coche ce qui te parle. En dessous : comment ?", "ex": "« Ma grand-mère : elle me prenait sur ses genoux et ne disait rien. » « Personne. J'allais dans ma chambre et j'attendais que ça passe. »", "placeholder": "Comment...", "chips": ["Ma mère", "Mon père", "Une grand-mère ou un grand-père", "Un frère ou une sœur", "Une autre personne", "Personne, je me calmais seule"]},
+  {"partie": "Petite, qui t'apaisait ?", "q": "Est-ce qu'il t'arrivait, petite, de devoir calmer ou consoler un adulte ?", "sous": "", "ex": "« Oui. Quand mes parents se disputaient, j'allais consoler ma mère. J'avais huit ans. » « Je sentais l'humeur de mon père dès qu'il passait la porte, et je faisais tout pour qu'il ne s'énerve pas. »", "placeholder": "Petite, je..."},
+  {"partie": "La co-régulatrice que tu es aujourd'hui", "ex": "« Avec mes enfants le soir, avec mon compagnon quand il rentre stressé, avec les personnes que j'accompagne au travail. Personne ne le remarque. » « Avec ma mère âgée. Et personne ne le fait pour moi. »", "q": "Dans quelles situations tu co-régules le plus souvent, et est-ce que c'est reconnu par les autres ?", "sous": "Enfant, partenaire, collègues, patients... et est-ce que quelqu'un co-régule aussi pour toi ?", "placeholder": "Je co-régule surtout... / Ce qui est rarement vu c'est... / Ce qui me manque c'est..."},
+  {"partie": "La co-régulatrice que tu es aujourd'hui", "q": "Est-ce qu'il t'arrive de repartir chargée d'émotions qui ne sont pas les tiennes ?", "sous": "", "ex": "« Après les repas de famille, je suis épuisée et triste sans savoir pourquoi. » « Je ramène à la maison le stress de mes collègues. »", "placeholder": "Il m'arrive de..."},
+  {"partie": "La co-régulatrice que tu es aujourd'hui", "ex": "« Vidée, la tête lourde, envie qu'on ne me touche plus. » « Irritable, avec un besoin de silence total. »", "q": "Comment tu te sens dans ton corps après une longue période de co-régulation intense ?", "sous": "Laisse de côté ce que tu penses devoir ressentir, et écris ce que tu ressens vraiment.", "placeholder": "Dans mon corps je ressens... / Les signaux que je remarque c'est..."},
+  {"partie": "La co-régulatrice que tu es aujourd'hui", "q": "Quel signal te dit que tu es toi-même trop à bout pour aider l'autre ?", "sous": "Coche ce qui te parle. En dessous : dans quelle situation, le plus souvent ?", "ex": "« Quand mes deux enfants pleurent en même temps, je sens ma voix monter. » « Quand mon compagnon s'énerve, je me fige et je n'arrive plus à parler. »", "placeholder": "Le plus souvent, c'est quand...", "chips": ["Je parle plus fort ou plus vite", "La chaleur me monte au visage", "Ma mâchoire se serre, mes épaules remontent", "J'ai envie de fuir ou je me fige", "Ses pleurs ou sa colère déclenchent les miens", "Je minimise ce qu'il vit", "Je ne réfléchis plus, je réagis"]},
+  {"partie": "La co-régulatrice que tu es aujourd'hui", "q": "Après un moment où tu as perdu ton calme avec quelqu'un, est-ce que tu reviens vers lui pour réparer ? Et chez toi, petite, comment ça se passait ?", "sous": "Perdre son calme arrive à tout le monde. Daniel Siegel et Mary Hartzell montrent que ce qui compte pour le lien, c'est de revenir vers l'autre pour réparer.", "ex": "« Oui, je vais voir ma fille et je lui dis : “J'ai crié, ce n'était pas juste, ce n'est pas ta faute.” Chez moi, on ne revenait jamais dessus. » « Non, je fais comme si rien ne s'était passé. Exactement comme mes parents. »", "placeholder": "Après coup, je... / Chez moi, petite..."},
+  {"partie": "Et toi, qui te régule ?", "q": "Et toi, aujourd'hui, qui t'apaise ?", "sous": "Coche ce qui te parle. En dessous : et qu'est-ce qui t'empêche de le demander plus souvent ?", "ex": "« Mon chien : quand je pose la main sur lui, je respire mieux. » « Personne. Je n'ose pas montrer que je vais mal, j'ai peur de déranger. »", "placeholder": "Ce qui m'empêche de le demander...", "chips": ["Mon ou ma partenaire", "Une amie", "Quelqu'un de ma famille", "Mon animal", "La nature", "Personne, en ce moment"]},
+  {"partie": "Et toi, qui te régule ?", "ex": "« Dix minutes seule dans la voiture avant de rentrer, sans téléphone. » « Dire à mon compagnon : ce soir, c'est toi qui prends le relais. »", "q": "Qu'est-ce qui t'aiderait à co-réguler sans te vider autant, de façon réaliste et concrète ?", "sous": "Quelque chose de faisable dans ta vie telle qu'elle est, loin de la liste de vœux.", "placeholder": "Ce qui m'aiderait vraiment c'est..."}
 ];
 
-let theorieIdx=0, selectedScenario=null, eIdx=0, eReponses=[];
+let theorieIdx=0, selectedScenario=null, eIdx=0, eReponses=[], eChoix=[];
 
 function showPhase(id){
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
@@ -408,10 +418,12 @@ function showOutilsScenario(i){
 
 function renderE(){
   const q=ecritureQs[eIdx];
-  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-label').textContent=(q.partie||'Écriture')+' · '+(eIdx+1)+'/'+ecritureQs.length;
   document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
   document.getElementById('e-question').textContent=q.q;
-  document.getElementById('e-sous').textContent=q.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
+  document.getElementById('e-sous').textContent=q.sous||'';document.getElementById('e-sous').style.display=q.sous?'block':'none';
+  eChoix=[];const ec=document.getElementById('e-chips');ec.innerHTML='';ec.style.display=q.chips?'flex':'none';
+  (q.chips||[]).forEach(function(txt){const ch=document.createElement('div');ch.className='chip';ch.textContent=txt;ch.onclick=function(){const i=eChoix.indexOf(txt);if(i>-1){eChoix.splice(i,1);ch.classList.remove('sel');}else{eChoix.push(txt);ch.classList.add('sel');}};ec.appendChild(ch);});(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=q.placeholder;
   document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 13 🫂';
@@ -420,7 +432,8 @@ function renderE(){
 function checkE(){/* écriture libre */}
 
 function nextE(){
-  const val=document.getElementById('e-textarea').value.trim();
+  const txt=document.getElementById('e-textarea').value.trim();
+  const val=eChoix.concat(txt?[txt]:[]).join(' · ');
   if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
   if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
   else showFin();
