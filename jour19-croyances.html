@@ -409,7 +409,7 @@ const identiteDimensions=[
 ];
 
 const ecritureQs=[
-  {ex:"« Je dois être forte. Ça vient de ma mère, qui ne pleurait jamais devant nous. » « Je dérange. Petite, on me disait souvent de ne pas faire de bruit. »",q:"Quelle croyance limitante te pèse le plus en ce moment, et d'où penses-tu qu'elle vient ?",sous:"Cherche l'origine, une personne, une expérience, un message répété.",placeholder:"La croyance qui me pèse le plus c'est... / Je pense qu'elle vient de..."},
+  {ex:"« Je dois être forte. Ça vient de ma mère, qui ne pleurait jamais devant nous. » « Je dérange. Petite, on me disait souvent de ne pas faire de bruit. »",q:"Cette croyance qui te pèse, d'où penses-tu qu'elle vient ?",sous:"Cherche l'origine, une personne, une expérience, un message répété.",placeholder:"Je pense qu'elle vient de..."},
   {ex:"« Je vois que c'est une pensée, pas un fait. » « J'ai trouvé trois exceptions. Ça fissure un peu la certitude. »",q:"Après le questionnement Byron Katie, qu'est-ce qui a légèrement bougé dans ta façon de voir cette croyance ?",sous:"Un tout petit décalage compte, comme un doute là où il y avait une certitude.",placeholder:"Ce qui a légèrement bougé c'est... / Je commence à voir que..."},
   {ex:"« Quelqu'un qui aime les longues marches seule. Quelqu'un de curieux, qui rit facilement. » « Je ne sais pas encore, et c'est peut-être ça que je découvre. »",q:"En dehors de tes rôles, mère, professionnelle, fille, partenaire, qui es-tu ?",sous:"Je ne te demande pas une liste de qualités : ce qui reste quand on enlève tout ce que tu fais pour les autres.",placeholder:"Au-delà de mes rôles, je suis quelqu'un qui..."},
 ];
@@ -508,7 +508,7 @@ function renderE(){
   document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
   document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
   document.getElementById('e-question').textContent=q.q;
-  document.getElementById('e-sous').textContent=q.sous;(function(){var r=document.getElementById('e-rappel');if(!r)return;var h=eIdx===0?rappelJ1():'';r.innerHTML=h;r.style.display=h?'block':'none';})();(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
+  document.getElementById('e-sous').textContent=q.sous;(function(){var r=document.getElementById('e-rappel');if(!r)return;var h=eIdx===0?(rappelCroyance()+rappelJ1()):'';r.innerHTML=h;r.style.display=h?'block':'none';})();(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=q.placeholder;
   document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 19 🔮';
@@ -614,6 +614,11 @@ function majCroyance(){
 })();
 
 // Ce qu'elle avait écrit au jour 1
+function rappelCroyance(){
+  const el=document.getElementById('ma-croyance');const v=el?el.value.trim():'';
+  return v?'<div class="rj1-label">Ta croyance</div><div class="rj1-r" style="margin-bottom:8px;">« '+escJ19(v)+' »</div>':'';
+}
+
 function rappelJ1(){
   try{
     const its=((JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}').j1)||{}).items||[];
