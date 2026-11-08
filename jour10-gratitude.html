@@ -28,6 +28,9 @@
   .progress-wrap{max-width:560px;width:100%;margin-top:18px}
   .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a09060;margin-bottom:8px;font-family:'Jost',sans-serif}
   .progress-track{height:3px;background:rgba(200,160,80,0.2);border-radius:4px;overflow:hidden}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .chip{background:#fdf8ee;border:2px solid rgba(200,168,112,0.4);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#6d5830;cursor:pointer;transition:all 0.15s;user-select:none;font-style:normal}
+  .chip.sel{background:linear-gradient(135deg,#c8a870,#e8a0b4);border-color:transparent;color:white}
   .progress-fill{height:100%;background:linear-gradient(90deg,#c8a870,#e8a0b4);border-radius:4px;transition:width 0.4s ease}
   .highlight{background:linear-gradient(135deg,#fdf8ee,#fdf5f0);border-radius:14px;padding:14px 18px;border-left:3px solid #c8a870;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
   .highlight.rose{border-left-color:#e8a0b4;background:linear-gradient(135deg,#fdf0f8,#fdf5f5)}
@@ -89,7 +92,7 @@
     <p class="small" style="margin-bottom:20px;">Mais à une condition : la pratiquer pour de vrai, pas en surface. Aujourd'hui on voit ce que la science en dit, pourquoi c'est si dur quand on souffre, et comment la pratiquer sans jamais te mentir à toi-même.</p>
     <div id="preview-container" style="text-align:left;margin-bottom:22px;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 💛</button>
-    <p class="hint">Théorie · Journal guidé · Gratitude envers soi · ~20 min</p>
+    <p class="hint">Théorie · Journal guidé · Gratitude envers soi · ~25 min</p>
   </div>
 </div>
 
@@ -129,14 +132,15 @@
 <div class="phase" id="phase-journal">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="j-label">Journal · 1/4</span>
+      <span id="j-label">La gratitude dans ton histoire · 1/9</span>
       <span style="font-family:'Jost',sans-serif;">📖 Gratitude profonde</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="j-progress" style="width:25%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="j-progress" style="width:11%"></div></div>
   </div>
   <div class="card">
     <p class="journal-q" id="j-question"></p>
     <p class="journal-sous" id="j-sous"></p>
+    <div class="chips" id="j-chips" style="display:none"></div>
     <div class="journal-exemple" id="j-exemple" style="display:none;"></div>
     <textarea id="j-textarea" rows="5" placeholder="" oninput="checkJournal()"></textarea>
     <button class="btn" id="btn-j-next" style="width:100%;margin-top:12px;" onclick="nextJournal()">Continuer →</button>
@@ -247,30 +251,15 @@ const difficiles = [
 ];
 
 const journalQuestions = [
-  {
-    q:"Une personne qui t'a aidée, soutenue ou vue récemment, qui est-ce ?",
-    sous:"Un petit geste compte aussi. Un mot, une présence, un regard peut suffire.",
-    exemple:"Par exemple : « Ma voisine, qui a gardé mon fils une heure sans que je demande. » « Mon collègue, qui a remarqué que je n'allais pas bien. » « Ma sœur, qui m'a écrit juste pour prendre des nouvelles. »",
-    placeholder:"Cette personne c'est... / Ce qu'elle a fait c'est..."
-  },
-  {
-    q:"Pourquoi ce geste compte-t-il pour toi ? Qu'est-ce qu'il dit de ce dont tu as besoin ?",
-    sous:"C'est ici que la gratitude devient profonde. Prends le temps d'aller vraiment dans le détail.",
-    exemple:"Par exemple : « Parce que je me suis sentie vue. J'ai besoin qu'on remarque que je porte beaucoup. » « Parce que je n'ai pas eu à demander. J'ai besoin d'aide sans devoir me justifier. »",
-    placeholder:"Ça compte parce que... / Ça me rappelle que..."
-  },
-  {
-    q:"Une chose ordinaire de ta journée, neutre, simple, que tu aurais pu ne pas avoir.",
-    sous:"Ça n'a besoin d'être ni beau ni émouvant. Ce qui compte, c'est que ce soit vrai.",
-    exemple:"Par exemple : « L'eau chaude de la douche ce matin. » « Mon café bu encore chaud, pour une fois. » « Mes jambes, qui m'ont portée toute la journée. »",
-    placeholder:"Cette chose simple c'est..."
-  },
-  {
-    q:"Qu'est-ce que ça t'a fait, de chercher ce qui est bon ?",
-    sous:"Toutes les réponses sont justes. Ça peut être doux, étrange, difficile, ou rien du tout.",
-    exemple:"Par exemple : « Ça m'a fait du bien de repenser à ce moment. » « J'ai eu du mal à trouver, et ça m'a rendue un peu triste. »",
-    placeholder:"Ce que ça m'a fait c'est..."
-  },
+  {"partie": "La gratitude dans ton histoire", "q": "Quand tu étais petite, comment on parlait de gratitude chez toi ?", "sous": "Coche ce qui te parle. En dessous, un souvenir, si tu en as un.", "exemple": "Par exemple : « Quand je pleurais, on me disait que d'autres enfants n'avaient même pas à manger. J'ai appris à me taire. » « Ma grand-mère remerciait pour chaque repas, ça me touchait. »", "placeholder": "Un souvenir, une phrase entendue...", "chips": ["« Dis merci ! » à chaque fois", "« Tu as de la chance, d'autres n'ont rien »", "« Ne te plains pas »", "On se remerciait pour de vrai", "Les mercis étaient rares", "On n'en parlait pas"]},
+  {"partie": "La gratitude dans ton histoire", "q": "Quelle différence fais-tu entre la gratitude qu'on t'a demandée et celle que tu ressens pour de vrai ?", "sous": "", "exemple": "Par exemple : « Celle qu'on m'a demandée me faisait taire. Celle que je ressens me réchauffe, comme quand ma fille m'a prise dans ses bras sans raison. » « Celle qu'on attendait de moi, c'était dire merci poliment. Celle que je ressens, c'est quand j'ai la gorge serrée tellement ça me touche. »", "placeholder": "Celle qu'on m'a demandée... / Celle que je ressens..."},
+  {"partie": "La gratitude profonde", "q": "Une personne qui t'a aidée, soutenue ou vue récemment, qui est-ce ?", "sous": "Un petit geste compte aussi. Un mot, une présence, un regard peut suffire.", "exemple": "Par exemple : « Ma voisine, qui a gardé mon fils une heure sans que je demande. » « Mon collègue, qui a remarqué que je n'allais pas bien. » « Ma sœur, qui m'a écrit juste pour prendre des nouvelles. »", "placeholder": "Cette personne c'est... / Ce qu'elle a fait c'est..."},
+  {"partie": "La gratitude profonde", "q": "Pourquoi ce geste compte-t-il pour toi ? Qu'est-ce qu'il dit de ce dont tu as besoin ?", "sous": "C'est ici que la gratitude devient profonde. Prends le temps d'aller vraiment dans le détail.", "exemple": "Par exemple : « Parce que je me suis sentie vue. J'ai besoin qu'on remarque que je porte beaucoup. » « Parce que je n'ai pas eu à demander. J'ai besoin d'aide sans devoir me justifier. »", "placeholder": "Ça compte parce que... / Ça me rappelle que..."},
+  {"partie": "La gratitude profonde", "q": "Une chose ordinaire de ta journée, neutre, simple, que tu aurais pu ne pas avoir.", "sous": "Ça n'a besoin d'être ni beau ni émouvant. Ce qui compte, c'est que ce soit vrai.", "exemple": "Par exemple : « L'eau chaude de la douche ce matin. » « Mon café bu encore chaud, pour une fois. » « Mes jambes, qui m'ont portée toute la journée. »", "placeholder": "Cette chose simple c'est..."},
+  {"partie": "La gratitude profonde", "q": "Qu'est-ce que ça t'a fait, de chercher ce qui est bon ?", "sous": "Toutes les réponses sont justes. Ça peut être doux, étrange, difficile, ou rien du tout.", "exemple": "Par exemple : « Ça m'a fait du bien de repenser à ce moment. » « J'ai eu du mal à trouver, et ça m'a rendue un peu triste. »", "placeholder": "Ce que ça m'a fait c'est..."},
+  {"partie": "Recevoir et donner", "q": "Quand quelqu'un fait quelque chose pour toi, qu'est-ce que tu fais ?", "sous": "Coche ce qui te parle. En dessous, raconte, si tu veux.", "exemple": "Par exemple : « Ma voisine m'a apporté un repas. J'ai passé la soirée à me demander quoi lui offrir en retour. » « Je dis toujours “non merci, ça va”, alors que je suis épuisée. »", "placeholder": "Quand on fait quelque chose pour moi...", "chips": ["Je minimise : « Il ne fallait pas »", "Je rends tout de suite la pareille", "Je me sens redevable", "Je refuse l'aide", "Je me demande ce qu'on attend de moi", "Je l'accueille, et ça me touche"]},
+  {"partie": "Recevoir et donner", "q": "Te souviens-tu d'un merci reçu qui t'a vraiment touchée ? Qu'est-ce qu'il disait de toi ?", "sous": "", "exemple": "Par exemple : « Une collègue m'a écrit : “Sans toi, ce projet n'aurait pas tenu.” J'ai compris que j'ai besoin qu'on voie ce que je porte en coulisses. » « Ma fille m'a dit : “Merci d'être venue à mon spectacle.” Ça m'a rappelé que ma présence compte plus que tout ce que je fais. »", "placeholder": "Ce merci-là... / Il disait de moi que..."},
+  {"partie": "Recevoir et donner", "q": "À qui aimerais-tu dire merci, sans l'avoir jamais fait ? Qu'est-ce que tu lui dirais ?", "sous": "", "exemple": "Par exemple : « À ma prof de français, qui a cru en moi quand personne ne le faisait. » « À ma meilleure amie, qui était là pendant ma séparation. Je lui dirais que sans elle, je ne sais pas comment j'aurais tenu. »", "placeholder": "J'aimerais dire merci à... / Je lui dirais..."}
 ];
 
 const soiQuestions = [
@@ -286,11 +275,16 @@ const soiQuestions = [
     categorie:"Douceur envers soi",
     question:"Dans quel moment récent as-tu été un peu plus douce envers toi-même qu'avant ?"
   },
+  {ex:"« Merci à mon côté perfectionniste : il m'a permis de réussir mes études quand tout était instable à la maison. » « Merci à ma sensibilité, qu'on m'a souvent reprochée : c'est elle qui me fait sentir quand quelqu'un va mal. »",
+    categorie:"Réconciliation",
+    question:"Une partie de toi que tu as longtemps critiquée, et qui t'a pourtant aidée à tenir : qu'est-ce que tu as envie de lui dire merci ?"
+  },
 ];
 
 let theorieIdx = 0;
 let journalIdx = 0;
 let journalReponses = [];
+let jChoix = [];
 let soiReponses = {};
 let soiCount = 0;
 
@@ -361,10 +355,12 @@ function toggleDiff(i) {
 
 function renderJournal() {
   const q=journalQuestions[journalIdx];
-  document.getElementById('j-label').textContent=`Journal · ${journalIdx+1}/${journalQuestions.length}`;
+  document.getElementById('j-label').textContent=(q.partie||'Journal')+' · '+(journalIdx+1)+'/'+journalQuestions.length;
   document.getElementById('j-progress').style.width=((journalIdx+1)/journalQuestions.length*100)+'%';
   document.getElementById('j-question').textContent=q.q;
-  document.getElementById('j-sous').textContent=q.sous;
+  document.getElementById('j-sous').textContent=q.sous||'';document.getElementById('j-sous').style.display=q.sous?'block':'none';
+  jChoix=[];const jc=document.getElementById('j-chips');jc.innerHTML='';jc.style.display=q.chips?'flex':'none';
+  (q.chips||[]).forEach(function(txt){const ch=document.createElement('div');ch.className='chip';ch.textContent=txt;ch.onclick=function(){const i=jChoix.indexOf(txt);if(i>-1){jChoix.splice(i,1);ch.classList.remove('sel');}else{jChoix.push(txt);ch.classList.add('sel');}};jc.appendChild(ch);});
   const exempleEl=document.getElementById('j-exemple');
   if(q.exemple){exempleEl.textContent=q.exemple;exempleEl.style.display='block';}
   else{exempleEl.style.display='none';}
@@ -379,7 +375,8 @@ function checkJournal(){
 }
 
 function nextJournal(){
-  const val=document.getElementById('j-textarea').value.trim();
+  const txt=document.getElementById('j-textarea').value.trim();
+  const val=jChoix.concat(txt?[txt]:[]).join(' · ');
   if(val) journalReponses.push({q:journalQuestions[journalIdx].q,r:val});
   if(journalIdx<journalQuestions.length-1){journalIdx++;renderJournal();window.scrollTo(0,0);}
   else{showPhase('soi');}
