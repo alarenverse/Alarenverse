@@ -28,6 +28,9 @@
   .progress-wrap{max-width:560px;width:100%;margin-top:18px}
   .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a08090;margin-bottom:8px;font-family:'Jost',sans-serif}
   .progress-track{height:3px;background:rgba(220,160,180,0.2);border-radius:4px;overflow:hidden}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .chip{background:#fdf6f5;border:2px solid rgba(232,160,180,0.35);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#6a4a50;cursor:pointer;transition:all 0.15s;user-select:none}
+  .chip.sel{background:linear-gradient(135deg,#e8a0b4,#c2836a);border-color:transparent;color:white}
   .progress-fill{height:100%;background:linear-gradient(90deg,#e8a0b4,#c2836a);border-radius:4px;transition:width 0.4s ease}
   .highlight{background:linear-gradient(135deg,#fdf0f5,#fdf5ee);border-radius:14px;padding:14px 18px;border-left:3px solid #e8a0b4;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
   .highlight.terre{border-left-color:#c2836a;background:linear-gradient(135deg,#fdf5ee,#fdf8f0)}
@@ -147,14 +150,15 @@
 <div class="phase" id="phase-ecriture">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="e-label">Écriture · 1/3</span>
+      <span id="e-label">Ton corps dans ton histoire · 1/7</span>
       <span style="font-family:'Jost',sans-serif;">✍️ Ta relation à ton corps</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:14%"></div></div>
   </div>
   <div class="card">
     <p class="ecriture-q" id="e-question"></p>
     <p class="ecriture-sous" id="e-sous"></p>
+    <div class="chips" id="e-chips" style="display:none"></div>
     <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="Écris librement..." oninput="checkEcriture()"></textarea>
     <button class="btn" id="btn-e-next" style="width:100%;margin-top:12px;" onclick="nextEcriture()">Continuer →</button>
@@ -233,15 +237,20 @@ const rituelItems = [
 ];
 
 const ecritureQuestions = [
-  {ex:"« Étrangère. » « En guerre. » « Fatigué, mais fidèle. » « Je l'oublie, je ne le sens que quand il a mal. »", q:"Quel est le mot qui décrit le mieux ta relation à ton corps en ce moment ?", sous:"Un seul mot, qui vient spontanément, sans réfléchir.", placeholder:"Mon mot est..." },
-  {ex:"« Que je suis fatiguée depuis des mois et que je continue comme si de rien n'était. » « Mon dos me dit que je porte trop. » « Mon ventre se serre chaque dimanche soir, avant la semaine. »", q:"Qu'est-ce que ton corps essaie de te dire en ce moment, que tu n'écoutes pas toujours ?", sous:"Sois honnête. Ton corps parle souvent, mais on apprend à ne plus l'entendre.", placeholder:"Mon corps essaie de me dire que..." },
-  {ex:"« Prendre deux minutes le matin pour sentir mes pieds avant de courir partout. » « Manger assise, sans écran. » « Arrêter de m'excuser pour mon corps. »", q:"Comment voudrais-tu habiter ton corps différemment d'ici la fin de ces 30 jours ?", sous:"Je te parle d'une façon différente d'être en lien avec lui, bien au-delà d'une transformation physique.", placeholder:"Je voudrais habiter mon corps en étant..." },
+  {"partie": "Ton corps dans ton histoire", "q": "Petite, quelle place avait la tendresse chez toi : les câlins, les bras, les bisous ?", "sous": "", "ex": "« Mon père me portait sur ses épaules, c'était mon endroit préféré. » « On ne se touchait pas beaucoup. Les câlins, c'était pour les grandes occasions. »", "placeholder": "Petite, la tendresse..."},
+  {"partie": "Ton corps aujourd'hui", "ex": "« Étrangère. » « En guerre. » « Fatigué, mais fidèle. » « Je l'oublie, je ne le sens que quand il a mal. »", "q": "Quel est le mot qui décrit le mieux ta relation à ton corps en ce moment ?", "sous": "Un seul mot, qui vient spontanément, sans réfléchir.", "placeholder": "Mon mot est..."},
+  {"partie": "Ton corps aujourd'hui", "q": "Pendant le scan, qu'est-ce qui t'a surprise ?", "sous": "", "ex": "« Mes épaules, bien plus serrées que je ne le pensais. » « Mes mains : chaudes et détendues. Je ne les avais jamais remarquées. »", "placeholder": "Ce qui m'a surprise..."},
+  {"partie": "Ton corps aujourd'hui", "ex": "« Que je suis fatiguée depuis des mois et que je continue comme si de rien n'était. » « Mon dos me dit que je porte trop. » « Mon ventre se serre chaque dimanche soir, avant la semaine. »", "q": "Qu'est-ce que ton corps essaie de te dire en ce moment, que tu n'écoutes pas toujours ?", "sous": "Sois honnête. Ton corps parle souvent, mais on apprend à ne plus l'entendre.", "placeholder": "Mon corps essaie de me dire que..."},
+  {"partie": "Ton corps aujourd'hui", "q": "Qu'est-ce que tu dis de ton corps devant les autres ?", "sous": "", "ex": "« Je me plains de mes cuisses devant mes amies, c'est presque un réflexe. » « Je ne dis rien, mais je me cache derrière les autres sur les photos. »", "placeholder": "Devant les autres, je..."},
+  {"partie": "Ce que ton corps fait pour toi", "q": "Qu'est-ce que ton corps fait pour toi, que tu oublies de remarquer ?", "sous": "Coche ce qui te parle. En dessous : lequel, et comment ?", "ex": "« Mes jambes, qui m'ont portée toute cette semaine chargée. » « Mes mains, qui savent consoler. »", "placeholder": "Mon corps...", "chips": ["Il me porte toute la journée", "Il me permet de serrer ceux que j'aime", "Il récupère, même après une mauvaise nuit", "Il me fait sentir le soleil, l'eau, le vent", "Il me prévient quand c'est trop", "Il guérit, il cicatrise"]},
+  {"partie": "Ce que ton corps fait pour toi", "ex": "« Prendre deux minutes le matin pour sentir mes pieds avant de courir partout. » « Manger assise, sans écran. » « Arrêter de m'excuser pour mon corps. »", "q": "Comment voudrais-tu habiter ton corps différemment d'ici la fin de ces 30 jours ?", "sous": "Je te parle d'une façon différente d'être en lien avec lui, bien au-delà d'une transformation physique.", "placeholder": "Je voudrais habiter mon corps en étant..."}
 ];
 
 let theorieIdx = 0;
 let rituelDone = [];
 let ecritureIdx = 0;
 let ecritureReponses = [];
+let eChoix = [];
 let scanOpen = null;
 
 function showPhase(id) {
@@ -346,10 +355,12 @@ function completeRituel(i) {
 
 function renderEcriture() {
   const e=ecritureQuestions[ecritureIdx];
-  document.getElementById('e-label').textContent=`Écriture · ${ecritureIdx+1}/${ecritureQuestions.length}`;
+  document.getElementById('e-label').textContent=(e.partie||'Écriture')+' · '+(ecritureIdx+1)+'/'+ecritureQuestions.length;
   document.getElementById('e-progress').style.width=((ecritureIdx+1)/ecritureQuestions.length*100)+'%';
   document.getElementById('e-question').textContent=e.q;
-  document.getElementById('e-sous').textContent=e.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=e.ex?('Par exemple : '+e.ex):'';x.style.display=e.ex?'block':'none';}})();
+  document.getElementById('e-sous').textContent=e.sous||'';document.getElementById('e-sous').style.display=e.sous?'block':'none';
+  eChoix=[];const ec=document.getElementById('e-chips');ec.innerHTML='';ec.style.display=e.chips?'flex':'none';
+  (e.chips||[]).forEach(function(txt){const ch=document.createElement('div');ch.className='chip';ch.textContent=txt;ch.onclick=function(){const i=eChoix.indexOf(txt);if(i>-1){eChoix.splice(i,1);ch.classList.remove('sel');}else{eChoix.push(txt);ch.classList.add('sel');}};ec.appendChild(ch);});(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=e.ex?('Par exemple : '+e.ex):'';x.style.display=e.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=e.placeholder;
   /* libre */
@@ -361,7 +372,8 @@ function checkEcriture() {
 }
 
 function nextEcriture() {
-  const val=document.getElementById('e-textarea').value.trim();
+  const txt=document.getElementById('e-textarea').value.trim();
+  const val=eChoix.concat(txt?[txt]:[]).join(' · ');
   if(val) ecritureReponses.push({q:ecritureQuestions[ecritureIdx].q,r:val});
   if(ecritureIdx<ecritureQuestions.length-1){ecritureIdx++;renderEcriture();window.scrollTo(0,0);}
   else{showFin();}
