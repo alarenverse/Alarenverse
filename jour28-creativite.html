@@ -65,6 +65,14 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#f5f0fa,#f0f8f5);border-radius:20px;padding:22px;border:1px solid rgba(160,100,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  #exercice-note,#cr-petite,#cr-retient{width:100%;border:2px solid rgba(160,96,200,0.25);border-radius:14px;padding:12px 14px;font-size:15px;font-family:'Lora',serif;color:#2d1d40;line-height:1.6;outline:none;resize:vertical;background:#fbf8fd;box-sizing:border-box}
+  #exercice-note:focus,#cr-petite:focus,#cr-retient:focus{border-color:#a060c8}
+  .t-bloc{margin-bottom:22px}
+  .t-q{font-size:17px;color:#2d1d40;font-weight:600;margin-bottom:6px;line-height:1.55;font-style:normal}
+  .t-sous{font-size:14px;color:#9080a8;margin-bottom:10px;font-family:'Jost',sans-serif}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .chip{background:#faf6fd;border:2px solid rgba(160,96,200,0.3);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#4d3a60;cursor:pointer;transition:all 0.15s;user-select:none;font-style:normal}
+  .chip.sel{background:linear-gradient(135deg,#a060c8,#60a880);border-color:transparent;color:white}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
@@ -124,6 +132,30 @@
       Le bénéfice neurologique de la créativité vient de l'acte de créer, pas de la qualité de ce qu'on produit. Un gribouillage fait avec attention vaut autant qu'une aquarelle soignée. Une recette improvisée vaut autant qu'un plat gastronomique. Ce qui compte c'est d'être en état de création : présente, concentrée, dans le flux.
     </div>
 
+    <button class="btn" onclick="showPhase('toi')">Continuer →</button>
+  </div>
+</div>
+
+<!-- TOI ET LA CRÉATIVITÉ -->
+<div class="phase" id="phase-toi">
+  <div class="card" style="margin-top:24px;">
+    <span class="emoji-hero">🖍️</span>
+    <h2>Toi et la créativité</h2>
+
+    <div class="t-bloc">
+      <div class="t-q">Petite, qu'est-ce que tu aimais créer ? Et quand as-tu arrêté ?</div>
+      <div class="exemple">Par exemple : « Je dessinais des robes pendant des heures. J'ai arrêté au collège, quand on s'est moqué de moi. » « Je chantais tout le temps, jusqu'au jour où on m'a dit que je chantais faux. »</div>
+      <textarea id="cr-petite" rows="3" placeholder="Petite, j'aimais... / J'ai arrêté quand..."></textarea>
+    </div>
+
+    <div class="t-bloc">
+      <div class="t-q">Qu'est-ce qui te retient de créer aujourd'hui ?</div>
+      <div class="t-sous">Coche ce qui te parle. En dessous : raconte, si tu veux.</div>
+      <div class="chips" id="chips-retient"></div>
+      <div class="exemple">Par exemple : « “Je ne suis pas douée” : ça vient de mes notes de dessin à l'école. » « Le temps : ça passe toujours après le reste. »</div>
+      <textarea id="cr-retient" rows="3" placeholder="Ce qui me retient..."></textarea>
+    </div>
+
     <button class="btn" onclick="showPhase('exercice')">L'exercice créatif du jour →</button>
   </div>
 </div>
@@ -133,7 +165,7 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">✨</span>
     <h2>Crée quelque chose, maintenant</h2>
-    <p style="text-align:center;margin-bottom:8px;">Pas de bonne ou mauvaise réponse. Pas d'objectif de résultat. Juste créer quelque chose, ici, maintenant, avec ce que tu as.</p>
+    <p style="text-align:center;margin-bottom:8px;">Il n'y a pas de bonne ou de mauvaise réponse, ni même aucun résultat à atteindre. Crée quelque chose ici, maintenant, avec ce que tu as.</p>
     <p class="small" style="text-align:center;margin-bottom:6px;">Choisis celui qui t'attire le plus. Un seul suffit largement pour aujourd'hui.</p>
     <p class="small" style="text-align:center;margin-bottom:18px;">Les trois ne sont pas à faire aujourd'hui. Tu les retrouveras dans ton récap en fin de journée, et dans le livret bonus qui rassemble tous les exercices du programme. Ils resteront disponibles pour toi, longtemps après ces 30 jours.</p>
 
@@ -153,7 +185,7 @@
       <div class="ex-desc">Ouvre ton frigo ou tes placards. Prends 3 ingrédients au hasard. Invente quelque chose, même simple, même bizarre. La contrainte est la mère de la créativité.</div>
       <div class="ex-etape">1. 3 ingrédients au hasard dans ton frigo</div>
       <div class="ex-etape">2. 10 minutes pour créer quelque chose avec</div>
-      <div class="ex-etape">3. Pas de recette, juste l'instinct</div>
+      <div class="ex-etape">3. Aucune recette, suis ton instinct</div>
     </div>
 
     <div class="exercice-bloc">
@@ -189,7 +221,7 @@
     <div style="font-family:'Jost',sans-serif;font-size:11px;color:#a060c8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Phrase d'amorce, commence par ici :</div>
     <div style="font-size:18px;color:#2d1d40;margin-bottom:16px;padding:12px 16px;background:rgba(160,100,200,0.08);border-radius:12px;border-left:3px solid #a060c8;">"Ce que je n'ai jamais dit à voix haute, c'est..."</div>
 
-    <div class="exemple">Par exemple : « Ce que je n'ai jamais dit à voix haute, c'est que j'aimerais tout arrêter pendant un mois. Juste pour voir qui je suis quand je ne cours pas. »</div>
+    <div class="exemple">Par exemple : « Ce que je n'ai jamais dit à voix haute, c'est que j'aimerais tout arrêter pendant un mois, pour voir qui je suis quand je ne cours pas. »</div>
       <textarea class="ecriture-libre" id="ecriture-libre-text" placeholder="Ce que je n'ai jamais dit à voix haute, c'est... (continue sans t'arrêter pendant 10 minutes)"></textarea>
 
     <div style="font-size:12px;color:#9080b0;font-family:'Jost',sans-serif;margin-top:8px;">Tu n'as pas à partager ce texte. Il est pour toi seule. Tu peux même le brûler ou le supprimer après. Le bienfait vient de l'acte d'écrire, pas de la conservation.</div>
@@ -319,9 +351,17 @@ function renderFormes(){
   });
 }
 
+const retientListe=["Le manque de temps", "« Je ne suis pas douée »", "La peur du regard des autres", "Ça me paraît inutile", "La fatigue", "Je ne sais pas par où commencer"];
+let retientChoix=[];
+(function(){const c=document.getElementById('chips-retient');retientListe.forEach(function(txt){const ch=document.createElement('div');ch.className='chip';ch.textContent=txt;ch.onclick=function(){const i=retientChoix.indexOf(txt);if(i>-1){retientChoix.splice(i,1);ch.classList.remove('sel');}else{retientChoix.push(txt);ch.classList.add('sel');}};c.appendChild(ch);});})();
+function reponsesToi(){const it=[];const a=document.getElementById('cr-petite').value.trim();if(a)it.push({q:"Petite, qu'est-ce que tu aimais créer ? Et quand as-tu arrêté ?",r:a});
+  const t=document.getElementById('cr-retient').value.trim();const b=retientChoix.concat(t?[t]:[]).join(' · ');if(b)it.push({q:"Qu'est-ce qui te retient de créer aujourd'hui ?",r:b});return it;}
+window.reponsesToi=reponsesToi;
+
 function showFin(){
   const rc=document.getElementById('recap-container');
   rc.innerHTML='';
+  reponsesToi().forEach(function(x){rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">${x.q}</div><div class="recap-r">"${x.r.replace(/</g,'&lt;')}"</div></div>`;});
   const exNote=document.getElementById('exercice-note').value.trim();
   if(exNote) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon exercice créatif</div><div class="recap-r">"${exNote}"</div></div>`;
   const ecritureNote=document.getElementById('ecriture-libre-text').value.trim();
@@ -334,7 +374,7 @@ function showFin(){
     <div class="recap-q">Mes 3 exercices créatifs, à refaire quand je veux</div>
     <div class="recap-r" style="font-style:normal;font-size:15px;line-height:1.9;">
       <strong>1. Dessin libre</strong><br>Une feuille, un stylo, cinq minutes. Ferme les yeux, respire, puis laisse ta main bouger sans réfléchir. Formes, lignes, gribouillis. Ne regarde pas avant d'avoir fini, et ne juge pas.<br><br>
-      <strong>2. Cuisine créative</strong><br>Ouvre ton frigo ou tes placards. Prends trois ingrédients au hasard. Invente quelque chose, même simple, même bizarre. Pas de recette, juste l'instinct. La contrainte nourrit la créativité.<br><br>
+      <strong>2. Cuisine créative</strong><br>Ouvre ton frigo ou tes placards. Prends trois ingrédients au hasard. Invente quelque chose, même simple, même bizarre. Aucune recette, suis ton instinct. La contrainte nourrit la créativité.<br><br>
       <strong>3. Arrangement</strong><br>Choisis un coin de ton espace. Prends des objets que tu as déjà. Arrange, déplace, recommence, jusqu'à ce que ça te fasse sourire. Rien à acheter, rien à réussir.
     </div></div>`;
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
@@ -397,10 +437,11 @@ function telechargerReponses(){
     var items=[];
 
     document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
-      if(el.id==='e-textarea'||el.id==='j-textarea'||(el.closest&&el.closest('.realise-jour'))||(el.closest&&el.closest('.preuve-jour')))return;
+      if(el.id==='e-textarea'||el.id==='j-textarea'||el.id==='cr-petite'||el.id==='cr-retient'||(el.closest&&el.closest('.realise-jour'))||(el.closest&&el.closest('.preuve-jour')))return;
       var v=(el.value||'').trim(); if(!v)return;
       items.push({q:lab(el),r:v});
     });
+    try{if(window.reponsesToi)items=window.reponsesToi().concat(items);}catch(e){}
     return items;
   }
   function sauver(){
@@ -483,7 +524,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
