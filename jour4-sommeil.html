@@ -61,6 +61,14 @@
   .recap-r{font-size:16px;color:#3a3258;line-height:1.6}
   .suite-box{background:linear-gradient(135deg,#f0ecfb,#eef2fc);border-radius:20px;padding:22px;border:1px solid rgba(150,140,200,0.2);text-align:center;margin-top:16px}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .r-label{font-family:'Jost',sans-serif;font-size:12px;color:#9a90b8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+  .r-track{height:3px;background:rgba(142,136,194,0.18);border-radius:4px;overflow:hidden;margin-bottom:18px}
+  .r-fill{height:100%;background:linear-gradient(90deg,#8e88c2,#a0b0d8);border-radius:4px;transition:width 0.4s ease}
+  .r-q{font-size:17px;color:#2d2848;font-weight:600;margin-bottom:4px}
+  .r-sous{font-size:14px;color:#9a90b8;margin-bottom:10px;font-family:'Jost',sans-serif}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .chip{background:#f6f5fc;border:2px solid rgba(142,136,194,0.32);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#4a4266;cursor:pointer;transition:all 0.15s;user-select:none}
+  .chip.sel{background:linear-gradient(135deg,#8e88c2,#a0b0d8);border-color:transparent;color:white}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
@@ -84,7 +92,7 @@
       <p>🧠 <strong>Le savoir du jour :</strong> se reposer calmement vaut mieux que lutter contre le sommeil. Le repos ne remplace pas une nuit, mais une nuit d'insomnie passée au calme n'est pas une nuit perdue.</p>
     </div>
     <button class="btn" onclick="showPhase('theorie')">Comprendre mes nuits ✨</button>
-    <p class="hint">Théorie + mon mantra des nuits difficiles · ~15 min</p>
+    <p class="hint">Théorie + mon mantra des nuits difficiles · ~20 min</p>
   </div>
 </div>
 
@@ -126,41 +134,28 @@
       <div id="checklist-container"></div>
     </details>
 
-    <button class="btn" onclick="showPhase('reflexion')" style="margin-top:18px;">Passer à ma réflexion →</button>
+    <button class="btn" onclick="showPhase('reflexion');renderR()" style="margin-top:18px;">Passer à ma réflexion →</button>
   </div>
 </div>
 
 <!-- RÉFLEXION -->
 <div class="phase" id="phase-reflexion">
   <div class="card">
+    <div class="r-label" id="r-label"></div>
+    <div class="r-track"><div class="r-fill" id="r-fill"></div></div>
     <div style="text-align:center;margin-bottom:8px;">
       <span class="emoji-hero" style="font-size:40px;">✍️</span>
       <h2>Ma réflexion du jour</h2>
     </div>
-    <p class="small" style="text-align:center;margin-bottom:22px;">Réponds à ce qui te parle. Tu peux laisser des questions vides.</p>
+    <p class="small" id="r-intro" style="text-align:center;margin-bottom:22px;">Réponds à ce qui te parle. Tu peux laisser des questions vides.</p>
 
-    <div style="margin-bottom:20px;">
-      <div style="font-size:17px;color:#2d2848;font-weight:600;margin-bottom:4px;">Comment se passent tes nuits en ce moment ?</div>
-      <div style="font-size:14px;color:#9a90b8;margin-bottom:10px;font-family:'Jost',sans-serif;">Sans te juger : un simple état des lieux, honnête.</div>
-      <div class="exemple">Par exemple : « Je m'endors vite, mais je me réveille vers 3 h avec la tête pleine. » « Je repousse le coucher parce que c'est le seul moment à moi. » « Je dors, mais je me lève aussi fatiguée que la veille. »</div>
-      <textarea id="e0" rows="3" placeholder="En ce moment, mes nuits..." oninput="checkE()"></textarea>
-    </div>
+    <div class="r-q" id="r-question"></div>
+    <div class="r-sous" id="r-sous"></div>
+    <div class="chips" id="r-chips" style="display:none"></div>
+    <div class="exemple" id="r-exemple"></div>
+    <textarea id="e-textarea" rows="4" placeholder=""></textarea>
 
-    <div style="margin-bottom:20px;">
-      <div style="font-size:17px;color:#2d2848;font-weight:600;margin-bottom:4px;">Quel est ton rapport au repos, pas juste au sommeil, mais au fait de t'autoriser à ralentir ?</div>
-      <div style="font-size:14px;color:#9a90b8;margin-bottom:10px;font-family:'Jost',sans-serif;">Est-ce que tu te le permets facilement, ou est-ce que tu culpabilises ?</div>
-      <div class="exemple">Par exemple : « Je ne m'assois que quand tout est fini, donc jamais. » « Quand je me repose, j'ai l'impression de voler du temps. » « Je me repose, mais le téléphone à la main, donc pas vraiment. »</div>
-      <textarea id="e1" rows="3" placeholder="Mon rapport au repos..." oninput="checkE()"></textarea>
-    </div>
-
-    <div style="margin-bottom:20px;">
-      <div style="font-size:17px;color:#2d2848;font-weight:600;margin-bottom:4px;">Quel mantra aimerais-tu te répéter les nuits difficiles ?</div>
-      <div style="font-size:14px;color:#9a90b8;margin-bottom:10px;font-family:'Jost',sans-serif;">Les 3R, ou les tiens à toi. Écris-les, c'est comme ça qu'on les ancre.</div>
-      <div class="exemple">Par exemple : « J'ai le droit de ne pas dormir et de me reposer quand même. » « Cette nuit, je relâche, je repose, je recharge. » « Rien ne se règle à 3 h du matin. Ça attendra le jour. »</div>
-      <textarea id="e2" rows="3" placeholder="Mon mantra : j'ai le droit de..." oninput="checkE()"></textarea>
-    </div>
-
-    <button class="btn" id="btn-fin" onclick="showFin()">Terminer ma pratique ✨</button>
+    <button class="btn" id="btn-r" onclick="nextR()">Continuer →</button>
   </div>
 </div>
 
@@ -273,23 +268,33 @@ rituels.forEach((r,i)=>{
   cc.appendChild(div);
 });
 
+const reflexionQs=[{"partie": "Le repos dans ton histoire", "court": "Le repos chez moi, petite", "q": "Petite, comment on voyait le repos chez toi ?", "sous": "Coche ce qui te parle. En dessous : un souvenir ?", "ex": "« Mes parents se levaient les premiers et se couchaient les derniers. Je ne les ai jamais vus assis sans rien faire. » « Le dimanche après-midi, toute la maison faisait la sieste. C'était sacré. »", "placeholder": "Un souvenir...", "chips": ["« On ne traîne pas au lit »", "« La sieste, c'est pour les paresseux »", "Mes parents ne s'arrêtaient jamais", "On se reposait le dimanche, tous ensemble", "On avait le droit de ne rien faire", "On n'en parlait pas"]}, {"partie": "Le repos dans ton histoire", "court": "Mes nuits, petite", "q": "Petite, comment étaient tes nuits ? Qu'est-ce qui t'aidait à t'endormir ?", "sous": "Coche ce qui te parle. En dessous : raconte, si un souvenir revient.", "ex": "« Mes parents me lisaient une histoire, et mon père laissait la porte entrouverte. » « J'avais peur de dormir toute seule. Je ne m'endormais qu'avec la petite veilleuse allumée. »", "placeholder": "Petite, mes nuits...", "chips": ["Une petite veilleuse allumée", "Une histoire le soir", "Mon doudou", "La porte entrouverte", "Dormir avec un frère ou une sœur", "Rejoindre le lit de mes parents", "J'avais peur de dormir seule"]}, {"partie": "Tes nuits aujourd'hui", "court": "Comment se passent mes nuits", "q": "Comment se passent tes nuits en ce moment ?", "sous": "Sans te juger : un simple état des lieux, honnête.", "ex": "« Je m'endors vite, mais je me réveille vers 3 h avec la tête pleine. » « Je repousse le coucher parce que c'est le seul moment à moi. » « Je dors, mais je me lève aussi fatiguée que la veille. »", "placeholder": "En ce moment, mes nuits..."}, {"partie": "Tes nuits aujourd'hui", "court": "Ce à quoi pense ma tête la nuit", "q": "Quand tu te réveilles la nuit ou que tu n'arrives pas à t'endormir, à quoi pense ta tête ?", "sous": "Coche ce qui te parle. En dessous : et qu'est-ce que tu fais, à ce moment-là ?", "ex": "« La liste de demain. Je prends mon téléphone pour la noter, et je finis sur Instagram. » « Ce que j'ai dit à ma collègue. Je rejoue la scène dix fois. »", "placeholder": "À ce moment-là, je...", "chips": ["Le travail", "Les enfants", "L'argent", "La liste de demain", "Ce que j'aurais dû dire ou faire", "Ma santé", "Mon couple", "Rien de précis, je suis éveillée"]}, {"partie": "Tes nuits aujourd'hui", "court": "Le moment du soir", "q": "Le soir, une fois tout le monde couché, qu'est-ce que ce moment t'apporte ? Et qu'est-ce qu'il te coûte le lendemain ?", "sous": "", "ex": "« C'est le seul moment où personne ne me demande rien. Le lendemain, je suis à plat dès 10 h. » « Une série, mon téléphone, du silence. Je sais que ça me coûte, mais sans ça, j'ai l'impression que mes journées sont entièrement aux autres. »", "placeholder": "Ce moment m'apporte... / Le lendemain..."}, {"partie": "Ton rapport au repos", "court": "Mon rapport au repos", "q": "Quel est ton rapport au repos, pas juste au sommeil, mais au fait de t'autoriser à ralentir ?", "sous": "Est-ce que tu te le permets facilement, ou est-ce que tu culpabilises ?", "ex": "« Je ne m'assois que quand tout est fini, donc jamais. » « Quand je me repose, j'ai l'impression de voler du temps. » « Je me repose, mais le téléphone à la main, donc pas vraiment. »", "placeholder": "Mon rapport au repos..."}, {"partie": "Ton rapport au repos", "court": "Mon mantra des nuits difficiles", "q": "Quel mantra aimerais-tu te répéter les nuits difficiles ?", "sous": "Les 3R, ou les tiens à toi. Écris-les, c'est comme ça qu'on les ancre.", "ex": "« J'ai le droit de ne pas dormir et de me reposer quand même. » « Cette nuit, je relâche, je repose, je recharge. » « Rien ne se règle à 3 h du matin. Ça attendra le jour. »", "placeholder": "Mon mantra : j'ai le droit de..."}];
+let rIdx=0, rChoix=[], rReponses=[];
+function renderR(){const q=reflexionQs[rIdx];
+  document.getElementById('r-label').textContent=q.partie+' · '+(rIdx+1)+'/'+reflexionQs.length;
+  document.getElementById('r-fill').style.width=((rIdx+1)/reflexionQs.length*100)+'%';
+  document.getElementById('r-intro').style.display=rIdx===0?'block':'none';
+  document.getElementById('r-question').textContent=q.q;
+  const so=document.getElementById('r-sous');so.textContent=q.sous||'';so.style.display=q.sous?'block':'none';
+  rChoix=[];const c=document.getElementById('r-chips');c.innerHTML='';c.style.display=q.chips?'flex':'none';
+  (q.chips||[]).forEach(function(txt){const ch=document.createElement('div');ch.className='chip';ch.textContent=txt;ch.onclick=function(){const i=rChoix.indexOf(txt);if(i>-1){rChoix.splice(i,1);ch.classList.remove('sel');}else{rChoix.push(txt);ch.classList.add('sel');}};c.appendChild(ch);});
+  document.getElementById('r-exemple').textContent='Par exemple : '+q.ex;
+  const ta=document.getElementById('e-textarea');ta.value='';ta.placeholder=q.placeholder;
+  document.getElementById('btn-r').textContent=rIdx<reflexionQs.length-1?'Continuer →':'Terminer ma pratique ✨';}
+function nextR(){const txt=document.getElementById('e-textarea').value.trim();const val=rChoix.concat(txt?[txt]:[]).join(' · ');
+  if(val)rReponses.push({q:reflexionQs[rIdx].q,court:reflexionQs[rIdx].court,r:val});
+  if(rIdx<reflexionQs.length-1){rIdx++;renderR();window.scrollTo(0,0);}else{showFin();}}
+window.reponsesJ4=function(){return rReponses.map(function(x){return {q:x.q,r:x.r};});};
+
 function checkE(){
-  const ok=['e0','e1','e2'].some(id=>document.getElementById(id).value.trim());
   /* libre */
 }
 
 function showFin(){
   const rc=document.getElementById('recap-container');
   rc.innerHTML='';
-  const qs=[
-    {id:'e0',label:'Comment se passent mes nuits'},
-    {id:'e1',label:'Mon rapport au repos'},
-    {id:'e2',label:'Mon mantra des nuits difficiles'},
-  ];
-  qs.forEach(q=>{
-    const val=document.getElementById(q.id).value.trim();
-    if(val) rc.innerHTML+='<div class="recap-box"><div class="recap-q">'+q.label+'</div><div class="recap-r">"'+val+'"</div></div>';
-  });
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+  rReponses.forEach(function(x){rc.innerHTML+='<div class="recap-box"><div class="recap-q">'+x.court+'</div><div class="recap-r">"'+esc(x.r)+'"</div></div>';});
   // Ajouter les rituels cochés
   const coches=[];
   document.querySelectorAll('.check-item.checked .check-texte').forEach(e=>coches.push(e.textContent));
@@ -358,6 +363,7 @@ renderTheorie();
       var v=(el.value||'').trim(); if(!v)return;
       items.push({q:lab(el),r:v});
     });
+    try{if(window.reponsesJ4)items=items.concat(window.reponsesJ4());}catch(e){}
     return items;
   }
   function sauver(){
