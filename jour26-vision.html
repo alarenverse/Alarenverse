@@ -68,6 +68,8 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#eef2fb,#fdf8f0);border-radius:20px;padding:22px;border:1px solid rgba(80,120,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .apres-lettre{margin-top:26px;padding-top:20px;border-top:1px solid rgba(80,120,200,0.18)}
+  .apres-q{font-size:17px;color:#1d2840;font-weight:600;text-align:center;margin:14px 0 8px;font-style:normal}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
@@ -84,7 +86,7 @@
     <span class="emoji-hero">🌅</span>
     <div class="label">Jour 26 · Ma vision & ma lettre</div>
     <h2>Ressentir qui tu as envie d'être</h2>
-    <p>Aujourd'hui est un jour en deux temps : d'abord ressentir la femme que tu as envie d'être. Pas une liste d'objectifs à atteindre, mais une façon d'être que tu peux déjà commencer à habiter. Puis lui écrire une lettre, depuis elle, à toi aujourd'hui.</p>
+    <p>Aujourd'hui est un jour en deux temps : d'abord ressentir la femme que tu as envie d'être. Une façon d'être que tu peux déjà commencer à habiter, et non une liste d'objectifs à atteindre. Puis lui écrire une lettre, depuis elle, à toi aujourd'hui.</p>
     <p class="small" style="margin-bottom:20px;">C'est un des exercices les plus puissants du programme. Prends le temps qu'il faut.</p>
     <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 🌅</button>
@@ -118,7 +120,7 @@
     <span class="emoji-hero">🏗️</span>
     <h2>Ma vision, domaine par domaine</h2>
     <p style="text-align:center;margin-bottom:8px;">La question n'est pas <em>"qu'est-ce que je veux avoir ?"</em> mais <em>"comment est-ce que je veux être et me sentir ?"</em></p>
-    <p class="small" style="text-align:center;margin-bottom:20px;">Écris au présent, comme si tu y étais. Pas d'objectifs chiffrés, juste ce que tu ressens.</p>
+    <p class="small" style="text-align:center;margin-bottom:20px;">Écris au présent, comme si tu y étais. Laisse les objectifs chiffrés de côté et note ce que tu ressens.</p>
 
     <div class="domaine-card" style="background:#eef2fb;border-color:rgba(80,120,200,0.2);">
       <div class="domaine-titre" style="color:#6080c8;">🌸 Moi : comment je veux me sentir dans mon corps et dans ma tête</div>
@@ -168,7 +170,7 @@
     <div class="visu-etape">
       <div class="visu-num">Étape 2</div>
       <div class="visu-titre">Laisse venir l'image</div>
-      <div class="visu-desc">Imagine-toi dans une journée ordinaire d'une vie qui te ressemble vraiment. Pas parfaite, mais juste. Une vie où tu te reconnais. Où es-tu ? Comment est la lumière ? Qu'est-ce que tu entends ? Laisse l'image venir sans forcer.</div>
+      <div class="visu-desc">Imagine-toi dans une journée ordinaire d'une vie qui te ressemble vraiment. Une vie avec ses contrastes, et qui résonne juste en toi. Une vie où tu te reconnais. Où es-tu ? Comment est la lumière ? Qu'est-ce que tu entends ? Laisse l'image venir sans forcer.</div>
       <div class="visu-duree">2 minutes</div>
     </div>
 
@@ -182,14 +184,14 @@
     <div class="visu-etape">
       <div class="visu-num">Étape 4</div>
       <div class="visu-titre">Observe ta vie et tes relations</div>
-      <div class="visu-desc">Qui est autour de toi ? Comment se passent tes journées ? Pas en termes de tâches, mais d'énergie et de présence. Qu'est-ce qui a changé par rapport à maintenant ?</div>
+      <div class="visu-desc">Qui est autour de toi ? Comment se passent tes journées ? Regarde-les en termes d'énergie et de présence, plutôt qu'en tâches. Qu'est-ce qui a changé par rapport à maintenant ?</div>
       <div class="visu-duree">2 minutes</div>
     </div>
 
     <div class="visu-etape">
       <div class="visu-num">Étape 5</div>
       <div class="visu-titre">Reviens, et note immédiatement</div>
-      <div class="visu-desc">Doucement, reviens. 3 respirations. Ouvre les yeux. Note ce que tu as vu, ressenti, entendu, avant que l'image s'estompe. Même des fragments. Même des sensations sans mots.</div>
+      <div class="visu-desc">Doucement, reviens. 3 respirations. Ouvre les yeux. Note ce que tu as vu, ressenti, entendu, avant que l'image s'estompe. Des fragments suffisent, ou des sensations sans mots.</div>
       <div class="visu-duree">3 minutes</div>
     </div>
 
@@ -215,6 +217,15 @@
       <textarea class="lettre-textarea" id="lettre-corps"
         placeholder="Je t'écris depuis l'endroit où tu voulais arriver...&#10;&#10;Ce que je voudrais que tu saches...&#10;&#10;Ce que tu peux lâcher dès maintenant...&#10;&#10;Ce dont tu es capable et que tu ne vois pas encore...&#10;&#10;Ce qui va changer, et ce qui restera...&#10;&#10;Ce qui compte vraiment, et ce qui ne compte pas..."></textarea>
       <div class="lettre-fin">Avec tout ce que tu vas devenir,<br><em>Toi.</em></div>
+    </div>
+
+    <div class="apres-lettre">
+      <p class="apres-q">Qu'est-ce que ça t'a fait de recevoir cette lettre ?</p>
+      <div class="exemple">Par exemple : une émotion… un ressenti…</div>
+      <textarea id="apres-1" rows="3" placeholder="En recevant cette lettre, j'ai..."></textarea>
+      <p class="apres-q">Qu'est-ce que tu as déjà en commun avec cette femme, aujourd'hui ?</p>
+      <div class="exemple">Par exemple : « Elle s'écoute avant de dire oui. Cette semaine, je l'ai fait une fois. » « Elle prend le temps de marcher. Moi aussi, le dimanche matin. »</div>
+      <textarea id="apres-2" rows="3" placeholder="Comme elle, je..."></textarea>
     </div>
 
     <button class="btn" onclick="showFin()" style="margin-top:16px;">Terminer le Jour 26 🌅</button>
@@ -255,7 +266,7 @@ const theorie=[
     {type:"texte",texte:"Avant de commencer, je veux qu'on soit bien d'accord sur ce qu'on va faire aujourd'hui. Parce qu'il y a deux façons très différentes de regarder devant soi, et une seule fait du bien."},
     {type:"hl",texte:"⚠️ Anticiper, c'est se demander ce qui va se passer, si on y arrivera, ce qui pourrait mal tourner. Ça mobilise la peur et ça nourrit l'anxiété. Ce n'est pas du tout ce qu'on cherche ici.",classe:"or"},
     {type:"hl",texte:"🌱 Une vision, c'est autre chose. C'est ressentir qui tu as envie d'être. Comment tu veux te sentir dans ton corps, dans tes liens, dans tes journées. Ce n'est pas un plan à exécuter, c'est une sensation à retrouver.",classe:"vert"},
-    {type:"texte",texte:"Et cette sensation, tu peux commencer à l'habiter dès maintenant. Pas dans cinq ans. Aujourd'hui, dans un choix, dans une façon de te parler, dans un geste. C'est ça qui rend une vision vivante plutôt qu'angoissante."},
+    {type:"texte",texte:"Et cette sensation, tu peux commencer à l'habiter dès maintenant, sans attendre cinq ans. Aujourd'hui, dans un choix, dans une façon de te parler, dans un geste. C'est ça qui rend une vision vivante plutôt qu'angoissante."},
     {type:"stat",texte:"Quand tu ressens intensément une scène, ton cerveau active en partie les mêmes zones que si tu la vivais vraiment. À force, la façon d'être que tu ressens devient plus familière, plus accessible, plus naturelle",source:"Dr Álvaro Pascual-Leone, Harvard Medical School"},
     {type:"hl",texte:"✅ D'où la différence entre une vision et un objectif.<br><br>L'objectif dit : je serai bien quand j'aurai obtenu ceci. La vision dit : voilà la femme que j'ai envie d'être, et je peux déjà l'incarner un peu aujourd'hui.<br><br>L'un met ton bien-être en attente. L'autre te le rend disponible tout de suite.",classe:"vert"},
   ]},
@@ -324,6 +335,11 @@ function showFin(){
 
   const lettre=document.getElementById('lettre-corps').value.trim();
   if(lettre) rc.innerHTML+=`<div class="recap-box"><div class="recap-q">Ma lettre de celle que je deviens</div><div class="recap-r" style="font-style:normal;font-size:15px;">${lettre.replace(/\n/g,'<br>')}</div></div>`;
+
+  [['apres-1',"Ce que ça m'a fait de recevoir cette lettre"],['apres-2',"Ce que j'ai déjà en commun avec elle"]].forEach(function(x){
+    const v=document.getElementById(x[0]).value.trim();
+    if(v) rc.innerHTML+=`<div class="recap-box" style="margin-top:10px;"><div class="recap-q">${x[1]}</div><div class="recap-r">"${v.replace(/</g,'&lt;')}"</div></div>`;
+  });
 
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
   document.getElementById('phase-fin').classList.add('active');
@@ -471,7 +487,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
