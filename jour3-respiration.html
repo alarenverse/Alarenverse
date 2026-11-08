@@ -60,6 +60,14 @@
   .retenir-box{background:white;border-radius:20px;padding:24px 26px;box-shadow:0 4px 24px rgba(160,180,200,0.1);border:1px solid rgba(160,200,220,0.18);margin-top:14px}
   .suite-box{background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:20px;padding:22px;border:1px solid rgba(160,200,220,0.25);text-align:center;margin-top:14px}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .e-q{font-size:17px;color:#3d4e58;line-height:1.6;text-align:center;margin-bottom:6px}
+  .e-sous{font-size:13px;color:#90a8b8;text-align:center;margin-bottom:14px;font-family:'Jost',sans-serif}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .chip{background:#f4fafd;border:2px solid rgba(144,184,208,0.35);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#4a6068;cursor:pointer;transition:all 0.15s;user-select:none;font-style:normal}
+  .chip.sel{background:linear-gradient(135deg,#90b8d0,#80c8a8);border-color:transparent;color:white}
+  .souffle-bloc{margin-top:22px;padding-top:18px;border-top:1px solid rgba(160,200,220,0.25)}
+  .fin-bloc{margin-top:26px;padding-top:20px;border-top:1px solid rgba(160,200,220,0.25)}
+  .e-rappel{font-size:15px;color:#3d5a68;font-style:italic;background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:12px;padding:10px 14px;margin:0 0 14px;line-height:1.55}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
@@ -80,7 +88,7 @@
     <p>Avant de te dire de respirer, parce que tout le monde te dit de respirer, j'aimerais que tu comprennes pourquoi ça marche vraiment. Parce que quand on comprend ce qui se passe dans le corps, on arrête de le faire machinalement. Et là, ça change tout.</p>
     <div id="theorie-preview"></div>
     <button class="btn" onclick="showPhase('theorie')">Je veux comprendre ✨</button>
-    <p class="hint">Théorie scientifique + pratique guidée · ~15 min</p>
+    <p class="hint">Théorie scientifique + pratique guidée · ~20 min</p>
   </div>
 </div>
 
@@ -105,6 +113,25 @@
   </div>
 </div>
 
+<!-- TON SYSTÈME NERVEUX, DANS TA VIE -->
+<div class="phase" id="phase-vie">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="v-label">Ton système nerveux, dans ta vie · 1/4</span>
+      <span>🌬️</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="v-progress" style="width:25%"></div></div>
+  </div>
+  <div class="card">
+    <p class="e-q" id="v-question"></p>
+    <p class="e-sous" id="v-sous"></p>
+    <div class="chips" id="v-chips" style="display:none"></div>
+    <div class="exemple" id="v-exemple" style="display:none"></div>
+    <textarea id="e-textarea" rows="4" placeholder=""></textarea>
+    <button class="btn" id="btn-v" style="width:100%;margin-top:12px;" onclick="nextVie()">Continuer →</button>
+  </div>
+</div>
+
 <!-- PRÉPARATION -->
 <div class="phase" id="phase-prepare">
   <div class="card" style="text-align:center;margin-top:24px;">
@@ -117,6 +144,10 @@
       <div class="prep-item"><span class="prep-num">3</span><span class="prep-texte">👃 Inspire par le nez · 👄 Expire par la bouche : le flux d'air est plus facile à doser et à contrôler</span></div>
       <div class="prep-item"><span class="prep-num">4</span><span class="prep-texte">Ferme les yeux ou fixe un point devant toi</span></div>
       <div class="prep-item"><span class="prep-num">5</span><span class="prep-texte">Tu n'as rien à faire, juste suivre le souffle</span></div>
+    </div>
+    <div class="souffle-bloc">
+      <p class="e-q">Avant de commencer, observe ton souffle sans le changer. Où est-il ?</p>
+      <div class="chips" id="chips-souffle"></div>
     </div>
     <button class="btn" onclick="startBreathing()">Je commence 🌬️</button>
   </div>
@@ -144,6 +175,7 @@
     <span class="emoji-hero">🌿</span>
     <h2>Prends un instant...</h2>
     <p>Voilà. Tu viens d'envoyer un signal de sécurité à ton corps. Ce que tu ressens là, maintenant, même si c'est tout petit, même si c'est juste un soupçon de détente, c'est ton système nerveux qui glisse du mode alerte vers le mode repos. Reste un moment avec ça.</p>
+    <div class="e-rappel" id="rappel-souffle" style="display:none"></div>
     <p style="font-size:17px;color:#3d4e58;margin-bottom:6px;">Dans quel état était ton système nerveux avant de commencer ?</p>
     <p class="small" style="text-align:center;margin-bottom:14px;">Sur-activée, sous-activée, ou déjà posée ? Et qu'est-ce que tu remarques maintenant ?</p>
     <div class="exemple">Par exemple : « Avant, j'étais sur-activée : les épaules hautes, la tête qui tournait sur la liste de demain. Maintenant, mon ventre s'est relâché et je respire plus bas. » Ou : « Avant, j'étais plutôt éteinte, sans énergie. Maintenant je sens un peu mieux mes mains et mes pieds. »</div>
@@ -152,6 +184,13 @@
     <div id="reflexion-saved" style="display:none;background:linear-gradient(135deg,#eef6fc,#eaf5f0);border-radius:14px;padding:18px 20px;border:1px solid rgba(160,200,220,0.2);text-align:left;margin-top:14px;">
       <div style="font-size:11px;color:#90a8b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-family:'Jost',sans-serif;">✍️ Ma réflexion du Jour 3</div>
       <p id="reflexion-display" style="font-size:14px;color:#4a6068;margin:0;"></p>
+    </div>
+    <div class="fin-bloc">
+      <p style="font-size:17px;color:#3d4e58;margin-bottom:6px;">Pendant ces 5 cycles, qu'est-ce qui a été facile ou difficile ?</p>
+      <p class="small" style="text-align:center;margin-bottom:14px;">Coche ce qui te parle. En dessous : raconte, si tu veux.</p>
+      <div class="chips" id="chips-fin"></div>
+      <div class="exemple">Par exemple : « Expirer 6 secondes : j'étais à court d'air au bout de 4. » « Fermer les yeux me mettait mal à l'aise, j'ai préféré fixer un point. »</div>
+      <textarea id="fin-difficile" rows="3" placeholder="Ce qui a été facile ou difficile..."></textarea>
     </div>
   </div>
   <div class="retenir-box">
@@ -245,7 +284,7 @@ function renderTheorie() {
   });
 
   const btn = document.querySelector('#phase-theorie .btn');
-  btn.textContent = theorieIdx < theorie.length-1 ? 'Continuer →' : 'Passons à la pratique 🌬️';
+  btn.textContent = 'Continuer →';
 }
 
 function nextTheorie() {
@@ -254,9 +293,36 @@ function nextTheorie() {
     renderTheorie();
     window.scrollTo(0,0);
   } else {
-    showPhase('prepare');
+    showPhase('vie');renderVie();
   }
 }
+
+// Ton système nerveux, dans ta vie
+const vieQs=[{"q": "Dans quel état passes-tu le plus de temps, en ce moment ?", "sous": "Coche ce qui te parle. En dessous : à quel moment de la journée, le plus souvent ?", "chips": ["Posée", "Sur-activée", "Sous-activée", "Je passe de l'un à l'autre"], "ex": "« Sur-activée du matin au soir, puis je m'effondre devant la télé. » « Sous-activée le dimanche : je n'arrive à rien faire, et je culpabilise. »", "placeholder": "Le plus souvent, c'est..."}, {"q": "Qu'est-ce qui fait monter ton thermostat le plus vite ?", "sous": "Coche ce qui te parle. En dessous : raconte la dernière fois.", "chips": ["Un message ou un mail", "Le bruit", "Les retards", "Un conflit", "Une remarque", "Le désordre", "La fatigue", "Un silence"], "ex": "« Un message de ma cheffe le soir : mon cœur s'emballe tout de suite. » « Le bruit à table, quand tout le monde parle en même temps. »", "placeholder": "La dernière fois, c'était..."}, {"q": "Petite, l'ambiance à la maison était plutôt…", "sous": "Le système nerveux se règle en partie sur l'environnement où l'on grandit. Coche ce qui te parle. En dessous : un souvenir qui te revient ?", "chips": ["Calme et rassurante", "Tendue", "Imprévisible", "Bruyante", "Silencieuse, on ne disait rien", "Ça dépendait des périodes"], "ex": "« Imprévisible : un jour tout allait bien, le lendemain tout le monde était tendu, sans que je comprenne pourquoi. » « Calme en surface, mais tout le monde marchait sur des œufs. »", "placeholder": "Un souvenir qui me revient..."}, {"q": "Quand on te dit « calme-toi » ou « respire », qu'est-ce que ça te fait ?", "sous": "", "ex": "« Ça m'agace : comme si c'était si simple. » « Ça me fait du bien quand c'est dit avec douceur, par quelqu'un qui reste à côté de moi. »", "placeholder": "Quand on me dit ça..."}];
+const souffleListe=["Haut, dans la poitrine", "Court et rapide", "Je le retiens", "Dans le ventre", "Je ne le sens pas bien"];
+const finListe=["Expirer 6 secondes", "Rester concentrée", "Fermer les yeux", "Sentir mon ventre", "Ne pas penser à autre chose", "Tout était facile"];
+let vIdx=0, vChoix=[], vReponses=[], souffleChoix=[], finChoix=[];
+function chipsDans(id,liste,arr){const c=document.getElementById(id);c.innerHTML='';liste.forEach(function(txt){const ch=document.createElement('div');ch.className='chip';ch.textContent=txt;if(arr.indexOf(txt)>-1)ch.classList.add('sel');ch.onclick=function(){const i=arr.indexOf(txt);if(i>-1){arr.splice(i,1);ch.classList.remove('sel');}else{arr.push(txt);ch.classList.add('sel');}majRappel();};c.appendChild(ch);});}
+function renderVie(){const q=vieQs[vIdx];
+  document.getElementById('v-label').textContent='Ton système nerveux, dans ta vie · '+(vIdx+1)+'/'+vieQs.length;
+  document.getElementById('v-progress').style.width=((vIdx+1)/vieQs.length*100)+'%';
+  document.getElementById('v-question').textContent=q.q;
+  const so=document.getElementById('v-sous');so.textContent=q.sous||'';so.style.display=q.sous?'block':'none';
+  vChoix=[];const vc=document.getElementById('v-chips');vc.style.display=q.chips?'flex':'none';if(q.chips)chipsDans('v-chips',q.chips,vChoix);else vc.innerHTML='';
+  const ex=document.getElementById('v-exemple');ex.textContent=q.ex?('Par exemple : '+q.ex):'';ex.style.display=q.ex?'block':'none';
+  const ta=document.getElementById('e-textarea');ta.value='';ta.placeholder=q.placeholder;
+  document.getElementById('btn-v').textContent=vIdx<vieQs.length-1?'Continuer →':'Passons à la pratique 🌬️';}
+function nextVie(){const txt=document.getElementById('e-textarea').value.trim();const val=vChoix.concat(txt?[txt]:[]).join(' · ');
+  if(val)vReponses.push({q:vieQs[vIdx].q,r:val});
+  if(vIdx<vieQs.length-1){vIdx++;renderVie();window.scrollTo(0,0);}else{showPhase('prepare');}}
+function majRappel(){const r=document.getElementById('rappel-souffle');if(!r)return;
+  if(souffleChoix.length){r.textContent='Avant de commencer, ton souffle était : '+souffleChoix.map(function(x){return x.charAt(0).toLowerCase()+x.slice(1);}).join(' · ');r.style.display='block';}else{r.textContent='';r.style.display='none';}}
+chipsDans('chips-souffle',souffleListe,souffleChoix);chipsDans('chips-fin',finListe,finChoix);
+function reponsesJ3(){const items=vReponses.slice();
+  if(souffleChoix.length)items.push({q:'Mon souffle avant la pratique',r:souffleChoix.join(' · ')});
+  const fd=document.getElementById('fin-difficile').value.trim();const f=finChoix.concat(fd?[fd]:[]).join(' · ');
+  if(f)items.push({q:"Pendant ces 5 cycles, qu'est-ce qui a été facile ou difficile ?",r:f});return items;}
+window.reponsesJ3=reponsesJ3;
 
 // Init théorie
 showPhase('intro');
@@ -342,7 +408,11 @@ function telechargerReponses(){
   var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   var contenu='';var t=document.getElementById('reflexion-text');var v=t?t.value.trim():'';
   function bx(q,r){return '<div class="recap-box"><div class="recap-q">'+q+'</div><div class="recap-r">'+r+'</div></div>';}
-  if(v) contenu+=bx('Ce que j\'ai ressenti apres la respiration',v.replace(/\n/g,'<br>'));
+  function e2(x){return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+  var ex=reponsesJ3();var fin=ex.filter(function(i){return i.q==="Pendant ces 5 cycles, qu'est-ce qui a été facile ou difficile ?";});
+  ex.filter(function(i){return i.q!=="Pendant ces 5 cycles, qu'est-ce qui a été facile ou difficile ?";}).forEach(function(i){contenu+=bx(e2(i.q),e2(i.r));});
+  if(v) contenu+=bx('Ce que j\'ai ressenti après la respiration',e2(v));
+  fin.forEach(function(i){contenu+=bx(e2(i.q),e2(i.r));});
   contenu+=bx('Ce que je retiens','Respiration 4-6 : inspire 4 secondes par le nez, expire 6 secondes par la bouche. Le corps l\'apprend dans le calme, et saura la retrouver dans les moments difficiles.');
   var css='body{font-family:Georgia,serif;font-size:16px;color:#3d2d50;padding:40px;max-width:600px;margin:0 auto;line-height:1.8;}'
     +'h1{font-size:22px;font-weight:bold;color:#3d2d50;margin-bottom:6px;border-bottom:2px solid #c8a060;padding-bottom:8px;}'
@@ -393,10 +463,11 @@ function telechargerReponses(){
     var items=[];
 
     document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
-      if(el.id==='e-textarea'||el.id==='j-textarea'||(el.closest&&el.closest('.realise-jour')))return;
+      if(el.id==='e-textarea'||el.id==='j-textarea'||el.id==='fin-difficile'||(el.closest&&el.closest('.realise-jour')))return;
       var v=(el.value||'').trim(); if(!v)return;
       items.push({q:lab(el),r:v});
     });
+    try{if(window.reponsesJ3)items=items.concat(window.reponsesJ3());}catch(e){}
     return items;
   }
   function sauver(){
