@@ -28,6 +28,9 @@
   .progress-wrap{max-width:560px;width:100%;margin-top:18px}
   .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a08090;margin-bottom:8px;font-family:'Jost',sans-serif}
   .progress-track{height:3px;background:rgba(200,120,130,0.18);border-radius:4px;overflow:hidden}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .chip{background:#fdf6f7;border:2px solid rgba(200,120,128,0.3);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#6a4a52;cursor:pointer;transition:all 0.15s;user-select:none}
+  .chip.sel{background:linear-gradient(135deg,#c87880,#a080c8);border-color:transparent;color:white}
   .progress-fill{height:100%;background:linear-gradient(90deg,#c87880,#a080c8);border-radius:4px;transition:width 0.4s ease}
   .hl{background:linear-gradient(135deg,#fdf0f2,#f8f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #c87880;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
   .hl.violet{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f0eefa)}
@@ -139,14 +142,15 @@
 <div class="phase" id="phase-ecriture">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="e-label">Écriture · 1/4</span>
+      <span id="e-label">D'où vient ta charge · 1/7</span>
       <span style="font-family:'Jost',sans-serif;">✍️ Nommer l'invisible</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:14%"></div></div>
   </div>
   <div class="card">
     <p class="e-q" id="e-question"></p>
     <p class="e-sous" id="e-sous"></p>
+    <div class="chips" id="e-chips" style="display:none"></div>
     <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="" oninput="checkE()"></textarea>
     <button class="btn" id="btn-e" style="width:100%;margin-top:12px;" onclick="nextE()">Continuer →</button>
@@ -253,13 +257,16 @@ const inventaire=[
 ];
 
 const ecritureQs=[
-  {ex:"« De la colère. Je ne pensais pas porter autant. » « Un soulagement : ce n'est pas moi qui suis mal organisée, c'est énorme. »",q:"Qu'est-ce que tu as ressenti en faisant cet inventaire ?",sous:"Surprise, reconnaissance, tristesse, colère, soulagement de voir... Nomme ce qui est là.",placeholder:"En faisant cet inventaire j'ai ressenti..."},
-  {ex:"« Penser aux anniversaires, aux cadeaux, aux rendez-vous chez le médecin. » « Anticiper l'humeur de tout le monde. » « Savoir ce qu'il manque dans le frigo. »",q:"Y a-t-il une partie de ta charge mentale qui t'épuise particulièrement, et que personne ne voit ?",sous:"La partie la plus invisible, la plus lourde, la moins reconnue.",placeholder:"Ce qui m'épuise le plus et qu'on ne voit pas c'est..."},
-  {ex:"« Le chant : j'ai arrêté la chorale il y a quatre ans. » « Mes soirées avec mes amies. » « Le temps de lire. »",q:"Qu'est-ce que tu as dû abandonner ou mettre de côté à cause de la charge mentale ?",sous:"Un projet, un rêve, une partie de toi-même, une relation, un loisir...",placeholder:"Ce que j'ai mis de côté c'est..."},
-  {ex:"« Que les repas de la semaine ne soient plus dans ma tête à moi seule. » « Ne plus être celle qui pense aux rendez-vous médicaux de toute la famille. »",q:"Si tu pouvais changer une chose dans la répartition de ta charge mentale, laquelle serait-ce ?",sous:"Une seule chose, réaliste ou non : celle qui te soulagerait vraiment.",placeholder:"Si je pouvais changer une chose ce serait..."},
+  {"partie": "D'où vient ta charge", "q": "Chez toi, quand tu étais petite, comment les tâches se répartissaient ?", "sous": "Coche ce qui te parle. En dessous : et aujourd'hui, tu retrouves ce modèle chez toi ?", "ex": "« Mon père déléguait tout à ma mère, sans même demander. Aujourd'hui, je fais exactement comme elle, sans m'en rendre compte. » « Chez nous, tout était partagé. Alors je ne comprends pas pourquoi, chez moi, tout me retombe dessus. »", "placeholder": "Aujourd'hui, chez moi...", "chips": ["Un parent déléguait tout à l'autre", "Les tâches étaient partagées", "L'un faisait, l'autre pensait à tout", "On ne s'en rendait même pas compte, c'était une habitude", "Les enfants mettaient beaucoup la main à la pâte"]},
+  {"partie": "D'où vient ta charge", "q": "Quelle phrase te pousse à tout gérer toi-même ?", "sous": "Coche ce qui te parle. En dessous : d'où vient-elle, à ton avis ?", "ex": "« Ça va plus vite si je le fais moi-même : j'ai toujours vu mon père repasser derrière tout le monde. » « C'est mon rôle : chez nous, c'étaient les femmes qui s'occupaient de tout. »", "placeholder": "Elle vient de...", "chips": ["« Si je ne le fais pas, personne ne le fera »", "« Ça va plus vite si je le fais moi-même »", "« Ils ne le feront pas comme il faut »", "« Je préfère ne pas avoir à demander »", "« C'est mon rôle »"]},
+  {"partie": "Nommer l'invisible", "ex": "« De la colère. Je ne pensais pas porter autant. » « Un soulagement : ce n'est pas moi qui suis mal organisée, c'est énorme. »", "q": "Qu'est-ce que tu as ressenti en faisant cet inventaire ?", "sous": "Surprise, reconnaissance, tristesse, colère, soulagement de voir... Nomme ce qui est là.", "placeholder": "En faisant cet inventaire j'ai ressenti..."},
+  {"partie": "Nommer l'invisible", "ex": "« Penser aux anniversaires, aux cadeaux, aux rendez-vous chez le médecin. » « Anticiper l'humeur de tout le monde. » « Savoir ce qu'il manque dans le frigo. »", "q": "Y a-t-il une partie de ta charge mentale qui t'épuise particulièrement, et que personne ne voit ?", "sous": "La partie la plus invisible, la plus lourde, la moins reconnue.", "placeholder": "Ce qui m'épuise le plus et qu'on ne voit pas c'est..."},
+  {"partie": "Nommer l'invisible", "ex": "« Le chant : j'ai arrêté la chorale il y a quatre ans. » « Mes soirées avec mes amies. » « Le temps de lire. »", "q": "Qu'est-ce que tu as dû abandonner ou mettre de côté à cause de la charge mentale ?", "sous": "Un projet, un rêve, une partie de toi-même, une relation, un loisir...", "placeholder": "Ce que j'ai mis de côté c'est..."},
+  {"partie": "Nommer l'invisible", "q": "Quand tu demandes de l'aide, qu'est-ce qui se passe ?", "sous": "", "ex": "« On me répond “tu n'avais qu'à demander”, alors que je viens justement de le faire. » « On m'aide, mais je dois tout expliquer. Alors je finis par le faire moi-même. »", "placeholder": "Quand je demande..."},
+  {"partie": "Nommer l'invisible", "ex": "« Que les repas de la semaine ne soient plus dans ma tête à moi seule. » « Ne plus être celle qui pense aux rendez-vous médicaux de toute la famille. »", "q": "Si tu pouvais changer une chose dans la répartition de ta charge mentale, laquelle serait-ce ?", "sous": "Une seule chose, réaliste ou non : celle qui te soulagerait vraiment.", "placeholder": "Si je pouvais changer une chose ce serait..."}
 ];
 
-let theorieIdx=0, checkedItems=new Set(), eIdx=0, eReponses=[];
+let theorieIdx=0, checkedItems=new Set(), eIdx=0, eReponses=[], eChoix=[];
 
 function showPhase(id){
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
@@ -369,10 +376,12 @@ function updateCompteur(){
 // Écriture
 function renderE(){
   const q=ecritureQs[eIdx];
-  document.getElementById('e-label').textContent=`Écriture · ${eIdx+1}/${ecritureQs.length}`;
+  document.getElementById('e-label').textContent=(q.partie||'Écriture')+' · '+(eIdx+1)+'/'+ecritureQs.length;
   document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
   document.getElementById('e-question').textContent=q.q;
-  document.getElementById('e-sous').textContent=q.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
+  document.getElementById('e-sous').textContent=q.sous||'';document.getElementById('e-sous').style.display=q.sous?'block':'none';
+  eChoix=[];const ec=document.getElementById('e-chips');ec.innerHTML='';ec.style.display=q.chips?'flex':'none';
+  (q.chips||[]).forEach(function(txt){const ch=document.createElement('div');ch.className='chip';ch.textContent=txt;ch.onclick=function(){const i=eChoix.indexOf(txt);if(i>-1){eChoix.splice(i,1);ch.classList.remove('sel');}else{eChoix.push(txt);ch.classList.add('sel');}};ec.appendChild(ch);});(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=q.placeholder;
   document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 15 🌸';
@@ -381,7 +390,8 @@ function renderE(){
 function checkE(){/* écriture libre */}
 
 function nextE(){
-  const val=document.getElementById('e-textarea').value.trim();
+  const txt=document.getElementById('e-textarea').value.trim();
+  const val=eChoix.concat(txt?[txt]:[]).join(' · ');
   if(val) eReponses.push({q:ecritureQs[eIdx].q,r:val});
   if(eIdx<ecritureQs.length-1){eIdx++;renderE();window.scrollTo(0,0);}
   else showFin();
