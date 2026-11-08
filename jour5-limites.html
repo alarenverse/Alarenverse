@@ -30,6 +30,9 @@
   .progress-wrap{max-width:560px;width:100%;margin-top:18px}
   .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:#a08080;margin-bottom:8px;font-family:'Jost',sans-serif}
   .progress-track{height:3px;background:rgba(200,150,180,0.2);border-radius:4px;overflow:hidden}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .chip{background:#fdf7f4;border:2px solid rgba(194,131,106,0.3);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#6a4a50;cursor:pointer;transition:all 0.15s;user-select:none}
+  .chip.sel{background:linear-gradient(135deg,#c2836a,#a08ec2);border-color:transparent;color:white}
   .progress-fill{height:100%;background:linear-gradient(90deg,#c2836a,#a08ec2);border-radius:4px;transition:width 0.4s ease}
   .highlight{background:linear-gradient(135deg,#fdf0f0,#f5f0fa);border-radius:14px;padding:14px 18px;border-left:3px solid #c2836a;font-size:17px;color:#253050;line-height:1.8;margin-bottom:12px;font-style:normal}
   .highlight.violet{border-left-color:#a08ec2;background:linear-gradient(135deg,#f5f0fa,#ede8f8)}
@@ -151,14 +154,15 @@
 <div class="phase" id="phase-ecriture">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="e-label">Écriture · 1/4</span>
+      <span id="e-label">Le non dans ton histoire · 1/9</span>
       <span style="font-family:'Jost',sans-serif;">✍️ Exploration guidée</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:25%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:11%"></div></div>
   </div>
   <div class="card">
     <p class="ecriture-question" id="e-question"></p>
     <p class="ecriture-sous" id="e-sous"></p>
+    <div class="chips" id="e-chips" style="display:none"></div>
     <div class="exemple" id="e-exemple" style="display:none"></div>
     <textarea id="e-textarea" rows="5" placeholder="Écris librement, sans te censurer..." oninput="checkEcriture()"></textarea>
     <button class="btn" id="btn-e-next" style="width:100%;margin-top:12px;" onclick="nextEcriture()">Continuer →</button>
@@ -240,10 +244,15 @@ const quizQuestions = [
 ];
 
 const ecritureQuestions = [
-  {ex:"« Quand ma collègue me demande de la remplacer au dernier moment, je dis oui alors que j'avais prévu de voir une amie. » « Quand ma mère appelle pour la troisième fois de la journée, je décroche alors que je n'en peux plus. »", q:"Dans quelle situation de ta vie tu dis oui alors que tout en toi crie non ?", sous:"Prends ton temps. Sois honnête avec toi-même.", placeholder:"Écris la situation, le contexte, ce que tu ressens quand tu dis ce oui..." },
-  {ex:"« Qu'elle me trouve égoïste. » « Qu'il se fâche et que l'ambiance devienne lourde. » « Qu'on ne m'aime plus si je ne suis plus celle qui dit toujours oui. »", q:"Qu'est-ce que tu as peur qu'il se passe si tu poses tes limites dans cette situation ?", sous:"La peur est valide. Nomme-la.", placeholder:"J'ai peur que... / Je redoute que..." },
-  {ex:"« Qu'on me demande avant de décider pour moi. » « Du temps pour moi sans avoir à me justifier. » « Être considérée, pas seulement utile. »", q:"De quoi as-tu vraiment besoin dans cette relation ou cette situation ?", sous:"Laisse de côté ce que tu penses devoir vouloir, et écris ce dont tu as vraiment besoin.", placeholder:"J'ai besoin de... / Ce qui me manque vraiment c'est..." },
-  {ex:"« Non, cette fois je ne peux pas. » « Je t'aime, et j'ai besoin de souffler ce week-end. » « Je te réponds demain, je veux y réfléchir. »", q:"Quelle serait la phrase que tu aimerais pouvoir dire, si tu n'avais pas peur ?", sous:"Laisse-toi rêver une limite honnête et courageuse.", placeholder:"Ce que j'aurais envie de dire c'est..." },
+  {"partie": "Le non dans ton histoire", "q": "Petite, quelles phrases tu as entendues sur le fait de dire non ou de faire plaisir ?", "sous": "Coche ce qui te parle. En dessous : quand tu disais non, qu'est-ce qui se passait ?", "ex": "« On me disait que j'étais capricieuse, alors j'ai arrêté. » « Mon père respectait mes non, mais ma grand-mère se vexait. Alors avec elle, je disais oui. »", "placeholder": "Quand je disais non...", "chips": ["« Sois gentille »", "« Ne fais pas de peine »", "« Pense aux autres »", "« Ne fais pas d'histoires »", "« Fais un bisou à la dame »", "« On ne répond pas aux adultes »", "On me laissait dire non"]},
+  {"partie": "Le non dans ton histoire", "q": "Dans ta famille, qui savait dire non, et qui ne le disait jamais ?", "sous": "", "ex": "« Mon père disait non sans se justifier. Ma mère disait oui à tout le monde, puis s'effondrait le soir. » « Personne ne disait non directement : on boudait. »", "placeholder": "Dans ma famille..."},
+  {"partie": "Ta situation", "ex": "« Quand ma collègue me demande de la remplacer au dernier moment, je dis oui alors que j'avais prévu de voir une amie. » « Quand ma mère appelle pour la troisième fois de la journée, je décroche alors que je n'en peux plus. »", "q": "Dans quelle situation de ta vie tu dis oui alors que tout en toi crie non ?", "sous": "Prends ton temps. Sois honnête avec toi-même.", "placeholder": "Écris la situation, le contexte, ce que tu ressens quand tu dis ce oui..."},
+  {"partie": "Ta situation", "q": "Où ton corps te dit non, avant ta bouche ?", "sous": "Coche ce qui te parle. En dessous : et qu'est-ce que tu fais de ce signal ?", "ex": "« Ma gorge se serre, et je dis oui quand même, avec un grand sourire. » « Une fatigue me tombe dessus, et c'est seulement le soir que je comprends que je n'avais pas envie. »", "placeholder": "Ce signal, j'en fais...", "chips": ["La gorge se serre", "Le ventre se noue", "La mâchoire se crispe", "Un poids sur la poitrine", "Une grande fatigue d'un coup", "Je ne sens rien, je dis oui tout de suite"]},
+  {"partie": "Ta situation", "q": "Qu'est-ce que ce oui te rapporte ?", "sous": "Coche ce qui te parle. En dessous : et qu'est-ce qu'il te coûte ?", "ex": "« Il me rapporte la paix sur le moment. Il me coûte mes soirées, et beaucoup de rancœur. » « Je me sens indispensable. Et je suis épuisée. »", "placeholder": "Il me coûte...", "chips": ["Éviter le conflit", "Être appréciée", "Me sentir utile", "Ne pas décevoir", "Avoir la paix plus vite", "Garder le contrôle", "Être indispensable"]},
+  {"partie": "Ta situation", "ex": "« Qu'elle me trouve égoïste. » « Qu'il se fâche et que l'ambiance devienne lourde. » « Qu'on ne m'aime plus si je ne suis plus celle qui dit toujours oui. »", "q": "Qu'est-ce que tu as peur qu'il se passe si tu poses tes limites dans cette situation ?", "sous": "La peur est valide. Nomme-la.", "placeholder": "J'ai peur que... / Je redoute que..."},
+  {"partie": "Ta situation", "ex": "« Qu'on me demande avant de décider pour moi. » « Du temps pour moi sans avoir à me justifier. » « Être considérée, pas seulement utile. »", "q": "De quoi as-tu vraiment besoin dans cette relation ou cette situation ?", "sous": "Laisse de côté ce que tu penses devoir vouloir, et écris ce dont tu as vraiment besoin.", "placeholder": "J'ai besoin de... / Ce qui me manque vraiment c'est..."},
+  {"partie": "Ta situation", "ex": "« Non, cette fois je ne peux pas. » « Je t'aime, et j'ai besoin de souffler ce week-end. » « Je te réponds demain, je veux y réfléchir. »", "q": "Quelle serait la phrase que tu aimerais pouvoir dire, si tu n'avais pas peur ?", "sous": "Laisse-toi rêver une limite honnête et courageuse.", "placeholder": "Ce que j'aurais envie de dire c'est..."},
+  {"partie": "Après le non", "q": "La dernière fois que tu as dit non, qu'est-ce que tu t'es dit après ? Et qu'est-ce qui s'est vraiment passé ?", "sous": "", "ex": "« Je me suis dit que j'étais égoïste. En vrai, ma sœur a trouvé quelqu'un d'autre et ne m'en a jamais reparlé. » « J'ai cru que j'allais perdre mon poste. En vrai, ma cheffe a simplement réorganisé le planning. »", "placeholder": "Je me suis dit... / En vrai..."}
 ];
 
 const phrasesTypes = [
@@ -262,6 +271,7 @@ let quizAnswers = [];
 let quizSelected = null;
 let ecritureIdx = 0;
 let ecritureReponses = [];
+let eChoix = [];
 
 function showPhase(id) {
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
@@ -357,10 +367,12 @@ function showQuizResults() {
 
 function renderEcriture() {
   const e=ecritureQuestions[ecritureIdx];
-  document.getElementById('e-label').textContent=`Écriture · ${ecritureIdx+1}/${ecritureQuestions.length}`;
+  document.getElementById('e-label').textContent=(e.partie||'Écriture')+' · '+(ecritureIdx+1)+'/'+ecritureQuestions.length;
   document.getElementById('e-progress').style.width=((ecritureIdx+1)/ecritureQuestions.length*100)+'%';
   document.getElementById('e-question').textContent=e.q;
-  document.getElementById('e-sous').textContent=e.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=e.ex?('Par exemple : '+e.ex):'';x.style.display=e.ex?'block':'none';}})();
+  document.getElementById('e-sous').textContent=e.sous||'';document.getElementById('e-sous').style.display=e.sous?'block':'none';
+  eChoix=[];const ec=document.getElementById('e-chips');ec.innerHTML='';ec.style.display=e.chips?'flex':'none';
+  (e.chips||[]).forEach(function(txt){const ch=document.createElement('div');ch.className='chip';ch.textContent=txt;ch.onclick=function(){const i=eChoix.indexOf(txt);if(i>-1){eChoix.splice(i,1);ch.classList.remove('sel');}else{eChoix.push(txt);ch.classList.add('sel');}};ec.appendChild(ch);});(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=e.ex?('Par exemple : '+e.ex):'';x.style.display=e.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=e.placeholder;
   /* libre */
@@ -373,7 +385,8 @@ function checkEcriture() {
 }
 
 function nextEcriture() {
-  const val=document.getElementById('e-textarea').value.trim();
+  const txt=document.getElementById('e-textarea').value.trim();
+  const val=eChoix.concat(txt?[txt]:[]).join(' · ');
   if(val) ecritureReponses.push({q:ecritureQuestions[ecritureIdx].q,r:val});
   if(ecritureIdx<ecritureQuestions.length-1){ecritureIdx++;renderEcriture();window.scrollTo(0,0);}
   else{renderPhrases();showPhase('phrases');}
