@@ -234,10 +234,10 @@
 <div class="phase" id="phase-ecriture">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="e-label">Réflexion · 1/3</span>
+      <span id="e-label">Réflexion · 1/5</span>
       <span style="font-family:'Jost',sans-serif;">✍️ Ma relation à la joie</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:33%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="e-progress" style="width:20%"></div></div>
   </div>
   <div class="card">
     <p class="e-q" id="e-question"></p>
@@ -316,9 +316,11 @@ const inventaireItems=[
 ];
 
 const ecritureQs=[
-  {ex:"« Hier, en entendant mon fils rire dans son bain. » « Ce matin, le soleil sur le lac en allant au travail. » « Une chanson à la radio qui m'a fait sourire toute seule. »",q:"Quand as-tu ressenti de la joie pour la dernière fois, même brièvement, même en marge ?",sous:"On ne parle pas de bonheur ici. Un éclair de vivant, un micro-moment.",placeholder:"La dernière fois que j'ai ressenti quelque chose de joyeux c'était..."},
-  {ex:"« La culpabilité : je me dis que ce n'est pas le moment, qu'il y a trop à faire. » « La peur que ça ne dure pas. » « La fatigue : je n'ai même plus l'énergie d'avoir envie. »",q:"Qu'est-ce qui t'empêche de te laisser aller à la joie : la culpabilité, la fatigue, l'impression de ne pas la mériter ?",sous:"Honnêteté bienveillante, sans jugement.",placeholder:"Ce qui m'empêche de laisser entrer la joie c'est..."},
-  {ex:"« Quand je mets ma musique en préparant le repas. » « Avec l'amie qui me fait rire. » « Dehors, sans but, un quart d'heure. »",q:"Où est-ce que la joie a encore un peu de place dans ta vie ?",sous:"Les moments, les endroits, les personnes avec qui tu te sens vivante. Le bonheur n'est pas l'objectif.",placeholder:"La joie a encore de la place quand..."},
+  {"ex": "« Hier, en entendant mon fils rire dans son bain. » « Ce matin, le soleil sur le lac en allant au travail. » « Une chanson à la radio qui m'a fait sourire toute seule. »", "q": "Quand as-tu ressenti de la joie pour la dernière fois, même brièvement, même en marge ?", "sous": "On ne parle pas de bonheur ici. Un éclair de vivant, un micro-moment.", "placeholder": "La dernière fois que j'ai ressenti quelque chose de joyeux c'était..."},
+  {"q": "Est-ce qu'il t'arrive de te dire « je profiterai quand… » ?", "sous": "", "ex": "« Je profiterai quand les enfants seront plus grands. » « Quand ce projet sera fini. Sauf qu'il y en a toujours un autre. »", "placeholder": "Je me dis souvent : je profiterai quand..."},
+  {"ex": "« La culpabilité : je me dis que ce n'est pas le moment, qu'il y a trop à faire. » « La peur que ça ne dure pas. » « La fatigue : je n'ai même plus l'énergie d'avoir envie. »", "q": "Qu'est-ce qui t'empêche de te laisser aller à la joie : la culpabilité, la fatigue, l'impression de ne pas la mériter ?", "sous": "Honnêteté bienveillante, sans jugement.", "placeholder": "Ce qui m'empêche de laisser entrer la joie c'est..."},
+  {"q": "Quand tu ressens de la joie, est-ce que tu t'autorises à la montrer ?", "sous": "", "ex": "« Quand j'ai une bonne nouvelle, je la minimise pour ne pas faire de jaloux. » « Je retiens mon enthousiasme : on m'a souvent dit que j'en faisais trop. »", "placeholder": "Ma joie, je..."},
+  {"ex": "« Quand je mets ma musique en préparant le repas. » « Avec l'amie qui me fait rire. » « Dehors, sans but, un quart d'heure. »", "q": "Où est-ce que la joie a encore un peu de place dans ta vie ?", "sous": "Les moments, les endroits, les personnes avec qui tu te sens vivante. Le bonheur n'est pas l'objectif.", "placeholder": "La joie a encore de la place quand..."}
 ];
 
 let theorieIdx=0, checkedJoie=new Set(), eIdx=0, eReponses=[];
@@ -445,7 +447,7 @@ function renderE(){
   document.getElementById('e-label').textContent=`Réflexion · ${eIdx+1}/${ecritureQs.length}`;
   document.getElementById('e-progress').style.width=((eIdx+1)/ecritureQs.length*100)+'%';
   document.getElementById('e-question').textContent=q.q;
-  document.getElementById('e-sous').textContent=q.sous;(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
+  document.getElementById('e-sous').textContent=q.sous||'';document.getElementById('e-sous').style.display=q.sous?'block':'none';(function(){var x=document.getElementById('e-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('e-textarea').value='';
   document.getElementById('e-textarea').placeholder=q.placeholder;
   document.getElementById('btn-e').textContent=eIdx<ecritureQs.length-1?'Continuer →':'Terminer le Jour 18 ✨';
