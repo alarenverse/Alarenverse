@@ -100,7 +100,7 @@
     <p class="small" style="margin-bottom:20px;">Mais tout est là : choisir le bon mouvement au bon moment. Selon ton état du jour, selon ton cycle, selon ce dont ton corps a vraiment besoin, pas selon ce qu'on est censées faire.</p>
     <div id="preview-container" style="text-align:left;margin-bottom:22px;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 🌿</button>
-    <p class="hint">Théorie · Mouvement guidé selon ton état · Journal · ~20 min</p>
+    <p class="hint">Théorie · Mouvement guidé selon ton état · Journal · ~25 min</p>
   </div>
 </div>
 
@@ -183,10 +183,10 @@
 <div class="phase" id="phase-journal">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="j-label">Journal · 1/3</span>
+      <span id="j-label">Le mouvement dans ton histoire · 1/12</span>
       <span style="font-family:'Jost',sans-serif;">✍️ Mon journal de mouvement</span>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="j-progress" style="width:33%"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="j-progress" style="width:8%"></div></div>
   </div>
   <div class="card">
     <p class="journal-q" id="j-question"></p>
@@ -375,9 +375,18 @@ const cyclePhases = [
 ];
 
 const journalQuestions = [
-  {ex:"« Dix minutes de marche après le repas. » « Les étirements du matin, allongée sur le tapis. » « Danser dans la cuisine sur une chanson que j'aime. »",q:"Quel mouvement as-tu choisi aujourd'hui, ou lequel te fait envie ?", sous:"Aucune obligation de résultat, juste une envie.", placeholder:"J'ai choisi / Ce qui me fait envie c'est..."},
-  {ex:"« Avant : les épaules nouées et la tête lourde. Après : plus chaude, plus présente. » « J'ai envie de bouger, mais je me sens molle. »",q:"Comment te sens-tu dans ton corps en ce moment, avant de bouger ou après ?", sous:"Sensations physiques, énergie, tensions... Décris ce que tu ressens.", placeholder:"Dans mon corps je ressens..."},
-  {ex:"« Je vais courir même malade, sinon je culpabilise. » « Je sais que marcher me ferait du bien, mais je reste sur le canapé en me disant que dix minutes, ça ne sert à rien. »",q:"Est-ce que tu as tendance à te forcer à faire du sport même quand ton corps dit non, ou au contraire à éviter le mouvement même quand il te ferait du bien ?", sous:"Honnêteté bienveillante, sans jugement.", placeholder:"Ma relation au mouvement c'est plutôt..."},
+  {"partie": "Le mouvement dans ton histoire", "q": "Petite, quel mouvement te rendait heureuse, sans que personne ne te le demande ?", "sous": "", "ex": "« Faire la roue dans le jardin jusqu'à en avoir le tournis. » « Danser dans ma chambre devant le miroir. »", "placeholder": "Petite, j'adorais..."},
+  {"partie": "Le mouvement dans ton histoire", "q": "À la maison, le mouvement, c'était plutôt quoi : un plaisir, une obligation, une récompense, une punition, ou un sujet dont on ne parlait pas ?", "sous": "", "ex": "« Une obligation : mon père nous faisait courir le dimanche, qu'on le veuille ou non. » « Le sport, c'était pour garder la ligne. Ma mère en parlait comme d'une corvée. »", "placeholder": "À la maison, le mouvement c'était..."},
+  {"partie": "Le mouvement dans ton histoire", "q": "Quelle phrase entendue sur ton corps ou sur le sport t'est restée ?", "sous": "", "ex": "« “Toi, tu n'es pas sportive.” » « “Tiens-toi droite, rentre ton ventre.” »", "placeholder": "La phrase qui m'est restée..."},
+  {"partie": "Le mouvement dans ton histoire", "q": "À l'école, les cours de gym, les équipes, les vestiaires : qu'est-ce que tu en gardes ?", "sous": "", "ex": "« J'étais choisie en dernier. Depuis, je déteste bouger devant les autres. » « J'adorais l'athlétisme, c'était le seul endroit où je me sentais forte. »", "placeholder": "De l'école, je garde..."},
+  {"partie": "Ton rapport au mouvement aujourd'hui", "q": "Aujourd'hui, quand tu bouges, c'est surtout pour quoi ?", "sous": "", "ex": "« Pour me vider la tête : c'est le seul moment où je ne pense à rien. » « Pour être “bien”, parce qu'une femme qui prend soin d'elle fait du sport. »", "placeholder": "Quand je bouge, c'est surtout pour..."},
+  {"partie": "Ton rapport au mouvement aujourd'hui", "ex": "«  Je vais courir même malade, sinon je culpabilise.  » «  Je sais que marcher me ferait du bien, mais je reste sur le canapé en me disant que dix minutes, ça ne sert à rien.  »", "q": "Est-ce que tu as tendance à te forcer à faire du sport même quand ton corps dit non, ou au contraire à éviter le mouvement même quand il te ferait du bien  ?", "sous": "Honnêteté bienveillante, sans jugement.", "placeholder": "Ma relation au mouvement c'est plutôt..."},
+  {"partie": "Ton rapport au mouvement aujourd'hui", "q": "Quand tu ne bouges pas, qu'est-ce qui t'en empêche, et qu'est-ce que tu te dis à ce moment-là ?", "sous": "", "ex": "« Le temps. Je me dis que si ce n'est pas une vraie séance d'une heure, ça ne compte pas. » « La fatigue. Je me dis que je n'ai aucune volonté. »", "placeholder": "Ce qui m'en empêche... / Je me dis..."},
+  {"partie": "Ton rapport au mouvement aujourd'hui", "q": "Comment tu te sens quand tu bouges devant les autres : au cours, à la salle, dehors ?", "sous": "", "ex": "« Je me compare tout le temps aux autres femmes du cours. » « Bien, en fait : en groupe, je me motive plus facilement que seule. »", "placeholder": "Devant les autres, je me sens..."},
+  {"partie": "Ton rapport au mouvement aujourd'hui", "q": "Et autour de toi, qu'est-ce que tu transmets sur le mouvement : à tes enfants, à tes proches ?", "sous": "", "ex": "« Je dis à mes enfants que le sport, c'est important, mais ils me voient surtout épuisée sur le canapé. » « Avec ma meilleure amie, on se motive pour marcher le samedi. »", "placeholder": "Autour de moi, je transmets..."},
+  {"partie": "Aujourd'hui, dans ton corps", "ex": "«  Avant  : les épaules nouées et la tête lourde. Après  : plus chaude, plus présente.  » «  J'ai envie de bouger, mais je me sens molle.  »", "q": "Comment te sens-tu dans ton corps en ce moment, avant de bouger ou après  ?", "sous": "Sensations physiques, énergie, tensions... Décris ce que tu ressens.", "placeholder": "Dans mon corps je ressens..."},
+  {"partie": "Aujourd'hui, dans ton corps", "ex": "«  Dix minutes de marche après le repas.  » «  Les étirements du matin, allongée sur le tapis.  » «  Danser dans la cuisine sur une chanson que j'aime.  »", "q": "Quel mouvement as-tu choisi aujourd'hui, ou lequel te fait envie  ?", "sous": "Aucune obligation de résultat, juste une envie.", "placeholder": "J'ai choisi / Ce qui me fait envie c'est..."},
+  {"partie": "Aujourd'hui, dans ton corps", "q": "Si ton corps pouvait te dire une chose sur la façon dont tu le fais bouger, qu'est-ce qu'il te dirait ?", "sous": "", "ex": "« Arrête de me pousser à bout, j'ai besoin de douceur. » « J'ai envie de jouer, comme quand j'étais petite. »", "placeholder": "Mon corps me dirait..."}
 ];
 
 let theorieIdx = 0;
@@ -386,6 +395,7 @@ let journalIdx = 0;
 let journalReponses = [];
 
 function showPhase(id) {
+  if(id==='fin'){showFin();return;}
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
   document.getElementById('phase-'+id).classList.add('active');
   window.scrollTo(0,0);
@@ -493,10 +503,10 @@ function renderCycle() {
 
 function renderJournal() {
   const q=journalQuestions[journalIdx];
-  document.getElementById('j-label').textContent=`Journal · ${journalIdx+1}/${journalQuestions.length}`;
+  document.getElementById('j-label').textContent=(q.partie||'Journal')+' · '+(journalIdx+1)+'/'+journalQuestions.length;
   document.getElementById('j-progress').style.width=((journalIdx+1)/journalQuestions.length*100)+'%';
   document.getElementById('j-question').textContent=q.q;
-  document.getElementById('j-sous').textContent=q.sous;(function(){var x=document.getElementById('j-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
+  document.getElementById('j-sous').textContent=q.sous||'';document.getElementById('j-sous').style.display=q.sous?'block':'none';(function(){var x=document.getElementById('j-exemple');if(x){x.textContent=q.ex?('Par exemple : '+q.ex):'';x.style.display=q.ex?'block':'none';}})();
   document.getElementById('j-textarea').value='';
   document.getElementById('j-textarea').placeholder=q.placeholder;
   document.getElementById('btn-j-next').textContent=journalIdx<journalQuestions.length-1?'Continuer →':'Voir le bilan du cycle 🌙';
