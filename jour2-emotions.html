@@ -66,6 +66,7 @@
   /* Chips */
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
   .chip{background:#fdf8fd;border:2px solid rgba(200,180,220,0.4);border-radius:50px;padding:7px 14px;font-size:15px;font-family:'Jost',sans-serif;color:#6d5878;cursor:pointer;transition:all 0.15s;user-select:none}
+  .chips-label{font-family:'Jost',sans-serif;font-size:13px;color:#9a84a8;margin:6px 0 6px}
   .chip.sel{background:linear-gradient(135deg,#c9a0c2,#a0b8d8);border-color:transparent;color:white}
   .echelle{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0 4px}
   .num{width:40px;height:40px;border-radius:50%;border:2px solid rgba(200,180,220,0.45);background:#fdf8fd;font-family:'Jost',sans-serif;font-size:15px;color:#6d5878;cursor:pointer;display:flex;align-items:center;justify-content:center;user-select:none}
@@ -149,14 +150,14 @@
       <p>🧠 <strong>Le savoir du jour :</strong> des chercheurs de l'université de Californie (UCLA) ont demandé à des participants si nommer leur émotion allait les apaiser. Ils pensaient que ça les ferait se sentir plus mal. C'est l'inverse qui s'est produit : leur détresse a baissé. Mettre des mots calme, même quand on n'y croit pas.</p>
     </div>
     <button class="btn" onclick="showPhase('moment')">Commencer ✨</button>
-    <p class="hint">~20 minutes · à ton rythme · tu peux laisser des cases vides</p>
+    <p class="hint">~25 minutes · à ton rythme · tu peux laisser des cases vides</p>
   </div>
 </div>
 
 <!-- 1. LE MOMENT -->
 <div class="phase" id="phase-moment">
   <div class="card">
-    <div class="etape">Étape 1 sur 8</div>
+    <div class="etape">Étape 1 sur 9</div>
     <h2>Choisis un moment</h2>
     <p>On va travailler sur un moment que tu as vraiment vécu. Choisis-en un qui te touche encore un peu quand tu y repenses, sans être le plus lourd de ta vie.</p>
 
@@ -192,7 +193,7 @@
 <!-- 2. LES 5 TEMPS -->
 <div class="phase" id="phase-temps">
   <div class="card">
-    <div class="etape">Étape 2 sur 8</div>
+    <div class="etape">Étape 2 sur 9</div>
     <h2>Ce qui se passe en toi, en cinq temps</h2>
     <p class="small centre">Une émotion ne tombe pas du ciel. Elle suit toujours le même chemin.</p>
 
@@ -230,7 +231,7 @@
 <!-- 3. DÉCORTIQUER -->
 <div class="phase" id="phase-decortiquer">
   <div class="card">
-    <div class="etape">Étape 3 sur 8</div>
+    <div class="etape">Étape 3 sur 9</div>
     <h2>Ton moment, temps par temps</h2>
     <div class="rappel" id="rappel-situation"></div>
 
@@ -265,7 +266,7 @@
 <!-- 4. LE MOT JUSTE -->
 <div class="phase" id="phase-mot">
   <div class="card">
-    <div class="etape">Étape 4 sur 8</div>
+    <div class="etape">Étape 4 sur 9</div>
     <h2>Le mot juste</h2>
     <p class="small centre">Ouvre les familles qui te parlent. Touche les nuances qui correspondent à ton moment, tu peux en choisir plusieurs. Souvent on ressent plusieurs choses à la fois.</p>
     <div id="familles-container"></div>
@@ -283,7 +284,7 @@
 <!-- 5. EN DESSOUS -->
 <div class="phase" id="phase-dessous">
   <div class="card">
-    <div class="etape">Étape 5 sur 8</div>
+    <div class="etape">Étape 5 sur 9</div>
     <h2>Ce qu'il y a en dessous</h2>
     <p>Parfois, l'émotion qu'on voit n'est pas la première. C'est une réaction à une autre émotion, plus discrète, arrivée juste avant.</p>
 
@@ -298,6 +299,14 @@
       <li>L'anxiété qui recouvre la tristesse.</li>
       <li>La honte qui recouvre un besoin.</li>
     </ul>
+
+    <div class="e-bloc">
+      <div class="e-q">Et en général, au-delà de ce moment, lequel de ces enchaînements reconnais-tu chez toi ?</div>
+      <div class="e-sous">Coche ce qui te parle. En dessous : dans quelles situations, le plus souvent ?</div>
+      <div class="chips" id="chips-enchain"></div>
+      <div class="exemple">Par exemple : « La colère qui recouvre la tristesse : avec ma mère, je m'énerve au lieu de lui dire qu'elle me manque. » « La culpabilité qui recouvre la colère : dès que je suis fâchée contre mes enfants, je m'en veux aussitôt. »</div>
+      <textarea id="s-enchain" rows="2" placeholder="Le plus souvent, c'est quand..."></textarea>
+    </div>
 
     <div class="e-bloc">
       <div class="e-q">Reviens à ton moment. Dans la seconde d'avant, juste avant ce que tu as ressenti, il y avait quoi ?</div>
@@ -323,7 +332,7 @@
 <!-- 6. LE BESOIN -->
 <div class="phase" id="phase-besoin">
   <div class="card">
-    <div class="etape">Étape 6 sur 8</div>
+    <div class="etape">Étape 6 sur 9</div>
     <h2>Ce que ton émotion te demande</h2>
     <p>Chaque émotion pousse à faire quelque chose. Et en dessous, il y a presque toujours un besoin.</p>
     <div id="table-besoins"></div>
@@ -350,7 +359,7 @@
 <!-- 7. APRÈS -->
 <div class="phase" id="phase-apres">
   <div class="card">
-    <div class="etape">Étape 7 sur 8</div>
+    <div class="etape">Étape 7 sur 9</div>
     <h2>Reviens à ta scène</h2>
     <p class="centre">Repense à ton moment, comme au début. À combien est l'émotion maintenant ?</p>
     <div class="echelle" id="echelle-apres"></div>
@@ -368,8 +377,44 @@
       <p style="font-size:16px;">Une émotion monte, atteint un sommet et redescend, même si tu ne fais rien. Ce qui la relance, c'est la pensée qui la rallume. <strong>Ce n'est pas l'émotion qui t'épuise, c'est le nombre de fois où tu la rejoues.</strong></p>
     </div>
 
-    <button class="btn" onclick="showPhase('racines')">Continuer →</button>
+    <div class="e-bloc">
+      <div class="e-q">Qu'est-ce que tu as découvert en regardant ton moment de si près ?</div>
+      <div class="exemple">Par exemple : « Que sous ma colère, il y avait surtout de la fatigue. » « Que la phrase que je me suis dite était bien plus dure que ce qui s'est vraiment passé. »</div>
+      <textarea id="a-decouvert" rows="3" placeholder="J'ai découvert que..."></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('quotidien')">Continuer →</button>
     <button class="retour" onclick="showPhase('besoin')">← Revenir en arrière</button>
+  </div>
+</div>
+
+<!-- AU QUOTIDIEN -->
+<div class="phase" id="phase-quotidien">
+  <div class="card">
+    <div class="etape">Étape 8 sur 9</div>
+    <h2>Toi et tes émotions, au quotidien</h2>
+
+    <div class="e-bloc">
+      <div class="e-q">Quand on te demande comment tu vas, qu'est-ce que tu réponds le plus souvent ?</div>
+      <div class="e-sous">Coche ce qui te parle. En dessous : et si tu répondais vrai aujourd'hui, tu dirais quoi ?</div>
+      <div class="chips" id="chips-cava"></div>
+      <div class="exemple">Par exemple : « Je dirais que je suis à bout, et que j'aimerais qu'on s'occupe un peu de moi. » « Je dirais que je suis triste depuis des semaines, sans savoir pourquoi. »</div>
+      <textarea id="q-vrai" rows="3" placeholder="Si je répondais vrai, je dirais..."></textarea>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Quelles émotions montres-tu facilement, et lesquelles gardes-tu pour toi ?</div>
+      <div class="e-sous">Coche ce qui te parle. En dessous : avec qui c'est différent ?</div>
+      <div class="chips-label">Je la montre facilement</div>
+      <div class="chips" id="chips-montre"></div>
+      <div class="chips-label">Je la garde pour moi</div>
+      <div class="chips" id="chips-garde"></div>
+      <div class="exemple">Par exemple : « Je montre la colère à mes enfants, mais jamais ma tristesse. » « Au travail, je ne montre rien. Avec ma sœur, tout sort. »</div>
+      <textarea id="q-avecqui" rows="3" placeholder="Avec... c'est différent"></textarea>
+    </div>
+
+    <button class="btn" onclick="showPhase('racines')">Continuer →</button>
+    <button class="retour" onclick="showPhase('apres')">← Revenir en arrière</button>
   </div>
 </div>
 
@@ -377,13 +422,21 @@
 <div class="phase" id="phase-racines">
   <div class="card">
     <span class="emoji-hero" style="font-size:40px;">🌿</span>
-    <div class="etape">Étape 8 sur 8</div>
+    <div class="etape">Étape 9 sur 9</div>
     <h2>Et si c'est flou pour toi ?</h2>
     <p>Beaucoup de femmes qui gèrent tout ne savent pas vraiment ce qu'elles ressentent. Ce n'est pas un défaut chez elles.</p>
     <p>Il y a d'abord une sensibilité de base, qui varie d'une personne à l'autre. Certaines captent plus, plus vite, plus fort. Ce n'est pas un défaut, c'est un réglage. C'est la même sensibilité qui fait ta finesse et ton épuisement.</p>
     <p>Et puis il y a ce qu'on a appris. Quand, petite, on entend « il n'y a pas de quoi pleurer », « arrête, tu exagères », « tu es trop sensible », on retient une chose : montrer ce qu'on ressent coûte cher. Autour de nous, on applaudit celle qui tient. Personne ne lui demande ce que ça lui coûte.</p>
     <div class="phrase-cle">
       <p>On t'a peut-être demandé de contrôler tes émotions sans jamais t'apprendre comment faire. Ce n'est pas un problème de volonté. C'est un apprentissage qui a manqué. Et ça s'apprend, à tout âge. C'est exactement ce que tu es en train de faire.</p>
+    </div>
+
+    <div class="e-bloc">
+      <div class="e-q">Est-ce que tu te reconnais dans cette sensibilité qui capte plus, plus vite, plus fort ?</div>
+      <div class="e-sous">Coche ce qui te parle. En dessous : et comment on a parlé de ta sensibilité, autour de toi ?</div>
+      <div class="chips" id="chips-sensib"></div>
+      <div class="exemple">Par exemple : « On disait que j'étais trop sensible. J'ai appris à la cacher. » « Au travail, c'est ma force : je sens tout de suite quand quelqu'un ne va pas bien. »</div>
+      <textarea id="r-sensibilite" rows="3" placeholder="Autour de moi, on disait..."></textarea>
     </div>
 
     <div class="e-bloc">
@@ -402,7 +455,7 @@
     </div>
 
     <button class="btn" onclick="showFin()">Terminer ma pratique ✨</button>
-    <button class="retour" onclick="showPhase('apres')">← Revenir en arrière</button>
+    <button class="retour" onclick="showPhase('quotidien')">← Revenir en arrière</button>
   </div>
 </div>
 
@@ -512,7 +565,11 @@ const besoins=[
 ];
 
 /* ---------- État ---------- */
-const etat={avant:null,apres:null,corps:[],envies:[],moments:[],mots:[],piste:null,besoins:[]};
+const liste_enchain=["La colère qui recouvre la peur", "La colère qui recouvre la tristesse", "La culpabilité qui recouvre la colère", "L'anxiété qui recouvre la tristesse", "La honte qui recouvre un besoin", "Je ne sais pas encore"];
+const liste_cava=["« Ça va »", "« Fatiguée »", "« Débordée »", "« Bien, et toi ? »", "Je change de sujet", "Je dis vraiment ce que je ressens"];
+const liste_emos=["Joie", "Tristesse", "Colère", "Peur", "Honte", "Culpabilité", "Fierté", "Jalousie", "Tendresse"];
+const liste_sensib=["Je sens l'ambiance d'une pièce dès que j'entre", "Le bruit et la foule me fatiguent vite", "Je suis très touchée par les films, la musique", "Les émotions des autres m'envahissent", "J'ai besoin de temps seule après une journée chargée", "Les conflits me secouent longtemps", "Je ne m'y reconnais pas vraiment"];
+const etat={avant:null,apres:null,corps:[],envies:[],moments:[],mots:[],piste:null,besoins:[],enchain:[],cava:[],montre:[],garde:[],sensib:[]};
 
 function showPhase(id){
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
@@ -591,6 +648,11 @@ function construireChips(conteneurId,liste,cle){
 construireChips('chips-corps',corps,'corps');
 construireChips('chips-envie',envies,'envies');
 construireChips('chips-besoins',besoinsListe,'besoins');
+construireChips('chips-enchain',liste_enchain,'enchain');
+construireChips('chips-cava',liste_cava,'cava');
+construireChips('chips-montre',liste_emos,'montre');
+construireChips('chips-garde',liste_emos,'garde');
+construireChips('chips-sensib',liste_sensib,'sensib');
 
 /* ---------- Train ---------- */
 function revelerTrain(){document.getElementById('train-reveal').style.display='block';}
@@ -659,10 +721,18 @@ function collecter(){
   add('Temps par temps','Ce que j\'ai fait, en vrai',val('d-fait'));
   add('Le mot juste','Mes mots',[etat.mots.join(', '),val('mot-libre')].filter(Boolean).join(', '));
   add('En dessous','L\'émotion d\'avant',val('s-dessous'));
+  add('En dessous','Les enchaînements que je reconnais chez moi',[etat.enchain.join(', '),val('s-enchain')].filter(Boolean).join(' · '));
   add('En dessous','Ce que je ressens à propos de mon émotion',val('s-meta'));
   add('Mon besoin','Ce dont j\'avais besoin',[etat.besoins.join(', '),val('b-besoin')].filter(Boolean).join(' · '));
   add('Mon besoin','Ce que je peux faire pour ce besoin',val('b-action'));
   add('Après','Intensité à la fin',etat.apres===null?'':etat.apres+' / 10');
+  add('Après','Ce que j\'ai découvert',val('a-decouvert'));
+  add('Au quotidien','Quand on me demande comment je vais',etat.cava.join(', '));
+  add('Au quotidien','Si je répondais vrai',val('q-vrai'));
+  add('Au quotidien','Les émotions que je montre facilement',etat.montre.join(', '));
+  add('Au quotidien','Les émotions que je garde pour moi',etat.garde.join(', '));
+  add('Au quotidien','Avec qui c\'est différent',val('q-avecqui'));
+  add('Mes racines','Ma sensibilité',[etat.sensib.join(', '),val('r-sensibilite')].filter(Boolean).join(' · '));
   add('Mes racines','Ce que je me dis quand je pleure',val('r-aujourdhui'));
   add('Mes racines','Petite, quand je pleurais',val('r-enfance'));
   return items;
