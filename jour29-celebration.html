@@ -70,6 +70,10 @@
   .recap-r{font-size:16px;color:#3d2d50;line-height:1.7}
   .suite-box{background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:20px;padding:24px;border:1px solid rgba(200,160,80,0.2);text-align:center;margin-top:16px;max-width:580px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .rappel-j1{background:#fdf6f0;border-left:3px solid #c8a070;border-radius:12px;padding:12px 16px;margin:0 0 12px;text-align:left}
+  .rj1-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#a07850;margin-bottom:4px}
+  .rj1-q{font-family:'Jost',sans-serif;font-size:13px;color:#8a7a6a;margin-top:8px;line-height:1.5}
+  .rj1-r{font-size:15.5px;color:#3d2d3a;line-height:1.6;font-style:italic}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
@@ -87,7 +91,7 @@
     <div class="label">Jour 29 · Célébrer mon chemin</div>
     <h2>29 jours. Tu es encore là.</h2>
     <p>Aujourd'hui on s'arrête. On regarde en arrière. Et on apprend à recevoir ce qu'on mérite de se dire.</p>
-    <p class="note">Pas pour te féliciter de tout. Pour te voir vraiment.</p>
+    <p class="note">Il ne s'agit pas de te féliciter de tout, mais de te voir vraiment.</p>
     <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
     <button class="btn" onclick="showPhase('theorie')">Commencer 🌟</button>
     <p class="hint">Chemin parcouru · Pourquoi célébrer · Recevoir · Gratitude envers soi · ~20 min</p>
@@ -119,7 +123,7 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">🗺️</span>
     <h2>Ce que tu as traversé, semaine par semaine</h2>
-    <p>Pas pour tout te rappeler. Juste pour voir l'étendue de ce que tu as osé regarder en face.</p>
+    <p>Pas pour tout te rappeler, mais plutôt pour voir l'étendue de ce que tu as osé regarder en face.</p>
     <p class="note" style="text-align:center;margin-bottom:20px;">Clique sur chaque semaine pour te souvenir.</p>
     <div id="semaines-container"></div>
     <div class="hl vert" style="margin-top:8px;">
@@ -152,13 +156,13 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">✨</span>
     <h2>Ce dont je suis fière, sans minimiser</h2>
-    <p>Pas de liste de performances. Pas de ce que tu as accompli pour les autres. Juste ce que tu as fait pour toi : ce que tu as osé, traversé, tenu, délesté, appris.</p>
+    <p>Laisse de côté les performances et ce que tu as accompli pour les autres. Ici, on regarde ce que tu as fait pour toi : ce que tu as osé, traversé, tenu, délesté, appris.</p>
     <p class="note" style="text-align:center;margin-bottom:20px;">Réponds honnêtement. Interdit de minimiser.</p>
 
     <div class="fierte-bloc">
       <div class="fierte-label">Ce que j'ai osé</div>
       <div class="fierte-q">Qu'est-ce que tu as osé faire, penser ou ressentir pendant ces 29 jours, que tu n'aurais pas osé avant ?</div>
-      <div class="fierte-sous">Même une toute petite chose. Même juste nommer une émotion que tu évitais.</div>
+      <div class="fierte-sous">Une toute petite chose compte, comme nommer une émotion que tu évitais.</div>
       <div class="exemple">Par exemple : « J'ai osé dire à mon compagnon que j'étais épuisée. » « J'ai osé pleurer devant quelqu'un. » « J'ai osé dire non à ma mère. »</div>
       <textarea id="f1" rows="3" placeholder="J'ai osé..." oninput="checkFierte()"></textarea>
     </div>
@@ -174,7 +178,8 @@
     <div class="fierte-bloc">
       <div class="fierte-label">Ce qui a changé</div>
       <div class="fierte-q">Qu'est-ce qui est différent en toi, même légèrement, depuis le Jour 1 ?</div>
-      <div class="fierte-sous">Pas forcément visible de l'extérieur. Quelque chose qui a bougé dans ta façon de te voir ou de te parler.</div>
+      <div class="fierte-sous">Ça peut être invisible de l'extérieur : quelque chose qui a bougé dans ta façon de te voir ou de te parler.</div>
+      <div class="rappel-j1" id="rappel-j1-29" style="display:none"></div>
       <div class="exemple">Par exemple : « Je remarque plus vite quand je suis en train de me juger. » « Je sais nommer ce que je ressens, au lieu de dire juste : ça ne va pas. »</div>
       <textarea id="f3" rows="3" placeholder="Ce qui a changé, même subtilement..." oninput="checkFierte()"></textarea>
     </div>
@@ -244,9 +249,9 @@ const semaines=[
 ];
 
 const recevoirItems=[
-  {titre:"Quand quelqu'un te complimente",desc:"Au lieu de minimiser, essaie juste de dire merci et de laisser le silence. Tu n'as pas à renvoyer le compliment. Tu n'as pas à expliquer que c'était rien. Juste : merci.",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)"},
+  {titre:"Quand quelqu'un te complimente",desc:"Au lieu de minimiser, essaie juste de dire merci et de laisser le silence. Tu n'as pas à renvoyer le compliment. Tu n'as pas à expliquer que c'était rien. Un simple merci suffit.",couleur:"#c8a060",bg:"#fdf8ee",border:"rgba(200,160,80,0.3)"},
   {titre:"Quand tu réussis quelque chose",desc:"Arrête-toi un instant pour le sentir dans ton corps avant d'enchaîner. Quelques secondes suffisent. C'est ce petit temps d'arrêt qui fait que ça reste.",couleur:"#a080c8",bg:"#f5f0fa",border:"rgba(160,128,200,0.3)"},
-  {titre:"Quand tu te félicites toi-même",desc:"Pas besoin de le dire à voix haute. Juste une pensée claire : \"j'ai bien fait\". Sans le \"mais\" qui suit. Sans la comparaison avec ce que tu aurais pu faire mieux. Juste : j'ai bien fait.",couleur:"#60a880",bg:"#eaf5f0",border:"rgba(96,168,128,0.3)"},
+  {titre:"Quand tu te félicites toi-même",desc:"Pas besoin de le dire à voix haute, une pensée claire suffit : \"j'ai bien fait\". Sans le \"mais\" qui suit. Sans la comparaison avec ce que tu aurais pu faire mieux. J'ai bien fait, point.",couleur:"#60a880",bg:"#eaf5f0",border:"rgba(96,168,128,0.3)"},
 ];
 
 let theorieIdx=0;
@@ -366,6 +371,16 @@ function telechargerReponses(){
   URL.revokeObjectURL(url);
 }
 
+
+/* Rappel : ce qu'elle avait écrit au jour 1, pour mesurer le chemin */
+(function(){try{
+  var its=((JSON.parse(localStorage.getItem('alarenverse_carnet')||'{}').j1)||{}).items||[];
+  var a=its.find(function(x){return x.n===4;}), b=its.find(function(x){return x.n===5;});
+  var el=document.getElementById('rappel-j1-29'); if((!a&&!b)||!el) return;
+  el.innerHTML='';var l=document.createElement('div');l.className='rj1-label';l.textContent='Ce que tu avais écrit au jour 1';el.appendChild(l);
+  [a,b].forEach(function(x){if(!x)return;var q=document.createElement('div');q.className='rj1-q';q.textContent=x.q;el.appendChild(q);var r=document.createElement('div');r.className='rj1-r';r.textContent='« '+x.r+' »';el.appendChild(r);});
+  el.style.display='block';
+}catch(e){}})();
 </script>
 <script>
 /* Mémoire du programme : tes réponses restent sur cet appareil */
@@ -476,7 +491,7 @@ function telechargerReponses(){
     if(!document.getElementById('realise-style')){var st=document.createElement('style');st.id='realise-style';st.textContent=".realise-jour{background:linear-gradient(135deg,#faf5fc,#fdf7f9);border:1px solid rgba(160,128,200,0.3);border-left:4px solid #a080c8;border-radius:16px;padding:18px 18px 12px;margin:18px auto 8px;max-width:560px;width:100%;text-align:left;box-sizing:border-box}.rl-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d5fa8;margin-bottom:8px}.rl-intro{font-family:'Jost',sans-serif;font-size:15px;color:#5d4868;line-height:1.6;margin-bottom:10px}.rl-ex{font-family:'Lora',serif;font-size:14px;font-style:italic;line-height:1.6;color:#6d5878;background:rgba(255,255,255,0.7);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 12px}.rl-q{font-family:'Lora',serif;font-size:16px;color:#3d2d50;margin:10px 0 6px;line-height:1.4}.rl-t{width:100%;box-sizing:border-box;border:2px solid rgba(160,128,200,0.28);border-radius:12px;padding:11px 14px;font-size:16px;font-family:'Lora',serif;color:#3d2d50;background:white;outline:none;resize:vertical;line-height:1.6;margin:0}.rl-t:focus{border-color:#a080c8}.rl-ok{font-family:'Jost',sans-serif;font-size:13px;color:#7d5fa8;opacity:0;transition:opacity .3s;text-align:right;min-height:18px;margin-top:4px}";document.head.appendChild(st);}
     var box=document.createElement('div');box.className='realise-jour';box.id='realise-jour';
     var h='<div class="rl-label">✍️ Ce que je réalise aujourd\'hui</div>'
-      +'<div class="rl-intro">Avant de refermer cette journée. Pas besoin de tout remplir, une ligne suffit.</div>'
+      +'<div class="rl-intro">Avant de refermer cette journée. Une ligne suffit, tu remplis ce qui te parle.</div>'
       +'<div class="rl-ex">Par exemple : « '+EX[0]+' » « '+EX[1]+' » « '+EX[2]+' »</div>';
     for(var i=0;i<3;i++)h+='<div class="rl-q">'+Q[i][0]+'</div><textarea class="rl-t" id="rl-'+(i+1)+'" rows="2" placeholder="'+Q[i][0].replace('…','...')+'"></textarea>';
     box.innerHTML=h+'<div class="rl-ok" id="rl-ok">Gardé dans ton carnet ✓</div>';
