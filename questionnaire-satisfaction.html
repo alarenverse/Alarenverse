@@ -60,6 +60,11 @@
   .reco-btn.selected{background:linear-gradient(135deg,#c8a060,#a080c8);color:white;border-color:transparent}
   .reco-labels{display:flex;justify-content:space-between;font-size:13px;color:#9a84a8;font-family:'Jost',sans-serif;margin-top:4px;padding:0 4px}
 
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(253,248,238,0.8);border-left:2px solid rgba(200,160,80,0.5);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;color:#5d4570}
+  .sous-label{font-family:'Jost',sans-serif;font-size:14px;color:#7d6090;margin:14px 0 8px;text-align:left}
+  input[type="text"]{width:100%;border:2px solid rgba(180,150,220,0.25);border-radius:14px;padding:14px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#3d2d50;outline:none;background:white}
+  input[type="text"]:focus{border-color:#c8a060}
+  .appel-box{background:linear-gradient(135deg,#f8f0fa,#fdf8ee);border-radius:20px;padding:22px;border:1px solid rgba(160,128,200,0.25);margin-top:18px}
   /* Fin */
   .merci-box{background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:20px;padding:28px;border:1px solid rgba(200,160,80,0.2);text-align:center;margin-top:16px}
   .merci-signature{font-size:16px;color:#7d6090;margin-top:14px;font-family:'Jost',sans-serif}
@@ -81,8 +86,8 @@
     <span class="emoji-hero">💛</span>
     <div class="label">Ton avis compte</div>
     <h2>30 jours ensemble, j'aimerais savoir comment ça s'est passé pour toi</h2>
-    <p>Ce questionnaire prend 3 minutes. Il m'aide à améliorer ce programme pour les femmes qui viendront après toi.</p>
-    <p class="note">6 questions · anonyme si tu le souhaites · 3 minutes</p>
+    <p>Ce questionnaire prend environ 7 minutes. Il m'aide à améliorer ce programme pour les femmes qui viendront après toi.</p>
+    <p class="note">12 questions · anonyme si tu le souhaites · 7 minutes</p>
     <button class="btn" onclick="showPhase('questions');renderQ()">Je donne mon avis 💛</button>
   </div>
 </div>
@@ -91,7 +96,7 @@
 <div class="phase" id="phase-questions">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="q-counter">Question 1 / 6</span>
+      <span id="q-counter">Question 1 / 12</span>
       <span id="q-titre-small"></span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="q-progress" style="width:17%"></div></div>
@@ -113,201 +118,137 @@
       <p style="font-size:17px;color:#3d2d50;margin-bottom:8px;">Si ce programme t'a aidée et que tu connais une femme qui pourrait en bénéficier, partage-le lui. C'est souvent à ça que ça sert, ces 30 jours.</p>
       <div class="merci-signature">Avec beaucoup de gratitude,<br><strong>@alarenverse.coaching</strong></div>
     </div>
+    <div class="appel-box" id="appel-box" style="display:none">
+      <p style="font-size:17px;color:#3d2d50;margin-bottom:12px;">Tu as envie d'aller plus loin ? On en parle ensemble, 20 minutes, sans engagement.</p>
+      <a class="btn" id="btn-appel" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener" style="text-decoration:none;display:block;">Réserver un appel</a>
+    </div>
     <a href="https://www.instagram.com/alarenverse.coaching" target="_blank" class="btn" style="text-decoration:none;display:block;margin-top:20px;">Me suivre sur Instagram 📱</a>
     <p style="margin-top:16px;font-size:15px;color:#9a84a8;font-family:'Jost',sans-serif;">Tu peux fermer cet onglet maintenant 🌸</p>
   </div>
 </div>
 
 <script>
-const questions=[
-  {
-    id:'note',
-    titre:'La note globale',
-    question:"Est-ce que ce programme t'a aidée ?",
-    sous:"Ton ressenti global, honnêtement.",
-    type:'stars',
-    labels:['','Pas vraiment','Un peu','Plutôt oui','Vraiment oui','Transformatrice !']
-  },
-  {
-    id:'jour_prefere',
-    titre:'Le moment préféré',
-    question:"Quel jour ou module t'a le plus marquée ?",
-    sous:"Celui qui a ouvert quelque chose, ou que tu as relus plusieurs fois.",
-    type:'choix',
-    options:[
-      'Semaine 1, Se connaître (Jours 1 à 7)',
-      'Semaine 2, Se réguler (Jours 8 à 14)',
-      'Semaine 3, Se délester (Jours 15 à 21)',
-      'Semaine 4, Se retrouver (Jours 22 à 30)',
-      'Bonus 1, Alimentation & santé mentale',
-      'Bonus 2, Les grandes souffrances féminines',
-    ]
-  },
-  {
-    id:'changement',
-    titre:'Ce qui a changé',
-    question:"Qu'est-ce que tu fais différemment depuis ce programme ?",
-    sous:"Même une toute petite chose. Même juste une façon de te parler.",
-    type:'texte',
-    placeholder:"Depuis le programme je..."
-  },
-  {
-    id:'manque',
-    titre:'Ce qui manquait',
-    question:"Y a-t-il un sujet que tu aurais aimé voir traité, et qui n'était pas là ?",
-    sous:"Ça m'aide à compléter le programme pour les prochaines.",
-    type:'texte',
-    placeholder:"J'aurais aimé qu'on parle de..."
-  },
-  {
-    id:'prix',
-    titre:'Le juste prix',
-    question:"Selon toi, combien vaut ce programme ?",
-    sous:"Pas ce que tu as payé : ce qu'il vaut pour toi, tel que tu l'as vécu. Ta réponse m'aide à fixer un prix juste.",
-    type:'choix',
-    options:[
-      'Moins de 100 CHF',
-      '100 à 200 CHF',
-      '200 à 300 CHF',
-      '300 à 400 CHF',
-      '400 à 500 CHF',
-      'Plus de 500 CHF',
-    ]
-  },
-  {
-    id:'recommandation',
-    titre:'La recommandation',
-    question:'Sur une échelle de 0 à 10, recommanderais-tu ce programme ?',
-    sous:"0 = non, pas du tout · 10 = absolument, sans hésiter",
-    type:'scale'
-  }
-];
+const questions=[{"id": "note", "titre": "La note globale", "type": "stars", "question": "Est-ce que ce programme t'a aidée ?", "sous": "Ton ressenti global, honnêtement."}, {"id": "attentes", "titre": "Tes attentes", "type": "choix_texte", "question": "Est-ce qu'il a répondu à ce que tu attendais en commençant ?", "sous": "Choisis, puis dis-moi ce que tu attendais, si tu veux.", "options": ["Au-delà de mes attentes", "Oui, tout à fait", "En partie", "Non, pas vraiment"], "ex": "« Mieux comprendre pourquoi je m'épuise. » « Des outils concrets, et pas seulement de la théorie. »", "placeholder": "J'attendais..."}, {"id": "pilote", "titre": "Le pilote automatique", "type": "double_scale", "question": "Le pilote automatique, de 0 à 10", "sous": "0 = je suis pleinement présente à ma vie · 10 = je fonctionne en pilote automatique, du matin au soir", "labels": ["Avant le programme", "Aujourd'hui"]}, {"id": "avantapres", "titre": "Ton avant / après", "type": "double_texte", "question": "Ton avant / après : une journée type", "sous": "Décris une journée type : ton réveil, ton énergie, ce que tu ressentais, comment tu réagissais, ce que tu te disais.", "labels": ["Il y a 30 jours, une journée type, c'était…", "Aujourd'hui, une journée type, c'est…"], "ex1": "« Je me réveillais déjà épuisée. Je courais toute la journée sans savoir ce que je ressentais. Le soir, je criais sur mes enfants, puis je m'en voulais jusqu'à minuit. »", "ex2": "« Je sens la fatigue arriver et je m'arrête cinq minutes. Je sais nommer ce que je ressens. Hier, j'ai dit non à une réunion de plus, sans me justifier, et j'ai bien dormi. »"}, {"id": "declic", "titre": "Ton déclic", "type": "texte", "question": "Ton déclic : raconte le moment où tu t'es dit « là, quelque chose a changé ».", "sous": "Où tu étais, ce qui s'est passé, ce que tu as ressenti.", "ex": "dans tes relations, ta façon de te parler à toi-même, te mettre en priorité, ta gestion émotionnelle…", "placeholder": "C'était le jour où..."}, {"id": "remarque", "titre": "Le regard des autres", "type": "texte", "question": "Est-ce que quelqu'un autour de toi a remarqué que tu avais changé ? Qu'est-ce qu'il t'a dit ?", "sous": "", "placeholder": "Quelqu'un m'a dit..."}, {"id": "jour_prefere", "titre": "Le moment préféré", "type": "choix", "question": "Quel jour ou module t'a le plus marquée ?", "sous": "Celui qui a ouvert quelque chose, ou que tu as relu plusieurs fois.", "options": ["Semaine 1, Se connaître (Jours 1 à 7)", "Semaine 2, Se réguler (Jours 8 à 14)", "Semaine 3, Se délester (Jours 15 à 21)", "Semaine 4, Se retrouver (Jours 22 à 30)", "Bonus 1, Alimentation & santé mentale", "Bonus 2, Les grandes souffrances féminines"]}, {"id": "manque", "titre": "Ce qui manquait", "type": "texte", "question": "Y a-t-il un sujet que tu aurais aimé voir traité, et qui n'était pas là ?", "sous": "Ça m'aide à compléter le programme pour les prochaines.", "placeholder": "J'aurais aimé qu'on parle de..."}, {"id": "recommandation", "titre": "La recommandation", "type": "scale_texte", "question": "Recommanderais-tu ce programme, de 0 à 10 ?", "sous": "0 = non, pas du tout · 10 = absolument, sans hésiter", "label2": "Qu'est-ce que tu dirais à une femme qui hésite à commencer ?", "ex": "« Vas-y, même si tu te sens trop fatiguée : c'est justement pour toi. » « Ici, on parle enfin de toi, et pas seulement de théorie. »", "placeholder": "Je lui dirais..."}, {"id": "plus_loin", "titre": "La suite", "type": "choix", "question": "As-tu envie d'aller plus loin, avec un accompagnement personnalisé ?", "sous": "Ta réponse ne t'engage à rien.", "options": ["Oui, j'aimerais en parler", "Peut-être, plus tard", "Non, pas pour l'instant"]}, {"id": "partage", "titre": "Ton témoignage", "type": "choix", "question": "Est-ce que je peux partager ton témoignage ?", "sous": "Tes mots peuvent aider d'autres femmes à se lancer. C'est toi qui choisis.", "options": ["Oui, avec mon prénom", "Oui, avec mes initiales", "Oui, de façon anonyme", "Non, il reste entre nous"]}, {"id": "contact", "titre": "Pour te recontacter", "type": "contact", "question": "Ton prénom et ton e-mail", "sous": "Facultatif : seulement si tu veux que je te recontacte."}];
 
-let current=0, answers={}, starSelected=0, scaleSelected=null;
+let current=0, answers={};
 
 function showPhase(id){
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
   document.getElementById('phase-'+id).classList.add('active');
   window.scrollTo(0,0);
 }
-
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function setNext(ok){document.getElementById('btn-next').disabled=!ok;}
+function echelle(cle){
+  return '<div class="reco-scale">'+[0,1,2,3,4,5,6,7,8,9,10].map(i=>'<button class="reco-btn" data-cle="'+cle+'" data-v="'+i+'" onclick="selectScale(\''+cle+'\','+i+')">'+i+'</button>').join('')+'</div>';
+}
 function renderQ(){
   const q=questions[current];
-  document.getElementById('q-counter').textContent=`Question ${current+1} / ${questions.length}`;
+  document.getElementById('q-counter').textContent='Question '+(current+1)+' / '+questions.length;
   document.getElementById('q-titre-small').textContent=q.titre;
   document.getElementById('q-progress').style.width=((current+1)/questions.length*100)+'%';
-  document.getElementById('btn-next').disabled=true;
   document.getElementById('btn-next').textContent=current<questions.length-1?'Question suivante →':'Envoyer mon avis 💛';
   document.getElementById('q-hint').textContent='';
-
   const el=document.getElementById('q-contenu');
-  el.innerHTML=`
-    <div class="question-text">${q.question}</div>
-    <div class="question-sous">${q.sous}</div>`;
-
+  let h='<div class="question-text">'+esc(q.question)+'</div>'+(q.sous?'<div class="question-sous">'+esc(q.sous)+'</div>':'<div style="height:12px"></div>');
+  const ex=q.ex?'<div class="exemple">Par exemple : '+esc(q.ex)+'</div>':'';
   if(q.type==='stars'){
-    starSelected=0;
-    el.innerHTML+=`
-      <div class="stars-container" id="stars-container">
-        ${[1,2,3,4,5].map(i=>`<span class="star" id="star-${i}" onclick="selectStar(${i})">⭐</span>`).join('')}
-      </div>
-      <div class="star-label" id="star-label">Clique pour noter</div>`;
+    h+='<div class="stars-container">'+[1,2,3,4,5].map(i=>'<span class="star" id="star-'+i+'" onclick="selectStar('+i+')">⭐</span>').join('')+'</div><div class="star-label" id="star-label">Clique pour noter</div>';
+  } else if(q.type==='choix'||q.type==='choix_texte'){
+    h+='<div id="options-container">'+q.options.map((o,i)=>'<button class="option-btn" id="opt-'+i+'" onclick="selectOption('+i+')">'+esc(o)+'</button>').join('')+'</div>';
+    if(q.type==='choix_texte') h+=ex+'<textarea id="ta" placeholder="'+esc(q.placeholder)+'"></textarea>';
+  } else if(q.type==='texte'){
+    h+=ex+'<textarea id="ta" placeholder="'+esc(q.placeholder)+'"></textarea>';
+  } else if(q.type==='double_scale'){
+    h+='<div class="sous-label">'+esc(q.labels[0])+'</div>'+echelle(q.id+'_avant')+'<div class="sous-label">'+esc(q.labels[1])+'</div>'+echelle(q.id+'_aujourdhui');
+  } else if(q.type==='double_texte'){
+    const e1=q.ex1?'<div class="exemple">Par exemple\u00a0: '+esc(q.ex1)+'</div>':'', e2=q.ex2?'<div class="exemple">Par exemple\u00a0: '+esc(q.ex2)+'</div>':'';
+    h+='<div class="sous-label">'+esc(q.labels[0])+'</div>'+e1+'<textarea id="ta" rows="4"></textarea><div class="sous-label">'+esc(q.labels[1])+'</div>'+e2+'<textarea id="ta2" rows="4"></textarea>';
+  } else if(q.type==='scale_texte'){
+    h+=echelle(q.id)+'<div class="reco-labels"><span>Non</span><span>Absolument</span></div><div class="sous-label" style="margin-top:22px;">'+esc(q.label2)+'</div>'+ex+'<textarea id="ta" placeholder="'+esc(q.placeholder)+'"></textarea>';
+  } else if(q.type==='contact'){
+    h+='<input type="text" id="in-prenom" placeholder="Ton prénom" autocomplete="given-name"><input type="email" id="in-email" placeholder="Ton e-mail" autocomplete="email" style="margin-top:12px;">';
   }
-  else if(q.type==='choix'){
-    el.innerHTML+=`<div id="options-container">`+
-      q.options.map((opt,i)=>`
-        <button class="option-btn" id="opt-${i}" onclick="selectOption(${i},'${opt.replace(/'/g,"\\'")}')">
-          ${opt}
-        </button>`).join('')+`</div>`;
-  }
-  else if(q.type==='texte'){
-    el.innerHTML+=`<textarea id="ta" placeholder="${q.placeholder}" oninput="checkTA()"></textarea>`;
-    document.getElementById('btn-next').disabled=false;
-  }
-  else if(q.type==='scale'){
-    scaleSelected=null;
-    el.innerHTML+=`
-      <div class="reco-scale">
-        ${[0,1,2,3,4,5,6,7,8,9,10].map(i=>`<button class="reco-btn" id="reco-${i}" onclick="selectScale(${i})">${i}</button>`).join('')}
-      </div>
-      <div class="reco-labels"><span>Non</span><span>Absolument</span></div>`;
-  }
+  el.innerHTML=h;
+  majNext();
 }
-
+function majNext(){
+  const q=questions[current];
+  if(q.type==='stars'||q.type==='choix'||q.type==='choix_texte') setNext(answers[q.id]!==undefined);
+  else if(q.type==='double_scale') setNext(answers[q.id+'_avant']!==undefined&&answers[q.id+'_aujourdhui']!==undefined);
+  else if(q.type==='scale_texte') setNext(answers[q.id]!==undefined);
+  else setNext(true);
+}
 function selectStar(n){
-  starSelected=n;
-  const labels=['','Pas vraiment','Un peu','Plutôt oui','Vraiment oui','Transformatrice !'];
+  const labels=['','Pas vraiment','Un peu','Plutôt oui','Vraiment oui','Transformatrice !'];
   for(let i=1;i<=5;i++) document.getElementById('star-'+i).className='star'+(i<=n?' active':'');
   document.getElementById('star-label').textContent=labels[n];
-  answers[questions[current].id]=n;
-  document.getElementById('btn-next').disabled=false;
+  answers[questions[current].id]=n; majNext();
 }
-
-function selectOption(i,val){
+function selectOption(i){
+  const q=questions[current];
   document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
   document.getElementById('opt-'+i).classList.add('selected');
-  answers[questions[current].id]=val;
-  document.getElementById('btn-next').disabled=false;
+  answers[q.id]=q.options[i]; majNext();
 }
-
-function checkTA(){
-  const val=document.getElementById('ta').value.trim();
-  answers[questions[current].id]=val||'(pas de réponse)';
-  document.getElementById('btn-next').disabled=false;
+function selectScale(cle,n){
+  document.querySelectorAll('.reco-btn[data-cle="'+cle+'"]').forEach(b=>b.classList.toggle('selected',+b.dataset.v===n));
+  answers[cle]=n; majNext();
 }
-
-function selectScale(n){
-  scaleSelected=n;
-  for(let i=0;i<=10;i++) document.getElementById('reco-'+i).className='reco-btn'+(i===n?' selected':'');
-  answers[questions[current].id]=n;
-  document.getElementById('btn-next').disabled=false;
-}
-
+function lire(id){const e=document.getElementById(id);return e?e.value.trim():'';}
 function nextQuestion(){
-  // Sauvegarder la réponse si textarea vide
-  if(questions[current].type==='texte'){
-    const ta=document.getElementById('ta');
-    if(ta&&!answers[questions[current].id]) answers[questions[current].id]='(pas de réponse)';
-  }
-
-  if(current<questions.length-1){
-    current++;
-    renderQ();
-    window.scrollTo(0,0);
-  } else {
-    submitForm();
-  }
+  const q=questions[current];
+  if(q.type==='texte'||q.type==='choix_texte'||q.type==='scale_texte') answers[q.id+(q.type==='texte'?'':'_texte')]=lire('ta');
+  if(q.type==='double_texte'){answers.avant=lire('ta');answers.aujourdhui=lire('ta2');}
+  if(q.type==='contact'){answers.prenom=lire('in-prenom');answers.email=lire('in-email');}
+  if(current<questions.length-1){current++;renderQ();window.scrollTo(0,0);}
+  else submitForm();
 }
 
 /* ===== Clé Web3Forms, la même que le bilan, ne pas modifier ===== */
 const ACCESS_KEY = "f78b1819-4743-4b7f-9c70-309561959f36";
+const LIEN_APPEL = "https://cal.com/debora-pilates-puidoux/effetpapillon";
 
+function court(v){if(!v)return 'non renseigné';if(v.indexOf('Oui')===0)return 'Oui';if(v.indexOf('Peut-être')===0)return 'Peut-être';return 'Non';}
 async function submitForm(){
   const btn=document.getElementById('btn-next');
   if(btn){btn.disabled=true;btn.textContent='Un instant...';}
-  const val=(k,suffixe)=>{const v=answers[k];return (v===undefined||v===null||v==='')?'non renseigné':(suffixe?v+suffixe:String(v));};
-  const donnees={
-    access_key:ACCESS_KEY,
-    subject:"Avis · L'Effet Papillon",
+  const v=(k,suf)=>{const x=answers[k];return (x===undefined||x===null||x==='')?'non renseigné':(suf?x+suf:String(x));};
+  const champs=[
+    ['Note',v('note',' / 5')],
+    ['Attentes',v('attentes')],
+    ['Ce que j\'attendais',v('attentes_texte')],
+    ['Pilote automatique avant',v('pilote_avant',' / 10')],
+    ['Pilote automatique aujourd\'hui',v('pilote_aujourdhui',' / 10')],
+    ['Il y a 30 jours, une journée type',v('avant')],
+    ['Aujourd\'hui, une journée type',v('aujourdhui')],
+    ['Mon déclic',v('declic')],
+    ['Ce que les autres ont remarqué',v('remarque')],
+    ['Jour ou module préféré',v('jour_prefere')],
+    ['Ce qui manquait',v('manque')],
+    ['Recommandation',v('recommandation',' / 10')],
+    ['À une femme qui hésite',v('recommandation_texte')],
+    ['Aller plus loin',v('plus_loin')],
+    ['Partage du témoignage',v('partage')],
+    ['Prénom',v('prenom')],
+    ['E-mail',v('email')],
+  ];
+  const donnees={access_key:ACCESS_KEY,
+    subject:"Avis · "+(answers.prenom||'Anonyme')+" · Aller plus loin : "+court(answers.plus_loin),
     from_name:"L'Effet Papillon · Satisfaction",
-    Note:val('note',' / 5'),
-    Jour_prefere:val('jour_prefere'),
-    Ce_qui_a_change:val('changement'),
-    Ce_qui_manquait:val('manque'),
-    Prix_estime:val('prix'),
-    Recommandation:val('recommandation',' / 10'),
     Date:new Date().toLocaleString('fr-CH'),
-    message:"AVIS SUR LE PROGRAMME\n\nNote : "+val('note',' / 5')+"\nJour préféré : "+val('jour_prefere')+"\nCe qui a changé : "+val('changement')+"\nCe qui manquait : "+val('manque')+"\nPrix estimé : "+val('prix')+"\nRecommandation : "+val('recommandation',' / 10')
-  };
+    message:"AVIS SUR LE PROGRAMME\n\n"+champs.map(c=>c[0]+' : '+c[1]).join('\n')};
+  champs.forEach(c=>{donnees[c[0]]=c[1];});
+  if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(answers.email||'')) donnees.email=answers.email;
   try{
-    const rep=await fetch('https://api.web3forms.com/submit',{
-      method:'POST',
-      headers:{'Content-Type':'application/json',Accept:'application/json'},
-      body:JSON.stringify(donnees)
-    });
+    const rep=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(donnees)});
     await rep.json();
-  }catch(e){
-    console.log('Erreur envoi :',e);
+  }catch(e){console.log('Erreur envoi :',e);}
+  const box=document.getElementById('appel-box');
+  if(box&&court(answers.plus_loin)==='Oui'){
+    const p=new URLSearchParams();if(answers.prenom)p.set('name',answers.prenom);if(answers.email)p.set('email',answers.email);
+    document.getElementById('btn-appel').href=LIEN_APPEL+(p.toString()?'?'+p.toString():'');
+    box.style.display='block';
   }
   showPhase('fin');
 }
