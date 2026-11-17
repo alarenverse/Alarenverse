@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "updated": "2026-11-17",
+  "couleurs": {
+    "principale": null,
+    "secondaire": null,
+    "accent": null
+  },
+  "polices": {
+    "titres": null,
+    "sous_titres": null
+  },
+  "inspirations": {
+    "reels": [
+      "https://www.instagram.com/reel/Dd06VJWpww8/",
+      "https://www.instagram.com/reel/DfNMGkQMnnY/",
+      "https://www.instagram.com/reel/Dfm6f6Ev0nL/",
+      "https://www.instagram.com/reel/DeZNsqHocoo/",
+      "https://www.instagram.com/reel/DehdVyIxbq8/",
+      "https://www.instagram.com/reel/DeuVRGERDPo/",
+      "https://www.instagram.com/reel/DfKyCg2xUsW/",
+      "https://www.instagram.com/reel/DeNNR6JT5Rq/"
+    ],
+    "style_retenu": {
+      "format": "Face caméra, plan fixe, 50 à 90 s, rythme très cuté",
+      "hook": "Titre en haut du cadre (zone sûre sous les 250 px), 2 lignes max, centré, visible tout le début puis remplacé par des titres de section",
+      "titres_de_section": "Mélange typo sans-serif sobre + mot-clé en serif italique (ou script) en couleur d'accent, ex. « signe 1 / tu demandes », « ce qui a / changé »",
+      "sous_titres": "Petits sous-titres blancs, 2 à 4 mots à la fois, centrés au milieu de l'écran (vers le buste), sans fond, légère ombre ; le mot-clé de chaque phrase passe en serif italique couleur d'accent",
+      "elements_graphiques": "Cartes façon UI (notes/checklist, bulle iMessage, barre de recherche) qui s'écrivent en direct ; petites images illustratives carrées à côté du visage ; petits stickers/étoiles scintillantes près du hook",
+      "animations": "Apparition douce (fade + léger scale), effet machine à écrire sur les cartes UI, mots pop-in un par un",
+      "transitions": "Coupes sèches avec punch-in ; transition papier déchiré ou whip pour changer de partie",
+      "ambiance": "Douce, lumineuse, tons naturels, intime, esthétique « carnet / journaling »"
+    }
+  },
+  "historique_ajustements": []
+}
