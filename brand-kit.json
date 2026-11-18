@@ -41,6 +41,10 @@
     {
       "date": "2026-11-18",
       "retour": "N’aime pas la v2. Veut la structure exacte de ses reels (DZw15ptuPev / DZ7muuSo5HR), hook jaune pastel lisible, couleurs chaudes comme ses reels, plan écrit + images avant de monter."
+    },
+    {
+      "date": "2026-11-18",
+      "retour": "v3 : couleurs enfin OK après correction HDR. Contour noir des sous-titres trop marqué. Veut un début façon « How I FAKE my yapping », phrases clés en police marqueur façon « LA MANIFESTATION… JEU ». Aime la machine à écrire et les paillettes."
     }
   ],
   "rendu": {
@@ -66,17 +70,22 @@
     "Reproduire la structure du reel de référence qu'elle envoie (ses propres reels alarenverse.coaching)."
   ],
   "hook": {
-    "couleur": "jaune pastel #FFEC96, ombre brune foncée pour la lisibilité",
-    "police": "Anton majuscules, 2-3 lignes, question punchy, haut du cadre"
+    "style": "Façon « How I FAKE my yapping » : mots qui apparaissent au rythme de la voix, gros serif (DM Serif Display) jaune pastel en haut, gros mot clé en Unbounded jaune pastel, fin de phrase en serif menthe. Pas de sous-titres pendant le hook.",
+    "note": "Texte derrière la tête seulement si le cadrage laisse de l’espace au-dessus de la tête."
   },
   "boutons_cta": "En français : J’AIME / PARTAGER / S’ABONNER, curseur qui clique + son de clic",
   "sous_titres": {
-    "style": "Blancs, contour noir fin, phrases courtes 1-2 lignes, bas du cadre (au-dessus des 420 px)",
-    "mots_cles": "Police différente (Anton jaune pastel, comme le hook)"
+    "style": "Blancs, SANS contour noir épais (assombrit la vidéo) : juste une ombre douce. Phrases courtes 1-2 lignes, bas du cadre.",
+    "mots_cles": "Anton jaune pastel, ombre douce"
   },
   "effets_interdits": [
     "Teinte de couleur sur toute l’image",
     "Emoji téléphone",
     "Filtre/étalonnage non demandé"
+  ],
+  "phrases_cles": "Police marqueur Gluten jaune pastel + mot final dans un badge ovale bleu marine avec étoiles dorées (façon « LA MANIFESTATION C’EST UN P*TAIN DE JEU »), en haut du cadre.",
+  "bruitages_aimes": [
+    "machine à écrire (touches)",
+    "petites paillettes / scintillement"
   ]
 }
