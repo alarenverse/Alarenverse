@@ -45,6 +45,10 @@
     {
       "date": "2026-11-18",
       "retour": "v3 : couleurs enfin OK après correction HDR. Contour noir des sous-titres trop marqué. Veut un début façon « How I FAKE my yapping », phrases clés en police marqueur façon « LA MANIFESTATION… JEU ». Aime la machine à écrire et les paillettes."
+    },
+    {
+      "date": "2026-11-18",
+      "retour": "v4 validée, sauf le badge bleu autour du mot jaune à retirer."
     }
   ],
   "rendu": {
@@ -81,9 +85,10 @@
   "effets_interdits": [
     "Teinte de couleur sur toute l’image",
     "Emoji téléphone",
-    "Filtre/étalonnage non demandé"
+    "Filtre/étalonnage non demandé",
+    "Ovale / badge de couleur (bleu) derrière le texte jaune"
   ],
-  "phrases_cles": "Police marqueur Gluten jaune pastel + mot final dans un badge ovale bleu marine avec étoiles dorées (façon « LA MANIFESTATION C’EST UN P*TAIN DE JEU »), en haut du cadre.",
+  "phrases_cles": "Police marqueur Gluten jaune pastel, mot final un peu plus gros avec petites étoiles dorées. PAS de badge/ovale de couleur autour (elle trouve ça moche).",
   "bruitages_aimes": [
     "machine à écrire (touches)",
     "petites paillettes / scintillement"
