@@ -57,8 +57,8 @@
     "hooks_auditifs": "Quelques clics / tacs / whoosh aux moments très clés seulement (4-5 max)"
   },
   "etalonnage": {
-    "regle": "Chaud et doré comme ses reels (mur crème chaud, peau dorée), jamais effet fantôme/délavé, pas de vignette.",
-    "ffmpeg": "colorchannelmixer=rr=1.02:gg=0.96:bb=0.90,eq=saturation=1.45:contrast=1.06:gamma=0.90"
+    "regle": "Aucun filtre : garder la couleur d’origine du rush (à valider sur la v3).",
+    "ffmpeg": null
   },
   "regles_process": [
     "Toujours repartir du rush original.",
@@ -68,5 +68,15 @@
   "hook": {
     "couleur": "jaune pastel #FFEC96, ombre brune foncée pour la lisibilité",
     "police": "Anton majuscules, 2-3 lignes, question punchy, haut du cadre"
-  }
+  },
+  "boutons_cta": "En français : J’AIME / PARTAGER / S’ABONNER, curseur qui clique + son de clic",
+  "sous_titres": {
+    "style": "Blancs, contour noir fin, phrases courtes 1-2 lignes, bas du cadre (au-dessus des 420 px)",
+    "mots_cles": "Police différente (Anton jaune pastel, comme le hook)"
+  },
+  "effets_interdits": [
+    "Teinte de couleur sur toute l’image",
+    "Emoji téléphone",
+    "Filtre/étalonnage non demandé"
+  ]
 }
