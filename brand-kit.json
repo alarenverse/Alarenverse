@@ -1,14 +1,17 @@
 {
   "version": 1,
-  "updated": "2026-11-17",
+  "updated": "2026-11-18",
   "couleurs": {
-    "principale": null,
-    "secondaire": null,
-    "accent": null
+    "principale": "#4A3423",
+    "secondaire": "#FBEFD8",
+    "accent": "#E8913C",
+    "source": "Repris de ton site (à valider)",
+    "fond_cartes": "#FFF9F0"
   },
   "polices": {
-    "titres": null,
-    "sous_titres": null
+    "titres": "Baloo 2 (ExtraBold)",
+    "sous_titres": "Atkinson Hyperlegible (Bold / Bold Italic pour les mots-clés)",
+    "source": "Repris de ton site (à valider)"
   },
   "inspirations": {
     "reels": [
@@ -32,5 +35,13 @@
       "ambiance": "Douce, lumineuse, tons naturels, intime, esthétique « carnet / journaling »"
     }
   },
-  "historique_ajustements": []
+  "historique_ajustements": [],
+  "rendu": {
+    "hook": "Baloo 2 ExtraBold, ligne 1 blanche + ligne 2 accent, étoiles crème/accent",
+    "titres_section": "petite ligne Atkinson Bold blanche + grosse ligne Baloo 2 ExtraBold accent",
+    "sous_titres": "Atkinson Bold blanc 58 px, 1 à 3 mots, y≈1330, mots-clés Bold Italic accent, pop-in",
+    "cartes": "carte crème #FFF9F0 arrondie, titre marron, cases + texte tapé en direct",
+    "zoom": "alternance 1.00/1.06 à chaque coupe + punch jusqu’à 1.12 sur les mots-clés, ancré sur le visage",
+    "audio": "loudnorm -14 LUFS, sans musique"
+  }
 }
