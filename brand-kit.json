@@ -37,6 +37,10 @@
     {
       "date": "2026-11-18",
       "retour": "N’aime pas v1 : typo, couleurs (orange/marron froid), dynamique, structure, teint « fantôme ». Veut : mix des 8 reels, hook visuel systématique, tons bruns chauds, image plus chaude uniquement, voix vieux téléphone sur phrases clés, petits hooks sonores (clic/tac) avec parcimonie, pas d’emoji téléphone."
+    },
+    {
+      "date": "2026-11-18",
+      "retour": "N’aime pas la v2. Veut la structure exacte de ses reels (DZw15ptuPev / DZ7muuSo5HR), hook jaune pastel lisible, couleurs chaudes comme ses reels, plan écrit + images avant de monter."
     }
   ],
   "rendu": {
@@ -53,7 +57,16 @@
     "hooks_auditifs": "Quelques clics / tacs / whoosh aux moments très clés seulement (4-5 max)"
   },
   "etalonnage": {
-    "regle": "Juste rendre la vidéo plus chaude, rien d’autre (pas de vignette, pas de filtre).",
-    "ffmpeg": "colortemperature=temperature=5300,eq=saturation=1.15:contrast=1.04"
+    "regle": "Chaud et doré comme ses reels (mur crème chaud, peau dorée), jamais effet fantôme/délavé, pas de vignette.",
+    "ffmpeg": "colorchannelmixer=rr=1.02:gg=0.96:bb=0.90,eq=saturation=1.45:contrast=1.06:gamma=0.90"
+  },
+  "regles_process": [
+    "Toujours repartir du rush original.",
+    "Avant chaque montage : écrire le plan + envoyer des images de proposition, et attendre sa validation.",
+    "Reproduire la structure du reel de référence qu'elle envoie (ses propres reels alarenverse.coaching)."
+  ],
+  "hook": {
+    "couleur": "jaune pastel #FFEC96, ombre brune foncée pour la lisibilité",
+    "police": "Anton majuscules, 2-3 lignes, question punchy, haut du cadre"
   }
 }
