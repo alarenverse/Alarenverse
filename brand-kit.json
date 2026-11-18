@@ -1,17 +1,15 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-11-18",
   "couleurs": {
-    "principale": "#4A3423",
-    "secondaire": "#FBEFD8",
-    "accent": "#E8913C",
-    "source": "Repris de ton site (à valider)",
-    "fond_cartes": "#FFF9F0"
+    "principale": "#4B2E1E",
+    "secondaire": "#F3E2CB",
+    "accent": "#D9A25F",
+    "ambiance": "bruns chauds, crème, caramel doré (à valider)"
   },
   "polices": {
-    "titres": "Baloo 2 (ExtraBold)",
-    "sous_titres": "Atkinson Hyperlegible (Bold / Bold Italic pour les mots-clés)",
-    "source": "Repris de ton site (à valider)"
+    "titres": "Anton (majuscules) + Instrument Serif Italic pour le mot-clé",
+    "sous_titres": "Montserrat ExtraBold, mots-clés en Instrument Serif Italic caramel"
   },
   "inspirations": {
     "reels": [
@@ -35,13 +33,27 @@
       "ambiance": "Douce, lumineuse, tons naturels, intime, esthétique « carnet / journaling »"
     }
   },
-  "historique_ajustements": [],
+  "historique_ajustements": [
+    {
+      "date": "2026-11-18",
+      "retour": "N’aime pas v1 : typo, couleurs (orange/marron froid), dynamique, structure, teint « fantôme ». Veut : mix des 8 reels, hook visuel systématique, tons bruns chauds, image plus chaude uniquement, voix vieux téléphone sur phrases clés, petits hooks sonores (clic/tac) avec parcimonie, pas d’emoji téléphone."
+    }
+  ],
   "rendu": {
-    "hook": "Baloo 2 ExtraBold, ligne 1 blanche + ligne 2 accent, étoiles crème/accent",
-    "titres_section": "petite ligne Atkinson Bold blanche + grosse ligne Baloo 2 ExtraBold accent",
-    "sous_titres": "Atkinson Bold blanc 58 px, 1 à 3 mots, y≈1330, mots-clés Bold Italic accent, pop-in",
-    "cartes": "carte crème #FFF9F0 arrondie, titre marron, cases + texte tapé en direct",
-    "zoom": "alternance 1.00/1.06 à chaque coupe + punch jusqu’à 1.12 sur les mots-clés, ancré sur le visage",
-    "audio": "loudnorm -14 LUFS, sans musique"
+    "structure": "Mix des 8 reels d’inspiration (pas un seul reel modèle)",
+    "hook": "Toujours un hook visuel fort : grosse ligne Anton crème + ligne serif italique caramel + étincelles, pop avec rebond",
+    "sections": "Numérotées « 1. » serif + titre Anton, sous-ligne serif italique",
+    "mots_forts": "Gros mots Anton caramel qui remplacent les sous-titres un instant",
+    "cartes": "Checklist crème tapée en direct et barrée (voix intérieure)",
+    "sous_titres": "1 à 3 mots, pop avec rebond, y≈1300",
+    "zoom": "Punch-in à chaque coupe (1.00 / 1.04 / 1.08 / 1.10) + snaps sur mots forts, max 1.12",
+    "transitions": "Whip flou sur 2 changements de partie max",
+    "audio": "loudnorm -14 LUFS, sans musique",
+    "voix_telephone": "Effet vieux téléphone sur 2-3 phrases clés (relance d’attention), sans emoji téléphone",
+    "hooks_auditifs": "Quelques clics / tacs / whoosh aux moments très clés seulement (4-5 max)"
+  },
+  "etalonnage": {
+    "regle": "Juste rendre la vidéo plus chaude, rien d’autre (pas de vignette, pas de filtre).",
+    "ffmpeg": "colortemperature=temperature=5300,eq=saturation=1.15:contrast=1.04"
   }
 }
