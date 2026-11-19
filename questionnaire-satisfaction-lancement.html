@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ton avis compte · Édition de lancement</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf8f0 0%,#f5f0fa 50%,#f0f8f5 100%);min-height:100vh;font-size:18px;font-style:normal;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 20px 80px;color:#3d2d50;line-height:1.8}
+  header{width:100%;max-width:580px;padding-top:40px;text-align:center;margin-bottom:10px}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#b090a8;margin-bottom:10px}
+  h1{font-size:clamp(22px,5vw,30px);font-weight:500;color:#3d2d50;line-height:1.3}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,#c8a060,#a080c8);margin:14px auto 0;border-radius:2px}
+  .phase{display:none}
+  .phase.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp 0.5s ease}
+  .card{background:white;border-radius:24px;padding:36px 28px;box-shadow:0 8px 40px rgba(160,128,200,0.1);border:1px solid rgba(180,150,220,0.2);max-width:580px;width:100%;margin-top:24px}
+  .emoji-hero{font-size:52px;display:block;text-align:center;margin-bottom:16px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#c8a060;text-align:center;margin-bottom:10px}
+  h2{font-size:24px;font-weight:600;color:#3d2d50;text-align:center;margin-bottom:16px;line-height:1.4}
+  p{font-size:18px;color:#5d4570;line-height:1.8;margin-bottom:14px}
+  p.note{font-size:15px;color:#9a84a8;font-family:'Jost',sans-serif;margin-bottom:14px}
+  .btn{background:linear-gradient(135deg,#c8a060,#a080c8);color:white;border:none;border-radius:50px;padding:15px 44px;font-size:17px;cursor:pointer;font-family:'Lora',serif;font-weight:500;box-shadow:0 4px 20px rgba(160,128,200,0.3);display:block;margin:20px auto 0;transition:transform 0.2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{background:rgba(180,150,220,0.25);color:#b0a0c8;box-shadow:none;cursor:not-allowed;transform:none}
+  .hint{font-size:13px;color:#b0a0c8;text-align:center;margin-top:12px;font-family:'Jost',sans-serif}
+  .progress-wrap{max-width:580px;width:100%;margin-top:20px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:13px;color:#9a84a8;margin-bottom:8px;font-family:'Jost',sans-serif}
+  .progress-track{height:4px;background:rgba(180,150,220,0.2);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#c8a060,#a080c8);border-radius:4px;transition:width 0.4s ease}
+
+  /* Questions */
+  .question-text{font-size:20px;font-weight:600;color:#3d2d50;line-height:1.5;margin-bottom:8px;text-align:center}
+  .question-sous{font-size:15px;color:#9a84a8;font-family:'Jost',sans-serif;text-align:center;margin-bottom:20px}
+
+  /* Étoiles */
+  .stars-container{display:flex;justify-content:center;gap:12px;margin-bottom:16px}
+  .star{font-size:40px;cursor:pointer;transition:transform 0.15s;opacity:0.3}
+  .star.active{opacity:1}
+  .star:hover{transform:scale(1.15)}
+  @media (max-width:360px){.stars-container{gap:6px}.star{font-size:34px}}
+  .star-label{text-align:center;font-size:15px;color:#9a84a8;font-family:'Jost',sans-serif;margin-top:8px;min-height:20px}
+
+  /* Options texte */
+  .option-btn{width:100%;text-align:left;padding:14px 18px;border-radius:14px;border:2px solid rgba(180,150,220,0.25);background:white;cursor:pointer;font-family:'Lora',serif;font-size:17px;font-weight:500;color:#5d4570;margin-bottom:10px;transition:all 0.2s;line-height:1.5}
+  .option-btn:hover{border-color:rgba(200,160,80,0.5);background:rgba(200,160,80,0.04)}
+  .option-btn.selected{border-color:#c8a060;background:linear-gradient(135deg,rgba(200,160,80,0.08),rgba(160,128,200,0.06))}
+
+  /* Textarea */
+  textarea{width:100%;border:2px solid rgba(180,150,220,0.25);border-radius:14px;padding:14px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#3d2d50;line-height:1.7;outline:none;resize:vertical;background:#faf5ff;min-height:100px}
+  textarea:focus{border-color:#c8a060}
+
+  /* Champ email */
+  input[type="email"]{width:100%;border:2px solid rgba(180,150,220,0.25);border-radius:14px;padding:14px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#3d2d50;outline:none;background:#faf5ff;margin-bottom:10px}
+  input[type="email"]:focus{border-color:#c8a060}
+
+  /* Recommandation */
+  .reco-scale{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+  .reco-btn{width:46px;height:46px;border-radius:12px;border:2px solid rgba(180,150,220,0.25);background:white;cursor:pointer;font-family:'Lora',serif;font-size:17px;font-weight:600;color:#9a84a8;transition:all 0.2s}
+  .reco-btn:hover{border-color:#c8a060;color:#c8a060}
+  .reco-btn.selected{background:linear-gradient(135deg,#c8a060,#a080c8);color:white;border-color:transparent}
+  .reco-labels{display:flex;justify-content:space-between;font-size:13px;color:#9a84a8;font-family:'Jost',sans-serif;margin-top:4px;padding:0 4px}
+
+  .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(253,248,238,0.8);border-left:2px solid rgba(200,160,80,0.5);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;color:#5d4570}
+  .sous-label{font-family:'Jost',sans-serif;font-size:14px;color:#7d6090;margin:14px 0 8px;text-align:left}
+  input[type="text"]{width:100%;border:2px solid rgba(180,150,220,0.25);border-radius:14px;padding:14px 16px;font-size:17px;font-family:'Lora',serif;font-weight:500;color:#3d2d50;outline:none;background:white}
+  input[type="text"]:focus{border-color:#c8a060}
+  .prix-wrap{display:flex;align-items:center;gap:10px;max-width:260px;margin:0 auto 6px}
+  .prix-wrap input[type="text"]{text-align:center;font-size:22px;font-weight:600}
+  .prix-devise{font-family:'Jost',sans-serif;font-size:18px;color:#7d6090}
+  .appel-box{background:linear-gradient(135deg,#f8f0fa,#fdf8ee);border-radius:20px;padding:22px;border:1px solid rgba(160,128,200,0.25);margin-top:18px}
+  /* Fin */
+  .merci-box{background:linear-gradient(135deg,#fdf8ee,#f8f0fa);border-radius:20px;padding:28px;border:1px solid rgba(200,160,80,0.2);text-align:center;margin-top:16px}
+  .merci-signature{font-size:16px;color:#7d6090;margin-top:14px;font-family:'Jost',sans-serif}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="surtitre">Programme · 30 jours</div>
+  <h1>Prendre soin de ma santé mentale</h1>
+  <div class="sep"></div>
+</header>
+
+<!-- INTRO -->
+<div class="phase active" id="phase-intro">
+  <div class="card" style="text-align:center;">
+    <span class="emoji-hero">💛</span>
+    <div class="label">Ton avis compte</div>
+    <h2>Tu fais partie des toutes premières. J'aimerais savoir comment ça s'est passé pour toi</h2>
+    <p>Ce questionnaire prend environ 8 minutes. Il m'aide à améliorer ce programme pour les femmes qui viendront après toi, et à lui donner son juste prix.</p>
+    <p class="note">13 questions · anonyme si tu le souhaites · 8 minutes</p>
+    <button class="btn" onclick="showPhase('questions');renderQ()">Je donne mon avis 💛</button>
+  </div>
+</div>
+
+<!-- QUESTIONS -->
+<div class="phase" id="phase-questions">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="q-counter">Question 1 / 13</span>
+      <span id="q-titre-small"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="q-progress" style="width:17%"></div></div>
+  </div>
+  <div class="card" id="q-card">
+    <div id="q-contenu"></div>
+    <button class="btn" id="btn-next" disabled onclick="nextQuestion()">Question suivante →</button>
+    <p class="hint" id="q-hint"></p>
+  </div>
+</div>
+
+<!-- FIN -->
+<div class="phase" id="phase-fin">
+  <div class="card" style="text-align:center;margin-top:24px;">
+    <span class="emoji-hero">🌸</span>
+    <h2>Merci du fond du cœur</h2>
+    <p>Ton retour m'est précieux. Il m'aide à continuer à construire des contenus qui correspondent vraiment à ce dont les femmes ont besoin.</p>
+    <div class="merci-box">
+      <p style="font-size:17px;color:#3d2d50;margin-bottom:8px;">Si ce programme t'a aidée et que tu connais une femme qui pourrait en bénéficier, partage-le lui. C'est souvent à ça que ça sert, ces 30 jours.</p>
+      <div class="merci-signature">Avec beaucoup de gratitude,<br><strong>@alarenverse.coaching</strong></div>
+    </div>
+    <div class="appel-box" id="appel-box" style="display:none">
+      <p style="font-size:17px;color:#3d2d50;margin-bottom:12px;">Tu as envie d'aller plus loin ? On en parle ensemble, 20 minutes, sans engagement.</p>
+      <a class="btn" id="btn-appel" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener" style="text-decoration:none;display:block;">Réserver un appel</a>
+    </div>
+    <a href="https://www.instagram.com/alarenverse.coaching" target="_blank" class="btn" style="text-decoration:none;display:block;margin-top:20px;">Me suivre sur Instagram 📱</a>
+    <p style="margin-top:16px;font-size:15px;color:#9a84a8;font-family:'Jost',sans-serif;">Tu peux fermer cet onglet maintenant 🌸</p>
+  </div>
+</div>
+
+<script>
+const questions=[{"id": "note", "titre": "La note globale", "type": "stars", "question": "Est-ce que ce programme t'a aidée ?", "sous": "Ton ressenti global, honnêtement."}, {"id": "attentes", "titre": "Tes attentes", "type": "choix_texte", "question": "Est-ce qu'il a répondu à ce que tu attendais en commençant ?", "sous": "Choisis, puis dis-moi ce que tu attendais, si tu veux.", "options": ["Au-delà de mes attentes", "Oui, tout à fait", "En partie", "Non, pas vraiment"], "ex": "« Mieux comprendre pourquoi je m'épuise. » « Des outils concrets, et pas seulement de la théorie. »", "placeholder": "J'attendais..."}, {"id": "pilote", "titre": "Le pilote automatique", "type": "double_scale", "question": "Le pilote automatique, de 0 à 10", "sous": "0 = je suis pleinement présente à ma vie · 10 = je fonctionne en pilote automatique, du matin au soir", "labels": ["Avant le programme", "Aujourd'hui"]}, {"id": "avantapres", "titre": "Ton avant / après", "type": "double_texte", "question": "Ton avant / après : une journée type", "sous": "Décris une journée type : ton réveil, ton énergie, ce que tu ressentais, comment tu réagissais, ce que tu te disais.", "labels": ["Il y a 30 jours, une journée type, c'était…", "Aujourd'hui, une journée type, c'est…"], "ex1": "« Je me réveillais déjà épuisée. Je courais toute la journée sans savoir ce que je ressentais. Le soir, je criais sur mes enfants, puis je m'en voulais jusqu'à minuit. »", "ex2": "« Je sens la fatigue arriver et je m'arrête cinq minutes. Je sais nommer ce que je ressens. Hier, j'ai dit non à une réunion de plus, sans me justifier, et j'ai bien dormi. »"}, {"id": "declic", "titre": "Ton déclic", "type": "texte", "question": "Ton déclic : raconte le moment où tu t'es dit « là, quelque chose a changé ».", "sous": "Où tu étais, ce qui s'est passé, ce que tu as ressenti.", "ex": "dans tes relations, ta façon de te parler à toi-même, te mettre en priorité, ta gestion émotionnelle…", "placeholder": "C'était le jour où..."}, {"id": "remarque", "titre": "Le regard des autres", "type": "texte", "question": "Est-ce que quelqu'un autour de toi a remarqué que tu avais changé ? Qu'est-ce qu'il t'a dit ?", "sous": "", "placeholder": "Quelqu'un m'a dit..."}, {"id": "jour_prefere", "titre": "Le moment préféré", "type": "choix", "question": "Quel jour ou module t'a le plus marquée ?", "sous": "Celui qui a ouvert quelque chose, ou que tu as relu plusieurs fois.", "options": ["Semaine 1, Se connaître (Jours 1 à 7)", "Semaine 2, Se réguler (Jours 8 à 14)", "Semaine 3, Se délester (Jours 15 à 21)", "Semaine 4, Se retrouver (Jours 22 à 30)", "Bonus 1, Alimentation & santé mentale", "Bonus 2, Les grandes souffrances féminines"]}, {"id": "manque", "titre": "Ce qui manquait", "type": "texte", "question": "Y a-t-il un sujet que tu aurais aimé voir traité, et qui n'était pas là ?", "sous": "Ça m'aide à compléter le programme pour les prochaines.", "placeholder": "J'aurais aimé qu'on parle de..."}, {"id": "recommandation", "titre": "La recommandation", "type": "scale_texte", "question": "Recommanderais-tu ce programme, de 0 à 10 ?", "sous": "0 = non, pas du tout · 10 = absolument, sans hésiter", "label2": "Qu'est-ce que tu dirais à une femme qui hésite à commencer ?", "ex": "« Vas-y, même si tu te sens trop fatiguée : c'est justement pour toi. » « Ici, on parle enfin de toi, et pas seulement de théorie. »", "placeholder": "Je lui dirais..."}, {"id": "estimation", "titre": "Ton estimation", "type": "prix", "question": "Maintenant que tu as fait les 30 jours, combien estimes-tu ce programme ?", "sous": "Les 150 CHF de novembre étaient une offre de lancement, réservée aux premières. Écris le montant qui te semble juste pour ce que tu as reçu, sans te demander ce que j'aimerais lire.", "label2": "Qu'est-ce qui fait que tu l'estimes à ce montant ?", "ex": "« Les outils que j'utilise encore tous les jours. » « Les lives et le groupe : je ne me suis jamais sentie seule. » « Certains jours m'ont plus apporté que des mois à tourner en rond. »", "placeholder": "Je l'estime à ce montant parce que..."}, {"id": "plus_loin", "titre": "La suite", "type": "choix", "question": "As-tu envie d'aller plus loin, avec un accompagnement personnalisé ?", "sous": "Ta réponse ne t'engage à rien.", "options": ["Oui, j'aimerais en parler", "Peut-être, plus tard", "Non, pas pour l'instant"]}, {"id": "partage", "titre": "Ton témoignage", "type": "choix", "question": "Est-ce que je peux partager ton témoignage ?", "sous": "Tes mots peuvent aider d'autres femmes à se lancer. C'est toi qui choisis.", "options": ["Oui, avec mon prénom", "Oui, avec mes initiales", "Oui, de façon anonyme", "Non, il reste entre nous"]}, {"id": "contact", "titre": "Pour te recontacter", "type": "contact", "question": "Ton prénom et ton e-mail", "sous": "Facultatif : seulement si tu veux que je te recontacte."}];
+
+let current=0, answers={};
+
+function showPhase(id){
+  document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
+  document.getElementById('phase-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function setNext(ok){document.getElementById('btn-next').disabled=!ok;}
+function echelle(cle){
+  return '<div class="reco-scale">'+[0,1,2,3,4,5,6,7,8,9,10].map(i=>'<button class="reco-btn" data-cle="'+cle+'" data-v="'+i+'" onclick="selectScale(\''+cle+'\','+i+')">'+i+'</button>').join('')+'</div>';
+}
+function renderQ(){
+  const q=questions[current];
+  document.getElementById('q-counter').textContent='Question '+(current+1)+' / '+questions.length;
+  document.getElementById('q-titre-small').textContent=q.titre;
+  document.getElementById('q-progress').style.width=((current+1)/questions.length*100)+'%';
+  document.getElementById('btn-next').textContent=current<questions.length-1?'Question suivante →':'Envoyer mon avis 💛';
+  document.getElementById('q-hint').textContent='';
+  const el=document.getElementById('q-contenu');
+  let h='<div class="question-text">'+esc(q.question)+'</div>'+(q.sous?'<div class="question-sous">'+esc(q.sous)+'</div>':'<div style="height:12px"></div>');
+  const ex=q.ex?'<div class="exemple">Par exemple : '+esc(q.ex)+'</div>':'';
+  if(q.type==='stars'){
+    h+='<div class="stars-container">'+[1,2,3,4,5].map(i=>'<span class="star" id="star-'+i+'" onclick="selectStar('+i+')">⭐</span>').join('')+'</div><div class="star-label" id="star-label">Clique pour noter</div>';
+  } else if(q.type==='choix'||q.type==='choix_texte'){
+    h+='<div id="options-container">'+q.options.map((o,i)=>'<button class="option-btn" id="opt-'+i+'" onclick="selectOption('+i+')">'+esc(o)+'</button>').join('')+'</div>';
+    if(q.type==='choix_texte') h+=ex+'<textarea id="ta" placeholder="'+esc(q.placeholder)+'"></textarea>';
+  } else if(q.type==='texte'){
+    h+=ex+'<textarea id="ta" placeholder="'+esc(q.placeholder)+'"></textarea>';
+  } else if(q.type==='double_scale'){
+    h+='<div class="sous-label">'+esc(q.labels[0])+'</div>'+echelle(q.id+'_avant')+'<div class="sous-label">'+esc(q.labels[1])+'</div>'+echelle(q.id+'_aujourdhui');
+  } else if(q.type==='double_texte'){
+    const e1=q.ex1?'<div class="exemple">Par exemple\u00a0: '+esc(q.ex1)+'</div>':'', e2=q.ex2?'<div class="exemple">Par exemple\u00a0: '+esc(q.ex2)+'</div>':'';
+    h+='<div class="sous-label">'+esc(q.labels[0])+'</div>'+e1+'<textarea id="ta" rows="4"></textarea><div class="sous-label">'+esc(q.labels[1])+'</div>'+e2+'<textarea id="ta2" rows="4"></textarea>';
+  } else if(q.type==='scale_texte'){
+    h+=echelle(q.id)+'<div class="reco-labels"><span>Non</span><span>Absolument</span></div><div class="sous-label" style="margin-top:22px;">'+esc(q.label2)+'</div>'+ex+'<textarea id="ta" placeholder="'+esc(q.placeholder)+'"></textarea>';
+  } else if(q.type==='prix'){
+    const val=answers[q.id]!==undefined?answers[q.id]:'';
+    h+='<div class="prix-wrap"><input type="text" id="in-prix" inputmode="numeric" autocomplete="off" placeholder="Montant" value="'+esc(val)+'" oninput="majPrix()"><span class="prix-devise">CHF</span></div><div class="sous-label" style="margin-top:22px;">'+esc(q.label2)+'</div>'+ex+'<textarea id="ta" placeholder="'+esc(q.placeholder)+'"></textarea>';
+  } else if(q.type==='contact'){
+    h+='<input type="text" id="in-prenom" placeholder="Ton prénom" autocomplete="given-name"><input type="email" id="in-email" placeholder="Ton e-mail" autocomplete="email" style="margin-top:12px;">';
+  }
+  el.innerHTML=h;
+  majNext();
+}
+function majNext(){
+  const q=questions[current];
+  if(q.type==='stars'||q.type==='choix'||q.type==='choix_texte') setNext(answers[q.id]!==undefined);
+  else if(q.type==='double_scale') setNext(answers[q.id+'_avant']!==undefined&&answers[q.id+'_aujourdhui']!==undefined);
+  else if(q.type==='scale_texte') setNext(answers[q.id]!==undefined);
+  else if(q.type==='prix') setNext(answers[q.id]!==undefined&&answers[q.id]!=='');
+  else setNext(true);
+}
+function selectStar(n){
+  const labels=['','Pas vraiment','Un peu','Plutôt oui','Vraiment oui','Transformatrice !'];
+  for(let i=1;i<=5;i++) document.getElementById('star-'+i).className='star'+(i<=n?' active':'');
+  document.getElementById('star-label').textContent=labels[n];
+  answers[questions[current].id]=n; majNext();
+}
+function selectOption(i){
+  const q=questions[current];
+  document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('opt-'+i).classList.add('selected');
+  answers[q.id]=q.options[i]; majNext();
+}
+function selectScale(cle,n){
+  document.querySelectorAll('.reco-btn[data-cle="'+cle+'"]').forEach(b=>b.classList.toggle('selected',+b.dataset.v===n));
+  answers[cle]=n; majNext();
+}
+function majPrix(){
+  const e=document.getElementById('in-prix');
+  const n=e.value.replace(/[^0-9]/g,'').slice(0,6);
+  if(e.value!==n) e.value=n;
+  answers.estimation=n; majNext();
+}
+function lire(id){const e=document.getElementById(id);return e?e.value.trim():'';}
+function nextQuestion(){
+  const q=questions[current];
+  if(q.type==='texte'||q.type==='choix_texte'||q.type==='scale_texte'||q.type==='prix') answers[q.id+(q.type==='texte'?'':'_texte')]=lire('ta');
+  if(q.type==='double_texte'){answers.avant=lire('ta');answers.aujourdhui=lire('ta2');}
+  if(q.type==='contact'){answers.prenom=lire('in-prenom');answers.email=lire('in-email');}
+  if(current<questions.length-1){current++;renderQ();window.scrollTo(0,0);}
+  else submitForm();
+}
+
+/* ===== Clé Web3Forms, la même que le bilan, ne pas modifier ===== */
+const ACCESS_KEY = "f78b1819-4743-4b7f-9c70-309561959f36";
+const LIEN_APPEL = "https://cal.com/debora-pilates-puidoux/effetpapillon";
+
+function court(v){if(!v)return 'non renseigné';if(v.indexOf('Oui')===0)return 'Oui';if(v.indexOf('Peut-être')===0)return 'Peut-être';return 'Non';}
+async function submitForm(){
+  const btn=document.getElementById('btn-next');
+  if(btn){btn.disabled=true;btn.textContent='Un instant...';}
+  const v=(k,suf)=>{const x=answers[k];return (x===undefined||x===null||x==='')?'non renseigné':(suf?x+suf:String(x));};
+  const champs=[
+    ['Note',v('note',' / 5')],
+    ['Attentes',v('attentes')],
+    ['Ce que j\'attendais',v('attentes_texte')],
+    ['Pilote automatique avant',v('pilote_avant',' / 10')],
+    ['Pilote automatique aujourd\'hui',v('pilote_aujourdhui',' / 10')],
+    ['Il y a 30 jours, une journée type',v('avant')],
+    ['Aujourd\'hui, une journée type',v('aujourdhui')],
+    ['Mon déclic',v('declic')],
+    ['Ce que les autres ont remarqué',v('remarque')],
+    ['Jour ou module préféré',v('jour_prefere')],
+    ['Ce qui manquait',v('manque')],
+    ['Recommandation',v('recommandation',' / 10')],
+    ['À une femme qui hésite',v('recommandation_texte')],
+    ['Estimation du programme',v('estimation',' CHF')],
+    ['Pourquoi ce montant',v('estimation_texte')],
+    ['Aller plus loin',v('plus_loin')],
+    ['Partage du témoignage',v('partage')],
+    ['Prénom',v('prenom')],
+    ['E-mail',v('email')],
+  ];
+  const donnees={access_key:ACCESS_KEY,
+    subject:"Avis lancement · "+(answers.prenom||'Anonyme')+" · Estimation : "+(answers.estimation?answers.estimation+' CHF':'non renseignée')+" · Aller plus loin : "+court(answers.plus_loin),
+    from_name:"L'Effet Papillon · Satisfaction lancement",
+    Date:new Date().toLocaleString('fr-CH'),
+    message:"AVIS SUR LE PROGRAMME · ÉDITION DE LANCEMENT\n\n"+champs.map(c=>c[0]+' : '+c[1]).join('\n')};
+  champs.forEach(c=>{donnees[c[0]]=c[1];});
+  if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(answers.email||'')) donnees.email=answers.email;
+  try{
+    const rep=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(donnees)});
+    await rep.json();
+  }catch(e){console.log('Erreur envoi :',e);}
+  const box=document.getElementById('appel-box');
+  if(box&&court(answers.plus_loin)==='Oui'){
+    const p=new URLSearchParams();if(answers.prenom)p.set('name',answers.prenom);if(answers.email)p.set('email',answers.email);
+    document.getElementById('btn-appel').href=LIEN_APPEL+(p.toString()?'?'+p.toString():'');
+    box.style.display='block';
+  }
+  showPhase('fin');
+}
+</script>
+</body>
+</html>
