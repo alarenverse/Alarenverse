@@ -78,6 +78,13 @@
   .suite-box{background:linear-gradient(135deg,#fdf0f2,#f8f0fa);border-radius:20px;padding:22px;border:1px solid rgba(200,120,130,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
+
+  /* Ta situation */
+  .situation-wrap{margin:18px 0 4px;text-align:left}
+  .situation-label{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#a08090;margin-bottom:10px;text-align:center}
+  .situation-opt{display:block;width:100%;text-align:left;background:#fdf6f7;border:2px solid rgba(200,120,128,0.25);border-radius:16px;padding:12px 16px;margin-bottom:8px;font-family:'Lora',serif;font-size:16px;color:#4a3038;cursor:pointer;transition:all 0.15s}
+  .situation-opt.sel{background:linear-gradient(135deg,#c87880,#a080c8);border-color:transparent;color:white}
+  .situation-note{font-family:'Jost',sans-serif;font-size:13px;color:#a08090;text-align:center;margin-top:4px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -96,7 +103,14 @@
     <p>La charge mentale, ce n'est pas du stress. C'est ce travail invisible et permanent de penser, anticiper, organiser, se souvenir, pour toi et pour les autres. Que tu sois mère ou non, en couple ou non, tu portes sûrement bien plus que tu ne le réalises. Et ça a un vrai coût.</p>
     <p class="small" style="margin-bottom:20px;">Aujourd'hui on met des mots sur ce qui est là, avec la science derrière, et un inventaire pour voir concrètement tout ce que tu portes.</p>
     <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
-    <button class="btn" onclick="showPhase('theorie')">Commencer 🧠</button>
+    <div class="situation-wrap">
+      <div class="situation-label">Ta situation aujourd'hui</div>
+      <button class="situation-opt" data-s="seule" onclick="choisirSituation('seule')">Je vis seule</button>
+      <button class="situation-opt" data-s="couple" onclick="choisirSituation('couple')">Je vis en couple, avec ou sans enfants</button>
+      <button class="situation-opt" data-s="solo" onclick="choisirSituation('solo')">J'élève seule mes enfants</button>
+      <div class="situation-note">La théorie, l'inventaire et les questions s'adaptent à ta situation.</div>
+    </div>
+    <button class="btn" id="btn-commencer" onclick="commencer()" disabled>Commencer 🧠</button>
     <p class="hint">Théorie · Impact psy · Inventaire · Écriture guidée · ~25 min</p>
   </div>
 </div>
@@ -167,7 +181,7 @@
       <div style="font-family:'Jost',sans-serif;font-size:11px;color:#c87880;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">✍️ Tes réflexions du jour</div>
       <div id="recap-container"></div>
     </div>
-    <div class="hl" style="margin-top:16px;text-align:left;">
+    <div class="hl" id="a-retenir" style="margin-top:16px;text-align:left;">
       🔑 <strong>À retenir :</strong> La charge mentale n'est pas une fatalité, mais elle ne disparaîtra pas seule, et elle ne disparaîtra pas par ta seule volonté de "mieux t'organiser". Elle demande une conversation, une redistribution, et parfois une décision courageuse sur ce que tu lâches. Demain, on travaille exactement sur ça.
     </div>
   </div>
@@ -184,32 +198,45 @@
 </div>
 
 <script>
-const theorie=[
+const SIT_KEY='alarenverse_situation';
+let situation=null;
+function pour(x){return !x||typeof x==='string'||!x.pour||x.pour.indexOf(situation)>-1;}
+
+const theorieBase=[
   {emoji:"📖",titre:"La charge mentale, et pourquoi elle pèse sur les femmes",source:"Monique Haicault / Emma, Fallait demander",contenu:[
     {type:"texte",texte:"Le terme \"charge mentale\" vient de la sociologue Monique Haicault, dans les années 80, et a été rendu célèbre par la dessinatrice Emma en 2017. Mais le truc qu'il décrit, lui, est bien plus ancien, et tu le connais sûrement par cœur."},
-    {type:"hl",texte:"🧠 La charge mentale, c'est tout ce travail invisible de gestion : penser à ce qui manque dans le frigo, retenir le rendez-vous chez le pédiatre, anticiper les cadeaux d'anniversaire, planifier les vacances, suivre les devoirs, garder un œil sur l'humeur de chacun. C'est gérer le foyer dans sa tête, en permanence, en arrière-plan de tout le reste."},
+    {type:"hl",pour:["couple","solo"],texte:"🧠 La charge mentale, c'est tout ce travail invisible de gestion : penser à ce qui manque dans le frigo, retenir le rendez-vous chez le pédiatre, anticiper les cadeaux d'anniversaire, planifier les vacances, suivre les devoirs, garder un œil sur l'humeur de chacun. C'est gérer le foyer dans sa tête, en permanence, en arrière-plan de tout le reste."},
+    {type:"hl",pour:["seule"],texte:"🧠 La charge mentale, c'est tout ce travail invisible de gestion : penser à ce qui manque dans le frigo, retenir le rendez-vous chez le dentiste, anticiper les cadeaux d'anniversaire, planifier les vacances, suivre les factures, garder un œil sur l'humeur de chacun. C'est gérer ta vie dans ta tête, en permanence, en arrière-plan de tout le reste."},
     {type:"stat",texte:"Les femmes consacrent nettement plus de temps que les hommes aux tâches domestiques, mais surtout, elles portent la grande majorité du travail de coordination et d'anticipation. C'est ça, le vrai poids",source:"INSEE, Enquête Emploi du temps"},
-    {type:"texte",texte:"Et même dans les couples qui se vivent comme égalitaires, c'est encore le plus souvent la femme qui porte cette charge de coordination, souvent sans même s'en rendre compte elle-même."},
+    {type:"texte",pour:["couple"],texte:"Et même dans les couples qui se vivent comme égalitaires, c'est encore le plus souvent la femme qui porte cette charge de coordination, souvent sans même s'en rendre compte elle-même."},
+    {type:"texte",pour:["solo"],texte:"Et si tu élèves seule tes enfants, il n'y a rien à rééquilibrer : tu portes tout, par définition. Ta charge mentale n'est pas une question de partage, c'est une question de quantité et d'appui."},
+    {type:"texte",pour:["solo"],texte:"Et tu portes ce que personne ne voit : décider seule, n'avoir aucun relais le soir ou le week-end, te demander qui prendrait le relais si tu tombais malade."},
+    {type:"texte",pour:["seule"],texte:"On pense souvent que vivre seule, c'est n'avoir que soi à gérer. En réalité, tu fais tout, sans personne pour te relayer ni pour le remarquer. Et parce que tu n'as « que toi », on te confie plus volontiers le reste : au travail, dans ta famille, chez tes amies."},
     {type:"hl",texte:"💡 Retiens bien ça : ce n'est pas naturel, ce n'est pas inné, ce n'est pas \"dans ta nature de femme\". C'est le résultat de générations d'éducation où les filles apprennent à gérer et anticiper, et les garçons à être pris en charge. C'est structurel, pas un défaut à toi.",classe:"violet"},
   ]},
   {emoji:"🏠",titre:"Le travail invisible, cheffe de projet du foyer",source:"Arlie Hochschild, The Second Shift",contenu:[
     {type:"texte",texte:"La charge mentale, c'est bien plus que \"faire des tâches\". C'est manager tout le foyer, comme une cheffe de projet qui coordonne, délègue, anticipe, vérifie, rappelle, réajuste. Sauf que cette cheffe de projet-là travaille sans arrêt, sans fiche de poste, sans salaire, et sans personne pour reconnaître le boulot."},
     {type:"hl",texte:"📊 C'est ce qu'on appelle la \"double journée\" : beaucoup de femmes qui travaillent à l'extérieur rentrent chez elles pour une deuxième journée de travail, non rémunérée celle-là. Hochschild l'a décrit il y a plus de trente ans, et ça n'a pas vraiment changé."},
-    {type:"texte",texte:"Ce management du foyer, c'est : le suivi médical de toute la famille, l'administratif, la logistique du quotidien, les repas, le suivi scolaire, les émotions des enfants, le lien social, les cadeaux, les anniversaires. Et surtout, le fait de devoir se souvenir de tout ça, tout le temps."},
-    {type:"stat",texte:"Les mères de jeunes enfants ont infiniment moins de temps libre que les pères dans la même situation familiale. L'écart est saisissant, et il est rarement nommé",source:"Observatoire des inégalités"},
-    {type:"hl",texte:"🔑 Et non, ce n'est pas \"de l'aide\" quand un partenaire fait la vaisselle. Aider, ça suppose qu'il y a une responsable qui délègue. Le vrai sujet, c'est la répartition de la responsabilité, pas seulement qui exécute la tâche.",classe:"or"},
+    {type:"texte",pour:["couple","solo"],texte:"Ce management du foyer, c'est : le suivi médical de toute la famille, l'administratif, la logistique du quotidien, les repas, le suivi scolaire, les émotions des enfants, le lien social, les cadeaux, les anniversaires. Et surtout, le fait de devoir se souvenir de tout ça, tout le temps."},
+    {type:"texte",pour:["seule"],texte:"Ce management, c'est : l'administratif, la logistique du quotidien, les repas, les réparations, le lien avec ta famille et tes amies, les cadeaux, les anniversaires. Et surtout, le fait de devoir se souvenir de tout ça, tout le temps."},
+    {type:"stat",pour:["couple"],texte:"Les mères de jeunes enfants ont infiniment moins de temps libre que les pères dans la même situation familiale. L'écart est saisissant, et il est rarement nommé",source:"Observatoire des inégalités"},
+    {type:"hl",pour:["couple"],texte:"🔑 Et non, ce n'est pas \"de l'aide\" quand un partenaire fait la vaisselle. Aider, ça suppose qu'il y a une responsable qui délègue. Le vrai sujet, c'est la répartition de la responsabilité, pas seulement qui exécute la tâche.",classe:"or"},
+    {type:"hl",pour:["solo"],texte:"🔑 Seule avec tes enfants, la vraie question n'est pas « qui fait quoi », mais « qui t'appuie ». Ton réseau, et ce que tes enfants peuvent porter à leur mesure : on en parle demain.",classe:"or"},
+    {type:"hl",pour:["seule"],texte:"🔑 Et parce que personne ne le voit, on croit souvent que tu as « du temps ». Au travail, dans ta famille, c'est souvent à toi qu'on pense en premier pour dépanner.",classe:"or"},
   ]},
   {emoji:"🧬",titre:"Ce que ça fait vraiment à ton cerveau et ton moral",source:"Recherches en psychologie clinique et neurosciences",contenu:[
     {type:"texte",texte:"La charge mentale chronique, ce n'est pas juste fatigant. Ça laisse des traces réelles, mesurables, sur le cerveau, les hormones, le moral. Ce n'est pas \"dans ta tête\" au sens où tu l'imaginerais, c'est dans ta tête au sens neurologique, bien concret."},
     {type:"stat",texte:"Quand le cerveau ne s'éteint jamais, le cortisol reste élevé en continu. Résultat : la mémoire flanche, les décisions deviennent plus dures à prendre, et le risque d'épuisement grimpe nettement",source:"Recherche en psychologie de la santé au travail"},
     {type:"stat",texte:"La dépression est deux fois plus fréquente chez les femmes. Parmi les facteurs de risque qui les touchent davantage, l'OMS cite la responsabilité permanente de prendre soin des autres : le rôle de \"celle qui prend soin\"",source:"OMS, Genre et santé mentale"},
-    {type:"hl",texte:"⚠️ Après des centaines de micro-décisions dans la journée (les repas, l'organisation, le planning, les émotions de chacun), il ne te reste souvent plus aucune énergie pour décider de ce qui te concerne, toi. Tu t'oublies. Ce n'est pas par manque d'amour pour toi-même. C'est une fatigue mentale bien réelle.",classe:"important"},
+    {type:"hl",pour:["couple","solo"],texte:"⚠️ Toute la journée, tu décides pour les autres : les repas, l'organisation, le planning, les émotions de chacun. Le soir, ce qui te concerne, toi, passe en dernier. Tu t'oublies. Ce n'est pas par manque d'amour pour toi-même. C'est que toute la place est déjà prise.",classe:"important"},
+    {type:"hl",pour:["seule"],texte:"⚠️ Toute la journée, tu gères : le travail, l'organisation, les demandes des autres. Le soir, ce qui te concerne, toi, passe en dernier. Tu t'oublies. Ce n'est pas par manque d'amour pour toi-même. C'est que toute la place est déjà prise.",classe:"important"},
     {type:"texte",texte:"Et ce sentiment de ne jamais pouvoir \"éteindre\" son cerveau, si caractéristique de la charge mentale, est directement lié à l'insomnie, à l'anxiété qui s'installe, et à cette impression de perdre peu à peu qui on est."},
-    {type:"hl",texte:"🌸 Cette perte d'identité, c'est l'un des effets les plus douloureux, et les moins nommés, de la charge mentale. À force de n'être que \"maman\", \"celle qui gère\", \"celle qui est toujours dispo\", on finit par ne plus savoir qui on est en dehors de ces rôles. C'est exactement là que ces 30 jours prennent tout leur sens.",classe:"vert"},
+    {type:"hl",pour:["couple","solo"],texte:"🌸 Cette perte d'identité, c'est l'un des effets les plus douloureux, et les moins nommés, de la charge mentale. À force de n'être que \"maman\", \"celle qui gère\", \"celle qui est toujours dispo\", on finit par ne plus savoir qui on est en dehors de ces rôles. C'est exactement là que ces 30 jours prennent tout leur sens.",classe:"vert"},
+    {type:"hl",pour:["seule"],texte:"🌸 Cette perte d'identité, c'est l'un des effets les plus douloureux, et les moins nommés, de la charge mentale. À force de n'être que \"celle qui gère\", \"celle qui est toujours dispo\", on finit par ne plus savoir qui on est en dehors de ces rôles. C'est exactement là que ces 30 jours prennent tout leur sens.",classe:"vert"},
   ]},
 ];
 
-const inventaire=[
+const inventaireBase=[
   {titre:"Foyer & Logistique",couleur:"#c87880",bg:"#fdf0f2",border:"rgba(200,120,130,0.2)",items:[
     "Anticiper ce qui manque dans les placards avant de faire les courses",
     "Planifier les menus de la semaine",
@@ -220,7 +247,22 @@ const inventaire=[
     "Gérer le linge, tri, lavage, repassage, rangement",
     "Surveiller les stocks de produits d'hygiène et ménagers",
   ]},
-  {titre:"Enfants & Famille",couleur:"#e8a0b4",bg:"#fdf0f5",border:"rgba(232,160,180,0.2)",items:[
+  {titre:"Si tu élèves seule tes enfants",pour:["solo"],couleur:"#c8865a",bg:"#fdf4ee",border:"rgba(200,134,90,0.22)",items:[
+    "Être la seule adulte à décider pour mes enfants",
+    "Prévoir qui garde mes enfants si je tombe malade",
+    "N'avoir aucun relais le soir ou le week-end",
+    "Coordonner avec l'autre parent (garde, vacances, frais), s'il y en a un",
+  ]},
+  {titre:"Quand tu vis seule",pour:["seule"],couleur:"#c8865a",bg:"#fdf4ee",border:"rgba(200,134,90,0.22)",items:[
+    "Tout l'administratif et la maison, sans personne pour me relayer",
+    "Décider seule, sans personne avec qui en parler",
+    "Prévoir qui appeler si je suis malade ou s'il m'arrive quelque chose",
+    "Laisser un double des clés, prévenir quelqu'un quand je pars",
+    "Être celle qu'on sollicite au travail « puisque tu n'as pas d'enfants »",
+    "Être la plus disponible pour mes parents ou ma famille",
+    "Entretenir seule mes amitiés : si je n'organise rien, personne ne le fait",
+  ]},
+  {titre:"Enfants & Famille",pour:["couple","solo"],couleur:"#e8a0b4",bg:"#fdf0f5",border:"rgba(232,160,180,0.2)",items:[
     "Suivre le carnet de santé et planifier les rendez-vous médicaux",
     "Gérer les activités extrascolaires, inscriptions, transport, matériel",
     "Suivre le travail scolaire et les communications avec les enseignants",
@@ -234,7 +276,7 @@ const inventaire=[
     "Se souvenir des anniversaires et occasions importantes",
     "Acheter et envoyer les cadeaux et cartes",
     "Maintenir le contact avec les amis, prendre des nouvelles, organiser des retrouvailles",
-    "Gérer l'état émotionnel du partenaire et anticiper ses besoins",
+    {t:"Gérer l'état émotionnel du partenaire et anticiper ses besoins",pour:["couple"]},
     "Être \"disponible émotionnellement\" pour les proches en difficulté",
     "Gérer les conflits relationnels dans la famille ou l'entourage",
     "Organiser les repas de famille et les réunions sociales",
@@ -256,15 +298,49 @@ const inventaire=[
   ]},
 ];
 
-const ecritureQs=[
+const ecritureBase=[
   {"partie": "D'où vient ta charge", "q": "Chez toi, quand tu étais petite, comment les tâches se répartissaient ?", "sous": "Coche ce qui te parle. En dessous : et aujourd'hui, tu retrouves ce modèle chez toi ?", "ex": "« Mon père déléguait tout à ma mère, sans même demander. Aujourd'hui, je fais exactement comme elle, sans m'en rendre compte. » « Chez nous, tout était partagé. Alors je ne comprends pas pourquoi, chez moi, tout me retombe dessus. »", "placeholder": "Aujourd'hui, chez moi...", "chips": ["Un parent déléguait tout à l'autre", "Les tâches étaient partagées", "L'un faisait, l'autre pensait à tout", "On ne s'en rendait même pas compte, c'était une habitude", "Les enfants mettaient beaucoup la main à la pâte"]},
   {"partie": "D'où vient ta charge", "q": "Quelle phrase te pousse à tout gérer toi-même ?", "sous": "Coche ce qui te parle. En dessous : d'où vient-elle, à ton avis ?", "ex": "« Ça va plus vite si je le fais moi-même : j'ai toujours vu mon père repasser derrière tout le monde. » « C'est mon rôle : chez nous, c'étaient les femmes qui s'occupaient de tout. »", "placeholder": "Elle vient de...", "chips": ["« Si je ne le fais pas, personne ne le fera »", "« Ça va plus vite si je le fais moi-même »", "« Ils ne le feront pas comme il faut »", "« Je préfère ne pas avoir à demander »", "« C'est mon rôle »"]},
   {"partie": "Nommer l'invisible", "ex": "« De la colère. Je ne pensais pas porter autant. » « Un soulagement : ce n'est pas moi qui suis mal organisée, c'est énorme. »", "q": "Qu'est-ce que tu as ressenti en faisant cet inventaire ?", "sous": "Surprise, reconnaissance, tristesse, colère, soulagement de voir... Nomme ce qui est là.", "placeholder": "En faisant cet inventaire j'ai ressenti..."},
   {"partie": "Nommer l'invisible", "ex": "« Penser aux anniversaires, aux cadeaux, aux rendez-vous chez le médecin. » « Anticiper l'humeur de tout le monde. » « Savoir ce qu'il manque dans le frigo. »", "q": "Y a-t-il une partie de ta charge mentale qui t'épuise particulièrement, et que personne ne voit ?", "sous": "La partie la plus invisible, la plus lourde, la moins reconnue.", "placeholder": "Ce qui m'épuise le plus et qu'on ne voit pas c'est..."},
   {"partie": "Nommer l'invisible", "ex": "« Le chant : j'ai arrêté la chorale il y a quatre ans. » « Mes soirées avec mes amies. » « Le temps de lire. »", "q": "Qu'est-ce que tu as dû abandonner ou mettre de côté à cause de la charge mentale ?", "sous": "Un projet, un rêve, une partie de toi-même, une relation, un loisir...", "placeholder": "Ce que j'ai mis de côté c'est..."},
-  {"partie": "Nommer l'invisible", "q": "Quand tu demandes de l'aide, qu'est-ce qui se passe ?", "sous": "", "ex": "« On me répond “tu n'avais qu'à demander”, alors que je viens justement de le faire. » « On m'aide, mais je dois tout expliquer. Alors je finis par le faire moi-même. »", "placeholder": "Quand je demande..."},
-  {"partie": "Nommer l'invisible", "ex": "« Que les repas de la semaine ne soient plus dans ma tête à moi seule. » « Ne plus être celle qui pense aux rendez-vous médicaux de toute la famille. »", "q": "Si tu pouvais changer une chose dans la répartition de ta charge mentale, laquelle serait-ce ?", "sous": "Une seule chose, réaliste ou non : celle qui te soulagerait vraiment.", "placeholder": "Si je pouvais changer une chose ce serait..."}
+  {"pour": ["couple"], "partie": "Nommer l'invisible", "q": "Quand tu demandes de l'aide, qu'est-ce qui se passe ?", "sous": "", "ex": "« On me répond “tu n'avais qu'à demander”, alors que je viens justement de le faire. » « On m'aide, mais je dois tout expliquer. Alors je finis par le faire moi-même. »", "placeholder": "Quand je demande..."},
+  {"pour": ["solo"], "partie": "Nommer l'invisible", "q": "Quand tu demandes de l'aide, ou quand tu aimerais en demander, qu'est-ce qui se passe ?", "sous": "", "ex": "« Je n'ai personne à qui demander, alors je ne demande plus. » « Ma sœur m'aide, mais je dois tout lui expliquer. Alors je finis par le faire moi-même. »", "placeholder": "Quand je demande, ou quand j'aimerais demander..."},
+  {"pour": ["seule"], "partie": "Nommer l'invisible", "q": "Quand tu as besoin d'un coup de main, vers qui tu te tournes ?", "sous": "", "ex": "« Personne : je me débrouille, je ne veux pas déranger. » « Ma sœur, mais j'ai l'impression de toujours lui demander. »", "placeholder": "Quand j'ai besoin d'un coup de main..."},
+  {"pour": ["couple"], "partie": "Nommer l'invisible", "ex": "« Que les repas de la semaine ne soient plus dans ma tête à moi seule. » « Ne plus être celle qui pense aux rendez-vous médicaux de toute la famille. »", "q": "Si tu pouvais changer une chose dans la répartition de ta charge mentale, laquelle serait-ce ?", "sous": "Une seule chose, réaliste ou non : celle qui te soulagerait vraiment.", "placeholder": "Si je pouvais changer une chose ce serait..."},
+  {"pour": ["solo"], "partie": "Nommer l'invisible", "ex": "« Avoir quelqu'un à appeler quand mon fils est malade. » « Que les repas de la semaine ne soient plus dans ma tête à moi seule. »", "q": "Si tu pouvais changer une chose dans ta charge mentale, laquelle serait-ce ?", "sous": "Une seule chose, réaliste ou non : celle qui te soulagerait vraiment.", "placeholder": "Si je pouvais changer une chose ce serait..."},
+  {"pour": ["seule"], "partie": "Nommer l'invisible", "ex": "« Ne plus être celle qui reste tard au bureau parce que je n'ai pas d'enfants. » « Qu'on m'appelle pour prendre de mes nouvelles, et pas seulement pour un service. »", "q": "Si tu pouvais changer une chose dans ta charge mentale, laquelle serait-ce ?", "sous": "Une seule chose, réaliste ou non : celle qui te soulagerait vraiment.", "placeholder": "Si je pouvais changer une chose ce serait..."}
 ];
+
+const aRetenirDebut="🔑 <strong>À retenir :</strong> La charge mentale n'est pas une fatalité, mais elle ne disparaîtra pas seule, et elle ne disparaîtra pas par ta seule volonté de \"mieux t'organiser\". ";
+const aRetenirFin={
+  couple:"Elle demande une conversation, une redistribution, et parfois une décision courageuse sur ce que tu lâches. Demain, on travaille exactement sur ça.",
+  solo:"Elle demande de redistribuer quand c'est possible, de trouver des appuis quand tu es seule, et parfois une décision courageuse sur ce que tu lâches. Demain, on travaille exactement sur ça.",
+  seule:"Elle demande de rendre ce qu'on te confie parce que tu serais disponible, de te créer des appuis, et parfois une décision courageuse sur ce que tu lâches. Demain, on travaille exactement sur ça."
+};
+
+let theorie=[], inventaire=[], ecritureQs=[];
+function appliquerSituation(){
+  theorie=theorieBase.filter(pour).map(function(p){return Object.assign({},p,{contenu:p.contenu.filter(pour)});});
+  inventaire=inventaireBase.filter(pour).map(function(c){return Object.assign({},c,{items:c.items.filter(pour).map(function(i){return typeof i==='string'?i:i.t;})});});
+  ecritureQs=ecritureBase.filter(pour);
+  const ar=document.getElementById('a-retenir');
+  if(ar) ar.innerHTML=aRetenirDebut+aRetenirFin[situation];
+}
+function lireSituation(){try{const s=localStorage.getItem(SIT_KEY);return ['seule','couple','solo'].indexOf(s)>-1?s:null;}catch(e){return null;}}
+function choisirSituation(s){
+  situation=s;
+  try{localStorage.setItem(SIT_KEY,s);}catch(e){}
+  document.querySelectorAll('.situation-opt').forEach(function(b){b.classList.toggle('sel',b.getAttribute('data-s')===s);});
+  const b=document.getElementById('btn-commencer');if(b)b.disabled=false;
+}
+function commencer(){
+  if(!situation)return;
+  appliquerSituation();
+  theorieIdx=0;checkedItems=new Set();eIdx=0;eReponses=[];
+  renderTheorie();
+  showPhase('theorie');
+}
 
 let theorieIdx=0, checkedItems=new Set(), eIdx=0, eReponses=[], eChoix=[];
 
@@ -408,7 +484,7 @@ function showFin(){
   window.scrollTo(0,0);
 }
 
-renderTheorie();
+(function(){const s0=lireSituation();situation=s0||'couple';appliquerSituation();renderTheorie();situation=null;if(s0)choisirSituation(s0);})();
 
 function telechargerReponses(){
   var recap=document.getElementById('recap-container');

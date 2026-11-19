@@ -81,6 +81,24 @@
   .recap-r{font-size:17px;color:#253050;line-height:1.65;font-style:italic}
   .suite-box{background:linear-gradient(135deg,#eef0fa,#f0eefa);border-radius:20px;padding:22px;border:1px solid rgba(100,120,200,0.18);text-align:center;margin-top:14px;max-width:560px;width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  /* Ta situation */
+  .situation-wrap{margin:18px 0 4px;text-align:left}
+  .situation-label{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#8090b8;margin-bottom:10px;text-align:center}
+  .situation-opt{display:block;width:100%;text-align:left;background:#f4f6fd;border:2px solid rgba(100,120,200,0.25);border-radius:16px;padding:12px 16px;margin-bottom:8px;font-family:'Lora',serif;font-size:16px;color:#2d3040;cursor:pointer;transition:all 0.15s}
+  .situation-opt.sel{background:linear-gradient(135deg,#6080c8,#a080c8);border-color:transparent;color:white}
+  .situation-note{font-family:'Jost',sans-serif;font-size:13px;color:#8090b8;text-align:center;margin-top:4px;line-height:1.5}
+  /* Boutons sous À qui */
+  .tache-bloc{margin-bottom:6px}
+  .tache-bloc .tache-row{margin-bottom:6px}
+  .aqui-pills{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .aqui-pill{font-family:'Jost',sans-serif;font-size:12px;padding:5px 10px;border-radius:14px;border:1.5px solid rgba(100,120,200,0.28);background:white;color:#5a6aa0;cursor:pointer;line-height:1.3}
+  .aqui-pill.sel{background:linear-gradient(135deg,#6080c8,#a080c8);border-color:transparent;color:white}
+  .aqui-pill.enfant{border-style:dashed}
+  .aqui-pill:disabled{opacity:0.35;cursor:not-allowed}
+  .tache-field{min-width:0;width:0}
+  @media (max-width:420px){.tache-a-qui{width:112px}}
+  .aqui-aide ul{margin:6px 0 8px 18px;padding:0}
+  .aqui-aide li{margin-bottom:4px}
   .exemple{font-size:14.5px;line-height:1.6;font-style:italic;text-align:left;background:rgba(255,255,255,0.65);border-left:2px solid rgba(150,120,160,0.45);border-radius:0 10px 10px 0;padding:9px 13px;margin:0 0 10px;opacity:0.92}
 </style>
 </head>
@@ -99,7 +117,14 @@
     <h2>Hier tu as nommé. Aujourd'hui tu agis, et tu poses.</h2>
     <p>Voir sa charge mentale c'est déjà un pas énorme. Mais voir sans agir peut aussi devenir une nouvelle source de frustration. Aujourd'hui on passe à la suite : redistribuer, délester ce qui peut l'être, et trouver les mots pour le dire.</p>
     <div id="preview-container" style="text-align:left;margin:18px 0;"></div>
-    <button class="btn" onclick="showPhase('theorie')">Commencer 🌿</button>
+    <div class="situation-wrap">
+      <div class="situation-label" id="situation-label">Ta situation aujourd'hui</div>
+      <button class="situation-opt" data-s="seule" onclick="choisirSituation('seule')">Je vis seule</button>
+      <button class="situation-opt" data-s="couple" onclick="choisirSituation('couple')">Je vis en couple, avec ou sans enfants</button>
+      <button class="situation-opt" data-s="solo" onclick="choisirSituation('solo')">J'élève seule mes enfants</button>
+      <div class="situation-note">La théorie, le plan et les phrases s'adaptent à ta situation.</div>
+    </div>
+    <button class="btn" id="btn-commencer" onclick="commencer()" disabled>Commencer 🌿</button>
     <p class="hint">Théorie · Plan de redistribution · Phrases types · Exercice de délestage · ~25 min</p>
   </div>
 </div>
@@ -132,11 +157,11 @@
     <p style="text-align:center;margin-bottom:8px;">Liste les tâches que tu veux redistribuer, et à qui tu pourrais les confier.</p>
     <p class="small" style="text-align:center;margin-bottom:20px;">Oublie la liste parfaite. Un premier pas réaliste suffit.</p>
 
-    <div class="hl" style="margin-bottom:16px;">
+    <div class="hl" id="rappel-redistrib" style="margin-bottom:16px;">
       <strong>Rappel important :</strong> redistribuer ne signifie pas "demander de l'aide". Ça signifie transférer la responsabilité, pas juste l'exécution. "Peux-tu t'occuper du suivi des rendez-vous médicaux des enfants ?" est une redistribution. "Peux-tu m'aider à prendre les rendez-vous ?" maintient la charge mentale chez toi.
     </div>
 
-    <div class="fiches-info">📄 <strong>Au moment du téléchargement, tout ce que tu remplis ici est classé par personne.</strong> Tu obtiens une fiche par personne, prête à imprimer et à lui donner. Si plusieurs tâches vont à la même personne, elles se retrouvent sur la même fiche. Pour une tâche que tu arrêtes, écris « J'arrête » à la place du prénom.</div>
+    <div class="fiches-info" id="fiches-info">📄 <strong>Au moment du téléchargement, tout ce que tu remplis ici est classé par personne.</strong> Tu obtiens une fiche par personne, prête à imprimer et à lui donner. Si plusieurs tâches vont à la même personne, elles se retrouvent sur la même fiche. Pour une tâche que tu arrêtes, écris « J'arrête » à la place du prénom.</div>
 
     <p style="font-family:'Jost',sans-serif;font-size:11px;color:#9098b8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Des idées pour commencer, touche pour ajouter :</p>
     <div id="suggestions-container" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;"></div>
@@ -145,7 +170,7 @@
       <div style="flex:1;font-family:'Jost',sans-serif;font-size:10px;color:#9098b8;text-transform:uppercase;letter-spacing:0.1em;">Tâche à redistribuer</div>
       <div style="width:130px;font-family:'Jost',sans-serif;font-size:10px;color:#9098b8;text-transform:uppercase;letter-spacing:0.1em;">À qui (prénom)</div>
     </div>
-    <p class="aqui-aide">Tu ne sais pas à qui ? Pense à ton ou ta partenaire, à un enfant assez grand, à ta mère, ta sœur, une amie, une voisine, un collègue, ou à une aide payée (ménage, courses livrées). Tu peux aussi laisser vide pour l'instant : la tâche reste dans ton plan, sans fiche.</p>
+    <div class="aqui-aide" id="aqui-aide"></div>
     <div id="plan-container"></div>
     <datalist id="liste-aqui"></datalist>
     <button class="add-btn" onclick="addTache()">+ Ajouter une tâche</button>
@@ -164,7 +189,7 @@
   <div class="card" style="margin-top:24px;">
     <span class="emoji-hero">💬</span>
     <h2>Des mots pour avoir la conversation</h2>
-    <p style="text-align:center;margin-bottom:6px;">Parler de charge mentale à son partenaire, sa famille ou ses collègues est difficile. Ces phrases t'aident à le faire sans accuser, sans minimiser, et sans que ce soit une guerre.</p>
+    <p id="phrases-intro" style="text-align:center;margin-bottom:6px;">Parler de charge mentale à son partenaire, sa famille ou ses collègues est difficile. Ces phrases t'aident à le faire sans accuser, sans minimiser, et sans que ce soit une guerre.</p>
     <p class="small" style="text-align:center;margin-bottom:20px;">Clique sur "Copier" pour garder celles qui te parlent.</p>
     <div id="phrases-container"></div>
     <button class="btn" onclick="showPhase('lacher')">Exercice de délestage →</button>
@@ -205,14 +230,14 @@
     <div style="margin-bottom:20px;">
       <p class="e-q">Quelle tâche tu choisis de redistribuer ou d'arrêter ?</p>
       <p class="e-sous">Une seule chose précise vaut mieux qu'une liste.</p>
-      <div class="exemple">Par exemple : « Les inscriptions aux activités, c'est mon compagnon qui les gère. » « Les mails du travail après 19 h, j'arrête. »</div>
+      <div class="exemple" id="ex-e1">Par exemple : « Les inscriptions aux activités, c'est mon compagnon qui les gère. » « Les mails du travail après 19 h, j'arrête. »</div>
       <textarea id="e1" rows="3" placeholder="Je choisis de redistribuer / d'arrêter... / Je demande à... de prendre en charge..." oninput="checkEngagement()"></textarea>
     </div>
 
     <div style="margin-bottom:20px;">
       <p class="e-q">Quelle permission tu te donnes à toi-même à partir d'aujourd'hui ?</p>
       <p class="e-sous">Une permission de délester, d'être imparfaite, de te faire de la place.</p>
-      <div class="exemple">Par exemple : « Je me permets un repas tout simple le mercredi. » « Je m'autorise à ne plus tout anticiper pour tout le monde. »</div>
+      <div class="exemple" id="ex-e2">Par exemple : « Je me permets un repas tout simple le mercredi. » « Je m'autorise à ne plus tout anticiper pour tout le monde. »</div>
       <textarea id="e2" rows="3" placeholder="Je me permets de... / Je m'autorise à ne plus... / Je décide que c'est suffisant de..." oninput="checkEngagement()"></textarea>
     </div>
 
@@ -249,14 +274,90 @@
 </div>
 
 <script>
-const theorie=[
-  {emoji:"🔄",titre:"La redistribution, bien plus qu'une question d'organisation",source:"Eve Rodsky, Fair Play / Hochschild",contenu:[
+const PAGE1_SOLO={emoji:"🔄",titre:"La redistribution, quand tu es seule avec tes enfants",source:"Eve Rodsky, Fair Play",pour:["solo"],contenu:[
+    {type:"texte",texte:"La charge mentale ne se règle pas avec un meilleur agenda ou une appli de plus. Elle se règle par une vraie redistribution de la responsabilité, pas juste de l'exécution."},
+    {type:"texte",texte:"Seule avec tes enfants, la redistribution se fait autrement : avec tes enfants, selon leur âge, avec ton réseau, et avec ce qui peut être automatisé."},
+    {type:"hl",texte:"🔑 La règle reste la même : tu confies une responsabilité entière, à la taille de la personne. Par exemple : \"Le cartable du lendemain, c'est mon fils qui le prépare avec sa liste.\" Il y pense, il le fait, et il coche son calendrier."},
+    {type:"texte",texte:"Eve Rodsky, dans Fair Play, découpe chaque tâche en trois temps : concevoir (y penser), planifier (l'organiser), exécuter (la faire). La vraie redistribution transfère les trois, pas seulement le dernier. Avec un enfant, tu commences par une seule tâche, avec une liste pour l'aider."},
+    {type:"hl",texte:"💡 À ton enfant, tu confies des tâches à sa taille. Tes soucis d'adulte, eux, restent entre adultes.",classe:"or"},
+  ]};
+const PAGE1_SEULE={emoji:"🔄",titre:"La redistribution, quand tu vis seule",source:"Eve Rodsky, Fair Play",pour:["seule"],contenu:[
+    {type:"texte",texte:"La charge mentale ne se règle pas avec un meilleur agenda ou une appli de plus. Elle se règle par une vraie redistribution de la responsabilité, pas juste de l'exécution."},
+    {type:"texte",texte:"Quand tu vis seule, redistribuer, c'est surtout deux choses. Rendre ce qu'on te confie parce que tu serais \"disponible\", au travail ou dans ta famille. Et te créer des appuis, pour ne plus tout porter seule."},
+    {type:"hl",texte:"🔑 La règle reste la même : tu transfères la responsabilité, pas seulement un coup de main. Par exemple : \"Cette année, l'anniversaire de papa, c'est ma sœur qui l'organise, de la date au cadeau.\""},
+    {type:"texte",texte:"Eve Rodsky, dans Fair Play, découpe chaque tâche en trois temps : concevoir (y penser), planifier (l'organiser), exécuter (la faire). La vraie redistribution transfère les trois, pas seulement le dernier."},
+    {type:"hl",texte:"💡 Tu n'as pas à mériter ton temps libre. Ta soirée compte autant que celle d'une collègue qui a des enfants.",classe:"or"},
+  ]};
+const EXEMPLE_PRISE_SOLO={type:"texte",pour:["solo"],texte:"Ensuite, transforme ce qui est sous ta prise en une action toute petite et très concrète : pas \"mieux m'organiser\" mais \"demander à la maman de Zoé, jeudi à la sortie de l'école, si on s'échange les mercredis\". Avec un quand, un où, un comment. Plus c'est précis et modeste, plus ça se fait réellement."};
+const EXEMPLE_PRISE_SEULE={type:"texte",pour:["seule"],texte:"Ensuite, transforme ce qui est sous ta prise en une action toute petite et très concrète : pas \"mieux m'organiser\" mais \"dire à ma sœur dimanche qu'elle organise l'anniversaire de papa cette année\". Avec un quand, un où, un comment. Plus c'est précis et modeste, plus ça se fait réellement."};
+
+const phrasesSolo=[
+  {situation:"Proposer un échange à un autre parent",texte:"\"Je cherche à m'organiser pour les mercredis. Ça t'irait qu'on s'échange : je prends ta fille un mercredi, tu prends la mienne le suivant ?\"",pourquoi:"Un échange se demande plus facilement qu'un service : personne ne doit rien à personne."},
+  {situation:"Demander un créneau précis à un proche",texte:"\"Est-ce que tu pourrais prendre mon fils le jeudi de 16 h à 18 h, une semaine sur deux ? Ça m'aiderait beaucoup.\"",pourquoi:"Une demande précise est plus facile à accepter qu'un « si un jour tu peux m'aider »."},
+  {situation:"Confier une responsabilité à ton enfant",texte:"\"À partir de maintenant, ton cartable du lendemain, c'est toi qui le prépares avec ta liste. Chaque soir, quand c'est fait, tu coches ton calendrier.\"",pourquoi:"Tu lui confies la tâche et le fait d'y penser. Le calendrier l'aide à s'en souvenir, et toi, tu vois où ça en est."},
+];
+const phrasesSeule=[
+  {situation:"Au travail, quand on te demande de rester",texte:"\"Ce soir, je ne pourrai pas rester. On regarde demain comment répartir ce qui reste ?\"",pourquoi:"Ta soirée compte autant que celle d'une collègue qui a des enfants. Aucune justification à donner."},
+  {situation:"Confier une responsabilité dans ta famille",texte:"\"Cette année, est-ce que tu peux t'occuper de l'anniversaire de papa, de A à Z : la date, le lieu, le cadeau ?\"",pourquoi:"Tu confies la responsabilité entière, pas seulement un coup de main."},
+  {situation:"Demander un coup de main à une amie",texte:"\"Est-ce que tu pourrais venir samedi matin m'aider à monter mon armoire ? Je t'invite à manger après.\"",pourquoi:"Un échange se demande plus facilement qu'un service."},
+];
+const phrasesIntro={
+  couple:"Parler de charge mentale à son partenaire, sa famille ou ses collègues est difficile. Ces phrases t'aident à le faire sans accuser, sans minimiser, et sans que ce soit une guerre.",
+  solo:"Demander à ton réseau, confier une responsabilité à ton enfant : ça s'apprend. Ces phrases t'aident à le faire simplement, sans te justifier.",
+  seule:"Rendre ce qu'on te confie, demander un coup de main : ça s'apprend. Ces phrases t'aident à le faire simplement, sans te justifier."
+};
+const LACHER_SEULE_ITEM={titre:"Prouver que j'y arrive seule, sans personne",desc:"Demander n'est pas la preuve que tu n'y arrives pas. C'est la preuve que tu t'organises.",bg:"#eaf5f0",border:"#80c8a8"};
+
+const rappelTextes={
+  solo:"<strong>Rappel important :</strong> redistribuer ne signifie pas \"demander de l'aide\". Ça signifie transférer la responsabilité, pas juste l'exécution. « Ton sac de piscine, c'est toi qui le prépares avec ta liste » est une redistribution. « Tu peux m'aider à faire ton sac ? » maintient la charge mentale chez toi.",
+  seule:"<strong>Rappel important :</strong> redistribuer ne signifie pas \"demander de l'aide\". Ça signifie transférer la responsabilité, pas juste l'exécution. « Peux-tu t'occuper de l'anniversaire de papa, de A à Z ? » est une redistribution. « Peux-tu m'aider à choisir le cadeau ? » maintient la charge mentale chez toi."
+};
+const fichesInfo={
+  enfant:"📄 <strong>Au moment du téléchargement, tout ce que tu remplis ici est classé par personne.</strong> Tu obtiens une fiche par personne, prête à imprimer et à lui donner. Si plusieurs tâches vont à la même personne, elles se retrouvent sur la même fiche. Sous chaque tâche, des boutons t'aident. « C'est un enfant » donne une fiche à sa taille, avec un calendrier à cocher. « Un service », « Automatisation », « IA » et « Liste modèle » vont sur ta fiche à toi, « Ce que je mets en place ». « J'arrête », c'est pour ce que tu supprimes.",
+  seule:"📄 <strong>Au moment du téléchargement, tout ce que tu remplis ici est classé par personne.</strong> Tu obtiens une fiche par personne, prête à imprimer et à lui donner. Si plusieurs tâches vont à la même personne, elles se retrouvent sur la même fiche. Sous chaque tâche, des boutons t'aident. « Un service », « Automatisation », « IA » et « Liste modèle » vont sur ta fiche à toi, « Ce que je mets en place ». « J'arrête », c'est pour ce que tu supprimes."
+};
+const aquiReseau={
+  couple:"ton ou ta partenaire, un enfant assez grand, tes parents, ta sœur ou ton frère, une amie, une voisine, un collègue.",
+  solo:"un enfant assez grand, tes parents, ta sœur ou ton frère, une amie, une voisine, un autre parent de l'école pour un échange, un collègue.",
+  seule:"tes parents, ta sœur ou ton frère, une amie, une voisine, un collègue."
+};
+const aquiService={couple:"ménage, courses livrées, accueil parascolaire, cantine, garde d'enfants.",solo:"ménage, courses livrées, accueil parascolaire, cantine, garde d'enfants.",seule:"ménage, courses livrées, repassage, petites réparations."};
+const aquiModele={couple:"cartable, piscine, valise",solo:"cartable, piscine, valise",seule:"courses, valise, ménage"};
+const aquiAsso={couple:"échanges de services entre habitants.",solo:"échanges de services entre habitants, associations de familles monoparentales.",seule:"échanges de services entre habitants."};
+function aideAquiHTML(s){
+  return "Tu ne sais pas à qui ? Pense à :<ul>"
+    +"<li><strong>Ton réseau</strong> : "+aquiReseau[s]+"</li>"
+    +"<li><strong>Un service</strong> : "+aquiService[s]+"</li>"
+    +"<li><strong>L'automatisation</strong> : prélèvements automatiques, rappels dans ton téléphone, commandes qui reviennent chaque mois.</li>"
+    +"<li><strong>L'intelligence artificielle</strong> : te proposer les menus de la semaine et la liste de courses, préparer un planning, t'aider à écrire un message difficile.</li>"
+    +"<li><strong>Une liste modèle</strong> : écrite une fois, elle te ressert à chaque fois ("+aquiModele[s]+").</li>"
+    +"<li><strong>Une association ou ta commune</strong> : "+aquiAsso[s]+"</li>"
+    +"</ul>Tu peux aussi laisser vide pour l'instant : la tâche reste dans ton plan, sans fiche.";
+}
+const suggestionsParSituation={
+  solo:["Le cartable du lendemain","Mettre et débarrasser la table","Le mercredi après-midi, en échange avec un autre parent","Les courses, avec une liste modèle livrée","Les rendez-vous médicaux (prise + suivi)","Les repas d'un ou plusieurs soirs par semaine","Les lessives de A à Z","Le linge des enfants (tri des tailles, saisons)","L'administratif et les factures","L'organisation des vacances","Les poubelles et le recyclage"],
+  seule:["Les courses, avec une liste modèle livrée","L'administratif et les factures","Les repas de la semaine","L'organisation des fêtes de famille","Les cadeaux d'anniversaire de la famille","Les apéros ou les sorties de l'équipe","Les remplacements au travail","Le ménage","Les réparations du logement","Les rendez-vous médicaux","Les poubelles et le recyclage"]
+};
+const ideesAqui={
+  couple:["Mon partenaire","Ma partenaire","Mon fils","Ma fille","Ma mère","Mon père","Ma sœur","Mon frère","Une amie","Une voisine","Un collègue","Une aide à domicile"],
+  solo:["Mon fils","Ma fille","Ma mère","Mon père","Ma sœur","Mon frère","Une amie","Une voisine","Un autre parent","Un collègue","Une aide à domicile"],
+  seule:["Ma mère","Mon père","Ma sœur","Mon frère","Une amie","Une voisine","Un collègue","Une aide à domicile"]
+};
+const exemplesFin={
+  solo:["Par exemple : « Le mercredi après-midi, je m'organise en échange avec la maman de Zoé. » « Les mails du travail après 19 h, j'arrête. »","Par exemple : « Je m'autorise à commander les courses en ligne. » « Je me permets un repas tout simple le mercredi. »"],
+  seule:["Par exemple : « Les apéros de l'équipe, ce n'est plus moi qui les organise. » « Les mails du travail après 19 h, j'arrête. »","Par exemple : « Je m'autorise à ne pas répondre aux messages du travail le week-end. » « Je m'autorise à ne plus tout anticiper pour tout le monde. »"]
+};
+
+const theorieBase=[
+  {pour:["couple"],emoji:"🔄",titre:"La redistribution, bien plus qu'une question d'organisation",source:"Eve Rodsky, Fair Play / Hochschild",contenu:[
     {type:"texte",texte:"La charge mentale ne se règle pas avec un meilleur agenda ou une appli de plus. Elle se règle par une vraie redistribution de la responsabilité, pas juste de l'exécution."},
     {type:"hl",texte:"🔑 Toute la différence est là : quand tu demandes \"tu peux faire les courses ?\", c'est encore toi qui penses aux courses, qui fais la liste, qui surveilles le frigo. Quand tu confies la responsabilité des courses, c'est l'autre qui pense, qui liste, qui surveille. Ça, c'est une redistribution."},
     {type:"texte",texte:"Eve Rodsky, dans Fair Play, découpe chaque tâche en trois temps : concevoir (y penser), planifier (l'organiser), exécuter (la faire). La vraie redistribution transfère les trois, pas seulement le dernier."},
     {type:"stat",texte:"Les couples qui ont une vraie conversation sur la répartition des tâches, y compris mentales, en ressortent avec une relation plus satisfaisante et nettement moins de stress, surtout chez les femmes",source:"Recherche sur le couple et la famille"},
     {type:"hl",texte:"💡 Oui, cette conversation fait peur. Mais ne pas l'avoir coûte plus cher : le ressentiment qui s'accumule en silence est l'un des poisons les plus sûrs d'une relation à long terme.",classe:"or"},
   ]},
+  PAGE1_SOLO,
+  PAGE1_SEULE,
   {emoji:"📤",titre:"Sortir de ta tête, l'externalisation",source:"Recherche en psychologie cognitive, cognitive offloading",contenu:[
     {type:"texte",texte:"Ton cerveau n'est pas fait pour stocker cinquante choses à ne pas oublier. Chaque \"il faut que je pense à...\" qui tourne dans ta tête consomme de la mémoire de travail : cette ressource limitée dont tu as besoin pour réfléchir, décider, être présente."},
     {type:"hl",texte:"🧠 La science est claire là-dessus : noter quelque chose libère ta mémoire de travail et te permet de passer à autre chose, sans la peur d'oublier. C'est ce qu'on appelle l'externalisation cognitive, sortir les choses de ta tête vers un support extérieur. Et ça marche remarquablement bien."},
@@ -266,7 +367,9 @@ const theorie=[
   {emoji:"🎯",titre:"Mettre ton énergie là où tu as une prise",source:"Approche cognitivo-comportementale, résolution de problème",contenu:[
     {type:"texte",texte:"Face à la surcharge, on gaspille souvent une énergie folle sur ce qui ne dépend pas de nous : ruminer, se plaindre, vouloir changer l'autre, refaire mentalement la journée. Et c'est humain, c'est même le premier mouvement de tout le monde face à ce qui déborde."},
     {type:"hl",texte:"🎯 Mais il y a une question qui change tout : \"À quel endroit mon énergie sera-t-elle le plus utile ?\" Prends une source de charge qui t'épuise, et trie en deux colonnes : ce qui est sous ta prise (ce que tu peux changer, déléguer, abandonner, dire), et ce qui ne l'est pas (les réactions des autres, le passé, les imprévus)."},
-    {type:"texte",texte:"Ensuite, transforme ce qui est sous ta prise en une action toute petite et très concrète : pas \"mieux répartir les tâches\" mais \"proposer à mon partenaire mercredi soir qu'il reprenne entièrement les lessives\". Avec un quand, un où, un comment. Plus c'est précis et modeste, plus ça se fait réellement."},
+    {type:"texte",pour:["couple"],texte:"Ensuite, transforme ce qui est sous ta prise en une action toute petite et très concrète : pas \"mieux répartir les tâches\" mais \"proposer à mon partenaire mercredi soir qu'il reprenne entièrement les lessives\". Avec un quand, un où, un comment. Plus c'est précis et modeste, plus ça se fait réellement."},
+    EXEMPLE_PRISE_SOLO,
+    EXEMPLE_PRISE_SEULE,
     {type:"hl",texte:"🌿 Et pour le reste, ce qui n'est pas sous ta prise, l'énergie que tu y mettais peut être doucement rapatriée vers toi. Ce n'est pas de la résignation. C'est de la stratégie.",classe:"vert"},
   ]},
   {emoji:"🎈",titre:"Délester · enlever du poids sans tout lâcher",source:"Dr Kristin Neff / Dr Susan David",contenu:[
@@ -285,7 +388,11 @@ const theorie=[
   ]},
 ];
 
-const phrases=[
+const phrasesCommunes=[
+  {situation:"Parler à un proche qui sollicite trop",texte:"\"Je t'aime et je veux être là pour toi. Et en ce moment j'ai besoin de te dire que je n'ai plus les ressources pour être aussi présente. J'ai besoin de me recharger.\"",pourquoi:"Pose une limite sans rejeter l'autre, en nommant ton état et ton besoin, pas ses comportements."},
+  {situation:"Se parler à soi-même, la permission intérieure",texte:"\"Ce n'est pas parfait, et c'est suffisant. Je fais de mon mieux avec ce que j'ai. Je me donne la permission d'en faire moins aujourd'hui.\"",pourquoi:"La conversation la plus importante est souvent celle qu'on a avec soi-même."},
+];
+const phrasesCouple=[
   {situation:"Ouvrir la conversation sur la charge mentale",texte:"\"J'ai besoin qu'on parle de quelque chose d'important pour moi. Je ne veux pas que ça soit une dispute, je veux qu'on trouve ensemble comment mieux répartir ce que je porte seule en ce moment.\"",pourquoi:"Pose le cadre collaboratif avant de commencer. Enlève la dimension accusatrice."},
   {situation:"Expliquer ce qu'est la charge mentale",texte:"\"Ce n'est pas juste de faire des tâches. C'est de penser à tout, anticiper, planifier, se souvenir, gérer. Et ce travail-là, je le fais presque entièrement seule, même quand tu fais des choses.\"",pourquoi:"Nomme la différence entre exécution et responsabilité mentale, sans agressivité."},
   {situation:"Demander une redistribution concrète",texte:"\"J'aimerais que tu prennes en charge [tâche précise], complètement. Je ne te demande pas de m'aider à le faire, mais d'en être responsable : y penser, le planifier, le faire. Est-ce que tu peux faire ça ?\"",pourquoi:"Précis, concret, et transfert complet de responsabilité, pas juste d'exécution."},
@@ -294,7 +401,7 @@ const phrases=[
   {situation:"Se parler à soi-même, la permission intérieure",texte:"\"Ce n'est pas parfait, et c'est suffisant. Je fais de mon mieux avec ce que j'ai. Je me donne la permission d'en faire moins aujourd'hui.\"",pourquoi:"La conversation la plus importante est souvent celle qu'on a avec soi-même."},
 ];
 
-const lacherItems=[
+const lacherBase=[
   {titre:"La maison parfaitement rangée en permanence",desc:"Une maison habitée est une maison vivante. Le rangement peut attendre, peut être fait différemment, peut être fait par d'autres.",bg:"#eef0fa",border:"#6080c8"},
   {titre:"Répondre à tous les messages dans la journée",desc:"Ta disponibilité n'est pas une obligation. Les gens peuvent attendre, et ceux qui t'aiment vraiment comprennent.",bg:"#f0eefa",border:"#a080c8"},
   {titre:"Le repas fait maison et équilibré chaque soir",desc:"Un repas simple et rapide nourrit autant. La culpabilité du repas \"insuffisant\" est souvent plus épuisante que le repas lui-même.",bg:"#eaf5f0",border:"#80c8a8"},
@@ -304,7 +411,29 @@ const lacherItems=[
   {titre:"Être disponible à 100% pour tout le monde en même temps",desc:"Tu es une personne, pas un service. Tes ressources sont limitées, et c'est normal et sain.",bg:"#f0eefa",border:"#a080c8"},
 ];
 
+const suggestionsCouple=[
+  "Les rendez-vous médicaux (prise + suivi)",
+  "Les lessives de A à Z",
+  "Les courses + la liste + le suivi du frigo",
+  "Les repas d'un ou plusieurs soirs par semaine",
+  "Les cadeaux d'anniversaire de sa famille",
+  "Le suivi des devoirs",
+  "Le lien avec l'école / la crèche",
+  "L'administratif et les factures",
+  "Le tri et le rangement d'une pièce",
+  "L'organisation des vacances",
+  "Le linge des enfants (tri des tailles, saisons)",
+  "Les poubelles et le recyclage",
+];
+
+
+
+const SIT_KEY='alarenverse_situation';
+let situation=null, situationStockee=null;
+function pour(x){return !x||typeof x==='string'||!x.pour||x.pour.indexOf(situation)>-1;}
+let theorie=[], phrases=[], suggestionsTaches=[], lacherItems=[];
 let theorieIdx=0, lacherSelected=new Set();
+const exemplesCouple=[null,null];
 
 function showPhase(id){
   document.querySelectorAll('.phase').forEach(p=>p.classList.remove('active'));
@@ -317,6 +446,39 @@ const pc=document.getElementById('preview-container');
 [{e:'🔄',t:'La redistribution, responsabilité vs exécution'},{e:'📤',t:'Sortir de ta tête, l\'externalisation'},{e:'🎯',t:'Mettre ton énergie là où tu as une prise'},{e:'🎈',t:'Délester, enlever du poids sans tout lâcher'},{e:'✨',t:'Le suffisamment bon, Winnicott & Brown'},{e:'📋',t:'Mon plan de redistribution concret'},{e:'💬',t:'Phrases types pour avoir la conversation'},{e:'🎈',t:'Exercice : ce que je choisis de délester'},{e:'✍️',t:'Ce que je redistribue, ce que je m\'autorise'}].forEach(i=>{
   pc.innerHTML+=`<div class="preview-item"><span style="font-size:16px;">${i.e}</span><span>${i.t}</span></div>`;
 });
+
+// Ta situation
+function lireSituation(){try{const s=localStorage.getItem(SIT_KEY);return ['seule','couple','solo'].indexOf(s)>-1?s:null;}catch(e){return null;}}
+function choisirSituation(s){
+  situation=s;
+  try{localStorage.setItem(SIT_KEY,s);}catch(e){}
+  document.querySelectorAll('.situation-opt').forEach(function(b){b.classList.toggle('sel',b.getAttribute('data-s')===s);});
+  const b=document.getElementById('btn-commencer');if(b)b.disabled=false;
+}
+function commencer(){
+  if(!situation)return;
+  appliquerSituation();
+  theorieIdx=0;renderTheorie();
+  showPhase('theorie');
+}
+function appliquerSituation(){
+  theorie=theorieBase.filter(pour).map(function(p){return Object.assign({},p,{contenu:p.contenu.filter(pour)});});
+  phrases=(situation==='solo'?phrasesSolo.concat(phrasesCommunes):situation==='seule'?phrasesSeule.concat(phrasesCommunes):phrasesCouple);
+  suggestionsTaches=(situation==='couple'?suggestionsCouple:suggestionsParSituation[situation]);
+  lacherItems=lacherBase.concat([LACHER_SEULE_ITEM]);
+  const r=document.getElementById('rappel-redistrib');
+  if(r){if(!r.getAttribute('data-couple'))r.setAttribute('data-couple',r.innerHTML);r.innerHTML=situation==='couple'?r.getAttribute('data-couple'):rappelTextes[situation];}
+  document.getElementById('fiches-info').innerHTML=situation==='seule'?fichesInfo.seule:fichesInfo.enfant;
+  document.getElementById('aqui-aide').innerHTML=aideAquiHTML(situation);
+  document.getElementById('phrases-intro').textContent=phrasesIntro[situation];
+  ['ex-e1','ex-e2'].forEach(function(id,k){const el=document.getElementById(id);if(!el)return;if(exemplesCouple[k]===null)exemplesCouple[k]=el.textContent;el.textContent=situation==='couple'?exemplesCouple[k]:exemplesFin[situation][k];});
+  document.getElementById('plan-container').innerHTML='';
+  for(let i=0;i<3;i++) addTache();
+  majListeAqui();
+  renderSuggestions();
+  renderPhrases();
+  renderLacher();
+}
 
 function renderTheorie(){
   const t=theorie[theorieIdx];
@@ -342,21 +504,6 @@ function nextTheorie(){
 }
 
 // Plan redistribution
-const suggestionsTaches=[
-  "Les rendez-vous médicaux (prise + suivi)",
-  "Les lessives de A à Z",
-  "Les courses + la liste + le suivi du frigo",
-  "Les repas d'un ou plusieurs soirs par semaine",
-  "Les cadeaux d'anniversaire de sa famille",
-  "Le suivi des devoirs",
-  "Le lien avec l'école / la crèche",
-  "L'administratif et les factures",
-  "Le tri et le rangement d'une pièce",
-  "L'organisation des vacances",
-  "Le linge des enfants (tri des tailles, saisons)",
-  "Les poubelles et le recyclage",
-];
-
 function renderSuggestions(){
   const sc=document.getElementById('suggestions-container');
   if(!sc)return;
@@ -376,68 +523,117 @@ function renderSuggestions(){
   });
 }
 
+const SPECIAUX=[["service","Un service"],["auto","Automatisation"],["ia","IA"],["modele","Liste modèle"]];
+function typeSpecial(n){
+  n=String(n||'').trim().toLowerCase();
+  if(/^(un )?services?$/.test(n))return 'service';
+  if(/^automati(sation|que|ser)$/.test(n))return 'auto';
+  if(/^(ia|i\.a\.?|intelligence artificielle)$/.test(n))return 'ia';
+  if(/^(une )?listes? mod[eè]les?$/.test(n))return 'modele';
+  return null;
+}
+function labelSpecial(t){for(const s of SPECIAUX){if(s[0]===t)return s[1];}return '';}
+function majPills(bloc){
+  const v=bloc.querySelector('.tache-a-qui').value;
+  const t=typeSpecial(v), arret=estArret(v);
+  bloc.querySelectorAll('.aqui-pill[data-v]').forEach(function(p){
+    const k=p.getAttribute('data-v');
+    p.classList.toggle('sel',(k==='arret'&&arret)||(k===t));
+  });
+  const enf=bloc.querySelector('.aqui-pill.enfant');
+  if(enf){const off=!!(t||arret);enf.disabled=off;if(off){bloc.dataset.enfant='';enf.classList.remove('sel');}}
+}
 function addTache(texte){
   const container=document.getElementById('plan-container');
-  const row=document.createElement('div');
-  row.className='tache-row';
-  row.innerHTML=`
-    <input class="tache-field" placeholder="Ex : Gérer les rendez-vous médicaux des enfants...">
-    <input class="tache-a-qui" list="liste-aqui" placeholder="Prénom" autocomplete="off" aria-label="À qui (prénom)">`;
-  container.appendChild(row);
-  row.querySelector('.tache-a-qui').addEventListener('input',majListeAqui);
+  const bloc=document.createElement('div');
+  bloc.className='tache-bloc';
+  let pills='';
+  if(situation!=='seule') pills+='<button type="button" class="aqui-pill enfant">C\'est un enfant</button>';
+  SPECIAUX.forEach(function(s){pills+='<button type="button" class="aqui-pill" data-v="'+s[0]+'">'+s[1]+'</button>';});
+  pills+='<button type="button" class="aqui-pill" data-v="arret">J\'arrête</button>';
+  bloc.innerHTML=`
+    <div class="tache-row">
+      <input class="tache-field" placeholder="Ex : Gérer les rendez-vous médicaux des enfants...">
+      <input class="tache-a-qui" list="liste-aqui" placeholder="Prénom" autocomplete="off" aria-label="À qui (prénom)">
+    </div>
+    <div class="aqui-pills">${pills}</div>`;
+  if(situation==='seule') bloc.querySelector('.tache-field').placeholder='Ex : Organiser l\'anniversaire de papa...';
+  container.appendChild(bloc);
+  const aqui=bloc.querySelector('.tache-a-qui');
+  aqui.addEventListener('input',function(){majListeAqui();majPills(bloc);});
+  bloc.querySelectorAll('.aqui-pill[data-v]').forEach(function(p){
+    p.addEventListener('click',function(){
+      const k=p.getAttribute('data-v');
+      const lab=k==='arret'?"J'arrête":labelSpecial(k);
+      aqui.value=p.classList.contains('sel')?'':lab;
+      majPills(bloc);majListeAqui();
+    });
+  });
+  const enf=bloc.querySelector('.aqui-pill.enfant');
+  if(enf) enf.addEventListener('click',function(){
+    if(enf.disabled)return;
+    const on=!enf.classList.contains('sel');
+    enf.classList.toggle('sel',on);bloc.dataset.enfant=on?'1':'';
+    if(on&&!aqui.value.trim())aqui.focus();
+  });
   if(typeof texte==='string'&&texte){
-    row.querySelector('.tache-field').value=texte;
+    bloc.querySelector('.tache-field').value=texte;
   }
 }
 // Regroupement par personne, pour les fiches à donner
 function escT(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function estArret(n){return /^(j[’']?arr[eê]te|je l[’']?arr[eê]te|arr[eê]ter|supprimer|à supprimer|stop)$/i.test(n.trim());}
+function estArret(n){return /^(j[’']?arr[eê]te|je l[’']?arr[eê]te|arr[eê]ter|supprimer|à supprimer|stop)$/i.test(String(n||'').trim());}
 function lirePlan(){
   const lignes=[];
-  document.querySelectorAll('#plan-container .tache-row').forEach(row=>{
-    const tache=(row.querySelector('.tache-field')?.value||'').trim();
-    const aqui=(row.querySelector('.tache-a-qui')?.value||'').replace(/\s+/g,' ').trim();
-    if(tache) lignes.push({tache,aqui});
+  document.querySelectorAll('#plan-container .tache-bloc').forEach(bloc=>{
+    const tache=(bloc.querySelector('.tache-field')?.value||'').trim();
+    const aqui=(bloc.querySelector('.tache-a-qui')?.value||'').replace(/\s+/g,' ').trim();
+    const enfant=bloc.dataset.enfant==='1'&&!!aqui&&!estArret(aqui)&&!typeSpecial(aqui);
+    if(tache) lignes.push({tache,aqui,enfant});
   });
   return lignes;
 }
 function parPersonne(){
   const groupes=[],index={};
   lirePlan().forEach(l=>{
-    if(!l.aqui||estArret(l.aqui))return;
+    if(!l.aqui||estArret(l.aqui)||typeSpecial(l.aqui))return;
     const k=l.aqui.toLowerCase();
-    if(!(k in index)){index[k]=groupes.length;groupes.push({nom:l.aqui,taches:[]});}
+    if(!(k in index)){index[k]=groupes.length;groupes.push({nom:l.aqui,taches:[],enfant:false});}
     groupes[index[k]].taches.push(l.tache);
+    if(l.enfant)groupes[index[k]].enfant=true;
   });
   return groupes;
+}
+function parAction(){
+  return lirePlan().filter(l=>typeSpecial(l.aqui)).map(l=>({tache:l.tache,type:typeSpecial(l.aqui)}));
 }
 function majListeAqui(){
   const dl=document.getElementById('liste-aqui');if(!dl)return;
   const noms=parPersonne().map(g=>g.nom);
-  const idees=["Mon partenaire","Ma partenaire","Mon fils","Ma fille","Ma mère","Mon père","Ma sœur","Mon frère","Une amie","Une voisine","Un collègue","Une aide à domicile"];
+  const idees=ideesAqui[situation||'couple'];
   const deja=new Set(noms.map(n=>n.toLowerCase()));
-  dl.innerHTML=noms.concat(idees.filter(n=>!deja.has(n.toLowerCase())),["J'arrête"]).map(n=>'<option value="'+escT(n)+'"></option>').join('');
+  dl.innerHTML=noms.concat(idees.filter(n=>!deja.has(n.toLowerCase())),SPECIAUX.map(s=>s[1]),["J'arrête"]).map(n=>'<option value="'+escT(n)+'"></option>').join('');
 }
-// Initialiser avec 3 lignes
-for(let i=0;i<3;i++) addTache();
-majListeAqui();
 
 // Phrases
 const phrasesEl=document.getElementById('phrases-container');
 let phrasesGardees=new Set();
-phrases.forEach((p,i)=>{
-  const div=document.createElement('div');
-  div.className='phrase-card';
-  div.innerHTML=`
-    <div class="phrase-situation">${p.situation}</div>
-    <div class="phrase-texte">${p.texte}</div>
-    <div class="phrase-pourquoi">${p.pourquoi}</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="phrase-copy" id="copy-${i}" onclick="copyPhrase(${i})">Copier cette phrase</button>
-      <button class="phrase-copy" id="garder-${i}" onclick="garderPhrase(${i})" style="background:#f4f0fa;border-color:rgba(160,128,200,0.35);color:#7a5aa8;">☆ Garder dans mon récap</button>
-    </div>`;
-  phrasesEl.appendChild(div);
-});
+function renderPhrases(){
+  phrasesEl.innerHTML='';phrasesGardees=new Set();
+  phrases.forEach((p,i)=>{
+    const div=document.createElement('div');
+    div.className='phrase-card';
+    div.innerHTML=`
+      <div class="phrase-situation">${p.situation}</div>
+      <div class="phrase-texte">${p.texte}</div>
+      <div class="phrase-pourquoi">${p.pourquoi}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="phrase-copy" id="copy-${i}" onclick="copyPhrase(${i})">Copier cette phrase</button>
+        <button class="phrase-copy" id="garder-${i}" onclick="garderPhrase(${i})" style="background:#f4f0fa;border-color:rgba(160,128,200,0.35);color:#7a5aa8;">☆ Garder dans mon récap</button>
+      </div>`;
+    phrasesEl.appendChild(div);
+  });
+}
 
 function garderPhrase(i){
   const btn=document.getElementById('garder-'+i);
@@ -463,33 +659,36 @@ function copyPhrase(i){
 
 // Lâcher prise
 const lacherEl=document.getElementById('lacher-container');
-lacherItems.forEach((item,i)=>{
-  const div=document.createElement('div');
-  div.className='lacher-item';
-  div.style.cssText=`background:${item.bg};border-color:${item.border}40;`;
-  div.id='lacher-'+i;
-  div.innerHTML=`
-    <div style="display:flex;align-items:flex-start;gap:12px;">
-      <div class="lacher-check" id="lcheck-${i}"></div>
-      <div>
-        <div class="lacher-titre">${item.titre}</div>
-        <div class="lacher-desc" style="color:#607080;">${item.desc}</div>
-      </div>
-    </div>`;
-  div.onclick=()=>{
-    const check=document.getElementById('lcheck-'+i);
-    if(lacherSelected.has(i)){
-      lacherSelected.delete(i);
-      check.classList.remove('done');check.textContent='';
-      div.classList.remove('selected');div.style.borderColor=item.border+'40';
-    } else {
-      lacherSelected.add(i);
-      check.classList.add('done');check.textContent='✓';
-      div.classList.add('selected');div.style.borderColor=item.border;
-    }
-  };
-  lacherEl.appendChild(div);
-});
+function renderLacher(){
+  lacherEl.innerHTML='';lacherSelected=new Set();
+  lacherItems.forEach((item,i)=>{
+    const div=document.createElement('div');
+    div.className='lacher-item';
+    div.style.cssText=`background:${item.bg};border-color:${item.border}40;`;
+    div.id='lacher-'+i;
+    div.innerHTML=`
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="lacher-check" id="lcheck-${i}"></div>
+        <div>
+          <div class="lacher-titre">${item.titre}</div>
+          <div class="lacher-desc" style="color:#607080;">${item.desc}</div>
+        </div>
+      </div>`;
+    div.onclick=()=>{
+      const check=document.getElementById('lcheck-'+i);
+      if(lacherSelected.has(i)){
+        lacherSelected.delete(i);
+        check.classList.remove('done');check.textContent='';
+        div.classList.remove('selected');div.style.borderColor=item.border+'40';
+      } else {
+        lacherSelected.add(i);
+        check.classList.add('done');check.textContent='✓';
+        div.classList.add('selected');div.style.borderColor=item.border;
+      }
+    };
+    lacherEl.appendChild(div);
+  });
+}
 
 function checkEngagement(){
   // Engagement libre, bouton toujours accessible
@@ -499,19 +698,25 @@ function showFin(){
   const rc=document.getElementById('recap-container');
   rc.innerHTML='';
   // Plan de redistribution : tâches + à qui
-  const lignes=lirePlan().map(l=>escT(l.tache)+(l.aqui?' → <strong>'+(estArret(l.aqui)?"J'arrête":escT(l.aqui))+'</strong>':''));
+  const lignes=lirePlan().map(l=>{
+    let dest='';
+    if(l.aqui){dest=estArret(l.aqui)?"J'arrête":typeSpecial(l.aqui)?labelSpecial(typeSpecial(l.aqui)):escT(l.aqui)+(l.enfant?' (enfant)':'');}
+    return escT(l.tache)+(dest?' → <strong>'+dest+'</strong>':'');
+  });
   if(lignes.length>0){
     rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mon plan de redistribution</div><div class="recap-r">${lignes.join('<br>')}</div></div>`;
   }
   const groupes=parPersonne();
-  if(groupes.length>0){
-    const noms=groupes.map(g=>'<strong>'+escT(g.nom)+'</strong> ('+g.taches.length+(g.taches.length>1?' tâches':' tâche')+')').join(', ');
-    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mes fiches à donner</div><div class="recap-r">${noms}<br><em>Elles sont à la fin de ton téléchargement, une par page, prêtes à imprimer.</em></div></div>`;
+  const actions=parAction();
+  if(groupes.length>0||actions.length>0){
+    let noms=groupes.map(g=>'<strong>'+escT(g.nom)+'</strong> ('+g.taches.length+(g.taches.length>1?' tâches':' tâche')+')').join(', ');
+    if(actions.length>0) noms+=(noms?', ':'')+'<strong>ma fiche « Ce que je mets en place »</strong> ('+actions.length+(actions.length>1?' tâches':' tâche')+')';
+    rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Mes fiches</div><div class="recap-r">${noms}<br><em>Elles sont à la fin de ton téléchargement, une par page, prêtes à imprimer.</em></div></div>`;
   }
   const e1=document.getElementById('e1').value.trim();
   const e2=document.getElementById('e2').value.trim();
-  if(e1) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ce que je choisis de redistribuer / d'arrêter</div><div class="recap-r">"${e1}"</div></div>`;
-  if(e2) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">La permission que je me donne</div><div class="recap-r">"${e2}"</div></div>`;
+  if(e1) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ce que je choisis de redistribuer / d'arrêter</div><div class="recap-r">"${escT(e1)}"</div></div>`;
+  if(e2) rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">La permission que je me donne</div><div class="recap-r">"${escT(e2)}"</div></div>`;
   if(lacherSelected.size>0){
     const lacher=[...lacherSelected].map(i=>lacherItems[i].titre).join(' / ');
     rc.innerHTML+=`<div class="recap-box" style="margin-bottom:10px;"><div class="recap-q">Ce que je choisis de délester</div><div class="recap-r">${lacher}</div></div>`;
@@ -525,9 +730,24 @@ function showFin(){
   window.scrollTo(0,0);
 }
 
-renderTheorie();
-renderSuggestions();
+(function(){
+  situationStockee=lireSituation();
+  situation=situationStockee||'couple';
+  appliquerSituation();renderTheorie();
+  situation=null;
+  const lab=document.getElementById('situation-label');
+  if(situationStockee){
+    if(lab)lab.textContent="Ta situation d'hier, tu peux la changer";
+    choisirSituation(situationStockee);
+  }
+})();
 
+const DEF_SPECIAL={
+  service:"<strong>Un service</strong> : je trouve le service, je compare si besoin, et je réserve.",
+  auto:"<strong>Automatisation</strong> : je règle le prélèvement, le rappel ou la commande qui revient.",
+  ia:"<strong>IA</strong> : je lui demande des idées (menus, liste de courses, planning, message), puis je garde ce qui me va.",
+  modele:"<strong>Liste modèle</strong> : je l'écris une fois, et je la range là où je la verrai au bon moment."
+};
 function telechargerReponses(){
   var recap=document.getElementById('recap-container');
   var date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
@@ -545,12 +765,28 @@ function telechargerReponses(){
     +'.fiche h2{font-size:26px;font-weight:normal;color:#3d2d50;margin:0 0 22px;}'
     +'.fiche ul{margin:8px 0 22px;padding-left:22px;}'
     +'.fiche li{font-size:17px;margin-bottom:8px;}'
+    +'.fiche ul.coche{list-style:none;padding-left:0;}'
     +'.fiche-def{background:#fdf8ee;border-left:3px solid #c8a060;border-radius:8px;padding:12px 16px;margin-bottom:18px;font-size:15px;}'
     +'.fiche p{font-size:15px;margin:0 0 14px;}'
     +'.fiche-merci{font-style:italic;margin-top:24px;}'
     +'.fiche-pied{margin-top:30px;font-size:10px;color:#c8b8a0;text-align:center;}'
+    +'.cal{width:100%;border-collapse:collapse;margin:6px 0 20px;table-layout:fixed;}'
+    +'.cal th{font-size:13px;font-weight:normal;color:#8a7a60;padding:6px 0;}'
+    +'.cal td{height:54px;border:1.5px solid #e2d6c4;}'
+    +'.dessin{border:1.5px dashed #e2d6c4;border-radius:12px;height:170px;padding:10px 14px;font-size:12px;color:#c8b8a0;}'
     +'@media print{body{padding:0;}.fiche{border:none;margin-top:0;padding:30px 10px;}.recap-box,.fiche-def{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}';
+  var jours=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
   var fiches=parPersonne().map(function(g){
+    if(g.enfant){
+      return '<div class="fiche"><div class="fiche-pour">Pour</div><h2>'+escT(g.nom)+'</h2>'
+        +'<p><strong>Ta mission :</strong></p>'
+        +'<ul>'+g.taches.map(function(t){return '<li>'+escT(t)+'</li>';}).join('')+'</ul>'
+        +'<div class="fiche-def">C\'est toi qui t\'en occupes, avec ta liste. Si tu oublies, on regarde ta liste ensemble pour l\'ajuster.</div>'
+        +'<p><strong>Ma semaine du :</strong> ………………………</p>'
+        +'<table class="cal"><tr>'+jours.map(function(j){return '<th>'+j+'</th>';}).join('')+'</tr><tr>'+jours.map(function(){return '<td></td>';}).join('')+'</tr></table>'
+        +'<div class="dessin">Mon dessin</div>'
+        +'<div class="fiche-pied">@alarenverse.coaching</div></div>';
+    }
     return '<div class="fiche"><div class="fiche-pour">Pour</div><h2>'+escT(g.nom)+'</h2>'
       +'<p>À partir du ………………………, je te confie complètement :</p>'
       +'<ul>'+g.taches.map(function(t){return '<li>'+escT(t)+'</li>';}).join('')+'</ul>'
@@ -560,6 +796,16 @@ function telechargerReponses(){
       +'<p class="fiche-merci">Merci de prendre ça avec moi.</p>'
       +'<div class="fiche-pied">@alarenverse.coaching</div></div>';
   }).join('');
+  var actions=parAction();
+  if(actions.length){
+    var types=[];actions.forEach(function(a){if(types.indexOf(a.type)<0)types.push(a.type);});
+    fiches+='<div class="fiche"><div class="fiche-pour">Ma fiche</div><h2>Ce que je mets en place</h2>'
+      +'<ul class="coche">'+actions.map(function(a){return '<li>☐ '+escT(a.tache)+' · <em>'+labelSpecial(a.type)+'</em></li>';}).join('')+'</ul>'
+      +'<div class="fiche-def">'+types.map(function(t){return DEF_SPECIAL[t];}).join('<br>')+'</div>'
+      +'<p><strong>Je m\'y mets le :</strong> ………………………</p>'
+      +'<p>Je coche chaque ligne quand c\'est en place.</p>'
+      +'<div class="fiche-pied">@alarenverse.coaching</div></div>';
+  }
   var body='<div class="programme">30 jours pour prendre soin de ma sante mentale</div>'
     +'<h1>Jour 16 · Gerer la charge mentale</h1>'
     +'<div class="date">Mes reponses du '+date+'</div>'
