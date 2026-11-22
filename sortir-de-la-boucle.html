@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Sortir de la boucle · L'Effet Papillon</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--terra:#c2836a;--caramel:#c8a870;--titre:#3d2e45;--texte:#5d4868;--doux:#8a7090;--pale:#a08898;--champ:#fffaf6}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{background:#fdf6f0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf6f0 0%,#f8ece6 45%,#f3eef8 100%);min-height:100vh;font-size:18px;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 70px;color:var(--texte)}
+  header{width:100%;max-width:600px;padding-top:34px;text-align:center}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b0806c;margin-bottom:10px}
+  h1{font-size:clamp(24px,6.2vw,33px);font-weight:500;color:var(--titre);line-height:1.25}
+  .sous-titre{font-size:17px;color:var(--doux);margin-top:10px;line-height:1.6}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,var(--terra),var(--caramel));margin:16px auto 0;border-radius:2px}
+  .wrap{width:100%;max-width:560px}
+  .card{background:white;border-radius:22px;padding:24px 20px;box-shadow:0 8px 34px rgba(194,131,106,0.09);border:1px solid rgba(194,131,106,0.15);margin-top:16px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--terra);margin-bottom:10px}
+  p{font-size:17.5px;line-height:1.75;margin-bottom:12px;color:var(--texte)}
+  .hl{background:linear-gradient(135deg,#fdf3ec,#f8f0f6);border-radius:14px;padding:13px 16px;border-left:3px solid var(--terra);font-size:16.5px;color:var(--titre);line-height:1.7;margin:4px 0 12px}
+  .hl.or{border-left-width:0;border-top:2px solid var(--caramel);background:linear-gradient(135deg,#fdf8ee,#fdf5f0);font-size:18px;text-align:center}
+  .hl.nuance{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f8f2f6)}
+  .partie{display:inline-flex;padding:6px 14px;border-radius:50px;background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.08em;margin-bottom:12px}
+  h2{font-size:21px;font-weight:600;color:var(--titre);line-height:1.4;margin-bottom:12px}
+  .etape{border-top:1px solid rgba(194,131,106,0.18);padding-top:16px;margin-top:16px}
+  .etape:first-of-type{border-top:none;padding-top:0;margin-top:6px}
+  .num{font-family:'Jost',sans-serif;font-size:12.5px;color:var(--terra);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+  .q{font-size:17px;font-weight:600;color:var(--titre);line-height:1.5;margin-bottom:6px}
+  .q-sous{font-family:'Jost',sans-serif;font-size:14.5px;color:var(--doux);line-height:1.55;margin-bottom:10px}
+  .exemple{font-size:15px;line-height:1.55;font-style:italic;background:rgba(253,248,238,0.9);border-left:2px solid rgba(200,168,112,0.6);border-radius:0 10px 10px 0;padding:8px 12px;margin:0 0 10px;color:var(--texte)}
+  textarea{width:100%;border:2px solid rgba(194,131,106,0.25);border-radius:12px;padding:11px 13px;font-size:16px;font-family:'Lora',serif;color:var(--titre);line-height:1.6;outline:none;resize:vertical;background:var(--champ);margin-bottom:8px}
+  textarea:focus{border-color:var(--terra)}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 10px}
+  .pill{border:2px solid rgba(194,131,106,0.28);background:var(--champ);color:var(--texte);border-radius:50px;padding:8px 14px;font-size:14.5px;font-family:'Jost',sans-serif;cursor:pointer;text-align:left;line-height:1.4;max-width:100%}
+  .pill.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));border-color:transparent;color:white}
+  .note-douce{font-family:'Jost',sans-serif;font-size:14.5px;color:#7d6090;line-height:1.55;background:rgba(160,128,200,0.08);border-radius:12px;padding:10px 13px;margin:4px 0 8px}
+  /* La boucle */
+  .boucle{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  .maillon{background:var(--champ);border:1px solid rgba(194,131,106,0.3);border-radius:14px;padding:10px 14px}
+  .maillon .t{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:2px}
+  .maillon .r{font-size:15.5px;color:var(--titre);line-height:1.5}
+  .maillon .r.vide{color:var(--pale);font-family:'Jost',sans-serif;font-size:14px}
+  .fleche{text-align:center;color:var(--terra);font-size:18px;line-height:1;padding:5px 0}
+  .retour{text-align:center;font-family:'Jost',sans-serif;font-size:14.5px;color:#a0644d;margin-top:8px}
+  .sortie{background:linear-gradient(135deg,#eef6f1,#f6f3fa);border:1px solid rgba(127,174,142,0.45);border-radius:14px;padding:12px 14px;margin-top:12px}
+  .sortie .t{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#4f7a60;margin-bottom:4px}
+  .sortie .r{font-size:15.5px;color:var(--titre);line-height:1.55}
+  .btn{background:linear-gradient(135deg,#c2836a,#c8a870);color:white;border:none;border-radius:50px;padding:15px 30px;font-size:17px;cursor:pointer;font-family:'Lora',serif;box-shadow:0 6px 22px rgba(194,131,106,0.3);display:block;margin:16px auto 0;text-decoration:none;text-align:center;max-width:100%;width:fit-content}
+  .btn.second{background:white;color:#a0644d;border:2px solid rgba(194,131,106,0.4);box-shadow:none;font-size:15.5px;padding:11px 24px}
+  .hint{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--pale);text-align:center;margin-top:10px;line-height:1.55}
+  .signature{font-family:'Jost',sans-serif;font-size:14px;color:var(--doux);text-align:center;margin-top:18px;line-height:1.6}
+  .signature a{color:#a0644d}
+  .sources{font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale);line-height:1.6;margin-top:18px;text-align:left}
+  .souffle{display:flex;align-items:center;gap:12px;background:var(--champ);border-radius:16px;padding:12px 14px;margin-top:4px}
+  .bulle{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle,#e8c3ad,#c2836a);flex-shrink:0;animation:souffle 10s ease-in-out infinite}
+  @keyframes souffle{0%,100%{transform:scale(.7)}40%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){.bulle{animation:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">L'Effet Papillon · Ressource offerte</div>
+  <h1>Pourquoi tu revis toujours les mêmes situations</h1>
+  <div class="sous-titre">Un outil à faire seule, en 15 minutes : tu dessines ta boucle, puis tu changes de perspective.</div>
+  <div class="sep"></div>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <div class="label">Avant de commencer</div>
+    <p>Si tu as tendance à abandonner facilement, ce n'est pas un manque de volonté. C'est souvent ton système nerveux qui te protège de quelque chose d'inconfortable.</p>
+    <div class="hl">Fuir ce qui est inconfortable soulage tout de suite. Mais sur la durée, ce soulagement entretient la peur : tu n'as jamais l'occasion d'apprendre que tu pouvais le traverser (Krypotos et al., 2015).</div>
+    <p>Voilà pourquoi tu revis les mêmes situations : chaque fois que la boucle te soulage, elle se renforce. Pour en sortir, il faut d'abord la voir.</p>
+    <div class="hl or">Celle qui continue ne regarde pas que le résultat. Elle apprécie le chemin.</div>
+    <div class="hl nuance">Cette ressource fait partie d'un accompagnement de type coaching. Ce n'est pas une thérapie, et elle ne remplace pas un suivi médical ou psychologique.</div>
+    <div class="q" style="margin-top:14px">D'abord, une minute pour revenir dans ton corps</div>
+    <div class="souffle"><div class="bulle" aria-hidden="true"></div><div class="q-sous" style="margin:0">Inspire sur 4 pendant que le cercle grandit, expire sur 6 pendant qu'il rétrécit. Cinq fois.</div></div>
+  </div>
+
+  <!-- PARTIE 1 -->
+  <div class="card">
+    <div class="partie">Partie 1 · Dessine ta boucle</div>
+
+    <div class="etape">
+      <div class="num">1 · La situation</div>
+      <div class="q">Dans quelle situation est-ce que tu abandonnes, ou que tu revis toujours la même chose ?</div>
+      <div class="exemple">Par exemple : « J'arrête le sport après trois semaines. » « Je lance un projet, puis je le laisse tomber dès que ça devient sérieux. » « Je finis toujours par tout porter seule dans mes relations. »</div>
+      <textarea rows="2" data-k="situation" placeholder="La situation qui revient : ..."></textarea>
+    </div>
+
+    <div class="etape">
+      <div class="num">2 · Le déclencheur</div>
+      <div class="q">Qu'est-ce qui se passe juste avant ?</div>
+      <div class="pills" data-groupe="declencheur"></div>
+      <textarea rows="2" data-k="declencheur" placeholder="Juste avant, il se passe ..."></textarea>
+    </div>
+
+    <div class="etape">
+      <div class="num">3 · Ce que tu ressens</div>
+      <div class="q">À ce moment-là, qu'est-ce qui se passe dans ton corps, et quelle émotion arrive ?</div>
+      <div class="q-sous">Mettre un mot sur ce que tu ressens fait déjà baisser l'intensité.</div>
+      <div class="pills" data-groupe="ressenti"></div>
+    </div>
+
+    <div class="etape">
+      <div class="num">4 · Ce que tu te dis</div>
+      <div class="q">Quelle phrase passe dans ta tête ?</div>
+      <div class="exemple">Par exemple : « Ça ne sert à rien. » « Je ne suis pas faite pour ça. » « De toute façon, je n'y arrive jamais. »</div>
+      <textarea rows="2" data-k="pensee" placeholder="Je me dis : ..."></textarea>
+    </div>
+
+    <div class="etape">
+      <div class="num">5 · Ce que tu fais</div>
+      <div class="q">Et là, qu'est-ce que tu fais ?</div>
+      <div class="pills" data-groupe="action"></div>
+    </div>
+
+    <div class="etape">
+      <div class="num">6 · Ce que ça t'évite</div>
+      <div class="q">Sur le moment, qu'est-ce que ça t'évite ?</div>
+      <div class="pills" data-groupe="evite"></div>
+      <div class="note-douce">C'est ce que j'appelle le retournement : ce que tu fais te protège de quelque chose. Et ce soulagement est exactement ce qui fait revenir la boucle.</div>
+    </div>
+
+    <div class="etape">
+      <div class="num">7 · Ce que ça te coûte</div>
+      <div class="q">Et à long terme, qu'est-ce que ça te coûte ?</div>
+      <div class="exemple">Par exemple : « Je me sens nulle, et j'ose de moins en moins commencer quelque chose. »</div>
+      <textarea rows="2" data-k="cout" placeholder="À long terme, ça me coûte ..."></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label">Ta boucle</div>
+    <div id="boucle"></div>
+  </div>
+
+  <!-- PARTIE 2 -->
+  <div class="card">
+    <div class="partie">Partie 2 · Change de perspective</div>
+
+    <div class="etape">
+      <div class="num">Prendre du recul</div>
+      <div class="q">Si ta meilleure amie vivait exactement cette boucle, qu'est-ce que tu lui dirais ?</div>
+      <div class="q-sous">On voit souvent plus juste pour les autres que pour soi.</div>
+      <div class="exemple">Par exemple : « Je lui dirais : tu n'es pas nulle, tu as peur. Et c'est normal que ce soit dur au bout de trois semaines. »</div>
+      <textarea rows="2" data-k="amie" placeholder="Je lui dirais : ..."></textarea>
+    </div>
+
+    <div class="etape">
+      <div class="num">Regarder autrement</div>
+      <div class="q">Qu'est-ce que le chemin t'apporte déjà, même sans le résultat ?</div>
+      <div class="hl">Dans une étude, des étudiants qui imaginaient chaque jour les étapes de leurs révisions ont mieux réussi leur examen que ceux qui imaginaient seulement leur bonne note (Pham et Taylor, 1999). Le chemin fait avancer davantage que la ligne d'arrivée.</div>
+      <div class="exemple">Par exemple : « Après chaque séance de sport, je dors mieux et je me sens fière, même si mon corps n'a pas encore changé. »</div>
+      <textarea rows="2" data-k="chemin" placeholder="Le chemin m'apporte déjà ..."></textarea>
+    </div>
+
+    <div class="etape">
+      <div class="num">Agir</div>
+      <div class="q">La prochaine fois que le déclencheur arrive : si…, alors je…</div>
+      <div class="q-sous">Décide dès maintenant ce que tu feras, plutôt que d'abandonner. Un pas, même petit, même quand c'est dur.</div>
+      <div class="exemple">Par exemple : « Si je me dis que ça ne sert à rien, alors je fais quand même 10 minutes, et je note ce que ça m'a apporté. »</div>
+      <textarea rows="2" data-k="si" placeholder="Si ..., alors je ..."></textarea>
+      <div class="q" style="margin-top:12px">Et pour revenir dans ta fenêtre, ce jour-là, tu choisis :</div>
+      <div class="pills" data-groupe="geste"></div>
+    </div>
+  </div>
+
+  <!-- FICHE -->
+  <div class="card">
+    <div class="label">Ma fiche</div>
+    <h2>Ma boucle, et ma sortie</h2>
+    <div id="fiche"></div>
+    <button class="btn second" onclick="telecharger()">Garder ma fiche</button>
+  </div>
+
+  <!-- SUITE -->
+  <div class="card" style="text-align:center">
+    <div class="label">Et maintenant ?</div>
+    <h2>Une boucle, ça se voit. Et ça se défait.</h2>
+    <p style="text-align:left">Si tu sens que tu revis toujours les mêmes situations, commence par voir où tu en es vraiment. Ton bilan te montre ce qui pèse le plus en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
+    <a class="btn" href="https://alarenverse.github.io/Alarenverse/bilan.html" target="_blank" rel="noopener">Je fais mon bilan</a>
+    <p class="hint">12 questions · 7 minutes · ton portrait tout de suite</p>
+    <p style="text-align:left;margin-top:18px">Tu préfères en parler directement ? Réserve un appel de 20 minutes avec moi. On regarde où tu en es, et je te dis honnêtement si mon accompagnement est fait pour toi en ce moment.</p>
+    <a class="btn" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je réserve mon appel</a>
+    <p class="hint">20 minutes · sans engagement · tu choisis le moment qui t'arrange</p>
+    <div class="signature">Une ressource de <strong>Debora</strong>, coach pour femmes et infirmière en santé mentale de formation<br><a href="https://www.instagram.com/alarenverse.coaching" target="_blank" rel="noopener">@alarenverse.coaching</a><br><span style="font-size:12.5px;color:#a08898">Accompagnement de type coaching, et non une thérapie.</span></div>
+    <div class="sources">Sources : Krypotos et al. (2015), l'évitement · Pham et Taylor (1999), imaginer le chemin plutôt que le résultat · Lieberman et al. (2007), nommer ses émotions · Grossmann et Kross (2014), prendre de la distance · Gollwitzer et Sheeran (2006), les plans « si…, alors… ».</div>
+  </div>
+</div>
+
+<script>
+function typo(t){return String(t).replace(/ ([?:;!»])/g,' $1').replace(/« /g,'« ');}
+function fixTypo(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);let n;while((n=w.nextNode())){if(n.parentNode&&/^(SCRIPT|STYLE|TEXTAREA)$/.test(n.parentNode.nodeName))continue;const v=typo(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;}root.querySelectorAll('[placeholder]').forEach(e=>{e.placeholder=typo(e.placeholder);});}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+const GROUPES={
+  declencheur:["Les résultats ne viennent pas assez vite","Une critique, un regard","La fatigue","Ça devient sérieux","Je me compare","Un imprévu","L'ennui"],
+  ressenti:["La peur","La honte","Le découragement","La colère","Le vide","Le ventre noué","La gorge serrée","Les épaules tendues","Une grosse fatigue"],
+  action:["J'abandonne","Je repousse","Je change de projet","Je me mets en pause, « pour une semaine »","Je m'occupe des autres à la place","Je scrolle sur mon téléphone"],
+  evite:["Le risque d'échouer","L'inconfort","Le jugement des autres","De découvrir que je pourrais réussir","La fatigue","Un conflit"],
+  geste:["Respirer en expirant long","Bouger 5 minutes","Poser la main sur mon cœur","Écrire ce que je ressens","Sortir prendre l'air"]
+};
+const CLE='alarenverse_ressource_boucle';
+let E=(function(){try{return JSON.parse(localStorage.getItem(CLE)||'{}');}catch(e){return {};}})();
+E.t=E.t||{}; E.p=E.p||{}; Object.keys(GROUPES).forEach(g=>{E.p[g]=E.p[g]||[];});
+function ecrire(){try{localStorage.setItem(CLE,JSON.stringify(E));}catch(e){}}
+
+function rendrePills(){
+  document.querySelectorAll('[data-groupe]').forEach(c=>{const g=c.dataset.groupe;
+    c.innerHTML=GROUPES[g].map((x,i)=>'<button type="button" class="pill'+(E.p[g].indexOf(x)>-1?' sel':'')+'" onclick="basculer(\''+g+'\','+i+')">'+esc(x)+'</button>').join('');
+    fixTypo(c);});
+}
+function basculer(g,i){const x=GROUPES[g][i],k=E.p[g].indexOf(x);if(k>-1)E.p[g].splice(k,1);else E.p[g].push(x);ecrire();rendrePills();rendreTout();}
+function val(g,k){return [E.p[g]&&E.p[g].length?E.p[g].join(', '):'',(E.t[k]||'').trim()].filter(Boolean).join(' · ');}
+
+const MAILLONS=[["La situation",()=>(E.t.situation||'').trim()],["Le déclencheur",()=>val('declencheur','declencheur')],["Ce que je ressens",()=>val('ressenti')],["Ce que je me dis",()=>(E.t.pensee||'').trim()],["Ce que je fais",()=>val('action')],["Ce que ça m'évite sur le moment",()=>val('evite')]];
+function rendreBoucle(){
+  const el=document.getElementById('boucle');
+  let h='<div class="boucle">';
+  MAILLONS.forEach((m,i)=>{const v=m[1]();h+=(i?'<div class="fleche" aria-hidden="true">↓</div>':'')+'<div class="maillon"><div class="t">'+esc(m[0])+'</div><div class="r'+(v?'':' vide')+'">'+(v?esc(v):'à compléter plus haut')+'</div></div>';});
+  h+='</div><div class="retour">↺ le soulagement renforce la boucle, et elle recommence</div>';
+  if((E.t.cout||'').trim()) h+='<div class="maillon" style="margin-top:12px"><div class="t">Ce que ça me coûte à long terme</div><div class="r">'+esc(E.t.cout.trim())+'</div></div>';
+  el.innerHTML=h; fixTypo(el);
+}
+function rendreFiche(){
+  const el=document.getElementById('fiche');
+  const sortie=[["Ce que je dirais à une amie",(E.t.amie||'').trim()],["Ce que le chemin m'apporte déjà",(E.t.chemin||'').trim()],["Mon plan « si…, alors je… »",(E.t.si||'').trim()],["Pour revenir dans ma fenêtre",E.p.geste.join(', ')]].filter(x=>x[1]);
+  let h=document.getElementById('boucle').innerHTML;
+  h+='<div class="sortie"><div class="t">Ma sortie de boucle</div>'+(sortie.length?sortie.map(x=>'<div style="margin-top:6px"><span style="font-family:Jost,sans-serif;font-size:13px;color:#4f7a60">'+esc(x[0])+' : </span><span class="r">'+esc(x[1])+'</span></div>').join(''):'<div class="r" style="color:#a08898;font-family:Jost,sans-serif;font-size:14px">Elle se remplit avec ta partie 2.</div>')+'</div>';
+  el.innerHTML=h; fixTypo(el);
+}
+function rendreTout(){rendreBoucle();rendreFiche();}
+document.querySelectorAll('[data-k]').forEach(el=>{el.value=E.t[el.dataset.k]||'';el.addEventListener('input',function(){E.t[this.dataset.k]=this.value;ecrire();rendreTout();});});
+
+function telecharger(){
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  const boucle=MAILLONS.map(m=>[m[0],m[1](),'']).concat([["Ce que ça me coûte à long terme",(E.t.cout||'').trim(),'']]);
+  const sortie=[["Ce que je dirais à une amie",(E.t.amie||'').trim()],["Ce que le chemin m'apporte déjà",(E.t.chemin||'').trim()],["Mon plan « si…, alors je… »",(E.t.si||'').trim()],["Pour revenir dans ma fenêtre",E.p.geste.join(', ')]].map(x=>[x[0],x[1],' s']);
+  const lignes=boucle.concat(sortie).filter(x=>x[1]);
+  const c=lignes.length?lignes.map(x=>'<div class="b'+x[2]+'"><div class="q">'+esc(x[0])+'</div><div class="r">'+esc(x[1])+'</div></div>').join(''):'<p>Tu n\'as encore rien noté. Reviens quand tu veux.</p>';
+  const css='body{font-family:Georgia,serif;color:#3d2e45;padding:34px;max-width:620px;margin:0 auto;line-height:1.7}.p{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#c2836a}h1{font-size:23px;font-weight:normal;margin:6px 0 2px}.d{font-size:13px;color:#a08898;margin-bottom:22px}.b{background:#fdf6f0;border-left:3px solid #c2836a;border-radius:8px;padding:12px 16px;margin-bottom:12px}.b.s{background:#eef6f1;border-left-color:#7fae8e}.q{font-size:13px;color:#a0644d;margin-bottom:4px}.r{font-size:16px}.f{margin-top:30px;font-size:14px;text-align:center;color:#5d4868}';
+  const html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ma boucle, et ma sortie</title><style>'+css+'</style></head><body><div class="p">L\'Effet Papillon</div><h1>Ma boucle, et ma sortie</h1><div class="d">'+date+'</div>'+typo(c)+'<div class="f">'+typo('Une boucle, ça se voit. Et ça se défait.')+'<br>@alarenverse.coaching</div></body></html>';
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='ma-boucle-et-ma-sortie.html';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+rendrePills(); rendreTout(); fixTypo(document.body);
+</script>
+</body>
+</html>
