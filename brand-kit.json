@@ -53,6 +53,10 @@
     {
       "date": "2026-11-22",
       "retour": "Retouches reels régulation et décentration : sons IA supprimés (garder clavier + paillettes), textes au-dessus de la tête, titre 3 groupé sous le menton, « (J’ai oublié le troisième) », carte profil Instagram + clic S’abonner/Suivre, noir et blanc cinéma sur la petite voix."
+    },
+    {
+      "date": "2026-11-22",
+      "retour": "Reel pensées : refuse le copier-coller du modèle (typo, jaune). Garder sa typo et son jaune, espacer la liste, soulignement sous les lettres, carte S’abonner beaucoup plus bas, vérifier les traductions dans la littérature psy."
     }
   ],
   "rendu": {
@@ -102,5 +106,6 @@
   "placement_textes": "Titres et phrases clés AU-DESSUS de la tête (descendre légèrement l’image si besoin, mur uni en haut). Suite du hook sous le menton. Jamais sur les yeux.",
   "fin_cta": "Carte profil Instagram (photo, chiffres, bio, lien) + bouton Suivre/S’abonner cliqué (souris ou doigt) → Abonné(e), followers +1. Plus de boutons J’aime/Partager.",
   "voix_interieure": "Passage en noir et blanc cinéma (bandes noires, contraste, grain, vignettage) synchronisé avec l’effet de voix.",
-  "livraison": "Envoyer des fichiers légers (≈20–30 Mo, H.264 1080×1920) : les gros fichiers ne se téléchargent pas sur son téléphone."
+  "livraison": "Envoyer des fichiers légers (≈20–30 Mo, H.264 1080×1920) : les gros fichiers ne se téléchargent pas sur son téléphone.",
+  "regle_inspiration": "Reprendre l’IDÉE d’un reel modèle, jamais sa typo ni ses couleurs : toujours SA typo (hook DM Serif Display + Unbounded crème #FFF4AA / menthe, sous-titres Inter + Anton jaune #FFEC96, listes en DM Serif Display) et SA façon de monter (sous-titres, petits zooms, fin profil Instagram en bas du cadre)."
 }
