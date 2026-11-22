@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Sortir de la posture de victime · L'Effet Papillon</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--terra:#c2836a;--caramel:#c8a870;--titre:#3d2e45;--texte:#5d4868;--doux:#8a7090;--pale:#a08898;--champ:#fffaf6}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{background:#fdf6f0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf6f0 0%,#f8ece6 45%,#f3eef8 100%);min-height:100vh;font-size:18px;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 70px;color:var(--texte)}
+  header{width:100%;max-width:600px;padding-top:34px;text-align:center}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b0806c;margin-bottom:10px}
+  h1{font-size:clamp(25px,6.4vw,34px);font-weight:500;color:var(--titre);line-height:1.25}
+  .sous-titre{font-size:17px;color:var(--doux);margin-top:10px;line-height:1.6}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,var(--terra),var(--caramel));margin:16px auto 0;border-radius:2px}
+  .wrap{width:100%;max-width:560px}
+  .card{background:white;border-radius:22px;padding:24px 20px;box-shadow:0 8px 34px rgba(194,131,106,0.09);border:1px solid rgba(194,131,106,0.15);margin-top:16px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--terra);margin-bottom:10px}
+  p{font-size:17.5px;line-height:1.75;margin-bottom:12px;color:var(--texte)}
+  .hl{background:linear-gradient(135deg,#fdf3ec,#f8f0f6);border-radius:14px;padding:13px 16px;border-left:3px solid var(--terra);font-size:16.5px;color:var(--titre);line-height:1.7;margin:4px 0 12px}
+  .hl.or{border-left-color:var(--caramel);background:linear-gradient(135deg,#fdf8ee,#fdf5f0);font-size:18px;text-align:center;border-left-width:0;border-top:2px solid var(--caramel)}
+  .hl.nuance{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f8f2f6)}
+  .lecon-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;font-family:'Jost',sans-serif;font-size:16px;font-weight:500;margin-bottom:12px}
+  h2{font-size:21px;font-weight:600;color:var(--titre);line-height:1.4;margin-bottom:14px}
+  .rubrique{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--terra);margin:14px 0 6px}
+  .essai{background:var(--champ);border:1px dashed rgba(194,131,106,0.45);border-radius:16px;padding:14px 14px 12px;margin-top:6px}
+  .essai p{font-size:16.5px;margin-bottom:8px;color:var(--titre)}
+  .exemple{font-size:15px;line-height:1.55;font-style:italic;background:rgba(253,248,238,0.9);border-left:2px solid rgba(200,168,112,0.6);border-radius:0 10px 10px 0;padding:8px 12px;margin:0 0 10px;color:var(--texte)}
+  textarea{width:100%;border:2px solid rgba(194,131,106,0.25);border-radius:12px;padding:11px 13px;font-size:16px;font-family:'Lora',serif;color:var(--titre);line-height:1.6;outline:none;resize:vertical;background:white;margin-bottom:8px}
+  textarea:focus{border-color:var(--terra)}
+  .petit-label{font-family:'Jost',sans-serif;font-size:14px;color:var(--doux);margin:6px 0 6px}
+  .coche{display:flex;align-items:center;gap:10px;margin-top:6px;font-family:'Jost',sans-serif;font-size:15px;color:var(--titre);cursor:pointer;background:white;border:2px solid rgba(194,131,106,0.28);border-radius:50px;padding:9px 14px;width:100%}
+  .coche.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));border-color:transparent;color:white}
+  .coche .rond{width:18px;height:18px;border-radius:50%;border:2px solid currentColor;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:12px;line-height:1}
+  .compteur{font-family:'Jost',sans-serif;font-size:14.5px;color:var(--titre);text-align:center;background:var(--champ);border-radius:50px;padding:8px 14px;margin-top:8px}
+  .btn{background:linear-gradient(135deg,#c2836a,#c8a870);color:white;border:none;border-radius:50px;padding:15px 30px;font-size:17px;cursor:pointer;font-family:'Lora',serif;box-shadow:0 6px 22px rgba(194,131,106,0.3);display:block;margin:16px auto 0;text-decoration:none;text-align:center;max-width:100%;width:fit-content}
+  .btn.second{background:white;color:#a0644d;border:2px solid rgba(194,131,106,0.4);box-shadow:none;font-size:15.5px;padding:11px 24px}
+  .hint{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--pale);text-align:center;margin-top:10px;line-height:1.55}
+  .signature{font-family:'Jost',sans-serif;font-size:14px;color:var(--doux);text-align:center;margin-top:18px;line-height:1.6}
+  .signature a{color:#a0644d}
+  .sources{font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale);line-height:1.6;margin-top:18px;text-align:left}
+  .ok{font-family:'Jost',sans-serif;font-size:12.5px;color:#4f7a60;text-align:right;min-height:16px;opacity:0;transition:opacity .3s}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">L'Effet Papillon · Ressource offerte</div>
+  <h1>Sortir de la posture de victime</h1>
+  <div class="sous-titre">10 leçons, le raisonnement complet, et un petit exercice pour chacune.</div>
+  <div class="sep"></div>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <div class="label">Avant de commencer</div>
+    <p>⚠️ Je ne parle pas ici des personnes qui ont vécu un traumatisme, une agression ou des événements où elles ont réellement été victimes. Ce vécu-là mérite d'être reconnu et accompagné, par un professionnel si tu en ressens le besoin.</p>
+    <p>Je parle de la <strong>posture</strong> : quand tu subis ton quotidien, ton environnement, ta vie, sans voir la part de pouvoir que tu as.</p>
+    <div class="hl">Et cette posture a souvent une fonction. Elle protège : elle t'évite de décider, de prendre un risque, de décevoir. C'est pour ça qu'on y reste. Le but n'est pas de te juger, c'est de voir ce qu'elle te coûte.</div>
+    <div class="hl or">Agir, c'est le contraire de subir.</div>
+    <div class="hl nuance">Cette ressource fait partie d'un accompagnement de type coaching. Ce n'est pas une thérapie, et elle ne remplace pas un suivi médical ou psychologique.</div>
+    <p style="margin-bottom:0">Lis une leçon par jour, ou toutes d'un coup. Coche celles que tu essaies cette semaine : tes réponses restent sur ton téléphone.</p>
+    <div class="compteur" id="compteur-haut"></div>
+  </div>
+
+  <div id="lecons"></div>
+
+  <div class="card" style="text-align:center">
+    <div class="label">Et maintenant ?</div>
+    <h2>Tu as vu ce qui te garde dans la posture</h2>
+    <p style="text-align:left">Si tu sens que tu subis plus que tu ne choisis, commence par voir où tu en es vraiment. Ton bilan te montre ce qui pèse le plus en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
+    <a class="btn" href="https://alarenverse.github.io/Alarenverse/bilan.html" target="_blank" rel="noopener">Je fais mon bilan</a>
+    <p class="hint">12 questions · 7 minutes · ton portrait tout de suite</p>
+    <p style="text-align:left;margin-top:18px">Tu préfères en parler directement ? Réserve un appel de 20 minutes avec moi. On regarde où tu en es, et je te dis honnêtement si mon accompagnement est fait pour toi en ce moment.</p>
+    <a class="btn" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je réserve mon appel</a>
+    <p class="hint">20 minutes · sans engagement · tu choisis le moment qui t'arrange</p>
+    <div class="compteur" id="compteur-bas"></div>
+    <button class="btn second" onclick="telecharger()">Garder mes réponses</button>
+    <div class="signature">Une ressource de <strong>Debora</strong>, coach pour femmes et infirmière en santé mentale de formation<br><a href="https://www.instagram.com/alarenverse.coaching" target="_blank" rel="noopener">@alarenverse.coaching</a><br><span style="font-size:12.5px;color:#a08898">Accompagnement de type coaching, et non une thérapie.</span></div>
+    <div class="sources">Sources : Rose (2002), co-rumination · McAdams et al. (2001), récits de vie · Benassi, Sweeney et Dufour (1988), sentiment de contrôle et dépression · Schwartz-Mette et Rose (2012), co-rumination entre amies · Bushman (2002), se défouler et colère · Lieberman et al. (2007), nommer ses émotions · Grossmann et Kross (2014), prendre de la distance · Watkins (2008), penser en boucle.</div>
+  </div>
+</div>
+
+<script>
+function typo(t){return String(t).replace(/ ([?:;!»])/g,' $1').replace(/« /g,'« ');}
+function fixTypo(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);let n;while((n=w.nextNode())){if(n.parentNode&&/^(SCRIPT|STYLE|TEXTAREA)$/.test(n.parentNode.nodeName))continue;const v=typo(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;}root.querySelectorAll('[placeholder]').forEach(e=>{e.placeholder=typo(e.placeholder);});}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+const LECONS=[
+ {t:"Résiste à l'envie de demander l'avis de plus de 5 personnes sur ton problème",
+  pq:["Raconter dix fois la même histoire, c'est la revivre dix fois. Et plus tu récoltes d'avis, moins tu entends le tien."],
+  sci:"Les chercheurs appellent ça la co-rumination : ressasser un problème à plusieurs, encore et encore. Chez les adolescentes, ça rapproche des amies, mais c'est aussi lié à plus d'anxiété et de déprime (Rose, 2002).",
+  nuance:"Demander de l'aide, c'est sain. Ce qui te garde coincée, c'est de répéter l'histoire sans rien en faire.",
+  essai:"Avant d'appeler quelqu'un, écris d'abord ce que toi, tu en penses. Puis choisis une seule personne, et demande-lui de t'aider à avancer, plutôt qu'à ressasser.",
+  ex:"« Ce que je pense, moi : je n'ai plus envie de ce poste. Je vais en parler à Léa, pour qu'elle m'aide à préparer ma demande. »",
+  champ:"Ce que j'en pense, moi : ..."},
+ {t:"Arrête de rattacher les événements de ton passé à ton identité actuelle",
+  pq:["« J'ai été trahie », c'est un événement. « Je suis quelqu'un qu'on trahit », c'est une identité. La première phrase raconte. La deuxième t'enferme."],
+  sci:"Les personnes qui racontent leur vie en montrant ce qu'elles ont fait de leurs épreuves ont un meilleur bien-être que celles dont l'histoire part du bon pour finir dans le mauvais (McAdams et al., 2001).",
+  essai:"Écris une phrase « Je suis… » que ton passé t'a collée. Puis réécris-la : « J'ai vécu…, et aujourd'hui je… »",
+  ex:"« Je suis nulle en couple » devient « J'ai vécu deux ruptures difficiles, et aujourd'hui j'apprends à dire ce dont j'ai besoin. »",
+  champ:"J'ai vécu ..., et aujourd'hui je ..."},
+ {t:"Prends toujours ta part de responsabilité",
+  pq:["Ta part, et seulement ta part. Les femmes que j'accompagne ont plutôt tendance à tout prendre sur elles. Prendre ta part, ce n'est pas tout porter : c'est repérer ce qui dépend de toi."],
+  sci:"La responsabilité n'est pas la culpabilité. La culpabilité te fait tourner en rond, la responsabilité te donne une prise. Et se sentir sans prise sur sa vie est lié à plus de dépression, de façon constante d'une étude à l'autre (Benassi et al., 1988).",
+  essai:"Le gâteau de responsabilité. Prends une situation qui te pèse. Liste tout ce qui y a contribué : la fatigue, l'autre, le contexte, toi. Donne une part du gâteau à chacun. Ta part, c'est là que tu as du pouvoir.",
+  ex:"« J'ai crié sur mon fils » : la nuit trop courte, la journée chargée, son refus d'aller se coucher. Ma part : je n'ai pris aucune pause avant de rentrer.",
+  champ:"Ma part, celle sur laquelle j'ai du pouvoir : ..."},
+ {t:"Éloigne-toi des personnes qui ont, elles aussi, une mentalité de victime",
+  pq:["Si chaque conversation tourne autour de ce qui ne va pas et de qui a tort, tu ressors plus lourde. Une façon de voir la vie se transmet, comme une émotion."],
+  sci:"Chez les jeunes, des chercheurs ont observé que la déprime peut passer d'une amie à l'autre, en partie à travers ces conversations où l'on ressasse (Schwartz-Mette et Rose, 2012).",
+  nuance:"T'éloigner ne veut pas dire couper. Tu peux changer de sujet, raccourcir la conversation, ou passer plus de temps avec les personnes qui te tirent vers le haut.",
+  essai:"Après une conversation, demande-toi : je me sens plus légère, ou plus lourde ? Puis note les deux personnes avec qui tu te sens le plus capable.",
+  ex:"« Après le café avec Sarah, je me sens capable. Après les repas avec mon collègue, je ressors vidée. »",
+  champ:"Les personnes avec qui je me sens capable : ..."},
+ {t:"Passe 24 h sans te plaindre, juste une fois",
+  pq:["Se plaindre soulage sur le moment. Mais ressasser sa colère ne la fait pas redescendre."],
+  sci:"Dans une expérience célèbre, les personnes en colère qui se défoulaient en repensant à ce qui les avait énervées sont restées plus en colère et plus agressives. Ne rien faire du tout a mieux marché (Bushman, 2002).",
+  nuance:"Dire « je suis fatiguée », ce n'est pas se plaindre : c'est nommer. Et mettre un mot sur ce que tu ressens apaise (Lieberman et al., 2007).",
+  essai:"24 heures. Chaque fois qu'une plainte arrive, transforme-la en demande ou en action.",
+  ex:"« Personne ne m'aide » devient « Est-ce que tu peux vider le lave-vaisselle ce soir ? »",
+  champ:"Une plainte que j'ai transformée : ..."},
+ {t:"Note toutes les excuses que tu te trouves pour ne pas passer à l'action",
+  pq:["Une excuse, c'est souvent une protection. Elle t'évite de rater, d'être jugée, ou de découvrir que tu pourrais.","C'est ce que j'appelle le retournement : ce qui ressemble à un frein est une solution qui te protège de quelque chose. Tant que tu ne la vois pas, c'est elle qui décide."],
+  essai:"Pendant une semaine, note chaque excuse. À côté, écris : ça me protège de quoi ?",
+  ex:"« Je n'ai pas le temps » : ça me protège de commencer, et de ne pas y arriver.",
+  champ:"Mon excuse : ... Elle me protège de : ..."},
+ {t:"Demande-toi : est-ce que tu respecterais quelqu'un qui a la même vision de la vie que toi ?",
+  pq:["Cette question pique, et elle n'est pas là pour te faire honte. Elle sert à te voir de l'extérieur, avec les yeux que tu poses sur une amie."],
+  sci:"On raisonne plus sagement sur les problèmes des autres que sur les siens. Se mettre à distance efface cet écart (Grossmann et Kross, 2014).",
+  essai:"Imagine une amie qui te dirait exactement ce que tu te dis en ce moment. Qu'est-ce que tu lui répondrais ?",
+  ex:"« Je lui dirais : tu n'es pas condamnée à cette vie. Qu'est-ce qui dépend de toi, là, cette semaine ? »",
+  champ:"Je lui dirais : ..."},
+ {t:"Réfléchis avant de parler : est-ce que ce que tu racontes te fait évoluer ou te garde au même endroit ?",
+  pq:["Raconter pour comprendre fait avancer. Raconter pour revivre garde au même endroit."],
+  sci:"La recherche distingue deux façons de repenser à un problème. Le « pourquoi moi ? », abstrait, entretient la déprime et l'anxiété. Le « comment je fais ? », concret, aide à se remettre et à s'organiser (Watkins, 2008).",
+  essai:"Avant de raconter, une question : je le dis pour avancer, ou pour être plainte ? Et remplace « pourquoi moi ? » par « comment je fais ? ».",
+  ex:"« Pourquoi c'est toujours sur moi que ça tombe ? » devient « Comment je fais pour que ça ne retombe pas sur moi la semaine prochaine ? »",
+  champ:"Mon « comment je fais ? » : ..."},
+ {t:"Supprime « c'est trop compliqué » et « c'est trop difficile » de ton vocabulaire",
+  pq:["Ces phrases ferment la porte avant même que tu essaies. Les mots que tu choisis changent ta façon de voir la situation, et donc ce que tu ressens."],
+  nuance:"Reconnaître que c'est dur, c'est sain. Ce qui bloque, c'est le « trop » : il transforme une difficulté en impossibilité.",
+  essai:"Remplace par : « C'est difficile, et je peux commencer par… »",
+  ex:"« C'est trop compliqué de parler à mon chef » devient « C'est difficile, et je peux commencer par lui écrire trois points. »",
+  champ:"C'est difficile, et je peux commencer par ..."},
+ {t:"Demande-toi quelle direction tu veux prendre",
+  pq:["En posture de victime, tu regardes ce qui t'arrive. Quand tu reprends le lead, tu regardes où tu vas.","Et une direction n'est pas un objectif. Un objectif s'atteint ou se rate. Une direction se choisit chaque jour."],
+  essai:"Complète ces deux phrases.",
+  ex:"« Dans un an, je veux que ma vie aille vers plus de temps pour moi, et des relations où je peux être moi-même. » « Mon premier petit pas : bloquer mon jeudi soir. »",
+  champ:"Dans un an, je veux que ma vie aille vers ...",
+  champ2:"Mon premier petit pas cette semaine : ..."}
+];
+
+const CLE='alarenverse_ressource_victime';
+let E=(function(){try{return JSON.parse(localStorage.getItem(CLE)||'{}');}catch(e){return {};}})();
+E.coches=E.coches||{}; E.textes=E.textes||{};
+function ecrire(){try{localStorage.setItem(CLE,JSON.stringify(E));}catch(e){}}
+
+function rendre(){
+  document.getElementById('lecons').innerHTML=LECONS.map((L,i)=>{
+    const n=i+1, sel=!!E.coches[n];
+    return '<div class="card" id="lecon-'+n+'"><div class="lecon-num">'+n+'</div><h2>'+esc(L.t)+'</h2>'
+      +'<div class="rubrique">Pourquoi</div>'+L.pq.map(x=>'<p>'+esc(x)+'</p>').join('')
+      +(L.sci?'<div class="hl">'+esc(L.sci)+'</div>':'')
+      +(L.nuance?'<div class="hl nuance">'+esc(L.nuance)+'</div>':'')
+      +'<div class="rubrique">À essayer</div><div class="essai"><p>'+esc(L.essai)+'</p>'
+      +'<div class="exemple">Par exemple : '+esc(L.ex)+'</div>'
+      +'<textarea rows="2" data-k="'+n+'a" placeholder="'+esc(L.champ)+'">'+esc(E.textes[n+'a']||'')+'</textarea>'
+      +(L.champ2?'<textarea rows="2" data-k="'+n+'b" placeholder="'+esc(L.champ2)+'">'+esc(E.textes[n+'b']||'')+'</textarea>':'')
+      +'<div class="ok" id="ok-'+n+'">Gardé sur ton téléphone ✓</div>'
+      +'<button type="button" class="coche'+(sel?' sel':'')+'" onclick="cocher('+n+')"><span class="rond">'+(sel?'✓':'')+'</span>Je l\'essaie cette semaine</button></div></div>';
+  }).join('');
+  document.querySelectorAll('#lecons textarea').forEach(t=>t.addEventListener('input',function(){E.textes[this.dataset.k]=this.value;ecrire();const ok=document.getElementById('ok-'+parseInt(this.dataset.k,10));if(ok){ok.style.opacity=1;clearTimeout(ok._t);ok._t=setTimeout(()=>ok.style.opacity=0,1400);}}));
+  majCompteur();
+  fixTypo(document.body);
+}
+function cocher(n){
+  E.coches[n]=!E.coches[n]; ecrire();
+  const b=document.querySelector('#lecon-'+n+' .coche'); b.classList.toggle('sel',!!E.coches[n]); b.querySelector('.rond').textContent=E.coches[n]?'✓':'';
+  majCompteur();
+}
+function majCompteur(){
+  const n=Object.values(E.coches).filter(Boolean).length;
+  const t=n?('🦋 '+n+' leçon'+(n>1?'s':'')+' que tu essaies cette semaine'):'Coche les leçons que tu essaies cette semaine';
+  document.getElementById('compteur-haut').textContent=t; document.getElementById('compteur-bas').textContent=t;
+}
+function telecharger(){
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  let c='';
+  LECONS.forEach((L,i)=>{const n=i+1,a=E.textes[n+'a'],b=E.textes[n+'b'];if(!a&&!b&&!E.coches[n])return;
+    c+='<div class="b"><div class="q">'+n+'. '+esc(L.t)+(E.coches[n]?' · je l\'essaie cette semaine':'')+'</div>'+(a?'<div class="r">'+esc(a)+'</div>':'')+(b?'<div class="r">'+esc(b)+'</div>':'')+'</div>';});
+  if(!c) c='<p>Tu n\'as encore rien noté. Reviens quand tu veux.</p>';
+  const css='body{font-family:Georgia,serif;color:#3d2e45;padding:34px;max-width:620px;margin:0 auto;line-height:1.7}.p{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#c2836a}h1{font-size:23px;font-weight:normal;margin:6px 0 2px}.d{font-size:13px;color:#a08898;margin-bottom:22px}.b{background:#fdf6f0;border-left:3px solid #c2836a;border-radius:8px;padding:12px 16px;margin-bottom:12px}.q{font-size:13px;color:#a0644d;margin-bottom:6px}.r{font-size:16px;margin-top:4px}.f{margin-top:30px;font-size:14px;text-align:center;color:#5d4868}';
+  const html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sortir de la posture de victime</title><style>'+css+'</style></head><body><div class="p">L\'Effet Papillon</div><h1>Sortir de la posture de victime</h1><div class="d">'+date+'</div>'+typo(c)+'<div class="f">'+typo('Agir, c\'est le contraire de subir.')+'<br>@alarenverse.coaching</div></body></html>';
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='sortir-de-la-posture-de-victime.html';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+rendre();
+</script>
+</body>
+</html>
