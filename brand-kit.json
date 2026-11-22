@@ -81,8 +81,9 @@
     "hooks_auditifs": "Quelques clics / tacs / whoosh aux moments très clés seulement (4-5 max)"
   },
   "etalonnage": {
-    "regle": "Garder SA couleur d’origine : conversion HDR iPhone -> SDR standard (BT.2408, blanc 203 nits), AUCUNE retouche (pas de eq saturation/gamma).",
-    "ffmpeg": "zscale=t=linear:npl=203,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=mobius:param=0.3:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p"
+    "regle": "Garder SA couleur d’origine (calée sur sa capture : moins saturée, plus contrastée, neutre). Conversion HDR iPhone standard puis LUT couleur_origine.cube.",
+    "ffmpeg": "zscale=t=linear:npl=203,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=mobius:param=0.3:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p,lut3d=couleur_origine.cube",
+    "lut": "couleur_origine.cube (gain .84, gamma 1.16, saturation .74, contraste .98)"
   },
   "regles_process": [
     "Toujours repartir du rush original.",
