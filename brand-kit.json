@@ -65,6 +65,10 @@
     {
       "date": "2026-11-22",
       "retour": "Reel « Combien tu vaux ? » : montage très bien. Veut SA couleur d’origine (pas d’assombrissement) et un poil moins de zoom."
+    },
+    {
+      "date": "2026-11-22",
+      "retour": "Trouvait l’image floue et pas ses couleurs : repartir de SA vidéo originale. Passage au rendu HDR natif sans conversion."
     }
   ],
   "rendu": {
@@ -81,9 +85,8 @@
     "hooks_auditifs": "Quelques clics / tacs / whoosh aux moments très clés seulement (4-5 max)"
   },
   "etalonnage": {
-    "regle": "Garder SA couleur d’origine (calée sur sa capture : moins saturée, plus contrastée, neutre). Conversion HDR iPhone standard puis LUT couleur_origine.cube.",
-    "ffmpeg": "zscale=t=linear:npl=203,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=mobius:param=0.3:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p,lut3d=couleur_origine.cube",
-    "lut": "couleur_origine.cube (gain .84, gamma 1.16, saturation .74, contraste .98)"
+    "regle": "NE PAS convertir sa vidéo : garder l’original HDR (HLG BT.2020, 10 bits) tel quel, poser seulement les textes (convertis en HLG, blanc ≈ 90 % pour rester lisibles sur son mur clair). Export HEVC 10 bits HLG CRF 18 (~30 Mo/min). Zoom seulement quand nécessaire (Lanczos).",
+    "ancienne_methode": "conversion SDR + LUT couleur_origine.cube : abandonnée (couleurs et netteté différentes)"
   },
   "regles_process": [
     "Toujours repartir du rush original.",
@@ -115,7 +118,7 @@
   "placement_textes": "Titres et phrases clés AU-DESSUS de la tête (descendre légèrement l’image si besoin, mur uni en haut). Suite du hook sous le menton. Jamais sur les yeux.",
   "fin_cta": "Carte profil Instagram (photo, chiffres, bio, lien) + bouton Suivre/S’abonner cliqué (souris ou doigt) → Abonné(e), followers +1. Plus de boutons J’aime/Partager.",
   "voix_interieure": "Passage en noir et blanc cinéma (bandes noires, contraste, grain, vignettage) synchronisé avec l’effet de voix.",
-  "livraison": "Envoyer des fichiers légers (≈20–30 Mo, H.264 1080×1920) : les gros fichiers ne se téléchargent pas sur son téléphone.",
+  "livraison": "Fichier ≈ 30 Mo pour 1 min en HEVC HDR : se télécharge bien. Éviter > 60 Mo.",
   "regle_inspiration": "Reprendre l’IDÉE d’un reel modèle, jamais sa typo ni ses couleurs : toujours SA typo (hook DM Serif Display + Unbounded crème #FFF4AA / menthe, sous-titres Inter + Anton jaune #FFEC96, listes en DM Serif Display) et SA façon de monter (sous-titres, petits zooms, fin profil Instagram en bas du cadre).",
   "style_valide_liste": "Reel « Je ne suis pas aimée » (adoré) : hook court = sa phrase choc entre guillemets (DM Serif crème + Unbounded), centré en haut, ombre douce v2 ; liste sans numéros en DM Serif Display, mot actif en jaune + soulignement sous les lettres ; image jamais décalée/floutée ; sous-titres Inter + Anton jaune ; carte profil en bas + clic Suivre."
 }
