@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Commencer avant d'être prête · L'Effet Papillon</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--terra:#c2836a;--caramel:#c8a870;--titre:#3d2e45;--texte:#5d4868;--doux:#8a7090;--pale:#a08898;--champ:#fffaf6}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{background:#fdf6f0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf6f0 0%,#f8ece6 45%,#f3eef8 100%);min-height:100vh;font-size:18px;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 70px;color:var(--texte)}
+  header{width:100%;max-width:600px;padding-top:34px;text-align:center}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b0806c;margin-bottom:10px}
+  h1{font-size:clamp(25px,6.4vw,34px);font-weight:500;color:var(--titre);line-height:1.25}
+  .sous-titre{font-size:17px;color:var(--doux);margin-top:10px;line-height:1.6}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,var(--terra),var(--caramel));margin:16px auto 0;border-radius:2px}
+  .wrap{width:100%;max-width:560px}
+  .card{background:white;border-radius:22px;padding:24px 20px;box-shadow:0 8px 34px rgba(194,131,106,0.09);border:1px solid rgba(194,131,106,0.15);margin-top:16px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--terra);margin-bottom:10px}
+  p{font-size:17.5px;line-height:1.75;margin-bottom:12px;color:var(--texte)}
+  .hl{background:linear-gradient(135deg,#fdf3ec,#f8f0f6);border-radius:14px;padding:13px 16px;border-left:3px solid var(--terra);font-size:16.5px;color:var(--titre);line-height:1.7;margin:4px 0 12px}
+  .hl.or{border-left-width:0;border-top:2px solid var(--caramel);background:linear-gradient(135deg,#fdf8ee,#fdf5f0);font-size:18px;text-align:center}
+  .hl.nuance{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f8f2f6)}
+  .etape-num{display:inline-flex;align-items:center;justify-content:center;padding:6px 14px;border-radius:50px;background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.08em;margin-bottom:12px}
+  h2{font-size:21px;font-weight:600;color:var(--titre);line-height:1.4;margin-bottom:12px}
+  .q{font-size:17px;font-weight:600;color:var(--titre);line-height:1.5;margin:16px 0 6px}
+  .q-sous{font-family:'Jost',sans-serif;font-size:14.5px;color:var(--doux);line-height:1.55;margin-bottom:10px}
+  .exemple{font-size:15px;line-height:1.55;font-style:italic;background:rgba(253,248,238,0.9);border-left:2px solid rgba(200,168,112,0.6);border-radius:0 10px 10px 0;padding:8px 12px;margin:0 0 10px;color:var(--texte)}
+  textarea,input[type="text"]{width:100%;border:2px solid rgba(194,131,106,0.25);border-radius:12px;padding:11px 13px;font-size:16px;font-family:'Lora',serif;color:var(--titre);line-height:1.6;outline:none;resize:vertical;background:var(--champ);margin-bottom:8px}
+  textarea:focus,input[type="text"]:focus{border-color:var(--terra)}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 10px}
+  .pill{border:2px solid rgba(194,131,106,0.28);background:var(--champ);color:var(--texte);border-radius:50px;padding:8px 14px;font-size:14.5px;font-family:'Jost',sans-serif;cursor:pointer;text-align:left;line-height:1.4;max-width:100%}
+  .pill.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));border-color:transparent;color:white}
+  .deux{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .deux input{margin-bottom:0}
+  .btn{background:linear-gradient(135deg,#c2836a,#c8a870);color:white;border:none;border-radius:50px;padding:15px 30px;font-size:17px;cursor:pointer;font-family:'Lora',serif;box-shadow:0 6px 22px rgba(194,131,106,0.3);display:block;margin:16px auto 0;text-decoration:none;text-align:center;max-width:100%;width:fit-content}
+  .btn.second{background:white;color:#a0644d;border:2px solid rgba(194,131,106,0.4);box-shadow:none;font-size:15.5px;padding:11px 24px}
+  .hint{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--pale);text-align:center;margin-top:10px;line-height:1.55}
+  .fiche{background:linear-gradient(135deg,#fdf6f0,#f8f0f6);border:1px solid rgba(194,131,106,0.22);border-radius:16px;padding:16px;text-align:left}
+  .fiche .l{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin:12px 0 4px}
+  .fiche .l:first-child{margin-top:0}
+  .fiche .r{font-size:16px;color:var(--titre);line-height:1.55}
+  .fiche .vide{font-family:'Jost',sans-serif;font-size:14px;color:var(--pale)}
+  .signature{font-family:'Jost',sans-serif;font-size:14px;color:var(--doux);text-align:center;margin-top:18px;line-height:1.6}
+  .signature a{color:#a0644d}
+  .sources{font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale);line-height:1.6;margin-top:18px;text-align:left}
+  .souffle{display:flex;align-items:center;gap:12px;background:var(--champ);border-radius:16px;padding:12px 14px;margin-top:4px}
+  .bulle{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle,#e8c3ad,#c2836a);flex-shrink:0;animation:souffle 10s ease-in-out infinite}
+  @keyframes souffle{0%,100%{transform:scale(.7)}40%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){.bulle{animation:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">L'Effet Papillon · Ressource offerte</div>
+  <h1>Commencer avant d'être prête</h1>
+  <div class="sous-titre">L'exercice que je donne à mes clientes, à partir de tes 3 questions. Environ 15 minutes.</div>
+  <div class="sep"></div>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <div class="label">Avant de commencer</div>
+    <p>Quand tu te sens figée et que tu repousses, c'est ton système nerveux qui te protège. Sauf que tu as beau le savoir, tu rejoues sans cesse la même histoire.</p>
+    <div class="hl">Repousser, ce n'est pas de la paresse. Les chercheurs le décrivent comme une façon de réparer son humeur sur le moment : tu ne fuis pas la tâche, tu fuis ce qu'elle te fait ressentir (Sirois et Pychyl, 2013).</div>
+    <div class="hl or">On ne devient pas prête en attendant que ça arrive. On le devient en posant les jalons, les uns après les autres, aussi petits soient-ils.</div>
+    <div class="hl nuance">Cette ressource fait partie d'un accompagnement de type coaching. Ce n'est pas une thérapie, et elle ne remplace pas un suivi médical ou psychologique.</div>
+    <div class="q">D'abord, une minute pour revenir dans ton corps</div>
+    <div class="souffle"><div class="bulle" aria-hidden="true"></div><div class="q-sous" style="margin:0">Inspire sur 4 pendant que le cercle grandit, expire sur 6 pendant qu'il rétrécit. Cinq fois. Tes réponses seront plus justes depuis un corps un peu plus calme.</div></div>
+  </div>
+
+  <!-- ÉTAPE 1 -->
+  <div class="card">
+    <div class="etape-num">Question 1</div>
+    <h2>Qu'est-ce que tu perdrais si tu commençais maintenant ?</h2>
+    <p>Ce qui te retient te protège souvent de quelque chose. C'est ce que j'appelle le retournement : le frein est une solution, et tant que tu ne la vois pas, c'est elle qui décide.</p>
+    <div class="q-sous">Coche ce qui te parle.</div>
+    <div class="pills" data-groupe="perte"></div>
+    <textarea rows="2" data-k="perte" placeholder="Si je commençais maintenant, je perdrais ..."></textarea>
+    <div class="exemple">Par exemple : « Je perdrais l'excuse de ne pas être prête. Si je commence et que je rate, je ne pourrai plus dire que c'était le mauvais moment. »</div>
+    <div class="q">Et ce que tu perds en attendant ?</div>
+    <div class="exemple">Par exemple : « Une année de plus à rêver de ce projet le dimanche soir, et à m'en vouloir le lundi. »</div>
+    <textarea rows="2" data-k="attente" placeholder="En attendant, je perds ..."></textarea>
+    <div class="q-sous">Regarde les deux réponses côte à côte. Laquelle te coûte le plus ?</div>
+  </div>
+
+  <!-- ÉTAPE 2 -->
+  <div class="card">
+    <div class="etape-num">Question 2</div>
+    <h2>Quelle est la petite histoire que tu répètes dans ta tête et qui t'empêche d'avancer ?</h2>
+    <div class="exemple">Par exemple : « Je ne suis pas assez qualifiée. » « Quand les enfants seront plus grands. » « Je commencerai quand j'aurai du temps. »</div>
+    <textarea rows="2" data-k="histoire" placeholder="Mon histoire : ..."></textarea>
+    <div class="q">Réécris-la en commençant par « J'ai l'histoire que… »</div>
+    <div class="q-sous">Tu ne te bats pas contre elle. Tu la regardes pour ce qu'elle est : une histoire, et non un fait.</div>
+    <div class="exemple">Par exemple : « J'ai l'histoire que je ne suis pas assez qualifiée. »</div>
+    <textarea rows="2" data-k="histoire2" placeholder="J'ai l'histoire que ..."></textarea>
+    <div class="q">Et ce que tu sais aussi ?</div>
+    <div class="q-sous">Une autre vérité, formulée en positif.</div>
+    <div class="exemple">Par exemple : « Je sais aussi que j'ai appris un nouveau métier à 35 ans, et que j'y suis arrivée. »</div>
+    <textarea rows="2" data-k="aussi" placeholder="Je sais aussi que ..."></textarea>
+  </div>
+
+  <!-- ÉTAPE 3 -->
+  <div class="card">
+    <div class="etape-num">Question 3</div>
+    <h2>Si tu avais une baguette magique qui exaucerait tous tes vœux, tu commencerais par quoi ?</h2>
+    <div class="exemple">Par exemple : « Je lancerais mon atelier de céramique. » « Je reprendrais la danse. » « Je changerais de poste. »</div>
+    <textarea rows="2" data-k="baguette" placeholder="Je commencerais par ..."></textarea>
+    <div class="q">Maintenant, rends-le tout petit</div>
+    <div class="q-sous">La toute première version, faisable en 10 minutes, cette semaine. Agis avant de te sentir prête : l'élan vient souvent après le premier pas.</div>
+    <div class="exemple">Par exemple : « Chercher un atelier de céramique près de chez moi et envoyer un message. » « Ouvrir un document et écrire le titre de mon projet. »</div>
+    <textarea rows="2" data-k="pas" placeholder="Mon premier petit pas : ..."></textarea>
+  </div>
+
+  <!-- ÉTAPE 4 -->
+  <div class="card">
+    <div class="etape-num">Ton cadre</div>
+    <h2>Pour ne pas retomber en pilote automatique</h2>
+    <p>Une intention seule ne suffit pas. Il te faut un cadre : quand, où, et ce que tu feras quand ta petite histoire reviendra.</p>
+    <div class="deux"><input type="text" data-k="quand" placeholder="Quand : jeudi 19 h"><input type="text" data-k="ou" placeholder="Où : à mon bureau"></div>
+    <div class="q">Qu'est-ce qui risque de te faire repousser ?</div>
+    <div class="pills" data-groupe="obstacle"></div>
+    <div class="q">Si…, alors je…</div>
+    <div class="hl">Prévoir à l'avance « si cette situation arrive, alors je fais ceci » aide vraiment à passer à l'acte. Sur 94 études, ces petits plans ont eu un effet moyen à fort sur l'atteinte des objectifs (Gollwitzer et Sheeran, 2006).</div>
+    <div class="exemple">Par exemple : « Si jeudi soir je me dis que je suis trop fatiguée, alors je fais seulement 10 minutes, et j'ai le droit d'arrêter après. »</div>
+    <textarea rows="2" data-k="si" placeholder="Si ..., alors je ..."></textarea>
+    <div class="q">Et si tu repousses quand même ?</div>
+    <div class="hl">Te pardonner aide à moins repousser la fois suivante. Des étudiants qui s'étaient pardonné d'avoir repoussé leurs révisions ont moins repoussé avant l'examen suivant (Wohl, Pychyl et Bennett, 2010).</div>
+    <div class="exemple">Par exemple : « J'ai repoussé, c'est humain. Je reprends demain, avec un pas encore plus petit. »</div>
+    <textarea rows="2" data-k="pardon" placeholder="Ce que je me dirai : ..."></textarea>
+  </div>
+
+  <!-- FICHE -->
+  <div class="card">
+    <div class="label">Ma fiche</div>
+    <h2>Je commence avant d'être prête</h2>
+    <div class="fiche" id="fiche"></div>
+    <button class="btn second" onclick="telecharger()">Garder ma fiche</button>
+  </div>
+
+  <!-- SUITE -->
+  <div class="card" style="text-align:center">
+    <div class="label">Et maintenant ?</div>
+    <h2>Le premier pas, c'est cette semaine</h2>
+    <p style="text-align:left">Si tu sens que tu rejoues toujours la même histoire, commence par voir où tu en es vraiment. Ton bilan te montre ce qui pèse le plus en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
+    <a class="btn" href="https://alarenverse.github.io/Alarenverse/bilan.html" target="_blank" rel="noopener">Je fais mon bilan</a>
+    <p class="hint">12 questions · 7 minutes · ton portrait tout de suite</p>
+    <p style="text-align:left;margin-top:18px">Tu préfères en parler directement ? Réserve un appel de 20 minutes avec moi. On regarde où tu en es, et je te dis honnêtement si mon accompagnement est fait pour toi en ce moment.</p>
+    <a class="btn" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je réserve mon appel</a>
+    <p class="hint">20 minutes · sans engagement · tu choisis le moment qui t'arrange</p>
+    <div class="signature">Une ressource de <strong>Debora</strong>, coach pour femmes et infirmière en santé mentale de formation<br><a href="https://www.instagram.com/alarenverse.coaching" target="_blank" rel="noopener">@alarenverse.coaching</a><br><span style="font-size:12.5px;color:#a08898">Accompagnement de type coaching, et non une thérapie.</span></div>
+    <div class="sources">Sources : Sirois et Pychyl (2013), repousser pour réparer son humeur · Gollwitzer et Sheeran (2006), les plans « si…, alors… » · Wohl, Pychyl et Bennett (2010), se pardonner d'avoir repoussé.</div>
+  </div>
+</div>
+
+<script>
+function typo(t){return String(t).replace(/ ([?:;!»])/g,' $1').replace(/« /g,'« ');}
+function fixTypo(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);let n;while((n=w.nextNode())){if(n.parentNode&&/^(SCRIPT|STYLE|TEXTAREA)$/.test(n.parentNode.nodeName))continue;const v=typo(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;}root.querySelectorAll('[placeholder]').forEach(e=>{e.placeholder=typo(e.placeholder);});}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+const GROUPES={
+  perte:["L'excuse « je ne suis pas prête »","Ma tranquillité","Le droit de rêver sans risquer","L'image de celle qui réussit tout","Le regard des autres","Mon temps libre"],
+  obstacle:["La fatigue","La peur de mal faire","L'envie que ce soit parfait","Les autres passent avant","La petite voix « ce n'est pas le moment »"]
+};
+const CLE='alarenverse_ressource_prete';
+let E=(function(){try{return JSON.parse(localStorage.getItem(CLE)||'{}');}catch(e){return {};}})();
+E.t=E.t||{}; E.p=E.p||{perte:[],obstacle:[]};
+function ecrire(){try{localStorage.setItem(CLE,JSON.stringify(E));}catch(e){}}
+
+function rendrePills(){
+  document.querySelectorAll('[data-groupe]').forEach(c=>{const g=c.dataset.groupe;
+    c.innerHTML=GROUPES[g].map((x,i)=>'<button type="button" class="pill'+(E.p[g].indexOf(x)>-1?' sel':'')+'" onclick="basculer(\''+g+'\','+i+')">'+esc(x)+'</button>').join('');
+    fixTypo(c);});
+}
+function basculer(g,i){const x=GROUPES[g][i],k=E.p[g].indexOf(x);if(k>-1)E.p[g].splice(k,1);else E.p[g].push(x);ecrire();rendrePills();rendreFiche();}
+
+const FICHE=[["Ce que je perdrais si je commençais",()=>[E.p.perte.join(', '),E.t.perte].filter(Boolean).join(' · ')],
+  ["Ce que je perds en attendant",()=>E.t.attente],
+  ["Mon histoire",()=>E.t.histoire2||E.t.histoire],
+  ["Ce que je sais aussi",()=>E.t.aussi],
+  ["Ma baguette magique",()=>E.t.baguette],
+  ["Mon premier petit pas",()=>E.t.pas],
+  ["Mon cadre",()=>[E.t.quand,E.t.ou].filter(Boolean).join(' · ')],
+  ["Mon plan « si…, alors je… »",()=>E.t.si],
+  ["Si je repousse quand même",()=>E.t.pardon]];
+function lignes(){return FICHE.map(f=>[f[0],(f[1]()||'').trim()]).filter(x=>x[1]);}
+function rendreFiche(){
+  const L=lignes(), el=document.getElementById('fiche');
+  el.innerHTML=L.length?L.map(x=>'<div class="l">'+esc(x[0])+'</div><div class="r">'+esc(x[1])+'</div>').join(''):'<div class="vide">Ta fiche se remplit au fur et à mesure de tes réponses.</div>';
+  fixTypo(el);
+}
+document.querySelectorAll('[data-k]').forEach(el=>{el.value=E.t[el.dataset.k]||'';el.addEventListener('input',function(){E.t[this.dataset.k]=this.value;ecrire();rendreFiche();});});
+
+function telecharger(){
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  const L=lignes();
+  const c=L.length?L.map(x=>'<div class="b"><div class="q">'+esc(x[0])+'</div><div class="r">'+esc(x[1])+'</div></div>').join(''):'<p>Tu n\'as encore rien noté. Reviens quand tu veux.</p>';
+  const css='body{font-family:Georgia,serif;color:#3d2e45;padding:34px;max-width:620px;margin:0 auto;line-height:1.7}.p{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#c2836a}h1{font-size:23px;font-weight:normal;margin:6px 0 2px}.d{font-size:13px;color:#a08898;margin-bottom:22px}.b{background:#fdf6f0;border-left:3px solid #c2836a;border-radius:8px;padding:12px 16px;margin-bottom:12px}.q{font-size:13px;color:#a0644d;margin-bottom:4px}.r{font-size:16px}.f{margin-top:30px;font-size:14px;text-align:center;color:#5d4868}';
+  const html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Je commence avant d\'être prête</title><style>'+css+'</style></head><body><div class="p">L\'Effet Papillon</div><h1>Je commence avant d\'être prête</h1><div class="d">'+date+'</div>'+typo(c)+'<div class="f">'+typo('On ne devient pas prête en attendant que ça arrive.')+'<br>@alarenverse.coaching</div></body></html>';
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='je-commence-avant-d-etre-prete.html';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+rendrePills(); rendreFiche(); fixTypo(document.body);
+</script>
+</body>
+</html>
