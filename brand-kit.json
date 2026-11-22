@@ -49,6 +49,10 @@
     {
       "date": "2026-11-18",
       "retour": "v4 validée, sauf le badge bleu autour du mot jaune à retirer."
+    },
+    {
+      "date": "2026-11-22",
+      "retour": "Retouches reels régulation et décentration : sons IA supprimés (garder clavier + paillettes), textes au-dessus de la tête, titre 3 groupé sous le menton, « (J’ai oublié le troisième) », carte profil Instagram + clic S’abonner/Suivre, noir et blanc cinéma sur la petite voix."
     }
   ],
   "rendu": {
@@ -86,11 +90,17 @@
     "Teinte de couleur sur toute l’image",
     "Emoji téléphone",
     "Filtre/étalonnage non demandé",
-    "Ovale / badge de couleur (bleu) derrière le texte jaune"
+    "Ovale / badge de couleur (bleu) derrière le texte jaune",
+    "Pops / bips / clics « effet IA » quand les textes apparaissent",
+    "Texte qui empiète sur les yeux, le visage ou les cheveux"
   ],
   "phrases_cles": "Police marqueur Gluten jaune pastel, mot final un peu plus gros avec petites étoiles dorées. PAS de badge/ovale de couleur autour (elle trouve ça moche).",
   "bruitages_aimes": [
     "machine à écrire (touches)",
     "petites paillettes / scintillement"
-  ]
+  ],
+  "placement_textes": "Titres et phrases clés AU-DESSUS de la tête (descendre légèrement l’image si besoin, mur uni en haut). Suite du hook sous le menton. Jamais sur les yeux.",
+  "fin_cta": "Carte profil Instagram (photo, chiffres, bio, lien) + bouton Suivre/S’abonner cliqué (souris ou doigt) → Abonné(e), followers +1. Plus de boutons J’aime/Partager.",
+  "voix_interieure": "Passage en noir et blanc cinéma (bandes noires, contraste, grain, vignettage) synchronisé avec l’effet de voix.",
+  "livraison": "Envoyer des fichiers légers (≈20–30 Mo, H.264 1080×1920) : les gros fichiers ne se téléchargent pas sur son téléphone."
 }
