@@ -69,6 +69,10 @@
     {
       "date": "2026-11-22",
       "retour": "Trouvait l’image floue et pas ses couleurs : repartir de SA vidéo originale. Passage au rendu HDR natif sans conversion."
+    },
+    {
+      "date": "2026-11-23",
+      "retour": "Série « La folle du bus » : choisit l’étiquette jaune (option A) pour le titre ; titre au début seulement, pas tout le long."
     }
   ],
   "rendu": {
@@ -121,5 +125,10 @@
   "voix_interieure": "Passage en noir et blanc cinéma (bandes noires, contraste, grain, vignettage) synchronisé avec l’effet de voix.",
   "livraison": "Fichier ≈ 30 Mo pour 1 min en HEVC HDR : se télécharge bien. Éviter > 60 Mo.",
   "regle_inspiration": "Reprendre l’IDÉE d’un reel modèle, jamais sa typo ni ses couleurs : toujours SA typo (hook DM Serif Display + Unbounded crème #FFF4AA / menthe, sous-titres Inter + Anton jaune #FFEC96, listes en DM Serif Display) et SA façon de monter (sous-titres, petits zooms, fin profil Instagram en bas du cadre).",
-  "style_valide_liste": "Reel « Je ne suis pas aimée » (adoré) : hook court = sa phrase choc entre guillemets (DM Serif crème + Unbounded), centré en haut, ombre douce v2 ; liste sans numéros en DM Serif Display, mot actif en jaune + soulignement sous les lettres ; image jamais décalée/floutée ; sous-titres Inter + Anton jaune ; carte profil en bas + clic Suivre."
+  "style_valide_liste": "Reel « Je ne suis pas aimée » (adoré) : hook court = sa phrase choc entre guillemets (DM Serif crème + Unbounded), centré en haut, ombre douce v2 ; liste sans numéros en DM Serif Display, mot actif en jaune + soulignement sous les lettres ; image jamais décalée/floutée ; sous-titres Inter + Anton jaune ; carte profil en bas + clic Suivre.",
+  "serie_folle_du_bus": {
+    "titre": "Titre de l’épisode (qu’elle ne dit pas) en étiquettes jaune pastel #FFEC96, texte brun #4B2E1E en Anton, 2 lignes",
+    "affichage": "Seulement au début (jusqu’à la fin de « épisode X sur 30 »), en bas sur le pouf pendant le gros plan d’ouverture, puis au-dessus de la tête",
+    "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier"
+  }
 }
