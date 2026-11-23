@@ -50,6 +50,21 @@
   .bulle{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle,#e8c3ad,#c2836a);flex-shrink:0;animation:souffle 10s ease-in-out infinite}
   @keyframes souffle{0%,100%{transform:scale(.7)}40%{transform:scale(1)}}
   @media (prefers-reduced-motion:reduce){.bulle{animation:none}}
+
+  /* Appel : carte + barre */
+  .ap-carte{text-align:left}
+  .ap-carte.ap-inline{margin-top:22px;padding-top:20px;border-top:1px solid rgba(194,131,106,0.22)}
+  .ap-titre{font-size:22px;font-weight:600;color:#3d2e45;line-height:1.35;margin-bottom:8px}
+  .ap-liste{list-style:none;margin:10px 0 4px;padding:0}
+  .ap-liste li{position:relative;padding-left:28px;margin-bottom:8px;font-size:16.5px;line-height:1.55;color:#5d4868}
+  .ap-liste li::before{content:'✓';position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#c2836a,#c8a870);color:#fff;font-size:12px;line-height:20px;text-align:center;font-family:'Jost',sans-serif}
+  .ap-qui{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;font-family:'Jost',sans-serif;font-size:14px;color:#8a7090}
+  .ap-qui img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+  .ap-barre{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(253,246,240,0.96);border-top:1px solid rgba(194,131,106,0.25);box-shadow:0 -4px 18px rgba(160,100,77,0.08);transform:translateY(110%);transition:transform .3s ease}
+  .ap-barre.visible{transform:translateY(0)}
+  .ap-barre a{flex:1;max-width:400px;display:block;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(135deg,#c2836a,#c8a870);border-radius:50px;padding:13px 16px;font-family:'Lora',serif;font-size:16px;box-shadow:0 4px 16px rgba(194,131,106,0.3)}
+  .ap-barre button{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(194,131,106,0.35);background:#fff;color:#a0644d;font-size:18px;line-height:1;cursor:pointer}
+  @media (prefers-reduced-motion:reduce){.ap-barre{transition:none}}
 </style>
 </head>
 <body>
@@ -114,6 +129,7 @@
     <textarea rows="2" data-k="pas" placeholder="Mon premier petit pas : ..."></textarea>
   </div>
 
+  <div class="card ap-carte" id="ap-carte"><div class="label">Ta prochaine étape</div><div class="ap-titre">On en parle 20 minutes, toi et moi ?</div><p>T'as trouvé ton premier pas. On peut regarder ensemble comment le tenir dans la durée.</p><ul class="ap-liste"><li>Tu me dis où t'en es, avec tes mots.</li><li>Tu repars avec un premier pas concret, que tu me rejoignes ou non.</li><li>On regarde ensemble si mon accompagnement est fait pour toi en ce moment.</li></ul><a class="btn" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau</a><p class="hint">20 minutes · sans engagement · tu choisis le moment qui t'arrange</p><div class="ap-qui"><img src="debora.jpg" alt="" onerror="this.remove()"><span>Avec <strong>Debora</strong>, coach pour femmes</span></div></div>
   <!-- ÉTAPE 4 -->
   <div class="card">
     <div class="etape-num">Ton cadre</div>
@@ -203,6 +219,31 @@ function telecharger(){
   a.href=url;a.download='je-commence-avant-d-etre-prete.html';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 rendrePills(); rendreFiche(); fixTypo(document.body);
+</script>
+<div class="ap-barre" id="ap-barre" aria-hidden="true"><a href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau · 20 min</a><button type="button" aria-label="Fermer" onclick="apFermer()">×</button></div>
+<script>
+(function(){
+  var barre=document.getElementById('ap-barre'); if(!barre)return;
+  var on=false, ferme=false;
+  try{ferme=sessionStorage.getItem('ap_barre_fermee')==='1';}catch(e){}
+  function boutonVisible(){
+    return Array.prototype.some.call(document.querySelectorAll('a[href*="cal.com"]'),function(a){
+      if(barre.contains(a))return false; var r=a.getBoundingClientRect();
+      return r.height>0&&r.top<window.innerHeight&&r.bottom>0;});
+  }
+  function enSaisie(){var a=document.activeElement;return !!a&&/^(TEXTAREA|INPUT)$/.test(a.tagName);}
+  function maj(){
+    var m=!ferme&&window.scrollY>window.innerHeight*1.1&&!boutonVisible()&&!enSaisie()&&(typeof window.apBarreOk!=='function'||window.apBarreOk());
+    if(m!==on){on=m;barre.classList.toggle('visible',m);barre.setAttribute('aria-hidden',m?'false':'true');}
+  }
+  window.apFermer=function(){ferme=true;try{sessionStorage.setItem('ap_barre_fermee','1');}catch(e){}maj();};
+  var raf=null;
+  window.addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=null;maj();});},{passive:true});
+  window.addEventListener('resize',maj);
+  document.addEventListener('focusin',maj);
+  document.addEventListener('focusout',function(){setTimeout(maj,60);});
+  window.apMaj=maj; maj();
+})();
 </script>
 </body>
 </html>
