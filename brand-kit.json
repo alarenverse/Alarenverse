@@ -118,7 +118,7 @@
   "phrases_cles": "Police marqueur Gluten jaune pastel, mot final un peu plus gros avec petites étoiles dorées. PAS de badge/ovale de couleur autour (elle trouve ça moche).",
   "bruitages_aimes": [
     "machine à écrire (touches)",
-    "petites paillettes / scintillement"
+    "petites paillettes, volume DOUX (environ 1/3 de l’ancien)"
   ],
   "placement_textes": "Titres et phrases clés AU-DESSUS de la tête (descendre légèrement l’image si besoin, mur uni en haut). Suite du hook sous le menton. Jamais sur les yeux.",
   "fin_cta": "Carte profil Instagram (photo, chiffres, bio, lien) + bouton Suivre/S’abonner cliqué (souris ou doigt) → Abonné(e), followers +1. Plus de boutons J’aime/Partager.",
@@ -128,7 +128,7 @@
   "style_valide_liste": "Reel « Je ne suis pas aimée » (adoré) : hook court = sa phrase choc entre guillemets (DM Serif crème + Unbounded), centré en haut, ombre douce v2 ; liste sans numéros en DM Serif Display, mot actif en jaune + soulignement sous les lettres ; image jamais décalée/floutée ; sous-titres Inter + Anton jaune ; carte profil en bas + clic Suivre.",
   "serie_folle_du_bus": {
     "titre": "Titre de l’épisode (qu’elle ne dit pas) en étiquettes jaune pastel #FFEC96, texte brun #4B2E1E en Anton, 2 lignes",
-    "affichage": "Seulement au début (jusqu’à la fin de « épisode X sur 30 »), en bas sur le pouf pendant le gros plan d’ouverture, puis au-dessus de la tête",
+    "affichage": "Même place du début à la fin (en haut, même si ça cache un peu la tête), environ 3,5 s : le temps de lire et de se reconnaître",
     "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier"
   }
 }
