@@ -129,6 +129,7 @@
   "serie_folle_du_bus": {
     "titre": "Titre de l’épisode (qu’elle ne dit pas) en étiquettes jaune pastel #FFEC96, texte brun #4B2E1E en Anton, 2 lignes",
     "affichage": "Même place du début à la fin (en haut, même si ça cache un peu la tête), environ 3,5 s : le temps de lire et de se reconnaître",
-    "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier"
+    "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier",
+    "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet) : elle le cache en entrant dans le cadre, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s"
   }
 }
