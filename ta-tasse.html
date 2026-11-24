@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Ta tasse : à toi, pas à toi · L'Effet Papillon</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root{--terra:#c2836a;--caramel:#c8a870;--titre:#3d2e45;--texte:#5d4868;--doux:#8a7090;--pale:#a08898;--champ:#fffaf6;--fonce:#b85a32}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{background:#fdf6f0;scroll-behavior:smooth}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf6f0 0%,#f8ece6 45%,#f3eef8 100%);min-height:100vh;font-size:18px;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 70px;color:var(--texte)}
+  header{width:100%;max-width:600px;padding-top:34px;text-align:center}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b0806c;margin-bottom:10px}
+  h1{font-size:clamp(27px,7vw,36px);font-weight:500;color:var(--titre);line-height:1.2}
+  .sous-titre{font-size:17px;color:var(--doux);margin-top:10px;line-height:1.6}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,var(--terra),var(--caramel));margin:16px auto 0;border-radius:2px}
+  .wrap{width:100%;max-width:560px}
+  section{scroll-margin-top:74px}
+  .card{background:white;border-radius:22px;padding:24px 20px;box-shadow:0 8px 34px rgba(194,131,106,0.09);border:1px solid rgba(194,131,106,0.15);margin-top:16px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--terra);margin-bottom:10px}
+  p{font-size:17.5px;line-height:1.75;margin-bottom:12px;color:var(--texte)}
+  .hl{background:linear-gradient(135deg,#fdf3ec,#f8f0f6);border-radius:14px;padding:13px 16px;border-left:3px solid var(--terra);font-size:16.5px;color:var(--titre);line-height:1.7;margin:4px 0 12px}
+  .hl.nuance{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f8f2f6)}
+  .arret{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:50px;background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.08em;margin-bottom:12px}
+  h2{font-size:22px;font-weight:600;color:var(--titre);line-height:1.35;margin-bottom:10px}
+  h3{font-size:18px;font-weight:600;color:var(--titre);line-height:1.45;margin-bottom:6px}
+  .q-sous{font-family:'Jost',sans-serif;font-size:14.5px;color:var(--doux);line-height:1.55;margin-bottom:10px}
+  .exemple{font-size:15px;line-height:1.55;font-style:italic;background:rgba(253,248,238,0.9);border-left:2px solid rgba(200,168,112,0.6);border-radius:0 10px 10px 0;padding:8px 12px;margin:0 0 10px;color:var(--texte)}
+  textarea,input[type=text]{width:100%;border:2px solid rgba(194,131,106,0.25);border-radius:12px;padding:11px 13px;font-size:16px;font-family:'Lora',serif;color:var(--titre);line-height:1.6;outline:none;resize:vertical;background:var(--champ);margin-bottom:8px}
+  textarea:focus,input[type=text]:focus{border-color:var(--terra)}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 10px}
+  .pill{border:2px solid rgba(194,131,106,0.28);background:var(--champ);color:var(--texte);border-radius:50px;padding:8px 14px;font-size:14.5px;font-family:'Jost',sans-serif;cursor:pointer;text-align:left;line-height:1.4;max-width:100%}
+  .pill.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));border-color:transparent;color:white}
+  .btn{background:linear-gradient(135deg,#c2836a,#c8a870);color:white;border:none;border-radius:50px;padding:15px 30px;font-size:17px;cursor:pointer;font-family:'Lora',serif;box-shadow:0 6px 22px rgba(194,131,106,0.3);display:block;margin:16px auto 0;text-decoration:none;text-align:center;max-width:100%;width:fit-content}
+  .btn.second{background:white;color:#a0644d;border:2px solid rgba(194,131,106,0.4);box-shadow:none;font-size:15.5px;padding:11px 24px}
+  .lien{background:none;border:none;color:#a0644d;font-family:'Jost',sans-serif;font-size:14px;text-decoration:underline;cursor:pointer;padding:6px 0}
+  .hint{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--pale);text-align:center;margin-top:10px;line-height:1.55}
+
+  /* Ligne de bus */
+  .ligne{position:sticky;top:0;z-index:20;width:100%;max-width:560px;margin-top:18px;background:rgba(255,255,255,0.93);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:0 0 18px 18px;box-shadow:0 6px 20px rgba(194,131,106,0.10);padding:8px 6px 7px}
+  .ligne-in{position:relative;display:grid;grid-template-columns:repeat(4,1fr)}
+  .rail{position:absolute;left:12.5%;right:12.5%;top:27px;height:3px;background:rgba(194,131,106,0.2);border-radius:3px}
+  .rail-plein{position:absolute;left:12.5%;top:27px;height:3px;background:linear-gradient(90deg,var(--terra),var(--caramel));border-radius:3px;transition:width .6s ease}
+  .bus{position:absolute;top:0;font-size:20px;line-height:1;transform:translateX(-50%);transition:left .6s ease}
+  .stop{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding-top:22px;font-family:'Jost',sans-serif;font-size:11.5px;color:var(--pale);position:relative;z-index:1}
+  .stop .dot{width:13px;height:13px;border-radius:50%;background:white;border:2.5px solid rgba(194,131,106,0.35)}
+  .stop.fait .dot{background:var(--terra);border-color:var(--terra)}
+  .stop.fait{color:var(--texte)}
+
+  /* Test */
+  .quiz-top{display:flex;justify-content:space-between;align-items:center;font-family:'Jost',sans-serif;font-size:13px;color:var(--doux);margin-bottom:8px}
+  .barre{height:5px;border-radius:5px;background:rgba(194,131,106,0.15);overflow:hidden;margin-bottom:16px}
+  .barre i{display:block;height:100%;background:linear-gradient(90deg,var(--terra),var(--caramel));transition:width .35s ease}
+  .scene{animation:entre .35s ease}
+  @keyframes entre{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .scene .situation{font-size:19px;font-weight:600;color:var(--titre);line-height:1.5;margin-bottom:10px}
+  .auto{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:4px}
+  .reponse{font-size:17px;font-style:italic;color:var(--texte);background:var(--champ);border-radius:14px;padding:12px 14px;margin-bottom:14px;line-height:1.55}
+  .choix{display:flex;flex-direction:column;gap:9px}
+  .choix button{border:2px solid rgba(194,131,106,0.3);background:white;border-radius:16px;padding:13px 16px;font-family:'Jost',sans-serif;font-size:16px;color:var(--titre);text-align:left;cursor:pointer;line-height:1.35}
+  .choix button.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;border-color:transparent}
+  .tu-fais{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin:4px 0 8px}
+
+  /* Résultat */
+  .resultat{animation:entre .5s ease}
+  .niveau{font-size:26px;font-weight:600;color:var(--titre);line-height:1.25;margin:4px 0 10px}
+  .jauge{position:relative;height:14px;border-radius:14px;background:linear-gradient(90deg,#f3e3da,#e8bfa8,#c2836a,#b85a32);margin:30px 0 6px}
+  .jauge .curseur{position:absolute;top:-25px;transform:translateX(-50%);font-size:20px;transition:left .8s ease}
+  .jauge .curseur::after{content:'';position:absolute;left:50%;top:24px;width:2px;height:20px;background:var(--titre);transform:translateX(-50%);border-radius:2px}
+  .jauge-l{display:flex;justify-content:space-between;font-family:'Jost',sans-serif;font-size:11.5px;color:var(--pale);margin-bottom:14px}
+  .terrain-box{background:linear-gradient(135deg,#fdf3ec,#f8eef4);border-radius:18px;padding:16px;margin:14px 0 10px;border:1px solid rgba(194,131,106,0.25)}
+  .terrain-box .nom{font-size:21px;font-weight:600;color:var(--titre);margin-bottom:6px}
+  .phrase{font-size:20px;color:var(--fonce);font-weight:600;line-height:1.4;text-align:center;padding:12px 6px;margin:6px 0}
+  .petit-titre{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin:10px 0 4px}
+  .barres{margin-top:6px}
+  .barres .r{display:grid;grid-template-columns:1fr 34px;align-items:center;gap:8px;margin-bottom:7px}
+  .barres .nm{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--texte);grid-column:1/3;margin-bottom:-3px}
+  .barres .tr{height:12px;border-radius:0 4px 4px 0;background:rgba(194,131,106,0.12);overflow:hidden}
+  .barres .tr i{display:block;height:100%;background:var(--fonce);border-radius:0 4px 4px 0}
+  .barres .v{font-family:'Jost',sans-serif;font-size:13px;color:var(--doux);text-align:right}
+  .barres .r.top .nm{font-weight:500;color:var(--titre)}
+
+  /* Vrai ou faux */
+  .vf{border-top:1px solid rgba(194,131,106,0.18);padding-top:16px;margin-top:16px}
+  .vf:first-of-type{border-top:none;padding-top:0}
+  .vf .aff{font-size:17.5px;font-weight:600;color:var(--titre);line-height:1.5;margin-bottom:10px}
+  .vf-btns{display:flex;gap:10px}
+  .vf-btns button{flex:1;border:2px solid rgba(194,131,106,0.3);background:white;border-radius:50px;padding:11px;font-family:'Jost',sans-serif;font-size:16px;color:var(--titre);cursor:pointer}
+  .vf-btns button.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;border-color:transparent}
+  .vf-btns button:disabled{cursor:default}
+  .verdict{margin-top:10px;background:var(--champ);border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.65;color:var(--titre);animation:entre .35s ease}
+  .verdict b{color:var(--fonce)}
+  .verdict .src{display:block;font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale);margin-top:6px}
+  .score-vf{text-align:center;font-size:18px;color:var(--titre);margin-top:16px;animation:entre .4s ease}
+
+  /* IRA */
+  .ira3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 14px}
+  .ira3 div{background:var(--champ);border-radius:14px;padding:10px 6px;text-align:center;border:1px solid rgba(194,131,106,0.2)}
+  .ira3 b{display:block;font-size:24px;color:var(--fonce);line-height:1.1}
+  .ira3 span{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--texte)}
+  .demo{background:linear-gradient(135deg,#fdf8ee,#fdf5f0);border-radius:16px;padding:14px 16px;margin:6px 0 16px;border-top:2px solid var(--caramel)}
+  .demo .l{font-size:15.5px;line-height:1.6;margin-top:6px;color:var(--titre)}
+  .demo .l b{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.1em;color:var(--terra);font-weight:500}
+  .etape{border-top:1px solid rgba(194,131,106,0.18);padding-top:16px;margin-top:16px}
+  .lettre{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;font-family:'Jost',sans-serif;font-size:15px;margin-right:8px;vertical-align:middle}
+  .note-douce{font-family:'Jost',sans-serif;font-size:14.5px;color:#7d6090;line-height:1.55;background:rgba(160,128,200,0.08);border-radius:12px;padding:10px 13px;margin:4px 0 8px}
+
+  /* Ticket */
+  .rituel{background:var(--champ);border-radius:14px;padding:12px 14px;margin:8px 0 4px}
+  .rituel div{font-size:15.5px;line-height:1.55;color:var(--titre);margin:4px 0}
+  .rituel b{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);font-weight:500;margin-right:6px}
+  .ticket{display:flex;margin-top:18px;border-radius:18px;background:linear-gradient(135deg,#fdf1e9,#f7ecf3);border:1px solid rgba(194,131,106,0.35);box-shadow:0 10px 28px rgba(184,90,50,0.12);overflow:hidden;position:relative}
+  .souche{width:46px;flex-shrink:0;background:linear-gradient(180deg,#c2836a,#c8a870);display:flex;align-items:center;justify-content:center;border-right:2px dashed rgba(255,255,255,0.9)}
+  .souche span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:white;white-space:nowrap}
+  .tk{flex:1;padding:14px 15px 12px;min-width:0}
+  .tk-h{display:flex;justify-content:space-between;gap:8px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#a0644d;margin-bottom:8px}
+  .tk-dir{font-size:12px;font-family:'Jost',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
+  .tk-dirv{font-size:18.5px;font-weight:600;color:var(--titre);line-height:1.4;margin-bottom:8px;overflow-wrap:anywhere}
+  .tk-l{border-top:1px dashed rgba(194,131,106,0.35);padding-top:7px;margin-top:7px}
+  .tk-l .t{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra)}
+  .tk-l .v{font-size:15.5px;color:var(--titre);line-height:1.45;overflow-wrap:anywhere}
+  .tk-l .v.vide{color:var(--pale);font-family:'Jost',sans-serif;font-size:13.5px}
+  .tk-f{font-family:'Jost',sans-serif;font-size:11px;color:var(--pale);margin-top:10px;letter-spacing:.06em}
+
+  .signature{font-family:'Jost',sans-serif;font-size:14px;color:var(--doux);text-align:center;margin-top:18px;line-height:1.6}
+  .signature a{color:#a0644d}
+  .sources{font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale);line-height:1.6;margin-top:18px;text-align:left}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+  @media (max-width:350px){.stop{font-size:10.5px}.card{padding:22px 16px}}
+
+  /* Appel : carte + barre */
+  .ap-carte{text-align:left}
+  .ap-carte.ap-inline{margin-top:22px;padding-top:20px;border-top:1px solid rgba(194,131,106,0.22)}
+  .ap-titre{font-size:22px;font-weight:600;color:#3d2e45;line-height:1.35;margin-bottom:8px}
+  .ap-liste{list-style:none;margin:10px 0 4px;padding:0}
+  .ap-liste li{position:relative;padding-left:28px;margin-bottom:8px;font-size:16.5px;line-height:1.55;color:#5d4868}
+  .ap-liste li::before{content:'✓';position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#c2836a,#c8a870);color:#fff;font-size:12px;line-height:20px;text-align:center;font-family:'Jost',sans-serif}
+  .ap-qui{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;font-family:'Jost',sans-serif;font-size:14px;color:#8a7090}
+  .ap-qui img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+  .ap-barre{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(253,246,240,0.96);border-top:1px solid rgba(194,131,106,0.25);box-shadow:0 -4px 18px rgba(160,100,77,0.08);transform:translateY(110%);transition:transform .3s ease}
+  .ap-barre.visible{transform:translateY(0)}
+  .ap-barre a{flex:1;max-width:400px;display:block;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(135deg,#c2836a,#c8a870);border-radius:50px;padding:13px 16px;font-family:'Lora',serif;font-size:16px;box-shadow:0 4px 16px rgba(194,131,106,0.3)}
+  .ap-barre button{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(194,131,106,0.35);background:#fff;color:#a0644d;font-size:18px;line-height:1;cursor:pointer}
+  @media (prefers-reduced-motion:reduce){.ap-barre{transition:none}}
+
+  /* Tasse : ajustements */
+  .ligne-in{grid-template-columns:repeat(5,1fr)}
+  .rail{left:10%;right:10%}
+  .rail-plein{left:10%}
+  .stop{font-size:11px;text-align:center;line-height:1.2}
+  @media (max-width:350px){.stop{font-size:10px}}
+  .carte-tri{background:linear-gradient(135deg,#fdf6ef,#f7eff5);border:1px solid rgba(194,131,106,0.25);border-radius:20px;padding:22px 16px;text-align:center;margin-bottom:14px}
+  .carte-tri .item{font-size:21px;font-weight:600;color:var(--titre);line-height:1.4}
+  .tri-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .tri-btns button{border:2px solid rgba(194,131,106,0.3);background:white;border-radius:16px;padding:14px 8px;font-family:'Jost',sans-serif;font-size:16.5px;color:var(--titre);cursor:pointer}
+  .tri-btns button.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;border-color:transparent}
+  .tri-btns button:disabled{cursor:default}
+  .rangee{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 6px}
+  .rangee>div{border-radius:16px;padding:12px;min-width:0}
+  .rangee .a{background:linear-gradient(160deg,#f6e3d2,#efd2b8);border:1px solid rgba(184,90,50,0.25)}
+  .rangee .p{background:#f4f0f2;border:1px dashed rgba(138,112,144,0.45)}
+  .rangee .t{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fonce);margin-bottom:6px}
+  .rangee .p .t{color:var(--doux)}
+  .rangee ul{list-style:none;padding:0;margin:0}
+  .rangee li{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--titre);line-height:1.4;margin:5px 0;overflow-wrap:anywhere}
+  .tasse-svg{display:block;width:100%;max-width:300px;height:auto;margin:6px auto 0}
+  .legende{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 16px;font-family:'Jost',sans-serif;font-size:13.5px;color:var(--texte);margin:6px 0 12px}
+  .legende span{display:inline-flex;align-items:center;gap:6px}
+  .legende i{width:14px;height:14px;border-radius:4px;display:inline-block}
+  .pct{text-align:center;font-size:19px;color:var(--titre);line-height:1.45;margin:4px 0 8px}
+  .pct b{color:var(--fonce);font-size:24px}
+  .suggestion{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--terra);margin:-4px 0 8px}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">L'Effet Papillon · Ressource offerte</div>
+  <h1>Ta tasse : à toi, pas à toi</h1>
+  <div class="sous-titre">Un tri, ta tasse du moment, un vrai ou faux, et ton plan pour revenir à toi.</div>
+  <div class="sep"></div>
+</header>
+
+<nav class="ligne" aria-label="Ta progression">
+  <div class="ligne-in">
+    <div class="rail"></div><div class="rail-plein" id="railPlein" style="width:0"></div>
+    <div class="bus" id="bus" aria-hidden="true" style="left:10%">☕</div>
+    <button class="stop" data-s="tri" onclick="aller('tri')"><span class="dot"></span>Le tri</button>
+    <button class="stop" data-s="tasse" onclick="aller('tasse')"><span class="dot"></span>Ta tasse</button>
+    <button class="stop" data-s="vf" onclick="aller('vf')"><span class="dot"></span>Vrai/faux</button>
+    <button class="stop" data-s="retourner" onclick="aller('retourner')"><span class="dot"></span>Retourner</button>
+    <button class="stop" data-s="plan" onclick="aller('plan')"><span class="dot"></span>Ton plan</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="card">
+    <p>Si t'as commenté TASSE, c'est que t'en as marre de t'occuper du biz des autres.</p>
+    <p>L'humeur de ta collègue, l'avis de ta belle-sœur, le bonheur de tout le monde à Noël… Tu portes plein de choses qui ne sont pas à toi. Et pendant ce temps, ton café refroidit.</p>
+    <div class="hl">Ta tasse, c'est ton énergie. Ce qui est à toi, c'est ce sur quoi tu as la main : tes limites, ta façon de te parler, tes réactions, ton repos. Le reste, tu peux l'écouter, le comprendre, aider, sans le porter à la place de l'autre.</div>
+    <p>Porter ce qui n'est pas à toi, tu l'as sûrement appris très tôt, et ça t'a rendu service. Et ce qui s'est appris peut se désapprendre, pour se réapprendre autrement.</p>
+    <div class="hl nuance">Cette ressource fait partie d'un accompagnement de type coaching : ce n'est pas une thérapie, et elle ne remplace pas un suivi médical ou psychologique. Si tu traverses une période difficile, parles-en à un ou une professionnelle de santé.</div>
+    <button class="btn" onclick="aller('tri')">Je prends ma tasse ☕</button>
+  </div>
+
+  <!-- ÉTAPE 1 -->
+  <section id="tri">
+    <div class="card" id="triCard">
+      <div class="arret">Étape 1 · Le tri</div>
+      <h2>À toi, ou pas à toi ?</h2>
+      <p class="q-sous" id="triIntro">10 cartes. Pour chacune, réponds à l'instinct. Je t'explique après chaque réponse.</p>
+      <div id="triZone"></div>
+    </div>
+  </section>
+
+  <!-- ÉTAPE 2 -->
+  <section id="tasse">
+    <div class="card" id="tasseCard">
+      <div class="arret">Étape 2 · Ta tasse aujourd'hui</div>
+      <h2>Qui boit dans ta tasse, en ce moment ?</h2>
+      <p class="q-sous" id="tasseIntro">8 scènes du quotidien. Pour chacune, choisis ce que tu fais le plus souvent, en vrai.</p>
+      <div id="tasseZone"></div>
+    </div>
+  </section>
+
+  <!-- ÉTAPE 3 -->
+  <section id="vf">
+    <div class="card">
+      <div class="arret">Étape 3 · Vrai ou faux</div>
+      <h2>5 idées reçues sur le fait de tout porter</h2>
+      <p class="q-sous">Tape ta réponse, et découvre ce que dit la science.</p>
+      <div id="vfListe"></div>
+      <div id="vfScore"></div>
+    </div>
+  </section>
+
+  <!-- ÉTAPE 4 -->
+  <section id="retourner">
+    <div class="card">
+      <div class="arret">Étape 4 · Retourner le comportement</div>
+      <h2>Ce que ça te protège, ce que ça te coûte</h2>
+      <p>Porter ce qui n'est pas à toi, c'est souvent une protection. C'est ce que j'appelle retourner le comportement : ce qui ressemble à un frein est une solution qui te protège de quelque chose. Tant que tu ne la vois pas, c'est elle qui décide.</p>
+      <div class="etape" style="border-top:none;padding-top:0">
+        <h3>Porter ce qui n'est pas à moi, ça me protège de quoi ?</h3>
+        <p class="q-sous">Choisis ce qui te parle, ou écris avec tes mots.</p>
+        <div class="pills" data-groupe="protege"></div>
+        <div class="exemple" id="exProtege">Par exemple : « Quand je règle la paperasse de ma sœur, ça m'évite de me sentir coupable de ne rien faire. »</div>
+        <textarea rows="2" data-k="protege" placeholder="Ça me protège de ..."></textarea>
+      </div>
+      <div class="etape">
+        <h3>Et ça me coûte quoi ?</h3>
+        <div class="pills" data-groupe="coute"></div>
+        <div class="exemple">Par exemple : « Le soir, je n'ai plus d'énergie pour ce que j'aime. »</div>
+        <textarea rows="2" data-k="coute" placeholder="Ça me coûte ..."></textarea>
+        <div class="note-douce">Ce que ça te protège est réel. Tu peux le reconnaître, et choisir quand même de rendre un petit morceau, cette semaine.</div>
+      </div>
+      <button class="btn" onclick="aller('plan')">Continuer : ton plan</button>
+    </div>
+  </section>
+
+  <!-- ÉTAPE 5 -->
+  <section id="plan">
+    <div class="card">
+      <div class="arret">Étape 5 · Ton plan</div>
+      <h2>Mon plan pour revenir à moi</h2>
+      <p class="q-sous">Une chose que tu rends, une chose que tu reprends. Petit, concret, pour cette semaine.</p>
+
+      <div class="etape" style="border-top:none;padding-top:0">
+        <h3>Ce que je rends cette semaine</h3>
+        <div class="suggestion" id="suggRendre"></div>
+        <div class="pills" data-groupe="rendre" data-un="1"></div>
+        <p class="q-sous">Avec qui, dans quelle situation ?</p>
+        <div class="exemple">Par exemple : « La mauvaise humeur de mon collègue le lundi matin. »</div>
+        <input type="text" data-k="situation" placeholder="Avec ..., quand ...">
+        <p class="q-sous">Ma phrase pour le rendre</p>
+        <div class="exemple" id="exPhrase">Par exemple : « Je vois que tu es contrariée. Je suis là si tu veux en parler. »</div>
+        <input type="text" data-k="phrase" placeholder="Ma phrase : ...">
+        <button class="lien" id="btnPhrase" onclick="utiliserPhrase()" style="display:none"></button>
+      </div>
+
+      <div class="etape">
+        <h3>Ce que je reprends</h3>
+        <div class="pills" data-groupe="reprendre" data-un="1"></div>
+        <p class="q-sous">Mon geste, cette semaine</p>
+        <div class="exemple" id="exGeste">Par exemple : « Mercredi soir, je garde une heure pour moi, téléphone en silence. »</div>
+        <input type="text" data-k="geste" placeholder="Cette semaine, je ...">
+      </div>
+
+      <div class="etape">
+        <h3>Mon « si…, alors je… »</h3>
+        <p class="q-sous">Prévoir le moment où ça va coincer t'aide à passer à l'action.</p>
+        <div class="exemple">Par exemple : « Si ma collègue soupire en arrivant, alors je lui demande si ça va, et je reprends mon travail. »</div>
+        <input type="text" data-k="si" placeholder="Si ...">
+        <input type="text" data-k="alors" placeholder="alors je ...">
+      </div>
+
+      <div class="etape">
+        <h3>Mon petit plaisir non négociable</h3>
+        <p class="q-sous">Un moment à toi, rien qu'à toi, cette semaine.</p>
+        <div class="pills" data-groupe="plaisir" data-un="1"></div>
+        <input type="text" data-k="plaisirAutre" placeholder="Ou le mien : ...">
+      </div>
+
+      <div id="ticketVue"></div>
+      <button class="btn" onclick="telecharger()">Télécharger mon plan</button>
+      <p class="hint">Fais une capture d'écran de ton plan. Et si t'as envie, partage-le en story en me taguant @alarenverse.coaching : ça donne du courage à celles qui n'osent pas encore.</p>
+    </div>
+  </section>
+
+  <!-- SUITE -->
+  <div class="card" style="text-align:center" id="suite">
+    <div class="label">Et maintenant ?</div>
+    <h2>Rendre ce qui n'est pas à toi, ça s'apprend, un petit morceau à la fois.</h2>
+    <p style="text-align:left" id="suiteBilan">Ta tasse te montre où part ton énergie. Ton bilan va plus loin : il te montre ce qui pèse le plus dans ta vie en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
+    <a class="btn" href="https://alarenverse.github.io/Alarenverse/bilan.html" target="_blank" rel="noopener">Je fais mon bilan</a>
+    <p class="hint">12 questions · 7 minutes · ton portrait tout de suite</p>
+    <p style="text-align:left;margin-top:18px" id="suiteAppel">Tu préfères en parler directement ? Réserve un appel de 20 minutes avec moi. On regarde ensemble où t'en es, et je te dis honnêtement si mon accompagnement est fait pour toi en ce moment.</p>
+    <a class="btn" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je réserve mon appel</a>
+    <p class="hint">20 minutes · sans engagement · tu choisis le moment qui t'arrange</p>
+    <div class="signature">Une ressource de <strong>Debora</strong> 🦋, coach pour femmes<br><a href="https://www.instagram.com/alarenverse.coaching" target="_blank" rel="noopener">@alarenverse.coaching</a><br><span style="font-size:12.5px;color:#a08898">Accompagnement de type coaching, et non une thérapie.</span></div>
+    <div class="sources">Sources : Singer et Klimecki (2014) et Klimecki et al. (2014), empathie et compassion · Engert et al. (2014), le stress qui se transmet · Wendsche et Lohmann-Haislah (2017), couper avec le travail · Breines et Chen (2012), la bienveillance envers soi · Gollwitzer et Sheeran (2006), les plans « si…, alors je… ».</div>
+  </div>
+</div>
+
+<script>
+function typo(t){return String(t).replace(/ ([?:;!»])/g,' $1').replace(/« /g,'« ');}
+function fixTypo(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);let n;while((n=w.nextNode())){if(n.parentNode&&/^(SCRIPT|STYLE|TEXTAREA)$/.test(n.parentNode.nodeName))continue;const v=typo(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;}root.querySelectorAll('[placeholder]').forEach(e=>{e.placeholder=typo(e.placeholder);});}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+/* ---------- Contenu ---------- */
+/* r : 'a' = à toi, 'p' = pas à toi */
+const TRI=[
+  {i:"Les émotions de ta collègue",r:'p',e:"Tu peux lui demander si ça va, et l'écouter. Sa mauvaise humeur, elle, reste la sienne."},
+  {i:"Nommer ce que tu ressens",r:'a',e:"Personne ne peut le faire à ta place. Et mettre un mot dessus, c'est déjà commencer à t'apaiser."},
+  {i:"Ce que ta belle-sœur pense de ta façon d'élever tes enfants",r:'p',e:"Son avis lui appartient. Ce que tu en fais, ça, c'est à toi."},
+  {i:"Ta réaction quand ta sœur te critique",r:'a',e:"Tu ne choisis pas ses mots. Tu choisis ce que tu en fais : répondre, poser une limite, ou laisser passer."},
+  {i:"Que tout le monde passe un bon Noël",r:'p',e:"Tu peux préparer un beau repas. L'ambiance, elle, dépend de chacune et de chacun autour de la table."},
+  {i:"Te reposer sans te justifier",r:'a',e:"Ton repos n'a pas besoin d'être mérité, ni expliqué. C'est à toi, et à personne d'autre."},
+  {i:"Que ton ou ta partenaire comprenne enfin pourquoi tu es fatiguée",r:'p',e:"Le lui dire clairement, c'est à toi. Qu'il comprenne, c'est à lui."},
+  {i:"À qui tu donnes ton énergie",r:'a',e:"Tu ne choisis pas qui te demande. Tu choisis à qui tu dis oui."},
+  {i:"Régler la dispute entre tes deux amies",r:'p',e:"Tu peux écouter chacune d'elles. La dispute, elle, leur appartient."},
+  {i:"Boire ton café encore chaud",r:'a',e:"Oui, ça aussi, c'est à toi. Et ça compte."}
+];
+const TERRAINS=[
+  {nom:"Les émotions des autres",txt:"Tu ressens tout ce que ressentent les autres, et tu le prends en charge. Résultat : tu passes tes journées à gérer l'humeur de tout le monde, et la tienne passe après.",phrase:"Je vois que tu es contrariée. Je suis là si tu veux en parler.",rendre:"Les émotions des autres"},
+  {nom:"Ce que les gens pensent de toi",txt:"Tu mets beaucoup d'énergie à deviner ce que les autres pensent de toi, et à t'ajuster. Chaque silence devient une question.",phrase:"Ce qu'elle pense de moi lui appartient.",rendre:"Ce que les gens pensent de moi"},
+  {nom:"Sauver tout le monde",txt:"Dès que quelqu'un a un souci, tu cherches la solution à sa place. Tu aides avec ton cœur, et tu t'oublies au passage.",phrase:"Qu'est-ce qui t'aiderait, toi ?",rendre:"Sauver tout le monde"},
+  {nom:"Les attentes des autres",txt:"Tu réponds à ce qu'on attend de toi avant même de te demander ce que tu veux. Ton agenda finit par appartenir aux autres.",phrase:"Je te dis ce que je peux faire.",rendre:"Les attentes des autres"}
+];
+/* o : [texte, points] · 2 = tu portes ce qui n'est pas à toi, 1 = entre-deux, 0 = tu gardes ta tasse */
+const SCENES=[
+  {t:0,s:"Ta collègue arrive de mauvaise humeur et soupire en posant son sac.",o:[["Tu te demandes ce que tu as fait, et tu essaies de la dérider toute la matinée.",2],["Tu lui demandes si ça va, tu prends l'info, et tu reprends ton travail.",0],["Tu ne dis rien, mais tu y penses encore à midi.",1]]},
+  {t:1,s:"Tu as envoyé un message à ton ou ta partenaire. Une heure plus tard, toujours pas de réponse.",o:[["Tu relis ton message deux fois, pour voir s'il pouvait être mal pris.",1],["Tu envoies un deuxième message pour adoucir le premier.",2],["Tu poses ton téléphone : la réponse viendra quand elle viendra.",0]]},
+  {t:2,s:"Ton amie t'appelle pour la troisième fois de la semaine, à propos de son ex.",o:[["Tu l'écoutes un moment, puis tu lui dis que tu dois raccrocher.",0],["Tu passes une heure au téléphone à chercher des solutions à sa place.",2],["Tu écoutes jusqu'au bout, même si tu tombes de sommeil.",1]]},
+  {t:3,s:"Ton chef te demande si tu peux « vite » finir un dossier ce soir.",o:[["Tu dis oui tout de suite, et tu annules ton cours de sport.",2],["Tu dis oui, et tu râles dans ta tête toute la soirée.",1],["Tu lui dis ce que tu peux faire d'ici demain midi.",0]]},
+  {t:0,s:"Ton ou ta partenaire rentre du travail sous tension et te répond sèchement.",o:[["Tu lui dis que tu sens de la tension, et tu lui laisses de l'espace.",0],["Tu lui demandes dix fois si ça va, et tu finis par t'excuser sans savoir de quoi.",2],["Tu marches sur des œufs toute la soirée.",1]]},
+  {t:1,s:"Tu as posé une limite à une amie. Elle a répondu « ok », sans rien ajouter.",o:[["Tu te repasses la conversation en boucle.",1],["Tu te dis qu'elle a le droit d'avoir besoin d'un peu de temps.",0],["Tu lui écris pour t'excuser, et tu reviens sur ta limite.",2]]},
+  {t:2,s:"Ta sœur ne s'en sort pas avec sa paperasse.",o:[["Tu remplis tous ses papiers à sa place, le soir, après ta journée.",2],["Tu lui proposes de les faire ensemble, un samedi.",0],["Tu lui envoies tous les liens utiles, et tu relances trois fois.",1]]},
+  {t:3,s:"À un repas de famille, ta tante te demande pourquoi tu travailles encore à temps partiel.",o:[["Tu souris, et tu te sens nulle en rentrant.",1],["Tu te justifies pendant dix minutes.",2],["Tu réponds « ça me convient comme ça », et tu changes de sujet.",0]]}
+];
+const PROFILS=[
+  {max:0.3,nom:"La tasse à toi",txt:"Tu sais déjà ce qui est à toi, et tu le gardes la plupart du temps. Ton défi : le garder aussi quand la fatigue monte, ou quand c'est quelqu'un de très proche."},
+  {max:0.6,nom:"La tasse partagée",txt:"Tu tiens ta tasse… jusqu'à ce que quelqu'un soit mal, déçu ou en galère. Là, tu la tends sans réfléchir. C'est exactement l'endroit où on peut travailler."},
+  {max:1.01,nom:"La tasse de tout le monde",txt:"Tout le monde boit dans ta tasse, et toi, tu bois ce qui reste, souvent froid. C'est une protection que tu as apprise, pas un défaut. Chaque chose que tu rends va se sentir."}
+];
+const VF=[
+  {a:"Ressentir les émotions des autres à leur place, c'est ça, l'empathie.",r:false,e:"Il y a une différence entre être touchée par la peine de quelqu'un et la porter à sa place. Partager à l'excès les émotions difficiles des autres peut mener à l'épuisement. La compassion, elle, te laisse chaleureuse sans te vider : dans une étude, un entraînement à la compassion a fait baisser les émotions négatives et monter les émotions positives.",s:"Singer et Klimecki, 2014 · Klimecki et al., 2014"},
+  {a:"Rien qu'en regardant quelqu'un de stressé, ton corps peut se mettre en stress lui aussi.",r:true,e:"Dans une étude, 26 % des personnes qui regardaient quelqu'un passer un test stressant ont eu une vraie montée de cortisol, l'hormone du stress. C'était encore plus fréquent quand la personne stressée était leur partenaire. D'où l'intérêt de remarquer quand le stress que tu sens n'est pas le tien.",s:"Engert et al., 2014"},
+  {a:"Te reposer sans rien faire d'utile, c'est du temps perdu.",r:false,e:"Une grande synthèse de 86 publications montre que couper vraiment avec le travail pendant ton temps libre va avec moins d'épuisement, un meilleur sommeil et plus de bien-être. Le repos fait partie de ce qui te fait tenir.",s:"Wendsche et Lohmann-Haislah, 2017"},
+  {a:"Te parler avec douceur après une erreur te motive davantage à progresser que te critiquer.",r:true,e:"Dans une série d'expériences, les personnes invitées à se traiter avec bienveillance après un échec ont passé plus de temps à réviser pour un test difficile, et étaient plus motivées à changer leur point faible.",s:"Breines et Chen, 2012"},
+  {a:"Si ce n'est pas à toi, c'est que tu t'en fiches.",r:false,e:"Tu peux écouter, aider, demander, être là. Ce que tu arrêtes, c'est de porter à la place de l'autre. Tu restes présente, sans te perdre.",s:"Le cœur de cette ressource"}
+];
+const GROUPES={
+  protege:["De passer pour égoïste","Du conflit","De décevoir","De me sentir inutile","D'être mise de côté","De la culpabilité"],
+  coute:["Mon énergie","Mon sommeil","Mon temps pour moi","Ma patience","Mes envies à moi","Mon café chaud ☕"],
+  rendre:["Les émotions des autres","Ce que les gens pensent de moi","Sauver tout le monde","Les attentes des autres","Le bonheur des autres","Les réactions des autres","Être comprise par tous"],
+  reprendre:["Poser mes limites","Ma façon de me parler","Nommer ce que je ressens","À qui je donne mon énergie","Me reposer sans me justifier","Mes réactions"],
+  plaisir:["Boire mon café encore chaud ☕","10 minutes dehors","Une chanson rien que pour moi","Me coucher plus tôt un soir","Une douche sans me presser"]
+};
+const PHRASES={
+  "Les émotions des autres":"Je vois que tu es contrariée. Je suis là si tu veux en parler.",
+  "Ce que les gens pensent de moi":"Ce qu'elle pense de moi lui appartient.",
+  "Sauver tout le monde":"Qu'est-ce qui t'aiderait, toi ?",
+  "Les attentes des autres":"Je te dis ce que je peux faire.",
+  "Le bonheur des autres":"Je peux t'aider. Ton bonheur, lui, t'appartient.",
+  "Les réactions des autres":"Je l'ai dit avec respect. Sa réaction lui appartient.",
+  "Être comprise par tous":"Je n'ai pas besoin que tout le monde comprenne pour avancer."
+};
+const GESTES={
+  "Poser mes limites":"« Jeudi, quand on me demande un service de plus, je réponds : je regarde demain. »",
+  "Ma façon de me parler":"« Le soir, je me dis une chose que j'ai bien gérée, comme je le dirais à une amie. »",
+  "Nommer ce que je ressens":"« Deux fois par jour, je m'arrête et je me demande : là, je ressens quoi ? »",
+  "À qui je donne mon énergie":"« Samedi, je dis non à une sortie qui me vide, et je vois une amie qui me fait du bien. »",
+  "Me reposer sans me justifier":"« Dimanche après-midi, je me pose une heure, sans rien expliquer à personne. »",
+  "Mes réactions":"« Quand je sens la colère monter, je souffle trois fois avant de répondre. »"
+};
+
+const CLE='alarenverse_ressource_tasse';
+let E=(function(){try{return JSON.parse(localStorage.getItem(CLE)||'{}');}catch(e){return {};}})();
+E.tri=Array.isArray(E.tri)&&E.tri.length===TRI.length?E.tri:Array(TRI.length).fill(null);
+E.rep=Array.isArray(E.rep)&&E.rep.length===SCENES.length?E.rep:Array(SCENES.length).fill(null);
+E.vf=Array.isArray(E.vf)&&E.vf.length===VF.length?E.vf:Array(VF.length).fill(null);
+E.t=E.t||{}; E.p=E.p||{}; Object.keys(GROUPES).forEach(g=>{E.p[g]=Array.isArray(E.p[g])?E.p[g]:[];});
+if(typeof E.ti!=='number')E.ti=0;
+if(typeof E.i!=='number')E.i=0;
+function ecrire(){try{localStorage.setItem(CLE,JSON.stringify(E));}catch(e){}}
+
+/* ---------- Étape 1 : le tri ---------- */
+function triFini(){return E.tri.every(x=>x!==null);}
+function triScore(){return TRI.filter((c,i)=>E.tri[i]===c.r).length;}
+function rendreTri(){
+  const el=document.getElementById('triZone');
+  if(triFini()&&E.ti>=TRI.length){rendreTriFin();return;}
+  document.getElementById('triIntro').style.display='';
+  let i=E.ti; if(i<0||i>=TRI.length)i=0;
+  const c=TRI[i], r=E.tri[i], fait=E.tri.filter(x=>x!==null).length;
+  let h='<div class="quiz-top"><span>Carte '+(i+1)+' sur '+TRI.length+'</span>'+(i>0?'<button class="lien" onclick="triRetour()">← Revenir</button>':'<span></span>')+'</div>'+
+    '<div class="barre"><i style="width:'+(fait/TRI.length*100)+'%"></i></div>'+
+    '<div class="scene"><div class="carte-tri"><div class="item">« '+esc(c.i)+' »</div></div>'+
+    '<div class="tri-btns">'+[['a','À toi ☕'],['p','Pas à toi']].map(b=>'<button type="button" '+(r!==null?'disabled ':'')+'class="'+(r===b[0]?'sel':'')+'" onclick="trier('+i+',\''+b[0]+'\')">'+b[1]+'</button>').join('')+'</div>';
+  if(r!==null){
+    h+='<div class="verdict"><b>'+(r===c.r?'Bien vu ! ':'Raté, et ce n\'est pas grave. ')+(c.r==='a'?'C\'est à toi.':'Ce n\'est pas à toi.')+'</b> '+esc(c.e)+'</div>'+
+      '<button class="btn" onclick="triSuivant()">'+(i<TRI.length-1?'Carte suivante':'Voir ma tasse rangée')+'</button>';
+  }
+  h+='</div>';
+  el.innerHTML=h; fixTypo(el);
+}
+function trier(i,v){E.tri[i]=v;ecrire();rendreTri();majLigne();}
+function triSuivant(){E.ti=E.ti+1;if(E.ti<TRI.length&&E.tri[E.ti]!==null){const n=E.tri.findIndex(x=>x===null);E.ti=n<0?TRI.length:n;}ecrire();rendreTri();majTout();if(E.ti>=TRI.length)document.getElementById('tri').scrollIntoView({behavior:'smooth'});}
+function triRetour(){E.ti=Math.max(0,E.ti-1);E.tri[E.ti]=null;ecrire();rendreTri();majLigne();}
+function triRefaire(){E.tri=Array(TRI.length).fill(null);E.ti=0;ecrire();rendreTri();majTout();aller('tri');}
+function rendreTriFin(){
+  document.getElementById('triIntro').style.display='none';
+  const n=triScore(), el=document.getElementById('triZone');
+  const msg=n>=9?"Tu sais très bien faire le tri dans ta tête. Le défi, c'est de le vivre quand c'est quelqu'un que tu aimes.":(n>=6?"Tu as déjà de bons repères. Certaines cartes piègent, surtout quand on t'a appris à porter.":"Ces cartes piègent, et tu n'es pas la seule. On t'a sûrement appris très tôt à porter ce qui n'est pas à toi.");
+  el.innerHTML='<div class="resultat"><div class="niveau" style="text-align:center">Tu as vu juste '+n+' fois sur '+TRI.length+'</div><p>'+esc(msg)+'</p>'+
+    '<div class="petit-titre">Ta tasse, bien rangée</div>'+
+    '<div class="rangee"><div class="a"><div class="t">À toi ☕</div><ul>'+TRI.filter(c=>c.r==='a').map(c=>'<li>'+esc(c.i)+'</li>').join('')+'</ul></div>'+
+    '<div class="p"><div class="t">Pas à toi</div><ul>'+TRI.filter(c=>c.r==='p').map(c=>'<li>'+esc(c.i)+'</li>').join('')+'</ul></div></div>'+
+    '<div style="text-align:center;margin-top:8px"><button class="btn" style="margin-top:6px" onclick="aller(\'tasse\')">Continuer : ta tasse aujourd\'hui</button><button class="lien" style="margin-top:8px" onclick="triRefaire()">Refaire le tri</button></div></div>';
+  fixTypo(el);
+}
+
+/* ---------- Étape 2 : ta tasse aujourd'hui ---------- */
+function tasseFinie(){return E.rep.every(x=>x!==null);}
+function scores(){const s=[0,0,0,0];SCENES.forEach((sc,i)=>{if(E.rep[i]!==null)s[sc.t]+=E.rep[i];});return s;}
+function terrainN1(){const s=scores();let m=-1,k=0;s.forEach((v,i)=>{if(v>m){m=v;k=i;}});return k;}
+function part(){return E.rep.reduce((a,x)=>a+(x||0),0)/(SCENES.length*2);}
+function rendreTasse(){
+  const el=document.getElementById('tasseZone');
+  if(tasseFinie()){rendreResultat();return;}
+  document.getElementById('tasseIntro').style.display='';
+  let i=E.i; if(i<0||i>=SCENES.length||E.rep[i]!==null){i=E.rep.findIndex(x=>x===null);E.i=i;}
+  const sc=SCENES[i], fait=E.rep.filter(x=>x!==null).length;
+  el.innerHTML='<div class="quiz-top"><span>Scène '+(i+1)+' sur '+SCENES.length+'</span>'+(i>0?'<button class="lien" onclick="retour()">← Revenir</button>':'<span></span>')+'</div>'+
+    '<div class="barre"><i style="width:'+(fait/SCENES.length*100)+'%"></i></div>'+
+    '<div class="scene"><div class="situation">'+esc(sc.s)+'</div><div class="tu-fais">Tu fais quoi, le plus souvent ?</div>'+
+    '<div class="choix">'+sc.o.map((o,k)=>'<button type="button" onclick="repondre('+i+','+k+')">'+esc(o[0])+'</button>').join('')+'</div></div>';
+  fixTypo(el);
+}
+function repondre(i,k){
+  E.rep[i]=SCENES[i].o[k][1]; E.i=E.rep.findIndex(x=>x===null); ecrire();
+  const b=document.querySelectorAll('#tasseZone .choix button'); b.forEach(x=>x.disabled=true);
+  if(b[k])b[k].classList.add('sel');
+  setTimeout(()=>{rendreTasse();majTout();if(tasseFinie())document.getElementById('tasse').scrollIntoView({behavior:'smooth'});if(window.apMaj)setTimeout(window.apMaj,600);},280);
+}
+function retour(){const i=E.i>0?E.i-1:SCENES.length-1;E.rep[i]=null;E.i=i;ecrire();rendreTasse();majLigne();}
+function refaire(){E.rep=Array(SCENES.length).fill(null);E.i=0;ecrire();rendreTasse();majTout();aller('tasse');}
+function dessinTasse(p){
+  /* Tasse vue de côté : le bas = ce qui est à toi (café), le haut = ce qui n'est pas à toi */
+  const y0=40,y1=170,plein=0.86,hLiq=(y1-y0)*plein,hPas=Math.round(hLiq*p),hToi=hLiq-hPas,yToi=y1-hToi,yPas=yToi-hPas;
+  return '<svg class="tasse-svg" viewBox="0 0 300 210" role="img" aria-label="Ta tasse : '+Math.round(p*100)+' % pris par ce qui n\'est pas à toi">'+
+    '<defs><clipPath id="interieur"><path d="M62 40 H218 L204 160 Q202 172 190 172 H90 Q78 172 76 160 Z"/></clipPath>'+
+    '<pattern id="hachure" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#ece5ee"/><line x1="0" y1="0" x2="0" y2="8" stroke="#cdbfd3" stroke-width="3"/></pattern></defs>'+
+    '<path d="M214 70 C262 66 262 128 206 128" fill="none" stroke="#c2836a" stroke-width="12" stroke-linecap="round"/>'+
+    '<g clip-path="url(#interieur)"><rect x="50" y="'+yToi+'" width="190" height="'+(hToi+4)+'" fill="#b07a52"/>'+(hPas>0?'<rect x="50" y="'+yPas+'" width="190" height="'+hPas+'" fill="url(#hachure)"/>':'')+'</g>'+
+    '<path d="M62 40 H218 L204 160 Q202 172 190 172 H90 Q78 172 76 160 Z" fill="none" stroke="#c2836a" stroke-width="5" stroke-linejoin="round"/>'+
+    '<ellipse cx="140" cy="186" rx="96" ry="9" fill="rgba(194,131,106,0.18)"/>'+
+    (hPas>18?'<text x="140" y="'+(yPas+hPas/2+5)+'" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#6a5070">pas à toi</text>':'')+
+    (hToi>18?'<text x="140" y="'+(yToi+hToi/2+5)+'" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#fff">à toi</text>':'')+
+    '<path d="M118 28 q-8 -10 0 -18 M140 30 q-8 -12 0 -22 M162 28 q-8 -10 0 -18" fill="none" stroke="rgba(160,128,144,0.5)" stroke-width="2.5" stroke-linecap="round"/>'+
+    '</svg>';
+}
+function rendreResultat(){
+  document.getElementById('tasseIntro').style.display='none';
+  const el=document.getElementById('tasseZone'), s=scores(), p=part(), k=terrainN1(), T=TERRAINS[k];
+  const prof=PROFILS.find(x=>p<x.max), pct=Math.round(p*100), max=Math.max.apply(null,s);
+  const ex=s.map((v,i)=>i).filter(i=>s[i]===max&&i!==k);
+  const ordre=s.map((v,i)=>i).sort((a,b)=>s[b]-s[a]||a-b);
+  el.innerHTML='<div class="resultat">'+
+    dessinTasse(p)+
+    '<div class="legende"><span><i style="background:#b07a52"></i>Ce qui est à toi</span><span><i style="background:repeating-linear-gradient(45deg,#ece5ee 0 3px,#cdbfd3 3px 6px)"></i>Ce qui n\'est pas à toi</span></div>'+
+    '<div class="pct"><b>'+pct+' %</b> de ta tasse part dans ce qui n\'est pas à toi</div>'+
+    '<div class="niveau" style="text-align:center">'+esc(prof.nom)+'</div><p>'+esc(prof.txt)+'</p>'+
+    '<div class="terrain-box"><div class="petit-titre" style="margin-top:0">'+(max===0?'Le terrain à surveiller':'Ton terrain n°1')+'</div><div class="nom">'+esc(T.nom)+'</div>'+
+      '<p style="font-size:16.5px;margin-bottom:6px">'+esc(T.txt)+'</p>'+
+      '<div class="petit-titre">Ta phrase pour le rendre</div><div class="phrase">« '+esc(T.phrase)+' »</div>'+
+      (ex.length?'<p class="q-sous" style="margin:8px 0 0">Ex æquo : '+esc(ex.map(i=>TERRAINS[i].nom).join(', '))+'.</p>':'')+
+    '</div>'+
+    '<div class="petit-titre">Ce qui boit dans ta tasse</div>'+
+    '<div class="barres">'+ordre.map(i=>'<div class="r'+(i===k?' top':'')+'"><div class="nm">'+esc(TERRAINS[i].nom)+'</div><div class="tr" title="'+esc(TERRAINS[i].nom)+' : '+s[i]+' sur 4"><i style="width:'+(s[i]/4*100)+'%"></i></div><div class="v">'+s[i]+'/4</div></div>').join('')+'</div>'+
+    '<p class="q-sous" style="margin-top:6px">Plus la barre est longue, plus ce terrain prend de place dans ta tasse.</p>'+
+    carteAppel('Ta tasse, c\'est « '+prof.nom.toLowerCase()+' », et ton terrain n°1, « '+T.nom.toLowerCase()+' ». On peut regarder ensemble par où commencer à rendre.')+
+    '<p class="q-sous" style="text-align:center;margin:16px 0 0">Tu préfères d\'abord un portrait plus complet ?</p>'+
+    '<a class="btn second" href="https://alarenverse.github.io/Alarenverse/bilan.html" target="_blank" rel="noopener" style="margin-top:8px">Je fais mon bilan en 7 minutes</a>'+
+    '<div style="text-align:center;margin-top:12px"><button class="btn" style="margin-top:0" onclick="aller(\'vf\')">Continuer : le vrai ou faux</button><button class="lien" style="margin-top:8px" onclick="refaire()">Refaire ma tasse</button></div>'+
+  '</div>';
+  fixTypo(el);
+}
+function carteAppel(ctx){return '<div class="ap-carte ap-inline" id="ap-carte"><div class="label">Ta prochaine étape</div><div class="ap-titre">On en parle 20 minutes, toi et moi ?</div><p>@@CTX@@</p><ul class="ap-liste"><li>Tu me dis où t\'en es, avec tes mots.</li><li>Tu repars avec un premier pas concret, que tu me rejoignes ou non.</li><li>On regarde ensemble si mon accompagnement est fait pour toi en ce moment.</li></ul><a class="btn" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau</a><p class="hint">20 minutes · sans engagement · tu choisis le moment qui t\'arrange</p><div class="ap-qui"><img src="debora.jpg" alt="" onerror="this.remove()"><span>Avec <strong>Debora</strong>, coach pour femmes</span></div></div>'.replace('@@CTX@@',esc(ctx));}
+window.apBarreOk=function(){
+  const vis=id=>{const q=document.getElementById(id).getBoundingClientRect();return q.top<window.innerHeight&&q.bottom>0;};
+  return !((!triFini()&&vis('triCard'))||(!tasseFinie()&&vis('tasseCard')));
+};
+
+/* ---------- Étape 3 : vrai ou faux ---------- */
+function rendreVF(){
+  const el=document.getElementById('vfListe');
+  el.innerHTML=VF.map((q,i)=>{const r=E.vf[i];const ok=r!==null&&r===q.r;
+    return '<div class="vf"><div class="aff">'+(i+1)+'. '+esc(q.a)+'</div><div class="vf-btns">'+
+      [true,false].map(v=>'<button type="button" '+(r!==null?'disabled ':'')+'class="'+(r===v?'sel':'')+'" onclick="vfRep('+i+','+v+')">'+(v?'Vrai':'Faux')+'</button>').join('')+'</div>'+
+      (r!==null?'<div class="verdict"><b>'+(ok?'Bien vu ! ':'Raté, et tu es loin d\'être la seule. ')+'C\'est '+(q.r?'vrai':'faux')+'.</b> '+esc(q.e)+'<span class="src">'+esc(q.s)+'</span></div>':'')+'</div>';}).join('');
+  const sc=document.getElementById('vfScore');
+  if(E.vf.every(x=>x!==null)){const n=VF.filter((q,i)=>E.vf[i]===q.r).length;
+    sc.innerHTML='<div class="score-vf"><b>'+n+'/5</b> · Prendre soin des autres, ça ne veut pas dire tout porter.</div><button class="btn" onclick="aller(\'retourner\')">Continuer : retourner le comportement</button>';}
+  else sc.innerHTML='';
+  fixTypo(el); fixTypo(sc);
+}
+function vfRep(i,v){E.vf[i]=v;ecrire();rendreVF();majLigne();}
+
+/* ---------- Pastilles et champs ---------- */
+function rendrePills(){
+  document.querySelectorAll('[data-groupe]').forEach(c=>{const g=c.dataset.groupe;
+    c.innerHTML=GROUPES[g].map((x,i)=>'<button type="button" class="pill'+(E.p[g].indexOf(x)>-1?' sel':'')+'" onclick="basculer(\''+g+'\','+i+')">'+esc(x)+'</button>').join('');
+    fixTypo(c);});
+}
+function basculer(g,i){
+  const x=GROUPES[g][i],k=E.p[g].indexOf(x),un=document.querySelector('[data-groupe="'+g+'"]').dataset.un;
+  if(k>-1)E.p[g].splice(k,1);else{if(un)E.p[g]=[];E.p[g].push(x);}
+  if(g==='rendre'){const ph=document.querySelector('[data-k="phrase"]');const nouv=E.p.rendre[0];
+    if(nouv&&(!(E.t.phrase||'').trim()||Object.values(PHRASES).some(v=>v===E.t.phrase))){E.t.phrase=PHRASES[nouv];ph.value=typo(PHRASES[nouv]);}}
+  ecrire();rendrePills();majTout();
+}
+document.querySelectorAll('[data-k]').forEach(el=>{el.value=E.t[el.dataset.k]||'';el.addEventListener('input',function(){E.t[this.dataset.k]=this.value;ecrire();majTout();});});
+function utiliserPhrase(){
+  const r=E.p.rendre[0]||(tasseFinie()?TERRAINS[terrainN1()].rendre:null); if(!r)return;
+  const ph=document.querySelector('[data-k="phrase"]'); ph.value=typo(PHRASES[r]); E.t.phrase=PHRASES[r]; ecrire(); majTout();
+}
+function personnaliser(){
+  const sugg=document.getElementById('suggRendre'), btn=document.getElementById('btnPhrase'), exP=document.getElementById('exPhrase'), exG=document.getElementById('exGeste'), sa=document.getElementById('suiteAppel');
+  if(tasseFinie()){const T=TERRAINS[terrainN1()];
+    sugg.textContent=typo('Ton terrain n°1 : « '+T.nom+' ». Tu peux commencer par là, ou choisir autre chose.');
+    sa.textContent=typo('Tu préfères en parler directement ? Réserve un appel de 20 minutes avec moi. On regarde ensemble ton terrain « '+T.nom.toLowerCase()+' », et je te dis honnêtement si mon accompagnement est fait pour toi en ce moment.');
+  } else sugg.textContent='';
+  const r=E.p.rendre[0]||(tasseFinie()?TERRAINS[terrainN1()].rendre:null);
+  if(r){exP.textContent=typo('Par exemple : « '+PHRASES[r]+' »');
+    const deja=(E.t.phrase||'').trim()===PHRASES[r];btn.style.display=deja?'none':'inline-block';btn.textContent=typo('Utiliser la phrase : « '+PHRASES[r]+' »');}
+  else btn.style.display='none';
+  const g=E.p.reprendre[0]; exG.textContent=typo('Par exemple : '+(g?GESTES[g]:'« Mercredi soir, je garde une heure pour moi, téléphone en silence. »'));
+}
+
+/* ---------- Ticket ---------- */
+function champsTicket(){
+  const rendre=E.p.rendre[0]||'', reprendre=E.p.reprendre[0]||'';
+  const plaisir=(E.t.plaisirAutre||'').trim()||E.p.plaisir[0]||'';
+  const si=(E.t.si||'').trim(), alors=(E.t.alors||'').trim();
+  return {rendre:rendre,situation:(E.t.situation||'').trim(),phrase:(E.t.phrase||'').trim(),reprendre:reprendre,geste:(E.t.geste||'').trim(),
+    sialors:si?('Si '+si.replace(/^si\s+/i,'')+(alors?', alors '+alors.replace(/^alors\s+/i,''):'')):(alors?'Alors '+alors.replace(/^alors\s+/i,''):''),plaisir:plaisir};
+}
+function dateCourte(){return new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'});}
+function htmlTicket(c){
+  const l=(t,v)=>v?'<div class="tk-l"><div class="t">'+t+'</div><div class="v">'+esc(v)+'</div></div>':'';
+  const vide=!c.rendre&&!c.phrase&&!c.reprendre&&!c.geste&&!c.sialors&&!c.plaisir;
+  return '<div class="ticket"><div class="souche"><span>Ma tasse à moi</span></div><div class="tk">'+
+    '<div class="tk-h"><span>Valable cette semaine</span><span>'+dateCourte()+'</span></div>'+
+    '<div class="tk-dir">Mon plan</div><div class="tk-dirv">Je reviens à moi</div>'+
+    (vide?'<div class="tk-l"><div class="v vide">Ton plan se remplit avec tes réponses aux questions au-dessus.</div></div>':'')+
+    l('Je rends',c.rendre+(c.situation?' · '+c.situation:''))+
+    l('Ma phrase pour le rendre',c.phrase?'« '+c.phrase.replace(/^«\s*|\s*»$/g,'')+' »':'')+
+    l('Je reprends',c.reprendre+(c.geste?' · '+c.geste:''))+
+    l('Mon si…, alors je…',c.sialors)+
+    l('Mon plaisir non négociable',c.plaisir)+
+    '<div class="tk-f">L\'Effet Papillon · @alarenverse.coaching · renouvelable chaque semaine</div></div></div>';
+}
+function rendreTicket(){const el=document.getElementById('ticketVue');el.innerHTML=htmlTicket(champsTicket());fixTypo(el);}
+function telecharger(){
+  const c=champsTicket();
+  const css=document.querySelector('style').textContent.match(/\/\* Ticket \*\/([\s\S]*?)\.signature/)[1];
+  const html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mon plan pour revenir à moi</title><style>:root{--terra:#c2836a;--caramel:#c8a870;--titre:#3d2e45;--texte:#5d4868;--pale:#a08898;--champ:#fffaf6}*{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,serif;background:#fdf6f0;padding:28px 16px;display:flex;justify-content:center}.w{width:100%;max-width:520px}h1{font-size:13px;font-family:Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#c2836a;text-align:center;margin-bottom:4px}'+css+'.r{background:white;border-radius:14px;padding:14px 16px;margin-top:18px;font-size:15px;line-height:1.6;color:#3d2e45}.r b{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#c2836a;font-weight:normal}.f{text-align:center;font-size:13px;color:#8a7090;margin-top:18px;font-family:Arial,sans-serif}</style></head><body><div class="w"><h1>Ta tasse : à toi, pas à toi</h1>'+typo(htmlTicket(c))+
+    '<div class="r"><b>Chaque soir · 1 minute</b><br>'+typo('Aujourd\'hui, qu\'est-ce que j\'ai porté qui n\'était pas à moi ?<br>Et qu\'est-ce que j\'ai gardé pour moi ?')+'</div>'+
+    '<div class="f">'+typo('Rendre ce qui n\'est pas à toi, ça s\'apprend, un petit morceau à la fois.')+'<br>@alarenverse.coaching 🦋</div></div></body></html>';
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='mon-plan-pour-revenir-a-moi.html';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  E.dl=true;ecrire();majLigne();
+}
+
+/* ---------- Progression ---------- */
+function etats(){
+  const ret=(E.p.protege.length||(E.t.protege||'').trim())&&(E.p.coute.length||(E.t.coute||'').trim());
+  const c=champsTicket(), plan=E.dl||[c.rendre,c.phrase,c.reprendre||c.geste,c.sialors].filter(Boolean).length>=3;
+  return {tri:triFini(),tasse:tasseFinie(),vf:E.vf.every(x=>x!==null),retourner:!!ret,plan:!!plan};
+}
+function majLigne(){
+  const st=etats(), ordre=['tri','tasse','vf','retourner','plan'];
+  document.querySelectorAll('.stop').forEach(b=>b.classList.toggle('fait',!!st[b.dataset.s]));
+  let pos=ordre.findIndex(s=>!st[s]); if(pos<0)pos=4;
+  const fait=ordre.filter(s=>st[s]).length;
+  document.getElementById('bus').style.left=(10+pos*20)+'%';
+  document.getElementById('railPlein').style.width=(Math.min(fait,4)*20)+'%';
+}
+function aller(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+function majTout(){personnaliser();rendreTicket();majLigne();}
+
+rendreTri(); rendreTasse(); rendreVF(); rendrePills(); majTout(); fixTypo(document.body);
+</script>
+<div class="ap-barre" id="ap-barre" aria-hidden="true"><a href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau · 20 min</a><button type="button" aria-label="Fermer" onclick="apFermer()">×</button></div>
+<script>
+(function(){
+  var barre=document.getElementById('ap-barre'); if(!barre)return;
+  var on=false, ferme=false;
+  try{ferme=sessionStorage.getItem('ap_barre_fermee')==='1';}catch(e){}
+  function boutonVisible(){
+    return Array.prototype.some.call(document.querySelectorAll('a[href*="cal.com"]'),function(a){
+      if(barre.contains(a))return false; var r=a.getBoundingClientRect();
+      return r.height>0&&r.top<window.innerHeight&&r.bottom>0;});
+  }
+  function enSaisie(){var a=document.activeElement;return !!a&&/^(TEXTAREA|INPUT)$/.test(a.tagName);}
+  function maj(){
+    var m=!ferme&&window.scrollY>window.innerHeight*1.1&&!boutonVisible()&&!enSaisie()&&(typeof window.apBarreOk!=='function'||window.apBarreOk());
+    if(m!==on){on=m;barre.classList.toggle('visible',m);barre.setAttribute('aria-hidden',m?'false':'true');}
+  }
+  window.apFermer=function(){ferme=true;try{sessionStorage.setItem('ap_barre_fermee','1');}catch(e){}maj();};
+  var raf=null;
+  window.addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=null;maj();});},{passive:true});
+  window.addEventListener('resize',maj);
+  document.addEventListener('focusin',maj);
+  document.addEventListener('focusout',function(){setTimeout(maj,60);});
+  window.apMaj=maj; maj();
+})();
+</script>
+</body>
+</html>
