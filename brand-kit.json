@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-11-18",
+  "updated": "2026-11-25",
   "couleurs": {
     "principale": "#4B2E1E",
     "secondaire": "#F3E2CB",
@@ -77,6 +77,10 @@
     {
       "date": "2026-11-25",
       "retour": "Culpabilité : la voix bizarre était « Mais cinq minutes c’est rien du tout », pas « t’as crié ». Me questionner avant de faire."
+    },
+    {
+      "date": "2026-11-25",
+      "retour": "Folle du bus ép. 2 : montage validé. Musique de fond testée (lo-fi, puis piano + violon) : finalement sans musique."
     }
   ],
   "rendu": {
@@ -135,7 +139,8 @@
     "titre": "Titre de l’épisode (qu’elle ne dit pas) en étiquettes jaune pastel #FFEC96, texte brun #4B2E1E en Anton, 2 lignes",
     "affichage": "Même place du début à la fin (en haut, même si ça cache un peu la tête), environ 3,5 s : le temps de lire et de se reconnaître",
     "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier",
-    "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet) : elle le cache en entrant dans le cadre, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s"
+    "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet) : elle le cache en entrant dans le cadre, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s",
+    "musique": "PAS de musique de fond (testé : lo-fi refusé, puis piano + violon synthétisés non retenus). Montage voix seule + bruitages de base."
   },
   "cta_commentaire": "Champ de commentaire en bas : le mot-clé s’écrit (bruit de clavier) puis clic sur « Publier ». PAS de bulle « toi + mot » au-dessus (doublon).",
   "boite_a_outils_sons_effets": {
