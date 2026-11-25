@@ -73,6 +73,10 @@
     {
       "date": "2026-11-23",
       "retour": "Série « La folle du bus » : choisit l’étiquette jaune (option A) pour le titre ; titre au début seulement, pas tout le long."
+    },
+    {
+      "date": "2026-11-25",
+      "retour": "Culpabilité : la voix bizarre était « Mais cinq minutes c’est rien du tout », pas « t’as crié ». Me questionner avant de faire."
     }
   ],
   "rendu": {
@@ -148,5 +152,6 @@
       "Pops, bips, whoosh et autres bruitages « effet IA »",
       "Son au tout début de la vidéo"
     ]
-  }
+  },
+  "regle_questions": "Avant de faire un effet (voix téléphone, noir et blanc…), lui DEMANDER le passage exact et attendre sa réponse. Ne jamais deviner."
 }
