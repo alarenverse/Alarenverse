@@ -121,7 +121,7 @@
     "machine à écrire (touches)",
     "petites paillettes, volume DOUX (environ 1/3 de l’ancien)"
   ],
-  "placement_textes": "Titres et phrases clés AU-DESSUS de la tête (descendre légèrement l’image si besoin, mur uni en haut). Suite du hook sous le menton. Jamais sur les yeux.",
+  "placement_textes": "Hook, phrases clés et machine à écrire TOUJOURS en haut de l’écran (les gens ne regardent pas en bas), même si ça couvre un peu le visage. Sous-titres en bas.",
   "fin_cta": "Carte profil Instagram (photo, chiffres, bio, lien) + bouton Suivre/S’abonner cliqué (souris ou doigt) → Abonné(e), followers +1. Plus de boutons J’aime/Partager.",
   "voix_interieure": "Passage en noir et blanc cinéma (bandes noires, contraste, grain, vignettage) synchronisé avec l’effet de voix.",
   "livraison": "Fichier ≈ 30 Mo pour 1 min en HEVC HDR : se télécharge bien. Éviter > 60 Mo.",
