@@ -113,7 +113,8 @@
     "Ovale / badge de couleur (bleu) derrière le texte jaune",
     "Pops / bips / clics « effet IA » quand les textes apparaissent",
     "Texte qui empiète sur les yeux, le visage ou les cheveux",
-    "Son (paillettes ou autre) au tout début de la vidéo"
+    "Son (paillettes ou autre) au tout début de la vidéo",
+    "Bulle de commentaire publié « toi + mot » au-dessus du champ (répète le mot)"
   ],
   "phrases_cles": "Police marqueur Gluten jaune pastel, mot final un peu plus gros avec petites étoiles dorées. PAS de badge/ovale de couleur autour (elle trouve ça moche).",
   "bruitages_aimes": [
@@ -131,5 +132,6 @@
     "affichage": "Même place du début à la fin (en haut, même si ça cache un peu la tête), environ 3,5 s : le temps de lire et de se reconnaître",
     "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier",
     "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet) : elle le cache en entrant dans le cadre, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s"
-  }
+  },
+  "cta_commentaire": "Champ de commentaire en bas : le mot-clé s’écrit (bruit de clavier) puis clic sur « Publier ». PAS de bulle « toi + mot » au-dessus (doublon)."
 }
