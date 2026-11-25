@@ -133,5 +133,20 @@
     "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier",
     "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet) : elle le cache en entrant dans le cadre, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s"
   },
-  "cta_commentaire": "Champ de commentaire en bas : le mot-clé s’écrit (bruit de clavier) puis clic sur « Publier ». PAS de bulle « toi + mot » au-dessus (doublon)."
+  "cta_commentaire": "Champ de commentaire en bas : le mot-clé s’écrit (bruit de clavier) puis clic sur « Publier ». PAS de bulle « toi + mot » au-dessus (doublon).",
+  "boite_a_outils_sons_effets": {
+    "regle": "TOUJOURS proposer avant de faire (plan écrit + images), même pour ces effets de base.",
+    "effets_de_base": [
+      "Voix « vieux téléphone » sur un moment intéressant (à proposer)",
+      "Noir et blanc cinéma si besoin, synchronisé avec la voix téléphone (à proposer)",
+      "Clic de souris sur « S’abonner / Suivre »",
+      "Bruit de clavier quand le mot-clé s’écrit dans le champ de commentaire",
+      "Clic quand on appuie sur « Publier »",
+      "Titre machine à écrire + bruit de touches + petites paillettes (volume doux)"
+    ],
+    "interdits": [
+      "Pops, bips, whoosh et autres bruitages « effet IA »",
+      "Son au tout début de la vidéo"
+    ]
+  }
 }
