@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Étape 1 · IRA, ma méthode · L'Effet Papillon</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--terra:#c2836a;--caramel:#c8a870;--titre:#3d2e45;--texte:#5d4868;--doux:#8a7090;--pale:#a08898;--champ:#fffaf6;--fonce:#b85a32;--brique:#a0644d}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{background:#fdf6f0}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf6f0 0%,#f8ece6 45%,#f3eef8 100%);min-height:100vh;font-size:18px;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 34px;color:var(--texte)}
+  button{font:inherit;color:inherit}
+
+  /* Le chemin du papillon */
+  .rail{position:sticky;top:0;z-index:20;width:100%;max-width:560px;background:rgba(255,252,249,0.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:0 0 18px 18px;box-shadow:0 6px 20px rgba(194,131,106,0.10);padding:4px 6px 6px}
+  .stations{position:relative;display:grid;grid-template-columns:repeat(5,1fr);height:54px}
+  .ligne,.ligne-pleine{position:absolute;left:10%;top:29px;height:3px;border-radius:3px}
+  .ligne{right:10%;background:rgba(194,131,106,0.18)}
+  .ligne-pleine{width:0;background:linear-gradient(90deg,var(--terra),var(--caramel));transition:width .6s ease}
+  .papillon{position:absolute;top:2px;left:10%;font-size:19px;line-height:1;transform:translateX(-50%);transition:left .6s ease;animation:battre 2.4s ease-in-out infinite;pointer-events:none}
+  @keyframes battre{0%,100%{margin-top:0}50%{margin-top:-3px}}
+  .st{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:23px;font-family:'Jost',sans-serif;font-size:12px;color:var(--pale);position:relative;z-index:1;cursor:pointer}
+  .st:disabled{cursor:default}
+  .st .pt{width:13px;height:13px;border-radius:50%;background:white;border:2.5px solid rgba(194,131,106,0.35);transition:all .3s}
+  .st.fait .pt{background:var(--terra);border-color:var(--terra)}
+  .st.fait{color:var(--texte)}
+  .st.ici{color:var(--fonce);font-weight:500}
+  .st.ici .pt{box-shadow:0 0 0 4px rgba(194,131,106,0.2)}
+  .tour-l{display:none;text-align:center;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brique);padding:12px 0 8px}
+  .rail.tour .stations{display:none}
+  .rail.tour .tour-l{display:block}
+
+  main{width:100%;max-width:560px;display:flex;flex-direction:column;flex:1}
+  .slide{min-height:calc(100vh - 186px);min-height:calc(100svh - 186px);display:flex;flex-direction:column;justify-content:center;padding:26px 2px 6px}
+  .corps-slide{flex:1;display:flex;flex-direction:column;justify-content:center}
+
+  /* Apparitions */
+  .a{animation:monte .6s ease both;animation-delay:calc(var(--d,0) * 140ms)}
+  @keyframes monte{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+  /* Textes */
+  .txt{font-size:19px;line-height:1.75;color:var(--texte);margin-bottom:14px}
+  .grand{font-size:clamp(25px,7vw,31px);font-weight:600;color:var(--titre);line-height:1.3;margin:4px 0 16px}
+  .grand.petit{font-size:clamp(22px,6vw,26px)}
+  .grand.fonce{color:var(--fonce)}
+  .sous{font-family:'Jost',sans-serif;font-size:15px;color:var(--doux);line-height:1.55;margin-bottom:12px}
+  .petit-titre{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brique);margin-bottom:12px}
+  .citation{font-style:italic;font-size:21px;color:var(--fonce);line-height:1.5;padding:16px 18px;background:rgba(255,255,255,0.75);border-radius:18px;border-left:3px solid var(--terra);margin:6px 0 14px}
+  .doux-box{background:linear-gradient(135deg,#fdf1e8,#f8eef5);border-radius:18px;padding:15px 17px;font-size:17.5px;line-height:1.7;color:var(--titre);margin:6px 0 16px}
+  .grosse-q{font-size:clamp(26px,7.4vw,32px);font-weight:600;color:var(--fonce);line-height:1.3;text-align:center;padding:26px 14px;background:white;border-radius:24px;box-shadow:0 12px 36px rgba(194,131,106,0.13);margin:10px 0 8px}
+  .emoji-hero{font-size:46px;text-align:center;margin-bottom:10px;line-height:1}
+
+  /* Couverture */
+  .cover{text-align:center}
+  .cov-pap{font-size:54px;line-height:1;margin-bottom:12px;animation:monte .6s ease both}
+  @keyframes flotte{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b0806c;margin-bottom:10px}
+  .cover h1{font-size:clamp(32px,9vw,42px);font-weight:600;color:var(--titre);line-height:1.15;margin-bottom:10px}
+  .cov-mots{font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--brique);margin-bottom:22px}
+  .cover .txt{max-width:440px;margin:0 auto 8px}
+
+  /* Boutons */
+  .btn{background:linear-gradient(135deg,#c2836a,#c8a870);color:white;border:none;border-radius:50px;padding:15px 30px;font-size:17px;cursor:pointer;font-family:'Lora',serif;box-shadow:0 6px 22px rgba(194,131,106,0.3);display:block;margin:14px auto 0;text-align:center;max-width:100%;transition:transform .2s,opacity .2s}
+  .btn:active{transform:scale(.97)}
+  .btn:disabled{background:rgba(194,131,106,0.22);color:#b89a92;box-shadow:none;cursor:not-allowed}
+  .btn.second{background:white;color:var(--brique);border:2px solid rgba(194,131,106,0.4);box-shadow:none;font-size:16px;padding:12px 24px}
+  .lien{display:block;margin:14px auto 0;background:none;border:none;color:var(--brique);font-family:'Jost',sans-serif;font-size:14.5px;text-decoration:underline;cursor:pointer;padding:6px 8px}
+  .hint{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--pale);text-align:center;margin-top:16px;line-height:1.55}
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px;padding-bottom:6px}
+  .nav .btn{margin:0;min-width:150px}
+  .retour{background:none;border:none;color:var(--doux);font-family:'Jost',sans-serif;font-size:15px;padding:12px 6px;cursor:pointer}
+
+  /* Carte question */
+  .carte-q{background:white;border-radius:24px;padding:24px 20px 18px;box-shadow:0 10px 36px rgba(194,131,106,0.10);border:1px solid rgba(194,131,106,0.15)}
+  .etiquette{display:inline-flex;align-items:center;gap:6px;font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:white;background:linear-gradient(135deg,#b0654a,#a8804a);padding:5px 12px;border-radius:50px;margin-bottom:14px}
+  .question{font-size:21px;font-weight:600;color:var(--titre);line-height:1.4;margin-bottom:8px}
+  .exemple{font-size:15.5px;line-height:1.6;font-style:italic;background:rgba(253,248,238,0.95);border-left:2px solid rgba(200,168,112,0.7);border-radius:0 12px 12px 0;padding:9px 13px;margin:2px 0 12px;color:var(--texte)}
+  .exemple span{font-style:normal;font-family:'Jost',sans-serif;font-size:13px;color:var(--brique);margin-right:2px}
+  textarea,input[type=text]{width:100%;border:2px solid rgba(194,131,106,0.25);border-radius:14px;padding:12px 14px;font-size:16.5px;font-family:'Lora',serif;color:var(--titre);line-height:1.6;outline:none;resize:vertical;background:var(--champ);margin-bottom:4px;transition:border-color .2s}
+  textarea:focus,input[type=text]:focus{border-color:var(--terra)}
+  input.autre{margin-top:4px}
+  .rappel{font-family:'Jost',sans-serif;font-size:14.5px;color:var(--doux);background:var(--champ);border:1.5px dashed rgba(194,131,106,0.45);border-radius:14px;padding:10px 13px;margin-bottom:14px;line-height:1.55}
+  .rappel b{font-family:'Lora',serif;font-style:italic;font-weight:500;color:var(--titre);font-size:15.5px}
+  .situ{font-family:'Jost',sans-serif;font-size:13px;color:var(--doux);margin:0 4px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .situ b{font-weight:500;color:var(--texte)}
+  .retour-msg{display:none;font-size:16.5px;line-height:1.6;color:var(--titre);background:linear-gradient(135deg,#fdf1e8,#f8eef5);border-radius:14px;padding:12px 14px;margin-top:10px;animation:monte .4s ease both}
+  .retour-msg.vu{display:block}
+
+  /* Choix */
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+  .pill{border:2px solid rgba(194,131,106,0.28);background:var(--champ);color:var(--texte);border-radius:50px;padding:9px 15px;font-size:15px;font-family:'Jost',sans-serif;cursor:pointer;line-height:1.35;max-width:100%;transition:all .2s}
+  .pill.sel{background:linear-gradient(135deg,#b0654a,#a8804a);border-color:transparent;color:white;transform:scale(1.04)}
+  .opts{display:flex;flex-direction:column;gap:9px;margin:6px 0 4px}
+  .opt{border:2px solid rgba(194,131,106,0.3);background:white;border-radius:16px;padding:14px 16px;font-family:'Jost',sans-serif;font-size:16.5px;color:var(--titre);text-align:left;cursor:pointer;line-height:1.35;transition:all .2s}
+  .opt.sel{background:linear-gradient(135deg,#b0654a,#a8804a);color:white;border-color:transparent}
+  .coche{display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:none;border:2px dashed rgba(194,131,106,0.4);border-radius:50px;padding:8px 14px;font-family:'Jost',sans-serif;font-size:14.5px;color:var(--brique);cursor:pointer}
+  .coche.sel{background:var(--champ);border-style:solid;border-color:var(--terra)}
+
+  /* Tuiles IRA */
+  .tuiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 22px}
+  .tuile{background:white;border-radius:20px;padding:16px 4px 14px;text-align:center;box-shadow:0 8px 26px rgba(194,131,106,0.12)}
+  .tuile b{display:block;font-size:44px;line-height:1;font-weight:600;background:linear-gradient(135deg,var(--terra),var(--caramel));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tuile span{display:block;font-family:'Jost',sans-serif;font-size:13px;color:var(--texte);margin-top:6px}
+
+  /* Elle ira */
+  .elleira{position:relative;text-align:center;padding:20px 0 26px;overflow:hidden}
+  .ei-ira{font-size:64px;font-weight:600;letter-spacing:.08em;background:linear-gradient(135deg,var(--terra),var(--caramel));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+  .ei-elle{font-size:clamp(30px,9vw,38px);font-style:italic;color:var(--fonce);margin-top:12px}
+  
+  /* Chapitres */
+  .chap{background:linear-gradient(160deg,#fffaf6,#fbefe8);border:1px solid rgba(194,131,106,0.2);border-radius:30px;padding:48px 22px 42px;text-align:center;position:relative;overflow:hidden;box-shadow:0 14px 40px rgba(194,131,106,0.13)}
+  .chap::before,.chap::after{content:'';position:absolute;border-radius:50%;pointer-events:none}
+  .chap::before{width:230px;height:230px;top:-70px;right:-70px;background:radial-gradient(circle,rgba(200,168,112,0.38),transparent 70%)}
+  .chap::after{width:190px;height:190px;bottom:-70px;left:-60px;background:radial-gradient(circle,rgba(194,131,106,0.22),transparent 70%)}
+  .chap.r::before{background:radial-gradient(circle,rgba(214,150,140,0.4),transparent 70%)}
+  .chap.a::before{background:radial-gradient(circle,rgba(184,90,50,0.28),transparent 70%)}
+  .chap.b::before,.chap.f::before{background:radial-gradient(circle,rgba(160,128,200,0.32),transparent 70%)}
+  .chap .lettre{position:relative;font-size:130px;font-weight:600;line-height:1;background:linear-gradient(135deg,var(--terra),var(--caramel));-webkit-background-clip:text;background-clip:text;color:transparent;animation:pop .8s cubic-bezier(.2,.9,.3,1.3) both}
+  .chap.a .lettre{background-image:linear-gradient(135deg,#b85a32,#c8a870)}
+  .chap .lettre.emo{color:initial;background:none;-webkit-background-clip:border-box;background-clip:border-box;font-size:96px}
+  @keyframes pop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
+  .chap .mot{position:relative;font-family:'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;font-size:14px;color:var(--fonce);margin-top:10px}
+  .chap .phr{position:relative;font-size:21px;font-style:italic;color:var(--titre);margin-top:18px;line-height:1.45}
+
+  /* Cartes à toucher */
+  .tap{display:block;width:100%;text-align:left;background:white;border:2px solid rgba(194,131,106,0.22);border-radius:18px;padding:15px 16px;margin-bottom:10px;cursor:pointer;transition:all .25s}
+  .tap-t{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:600;color:var(--titre);line-height:1.35}
+  .tap-t .ic{font-size:22px}
+  .tap-t .plus{margin-left:auto;font-family:'Jost',sans-serif;font-size:22px;color:var(--terra);transition:transform .25s}
+  .tap-c{display:none;font-size:15.5px;line-height:1.65;font-style:italic;color:var(--texte);padding-top:10px}
+  .tap.ouvert{border-color:var(--terra);background:var(--champ)}
+  .tap.ouvert .tap-c{display:block;animation:monte .35s ease both}
+  .tap.ouvert .plus{transform:rotate(45deg)}
+
+  /* Cartes qui se retournent */
+  .flip{display:block;width:100%;border:none;background:none;padding:0;text-align:left;cursor:pointer;perspective:900px;margin-bottom:12px}
+  .flip .face{border-radius:20px;padding:18px 18px;transition:transform .17s ease;transform-origin:center}
+  .flip.anim .face{transform:rotateY(90deg)}
+  .flip.devant .face{background:linear-gradient(135deg,#a85e44,#a07a48);color:white;box-shadow:0 8px 24px rgba(160,100,77,0.25)}
+  .flip.dos .face{background:white;border:2px solid rgba(194,131,106,0.35);box-shadow:0 8px 24px rgba(194,131,106,0.10)}
+  .flip.sci.devant .face{background:linear-gradient(135deg,#7f62a8,#a0644d)}
+  .f-emo{font-size:28px;line-height:1;margin-bottom:8px}
+  .f-txt{font-size:19px;font-weight:600;line-height:1.35}
+  .f-hint{font-family:'Jost',sans-serif;font-size:13px;opacity:.92;margin-top:8px}
+  .d-l{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--brique);margin-top:8px}
+  .d-l:first-child{margin-top:0}
+  .d-t{font-size:16.5px;line-height:1.5;color:var(--titre)}
+  .d-t.fort{color:var(--fonce);font-weight:600}
+  .flip.dos p{font-size:16.5px;line-height:1.65;color:var(--titre);margin-bottom:6px}
+  .src{font-family:'Jost',sans-serif;font-size:12.5px;color:var(--brique);margin-bottom:12px}
+  .src:last-child{margin-bottom:0}
+  .compteur{font-family:'Jost',sans-serif;font-size:14px;color:var(--doux);text-align:center;margin-top:4px}
+
+  /* Petit arrêt */
+  .note{position:relative;background:#fffdf7;border-radius:6px 22px 22px 22px;padding:28px 20px 18px;box-shadow:0 12px 34px rgba(160,120,70,0.14);border:1px solid rgba(200,168,112,0.3);transform:rotate(-.6deg)}
+  .scotch{position:absolute;top:-12px;left:50%;width:92px;height:24px;transform:translateX(-50%) rotate(-3deg);background:rgba(200,168,112,0.45);border-radius:3px}
+  .note-l{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brique);margin-bottom:8px}
+  .note textarea{background:white}
+
+  /* Ressentir */
+  .ressens{display:flex;flex-direction:column;gap:6px;margin:0 0 16px;padding-left:4px}
+  .ressens span{font-size:19px;font-style:italic;color:var(--titre);line-height:1.5}
+  .kit{display:flex;gap:14px;align-items:center;background:white;border-radius:20px;padding:16px 18px;box-shadow:0 10px 30px rgba(194,131,106,0.12);font-size:17.5px;line-height:1.6;color:var(--titre);margin:6px 0 12px}
+  .kit>span{font-size:34px;line-height:1}
+  .fenetre{border-radius:22px;overflow:hidden;margin:4px 0 16px;box-shadow:0 10px 30px rgba(194,131,106,0.12);font-family:'Jost',sans-serif;font-size:15px}
+  .zf{padding:13px 16px;display:flex;align-items:center;gap:8px;color:var(--titre)}
+  .zf.haut{background:#f7dcd3}
+  .zf.milieu{background:#eef3e6;padding:22px 16px;font-size:16.5px;font-weight:500;position:relative}
+  .zf.bas{background:#e6e3f3}
+  .souffle-wrap{position:relative;height:190px;display:flex;align-items:center;justify-content:center;margin:6px 0}
+  .souffle{width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f3cdb9,#b0654a);box-shadow:0 0 0 14px rgba(194,131,106,0.12);animation:souffle 10s ease-in-out infinite}
+  @keyframes souffle{0%{transform:scale(1)}40%{transform:scale(1.55)}100%{transform:scale(1)}}
+  .souffle-mots{position:absolute;inset:0;display:grid;place-items:center;font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:white;pointer-events:none}
+  .souffle-mots span{grid-area:1/1}
+  .m-in{animation:min 10s infinite}
+  .m-out{animation:mout 10s infinite}
+  @keyframes min{0%,37%{opacity:1}42%,100%{opacity:0}}
+  @keyframes mout{0%,37%{opacity:0}42%,95%{opacity:1}100%{opacity:0}}
+  .ancrage{font-size:16.5px;line-height:1.65;color:var(--titre);text-align:center;margin-bottom:6px}
+
+  /* Corps */
+  .corps{display:block;width:100%;max-width:190px;margin:4px auto 8px}
+  .zone{cursor:pointer;outline:none}
+  .zone .hit{fill:transparent}
+  .zone .pt{fill:white;stroke:var(--terra);stroke-width:2.5;transition:all .25s}
+  .zone .halo{fill:var(--terra);opacity:0;transform-box:fill-box;transform-origin:center}
+  .zone.sel .pt{fill:var(--fonce);stroke:var(--fonce)}
+  .zone.sel .halo{animation:halo 1.8s ease-out infinite}
+  @keyframes halo{0%{transform:scale(.6);opacity:.5}100%{transform:scale(2.3);opacity:0}}
+
+  /* Agir */
+  .chemins{background:white;border-radius:22px;padding:16px 16px 10px;box-shadow:0 10px 30px rgba(194,131,106,0.12);margin:4px 0 16px}
+  .ch-l{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brique);margin-bottom:8px}
+  .ch-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px}
+  .nd{background:var(--champ);border:1.5px solid rgba(194,131,106,0.3);border-radius:50px;padding:6px 12px;font-family:'Jost',sans-serif;font-size:14px;color:var(--titre)}
+  .nd.chaud{background:#f7dcd3;border-color:#e6a995}
+  .nd.choix{background:linear-gradient(135deg,#b0654a,#a8804a);color:white;border-color:transparent}
+  .fl{color:var(--terra);font-size:15px}
+  .ch-note{font-size:15px;font-style:italic;color:var(--doux);margin-bottom:14px}
+  .puces{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}
+  .puces span{background:white;border-radius:16px;padding:12px 15px;font-size:16.5px;color:var(--titre);box-shadow:0 5px 16px rgba(194,131,106,0.10);display:flex;gap:10px;align-items:flex-start;line-height:1.45}
+  .puces span::before{content:'🚩';font-size:15px;line-height:1.5}
+  .puces span.sans::before{content:'•';color:var(--terra);font-size:18px;line-height:1.3}
+  .temps{display:flex;gap:14px;align-items:flex-start;background:white;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(194,131,106,0.11);margin-bottom:10px;font-size:17px;line-height:1.6;color:var(--texte)}
+  .temps b{flex-shrink:0;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#b0654a,#a8804a);color:white;font-size:18px}
+  .temps strong{color:var(--titre)}
+
+  /* Boucle */
+  .oignon{position:relative;width:200px;height:200px;margin:4px auto 22px}
+  .oignon i{position:absolute;border-radius:50%;background:rgba(232,190,168,0.32);border:2px solid rgba(194,131,106,0.4);inset:calc((5 - var(--n)) * 20px);animation:pele 7.5s ease-in-out infinite;animation-delay:calc((5 - var(--n)) * 0.9s)}
+  @keyframes pele{0%,8%{opacity:1;transform:scale(1)}18%{opacity:0;transform:scale(1.12)}62%{opacity:0;transform:scale(1)}74%,100%{opacity:1}}
+  .oignon b{position:absolute;inset:0;display:grid;place-items:center;font-style:italic;font-weight:500;font-size:16px;color:var(--fonce)}
+  .oignon.mini{width:130px;height:130px}
+  .oignon.mini i{inset:calc((5 - var(--n)) * 13px)}
+  .piste{background:white;border-radius:20px;padding:16px 18px;box-shadow:0 8px 24px rgba(194,131,106,0.11);margin-bottom:12px}
+  .piste-t{font-size:18px;font-weight:600;color:var(--titre);margin-bottom:6px}
+  .piste p{font-size:16.5px;line-height:1.65;color:var(--texte)}
+  .reponse-role{background:linear-gradient(135deg,#fdf1e8,#f8eef5);border-radius:14px;padding:12px 14px;margin-top:10px;font-size:16px;line-height:1.6;color:var(--titre);animation:monte .4s ease both}
+  .reponse-role b{display:block;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--brique);font-weight:500;margin-bottom:4px}
+
+  /* Échelle */
+  .echelle{text-align:center;margin:6px 0 4px}
+  .echelle .num{font-size:66px;font-weight:600;color:var(--fonce);line-height:1}
+  .echelle .mot{font-family:'Jost',sans-serif;font-size:15.5px;color:var(--doux);margin-top:6px;min-height:22px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:12px;background:linear-gradient(90deg,#f3e3da,#e8bfa8,#c2836a,#b85a32);outline:none;margin:24px 0 8px;cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;border-radius:50%;background:white;border:3px solid var(--fonce);box-shadow:0 3px 12px rgba(0,0,0,0.16)}
+  input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;background:white;border:3px solid var(--fonce);box-shadow:0 3px 12px rgba(0,0,0,0.16)}
+  input[type=range].vierge::-webkit-slider-thumb{border-color:#d9b5a5}
+  input[type=range].vierge::-moz-range-thumb{border-color:#d9b5a5}
+  .ech-l{display:flex;justify-content:space-between;font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale)}
+  .cmp{display:flex;align-items:center;justify-content:center;gap:14px;margin:18px 0 8px;animation:monte .4s ease both}
+  .bulle{background:var(--champ);border:2px solid rgba(194,131,106,0.3);border-radius:20px;padding:10px 16px;text-align:center;min-width:104px}
+  .bulle span{display:block;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--doux)}
+  .bulle b{font-size:34px;color:var(--titre)}
+  .bulle.now{background:linear-gradient(135deg,#b0654a,#a8804a);border-color:transparent}
+  .bulle.now span,.bulle.now b{color:white}
+  .fleche{font-size:24px;color:var(--terra)}
+  .cmp-msg{font-size:16.5px;line-height:1.6;color:var(--titre);text-align:center}
+
+  /* Fin */
+  .fin-intro{text-align:center;margin-bottom:18px}
+  .sources{font-family:'Jost',sans-serif;font-size:12px;line-height:1.6;color:var(--pale);margin-top:26px;padding-top:14px;border-top:1px solid rgba(194,131,106,0.18)}
+  .sources b{font-weight:500;color:var(--doux)}
+
+  @media (prefers-reduced-motion:reduce){
+    .a,.chap .lettre,.cov-pap,.papillon,.vol,.oignon i,.zf .pap{animation:none !important}
+    .vol{display:none}
+  }
+</style>
+<style id="css-ticket">
+  .ticket{background:white;border-radius:22px;box-shadow:0 12px 40px rgba(194,131,106,0.14);border:1px solid rgba(194,131,106,0.2);overflow:hidden;max-width:560px;margin:0 auto;color:#5d4868;font-family:'Lora',serif;text-align:left}
+  .tk-top{background:linear-gradient(135deg,#9e5a40,#8f6a3c);color:white;padding:22px 20px 18px;text-align:center}
+  .tk-sur{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+  .tk-titre{font-size:32px;font-weight:600;margin-top:6px;line-height:1.1}
+  .tk-date{font-family:'Jost',sans-serif;font-size:13px;margin-top:6px}
+  .tk-sec{padding:16px 20px 6px;border-top:1px dashed rgba(194,131,106,0.35)}
+  .tk-sec:first-of-type{border-top:none}
+  .tk-h{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:600;color:#3d2e45;margin-bottom:12px}
+  .tk-h b{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#b0654a,#a8804a);color:white;font-size:16px;flex-shrink:0}
+  .tk-l{margin-bottom:12px}
+  .tk-k{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#a0644d;margin-bottom:2px}
+  .tk-v{font-size:16.5px;line-height:1.55;color:#3d2e45}
+  .tk-phrase{padding:22px 20px 8px;text-align:center;font-size:21px;font-weight:600;font-style:italic;color:#b85a32;background:#fdf3ec;border-top:1px dashed rgba(194,131,106,0.35)}
+  .tk-sign{text-align:center;font-family:'Jost',sans-serif;font-size:13px;color:#8a7090;padding:4px 0 20px;background:#fdf3ec}
+</style>
+</head>
+<body>
+
+<div class="rail" id="rail">
+  <div class="stations" id="stations">
+    <div class="ligne"></div><div class="ligne-pleine" id="plein"></div>
+    <div class="papillon" id="pap">🦋</div>
+    <button class="st" data-st="0"><span class="pt"></span>Toi</button>
+    <button class="st" data-st="1"><span class="pt"></span>I</button>
+    <button class="st" data-st="2"><span class="pt"></span>R</button>
+    <button class="st" data-st="3"><span class="pt"></span>A</button>
+    <button class="st" data-st="4"><span class="pt"></span>∞</button>
+  </div>
+  <div class="tour-l" id="tourL"></div>
+</div>
+
+<main>
+  <div id="scene"></div>
+  <div class="nav" id="nav">
+    <button class="retour" id="btnRetour">← Retour</button>
+    <button class="btn" id="btnSuivant">Continuer</button>
+  </div>
+</main>
+
+<noscript><p class="txt" style="text-align:center;margin-top:40px">Pour faire cette étape, active JavaScript dans ton navigateur.</p></noscript>
+
+<script>
+(function(){
+  'use strict';
+  var CLE='alarenverse_module2';
+
+  /* ---------- Données ---------- */
+  function nouveau(){return {i:0,last:0,max:0,rep:{besoins:[],zones:[],emotions:[],roles:[]},cartes:{},tours:[],br:{emotions:[]},fini:false,debut:new Date().toISOString()};}
+  var S=null;
+  try{S=JSON.parse(localStorage.getItem(CLE)||'null');}catch(e){S=null;}
+  if(!S||typeof S!=='object')S={};
+  if(!S.ira||typeof S.ira!=='object')S.ira=nouveau();
+  var E=S.ira;
+  ['rep','cartes','br'].forEach(function(k){if(!E[k]||typeof E[k]!=='object')E[k]={};});
+  ['besoins','zones','emotions','roles'].forEach(function(k){if(!Array.isArray(E.rep[k]))E.rep[k]=[];});
+  if(!Array.isArray(E.tours))E.tours=[];
+  if(!Array.isArray(E.br.emotions))E.br.emotions=[];
+  function R(){return E.rep;}
+  function sauver(){try{localStorage.setItem(CLE,JSON.stringify(S));}catch(e){}}
+  function miroirCarnet(){
+    try{
+      var k='alarenverse_carnet',c=JSON.parse(localStorage.getItem(k)||'{}');
+      c.realise=c.realise||{};
+      c.realise['m2-ira']={titre:'Module 2 · IRA, ma méthode',date:E.date||new Date().toISOString(),r1:R().decouverteI||'',r2:R().decouverteR||'',r3:R().jalon||''};
+      localStorage.setItem(k,JSON.stringify(c));
+    }catch(e){}
+  }
+  function get(k){if(k.indexOf('br.')===0)return E.br[k.slice(3)];return E.rep[k];}
+  function set(k,v){if(k.indexOf('br.')===0)E.br[k.slice(3)]=v;else E.rep[k]=v;}
+  function rempli(k){var x=get(k);if(Array.isArray(x))return x.length>0;return x!==undefined&&x!==null&&String(x).trim()!=='';}
+  function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function escBr(t){return esc(t).replace(/\n/g,'<br>');}
+
+  /* ---------- Typographie française ---------- */
+  function typo(s){return s.replace(/ ([?!:;»])/g,' $1').replace(/« /g,'« ');}
+  function fixTypo(root){
+    var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n,L=[];
+    while((n=w.nextNode())){var p=n.parentNode;if(p&&/^(TEXTAREA|SCRIPT|STYLE)$/.test(p.nodeName))continue;L.push(n);}
+    L.forEach(function(n){var t=typo(n.nodeValue);if(t!==n.nodeValue)n.nodeValue=t;});
+    root.querySelectorAll('[placeholder]').forEach(function(e){e.placeholder=typo(e.placeholder);});
+  }
+
+  /* ---------- Contenus ---------- */
+  var ZONES=[['tete','La tête'],['machoire','La mâchoire'],['gorge','La gorge'],['epaules','Les épaules'],['poitrine','La poitrine'],['ventre','Le ventre'],['dos','Le dos'],['mains','Les mains'],['jambes','Les jambes']];
+  var ZL={};ZONES.forEach(function(z){ZL[z[0]]=z[1];});
+  var EMOS=['agacement','colère','culpabilité','tristesse','peur','honte','fatigue','impuissance','autre'];
+  var BESOINS=['du repos','du calme','de la reconnaissance',"de l'aide",'du temps pour moi','être écoutée','autre'];
+  var QUAND=[['moment','⚡ Sur le moment'],['heures','🕐 Quelques heures après'],['jours','📅 Des jours après']];
+  var FENETRE=[['ok','🌿 Ça va, je suis dans ma fenêtre'],['monte','🌊 Ça monte trop'],['fige','🧊 Je me sens figée, vide']];
+  var ROLES=[['sauveuse','🦸‍♀️ Sauveuse'],['victime','🌧️ Victime'],['explose',"🌋 J'explose"],['fige','🧊 Je me fige'],['non','🙂 Non, pas vraiment']];
+  var ROLE_TXT={
+    sauveuse:["Sauveuse","Tu prends en charge ce qui ne t'appartient pas. Ton prochain I : « Là, je suis en train de sauver. » Et ton A peut commencer par une question : « Qu'est-ce qui t'aiderait, toi ? »"],
+    victime:["Victime","Tu as l'impression que tout t'arrive et que tu subis. Ton prochain I : « Là, je me sens impuissante. » Et ton A : chercher la petite chose qui dépend de toi."],
+    explose:["J'explose","Ça monte, ça monte, et ça sort d'un coup. Ton prochain I : repérer le moment où ça commence à monter. Et ton A vers toi d'abord : tu prends un moment, tu respires, tu écris, avant de dire quoi que ce soit."],
+    fige:["Je me fige","Ton Agir peut être tout petit : bouger tes mains, bouger ton corps, boire un verre d'eau, faire un pas. Et ça compte."],
+    non:["Non, pas vraiment","Garde ces deux pistes dans un coin. Elles pourront te servir un jour."]
+  };
+  var CARTES=[
+    {e:'⏳',f:'Tu repousses ton projet.',p:"la peur d'échouer.",c:"Si je rate, c'est que je suis nulle.",r:"Si je rate, j'apprends quelque chose. Et j'aurai essayé."},
+    {e:'🙋‍♀️',f:'Tu dis oui à tout.',p:"la peur d'être rejetée.",c:"Si je dis non, on va moins m'aimer.",r:'Si je dis non, je vois qui respecte mes limites.'},
+    {e:'🎛️',f:'Tu contrôles tout.',p:'la peur que tout s\'écroule. Ou la peur que les autres ne comptent plus sur toi, et de ne plus exister.',c:'Si je lâche, rien ne sera bien fait.',r:'Si je lâche un peu, je laisse les autres faire leur part.'},
+    {e:'🙇‍♀️',f:"Tu t'excuses tout le temps.",p:'la peur de déranger.',c:'Si je prends de la place, je suis de trop.',r:"J'ai le droit de prendre de la place."}
+  ];
+  var SCI_FRONT='<div class="f-emo">🔬</div><div class="f-txt">La science</div><div class="f-hint">Touche pour découvrir ↻</div>';
+  var FL={
+    sI:{d:SCI_FRONT,b:"<p>Mettre un mot précis sur une émotion en diminue l'intensité. Elle ne disparaît pas, mais elle prend moins de place.</p><div class=\"src\">Lieberman et al., 2007</div><p>Et ces réflexes de protection ont un revers : ils t'empêchent de vérifier que ce que tu crains n'arrive pas forcément, alors la peur reste en place.</p><div class=\"src\">Salkovskis, 1991</div>"},
+    sR:{d:SCI_FRONT,b:"<p>Dans une étude, des personnes anxieuses ou déprimées ont regardé un film difficile.</p><p>Celles qui accueillaient leurs émotions se sont apaisées plus vite après le film. Chez celles qui les retenaient, le cœur accélérait.</p><div class=\"src\">Campbell-Sills et al., 2006</div>"},
+    sA:{d:SCI_FRONT,b:"<p>Les chercheurs décrivent l'intelligence émotionnelle comme la capacité à percevoir, comprendre et réguler ses émotions.</p><div class=\"src\">Mayer &amp; Salovey, 1997</div><p>Et te parler à toi-même avec ton prénom ou avec « tu » t'aide à prendre du recul quand c'est chargé.</p><div class=\"src\">Kross et al., 2014</div>"}
+  };
+  CARTES.forEach(function(c,n){
+    FL['c'+n]={
+      d:'<div class="f-emo">'+c.e+'</div><div class="f-txt">'+c.f+'</div><div class="f-hint">Touche pour retourner ↻</div>',
+      b:'<div class="d-l">Ça te protège de</div><div class="d-t">'+c.p+'</div><div class="d-l">La croyance</div><div class="d-t">« '+c.c+' »</div><div class="d-l">Retournée</div><div class="d-t fort">« '+c.r+' »</div>'
+    };
+  });
+
+  /* ---------- Petits morceaux ---------- */
+  function ex(a){return '<div class="exemple"><span>Par exemple :</span> '+a.map(function(x){return '« '+x+' »';}).join(' ')+'</div>';}
+  function ta(k,ph,rows){return '<textarea data-k="'+k+'" rows="'+(rows||3)+'" placeholder="'+esc(ph||"J'écris ici...")+'"></textarea>';}
+  function pills(k,list){return '<div class="pills">'+list.map(function(x){var v=Array.isArray(x)?x[0]:x,l=Array.isArray(x)?x[1]:x;return '<button class="pill" data-m="'+k+'" data-v="'+esc(v)+'">'+l+'</button>';}).join('')+'</div>';}
+  function opts(k,list){return '<div class="opts">'+list.map(function(x){return '<button class="opt" data-o="'+k+'" data-v="'+x[0]+'">'+x[1]+'</button>';}).join('')+'</div>';}
+  function autre(listeK,k,ph){return '<input type="text" class="autre" data-k="'+k+'" data-autre="'+listeK+'" placeholder="'+esc(ph)+'">';}
+  function flip(id,cls){var r=!!E.cartes[id];return '<button class="flip '+(cls||'')+' '+(r?'dos':'devant')+'" data-flip="'+id+'"><div class="face">'+(r?FL[id].b:FL[id].d)+'</div></button>';}
+  function rap(txt){return '<div class="rappel">'+txt+'</div>';}
+  function situChip(ch){
+    if(['i','r','a','t'].indexOf(ch)<0||!rempli('situation'))return '';
+    return '<div class="situ a">📍 Ta situation : <b>'+esc(R().situation)+'</b></div>';
+  }
+  function motPoids(n){if(n<=1)return 'Presque rien';if(n<=3)return 'Un peu';if(n<=6)return 'Ça pèse';if(n<=8)return 'Ça pèse lourd';return "Ça m'écrase";}
+  function echelle(k){
+    var x=R()[k],vide=(x===undefined||x===null);
+    return '<div class="echelle"><div class="num" id="num-'+k+'">'+(vide?'?':x)+'</div><div class="mot" id="mot-'+k+'">'+(vide?'Fais glisser le curseur':motPoids(x))+'</div>'
+      +'<input type="range" min="0" max="10" step="1" data-k="'+k+'" value="'+(vide?5:x)+'" class="'+(vide?'vierge':'')+'" aria-label="De 0 à 10">'
+      +'<div class="ech-l"><span>0 · rien</span><span>10 · ça m\'écrase</span></div></div>';
+  }
+  function majEchelle(root,k){
+    var x=R()[k],n=root.querySelector('#num-'+k);if(!n)return;
+    var vide=(x===undefined||x===null);
+    n.textContent=vide?'?':x;
+    root.querySelector('#mot-'+k).textContent=vide?'Fais glisser le curseur':motPoids(x);
+    var r=root.querySelector('input[data-k="'+k+'"]');if(r&&!vide)r.classList.remove('vierge');
+  }
+  function corpsSVG(){
+    var pts=[['tete',[[100,24]]],['machoire',[[100,52]]],['gorge',[[100,73]]],['epaules',[[68,93],[132,93]]],['poitrine',[[100,118]]],['ventre',[[100,162]]],['mains',[[44,200],[156,200]]],['jambes',[[86,248],[114,248]]]];
+    var z=pts.map(function(p){
+      return '<g class="zone" data-z="'+p[0]+'" role="button" tabindex="0" aria-label="'+ZL[p[0]]+'">'+p[1].map(function(c){
+        return '<circle class="hit" cx="'+c[0]+'" cy="'+c[1]+'" r="17"/><circle class="halo" cx="'+c[0]+'" cy="'+c[1]+'" r="8"/><circle class="pt" cx="'+c[0]+'" cy="'+c[1]+'" r="7.5"/>';
+      }).join('')+'</g>';
+    }).join('');
+    return '<svg class="corps" viewBox="0 0 200 296" aria-hidden="false">'
+      +'<g fill="#f3e3da" stroke="#f3e3da" stroke-linecap="round" stroke-linejoin="round">'
+      +'<circle cx="100" cy="36" r="25" stroke="none"/>'
+      +'<line x1="100" y1="56" x2="100" y2="80" stroke-width="20"/>'
+      +'<path d="M70 90 Q100 80 130 90 L127 186 Q100 196 73 186 Z" stroke-width="18"/>'
+      +'<line x1="66" y1="96" x2="46" y2="196" stroke-width="18"/>'
+      +'<line x1="134" y1="96" x2="154" y2="196" stroke-width="18"/>'
+      +'<line x1="87" y1="190" x2="84" y2="282" stroke-width="23"/>'
+      +'<line x1="113" y1="190" x2="116" y2="282" stroke-width="23"/>'
+      +'</g>'+z+'</svg>';
+  }
+  function oignon(cls){return '<div class="oignon '+(cls||'')+'"><i style="--n:5"></i><i style="--n:4"></i><i style="--n:3"></i><i style="--n:2"></i><i style="--n:1"></i><b>toi</b></div>';}
+  function listeAvecAutre(arr,autreTxt){var l=(arr||[]).filter(function(x){return x!=='autre';});if((arr||[]).indexOf('autre')>=0&&autreTxt&&String(autreTxt).trim())l.push(String(autreTxt).trim());return l;}
+  function dateFr(iso){try{return new Date(iso||Date.now()).toLocaleDateString('fr-CH',{day:'numeric',month:'long',year:'numeric'});}catch(e){return '';}}
+
+  /* ---------- Constructeurs de slides ---------- */
+  function T(id,ch,html,extra){var s={id:id,ch:ch,type:'theorie',html:function(){return '<div class="corps-slide">'+(typeof html==='function'?html():html)+'</div>';}};if(extra)for(var k in extra)s[k]=extra[k];return s;}
+  function C(id,ch,lettre,mot,phr,emo){return {id:id,ch:ch,type:'chap',bouton:'On y va',html:function(){return '<div class="chap '+ch+'"><div class="lettre'+(emo?' emo':'')+'">'+lettre+'</div><div class="mot a" style="--d:3">'+mot+'</div><div class="phr a" style="--d:5">'+phr+'</div></div>';}};}
+  function Q(o){
+    return {id:o.id,ch:o.ch,type:'q',k:o.k,requis:o.requis,ok:o.ok,skip:o.skip,maj:o.maj,bind:o.bind,bouton:o.bouton,avant:o.avant,
+      html:function(){
+        return situChip(o.ch)+'<div class="carte-q a" style="--d:1">'
+          +'<div class="etiquette">'+(typeof o.lab==='function'?o.lab():(o.lab||'À toi'))+'</div>'
+          +(o.rappel?o.rappel():'')
+          +'<div class="question">'+o.q+'</div>'
+          +(o.sous?'<div class="sous">'+o.sous+'</div>':'')
+          +(o.ex?ex(o.ex):'')
+          +(o.champ?o.champ():ta(o.k,o.ph,o.rows))
+          +(o.extra?o.extra():'')
+          +'</div>';
+      }};
+  }
+  function ARRET(id,ch,k,exemple){
+    return {id:id,ch:ch,type:'q',k:k,html:function(){
+      return '<div class="note a" style="--d:1"><div class="scotch"></div><div class="note-l">Petit arrêt</div><div class="question">Ce que je découvre sur moi</div>'+ex([exemple])+ta(k,'Ce que je découvre...',3)+'</div>';
+    }};
+  }
+  function SCI(id,ch,fid){return T(id,ch,'<div class="petit-titre a">Et la science, dans tout ça ?</div><div class="a" style="--d:1">'+flip(fid,'sci')+'</div>');}
+
+  /* ---------- Les slides ---------- */
+  var SL=[
+    {id:'cover',ch:'o',type:'cover',nonav:true,html:function(){
+      var fini=E.fini,enCours=!fini&&E.last>0;
+      var b=fini?'<button class="btn" data-act="carte">Voir ma carte</button><button class="btn second" data-act="tour">J\'ai posé mon jalon</button><button class="lien" data-act="revoir">Refaire l\'étape</button>'
+        :enCours?'<button class="btn" data-act="reprendre">Reprendre où j\'en étais</button><button class="lien" data-act="revoir">Recommencer du début</button>'
+        :'<button class="btn" data-act="commencer">Je commence</button>';
+      return '<div class="cover"><div class="cov-pap">🦋</div>'
+        +'<div class="surtitre a" style="--d:1">L\'Effet Papillon · Module 2 · Étape 1</div>'
+        +'<h1 class="a" style="--d:2">IRA, ma méthode</h1>'
+        +'<div class="cov-mots a" style="--d:3">Identifier · Ressentir · Agir</div>'
+        +'<p class="txt a" style="--d:4">Tu avances avec une situation de ta vie. On va mélanger la théorie et la pratique.</p>'
+        +'<div class="a" style="--d:5">'+b+'</div>'
+        +'<p class="hint a" style="--d:6">Prends ton temps. Tes réponses restent sur ton appareil, personne d\'autre ne les voit.</p></div>';
+    }},
+    T('o1','o','<p class="txt a">Tu as compris plein de choses sur toi.</p><p class="txt a" style="--d:2">Tu sais d\'où viennent tes réflexes, tu sais ce qui te pèse.</p><p class="grand a" style="--d:5">Et après, on en fait quoi ?</p>'),
+    T('o2','o','<p class="txt a">C\'est pour ça que j\'ai créé IRA.</p><div class="tuiles"><div class="tuile a" style="--d:2"><b>I</b><span>Identifier</span></div><div class="tuile a" style="--d:3"><b>R</b><span>Ressentir</span></div><div class="tuile a" style="--d:4"><b>A</b><span>Agir</span></div></div><p class="grand petit a" style="--d:6">Trois temps pour traverser ta vie, au lieu d\'être traversée par elle.</p>'),
+    T('o3','o','<p class="txt a">Et si tu écoutes bien…</p><div class="elleira"><div class="ei-ira a" style="--d:2">IRA</div><div class="ei-elle a" style="--d:6">« elle ira »</div></div><p class="grand petit a" style="--d:9">Elle ira là où elle a envie d\'aller.</p>'),
+    Q({id:'q1',ch:'o',lab:'À toi · Ta situation',k:'situation',requis:true,q:'Choisis une situation qui revient souvent et qui te pèse.',sous:'C\'est elle qui t\'accompagne pendant toute l\'étape.',ex:['Ma voisine me demande encore de garder son chien.','Mon chef m\'envoie des messages le soir.','Ma sœur m\'appelle pendant une heure pour me raconter ses problèmes.'],ph:'La situation qui revient souvent...'}),
+    Q({id:'q2',ch:'o',k:'habitude',q:'D\'habitude, dans cette situation, tu fais quoi ?',rappel:function(){return rempli('situation')?rap('Ta situation : « <b>'+esc(R().situation)+'</b> »'):'';},ex:['Je dis oui, et je râle après.','Je réponds tout de suite, même à 22 h.','J\'écoute, et je raccroche vidée.'],ph:'D\'habitude, je...'}),
+    Q({id:'q3',ch:'o',k:'poids1',requis:true,ok:function(){return R().poids1!=null;},q:'Aujourd\'hui, elle te pèse à combien ?',sous:'On reprendra ce chiffre à la fin de l\'étape.',champ:function(){return echelle('poids1');},maj:function(root){majEchelle(root,'poids1');}}),
+
+    C('ic','i','I','Identifier','Le premier éclair de conscience.'),
+    T('i1','i','<div class="emoji-hero a">⚡</div><p class="grand a" style="--d:1">Identifier, c\'est le premier éclair de conscience.</p><p class="txt a" style="--d:3">Tu remarques qu\'il se passe quelque chose :</p><div class="citation a" style="--d:4">« Là, il se passe quelque chose en moi. »</div>'),
+    T('i2','i','<p class="txt a">Petit à petit, tu développes cette capacité à reconnaître les moments et les situations en conscience, sur l\'instant présent.</p><div class="doux-box a" style="--d:3">Et si tu t\'en rends compte quatre jours plus tard, c\'est ok. C\'est un apprentissage en continu.</div><p class="txt a" style="--d:5">Au lieu de subir sans le voir, avec ton corps qui parle avant toi, tu apprends à identifier de plus en plus tôt.</p>'),
+    Q({id:'q4',ch:'i',k:'quand',requis:true,q:'La dernière fois que c\'est arrivé, tu t\'en es rendu compte quand ?',champ:function(){return opts('quand',QUAND);},extra:function(){return '<div class="retour-msg" id="m-quand" aria-live="polite">Peu importe ta réponse. À partir de maintenant, tu t\'entraînes à le voir un peu plus tôt.</div>';},maj:function(root){root.querySelector('#m-quand').classList.toggle('vu',rempli('quand'));}}),
+    Q({id:'q5',ch:'i',k:'signe',q:'Qu\'est-ce qui t\'a fait comprendre qu\'il se passait quelque chose ?',ex:['Mon ventre s\'est noué.','J\'ai répondu sèchement à mon fils.','J\'ai mal dormi.'],ph:'Ce qui m\'a mis la puce à l\'oreille...'}),
+    T('i3','i','<p class="grand petit a">Ensuite, tu regardes ce qui se joue en toi.</p><p class="sous a" style="--d:1">Touche chaque carte.</p>'
+      +'<button class="tap a" style="--d:2"><div class="tap-t"><span class="ic">📖</span>L\'histoire que tu te racontes<span class="plus">+</span></div><div class="tap-c">« Elle va penser que je m\'en fiche. » « Si je ralentis, tout va s\'écrouler. » « Je dois me débrouiller seule. » « Ils vont voir que je suis pas à la hauteur. »</div></button>'
+      +'<button class="tap a" style="--d:3"><div class="tap-t"><span class="ic">💡</span>Le besoin qui vient en lumière<span class="plus">+</span></div><div class="tap-c">Du repos, du calme, de la reconnaissance, de l\'aide, du temps pour toi, être écoutée.</div></button>'
+      +'<button class="tap a" style="--d:4"><div class="tap-t"><span class="ic">🚧</span>La limite qu\'on est en train de franchir<span class="plus">+</span></div><div class="tap-c">Ton collègue t\'appelle pendant ton jour de congé. Ton frère débarque sans prévenir. Ta belle-mère commente ta façon d\'élever tes enfants. On te coupe la parole en réunion.</div></button>'),
+    Q({id:'q6',ch:'i',k:'histoire',lab:'À toi · L\'histoire',q:'L\'histoire que tu te racontes dans cette situation.',ex:['Si je refuse, elle va me trouver égoïste.','S\'il attend ma réponse, il va penser que je suis pas fiable.'],ph:'Je me dis que...'}),
+    Q({id:'q7',ch:'i',k:'besoins',lab:'À toi · Le besoin',q:'Le besoin qui vient en lumière.',sous:'Touche tout ce qui te parle.',champ:function(){return pills('besoins',BESOINS)+autre('besoins','besoinAutre','Mon besoin...');}}),
+    Q({id:'q8',ch:'i',k:'limite',lab:'À toi · La limite',q:'La limite qu\'on est en train de franchir.',ex:['Mon week-end, c\'est mon temps à moi.','Le soir, je ne travaille plus.'],ph:'Ma limite...'}),
+    T('i4','i','<div class="petit-titre a">Retourner le comportement</div><p class="txt a" style="--d:1">Et là, tu vas un cran plus loin.</p><p class="txt a" style="--d:2">Très souvent, on pense que ce qu\'on vit, c\'est un problème. Par exemple, tu repousses, tu dis oui à tout, tu penses tout contrôler. Et peut-être qu\'en plus, tu te rabaisses quand tu te parles : « Je suis nulle, j\'y arrive pas. »</p><p class="grand petit a" style="--d:5">Alors qu\'en général, ton corps le vit plutôt comme une solution : une façon de te protéger.</p>'),
+    T('i5','i','<p class="txt a">Retourner le comportement, c\'est te poser cette question :</p><div class="grosse-q a" style="--d:2"><div class="emoji-hero">🛡️</div>Ce réflexe, il me protège de quoi ?</div>'),
+    T('i6','i','<p class="grand petit a">Souvent, derrière, il y a une peur.</p><p class="txt a" style="--d:2">Et cette peur peut cacher une croyance, une phrase que tu as apprise sur toi ou sur la vie.</p><div class="doux-box a" style="--d:4">Ce n\'est pas toujours le cas : parfois, ton corps a simplement appris à se protéger, sans phrase derrière.</div>'),
+    T('i7','i',function(){return '<p class="txt a">Quand tu trouves la croyance, tu peux la retourner pour en faire une force.</p><p class="sous a" style="--d:1">À toi de retourner les cartes. Ce sont des hypothèses : derrière un même réflexe, il peut y avoir plusieurs peurs.</p>'+CARTES.map(function(c,n){return '<div class="a" style="--d:'+(2+n)+'">'+flip('c'+n)+'</div>';}).join('')+'<div class="compteur" id="cpt" aria-live="polite"></div>';},{maj:function(root){var n=0;for(var i=0;i<4;i++)if(E.cartes['c'+i])n++;root.querySelector('#cpt').textContent=n===4?'Les 4 cartes sont retournées 🎉':(n+(n>1?' cartes retournées':' carte retournée')+' sur 4');}}),
+    Q({id:'q9',ch:'i',k:'protege',lab:'À toi · Retourner',rappel:function(){return rempli('habitude')?rap('Ton réflexe, c\'est : « <b>'+esc(R().habitude)+'</b> »'):rap('Repense à ce que tu fais d\'habitude dans ta situation.');},q:'Il te protège de quoi ?',ex:['Du malaise de la décevoir.','De la peur qu\'on me trouve pas fiable.'],ph:'Il me protège de...'}),
+    Q({id:'q10',ch:'i',k:'croyance',lab:'À toi · La croyance',ok:function(){return rempli('croyance')||!!R().sansCroyance;},q:'La croyance derrière, si tu en trouves une.',ex:['Si je dis non, je suis égoïste.'],ph:'Si je..., alors...',extra:function(){return '<button class="coche" data-act="sans">☐ Je trouve pas de croyance</button><div class="retour-msg" id="m-sans" aria-live="polite">C\'est ok. Parfois, ton corps a simplement appris à se protéger.</div>';},maj:function(root){var s=!!R().sansCroyance,b=root.querySelector('[data-act="sans"]');b.classList.toggle('sel',s);b.textContent=(s?'☑':'☐')+' Je trouve pas de croyance';root.querySelector('#m-sans').classList.toggle('vu',s);}}),
+    Q({id:'q11',ch:'i',k:'retournee',lab:'À toi · Retourner',skip:function(){return !rempli('croyance');},rappel:function(){return rap('Ta croyance : « <b>'+esc(R().croyance)+'</b> »');},q:'Retourne-la pour en faire une force.',ex:['Si je dis non, je respecte mon temps et ma limite.'],ph:'Ma croyance retournée...'}),
+    SCI('isci','i','sI'),
+    ARRET('iarret','i','decouverteI','Je croyais que j\'étais trop gentille. En fait, j\'ai peur qu\'on me rejette.'),
+
+    C('rc','r','R','Ressentir','Rester avec toi.'),
+    T('r1','r','<p class="grand a">Ressentir, c\'est rester avec toi.</p><p class="txt a" style="--d:2">Tu ne te sauves pas, tu ne fais pas semblant. Tu descends dans ton corps :</p><div class="ressens"><span class="a" style="--d:3">🤏 où ça serre</span><span class="a" style="--d:4">🔥 où ça chauffe</span><span class="a" style="--d:5">🧱 où ça se bloque</span></div><p class="txt a" style="--d:7">Et tu mets un mot dessus.</p>'),
+    T('r2','r','<p class="grand petit a">Et tu t\'autorises à accueillir ça, de plus en plus.</p><div class="kit a" style="--d:3"><span>🧰</span><div>Pour t\'aider, tu peux utiliser ton <b>kit de régulation</b>.</div></div>'),
+    T('r3','r','<p class="txt a">Si ça déborde, si ton cœur s\'emballe ou si tu te figes, tu ne plonges pas dedans.</p><div class="fenetre a" style="--d:2"><div class="zf haut">🌊 Ça déborde</div><div class="zf milieu">🌿 Ta fenêtre</div><div class="zf bas">🧊 Figée</div></div><p class="txt a" style="--d:4">D\'abord, tu reviens dans ta fenêtre : tu respires, tu poses tes pieds au sol, tu regardes autour de toi.</p>'),
+    T('r4','r','<p class="grand a">Ensuite seulement, tu ressens.</p><p class="txt a" style="--d:2">Et à chaque fois, tu entraînes ta fenêtre de tolérance.</p><div class="doux-box a" style="--d:4">Je sais, c\'est plus facile à dire qu\'à faire. Ça s\'apprend, petit à petit.</div>'),
+    Q({id:'q12',ch:'r',k:'fenetre',requis:true,ok:function(){return R().fenetre==='ok'||(rempli('fenetre')&&!!R().prete);},q:'En repensant à ta situation, là, maintenant, tu es où ?',champ:function(){return opts('fenetre',FENETRE);},
+      extra:function(){return '<div class="retour-msg" id="f-ok">Alors on continue, doucement.</div>'
+        +'<div id="f-retour" style="display:none"><div class="retour-msg vu">D\'abord, reviens dans ta fenêtre.</div><div class="souffle-wrap"><div class="souffle"></div><div class="souffle-mots"><span class="m-in">Inspire</span><span class="m-out">Expire</span></div></div><p class="ancrage">Pose tes pieds au sol. Regarde autour de toi et nomme trois choses que tu vois.</p><p class="ancrage">Tu peux aussi aller dans ton kit de régulation.</p><button class="btn second" data-act="prete">Je suis prête</button></div>'
+        +'<div id="f-fige" style="display:none"><div class="retour-msg vu">D\'abord, reviens doucement dans ton corps.</div><div class="puces" style="margin-top:12px"><span class="sans">Frotte tes mains l\'une contre l\'autre.</span><span class="sans">Bouge tes pieds, étire-toi.</span><span class="sans">Regarde autour de toi et nomme trois choses que tu vois.</span></div><p class="ancrage">Tu peux aussi aller dans ton kit de régulation.</p><button class="btn second" data-act="prete">Je suis prête</button></div>'
+        +'<div class="retour-msg" id="f-prete">Merci d\'avoir pris ce temps pour toi. On continue, doucement.</div>';},
+      maj:function(root){var f=R().fenetre,p=!!R().prete;root.querySelector('#f-ok').classList.toggle('vu',f==='ok');root.querySelector('#f-retour').style.display=(f==='monte'&&!p)?'block':'none';root.querySelector('#f-fige').style.display=(f==='fige'&&!p)?'block':'none';root.querySelector('#f-prete').classList.toggle('vu',!!f&&f!=='ok'&&p);}}),
+    Q({id:'q13',ch:'r',k:'zones',ok:function(){return rempli('zones')||rempli('corpsTexte');},q:'Dans ton corps, tu sens quoi, et où ?',sous:'Touche les endroits où ça se passe.',champ:function(){return corpsSVG()+pills('zones',ZONES)+ex(['Les épaules qui montent, la mâchoire serrée.'])+ta('corpsTexte','Tu peux décrire, si tu veux...',2);}}),
+    Q({id:'q14',ch:'r',k:'emotions',q:'Mets un mot dessus.',sous:'Touche tous les mots qui te parlent.',champ:function(){return pills('emotions',EMOS)+autre('emotions','emotionAutre','Mon mot...');}}),
+    Q({id:'q15',ch:'r',k:'fuite',q:'D\'habitude, qu\'est-ce que tu fais pour ne pas sentir ça ?',ex:['Je m\'occupe, je range tout.','Je scrolle.','Je dis oui pour que ça s\'arrête.'],ph:'D\'habitude, pour ne pas sentir, je...'}),
+    SCI('rsci','r','sR'),
+    ARRET('rarret','r','decouverteR','La culpabilité arrive avant même qu\'elle me demande quoi que ce soit.'),
+
+    C('ac','a','A','Agir','Le contraire de subir.'),
+    T('a1','a','<p class="grand a">Agir, c\'est le contraire de subir.</p><p class="grand petit fonce a" style="--d:4">Et agir, ce n\'est pas réagir.</p><p class="txt a" style="--d:6">L\'idée, c\'est justement de faire la distinction. Si tu agis sans avoir fait le processus, tu vas sûrement réagir, et faire preuve d\'impulsivité.</p>'),
+    T('a2','a','<div class="petit-titre a">L\'intelligence émotionnelle</div><p class="txt a" style="--d:1">L\'intelligence émotionnelle, c\'est ça : être capable de ressentir l\'émotion sans être embarquée par elle.</p><p class="grand petit a" style="--d:3">Tu la traverses, et ensuite tu en fais quelque chose.</p>'),
+    T('a3','a','<div class="chemins a"><div class="ch-l">Réagir</div><div class="ch-row"><span class="nd">Émotion</span><span class="fl">→</span><span class="nd chaud">Action</span></div><div class="ch-note">C\'est l\'émotion qui décide.</div><div class="ch-l">Agir</div><div class="ch-row"><span class="nd">Émotion</span><span class="fl">→</span><span class="nd">Distance</span><span class="fl">→</span><span class="nd">Ce qui compte</span><span class="fl">→</span><span class="nd choix">Ton choix</span></div><div class="ch-note">C\'est toi qui choisis.</div></div><p class="txt a" style="--d:3">Si tu passes direct de l\'émotion à l\'action, c\'est l\'émotion qui décide. Alors tu prends d\'abord un peu de distance. Tu regardes ce qui se joue, tu vérifies ce qui compte pour toi, et ensuite tu choisis.</p>'),
+    T('a4','a','<p class="txt a">Agir, dans IRA, c\'est sortir de ce que tu as toujours répété.</p><p class="grand petit a" style="--d:2">C\'est poser ce jalon que tu n\'as jamais posé.</p><p class="sous a" style="--d:3">Ça peut être :</p><div class="puces"><span class="a" style="--d:4">Demander de l\'aide.</span><span class="a" style="--d:5">Prendre ce premier rendez-vous chez une thérapeute.</span><span class="a" style="--d:6">Faire le premier pas pour ton projet.</span><span class="a" style="--d:7">Dire à ton chef que tu ne peux pas prendre ce dossier en plus.</span></div><p class="txt a" style="--d:9">Il y a plein de façons d\'agir, dans tes relations, au travail, dans ta vie privée. Aussi petite soit-elle, chaque action t\'aide à sortir de ce schéma.</p>'),
+    T('a5','a','<p class="txt a">Tu agis en deux temps :</p><div class="temps a" style="--d:1"><b>1</b><div><strong>Vers toi, d\'abord.</strong> Tu prends un moment, tu écris, tu respires, tu te recentres.</div></div><div class="temps a" style="--d:3"><b>2</b><div><strong>Vers l\'autre, ensuite.</strong> Tu dis ta limite ou ton besoin, depuis cet endroit posé.</div></div><div class="citation a" style="--d:5">Une limite posée avant de t\'être recentrée, c\'est une limite qui explose au lieu de se poser.</div>'),
+    Q({id:'q16',ch:'a',k:'jalon',lab:'À toi · Ton jalon',rappel:function(){return rempli('habitude')?rap('D\'habitude, tu fais : « <b>'+esc(R().habitude)+'</b> »'):'';},q:'Le jalon que tu n\'as jamais posé, ce serait quoi ?',ex:['Dire non sans me justifier.'],ph:'Mon jalon...'}),
+    Q({id:'q17',ch:'a',k:'versMoi',lab:'À toi · Vers toi',q:'Agir vers moi, d\'abord.',sous:'Qu\'est-ce que je fais d\'abord pour moi ?',ex:['Je lui réponds : je te redis ce soir. Et je prends dix minutes pour moi.'],ph:'D\'abord, pour moi, je...'}),
+    Q({id:'q18',ch:'a',k:'versAutre',lab:'À toi · Vers l\'autre',q:'Agir vers l\'autre, ensuite.',sous:'Qu\'est-ce que je lui dis ?',ex:['Ce week-end, je ne pourrai pas.'],ph:'Je lui dis...'}),
+    Q({id:'q19',ch:'a',k:'quandJalon',lab:'À toi · Quand',q:'Ton jalon, tu le poses quand ?',sous:'Le jour, le moment, la situation.',ex:['Jeudi, quand elle m\'écrit, je lui réponds le soir.'],ph:'Je le pose...'}),
+    SCI('asci','a','sA'),
+
+    C('bc','b','∞','La boucle','Et après ?'),
+    T('b1','b',function(){return '<div class="a">'+oignon()+'</div><p class="grand petit a" style="--d:2">IRA, c\'est une boucle. Un peu comme un oignon.</p><p class="txt a" style="--d:3">Tu identifies, tu ressens, tu poses ton jalon. Ensuite, quelque chose de nouveau se présente : une culpabilité, une autre peur, une autre situation.</p>';}),
+    T('b2','b','<p class="txt a">Alors tu recommences : tu identifies, tu ressens, tu agis.</p><p class="grand petit a" style="--d:2">À chaque tour, tu enlèves une couche.</p><div class="kit a" style="--d:4"><span>🔁</span><div>Quand tu auras posé ton jalon, reviens sur cette page. Une partie <b>« Après mon jalon »</b> t\'attend pour ton prochain tour.</div></div>'),
+    T('c1','c','<div class="petit-titre a">Quand ça coince : deux pistes</div><p class="txt a" style="--d:1">Ce sont des hypothèses. À toi de voir si ça te parle.</p><div class="piste a" style="--d:2"><div class="piste-t">🔺 Le triangle</div><p>Peut-être que tu te retrouves sauveuse, puis victime, puis que tu finis par exploser. Si c\'est le cas, IRA peut t\'aider à en sortir : tu identifies le rôle que t\'es en train de jouer, tu ressens ce qu\'il y a dessous, et tu choisis d\'agir pour toi.</p></div><div class="piste a" style="--d:3"><div class="piste-t">🧊 Le figement</div><p>Peut-être que tu es bloquée et que t\'arrives plus à rien. Dans ce cas, ton Agir peut être tout petit : bouger tes mains, bouger ton corps, boire un verre d\'eau, faire un pas. Et ça compte.</p></div>'),
+    Q({id:'q20',ch:'c',k:'roles',q:'Tu te reconnais ?',sous:'Tu peux en choisir plusieurs.',champ:function(){return pills('roles',ROLES);},extra:function(){return '<div id="m-roles" aria-live="polite"></div>';},maj:function(root){var h='';(R().roles||[]).forEach(function(r){if(ROLE_TXT[r])h+='<div class="reponse-role"><b>'+ROLE_TXT[r][0]+'</b>'+ROLE_TXT[r][1]+'</div>';});root.querySelector('#m-roles').innerHTML=h;}}),
+
+    C('fc','f','🦋','Ton chemin','Regarde le chemin que tu viens de faire.',true),
+    Q({id:'q21',ch:'f',k:'poids2',requis:true,ok:function(){return R().poids2!=null;},rappel:function(){return rempli('situation')?rap('Ta situation : « <b>'+esc(R().situation)+'</b> »'):'';},q:'Ta situation te pèse à combien, maintenant ?',champ:function(){return echelle('poids2');},extra:function(){return '<div id="cmp" aria-live="polite"></div>';},
+      maj:function(root){majEchelle(root,'poids2');var a=R().poids1,b=R().poids2,h='';if(b!=null){var msg;if(a==null)msg='';else if(b<a)msg='Ton chiffre a bougé : quelque chose s\'est déjà déplacé.';else if(b===a)msg='Ton chiffre a pas bougé ? C\'est ok : maintenant, tu sais ce qui se joue.';else msg='Ça peut arriver : regarder les choses en face, ça remue. C\'est ok : maintenant, tu sais ce qui se joue.';h='<div class="cmp">'+(a!=null?'<div class="bulle"><span>Au début</span><b>'+a+'</b></div><div class="fleche">→</div>':'')+'<div class="bulle now"><span>Maintenant</span><b>'+b+'</b></div></div>'+(msg?'<p class="cmp-msg">'+msg+'</p>':'');}root.querySelector('#cmp').innerHTML=h;}}),
+    {id:'carte',ch:'f',type:'fin',nonav:true,bind:function(){if(!E.fini){E.fini=true;}E.date=E.date||new Date().toISOString();sauver();miroirCarnet();},html:function(){
+      return '<div class="fin-intro"><p class="grand petit a">'+(E.tours.length?'Tu as fait '+(E.tours.length+1)+' tours d\'IRA.':'Tu viens de faire ton premier tour d\'IRA.')+'</p><p class="txt a" style="--d:1">Garde ta carte. Elle va te suivre dans la suite du module.</p></div>'
+        +'<div class="a" style="--d:2">'+carteHTML()+'</div>'
+        +'<button class="btn a" style="--d:3" data-act="dl">Télécharger ma carte</button>'
+        +'<button class="btn second a" style="--d:4" data-act="tour">J\'ai posé mon jalon</button>'
+        +'<button class="lien" data-act="revoir">Revoir l\'étape</button>'
+        +'<button class="lien" data-act="effacer">Tout effacer</button>'
+        +'<div class="sources"><b>Sources</b><br>Campbell-Sills, L., Barlow, D. H., Brown, T. A. &amp; Hofmann, S. G. (2006). Effects of suppression and acceptance on emotional responses of individuals with anxiety and mood disorders. Behaviour Research and Therapy, 44, 1251-1263.<br>Kross, E. et al. (2014). Self-talk as a regulatory mechanism: How you do it matters. Journal of Personality and Social Psychology, 106(2), 304-324.<br>Lieberman, M. D. et al. (2007). Putting feelings into words. Psychological Science, 18(5), 421-428.<br>Mayer, J. D. &amp; Salovey, P. (1997). What is emotional intelligence? In P. Salovey &amp; D. Sluyter (Eds.), Emotional Development and Emotional Intelligence. Basic Books.<br>Salkovskis, P. M. (1991). The importance of behaviour in the maintenance of anxiety and panic: a cognitive account. Behavioural Psychotherapy, 19, 6-19.</div>';
+    }},
+
+    /* Après mon jalon */
+    Q({id:'t1',ch:'t',k:'br.cs',lab:'Après mon jalon',rappel:function(){return rempli('jalon')?rap('Ton jalon : « <b>'+esc(R().jalon)+'</b> »'):'';},q:'Comment ça s\'est passé ?',ex:['Je l\'ai dit. Ma voix tremblait un peu, mais je l\'ai dit.','J\'ai attendu le soir pour répondre, comme prévu.'],ph:'Ça s\'est passé...'}),
+    Q({id:'t2',ch:'t',k:'br.present',lab:'Après mon jalon',q:'Et maintenant, qu\'est-ce qui se présente ?',sous:'Une culpabilité, une autre peur, une autre situation…',ex:['Une heure après, je culpabilisais.','Elle m\'a répondu sèchement, et ça m\'a remuée.'],ph:'Ce qui se présente...'}),
+    Q({id:'t3',ch:'t',k:'br.i',lab:function(){return 'Tour '+(E.tours.length+2)+' · I';},q:'Identifier : là, il se passe quoi en moi ?',ex:['Je me raconte que je suis égoïste.','J\'ai besoin qu\'on me dise que c\'est ok.'],ph:'Là, en moi...'}),
+    Q({id:'t4',ch:'t',k:'br.emotions',lab:function(){return 'Tour '+(E.tours.length+2)+' · R';},ok:function(){return rempli('br.emotions')||rempli('br.r');},q:'Ressentir : dans ton corps, tu sens quoi ? Et quel mot tu mets dessus ?',sous:'Si ça monte trop, reviens d\'abord dans ta fenêtre : tes pieds au sol, ta respiration, trois choses autour de toi.',champ:function(){return pills('br.emotions',EMOS.filter(function(e){return e!=='autre';}))+ta('br.r','Dans mon corps, je sens...',2);}}),
+    Q({id:'t5',ch:'t',k:'br.a',lab:function(){return 'Tour '+(E.tours.length+2)+' · A';},bouton:'Je termine ce tour',q:'Agir : ton prochain jalon, vers toi ou vers l\'autre ?',ex:['Je me rappelle que j\'ai respecté ma limite.','Je lui dis que j\'ai besoin d\'un peu de temps.'],ph:'Mon prochain jalon...',
+      avant:function(){var b=E.br,plein=['cs','present','i','r','a'].some(function(k){return b[k]&&String(b[k]).trim();})||(b.emotions&&b.emotions.length);if(plein){var t={};for(var k in b)t[k]=b[k];t.date=new Date().toISOString();E.tours.push(t);}E.br={emotions:[]};sauver();miroirCarnet();}}),
+    {id:'tfin',ch:'t',type:'fin',nonav:true,html:function(){
+      var n=E.tours.length+1;
+      return '<div class="corps-slide" style="text-align:center"><div class="a">'+oignon('mini')+'</div><p class="grand a" style="--d:1">Une couche de moins.</p><p class="txt a" style="--d:2">Tu as fait '+n+' tours d\'IRA sur ta situation. Ils sont tous sur ta carte.</p><button class="btn a" style="--d:3" data-act="carte">Voir ma carte</button><button class="btn second a" style="--d:4" data-act="tour">Faire encore un tour</button></div>';
+    }}
+  ];
+  var IDX={};SL.forEach(function(s,n){IDX[s.id]=n;});
+  var STATIONS=[0,IDX.ic,IDX.rc,IDX.ac,IDX.bc];
+  var CHS={o:0,i:1,r:2,a:3,b:4,c:4,f:4};
+
+  /* ---------- Carte Mon IRA ---------- */
+  function ligne(l,t){return (t&&String(t).trim())?'<div class="tk-l"><div class="tk-k">'+l+'</div><div class="tk-v">'+escBr(t)+'</div></div>':'';}
+  function sec(titre,lettre,contenu){return contenu?'<div class="tk-sec"><div class="tk-h">'+(lettre?'<b>'+lettre+'</b>':'')+titre+'</div>'+contenu+'</div>':'';}
+  function carteHTML(){
+    var r=R();
+    var bes=listeAvecAutre(r.besoins,r.besoinAutre).join(', ');
+    var emo=listeAvecAutre(r.emotions,r.emotionAutre).join(', ');
+    var zon=(r.zones||[]).map(function(z){return (ZL[z]||z).toLowerCase();}).join(', ');
+    var corps=[zon?zon.charAt(0).toUpperCase()+zon.slice(1):'',r.corpsTexte||''].filter(function(x){return String(x).trim();}).join('\n');
+    var croy='';
+    if(rempli('croyance'))croy='« '+r.croyance+' »'+(rempli('retournee')?'\ndevient « '+r.retournee+' »':'');
+    else if(r.sansCroyance)croy='Aucune croyance trouvée : mon corps a appris à se protéger.';
+    var poids=(r.poids1!=null&&r.poids2!=null)?(r.poids1+'/10 au début, '+r.poids2+'/10 maintenant'):(r.poids1!=null?r.poids1+'/10 au début':'');
+    var h='<div class="ticket"><div class="tk-top"><div class="tk-sur">L\'Effet Papillon · Module 2</div><div class="tk-titre">Mon IRA</div><div class="tk-date">'+dateFr(E.date)+'</div></div>';
+    h+=sec('Ma situation','',ligne('La situation',r.situation)+ligne('D\'habitude, je fais',r.habitude)+ligne('Ce qu\'elle me pèse',poids));
+    h+=sec('Identifier','I',ligne('Ce qui m\'a mis la puce à l\'oreille',r.signe)+ligne('L\'histoire que je me raconte',r.histoire)+ligne('Mon besoin',bes)+ligne('Ma limite',r.limite)+ligne('Mon réflexe me protège de',r.protege)+ligne('Ma croyance',croy)+ligne('Ce que je découvre',r.decouverteI));
+    h+=sec('Ressentir','R',ligne('Dans mon corps',corps)+ligne('Le mot',emo)+ligne('D\'habitude, pour ne pas sentir',r.fuite)+ligne('Ce que je découvre',r.decouverteR));
+    h+=sec('Agir','A',ligne('Mon jalon',r.jalon)+ligne('Vers moi, d\'abord',r.versMoi)+ligne('Vers l\'autre, ensuite',r.versAutre)+ligne('Quand',r.quandJalon));
+    var roles=(r.roles||[]).filter(function(x){return x!=='non';}).map(function(x){return ROLE_TXT[x]?ROLE_TXT[x][0]:x;}).join(', ');
+    if(roles)h+=sec('Quand ça coince','',ligne('Je me reconnais',roles));
+    E.tours.forEach(function(t,n){
+      h+=sec('Tour '+(n+2)+' · '+dateFr(t.date),'∞',ligne('Comment ça s\'est passé',t.cs)+ligne('Ce qui se présente',t.present)+ligne('I · En moi',t.i)+ligne('R · Je ressens',[(t.emotions||[]).join(', '),t.r||''].filter(function(x){return String(x).trim();}).join('\n'))+ligne('A · Mon prochain jalon',t.a));
+    });
+    h+='<div class="tk-phrase">Agir, c\'est le contraire de subir.</div><div class="tk-sign">Debora, coach pour femmes</div></div>';
+    return h;
+  }
+  function telecharger(){
+    var tk=document.querySelector('.ticket');if(!tk)return;
+    var css=document.getElementById('css-ticket').textContent;
+    var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mon IRA · L\'Effet Papillon</title><link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}body{padding:24px 16px;background:#fdf6f0}'+css+'</style></head><body>'+tk.outerHTML+'</body></html>';
+    try{
+      var b=new Blob([html],{type:'text/html'}),a=document.createElement('a');
+      a.href=URL.createObjectURL(b);a.download='mon-ira.html';document.body.appendChild(a);a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},800);
+    }catch(e){}
+  }
+
+  /* ---------- Moteur ---------- */
+  var scene=document.getElementById('scene'),nav=document.getElementById('nav'),btnS=document.getElementById('btnSuivant'),btnR=document.getElementById('btnRetour');
+  var rail=document.getElementById('rail'),pap=document.getElementById('pap'),plein=document.getElementById('plein'),tourL=document.getElementById('tourL');
+  var sts=[].slice.call(document.querySelectorAll('.st'));
+
+  function root(){return scene.firstElementChild;}
+  function remplir(rt){
+    rt.querySelectorAll('textarea[data-k],input[type=text][data-k]').forEach(function(el){var x=get(el.dataset.k);el.value=(x==null?'':x);});
+  }
+  function majSlide(){
+    var rt=root(),s=SL[E.i];if(!rt)return;
+    rt.querySelectorAll('.pill[data-m]').forEach(function(p){p.classList.toggle('sel',(get(p.dataset.m)||[]).indexOf(p.dataset.v)>=0);});
+    rt.querySelectorAll('.opt[data-o]').forEach(function(p){p.classList.toggle('sel',get(p.dataset.o)===p.dataset.v);});
+    rt.querySelectorAll('.zone').forEach(function(z){z.classList.toggle('sel',(R().zones||[]).indexOf(z.dataset.z)>=0);});
+    rt.querySelectorAll('[data-autre]').forEach(function(el){el.style.display=(get(el.dataset.autre)||[]).indexOf('autre')>=0?'block':'none';});
+    if(s.maj)s.maj(rt);
+    fixTypo(rt);
+    majNav();
+  }
+  function estRempli(s){return s.ok?s.ok():(s.k?rempli(s.k):true);}
+  function majNav(){
+    var s=SL[E.i];
+    nav.style.display=s.nonav?'none':'flex';
+    btnR.style.visibility=E.i===0?'hidden':'visible';
+    var f=estRempli(s);
+    btnS.disabled=!!s.requis&&!f;
+    btnS.textContent=s.bouton||((s.k||s.ok)&&!s.requis&&!f?'Je passe':'Continuer');
+  }
+  function majRail(){
+    var s=SL[E.i],tour=s.ch==='t';
+    rail.classList.toggle('tour',tour);
+    if(tour){tourL.textContent=s.id==='tfin'?'Après mon jalon':'Après mon jalon · Tour '+(E.tours.length+2);return;}
+    var frac=Math.min(1,E.i/IDX.carte);
+    pap.style.left=(10+frac*80)+'%';plein.style.width=(frac*80)+'%';
+    var ch=CHS[s.ch];
+    sts.forEach(function(b,n){b.classList.toggle('fait',E.i>=STATIONS[n]);b.classList.toggle('ici',ch===n);b.disabled=STATIONS[n]>E.max;});
+  }
+  function rendre(){
+    var s=SL[E.i];
+    scene.innerHTML='<div class="slide s-'+s.type+'" data-id="'+s.id+'">'+s.html()+'</div>';
+    var rt=root();
+    remplir(rt);
+    if(s.bind)s.bind(rt);
+    majSlide();
+    majRail();
+    window.scrollTo(0,0);
+  }
+  function aller(j){
+    E.i=Math.max(0,Math.min(SL.length-1,j));
+    if(E.i>0&&E.i<=IDX.carte){E.last=E.i;E.max=Math.max(E.max||0,E.i);}
+    sauver();rendre();
+  }
+  function suivant(){
+    var s=SL[E.i];if(btnS.disabled)return;
+    if(s.avant)s.avant();
+    var j=E.i+1;while(j<SL.length&&SL[j].skip&&SL[j].skip())j++;
+    aller(j);
+  }
+  function precedent(){
+    var s=SL[E.i];
+    if(s.id==='t1'){aller(IDX.carte);return;}
+    var j=E.i-1;while(j>0&&SL[j].skip&&SL[j].skip())j--;
+    aller(j);
+  }
+  btnS.addEventListener('click',suivant);
+  btnR.addEventListener('click',precedent);
+  sts.forEach(function(b,n){b.addEventListener('click',function(){if(!b.disabled)aller(STATIONS[n]);});});
+
+  scene.addEventListener('input',function(e){
+    var el=e.target;if(!el.dataset||!el.dataset.k)return;
+    set(el.dataset.k,el.type==='range'?+el.value:el.value);
+    sauver();
+    var s=SL[E.i];if(s.maj&&el.type==='range'){s.maj(root());fixTypo(root());}
+    if(el.type==='range')majSlide();else majNav();
+  });
+  scene.addEventListener('pointerup',function(e){
+    var el=e.target;if(el.type==='range'&&el.dataset.k&&get(el.dataset.k)==null){set(el.dataset.k,+el.value);sauver();majSlide();}
+  });
+
+  function toggleArr(k,v,exclusif){
+    var a=(get(k)||[]).slice(),i=a.indexOf(v);
+    if(exclusif){a=(i>=0)?[]:[v];}
+    else{a=a.filter(function(x){return x!=='non';});i=a.indexOf(v);if(i>=0)a.splice(i,1);else a.push(v);}
+    set(k,a);
+  }
+  scene.addEventListener('click',function(e){
+    var t=e.target;
+    var p=t.closest('.pill[data-m]');
+    if(p){toggleArr(p.dataset.m,p.dataset.v,p.dataset.v==='non');sauver();majSlide();return;}
+    var o=t.closest('.opt[data-o]');
+    if(o){set(o.dataset.o,o.dataset.v);sauver();majSlide();return;}
+    var z=t.closest('.zone');
+    if(z){toggleArr('zones',z.dataset.z,false);sauver();majSlide();return;}
+    var f=t.closest('.flip');
+    if(f){
+      var id=f.dataset.flip;if(f.classList.contains('anim'))return;
+      f.classList.add('anim');
+      setTimeout(function(){
+        E.cartes[id]=!E.cartes[id];sauver();
+        f.classList.remove('devant','dos');f.classList.add(E.cartes[id]?'dos':'devant');
+        f.querySelector('.face').innerHTML=E.cartes[id]?FL[id].b:FL[id].d;
+        fixTypo(f);
+        requestAnimationFrame(function(){f.classList.remove('anim');});
+        var s=SL[E.i];if(s.maj){s.maj(root());fixTypo(root());}
+      },170);
+      return;
+    }
+    var tp=t.closest('.tap');
+    if(tp){tp.classList.toggle('ouvert');return;}
+    var a=t.closest('[data-act]');
+    if(a)action(a.dataset.act,a);
+  });
+  scene.addEventListener('keydown',function(e){
+    var z=e.target.closest&&e.target.closest('.zone');
+    if(z&&(e.key==='Enter'||e.key===' ')){e.preventDefault();toggleArr('zones',z.dataset.z,false);sauver();majSlide();}
+  });
+
+  function action(act,el){
+    if(act==='commencer'||act==='revoir'){aller(1);}
+    else if(act==='reprendre'){aller(E.last||1);}
+    else if(act==='carte'){aller(IDX.carte);}
+    else if(act==='tour'){E.br={emotions:[]};sauver();aller(IDX.t1);}
+    else if(act==='dl'){telecharger();}
+    else if(act==='prete'){R().prete=true;sauver();majSlide();}
+    else if(act==='sans'){R().sansCroyance=!R().sansCroyance;sauver();majSlide();}
+    else if(act==='effacer'){
+      if(el.dataset.sure){S.ira=nouveau();E=S.ira;sauver();aller(0);}
+      else{el.dataset.sure='1';el.textContent='Sûre ? Touche encore pour tout effacer';}
+    }
+  }
+
+  /* Démarrage : toujours sur la couverture */
+  E.i=0;
+  rendre();
+})();
+</script>
+</body>
+</html>
