@@ -97,6 +97,10 @@
     {
       "date": "2026-11-26",
       "retour": "Ép. 4 : veut voir qu’elle passe devant le titre puis qu’il réapparaît derrière elle, comme les autres épisodes (pas de titre devant)."
+    },
+    {
+      "date": "2026-11-26",
+      "retour": "Ép. 4 : garder le petit mouvement de tête quand elle se recule en souriant, il retient l’attention."
     }
   ],
   "rendu": {
@@ -178,5 +182,5 @@
   "regle_questions": "Avant de faire un effet (voix téléphone, noir et blanc…), lui DEMANDER le passage exact et attendre sa réponse. Ne jamais deviner.",
   "niveau_bruitages": "Réglé PAR RAPPORT À SA VOIX (le niveau de ses rushs varie beaucoup d’une vidéo à l’autre) : voix ramenée à une référence, puis clavier + paillettes ≈ −4 dB et clics ≈ −6 dB par rapport au réglage d’origine. Ni trop fort ni à peine audible : « harmonieux ».",
   "cta_partage": "Quand elle dit « Partage ce reel à ta pote… » : carte d’envoi façon Instagram (avatar neutre, « ta pote » + petite ligne grise liée au sujet), clic sur « Envoyer » qui devient « Envoyé ». Pas de champ commentaire dans ce cas.",
-  "retention": "Les 1,5 premières secondes décident de tout : démarrer juste avant son entrée dans le cadre (≤ 0,3 s de titre seul, sa voix avant 1 s), jamais de longue chaise vide ni de réinstallation. Couper tous les moments faibles (reprises, blancs > 0,35 s, moments où elle se rassoit / remet le micro) : ne garder que le meilleur."
+  "retention": "Les 1,5 premières secondes décident de tout : démarrer juste avant son entrée dans le cadre (≤ 0,3 s de titre seul, sa voix avant 1 s), jamais de longue chaise vide ni de réinstallation. Couper tous les moments faibles (reprises, blancs > 0,35 s, moments où elle se rassoit / remet le micro) : ne garder que le meilleur. MAIS garder les petits gestes qui accrochent (mouvement de tête, sourire complice) : ne couper que les vrais temps morts (remonter le micro, se réinstaller)."
 }
