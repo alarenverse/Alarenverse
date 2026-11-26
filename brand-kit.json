@@ -121,6 +121,10 @@
     {
       "date": "2026-11-26",
       "retour": "Ép. 5 : « Prends soin de ta tête » dit deux fois → enlever le premier, garder seulement la suite."
+    },
+    {
+      "date": "2026-11-26",
+      "retour": "Ép. 5 : fin de « encore » coupée → corrigé. Règle : vérifier la fin réelle du dernier mot au niveau audio + marge."
     }
   ],
   "rendu": {
@@ -204,5 +208,6 @@
   "regle_questions": "Avant de faire un effet (voix téléphone, noir et blanc…), lui DEMANDER le passage exact et attendre sa réponse. Ne jamais deviner.",
   "niveau_bruitages": "Réglé PAR RAPPORT À SA VOIX (le niveau de ses rushs varie beaucoup d’une vidéo à l’autre) : voix ramenée à une référence, puis clavier + paillettes ≈ −4 dB et clics ≈ −6 dB par rapport au réglage d’origine. Ni trop fort ni à peine audible : « harmonieux ».",
   "cta_partage": "Quand elle dit « Partage ce reel à ta pote… » : carte d’envoi façon Instagram (avatar neutre, « ta pote » + petite ligne grise liée au sujet), clic sur « Envoyer » qui devient « Envoyé ». Pas de champ commentaire dans ce cas.",
-  "retention": "Les 1,5 premières secondes décident de tout : démarrer juste avant son entrée dans le cadre (≤ 0,3 s de titre seul, sa voix avant 1 s), jamais de longue chaise vide ni de réinstallation. Couper tous les moments faibles (reprises, blancs > 0,35 s, moments où elle se rassoit / remet le micro) : ne garder que le meilleur. MAIS garder les petits gestes qui accrochent (mouvement de tête, sourire complice) : ne couper que les vrais temps morts (remonter le micro, se réinstaller). Ne JAMAIS montrer le moment où elle s’assoit / se recule vers la chaise : couper du gros plan directement sur elle déjà assise. Une phrase dite deux fois = TOUJOURS une reprise : couper la première, garder seulement la dernière (même si la répétition semble voulue)."
+  "retention": "Les 1,5 premières secondes décident de tout : démarrer juste avant son entrée dans le cadre (≤ 0,3 s de titre seul, sa voix avant 1 s), jamais de longue chaise vide ni de réinstallation. Couper tous les moments faibles (reprises, blancs > 0,35 s, moments où elle se rassoit / remet le micro) : ne garder que le meilleur. MAIS garder les petits gestes qui accrochent (mouvement de tête, sourire complice) : ne couper que les vrais temps morts (remonter le micro, se réinstaller). Ne JAMAIS montrer le moment où elle s’assoit / se recule vers la chaise : couper du gros plan directement sur elle déjà assise. Une phrase dite deux fois = TOUJOURS une reprise : couper la première, garder seulement la dernière (même si la répétition semble voulue).",
+  "fin_video": "Ne JAMAIS couper le dernier mot : mesurer la fin réelle du son (niveau audio, pas seulement la transcription) et garder ≥ 0,15 s après. Déjà arrivé 2 fois (« direction » ép. 1, « encore » ép. 5)."
 }
