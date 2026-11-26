@@ -84,7 +84,7 @@
     },
     {
       "date": "2026-11-26",
-      "retour": "Folle du bus ép. 3 : proposition validée. Voix téléphone seulement sur « Oh, mais toi aussi t’es trop belle ! » (pas sur la 1re phrase). Bruitages 2× moins forts. Fin « partage » = carte Envoyer."
+      "retour": "Folle du bus ép. 3 : proposition validée. Voix téléphone sur la 1re phrase ET sur « Oh, mais toi aussi t’es trop belle ! ». Bruitages 2× moins forts. Fin « partage » = carte Envoyer."
     }
   ],
   "rendu": {
@@ -144,7 +144,8 @@
     "affichage": "Même place du début à la fin (en haut, même si ça cache un peu la tête), environ 3,5 s : le temps de lire et de se reconnaître",
     "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier",
     "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet) : elle le cache en entrant dans le cadre, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s",
-    "musique": "PAS de musique de fond (testé : lo-fi refusé, puis piano + violon synthétisés non retenus). Montage voix seule + bruitages de base."
+    "musique": "PAS de musique de fond (testé : lo-fi refusé, puis piano + violon synthétisés non retenus). Montage voix seule + bruitages de base.",
+    "voix_telephone": "Toujours sur la 1re phrase de l’épisode (« Tu passes pour la folle du bus… »), + 1 moment au milieu à lui faire choisir."
   },
   "cta_commentaire": "Champ de commentaire en bas : le mot-clé s’écrit (bruit de clavier) puis clic sur « Publier ». PAS de bulle « toi + mot » au-dessus (doublon).",
   "boite_a_outils_sons_effets": {
