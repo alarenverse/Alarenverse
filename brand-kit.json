@@ -101,6 +101,10 @@
     {
       "date": "2026-11-26",
       "retour": "Ép. 4 : garder le petit mouvement de tête quand elle se recule en souriant, il retient l’attention."
+    },
+    {
+      "date": "2026-11-26",
+      "retour": "Série : titre devant, plus bas (lisible même quand elle passe), sticker « série / LA FOLLE DU BUS / ép. N/30 » d’après son croquis à la place du sous-titre « Bienvenue… ». Validé (« Oui top »). Les 4 épisodes refaits."
     }
   ],
   "rendu": {
@@ -157,11 +161,13 @@
   "style_valide_liste": "Reel « Je ne suis pas aimée » (adoré) : hook court = sa phrase choc entre guillemets (DM Serif crème + Unbounded), centré en haut, ombre douce v2 ; liste sans numéros en DM Serif Display, mot actif en jaune + soulignement sous les lettres ; image jamais décalée/floutée ; sous-titres Inter + Anton jaune ; carte profil en bas + clic Suivre.",
   "serie_folle_du_bus": {
     "titre": "Titre de l’épisode (qu’elle ne dit pas) en étiquettes jaune pastel #FFEC96, texte brun #4B2E1E en Anton, 2 lignes",
-    "affichage": "Même place du début à la fin (en haut, même si ça cache un peu la tête), environ 3,5 s : le temps de lire et de se reconnaître",
+    "affichage": "Titre DEVANT elle, plus bas (y ≈ 1010 px, sous le visage / au menton) : toujours lisible même quand elle passe devant. Affiché du début jusqu’à « Bienvenue dans la série… ».",
     "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier",
-    "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet + différence avec la chaise vide pendant l’entrée floue) : on voit le titre seul ~0,3 s, elle passe DEVANT en entrant dans le cadre et le cache, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s. TOUJOURS cet effet, même si sa tête cache tout le titre en gros plan.",
+    "effet_titre": "Plus de titre derrière elle (remplacé le 2026-11-26) : le titre est devant, plus bas, pour rester lisible.",
     "musique": "PAS de musique de fond (testé : lo-fi refusé, puis piano + violon synthétisés non retenus). Montage voix seule + bruitages de base.",
-    "voix_telephone": "Toujours sur la 1re phrase de l’épisode (« Tu passes pour la folle du bus… »), + 1 moment au milieu à lui faire choisir."
+    "voix_telephone": "Toujours sur la 1re phrase de l’épisode (« Tu passes pour la folle du bus… »), + 1 moment au milieu à lui faire choisir.",
+    "sticker_serie": "Sur « Bienvenue dans la série La folle du bus, épisode N sur 30 » : sticker devant elle (buste, y ≈ 1110) d’après son croquis — petite bulle menthe « série », bandeau jaune #FFEC96 « LA FOLLE DU BUS » (Anton brun, contour brun) qui monte vers la droite, nuage crème « ép. N/30 » (Gluten) à cheval dessous. Pop avec petit rebond, sans son. PAS de sous-titre pendant cette phrase.",
+    "fichiers": "sticker.py (scratchpad) + mkserie.py pour appliquer le format à un script d’épisode."
   },
   "cta_commentaire": "Champ de commentaire en bas : le mot-clé s’écrit (bruit de clavier) puis clic sur « Publier ». PAS de bulle « toi + mot » au-dessus (doublon).",
   "boite_a_outils_sons_effets": {
