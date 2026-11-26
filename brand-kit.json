@@ -105,6 +105,10 @@
     {
       "date": "2026-11-26",
       "retour": "Série : titre devant, plus bas (lisible même quand elle passe), sticker « série / LA FOLLE DU BUS / ép. N/30 » d’après son croquis à la place du sous-titre « Bienvenue… ». Validé (« Oui top »). Les 4 épisodes refaits."
+    },
+    {
+      "date": "2026-11-26",
+      "retour": "Série : enlever les hook textuels, elle les met elle-même via Edits. Tout le reste inchangé (sticker épisode, effets, sous-titres, CTA)."
     }
   ],
   "rendu": {
@@ -160,8 +164,8 @@
   "regle_inspiration": "Reprendre l’IDÉE d’un reel modèle, jamais sa typo ni ses couleurs : toujours SA typo (hook DM Serif Display + Unbounded crème #FFF4AA / menthe, sous-titres Inter + Anton jaune #FFEC96, listes en DM Serif Display) et SA façon de monter (sous-titres, petits zooms, fin profil Instagram en bas du cadre).",
   "style_valide_liste": "Reel « Je ne suis pas aimée » (adoré) : hook court = sa phrase choc entre guillemets (DM Serif crème + Unbounded), centré en haut, ombre douce v2 ; liste sans numéros en DM Serif Display, mot actif en jaune + soulignement sous les lettres ; image jamais décalée/floutée ; sous-titres Inter + Anton jaune ; carte profil en bas + clic Suivre.",
   "serie_folle_du_bus": {
-    "titre": "Titre de l’épisode (qu’elle ne dit pas) en étiquettes jaune pastel #FFEC96, texte brun #4B2E1E en Anton, 2 lignes",
-    "affichage": "Titre DEVANT elle, plus bas (y ≈ 1010 px, sous le visage / au menton) : toujours lisible même quand elle passe devant. Affiché du début jusqu’à « Bienvenue dans la série… ».",
+    "titre": "Le hook textuel (titre de l’épisode) : ELLE l’ajoute elle-même dans l’app Edits. Je ne le mets plus dans le montage (depuis le 2026-11-26).",
+    "affichage": "Pas de titre dans mon montage. Pas de sous-titres pendant le début (jusqu’à « Bienvenue ») pour laisser la place à son hook ajouté dans Edits.",
     "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier",
     "effet_titre": "Plus de titre derrière elle (remplacé le 2026-11-26) : le titre est devant, plus bas, pour rester lisible.",
     "musique": "PAS de musique de fond (testé : lo-fi refusé, puis piano + violon synthétisés non retenus). Montage voix seule + bruitages de base.",
