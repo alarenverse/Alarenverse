@@ -89,6 +89,10 @@
     {
       "date": "2026-11-26",
       "retour": "Ép. 3 : clavier + paillettes quasi inaudibles (sa voix était enregistrée bien plus fort). Veut un niveau harmonieux : ni trop fort, ni trop faible. Bruitages désormais calés sur le niveau de sa voix."
+    },
+    {
+      "date": "2026-11-26",
+      "retour": "Ép. 4 : « couper les moments pourris, prendre tout le meilleur, la rétention c’est les 1,5 premières secondes ». Début direct sur la 1re phrase, titre devant. Voix téléphone : 1re phrase + « là, je peux plus gérer toute seule »."
     }
   ],
   "rendu": {
@@ -149,7 +153,8 @@
     "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier",
     "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet) : elle le cache en entrant dans le cadre, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s",
     "musique": "PAS de musique de fond (testé : lo-fi refusé, puis piano + violon synthétisés non retenus). Montage voix seule + bruitages de base.",
-    "voix_telephone": "Toujours sur la 1re phrase de l’épisode (« Tu passes pour la folle du bus… »), + 1 moment au milieu à lui faire choisir."
+    "voix_telephone": "Toujours sur la 1re phrase de l’épisode (« Tu passes pour la folle du bus… »), + 1 moment au milieu à lui faire choisir.",
+    "effet_titre_exception": "Si sa tête cache entièrement le titre en gros plan (ép. 4), le titre passe DEVANT elle pour rester lisible dès la 1re image."
   },
   "cta_commentaire": "Champ de commentaire en bas : le mot-clé s’écrit (bruit de clavier) puis clic sur « Publier ». PAS de bulle « toi + mot » au-dessus (doublon).",
   "boite_a_outils_sons_effets": {
@@ -169,5 +174,6 @@
   },
   "regle_questions": "Avant de faire un effet (voix téléphone, noir et blanc…), lui DEMANDER le passage exact et attendre sa réponse. Ne jamais deviner.",
   "niveau_bruitages": "Réglé PAR RAPPORT À SA VOIX (le niveau de ses rushs varie beaucoup d’une vidéo à l’autre) : voix ramenée à une référence, puis clavier + paillettes ≈ −4 dB et clics ≈ −6 dB par rapport au réglage d’origine. Ni trop fort ni à peine audible : « harmonieux ».",
-  "cta_partage": "Quand elle dit « Partage ce reel à ta pote… » : carte d’envoi façon Instagram (avatar neutre, « ta pote » + petite ligne grise liée au sujet), clic sur « Envoyer » qui devient « Envoyé ». Pas de champ commentaire dans ce cas."
+  "cta_partage": "Quand elle dit « Partage ce reel à ta pote… » : carte d’envoi façon Instagram (avatar neutre, « ta pote » + petite ligne grise liée au sujet), clic sur « Envoyer » qui devient « Envoyé ». Pas de champ commentaire dans ce cas.",
+  "retention": "Les 1,5 premières secondes décident de tout : démarrer DIRECT sur sa 1re phrase (pas de chaise vide, pas d’entrée dans le cadre, pas de réinstallation), titre lisible dès la 1re image. Couper tous les moments faibles (reprises, blancs > 0,35 s, moments où elle se rassoit / remet le micro) : ne garder que le meilleur."
 }
