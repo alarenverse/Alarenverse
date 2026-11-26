@@ -93,6 +93,10 @@
     {
       "date": "2026-11-26",
       "retour": "Ép. 4 : « couper les moments pourris, prendre tout le meilleur, la rétention c’est les 1,5 premières secondes ». Début direct sur la 1re phrase, titre devant. Voix téléphone : 1re phrase + « là, je peux plus gérer toute seule »."
+    },
+    {
+      "date": "2026-11-26",
+      "retour": "Ép. 4 : veut voir qu’elle passe devant le titre puis qu’il réapparaît derrière elle, comme les autres épisodes (pas de titre devant)."
     }
   ],
   "rendu": {
@@ -151,10 +155,9 @@
     "titre": "Titre de l’épisode (qu’elle ne dit pas) en étiquettes jaune pastel #FFEC96, texte brun #4B2E1E en Anton, 2 lignes",
     "affichage": "Même place du début à la fin (en haut, même si ça cache un peu la tête), environ 3,5 s : le temps de lire et de se reconnaître",
     "ensuite": "Montage habituel : titres machine à écrire + paillettes, phrases clés Gluten + étoiles, sous-titres, zooms légers, CTA commentaire tapé + clic Publier",
-    "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet) : elle le cache en entrant dans le cadre, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s",
+    "effet_titre": "Le titre est DERRIÈRE elle (détourage MODNet + différence avec la chaise vide pendant l’entrée floue) : on voit le titre seul ~0,3 s, elle passe DEVANT en entrant dans le cadre et le cache, il réapparaît en entier quand elle s’assoit, puis reste ~2,4 s. TOUJOURS cet effet, même si sa tête cache tout le titre en gros plan.",
     "musique": "PAS de musique de fond (testé : lo-fi refusé, puis piano + violon synthétisés non retenus). Montage voix seule + bruitages de base.",
-    "voix_telephone": "Toujours sur la 1re phrase de l’épisode (« Tu passes pour la folle du bus… »), + 1 moment au milieu à lui faire choisir.",
-    "effet_titre_exception": "Si sa tête cache entièrement le titre en gros plan (ép. 4), le titre passe DEVANT elle pour rester lisible dès la 1re image."
+    "voix_telephone": "Toujours sur la 1re phrase de l’épisode (« Tu passes pour la folle du bus… »), + 1 moment au milieu à lui faire choisir."
   },
   "cta_commentaire": "Champ de commentaire en bas : le mot-clé s’écrit (bruit de clavier) puis clic sur « Publier ». PAS de bulle « toi + mot » au-dessus (doublon).",
   "boite_a_outils_sons_effets": {
@@ -175,5 +178,5 @@
   "regle_questions": "Avant de faire un effet (voix téléphone, noir et blanc…), lui DEMANDER le passage exact et attendre sa réponse. Ne jamais deviner.",
   "niveau_bruitages": "Réglé PAR RAPPORT À SA VOIX (le niveau de ses rushs varie beaucoup d’une vidéo à l’autre) : voix ramenée à une référence, puis clavier + paillettes ≈ −4 dB et clics ≈ −6 dB par rapport au réglage d’origine. Ni trop fort ni à peine audible : « harmonieux ».",
   "cta_partage": "Quand elle dit « Partage ce reel à ta pote… » : carte d’envoi façon Instagram (avatar neutre, « ta pote » + petite ligne grise liée au sujet), clic sur « Envoyer » qui devient « Envoyé ». Pas de champ commentaire dans ce cas.",
-  "retention": "Les 1,5 premières secondes décident de tout : démarrer DIRECT sur sa 1re phrase (pas de chaise vide, pas d’entrée dans le cadre, pas de réinstallation), titre lisible dès la 1re image. Couper tous les moments faibles (reprises, blancs > 0,35 s, moments où elle se rassoit / remet le micro) : ne garder que le meilleur."
+  "retention": "Les 1,5 premières secondes décident de tout : démarrer juste avant son entrée dans le cadre (≤ 0,3 s de titre seul, sa voix avant 1 s), jamais de longue chaise vide ni de réinstallation. Couper tous les moments faibles (reprises, blancs > 0,35 s, moments où elle se rassoit / remet le micro) : ne garder que le meilleur."
 }
