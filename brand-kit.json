@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-11-25",
+  "updated": "2026-11-26",
   "couleurs": {
     "principale": "#4B2E1E",
     "secondaire": "#F3E2CB",
@@ -81,6 +81,10 @@
     {
       "date": "2026-11-25",
       "retour": "Folle du bus ép. 2 : montage validé. Musique de fond testée (lo-fi, puis piano + violon) : finalement sans musique."
+    },
+    {
+      "date": "2026-11-26",
+      "retour": "Folle du bus ép. 3 : proposition validée. Voix téléphone seulement sur « Oh, mais toi aussi t’es trop belle ! » (pas sur la 1re phrase). Bruitages 2× moins forts. Fin « partage » = carte Envoyer."
     }
   ],
   "rendu": {
@@ -158,5 +162,7 @@
       "Son au tout début de la vidéo"
     ]
   },
-  "regle_questions": "Avant de faire un effet (voix téléphone, noir et blanc…), lui DEMANDER le passage exact et attendre sa réponse. Ne jamais deviner."
+  "regle_questions": "Avant de faire un effet (voix téléphone, noir et blanc…), lui DEMANDER le passage exact et attendre sa réponse. Ne jamais deviner.",
+  "niveau_bruitages": "Tous les bruitages (clavier, machine à écrire, paillettes, clics) 2 fois moins forts qu’avant (−6 dB) : ils restent bien sous la voix. Validé le 2026-11-26 (épisode 3).",
+  "cta_partage": "Quand elle dit « Partage ce reel à ta pote… » : carte d’envoi façon Instagram (avatar neutre, « ta pote » + petite ligne grise liée au sujet), clic sur « Envoyer » qui devient « Envoyé ». Pas de champ commentaire dans ce cas."
 }
