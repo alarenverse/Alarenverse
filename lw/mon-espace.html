@@ -1,0 +1,166 @@
+<!-- ===== Mon espace · L'Effet Papillon ===== -->
+<div id="mon-espace" style="display:none">
+  <header class="me-head">
+    <div class="me-head-in">
+      <a class="me-logo" href="/start">L'Effet Papillon</a>
+      <nav class="me-nav" aria-label="Menu principal">
+        <a class="on" href="/start">Mon espace</a>
+        <a href="/path-player?courseid=leffet-papillon">Mes thématiques</a>
+        <a href="#me-lives">Les lives</a>
+        <a href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Mes rendez-vous</a>
+        <a href="/profile">Mon compte</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="me-hero">
+      <div class="me-hero-txt">
+        <p class="me-bonjour" id="me-bonjour">Bonjour</p>
+        <h1>Reprends le lead de ta vie.</h1>
+        <p class="me-jour" id="me-jour">Ta thématique du jour t'attend. Une vidéo, une page, une vingtaine de minutes rien qu'à toi.</p>
+        <div class="me-btns">
+          <a class="me-btn" href="/path-player?courseid=leffet-papillon">Reprendre où je me suis arrêtée
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+          <a class="me-btn2" href="/path-player?courseid=leffet-papillon&amp;unit=__JOUR1_VIDEO__">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg>Ma vidéo de bienvenue</a>
+        </div>
+      </div>
+      <div class="me-photo">
+        <img src="https://alarenverse.github.io/Alarenverse/img/debora-mon-espace.jpg" alt="Debora, debout sur un muret dans les vignes de Lavaux" loading="eager">
+      </div>
+    </section>
+
+    <section class="me-prog" id="me-prog" aria-label="Ma progression" style="display:none">
+      <div class="me-prog-txt">
+        <p class="me-prog-titre" id="me-prog-titre"></p>
+        <p class="me-prog-sous" id="me-prog-sous"></p>
+      </div>
+      <div class="me-barre" aria-hidden="true"><div id="me-barre"></div></div>
+    </section>
+
+    <section class="me-cartes">
+      <article class="me-carte">
+        <p class="me-sur">L'Effet Papillon</p>
+        <h2>Mes thématiques</h2>
+        <p class="me-desc">Toutes celles que tu as ouvertes, avec tes vidéos, tes pages et tes audios.</p>
+        <a class="me-cbtn" href="/path-player?courseid=leffet-papillon">Voir mes thématiques</a>
+      </article>
+
+      <article class="me-carte fonce" id="me-lives">
+        <p class="me-sur">Les lives</p>
+        <h2 id="me-live-titre">Les lives</h2>
+        <p class="me-desc" id="me-live-desc">Deux fois par mois, une heure ensemble en visio. La date du prochain live s'affiche ici.</p>
+        <div class="me-cbtns" id="me-live-btns"></div>
+      </article>
+
+      <article class="me-carte">
+        <p class="me-sur">Avec Debora</p>
+        <h2>Mon rendez-vous</h2>
+        <p class="me-desc">Choisis ton créneau directement dans mon agenda.</p>
+        <a class="me-cbtn" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Réserver mon rendez-vous</a>
+      </article>
+
+      <article class="me-carte">
+        <p class="me-sur">Dans ton corps <span class="me-bientot">Bientôt</span></p>
+        <h2>Mon kit de régulation</h2>
+        <p class="me-desc">Respirer, bouger, relâcher. Des pratiques à choisir selon ton énergie du jour.</p>
+      </article>
+
+      <article class="me-carte">
+        <p class="me-sur">5 minutes par jour <span class="me-bientot">Bientôt</span></p>
+        <h2>Mon journal de suivi</h2>
+        <p class="me-desc">Ce qui a bougé, tes inquiétudes du jour. Confidentiel : personne d'autre que toi n'y a accès.</p>
+      </article>
+
+      <article class="me-carte sable">
+        <p class="me-sur">Bientôt</p>
+        <h2>Reprendre le lead de ta vie</h2>
+        <p class="me-desc">Le module pour aller plus loin, une fois L'Effet Papillon terminé : le courage de vivre ta vie, au quotidien.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="me-pied">
+    <div class="me-pied-in">
+      <p style="color:#3d2e45">Debora · coach pour femmes · À la renverse</p>
+      <p>Un accompagnement, pas une thérapie. · <a href="/signout">Me déconnecter</a></p>
+    </div>
+  </footer>
+</div>
+<script>
+(function(){
+  /* ---- Prochain live : remplir ces 3 lignes à chaque nouveau live ---- */
+  var LIVE_DATE = '';      /* ex. 'mardi 9 décembre à 20h15' */
+  var LIVE_LIEN = '';      /* lien Google Meet */
+  var REPLAYS_LIEN = '';   /* lien vers les replays */
+
+  var THEMES = ["Ton point de départ","Identifier ses émotions","La respiration","Le sommeil","Poser ses limites","Prendre soin de son corps","Bilan de la semaine 1","La voix intérieure","Le mouvement","La gratitude","Les relations","La régulation émotionnelle","La co-régulation","Bilan & Organisation","La charge mentale","Gérer la charge mentale","Le cycle féminin","Retrouver la joie","Les croyances limitantes","Le deuil et les transitions","Bilan de la semaine 3","Apprivoiser la colère","Le pardon","L'estime de soi","Mes valeurs profondes","Ma vision et ma lettre","Le rapport au corps","La créativité comme soin","Célébrer mon chemin","Mon engagement envers moi"];
+  var COURS = 'leffet-papillon';
+  var el = document.getElementById('mon-espace');
+  if (!el) return;
+
+  /* placer l'espace sous la barre du haut, avant le pied de page de l'école */
+  var pied = document.querySelector('.lw-footer');
+  var section = pied ? pied.closest('section') || pied : null;
+  if (section && section.parentNode) section.parentNode.insertBefore(el, section);
+  el.style.display = 'block';
+
+  function txt(id, t){ var n = document.getElementById(id); if (n) n.textContent = t; }
+
+  /* lives */
+  if (LIVE_DATE) {
+    txt('me-live-titre', 'Prochain live : ' + LIVE_DATE);
+    txt('me-live-desc', "Une heure ensemble, en visio. Tu as raté le dernier ? Le replay t'attend.");
+  }
+  var lb = document.getElementById('me-live-btns'), h = '';
+  if (LIVE_LIEN) h += '<a class="me-cbtn terra" href="' + LIVE_LIEN + '" target="_blank" rel="noopener">Rejoindre le live</a>';
+  if (REPLAYS_LIEN) h += '<a class="me-cbtn ligne" href="' + REPLAYS_LIEN + '">Les replays</a>';
+  lb.innerHTML = h;
+
+  /* chercher, dans les données de l'élève, l'inscription au cours et sa date */
+  function trouverCours(liste) {
+    if (!liste || typeof liste !== 'object') return null;
+    var vals = Array.isArray(liste) ? liste : Object.keys(liste).map(function (k) { return liste[k]; });
+    for (var i = 0; i < vals.length; i++) {
+      try { if (JSON.stringify(vals[i]).indexOf('"' + COURS + '"') > -1) return vals[i]; } catch (e) {}
+    }
+    return null;
+  }
+  function dateDans(o, prof) {
+    if (!o || typeof o !== 'object' || prof > 3) return null;
+    var cles = ['enrolled', 'enrolledAt', 'enrollment_date', 'enrollmentDate', 'created', 'createdAt', 'started', 'startDate', 'date'];
+    for (var i = 0; i < cles.length; i++) {
+      var v = o[cles[i]];
+      if (typeof v === 'number' && v > 1e9) return new Date(v < 1e12 ? v * 1000 : v);
+      if (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}/.test(v)) return new Date(v);
+    }
+    for (var k in o) { if (o[k] && typeof o[k] === 'object') { var r = dateDans(o[k], prof + 1); if (r) return r; } }
+    return null;
+  }
+
+  fetch('/api/user_stats', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (j) {
+    var me = (j && j.me) || {};
+    var prenom = String(me.first_name || '').trim().split(/\s+/)[0];
+    if (prenom) txt('me-bonjour', 'Bonjour ' + prenom.charAt(0).toUpperCase() + prenom.slice(1));
+
+    var c = trouverCours(j && j.userCourses);
+    var d = c ? dateDans(c, 0) : null;
+    if (!d || isNaN(d)) return;
+    var debut = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    var auj = new Date(); auj = new Date(auj.getFullYear(), auj.getMonth(), auj.getDate());
+    var n = Math.floor((auj - debut) / 864e5) + 1;
+    if (n < 1) n = 1;
+    if (n > 30) n = 30;
+    var jour = document.getElementById('me-jour');
+    jour.innerHTML = '';
+    jour.appendChild(document.createTextNode(n >= 30 ? 'Toutes tes thématiques sont ouvertes. La dernière : ' : "Ta thématique du jour t'attend : "));
+    var s = document.createElement('strong'); s.textContent = THEMES[n - 1]; jour.appendChild(s);
+    jour.appendChild(document.createTextNode(". Une vidéo, une page, une vingtaine de minutes rien qu'à toi."));
+    txt('me-prog-titre', n + (n > 1 ? ' thématiques ouvertes' : ' thématique ouverte') + ' sur 30');
+    txt('me-prog-sous', n >= 30 ? 'Tu as tout ouvert. Reviens sur celles qui te parlent, aussi souvent que tu veux.' : "La prochaine s'ouvre demain matin. Tu peux revenir sur les précédentes quand tu veux.");
+    document.getElementById('me-prog').style.display = '';
+    setTimeout(function () { document.getElementById('me-barre').style.width = Math.round(n / 30 * 100) + '%'; }, 120);
+  }).catch(function () {});
+})();
+</script>

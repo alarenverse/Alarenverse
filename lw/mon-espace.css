@@ -1,0 +1,72 @@
+/* ===== Mon espace · L'Effet Papillon ===== */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;1,500&display=swap');
+body{background:#fdf6f0!important}
+.lw-topbar{display:none!important}
+#mon-espace{font-family:'Jost',sans-serif;color:#5d4868;background:#fdf6f0;-webkit-font-smoothing:antialiased}
+#mon-espace *{box-sizing:border-box}
+#mon-espace a{text-decoration:none}
+#mon-espace .me-head{background:#fff;border-bottom:1px solid #efe2d7}
+#mon-espace .me-head-in{max-width:1180px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px}
+#mon-espace .me-logo{font-family:'Lora',serif;font-weight:600;font-size:24px;color:#3d2e45}
+#mon-espace .me-nav{display:flex;flex-wrap:nowrap;overflow-x:auto;max-width:100%;gap:4px;font-size:15px;font-weight:500;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#mon-espace .me-nav::-webkit-scrollbar{display:none}
+#mon-espace .me-nav a{padding:10px 16px;border-radius:999px;color:#3d2e45;transition:background .2s}
+#mon-espace .me-nav a:hover{background:#f6ebe2}
+#mon-espace .me-nav a.on{background:#3d2e45;color:#fdf6f0}
+#mon-espace main{max-width:1180px;margin:0 auto;padding:48px 24px 64px;display:flex;flex-direction:column;gap:32px}
+#mon-espace .me-hero{display:flex;flex-wrap:wrap;gap:40px;align-items:center}
+#mon-espace .me-hero-txt{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:18px}
+#mon-espace .me-bonjour{margin:0;font-size:16px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#8a5440}
+#mon-espace h1{margin:0;font-family:'Lora',serif;font-weight:600;font-size:52px;line-height:1.1;color:#3d2e45}
+#mon-espace .me-jour{margin:0;font-size:19px;line-height:1.55;max-width:520px}
+#mon-espace .me-jour strong{color:#3d2e45;font-weight:600}
+#mon-espace .me-btns{display:flex;flex-wrap:wrap;gap:12px;padding-top:6px}
+#mon-espace .me-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;background:#a0644d;color:#fff!important;font-size:17px;font-weight:500;transition:transform .2s,background .2s}
+#mon-espace .me-btn:hover{background:#8a5440;transform:translateY(-1px)}
+#mon-espace .me-btn2{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;border:1.5px solid #3d2e45;color:#3d2e45!important;font-size:17px;font-weight:500;transition:background .2s}
+#mon-espace .me-btn2:hover{background:#fff}
+#mon-espace .me-photo{flex:1 1 340px;min-width:0}
+#mon-espace .me-photo img{display:block;width:100%;height:420px;object-fit:cover;object-position:50% 30%;border-radius:32px}
+#mon-espace .me-prog{background:#fff;border-radius:28px;padding:26px 30px;display:flex;flex-wrap:wrap;align-items:center;gap:20px 40px}
+#mon-espace .me-prog-txt{flex:1 1 260px;display:flex;flex-direction:column;gap:4px}
+#mon-espace .me-prog-titre{margin:0;font-family:'Lora',serif;font-weight:600;font-size:22px;color:#3d2e45}
+#mon-espace .me-prog-sous{margin:0;font-size:15px;line-height:1.5}
+#mon-espace .me-barre{flex:2 1 320px;height:12px;border-radius:999px;background:#f1e3d8;overflow:hidden}
+#mon-espace .me-barre div{width:0;height:12px;border-radius:999px;background:#a0644d;transition:width 1s ease}
+#mon-espace .me-cartes{display:flex;flex-wrap:wrap;gap:20px}
+#mon-espace .me-carte{flex:1 1 320px;background:#fff;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:12px}
+#mon-espace .me-carte.fonce{background:#3d2e45}
+#mon-espace .me-carte.sable{background:#f1e3d8}
+#mon-espace .me-sur{margin:0;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8a5440;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#mon-espace .fonce .me-sur{color:#e2cfc4}
+#mon-espace .me-bientot{font-size:11px;letter-spacing:.08em;background:#f6ebe2;color:#8a5440;border-radius:999px;padding:3px 9px}
+#mon-espace .sable .me-bientot{background:#fff}
+#mon-espace h2{margin:0;font-family:'Lora',serif;font-weight:600;font-size:24px;line-height:1.25;color:#3d2e45}
+#mon-espace .fonce h2{color:#fdf6f0}
+#mon-espace .me-carte p.me-desc{margin:0;font-size:16px;line-height:1.55;flex-grow:1}
+#mon-espace .fonce p.me-desc{color:#f1e3d8}
+#mon-espace .sable p.me-desc{color:#3d2e45}
+#mon-espace .me-cbtns{display:flex;flex-wrap:wrap;gap:10px}
+#mon-espace .me-cbtn{align-self:flex-start;padding:12px 22px;border-radius:999px;background:#3d2e45;color:#fdf6f0!important;font-size:15px;font-weight:500;transition:background .2s}
+#mon-espace .me-cbtn:hover{background:#5d4868}
+#mon-espace .me-cbtn.terra{background:#a0644d;color:#fff!important}
+#mon-espace .me-cbtn.terra:hover{background:#8a5440}
+#mon-espace .me-cbtn.ligne{background:transparent;border:1.5px solid #f1e3d8;padding:10.5px 20.5px}
+#mon-espace .me-pied{border-top:1px solid #efe2d7;background:#fff}
+#mon-espace .me-pied-in{max-width:1180px;margin:0 auto;padding:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 32px;font-size:14px;line-height:1.5}
+#mon-espace .me-pied p{margin:0}
+#mon-espace .me-pied a{color:#8a5440}
+@media (max-width:700px){
+  #mon-espace .me-head-in{padding:14px 16px}
+  #mon-espace .me-logo{font-size:21px}
+  #mon-espace .me-nav{font-size:14px}
+  #mon-espace .me-nav a{padding:9px 13px}
+  #mon-espace main{padding:30px 16px 48px;gap:22px}
+  #mon-espace .me-hero{gap:24px}
+  #mon-espace h1{font-size:40px}
+  #mon-espace .me-jour{font-size:17px}
+  #mon-espace .me-photo img{height:420px;border-radius:26px}
+  #mon-espace .me-prog{padding:22px}
+  #mon-espace .me-carte{padding:24px;border-radius:24px}
+  #mon-espace .me-pied-in{padding:20px 16px}
+}
