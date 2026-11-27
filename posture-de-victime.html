@@ -58,6 +58,7 @@
   .ap-barre a{flex:1;max-width:400px;display:block;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(135deg,#c2836a,#c8a870);border-radius:50px;padding:13px 16px;font-family:'Lora',serif;font-size:16px;box-shadow:0 4px 16px rgba(194,131,106,0.3)}
   .ap-barre button{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(194,131,106,0.35);background:#fff;color:#a0644d;font-size:18px;line-height:1;cursor:pointer}
   @media (prefers-reduced-motion:reduce){.ap-barre{transition:none}}
+  .prive{font-family:'Jost',sans-serif;font-size:14.5px;line-height:1.55;color:#8a7090;background:#fffaf6;border:1px solid rgba(194,131,106,0.22);border-radius:12px;padding:10px 13px;margin:10px 0 6px}
 </style>
 </head>
 <body>
@@ -76,7 +77,8 @@
     <div class="hl">Et cette posture a souvent une fonction. Elle protège : elle t'évite de décider, de prendre un risque, de décevoir. C'est pour ça qu'on y reste. Le but n'est pas de te juger, c'est de voir ce qu'elle te coûte.</div>
     <div class="hl or">Agir, c'est le contraire de subir.</div>
     <div class="hl nuance">Cette ressource fait partie d'un accompagnement de type coaching. Ce n'est pas une thérapie, et elle ne remplace pas un suivi médical ou psychologique.</div>
-    <p style="margin-bottom:0">Lis une leçon par jour, ou toutes d'un coup. Coche celles que tu essaies cette semaine : tes réponses restent sur ton téléphone.</p>
+    <p class="prive">🔒 Tes réponses restent sur ton téléphone ou ton ordinateur. Elles ne sont envoyées à personne, même pas à moi.</p>
+    <p style="margin-bottom:0">Lis une leçon par jour, ou toutes d'un coup. Coche celles que tu essaies cette semaine.</p>
     <div class="compteur" id="compteur-haut"></div>
   </div>
 
@@ -214,8 +216,6 @@ function telecharger(){
 }
 rendre();
 </script>
-<div class="ap-barre" id="ap-barre" aria-hidden="true"><a href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau · 20 min</a><button type="button" aria-label="Fermer" onclick="apFermer()">×</button></div>
-<script>(function(){var l=document.getElementById('lecon-5');if(!l)return;l.insertAdjacentHTML('afterend','<div class="card ap-carte" id="ap-carte"><div class="label">Ta prochaine étape</div><div class="ap-titre">On en parle 20 minutes, toi et moi ?</div><p>T\'es à mi-chemin. Si tu te reconnais déjà dans ces leçons, on peut regarder ensemble par où commencer.</p><ul class="ap-liste"><li>Tu me dis où t\'en es, avec tes mots.</li><li>Tu repars avec un premier pas concret, que tu me rejoignes ou non.</li><li>On regarde ensemble si mon accompagnement est fait pour toi en ce moment.</li></ul><a class="btn" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau</a><p class="hint">20 minutes · sans engagement · tu choisis le moment qui t\'arrange</p><div class="ap-qui"><img src="debora.jpg" alt="" onerror="this.remove()"><span>Avec <strong>Debora</strong>, coach pour femmes</span></div></div>');var k=document.getElementById('ap-carte');if(k&&typeof fixTypo==='function')fixTypo(k);})();</script>
 <script>
 (function(){
   var barre=document.getElementById('ap-barre'); if(!barre)return;

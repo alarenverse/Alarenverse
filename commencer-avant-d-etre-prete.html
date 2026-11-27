@@ -65,6 +65,7 @@
   .ap-barre a{flex:1;max-width:400px;display:block;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(135deg,#c2836a,#c8a870);border-radius:50px;padding:13px 16px;font-family:'Lora',serif;font-size:16px;box-shadow:0 4px 16px rgba(194,131,106,0.3)}
   .ap-barre button{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(194,131,106,0.35);background:#fff;color:#a0644d;font-size:18px;line-height:1;cursor:pointer}
   @media (prefers-reduced-motion:reduce){.ap-barre{transition:none}}
+  .prive{font-family:'Jost',sans-serif;font-size:14.5px;line-height:1.55;color:#8a7090;background:#fffaf6;border:1px solid rgba(194,131,106,0.22);border-radius:12px;padding:10px 13px;margin:10px 0 6px}
 </style>
 </head>
 <body>
@@ -82,6 +83,7 @@
     <div class="hl">Repousser, ce n'est pas de la paresse. Les chercheurs le décrivent comme une façon de réparer son humeur sur le moment : tu ne fuis pas la tâche, tu fuis ce qu'elle te fait ressentir (Sirois et Pychyl, 2013).</div>
     <div class="hl or">On ne devient pas prête en attendant que ça arrive. On le devient en posant les jalons, les uns après les autres, aussi petits soient-ils.</div>
     <div class="hl nuance">Cette ressource fait partie d'un accompagnement de type coaching. Ce n'est pas une thérapie, et elle ne remplace pas un suivi médical ou psychologique.</div>
+    <p class="prive">🔒 Tes réponses restent sur ton téléphone ou ton ordinateur. Elles ne sont envoyées à personne, même pas à moi.</p>
     <div class="q">D'abord, une minute pour revenir dans ton corps</div>
     <div class="souffle"><div class="bulle" aria-hidden="true"></div><div class="q-sous" style="margin:0">Inspire sur 4 pendant que le cercle grandit, expire sur 6 pendant qu'il rétrécit. Cinq fois. Tes réponses seront plus justes depuis un corps un peu plus calme.</div></div>
   </div>
@@ -129,7 +131,6 @@
     <textarea rows="2" data-k="pas" placeholder="Mon premier petit pas : ..."></textarea>
   </div>
 
-  <div class="card ap-carte" id="ap-carte"><div class="label">Ta prochaine étape</div><div class="ap-titre">On en parle 20 minutes, toi et moi ?</div><p>T'as trouvé ton premier pas. On peut regarder ensemble comment le tenir dans la durée.</p><ul class="ap-liste"><li>Tu me dis où t'en es, avec tes mots.</li><li>Tu repars avec un premier pas concret, que tu me rejoignes ou non.</li><li>On regarde ensemble si mon accompagnement est fait pour toi en ce moment.</li></ul><a class="btn" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau</a><p class="hint">20 minutes · sans engagement · tu choisis le moment qui t'arrange</p><div class="ap-qui"><img src="debora.jpg" alt="" onerror="this.remove()"><span>Avec <strong>Debora</strong>, coach pour femmes</span></div></div>
   <!-- ÉTAPE 4 -->
   <div class="card">
     <div class="etape-num">Ton cadre</div>
@@ -220,7 +221,6 @@ function telecharger(){
 }
 rendrePills(); rendreFiche(); fixTypo(document.body);
 </script>
-<div class="ap-barre" id="ap-barre" aria-hidden="true"><a href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau · 20 min</a><button type="button" aria-label="Fermer" onclick="apFermer()">×</button></div>
 <script>
 (function(){
   var barre=document.getElementById('ap-barre'); if(!barre)return;

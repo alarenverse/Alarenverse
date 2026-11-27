@@ -173,6 +173,7 @@
   .pct{text-align:center;font-size:19px;color:var(--titre);line-height:1.45;margin:4px 0 8px}
   .pct b{color:var(--fonce);font-size:24px}
   .suggestion{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--terra);margin:-4px 0 8px}
+  .prive{font-family:'Jost',sans-serif;font-size:14.5px;line-height:1.55;color:#8a7090;background:#fffaf6;border:1px solid rgba(194,131,106,0.22);border-radius:12px;padding:10px 13px;margin:10px 0 6px}
 </style>
 </head>
 <body>
@@ -202,6 +203,7 @@
     <div class="hl">Ta tasse, c'est ton énergie. Ce qui est à toi, c'est ce sur quoi tu as la main : tes limites, ta façon de te parler, tes réactions, ton repos. Le reste, tu peux l'écouter, le comprendre, aider, sans le porter à la place de l'autre.</div>
     <p>Porter ce qui n'est pas à toi, tu l'as sûrement appris très tôt, et ça t'a rendu service. Et ce qui s'est appris peut se désapprendre, pour se réapprendre autrement.</p>
     <div class="hl nuance">Cette ressource fait partie d'un accompagnement de type coaching : ce n'est pas une thérapie, et elle ne remplace pas un suivi médical ou psychologique. Si tu traverses une période difficile, parles-en à un ou une professionnelle de santé.</div>
+    <p class="prive">🔒 Tes réponses restent sur ton téléphone ou ton ordinateur. Elles ne sont envoyées à personne, même pas à moi.</p>
     <button class="btn" onclick="aller('tri')">Je prends ma tasse ☕</button>
   </div>
 
@@ -502,9 +504,6 @@ function rendreResultat(){
     '<div class="petit-titre">Ce qui boit dans ta tasse</div>'+
     '<div class="barres">'+ordre.map(i=>'<div class="r'+(i===k?' top':'')+'"><div class="nm">'+esc(TERRAINS[i].nom)+'</div><div class="tr" title="'+esc(TERRAINS[i].nom)+' : '+s[i]+' sur 4"><i style="width:'+(s[i]/4*100)+'%"></i></div><div class="v">'+s[i]+'/4</div></div>').join('')+'</div>'+
     '<p class="q-sous" style="margin-top:6px">Plus la barre est longue, plus ce terrain prend de place dans ta tasse.</p>'+
-    carteAppel('Ta tasse, c\'est « '+prof.nom.toLowerCase()+' », et ton terrain n°1, « '+T.nom.toLowerCase()+' ». On peut regarder ensemble par où commencer à rendre.')+
-    '<p class="q-sous" style="text-align:center;margin:16px 0 0">Tu préfères d\'abord un portrait plus complet ?</p>'+
-    '<a class="btn second" href="https://alarenverse.github.io/Alarenverse/bilan.html" target="_blank" rel="noopener" style="margin-top:8px">Je fais mon bilan en 7 minutes</a>'+
     '<div style="text-align:center;margin-top:12px"><button class="btn" style="margin-top:0" onclick="aller(\'vf\')">Continuer : le vrai ou faux</button><button class="lien" style="margin-top:8px" onclick="refaire()">Refaire ma tasse</button></div>'+
   '</div>';
   fixTypo(el);
@@ -615,7 +614,6 @@ function majTout(){personnaliser();rendreTicket();majLigne();}
 
 rendreTri(); rendreTasse(); rendreVF(); rendrePills(); majTout(); fixTypo(document.body);
 </script>
-<div class="ap-barre" id="ap-barre" aria-hidden="true"><a href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau · 20 min</a><button type="button" aria-label="Fermer" onclick="apFermer()">×</button></div>
 <script>
 (function(){
   var barre=document.getElementById('ap-barre'); if(!barre)return;

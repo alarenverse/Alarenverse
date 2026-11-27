@@ -144,6 +144,7 @@
   .ap-barre a{flex:1;max-width:400px;display:block;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(135deg,#c2836a,#c8a870);border-radius:50px;padding:13px 16px;font-family:'Lora',serif;font-size:16px;box-shadow:0 4px 16px rgba(194,131,106,0.3)}
   .ap-barre button{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(194,131,106,0.35);background:#fff;color:#a0644d;font-size:18px;line-height:1;cursor:pointer}
   @media (prefers-reduced-motion:reduce){.ap-barre{transition:none}}
+  .prive{font-family:'Jost',sans-serif;font-size:14.5px;line-height:1.55;color:#8a7090;background:#fffaf6;border:1px solid rgba(194,131,106,0.22);border-radius:12px;padding:10px 13px;margin:10px 0 6px}
 </style>
 </head>
 <body>
@@ -172,6 +173,7 @@
     <div class="hl">La folle du bus, c'est celle qui dérange parce qu'elle est vraie. Elle dit non, elle dit ce qu'elle ressent, elle choisit pour elle. Et oui, ça fait parler.</div>
     <p>Ton pilote automatique, c'est pas un défaut. C'est ton système nerveux qui a appris que s'effacer, c'était plus sûr. Et ce qui s'est appris peut se désapprendre, pour se réapprendre autrement.</p>
     <div class="hl nuance">« Folle », ici, c'est un clin d'œil affectueux. Cette ressource fait partie d'un accompagnement de type coaching : ce n'est pas une thérapie, et elle ne remplace pas un suivi médical ou psychologique. Si tu traverses une période difficile, parles-en à un ou une professionnelle de santé.</div>
+    <p class="prive">🔒 Tes réponses restent sur ton téléphone ou ton ordinateur. Elles ne sont envoyées à personne, même pas à moi.</p>
     <button class="btn" onclick="aller('test')">Je monte dans le bus</button>
   </div>
 
@@ -401,9 +403,6 @@ function rendreResultat(){
     '<div class="petit-titre">Là où ton pilote automatique conduit</div>'+
     '<div class="barres">'+ordre.map(i=>'<div class="r'+(i===k?' top':'')+'"><div class="nm">'+esc(TERRAINS[i].nom)+'</div><div class="tr" title="'+esc(TERRAINS[i].nom)+' : '+s[i]+' sur 4"><i style="width:'+(s[i]/4*100)+'%"></i></div><div class="v">'+s[i]+'/4</div></div>').join('')+'</div>'+
     '<p class="q-sous" style="margin-top:6px">Plus la barre est longue, plus tu t\'effaces sur ce terrain.</p>'+
-    carteAppel((max===0?'Ton terrain à entretenir':'Ton terrain n°1')+', c\'est « '+T.nom+' ». On peut regarder ensemble par où commencer.')+
-    '<p class="q-sous" style="text-align:center;margin:16px 0 0">Tu préfères d\'abord un portrait plus complet ?</p>'+
-    '<a class="btn second" href="https://alarenverse.github.io/Alarenverse/bilan.html" target="_blank" rel="noopener" style="margin-top:8px">Je fais mon bilan en 7 minutes</a>'+
     '<div style="text-align:center;margin-top:12px"><button class="btn" style="margin-top:0" onclick="aller(\'vf\')">Continuer : le vrai ou faux</button><button class="lien" style="margin-top:8px" onclick="refaire()">Refaire le test</button></div>'+
   '</div>';
   fixTypo(el);
@@ -507,7 +506,6 @@ function majTout(){personnaliser();rendreTicket();majLigne();}
 
 rendreQuiz(); rendreVF(); rendrePills(); majTout(); fixTypo(document.body);
 </script>
-<div class="ap-barre" id="ap-barre" aria-hidden="true"><a href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je choisis mon créneau · 20 min</a><button type="button" aria-label="Fermer" onclick="apFermer()">×</button></div>
 <script>
 (function(){
   var barre=document.getElementById('ap-barre'); if(!barre)return;
