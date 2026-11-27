@@ -7,12 +7,12 @@ body{background:#fdf6f0!important}
 #mon-espace a{text-decoration:none}
 #mon-espace .me-head{background:#fff;border-bottom:1px solid #efe2d7}
 #mon-espace .me-head-in{max-width:1180px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px}
-#mon-espace .me-logo{font-family:'Lora',serif;font-weight:600;font-size:24px;color:#3d2e45}
+#mon-espace .me-logo{font-family:'Lora',serif;font-weight:600;font-size:24px;color:#3d2e45!important}
 #mon-espace .me-nav{display:flex;flex-wrap:nowrap;overflow-x:auto;max-width:100%;gap:4px;font-size:15px;font-weight:500;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 #mon-espace .me-nav::-webkit-scrollbar{display:none}
-#mon-espace .me-nav a{padding:10px 16px;border-radius:999px;color:#3d2e45;transition:background .2s}
+#mon-espace .me-nav a{padding:10px 16px;border-radius:999px;color:#3d2e45!important;transition:background .2s}
 #mon-espace .me-nav a:hover{background:#f6ebe2}
-#mon-espace .me-nav a.on{background:#3d2e45;color:#fdf6f0}
+#mon-espace .me-nav a.on{background:#3d2e45;color:#fdf6f0!important}
 #mon-espace main{max-width:1180px;margin:0 auto;padding:48px 24px 64px;display:flex;flex-direction:column;gap:32px}
 #mon-espace .me-hero{display:flex;flex-wrap:wrap;gap:40px;align-items:center}
 #mon-espace .me-hero-txt{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:18px}
@@ -52,10 +52,8 @@ body{background:#fdf6f0!important}
 #mon-espace .me-cbtn.terra{background:#a0644d;color:#fff!important}
 #mon-espace .me-cbtn.terra:hover{background:#8a5440}
 #mon-espace .me-cbtn.ligne{background:transparent;border:1.5px solid #f1e3d8;padding:10.5px 20.5px}
-#mon-espace .me-pied{border-top:1px solid #efe2d7;background:#fff}
-#mon-espace .me-pied-in{max-width:1180px;margin:0 auto;padding:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 32px;font-size:14px;line-height:1.5}
-#mon-espace .me-pied p{margin:0}
-#mon-espace .me-pied a{color:#8a5440}
+#mon-espace .me-sortie{margin:-6px 0 0;text-align:right;font-size:14px}
+#mon-espace .me-sortie a{color:#8a5440!important;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:700px){
   #mon-espace .me-head-in{padding:14px 16px}
   #mon-espace .me-logo{font-size:21px}
@@ -68,5 +66,4 @@ body{background:#fdf6f0!important}
   #mon-espace .me-photo img{height:420px;border-radius:26px}
   #mon-espace .me-prog{padding:22px}
   #mon-espace .me-carte{padding:24px;border-radius:24px}
-  #mon-espace .me-pied-in{padding:20px 16px}
 }
