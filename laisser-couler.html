@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Laisser couler tes pensées · L'Effet Papillon</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root{--terra:#c2836a;--caramel:#c8a870;--titre:#3d2e45;--texte:#5d4868;--doux:#8a7090;--pale:#a08898;--champ:#fffaf6;--fonce:#b85a32}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{background:#fdf6f0;scroll-behavior:smooth}
+  body{font-family:'Lora',serif;background:linear-gradient(160deg,#fdf6f0 0%,#f8ece6 45%,#f3eef8 100%);min-height:100vh;font-size:18px;font-weight:500;display:flex;flex-direction:column;align-items:center;padding:0 16px 70px;color:var(--texte)}
+  header{width:100%;max-width:600px;padding-top:34px;text-align:center}
+  .surtitre{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#b0806c;margin-bottom:10px}
+  h1{font-size:clamp(27px,7vw,36px);font-weight:500;color:var(--titre);line-height:1.2}
+  .sous-titre{font-size:17px;color:var(--doux);margin-top:10px;line-height:1.6}
+  .sep{width:40px;height:2px;background:linear-gradient(90deg,var(--terra),var(--caramel));margin:16px auto 0;border-radius:2px}
+  .wrap{width:100%;max-width:560px}
+  section{scroll-margin-top:74px}
+  .card{background:white;border-radius:22px;padding:24px 20px;box-shadow:0 8px 34px rgba(194,131,106,0.09);border:1px solid rgba(194,131,106,0.15);margin-top:16px}
+  .label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--terra);margin-bottom:10px}
+  p{font-size:17.5px;line-height:1.75;margin-bottom:12px;color:var(--texte)}
+  .hl{background:linear-gradient(135deg,#fdf3ec,#f8f0f6);border-radius:14px;padding:13px 16px;border-left:3px solid var(--terra);font-size:16.5px;color:var(--titre);line-height:1.7;margin:4px 0 12px}
+  .hl.nuance{border-left-color:#a080c8;background:linear-gradient(135deg,#f5f0fa,#f8f2f6)}
+  .arret{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:50px;background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.08em;margin-bottom:12px}
+  h2{font-size:22px;font-weight:600;color:var(--titre);line-height:1.35;margin-bottom:10px}
+  h3{font-size:18px;font-weight:600;color:var(--titre);line-height:1.45;margin-bottom:6px}
+  .q-sous{font-family:'Jost',sans-serif;font-size:14.5px;color:var(--doux);line-height:1.55;margin-bottom:10px}
+  .exemple{font-size:15px;line-height:1.55;font-style:italic;background:rgba(253,248,238,0.9);border-left:2px solid rgba(200,168,112,0.6);border-radius:0 10px 10px 0;padding:8px 12px;margin:0 0 10px;color:var(--texte)}
+  textarea,input[type=text]{width:100%;border:2px solid rgba(194,131,106,0.25);border-radius:12px;padding:11px 13px;font-size:16px;font-family:'Lora',serif;color:var(--titre);line-height:1.6;outline:none;resize:vertical;background:var(--champ);margin-bottom:8px}
+  textarea:focus,input[type=text]:focus{border-color:var(--terra)}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 10px}
+  .pill{border:2px solid rgba(194,131,106,0.28);background:var(--champ);color:var(--texte);border-radius:50px;padding:8px 14px;font-size:14.5px;font-family:'Jost',sans-serif;cursor:pointer;text-align:left;line-height:1.4;max-width:100%}
+  .pill.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));border-color:transparent;color:white}
+  .btn{background:linear-gradient(135deg,#c2836a,#c8a870);color:white;border:none;border-radius:50px;padding:15px 30px;font-size:17px;cursor:pointer;font-family:'Lora',serif;box-shadow:0 6px 22px rgba(194,131,106,0.3);display:block;margin:16px auto 0;text-decoration:none;text-align:center;max-width:100%;width:fit-content}
+  .btn.second{background:white;color:#a0644d;border:2px solid rgba(194,131,106,0.4);box-shadow:none;font-size:15.5px;padding:11px 24px}
+  .lien{background:none;border:none;color:#a0644d;font-family:'Jost',sans-serif;font-size:14px;text-decoration:underline;cursor:pointer;padding:6px 0}
+  .hint{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--pale);text-align:center;margin-top:10px;line-height:1.55}
+
+  /* Ligne de bus */
+  .ligne{position:sticky;top:0;z-index:20;width:100%;max-width:560px;margin-top:18px;background:rgba(255,255,255,0.93);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:0 0 18px 18px;box-shadow:0 6px 20px rgba(194,131,106,0.10);padding:8px 6px 7px}
+  .ligne-in{position:relative;display:grid;grid-template-columns:repeat(4,1fr)}
+  .rail{position:absolute;left:12.5%;right:12.5%;top:27px;height:3px;background:rgba(194,131,106,0.2);border-radius:3px}
+  .rail-plein{position:absolute;left:12.5%;top:27px;height:3px;background:linear-gradient(90deg,var(--terra),var(--caramel));border-radius:3px;transition:width .6s ease}
+  .bus{position:absolute;top:0;font-size:20px;line-height:1;transform:translateX(-50%);transition:left .6s ease}
+  .stop{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding-top:22px;font-family:'Jost',sans-serif;font-size:11.5px;color:var(--pale);position:relative;z-index:1}
+  .stop .dot{width:13px;height:13px;border-radius:50%;background:white;border:2.5px solid rgba(194,131,106,0.35)}
+  .stop.fait .dot{background:var(--terra);border-color:var(--terra)}
+  .stop.fait{color:var(--texte)}
+
+  /* Test */
+  .quiz-top{display:flex;justify-content:space-between;align-items:center;font-family:'Jost',sans-serif;font-size:13px;color:var(--doux);margin-bottom:8px}
+  .barre{height:5px;border-radius:5px;background:rgba(194,131,106,0.15);overflow:hidden;margin-bottom:16px}
+  .barre i{display:block;height:100%;background:linear-gradient(90deg,var(--terra),var(--caramel));transition:width .35s ease}
+  .scene{animation:entre .35s ease}
+  @keyframes entre{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .scene .situation{font-size:19px;font-weight:600;color:var(--titre);line-height:1.5;margin-bottom:10px}
+  .auto{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:4px}
+  .reponse{font-size:17px;font-style:italic;color:var(--texte);background:var(--champ);border-radius:14px;padding:12px 14px;margin-bottom:14px;line-height:1.55}
+  .choix{display:flex;flex-direction:column;gap:9px}
+  .choix button{border:2px solid rgba(194,131,106,0.3);background:white;border-radius:16px;padding:13px 16px;font-family:'Jost',sans-serif;font-size:16px;color:var(--titre);text-align:left;cursor:pointer;line-height:1.35}
+  .choix button.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;border-color:transparent}
+  .tu-fais{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin:4px 0 8px}
+
+  /* Résultat */
+  .resultat{animation:entre .5s ease}
+  .niveau{font-size:26px;font-weight:600;color:var(--titre);line-height:1.25;margin:4px 0 10px}
+  .jauge{position:relative;height:14px;border-radius:14px;background:linear-gradient(90deg,#f3e3da,#e8bfa8,#c2836a,#b85a32);margin:30px 0 6px}
+  .jauge .curseur{position:absolute;top:-25px;transform:translateX(-50%);font-size:20px;transition:left .8s ease}
+  .jauge .curseur::after{content:'';position:absolute;left:50%;top:24px;width:2px;height:20px;background:var(--titre);transform:translateX(-50%);border-radius:2px}
+  .jauge-l{display:flex;justify-content:space-between;font-family:'Jost',sans-serif;font-size:11.5px;color:var(--pale);margin-bottom:14px}
+  .terrain-box{background:linear-gradient(135deg,#fdf3ec,#f8eef4);border-radius:18px;padding:16px;margin:14px 0 10px;border:1px solid rgba(194,131,106,0.25)}
+  .terrain-box .nom{font-size:21px;font-weight:600;color:var(--titre);margin-bottom:6px}
+  .phrase{font-size:20px;color:var(--fonce);font-weight:600;line-height:1.4;text-align:center;padding:12px 6px;margin:6px 0}
+  .petit-titre{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin:10px 0 4px}
+  .barres{margin-top:6px}
+  .barres .r{display:grid;grid-template-columns:1fr 34px;align-items:center;gap:8px;margin-bottom:7px}
+  .barres .nm{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--texte);grid-column:1/3;margin-bottom:-3px}
+  .barres .tr{height:12px;border-radius:0 4px 4px 0;background:rgba(194,131,106,0.12);overflow:hidden}
+  .barres .tr i{display:block;height:100%;background:var(--fonce);border-radius:0 4px 4px 0}
+  .barres .v{font-family:'Jost',sans-serif;font-size:13px;color:var(--doux);text-align:right}
+  .barres .r.top .nm{font-weight:500;color:var(--titre)}
+
+  /* Vrai ou faux */
+  .vf{border-top:1px solid rgba(194,131,106,0.18);padding-top:16px;margin-top:16px}
+  .vf:first-of-type{border-top:none;padding-top:0}
+  .vf .aff{font-size:17.5px;font-weight:600;color:var(--titre);line-height:1.5;margin-bottom:10px}
+  .vf-btns{display:flex;gap:10px}
+  .vf-btns button{flex:1;border:2px solid rgba(194,131,106,0.3);background:white;border-radius:50px;padding:11px;font-family:'Jost',sans-serif;font-size:16px;color:var(--titre);cursor:pointer}
+  .vf-btns button.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;border-color:transparent}
+  .vf-btns button:disabled{cursor:default}
+  .verdict{margin-top:10px;background:var(--champ);border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.65;color:var(--titre);animation:entre .35s ease}
+  .verdict b{color:var(--fonce)}
+  .verdict .src{display:block;font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale);margin-top:6px}
+  .score-vf{text-align:center;font-size:18px;color:var(--titre);margin-top:16px;animation:entre .4s ease}
+
+  /* IRA */
+  .ira3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 14px}
+  .ira3 div{background:var(--champ);border-radius:14px;padding:10px 6px;text-align:center;border:1px solid rgba(194,131,106,0.2)}
+  .ira3 b{display:block;font-size:24px;color:var(--fonce);line-height:1.1}
+  .ira3 span{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--texte)}
+  .demo{background:linear-gradient(135deg,#fdf8ee,#fdf5f0);border-radius:16px;padding:14px 16px;margin:6px 0 16px;border-top:2px solid var(--caramel)}
+  .demo .l{font-size:15.5px;line-height:1.6;margin-top:6px;color:var(--titre)}
+  .demo .l b{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.1em;color:var(--terra);font-weight:500}
+  .etape{border-top:1px solid rgba(194,131,106,0.18);padding-top:16px;margin-top:16px}
+  .lettre{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;font-family:'Jost',sans-serif;font-size:15px;margin-right:8px;vertical-align:middle}
+  .note-douce{font-family:'Jost',sans-serif;font-size:14.5px;color:#7d6090;line-height:1.55;background:rgba(160,128,200,0.08);border-radius:12px;padding:10px 13px;margin:4px 0 8px}
+
+  /* Ticket */
+  .rituel{background:var(--champ);border-radius:14px;padding:12px 14px;margin:8px 0 4px}
+  .rituel div{font-size:15.5px;line-height:1.55;color:var(--titre);margin:4px 0}
+  .rituel b{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);font-weight:500;margin-right:6px}
+  .ticket{display:flex;margin-top:18px;border-radius:18px;background:linear-gradient(135deg,#fdf1e9,#f7ecf3);border:1px solid rgba(194,131,106,0.35);box-shadow:0 10px 28px rgba(184,90,50,0.12);overflow:hidden;position:relative}
+  .souche{width:46px;flex-shrink:0;background:linear-gradient(180deg,#c2836a,#c8a870);display:flex;align-items:center;justify-content:center;border-right:2px dashed rgba(255,255,255,0.9)}
+  .souche span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:white;white-space:nowrap}
+  .tk{flex:1;padding:14px 15px 12px;min-width:0}
+  .tk-h{display:flex;justify-content:space-between;gap:8px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#a0644d;margin-bottom:8px}
+  .tk-dir{font-size:12px;font-family:'Jost',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
+  .tk-dirv{font-size:18.5px;font-weight:600;color:var(--titre);line-height:1.4;margin-bottom:8px;overflow-wrap:anywhere}
+  .tk-l{border-top:1px dashed rgba(194,131,106,0.35);padding-top:7px;margin-top:7px}
+  .tk-l .t{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra)}
+  .tk-l .v{font-size:15.5px;color:var(--titre);line-height:1.45;overflow-wrap:anywhere}
+  .tk-l .v.vide{color:var(--pale);font-family:'Jost',sans-serif;font-size:13.5px}
+  .tk-f{font-family:'Jost',sans-serif;font-size:11px;color:var(--pale);margin-top:10px;letter-spacing:.06em}
+
+  .signature{font-family:'Jost',sans-serif;font-size:14px;color:var(--doux);text-align:center;margin-top:18px;line-height:1.6}
+  .signature a{color:#a0644d}
+  .sources{font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale);line-height:1.6;margin-top:18px;text-align:left}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+  @media (max-width:350px){.stop{font-size:10.5px}.card{padding:22px 16px}}
+
+  /* Appel : carte + barre */
+  .ap-carte{text-align:left}
+  .ap-carte.ap-inline{margin-top:22px;padding-top:20px;border-top:1px solid rgba(194,131,106,0.22)}
+  .ap-titre{font-size:22px;font-weight:600;color:#3d2e45;line-height:1.35;margin-bottom:8px}
+  .ap-liste{list-style:none;margin:10px 0 4px;padding:0}
+  .ap-liste li{position:relative;padding-left:28px;margin-bottom:8px;font-size:16.5px;line-height:1.55;color:#5d4868}
+  .ap-liste li::before{content:'✓';position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#c2836a,#c8a870);color:#fff;font-size:12px;line-height:20px;text-align:center;font-family:'Jost',sans-serif}
+  .ap-qui{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;font-family:'Jost',sans-serif;font-size:14px;color:#8a7090}
+  .ap-qui img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+  .ap-barre{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(253,246,240,0.96);border-top:1px solid rgba(194,131,106,0.25);box-shadow:0 -4px 18px rgba(160,100,77,0.08);transform:translateY(110%);transition:transform .3s ease}
+  .ap-barre.visible{transform:translateY(0)}
+  .ap-barre a{flex:1;max-width:400px;display:block;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(135deg,#c2836a,#c8a870);border-radius:50px;padding:13px 16px;font-family:'Lora',serif;font-size:16px;box-shadow:0 4px 16px rgba(194,131,106,0.3)}
+  .ap-barre button{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(194,131,106,0.35);background:#fff;color:#a0644d;font-size:18px;line-height:1;cursor:pointer}
+  @media (prefers-reduced-motion:reduce){.ap-barre{transition:none}}
+
+  /* Tasse : ajustements */
+  .ligne-in{grid-template-columns:repeat(5,1fr)}
+  .rail{left:10%;right:10%}
+  .rail-plein{left:10%}
+  .stop{font-size:11px;text-align:center;line-height:1.2}
+  @media (max-width:350px){.stop{font-size:10px}}
+  .carte-tri{background:linear-gradient(135deg,#fdf6ef,#f7eff5);border:1px solid rgba(194,131,106,0.25);border-radius:20px;padding:22px 16px;text-align:center;margin-bottom:14px}
+  .carte-tri .item{font-size:21px;font-weight:600;color:var(--titre);line-height:1.4}
+  .tri-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .tri-btns button{border:2px solid rgba(194,131,106,0.3);background:white;border-radius:16px;padding:14px 8px;font-family:'Jost',sans-serif;font-size:16.5px;color:var(--titre);cursor:pointer}
+  .tri-btns button.sel{background:linear-gradient(135deg,var(--terra),var(--caramel));color:white;border-color:transparent}
+  .tri-btns button:disabled{cursor:default}
+  .rangee{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 6px}
+  .rangee>div{border-radius:16px;padding:12px;min-width:0}
+  .rangee .a{background:linear-gradient(160deg,#f6e3d2,#efd2b8);border:1px solid rgba(184,90,50,0.25)}
+  .rangee .p{background:#f4f0f2;border:1px dashed rgba(138,112,144,0.45)}
+  .rangee .t{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fonce);margin-bottom:6px}
+  .rangee .p .t{color:var(--doux)}
+  .rangee ul{list-style:none;padding:0;margin:0}
+  .rangee li{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--titre);line-height:1.4;margin:5px 0;overflow-wrap:anywhere}
+  .tasse-svg{display:block;width:100%;max-width:300px;height:auto;margin:6px auto 0}
+  .legende{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 16px;font-family:'Jost',sans-serif;font-size:13.5px;color:var(--texte);margin:6px 0 12px}
+  .legende span{display:inline-flex;align-items:center;gap:6px}
+  .legende i{width:14px;height:14px;border-radius:4px;display:inline-block}
+  .pct{text-align:center;font-size:19px;color:var(--titre);line-height:1.45;margin:4px 0 8px}
+  .pct b{color:var(--fonce);font-size:24px}
+  .suggestion{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--terra);margin:-4px 0 8px}
+
+  /* AIMER */
+  .encadre{background:linear-gradient(135deg,#f5f0fa,#fdf3ec);border-radius:18px;padding:16px 17px 10px;margin:8px 0 14px;border:1px solid rgba(160,128,200,0.25)}
+  .encadre p{font-size:16.5px;line-height:1.65;margin-bottom:10px}
+  .encadre .src-l{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--doux);line-height:1.55}
+  .film{display:none;align-items:center;gap:12px;background:#2f2433;color:#fdf3ec;border-radius:16px;padding:16px;margin:12px 0 4px;font-size:18px;font-style:italic;line-height:1.45;animation:entre .4s ease}
+  .film span{font-size:26px;font-style:normal}
+  .trois{display:flex;flex-direction:column;gap:14px;margin:14px 0 12px;padding:16px 14px;background:var(--champ);border-radius:18px}
+  .ligne-p{display:none;color:var(--titre);line-height:1.45;animation:entre .5s ease}
+  .ligne-p.vue{display:block}
+  .ligne-p.l1{font-size:23px;font-weight:600}
+  .ligne-p.l2{font-size:19px;color:var(--texte);padding-left:10px}
+  .ligne-p.l3{font-size:16.5px;color:var(--doux);padding-left:20px;font-style:italic}
+  .science{background:white;border:1px solid rgba(194,131,106,0.22);border-left:3px solid #a080c8;border-radius:0 14px 14px 0;padding:12px 14px;margin:14px 0 6px;font-size:15.5px;line-height:1.65;color:var(--texte)}
+  .science b{display:block;font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7d5fa8;font-weight:500;margin-bottom:4px}
+  .science .src{display:block;font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale);margin-top:6px}
+  .rappel-p{font-family:'Jost',sans-serif;font-size:14.5px;color:var(--doux);background:var(--champ);border:1.5px dashed rgba(194,131,106,0.45);border-radius:14px;padding:10px 13px;margin-bottom:12px}
+  .rappel-p b{font-family:'Lora',serif;font-style:italic;font-weight:500;color:var(--titre);font-size:15.5px}
+  .ciel{position:relative;height:230px;border-radius:22px;background:linear-gradient(180deg,#d6e4f0 0%,#ece6f1 55%,#fbeee6 100%);overflow:hidden;margin:12px 0 14px}
+  .nuage{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:max-content;max-width:76%;background:white;border-radius:44px;padding:16px 22px;font-size:17px;font-style:italic;color:var(--titre);text-align:center;line-height:1.4;box-shadow:0 10px 26px rgba(110,130,165,0.18);transition:opacity .4s}
+  .nuage::before,.nuage::after{content:'';position:absolute;background:white;border-radius:50%;z-index:-1}
+  .nuage::before{width:64px;height:64px;top:-28px;left:16%}
+  .nuage::after{width:46px;height:46px;top:-19px;right:18%}
+  .nuage.part{animation:part 4.2s ease-in forwards}
+  @keyframes part{0%{transform:translate(-50%,-50%);opacity:1}100%{transform:translate(60%,-95%) scale(.8);opacity:0}}
+  .doux{background:linear-gradient(135deg,#fdf1e8,#f8eef5);border-radius:16px;padding:13px 15px;font-size:16.5px;line-height:1.65;color:var(--titre)}
+  .autre-l{display:flex;gap:8px;align-items:center}
+  .autre-l input{margin:0}
+  .autre-l .btn{width:auto;padding:11px 16px;font-size:18px}
+  .echelle{text-align:center;margin:4px 0 2px}
+  .echelle .num{font-size:52px;font-weight:600;color:var(--fonce);line-height:1}
+  .echelle .mot{font-family:'Jost',sans-serif;font-size:15px;color:var(--doux);margin-top:4px;min-height:22px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:12px;background:linear-gradient(90deg,#f3e3da,#e8bfa8,#c2836a,#b85a32);outline:none;margin:20px 0 8px;cursor:pointer;border:none;padding:0}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:32px;height:32px;border-radius:50%;background:white;border:3px solid var(--fonce);box-shadow:0 3px 12px rgba(0,0,0,0.16)}
+  input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:white;border:3px solid var(--fonce)}
+  input[type=range].vierge::-webkit-slider-thumb{border-color:#d9b5a5}
+  .ech-l{display:flex;justify-content:space-between;font-family:'Jost',sans-serif;font-size:12.5px;color:var(--pale)}
+  .cmp{display:flex;align-items:center;justify-content:center;gap:12px;margin:8px 0 12px;animation:entre .4s ease}
+  .bulle{background:var(--champ);border:2px solid rgba(194,131,106,0.3);border-radius:18px;padding:8px 14px;text-align:center;min-width:96px}
+  .bulle span{display:block;font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--doux)}
+  .bulle b{font-size:28px;color:var(--titre)}
+  .bulle.now{background:linear-gradient(135deg,#b0654a,#a8804a);border-color:transparent}
+  .bulle.now span,.bulle.now b{color:white}
+  .fleche{font-size:22px;color:var(--terra)}
+  .cmp-msg{font-size:16.5px;line-height:1.6;color:var(--titre);text-align:center;margin:4px 0 6px}
+  #avantApres .petit-titre{text-align:center;margin-top:18px}
+  .prive{font-family:'Jost',sans-serif;font-size:14.5px;line-height:1.55;color:#8a7090;background:#fffaf6;border:1px solid rgba(194,131,106,0.22);border-radius:12px;padding:10px 13px;margin:10px 0 6px}
+</style>
+</head>
+<body>
+<header>
+  <div class="surtitre">L'Effet Papillon · Ressource offerte</div>
+  <h1>Laisser couler tes pensées</h1>
+  <div class="sous-titre">Nommer, remarquer, questionner, te détacher, laisser aller.</div>
+  <div class="sep"></div>
+</header>
+
+<nav class="ligne" aria-label="Ta progression">
+  <div class="ligne-in">
+    <div class="rail"></div><div class="rail-plein" id="railPlein" style="width:0"></div>
+    <div class="bus" id="bus" aria-hidden="true" style="left:10%">☁️</div>
+    <button class="stop" data-s="pensee" onclick="aller('pensee')"><span class="dot"></span>Ta pensée</button>
+    <button class="stop" data-s="nommer" onclick="aller('nommer')"><span class="dot"></span>Nommer</button>
+    <button class="stop" data-s="remarquer" onclick="aller('remarquer')"><span class="dot"></span>Remarquer</button>
+    <button class="stop" data-s="questionner" onclick="aller('questionner')"><span class="dot"></span>Questionner</button>
+    <button class="stop" data-s="laisser" onclick="aller('laisser')"><span class="dot"></span>Laisser aller</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="card">
+    <p>Si t'as commenté AIMER, c'est qu'une pensée tourne en boucle dans ta tête.</p>
+    <p>« Je ne suis pas aimée. » « Je dérange. » « Je ne suis pas à la hauteur. » Elle revient, encore et encore. Et à force, elle finit par ressembler à la vérité.</p>
+    <p>Tu n'as pas besoin de te battre contre elle. Tu peux apprendre à la regarder passer.</p>
+    <div class="encadre">
+      <div class="label">La décentration, ça sert à quoi ?</div>
+      <p>La décentration, c'est la capacité à observer tes pensées comme des événements passagers dans ta tête, plutôt que comme des vérités sur toi.</p>
+      <p>Tu ne te bats pas contre elles, et tu ne les crois pas d'office. Tu prends un pas de recul.</p>
+      <p class="src-l">Chez les personnes qui savent mieux se décentrer, on observe moins de rumination et moins de symptômes dépressifs (Fresco et al., 2007).</p>
+    </div>
+    <div class="hl nuance">Cette ressource fait partie d'un accompagnement de type coaching : ce n'est pas une thérapie, et elle ne remplace pas un suivi médical ou psychologique. Si tu traverses une période difficile, parles-en à un ou une professionnelle de santé.</div>
+    <p class="prive">🔒 Tes réponses restent sur ton téléphone ou ton ordinateur. Elles ne sont envoyées à personne, même pas à moi.</p>
+    <button class="btn" onclick="aller('pensee')">Je commence ☁️</button>
+  </div>
+
+  <!-- ÉTAPE 1 -->
+  <section id="pensee">
+    <div class="card">
+      <div class="arret">Étape 1 · Ta pensée</div>
+      <h2>La pensée qui revient</h2>
+      <p class="q-sous">Choisis-en une, ou écris la tienne, avec tes mots.</p>
+      <div class="pills" id="pillsPensee"></div>
+      <textarea rows="2" data-k="pensee" placeholder="La pensée qui revient..."></textarea>
+      <div class="etape">
+        <h3>Elle revient quand ?</h3>
+        <div class="exemple">Par exemple : « Quand il ne répond pas à mes messages. » « Le soir, quand je suis seule et que tout le monde dort. » « Quand on a oublié de m'inviter. »</div>
+        <textarea rows="2" data-k="quand" placeholder="Elle revient quand..."></textarea>
+      </div>
+      <div class="etape">
+        <h3>Tu y crois à combien ?</h3>
+        <div class="echelle"><div class="num" id="num-conv1">?</div><div class="mot" id="mot-conv1">Fais glisser le curseur</div>
+          <input type="range" min="0" max="100" step="5" value="50" data-r="conv1" class="vierge" aria-label="De 0 à 100 %"><div class="ech-l"><span>0 %</span><span>100 %</span></div></div>
+      </div>
+      <div class="etape">
+        <h3>Et elle te pèse à combien ?</h3>
+        <div class="echelle"><div class="num" id="num-poids1">?</div><div class="mot" id="mot-poids1">Fais glisser le curseur</div>
+          <input type="range" min="0" max="10" step="1" value="5" data-r="poids1" class="vierge" aria-label="De 0 à 10"><div class="ech-l"><span>0 · rien</span><span>10 · très lourd</span></div></div>
+      </div>
+      <button class="btn" onclick="aller('nommer')">Continuer : nommer</button>
+    </div>
+  </section>
+
+  <!-- ÉTAPE 2 -->
+  <section id="nommer">
+    <div class="card">
+      <div class="arret">Étape 2 · Nommer</div>
+      <h2>Donne un titre à ton histoire</h2>
+      <p>Ta pensée revient souvent avec la même histoire, comme un film qui repasse. Lui donner un titre, c'est la reconnaître dès les premières images.</p>
+      <div class="pills" id="pillsTitre"></div>
+      <input type="text" data-k="titreAutre" placeholder="Ou mon titre : le film de « ... »">
+      <div class="exemple">Par exemple : « Tiens, revoilà le film de « la pas aimée ». » « Tiens, revoilà le film de « la de trop ». » « Tiens, revoilà le film du « ça va mal finir ». »</div>
+      <div class="film" id="film"></div>
+      <button class="btn" onclick="aller('remarquer')">Continuer : remarquer</button>
+    </div>
+  </section>
+
+  <!-- ÉTAPE 3 -->
+  <section id="remarquer">
+    <div class="card">
+      <div class="arret">Étape 3 · Remarquer</div>
+      <h2>Recule d'un pas, puis d'un autre</h2>
+      <p>Regarde ta phrase changer. À chaque pas, tu t'éloignes un peu plus d'elle.</p>
+      <div class="trois" id="trois"></div>
+      <button class="btn second" id="btnPas" onclick="pas()">Je recule d'un pas</button>
+      <div id="apresPas" style="display:none">
+        <div class="etape">
+          <h3>Qu'est-ce qui change en toi, quand tu la lis comme ça ?</h3>
+          <div class="exemple">Par exemple : « Elle prend moins de place. » « Je la vois, au lieu d'être dedans. » « Rien pour l'instant, et c'est ok. »</div>
+          <textarea rows="2" data-k="change" placeholder="Ce qui change..."></textarea>
+        </div>
+        <div class="science"><b>Ce que dit la science</b> Dans une étude, une technique qui change ton rapport à une pensée négative sur toi a réduit son inconfort et à quel point on y croyait, plus qu'essayer de se distraire ou de la contrôler. <span class="src">Masuda et al., 2004</span></div>
+        <button class="btn" onclick="aller('questionner')">Continuer : questionner</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉTAPE 4 -->
+  <section id="questionner">
+    <div class="card">
+      <div class="arret">Étape 4 · Questionner</div>
+      <h2>Qu'est-ce qui pourrait rendre cette pensée fausse ?</h2>
+      <p>Cherche des faits. Le but, c'est de voir plus juste, sans te forcer à voir la vie en rose.</p>
+      <div class="rappel-p" id="rappelPensee"></div>
+      <div class="exemple">Par exemple : « Ma sœur m'appelle chaque dimanche pour prendre de mes nouvelles. » « Mon fils m'a fait un câlin ce matin, sans raison. » « Une collègue m'a écrit pour savoir si j'allais mieux. »</div>
+      <input type="text" data-k="f1" placeholder="Un fait qui montre l'inverse...">
+      <input type="text" data-k="f2" placeholder="Un autre fait...">
+      <input type="text" data-k="f3" placeholder="Et un troisième, si tu en trouves un...">
+      <div class="science"><b>Ce que dit la science</b> Chercher activement ce qui va à l'encontre de son jugement corrige mieux nos biais que de simplement essayer d'être juste et objective. <span class="src">Lord, Lepper et Preston, 1984</span></div>
+      <button class="btn" onclick="aller('laisser')">Continuer : laisser aller</button>
+    </div>
+  </section>
+
+  <!-- ÉTAPE 5 -->
+  <section id="laisser">
+    <div class="card">
+      <div class="arret">Étape 5 · Te détacher et laisser aller</div>
+      <h2>Tu es le ciel. Ta pensée, c'est un nuage qui passe.</h2>
+      <p>Le ciel est toujours là, quel que soit le temps. Les nuages arrivent, restent un moment, et repartent.</p>
+      <div class="ciel" id="ciel"><div class="nuage" id="nuage"></div></div>
+      <button class="btn" id="btnPasser" onclick="laisserPasser()">Je la laisse passer</button>
+      <div id="apresNuage" style="display:none">
+        <p class="doux">Elle reviendra peut-être. C'est normal. Chaque fois, tu la nommes, tu la remarques, et tu la laisses repasser.</p>
+        <div class="science"><b>Ce que dit la science</b> Dans une expérience célèbre, des personnes à qui on avait demandé de ne pas penser à un ours blanc y ont ensuite pensé plus que les autres. Les chercheurs débattent encore de la force de cet effet, mais l'idée reste parlante : chasser une pensée ne la fait pas partir. <span class="src">Wegner et al., 1987</span></div>
+        <div class="etape">
+          <h3>Une autre pensée à laisser passer ?</h3>
+          <div class="autre-l"><input type="text" id="autrePensee" placeholder="Une autre pensée..."><button class="btn second" style="margin:0" onclick="autreNuage()">☁️</button></div>
+        </div>
+        <div class="etape">
+          <h3>Et maintenant, tu y crois à combien ?</h3>
+          <div class="echelle"><div class="num" id="num-conv2">?</div><div class="mot" id="mot-conv2">Fais glisser le curseur</div>
+            <input type="range" min="0" max="100" step="5" value="50" data-r="conv2" class="vierge" aria-label="De 0 à 100 %"><div class="ech-l"><span>0 %</span><span>100 %</span></div></div>
+        </div>
+        <div class="etape">
+          <h3>Elle te pèse à combien, maintenant ?</h3>
+          <div class="echelle"><div class="num" id="num-poids2">?</div><div class="mot" id="mot-poids2">Fais glisser le curseur</div>
+            <input type="range" min="0" max="10" step="1" value="5" data-r="poids2" class="vierge" aria-label="De 0 à 10"><div class="ech-l"><span>0 · rien</span><span>10 · très lourd</span></div></div>
+        </div>
+        <div id="avantApres"></div>
+                <div class="etape">
+          <h3>Ta phrase pour laisser couler</h3>
+          <p class="q-sous">Garde-la pour la prochaine fois que ta pensée repasse.</p>
+          <div id="ticketVue"></div>
+          <button class="btn" onclick="telecharger()">Télécharger ma phrase</button>
+          <p class="hint">Fais une capture d'écran. Et si t'as envie, partage-la en story en me taguant @alarenverse.coaching.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUITE -->
+  <div class="card" style="text-align:center" id="suite">
+    <div class="label">Et maintenant ?</div>
+    <h2>Laisser couler ses pensées, ça s'apprend, une pensée à la fois.</h2>
+    <p style="text-align:left" id="suiteBilan">Ta pensée te montre une boucle. Ton bilan va plus loin : il te montre ce qui pèse le plus dans ta vie en ce moment, et ce sur quoi tu peux déjà t'appuyer.</p>
+    <a class="btn" href="https://alarenverse.github.io/Alarenverse/bilan.html" target="_blank" rel="noopener">Je fais mon bilan</a>
+    <p class="hint">12 questions · 7 minutes · ton portrait tout de suite</p>
+    <p style="text-align:left;margin-top:18px" id="suiteAppel">Tu préfères en parler directement ? Réserve un appel de 20 minutes avec moi. On regarde ensemble où t'en es, et je te dis honnêtement si mon accompagnement est fait pour toi en ce moment.</p>
+    <a class="btn second" href="https://cal.com/debora-pilates-puidoux/effetpapillon" target="_blank" rel="noopener">Je réserve mon appel</a>
+    <p class="hint">20 minutes · sans engagement · tu choisis le moment qui t'arrange</p>
+    <div class="signature">Une ressource de <strong>Debora</strong> 🦋, coach pour femmes<br><a href="https://www.instagram.com/alarenverse.coaching" target="_blank" rel="noopener">@alarenverse.coaching</a><br><span style="font-size:12.5px;color:#a08898">Accompagnement de type coaching, et non une thérapie.</span></div>
+    <div class="sources">Sources : Fresco et al. (2007), la décentration · Masuda et al. (2004), la défusion et les pensées négatives sur soi · Lord, Lepper et Preston (1984), considérer l'inverse · Wegner et al. (1987), l'ours blanc.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+var CLE='alarenverse_ressource_aimer';
+var E={};try{E=JSON.parse(localStorage.getItem(CLE)||'{}')||{};}catch(e){E={};}
+E.t=E.t||{};E.r=E.r||{};
+function ecrire(){try{localStorage.setItem(CLE,JSON.stringify(E));}catch(e){}}
+function typo(t){return String(t).replace(/ ([?:;!»%])/g,' $1').replace(/« /g,'« ');}
+function fixTypo(root){var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n,L=[];while((n=w.nextNode())){if(n.parentNode&&/^(SCRIPT|STYLE|TEXTAREA)$/.test(n.parentNode.nodeName))continue;L.push(n);}L.forEach(function(n){var v=typo(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;});root.querySelectorAll('[placeholder]').forEach(function(e){e.placeholder=typo(e.placeholder);});}
+function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function plein(x){return x!=null&&String(x).trim()!=='';}
+function vide(x){return x===undefined||x===null;}
+
+var PENSEES=['Je ne suis pas aimée.','Je dérange.','Je ne suis pas à la hauteur.','Je fais tout de travers.'];
+var TITRES=['Le film de « la pas aimée »','Le film de « la de trop »','Le film de « la pas à la hauteur »','Le film du « ça va mal finir »'];
+
+function pensee(){var p=(E.t.pensee||'').trim();return p||'Je ne suis pas aimée.';}
+function nue(){return pensee().replace(/^[«"\s]+|[»"\s]+$/g,'').replace(/[.!…]+$/,'').trim();}
+function que(){var p=nue();if(!p)return '';var m=p.charAt(0).toLowerCase()+p.slice(1);return (/^(il|elle|on|ils|elles|un|une|aucun)\b/i.test(m)?"qu'":'que ')+m;}
+function titre(){var a=(E.t.titreAutre||'').trim();return a||E.titre||'';}
+function titreAffiche(){var t=titre().trim();if(/^«[\s\S]*»$/.test(t)&&t.indexOf('«',1)<0)t=t.replace(/^«\s*|\s*»$/g,'');t=t.replace(/^"|"$/g,'').trim();if(!t)return '';if(/^(le|la|les|l')\s*film/i.test(t)){t=t.charAt(0).toLowerCase()+t.slice(1);if(t.indexOf('«')>=0)return t;var m=t.match(/^le film (de |du |des |d')(.+)$/i);return m?'le film '+m[1]+'« '+m[2].trim()+' »':t;}var d=t.match(/^(du|des)\s+(.+)$/i);if(d)return 'le film '+d[1].toLowerCase()+' « '+d[2]+' »';return 'le film de « '+t+' »';}
+
+/* Pastilles */
+function rendrePills(){
+  document.getElementById('pillsPensee').innerHTML=PENSEES.map(function(p,i){return '<button type="button" class="pill'+((E.t.pensee||'').trim()===p?' sel':'')+'" onclick="choisirPensee('+i+')">'+esc(p)+'</button>';}).join('');
+  document.getElementById('pillsTitre').innerHTML=TITRES.map(function(p,i){return '<button type="button" class="pill'+(E.titre===p&&!plein(E.t.titreAutre)?' sel':'')+'" onclick="choisirTitre('+i+')">'+esc(p)+'</button>';}).join('');
+  fixTypo(document.getElementById('pillsPensee'));fixTypo(document.getElementById('pillsTitre'));
+}
+window.choisirPensee=function(i){E.t.pensee=PENSEES[i];document.querySelector('[data-k="pensee"]').value=PENSEES[i];ecrire();rendrePills();majTout();};
+window.choisirTitre=function(i){E.titre=TITRES[i];E.t.titreAutre='';document.querySelector('[data-k="titreAutre"]').value='';ecrire();rendrePills();majTout();};
+
+/* Échelles */
+function motPct(n){if(n<=10)return "Je n'y crois presque pas";if(n<=40)return 'Un peu';if(n<=60)return 'À moitié';if(n<=85)return 'Beaucoup';return 'Complètement';}
+function motPoids(n){if(n<=1)return 'Presque rien';if(n<=3)return 'Un peu';if(n<=6)return 'Ça pèse';if(n<=8)return 'Ça pèse lourd';return 'Très lourd';}
+function majEchelles(){
+  document.querySelectorAll('input[data-r]').forEach(function(r){var k=r.dataset.r,x=E.r[k],pct=k.indexOf('conv')===0;
+    document.getElementById('num-'+k).textContent=vide(x)?'?':typo(x+(pct?' %':''));
+    document.getElementById('mot-'+k).textContent=vide(x)?'Fais glisser le curseur':(pct?motPct(x):motPoids(x));
+    if(!vide(x)){r.value=x;r.classList.remove('vierge');}});
+}
+document.querySelectorAll('input[data-r]').forEach(function(r){
+  function poser(){E.r[r.dataset.r]=+r.value;ecrire();majEchelles();majTout();}
+  r.addEventListener('input',poser);r.addEventListener('pointerup',function(){if(vide(E.r[r.dataset.r]))poser();});
+});
+
+/* Nommer */
+function majFilm(){var el=document.getElementById('film'),t=titreAffiche();el.innerHTML=t?'<span>🎬</span><div>« Tiens, revoilà '+esc(t)+'. »</div>':'';el.style.display=t?'flex':'none';fixTypo(el);}
+
+/* Remarquer */
+function fin(s){return /[?]$/.test(s)?s:s+'.';}
+function lignes(){var p=nue();return ['« '+fin(p)+' »','« J\'ai la pensée '+fin(que())+' »','« Je remarque que j\'ai la pensée '+fin(que())+' »'];}
+function rendreTrois(){var n=E.pas||0,l=lignes(),el=document.getElementById('trois');
+  el.innerHTML=l.map(function(x,i){return '<div class="ligne-p l'+(i+1)+(i<=n?' vue':'')+'">'+esc(x)+'</div>';}).join('');
+  document.getElementById('btnPas').style.display=n>=2?'none':'block';
+  document.getElementById('apresPas').style.display=n>=2?'block':'none';
+  fixTypo(el);}
+window.pas=function(){E.pas=Math.min(2,(E.pas||0)+1);ecrire();rendreTrois();majLigne();};
+
+/* Questionner */
+function majRappel(){var el=document.getElementById('rappelPensee');el.innerHTML='Ta pensée : <b>« '+esc(nue())+' »</b>';fixTypo(el);}
+
+/* Laisser aller */
+function majNuage(){var n=document.getElementById('nuage');if(!E.parti){n.textContent=typo('« '+nue()+' »');n.className='nuage';}
+  document.getElementById('btnPasser').style.display=E.parti?'none':'block';
+  document.getElementById('apresNuage').style.display=E.parti?'block':'none';
+  if(E.parti&&!n.classList.contains('part'))n.style.opacity='0';}
+window.laisserPasser=function(){var n=document.getElementById('nuage');n.classList.add('part');document.getElementById('btnPasser').style.display='none';
+  setTimeout(function(){E.parti=true;ecrire();majNuage();majTout();},4300);};
+window.autreNuage=function(){var i=document.getElementById('autrePensee'),v=(i.value||'').trim();if(!v)return;
+  var c=document.getElementById('ciel'),d=document.createElement('div');d.className='nuage';d.textContent=typo('« '+v.replace(/^[«"\s]+|[»"\s]+$/g,'')+' »');c.appendChild(d);
+  i.value='';setTimeout(function(){d.classList.add('part');},900);setTimeout(function(){d.remove();},5400);};
+
+/* Avant, après, moment fort */
+function bulles(a,b,u){return '<div class="cmp">'+(!vide(a)?'<div class="bulle"><span>Au début</span><b>'+a+u+'</b></div><div class="fleche">→</div>':'')+'<div class="bulle now"><span>Maintenant</span><b>'+b+u+'</b></div></div>';}
+function majAvantApres(){
+  var el=document.getElementById('avantApres'),a=E.r.conv1,b=E.r.conv2,c=E.r.poids1,d=E.r.poids2,h='';
+  if(!vide(b))h+='<div class="petit-titre">Tu y crois</div>'+bulles(a,b,' %');
+  if(!vide(d))h+='<div class="petit-titre">Elle te pèse</div>'+bulles(c,d,'/10');
+  if(!vide(b)&&!vide(d)){var baisse=(!vide(a)&&b<a)||(!vide(c)&&d<c);
+    h+='<p class="cmp-msg">'+(baisse?'Ta pensée a perdu un peu de sa force. Elle est toujours là, mais elle prend moins de place.':'Ta pensée a encore de la force, et c\'est ok. Laisser couler, ça s\'entraîne, pensée après pensée.')+'</p>';}
+  el.innerHTML=h;fixTypo(el);
+  majCarte();
+}
+function majCarte(){if(!plein(E.t.pensee))return;var t=titreAffiche(),c=document.getElementById('suiteBilan');
+  c.textContent=typo('Ta pensée « '+nue()+' » ne vient pas de nulle part. '+(t?'Ton bilan t\'aide à voir ce qui nourrit '+t+', ':'Ton bilan t\'aide à voir ce qui la nourrit, ')+'ce qui pèse le plus dans ta vie en ce moment, et ce sur quoi tu peux déjà t\'appuyer.');
+  var sa=document.getElementById('suiteAppel');sa.textContent=typo('Tu préfères en parler directement ? Réserve un appel de 20 minutes avec moi. On regarde ensemble ta pensée « '+nue()+' », et je te dis honnêtement si mon accompagnement est fait pour toi en ce moment.');}
+
+/* Ticket */
+function phraseFinale(){var t=titreAffiche();return (t?'Tiens, revoilà '+t+'. ':'Tiens, revoilà cette pensée. ')+'Je la vois, et je la laisse passer.';}
+function htmlTicket(){
+  var f=['f1','f2','f3'].map(function(k){return (E.t[k]||'').trim();}).filter(Boolean);
+  var l=function(t,v){return v?'<div class="tk-l"><div class="t">'+t+'</div><div class="v">'+esc(v)+'</div></div>':'';};
+  return '<div class="ticket"><div class="souche"><span>Laisser couler</span></div><div class="tk">'
+    +'<div class="tk-h"><span>Ma phrase</span><span>'+new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})+'</span></div>'
+    +'<div class="tk-dirv">« '+esc(phraseFinale())+' »</div>'
+    +l('Ma pensée','« '+nue()+' »')
+    +l('Des faits qui montrent l\'inverse',f.join(' · '))
+    +l('Quand elle revient','Je la nomme. Je la remarque. Je cherche un fait. Je la laisse passer.')
+    +'<div class="tk-f">L\'Effet Papillon · @alarenverse.coaching</div></div></div>';
+}
+function rendreTicket(){var el=document.getElementById('ticketVue');el.innerHTML=htmlTicket();fixTypo(el);}
+window.telecharger=function(){
+  var css=document.querySelector('style').textContent.match(/\/\* Ticket \*\/([\s\S]*?)\.signature/)[1];
+  var tk=document.getElementById('ticketVue').innerHTML;
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ma phrase pour laisser couler</title><style>:root{--terra:#c2836a;--caramel:#c8a870;--titre:#3d2e45;--texte:#5d4868;--pale:#a08898;--champ:#fffaf6}*{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,serif;background:#fdf6f0;padding:28px 16px;display:flex;justify-content:center}.w{width:100%;max-width:520px}h1{font-size:13px;font-family:Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#c2836a;text-align:center;margin-bottom:4px}.f{font-family:Arial,sans-serif;font-size:12.5px;color:#a08898;text-align:center;margin-top:16px;line-height:1.6}'+css+'</style></head><body><div class="w"><h1>Laisser couler mes pensées</h1>'+tk+'<div class="f">'+typo('Laisser couler ses pensées, ça s\'apprend, une pensée à la fois.')+'<br>@alarenverse.coaching 🦋</div></div></body></html>';
+  try{var b=new Blob([html],{type:'text/html;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='ma-phrase-pour-laisser-couler.html';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);}catch(e){}
+  E.dl=true;ecrire();majLigne();
+};
+
+/* Champs texte */
+document.querySelectorAll('[data-k]').forEach(function(el){el.value=E.t[el.dataset.k]||'';el.addEventListener('input',function(){E.t[this.dataset.k]=this.value;if(this.dataset.k==='titreAutre'&&this.value.trim())E.titre='';ecrire();if(this.dataset.k==='pensee'||this.dataset.k==='titreAutre')rendrePills();majTout();});});
+
+/* Progression */
+function etats(){return {pensee:plein(E.t.pensee)&&!vide(E.r.conv1),nommer:!!titre(),remarquer:(E.pas||0)>=2,questionner:plein(E.t.f1),laisser:!!E.parti&&!vide(E.r.conv2)};}
+function majLigne(){
+  var st=etats(),ordre=['pensee','nommer','remarquer','questionner','laisser'];
+  document.querySelectorAll('.stop').forEach(function(b){b.classList.toggle('fait',!!st[b.dataset.s]);});
+  var pos=ordre.findIndex(function(s){return !st[s];});if(pos<0)pos=4;
+  var fait=ordre.filter(function(s){return st[s];}).length;
+  document.getElementById('bus').style.left=(10+pos*20)+'%';
+  document.getElementById('railPlein').style.width=(Math.min(fait,4)*20)+'%';
+}
+window.aller=function(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});};
+function majTout(){majFilm();rendreTrois();majRappel();majNuage();majAvantApres();rendreTicket();majLigne();}
+window.apBarreOk=function(){return true;};
+
+rendrePills();majEchelles();majTout();fixTypo(document.body);
+})();
+</script>
+
+<script>
+(function(){
+  var barre=document.getElementById('ap-barre'); if(!barre)return;
+  var on=false, ferme=false;
+  try{ferme=sessionStorage.getItem('ap_barre_fermee')==='1';}catch(e){}
+  function boutonVisible(){
+    return Array.prototype.some.call(document.querySelectorAll('a[href*="cal.com"]'),function(a){
+      if(barre.contains(a))return false; var r=a.getBoundingClientRect();
+      return r.height>0&&r.top<window.innerHeight&&r.bottom>0;});
+  }
+  function enSaisie(){var a=document.activeElement;return !!a&&/^(TEXTAREA|INPUT)$/.test(a.tagName);}
+  function maj(){
+    var m=!ferme&&window.scrollY>window.innerHeight*1.1&&!boutonVisible()&&!enSaisie()&&(typeof window.apBarreOk!=='function'||window.apBarreOk());
+    if(m!==on){on=m;barre.classList.toggle('visible',m);barre.setAttribute('aria-hidden',m?'false':'true');}
+  }
+  window.apFermer=function(){ferme=true;try{sessionStorage.setItem('ap_barre_fermee','1');}catch(e){}maj();};
+  var raf=null;
+  window.addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=null;maj();});},{passive:true});
+  window.addEventListener('resize',maj);
+  document.addEventListener('focusin',maj);
+  document.addEventListener('focusout',function(){setTimeout(maj,60);});
+  window.apMaj=maj; maj();
+})();
+</script>
+</body>
+</html>
