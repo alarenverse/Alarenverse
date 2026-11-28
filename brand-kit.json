@@ -129,6 +129,10 @@
     {
       "date": "2026-11-26",
       "retour": "Ép. 4 et 5 : ralenti saccadé au début (une image sur deux répétée, à cause de coupes entre deux images) → corrigé, coupes calées sur les images + contrôle automatique."
+    },
+    {
+      "date": "2026-11-28",
+      "retour": "Reel « les étagères » : garder tout (1 min 50), seulement les meilleures prises. Hook écrit par moi : « ARRÊTE DE VOULOIR CHANGER LES GENS. / PLACE-LES SUR LA BONNE ÉTAGÈRE. » Voix téléphone sur la citation."
     }
   ],
   "rendu": {
@@ -214,5 +218,7 @@
   "cta_partage": "Quand elle dit « Partage ce reel à ta pote… » : carte d’envoi façon Instagram (avatar neutre, « ta pote » + petite ligne grise liée au sujet), clic sur « Envoyer » qui devient « Envoyé ». Pas de champ commentaire dans ce cas.",
   "retention": "Les 1,5 premières secondes décident de tout : démarrer juste avant son entrée dans le cadre (≤ 0,3 s de titre seul, sa voix avant 1 s), jamais de longue chaise vide ni de réinstallation. Couper tous les moments faibles (reprises, blancs > 0,35 s, moments où elle se rassoit / remet le micro) : ne garder que le meilleur. MAIS garder les petits gestes qui accrochent (mouvement de tête, sourire complice) : ne couper que les vrais temps morts (remonter le micro, se réinstaller). Ne JAMAIS montrer le moment où elle s’assoit / se recule vers la chaise : couper du gros plan directement sur elle déjà assise. Une phrase dite deux fois = TOUJOURS une reprise : couper la première, garder seulement la dernière (même si la répétition semble voulue).",
   "fin_video": "Ne JAMAIS couper le dernier mot : mesurer la fin réelle du son (niveau audio, pas seulement la transcription) et garder ≥ 0,15 s après. Déjà arrivé 2 fois (« direction » ép. 1, « encore » ép. 5).",
-  "controle_qualite": "Avant chaque envoi : 1) aucune image répétée/sautée (coupes calées sur les images, sinon ralenti saccadé) ; 2) dernier mot entier ; 3) textes centrés ; 4) couleurs = original."
+  "controle_qualite": "Avant chaque envoi : 1) aucune image répétée/sautée (coupes calées sur les images, sinon ralenti saccadé) ; 2) dernier mot entier ; 3) textes centrés ; 4) couleurs = original.",
+  "hook_reels_hors_serie": "Reels hors série : c’est moi qui écris le hook (elle l’a demandé le 2026-11-28), dans ses étiquettes jaunes #FFEC96 (Anton brun), en haut sur le mur si sa tête est plus bas, pendant sa 1re phrase, sans sous-titres à ce moment-là. Le hook complète sa phrase au lieu de la répéter.",
+  "duree": "Ne pas raccourcir son contenu sans son accord : on enlève seulement les reprises et les blancs (ex. « les étagères » gardé à 1 min 50)."
 }
